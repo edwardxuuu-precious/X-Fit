@@ -1,0 +1,91 @@
+import Foundation
+import HealthKit
+
+struct HealthBodySnapshot {
+    let weightKg: Double?
+    let bodyFatPercent: Double?
+    let date: Date
+}
+
+final class HealthKitService {
+    static let shared = HealthKitService()
+    static let enabledKey = "healthKitEnabled"
+
+    private let healthStore = HKHealthStore()
+
+    var isAvailable: Bool {
+        HKHealthStore.isHealthDataAvailable()
+    }
+
+    func requestAuthorization() async throws {
+        guard isAvailable else {
+            throw CocoaError(.featureUnsupported, userInfo: [
+                NSLocalizedDescriptionKey: "这台设备不支持 Apple 健康。"
+            ])
+        }
+
+        let workoutType = HKObjectType.workoutType()
+        let weightType = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+        let bodyFatType = HKObjectType.quantityType(forIdentifier: .bodyFatPercentage)!
+        try await healthStore.requestAuthorization(
+            toShare: [workoutType],
+            read: [workoutType, weightType, bodyFatType]
+        )
+        guard healthStore.authorizationStatus(for: workoutType) == .sharingAuthorized else {
+            throw CocoaError(.userCancelled, userInfo: [
+                NSLocalizedDescriptionKey: "未获得写入力量训练的权限。你仍可继续使用 X-Fit 的本机记录功能。"
+            ])
+        }
+    }
+
+    func saveWorkout(start: Date, end: Date) async throws {
+        guard isAvailable, end > start else { return }
+
+        let configuration = HKWorkoutConfiguration()
+        configuration.activityType = .traditionalStrengthTraining
+        configuration.locationType = .indoor
+
+        let builder = HKWorkoutBuilder(
+            healthStore: healthStore,
+            configuration: configuration,
+            device: .local()
+        )
+        try await builder.beginCollection(at: start)
+        try await builder.endCollection(at: end)
+        _ = try await builder.finishWorkout()
+    }
+
+    func latestBodySnapshot() async throws -> HealthBodySnapshot? {
+        let weightType = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+        let bodyFatType = HKObjectType.quantityType(forIdentifier: .bodyFatPercentage)!
+        async let weightSample = latestSample(for: weightType)
+        async let bodyFatSample = latestSample(for: bodyFatType)
+        let (weight, bodyFat) = try await (weightSample, bodyFatSample)
+
+        guard weight != nil || bodyFat != nil else { return nil }
+        let latestDate = max(weight?.endDate ?? .distantPast, bodyFat?.endDate ?? .distantPast)
+        return HealthBodySnapshot(
+            weightKg: weight?.quantity.doubleValue(for: .gramUnit(with: .kilo)),
+            bodyFatPercent: bodyFat.map { $0.quantity.doubleValue(for: .percent()) * 100 },
+            date: latestDate
+        )
+    }
+
+    private func latestSample(for type: HKQuantityType) async throws -> HKQuantitySample? {
+        try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: type,
+                predicate: nil,
+                limit: 1,
+                sortDescriptors: [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]
+            ) { _, samples, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                } else {
+                    continuation.resume(returning: samples?.first as? HKQuantitySample)
+                }
+            }
+            healthStore.execute(query)
+        }
+    }
+}

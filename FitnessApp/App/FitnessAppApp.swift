@@ -11,7 +11,10 @@ struct FitnessAppApp: App {
             ScheduledWorkout.self,
             WorkoutSession.self,
             SessionExercise.self,
-            SetLog.self
+            SetLog.self,
+            NutritionTarget.self,
+            MealEntry.self,
+            BodyMeasurement.self
         ])
         let isUITesting = CommandLine.arguments.contains("--ui-testing")
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: isUITesting)

@@ -14,6 +14,9 @@ struct PlanView: View {
     @State private var selectedMode = 0
     @State private var selectedMuscleGroup = "全部"
     @State private var searchText = ""
+    @State private var showExerciseEditor = false
+    @State private var editingExercise: Exercise?
+    @State private var showArchivedExercises = false
 
     private var sortedTemplates: [WorkoutTemplate] {
         templates.sorted {
@@ -24,11 +27,12 @@ struct PlanView: View {
     }
 
     private var muscleGroups: [String] {
-        ["全部"] + Array(Set(exercises.map(\.muscleGroup))).sorted()
+        ["全部"] + Array(Set(exercises.filter { !$0.isArchived }.map(\.muscleGroup))).sorted()
     }
 
     private var filteredExercises: [Exercise] {
         exercises
+            .filter { showArchivedExercises ? $0.isArchived : !$0.isArchived }
             .filter { selectedMuscleGroup == "全部" || $0.muscleGroup == selectedMuscleGroup }
             .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
             .sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
@@ -42,8 +46,13 @@ struct PlanView: View {
                     title: "训练",
                     trailingSystemImage: "plus",
                     trailingAction: {
-                        editingTemplate = nil
-                        showEditor = true
+                        if selectedMode == 0 {
+                            editingTemplate = nil
+                            showEditor = true
+                        } else {
+                            editingExercise = nil
+                            showExerciseEditor = true
+                        }
                     }
                 )
 
@@ -83,6 +92,11 @@ struct PlanView: View {
         .toolbar(.hidden, for: .navigationBar)
         .sheet(isPresented: $showEditor) {
             TemplateEditorView(template: editingTemplate)
+                .preferredColorScheme(.dark)
+                .tint(AppTheme.accent)
+        }
+        .sheet(isPresented: $showExerciseEditor) {
+            ExerciseEditorView(exercise: editingExercise)
                 .preferredColorScheme(.dark)
                 .tint(AppTheme.accent)
         }
@@ -289,6 +303,20 @@ struct PlanView: View {
 
             SectionHeader(title: "动作库", actionTitle: "\(filteredExercises.count) 个动作")
 
+            Button {
+                showArchivedExercises.toggle()
+                if showArchivedExercises {
+                    selectedMuscleGroup = "全部"
+                }
+            } label: {
+                Label(
+                    showArchivedExercises ? "返回可用动作" : "查看已归档动作",
+                    systemImage: showArchivedExercises ? "arrow.uturn.backward" : "archivebox"
+                )
+                .font(.caption.bold())
+                .foregroundStyle(showArchivedExercises ? AppTheme.accent : AppTheme.secondaryText)
+            }
+
             LazyVStack(spacing: 10) {
                 ForEach(filteredExercises) { exercise in
                     exerciseRow(exercise)
@@ -317,11 +345,38 @@ struct PlanView: View {
                     .foregroundStyle(AppTheme.secondaryText)
             }
             Spacer()
-            Image(systemName: "chevron.right")
+            Text(exercise.isBuiltIn ? "内置" : "自定义")
+                .font(.caption2.bold())
+                .foregroundStyle(exercise.isBuiltIn ? AppTheme.secondaryText : AppTheme.accent)
+            Image(systemName: exercise.isArchived ? "archivebox.fill" : "chevron.right")
                 .font(.caption.bold())
-                .foregroundStyle(AppTheme.secondaryText)
+                .foregroundStyle(exercise.isArchived ? .orange : AppTheme.secondaryText)
         }
         .cardSurface(padding: 12, cornerRadius: 16)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            guard !exercise.isBuiltIn, !exercise.isArchived else { return }
+            editingExercise = exercise
+            showExerciseEditor = true
+        }
+        .contextMenu {
+            if !exercise.isBuiltIn && !exercise.isArchived {
+                Button {
+                    editingExercise = exercise
+                    showExerciseEditor = true
+                } label: {
+                    Label("编辑动作", systemImage: "pencil")
+                }
+            }
+            Button {
+                setArchived(exercise, archived: !exercise.isArchived)
+            } label: {
+                Label(
+                    exercise.isArchived ? "恢复动作" : "归档动作",
+                    systemImage: exercise.isArchived ? "arrow.uturn.backward" : "archivebox"
+                )
+            }
+        }
     }
 
     private func exerciseIcon(_ muscleGroup: String) -> String {
@@ -347,6 +402,16 @@ struct PlanView: View {
     private func edit(_ template: WorkoutTemplate) {
         editingTemplate = template
         showEditor = true
+    }
+
+    private func setArchived(_ exercise: Exercise, archived: Bool) {
+        exercise.isArchived = archived
+        exercise.updatedAt = .now
+        do {
+            try modelContext.save()
+        } catch {
+            assertionFailure("更新动作归档状态失败：\(error)")
+        }
     }
 
     private func delete(_ template: WorkoutTemplate) {
@@ -470,7 +535,7 @@ struct TemplateEditorView: View {
 
     private var availableExercises: [Exercise] {
         exercises.filter { exercise in
-            !drafts.contains { $0.exerciseID == exercise.id }
+            !exercise.isArchived && !drafts.contains { $0.exerciseID == exercise.id }
         }
     }
 
@@ -566,6 +631,124 @@ struct TemplateEditorView: View {
         item.maxReps = max(draft.minReps, draft.maxReps)
         item.targetWeight = max(0, draft.targetWeight)
         item.restSeconds = draft.restSeconds
+    }
+}
+
+private struct ExerciseEditorView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    @Query private var allExercises: [Exercise]
+
+    let exercise: Exercise?
+
+    @State private var name: String
+    @State private var muscleGroup: String
+    @State private var equipment: String
+    @State private var restSeconds: Int
+    @State private var notes: String
+    @State private var errorMessage: String?
+
+    init(exercise: Exercise?) {
+        self.exercise = exercise
+        _name = State(initialValue: exercise?.name ?? "")
+        _muscleGroup = State(initialValue: exercise?.muscleGroup ?? "胸部")
+        _equipment = State(initialValue: exercise?.equipment ?? "哑铃")
+        _restSeconds = State(initialValue: exercise?.defaultRestSeconds ?? 90)
+        _notes = State(initialValue: exercise?.notes ?? "")
+    }
+
+    var body: some View {
+        NavigationStack {
+            Form {
+                Section("动作信息") {
+                    TextField("动作名称", text: $name)
+                    TextField("目标肌群", text: $muscleGroup)
+                    TextField("器械", text: $equipment)
+                    Picker("默认休息", selection: $restSeconds) {
+                        ForEach([30, 45, 60, 90, 120, 150, 180, 240, 300], id: \.self) { seconds in
+                            Text("\(seconds) 秒").tag(seconds)
+                        }
+                    }
+                }
+
+                Section("备注") {
+                    TextField("动作要点、器械位置等", text: $notes, axis: .vertical)
+                        .lineLimit(3...6)
+                }
+            }
+            .navigationTitle(exercise == nil ? "新建动作" : "编辑动作")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { dismiss() }
+                }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("保存") { save() }
+                        .fontWeight(.semibold)
+                        .disabled(trimmedName.isEmpty || trimmedMuscleGroup.isEmpty || trimmedEquipment.isEmpty)
+                }
+            }
+            .alert("保存失败", isPresented: Binding(
+                get: { errorMessage != nil },
+                set: { if !$0 { errorMessage = nil } }
+            )) {
+                Button("知道了", role: .cancel) { errorMessage = nil }
+            } message: {
+                Text(errorMessage ?? "未知错误")
+            }
+        }
+    }
+
+    private var trimmedName: String {
+        name.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedMuscleGroup: String {
+        muscleGroup.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var trimmedEquipment: String {
+        equipment.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private func save() {
+        let editingID = exercise?.id
+        let duplicate = allExercises.contains {
+            $0.id != editingID
+                && !$0.isArchived
+                && $0.name.caseInsensitiveCompare(trimmedName) == .orderedSame
+        }
+        guard !duplicate else {
+            errorMessage = "动作库中已经存在同名动作。"
+            return
+        }
+
+        if let exercise {
+            exercise.name = trimmedName
+            exercise.muscleGroup = trimmedMuscleGroup
+            exercise.equipment = trimmedEquipment
+            exercise.defaultRestSeconds = restSeconds
+            exercise.notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
+            exercise.updatedAt = .now
+        } else {
+            modelContext.insert(
+                Exercise(
+                    name: trimmedName,
+                    muscleGroup: trimmedMuscleGroup,
+                    equipment: trimmedEquipment,
+                    defaultRestSeconds: restSeconds,
+                    isBuiltIn: false,
+                    notes: notes.trimmingCharacters(in: .whitespacesAndNewlines)
+                )
+            )
+        }
+
+        do {
+            try modelContext.save()
+            dismiss()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 }
 

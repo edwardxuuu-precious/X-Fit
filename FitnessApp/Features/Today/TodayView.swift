@@ -295,8 +295,8 @@ struct TodayView: View {
             NavigationLink(destination: StatsView()) {
                 QuickActionTile(title: "进度", icon: "chart.line.uptrend.xyaxis", tint: AppTheme.purple)
             }
-            NavigationLink(destination: HistoryView()) {
-                QuickActionTile(title: "历史", icon: "calendar", tint: .pink)
+            NavigationLink(destination: ScheduleView()) {
+                QuickActionTile(title: "日程", icon: "calendar", tint: .pink)
             }
         }
         .buttonStyle(.plain)
@@ -304,7 +304,13 @@ struct TodayView: View {
 
     private var upcomingSection: some View {
         VStack(alignment: .leading, spacing: 14) {
-            SectionHeader(title: "接下来")
+            HStack {
+                SectionHeader(title: "接下来")
+                Spacer()
+                NavigationLink("管理日程", destination: ScheduleView())
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+            }
 
             ForEach(upcomingSchedules) { schedule in
                 HStack(spacing: 14) {

@@ -11,6 +11,10 @@ enum SeedDataService {
             try seedStarterProgram(in: context)
         }
 
+        if try context.fetch(FetchDescriptor<NutritionTarget>()).isEmpty {
+            context.insert(NutritionTarget())
+        }
+
         try ScheduleService.refreshUpcoming(in: context)
         try context.save()
     }
@@ -81,4 +85,3 @@ enum SeedDataService {
         }
     }
 }
-

@@ -77,6 +77,8 @@ struct RootView: View {
             guard !isPrepared else { return }
             do {
                 try SeedDataService.prepareIfNeeded(in: modelContext)
+                let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
+                await NotificationService.syncWorkoutReminders(schedules)
                 isPrepared = true
             } catch {
                 preparationError = error.localizedDescription

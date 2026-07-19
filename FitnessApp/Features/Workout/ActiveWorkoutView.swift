@@ -13,6 +13,7 @@ struct ActiveWorkoutView: View {
     let sessionID: UUID
 
     @State private var showFinishConfirmation = false
+    @State private var showDiscardConfirmation = false
     @State private var errorMessage: String?
 
     private var session: WorkoutSession? {
@@ -48,7 +49,9 @@ struct ActiveWorkoutView: View {
                             exerciseCard(exercise, session: session)
                         }
 
+                        notesCard(session)
                         finishButton
+                        discardButton
                     }
                     .padding()
                 }
@@ -75,6 +78,16 @@ struct ActiveWorkoutView: View {
             Button("继续记录", role: .cancel) {}
         } message: {
             Text(completedCount < logs.count ? "还有 \(logs.count - completedCount) 组未完成，未勾选的组不会计入训练容量。" : "所有工作组都已完成。")
+        }
+        .confirmationDialog(
+            "放弃本次训练？",
+            isPresented: $showDiscardConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("放弃并退出", role: .destructive) { discardWorkout() }
+            Button("继续训练", role: .cancel) {}
+        } message: {
+            Text("本次训练不会计入历史和统计，原训练日程会恢复为等待开始。")
         }
         .alert("操作失败", isPresented: Binding(
             get: { errorMessage != nil },
@@ -139,11 +152,15 @@ struct ActiveWorkoutView: View {
                 Button("+30秒") {
                     session.restEndDate = max(session.restEndDate ?? .now, .now).addingTimeInterval(30)
                     saveQuietly()
+                    if let endDate = session.restEndDate {
+                        NotificationService.scheduleRestEnd(sessionID: session.id, at: endDate)
+                    }
                 }
                 .buttonStyle(.bordered)
 
                 Button {
                     session.restEndDate = nil
+                    NotificationService.cancelRestEnd(sessionID: session.id)
                     saveQuietly()
                 } label: {
                     Image(systemName: "xmark")
@@ -155,6 +172,9 @@ struct ActiveWorkoutView: View {
             .onChange(of: remaining) { _, value in
                 if value == 0, session.restEndDate != nil {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    session.restEndDate = nil
+                    NotificationService.cancelRestEnd(sessionID: session.id)
+                    saveQuietly()
                 }
             }
         }
@@ -196,9 +216,11 @@ struct ActiveWorkoutView: View {
             .foregroundStyle(.secondary)
 
             ForEach(exerciseLogs) { log in
-                SetLogRow(log: log) {
-                    toggle(log, restSeconds: exercise.restSeconds, session: session)
-                }
+                SetLogRow(
+                    log: log,
+                    onEdit: saveQuietly,
+                    onToggle: { toggle(log, restSeconds: exercise.restSeconds, session: session) }
+                )
             }
         }
         .cardSurface()
@@ -220,15 +242,50 @@ struct ActiveWorkoutView: View {
         .padding(.vertical, 6)
     }
 
+    private var discardButton: some View {
+        Button(role: .destructive) {
+            showDiscardConfirmation = true
+        } label: {
+            Label("放弃本次训练", systemImage: "xmark.circle")
+                .font(.subheadline.bold())
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+        }
+        .buttonStyle(.bordered)
+        .tint(.red)
+    }
+
+    private func notesCard(_ session: WorkoutSession) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("训练备注", systemImage: "note.text")
+                .font(.headline)
+            TextField("记录状态、疼痛、器械调整等", text: Binding(
+                get: { session.notes },
+                set: {
+                    session.notes = $0
+                    saveQuietly()
+                }
+            ), axis: .vertical)
+            .lineLimit(3...6)
+            .padding(12)
+            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 12))
+        }
+        .cardSurface()
+    }
+
     private func toggle(_ log: SetLog, restSeconds: Int, session: WorkoutSession) {
         log.isCompleted.toggle()
         log.completedAt = log.isCompleted ? .now : nil
 
         if log.isCompleted, completedCount < logs.count {
             session.restEndDate = Date.now.addingTimeInterval(TimeInterval(restSeconds))
+            if let endDate = session.restEndDate {
+                NotificationService.scheduleRestEnd(sessionID: session.id, at: endDate)
+            }
             UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         } else if !log.isCompleted {
             session.restEndDate = nil
+            NotificationService.cancelRestEnd(sessionID: session.id)
         }
         saveQuietly()
     }
@@ -237,7 +294,26 @@ struct ActiveWorkoutView: View {
         guard let session else { return }
         do {
             try WorkoutService.finish(session: session, schedules: schedules, in: modelContext)
+            NotificationService.cancelRestEnd(sessionID: session.id)
+            if UserDefaults.standard.bool(forKey: HealthKitService.enabledKey),
+               let completedAt = session.completedAt {
+                let startedAt = session.startedAt
+                Task {
+                    try? await HealthKitService.shared.saveWorkout(start: startedAt, end: completedAt)
+                }
+            }
             UINotificationFeedbackGenerator().notificationOccurred(.success)
+            dismiss()
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private func discardWorkout() {
+        guard let session else { return }
+        do {
+            try WorkoutService.discard(session: session, schedules: schedules, in: modelContext)
+            NotificationService.cancelRestEnd(sessionID: session.id)
             dismiss()
         } catch {
             errorMessage = error.localizedDescription
@@ -255,6 +331,7 @@ struct ActiveWorkoutView: View {
 
 private struct SetLogRow: View {
     @Bindable var log: SetLog
+    let onEdit: () -> Void
     let onToggle: () -> Void
 
     var body: some View {
@@ -304,5 +381,8 @@ private struct SetLogRow: View {
             .accessibilityLabel(log.isCompleted ? "标记为未完成" : "完成第 \(log.setNumber) 组")
         }
         .opacity(log.isCompleted ? 0.72 : 1)
+        .onChange(of: log.actualWeight) { _, _ in onEdit() }
+        .onChange(of: log.actualReps) { _, _ in onEdit() }
+        .onChange(of: log.rir) { _, _ in onEdit() }
     }
 }

@@ -62,6 +62,7 @@ struct ScreenHeader: View {
     let eyebrow: String?
     let title: String
     var trailingSystemImage: String? = nil
+    var trailingAccessibilityLabel: String? = nil
     var trailingAction: (() -> Void)? = nil
 
     var body: some View {
@@ -88,6 +89,7 @@ struct ScreenHeader: View {
                         .background(AppTheme.elevatedSurface, in: Circle())
                         .overlay(Circle().stroke(AppTheme.line, lineWidth: 1))
                 }
+                .accessibilityLabel(trailingAccessibilityLabel ?? trailingSystemImage)
             }
         }
     }

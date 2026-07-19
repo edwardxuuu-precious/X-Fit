@@ -22,6 +22,10 @@ final class Exercise {
     var equipment: String
     var defaultRestSeconds: Int
     var createdAt: Date
+    var isBuiltIn: Bool = true
+    var isArchived: Bool = false
+    var notes: String = ""
+    var updatedAt: Date = Date.now
 
     init(
         id: UUID = UUID(),
@@ -29,7 +33,10 @@ final class Exercise {
         muscleGroup: String,
         equipment: String,
         defaultRestSeconds: Int = 90,
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        isBuiltIn: Bool = true,
+        isArchived: Bool = false,
+        notes: String = ""
     ) {
         self.id = id
         self.name = name
@@ -37,6 +44,10 @@ final class Exercise {
         self.equipment = equipment
         self.defaultRestSeconds = defaultRestSeconds
         self.createdAt = createdAt
+        self.isBuiltIn = isBuiltIn
+        self.isArchived = isArchived
+        self.notes = notes
+        self.updatedAt = createdAt
     }
 }
 
@@ -107,6 +118,11 @@ final class ScheduledWorkout {
     var plannedDate: Date
     var statusRaw: String
     var createdAt: Date
+    var originalPlannedDate: Date?
+    var isManuallyScheduled: Bool = false
+    var skipReason: String = ""
+    var reminderDate: Date?
+    var updatedAt: Date = Date.now
 
     var status: ScheduleStatus {
         get { ScheduleStatus(rawValue: statusRaw) ?? .planned }
@@ -119,7 +135,11 @@ final class ScheduledWorkout {
         templateName: String,
         plannedDate: Date,
         status: ScheduleStatus = .planned,
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        originalPlannedDate: Date? = nil,
+        isManuallyScheduled: Bool = false,
+        skipReason: String = "",
+        reminderDate: Date? = nil
     ) {
         self.id = id
         self.templateID = templateID
@@ -127,6 +147,11 @@ final class ScheduledWorkout {
         self.plannedDate = plannedDate.startOfDay
         self.statusRaw = status.rawValue
         self.createdAt = createdAt
+        self.originalPlannedDate = originalPlannedDate
+        self.isManuallyScheduled = isManuallyScheduled
+        self.skipReason = skipReason
+        self.reminderDate = reminderDate
+        self.updatedAt = createdAt
     }
 }
 
@@ -258,4 +283,3 @@ final class SetLog {
         self.completedAt = completedAt
     }
 }
-

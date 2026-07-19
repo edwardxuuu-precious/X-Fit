@@ -112,4 +112,22 @@ enum WorkoutService {
         }
         try context.save()
     }
+
+    static func discard(
+        session: WorkoutSession,
+        schedules: [ScheduledWorkout],
+        in context: ModelContext
+    ) throws {
+        session.status = .discarded
+        session.completedAt = .now
+        session.restEndDate = nil
+
+        if let scheduledID = session.scheduledWorkoutID,
+           let schedule = schedules.first(where: { $0.id == scheduledID }),
+           schedule.status == .inProgress {
+            schedule.status = .planned
+            schedule.updatedAt = .now
+        }
+        try context.save()
+    }
 }

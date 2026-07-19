@@ -324,26 +324,29 @@ struct StatsView: View {
     }
 
     private var bodyStatsCard: some View {
-        VStack(spacing: 18) {
-            Image(systemName: "figure.arms.open")
-                .font(.system(size: 42, weight: .bold))
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 84, height: 84)
-                .background(AppTheme.accent.opacity(0.10), in: Circle())
-            Text("身体数据")
-                .font(.title3.bold())
-                .foregroundStyle(.white)
-            Text("体重、围度和身体照片将在后续版本中加入。当前版本不会收集这些隐私数据。")
-                .font(.subheadline)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(AppTheme.secondaryText)
-            Label("仅保存在本机", systemImage: "lock.shield.fill")
-                .font(.caption.bold())
-                .foregroundStyle(AppTheme.accent)
+        NavigationLink(destination: BodyMeasurementsView()) {
+            VStack(spacing: 18) {
+                Image(systemName: "figure.arms.open")
+                    .font(.system(size: 42, weight: .bold))
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(width: 84, height: 84)
+                    .background(AppTheme.accent.opacity(0.10), in: Circle())
+                Text("身体数据")
+                    .font(.title3.bold())
+                    .foregroundStyle(.white)
+                Text("记录体重、体脂和围度，查看随训练变化的趋势。")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(AppTheme.secondaryText)
+                Label("打开身体记录", systemImage: "arrow.right")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 30)
+            .cardSurface()
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 30)
-        .cardSurface()
+        .buttonStyle(.plain)
     }
 
     private var dailyVolumePoints: [DailyVolumePoint] {

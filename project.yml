@@ -9,8 +9,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    CURRENT_PROJECT_VERSION: 1
-    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 2
+    MARKETING_VERSION: 0.2.0
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 664DT5VC99
 
@@ -24,11 +24,14 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.edward.FitnessApp
         PRODUCT_NAME: FitnessApp
+        CODE_SIGN_ENTITLEMENTS: FitnessApp/FitnessApp.entitlements
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: 训练计划
+        INFOPLIST_KEY_CFBundleDisplayName: X-Fit
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.healthcare-fitness
+        INFOPLIST_KEY_NSHealthShareUsageDescription: X-Fit 仅在你授权后读取体重和体脂，用于展示身体趋势。
+        INFOPLIST_KEY_NSHealthUpdateUsageDescription: X-Fit 仅在你授权后把已完成的力量训练写入 Apple 健康。
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: UIInterfaceOrientationPortrait
