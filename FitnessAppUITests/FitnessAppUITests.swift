@@ -5,6 +5,26 @@ final class FitnessAppUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    private func tap(
+        _ element: XCUIElement,
+        until expectedElement: XCUIElement,
+        attempts: Int = 2
+    ) -> Bool {
+        for _ in 0..<attempts {
+            if expectedElement.exists {
+                return true
+            }
+            guard element.waitForExistence(timeout: 5) else {
+                return expectedElement.exists
+            }
+            element.tap()
+            if expectedElement.waitForExistence(timeout: 4) {
+                return true
+            }
+        }
+        return expectedElement.exists
+    }
+
     func testStartWorkoutAndCompleteFirstSet() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
@@ -12,9 +32,8 @@ final class FitnessAppUITests: XCTestCase {
 
         let startButton = app.buttons["开始训练"]
         XCTAssertTrue(startButton.waitForExistence(timeout: 8))
-        startButton.tap()
-
-        XCTAssertTrue(app.staticTexts["训练进行中"].waitForExistence(timeout: 5))
+        let activeWorkoutTitle = app.staticTexts["训练进行中"]
+        XCTAssertTrue(tap(startButton, until: activeWorkoutTitle))
 
         let firstSetButton = app.buttons["完成第 1 组"].firstMatch
         XCTAssertTrue(firstSetButton.waitForExistence(timeout: 5))
@@ -48,14 +67,63 @@ final class FitnessAppUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.tabBars.buttons["我的"].waitForExistence(timeout: 8))
-        app.tabBars.buttons["我的"].tap()
-
+        let profileTab = app.tabBars.buttons["我的"]
         let settingsButton = app.buttons["打开设置"]
-        XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+        XCTAssertTrue(tap(profileTab, until: settingsButton))
         settingsButton.tap()
 
         XCTAssertTrue(app.staticTexts["设置与数据"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Apple 健康"].exists)
         XCTAssertTrue(app.staticTexts["数据所有权"].exists)
+    }
+
+    func testAdaptiveDailyBuilderShowsRecommendations() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launch()
+
+        let builderButton = app.buttons["编排"]
+        XCTAssertTrue(builderButton.waitForExistence(timeout: 8))
+        builderButton.tap()
+
+        XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
+        let chestButton = app.buttons["胸部"].firstMatch
+        XCTAssertTrue(chestButton.waitForExistence(timeout: 5))
+        chestButton.tap()
+
+        XCTAssertTrue(app.staticTexts["肌群建议"].waitForExistence(timeout: 5))
+        let benchRecommendation = app.buttons.containing(.staticText, identifier: "杠铃卧推").firstMatch
+        XCTAssertTrue(benchRecommendation.waitForExistence(timeout: 5))
+        benchRecommendation.tap()
+        XCTAssertTrue(app.buttons["保存为今天训练"].waitForExistence(timeout: 5))
+    }
+
+    func testHistoricalWorkoutEntryIsReachable() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launch()
+
+        let syncLink = app.buttons["同步过去几周训练"]
+        XCTAssertTrue(syncLink.waitForExistence(timeout: 8))
+        syncLink.tap()
+
+        let backfillButton = app.buttons["逐场手动补录"]
+        XCTAssertTrue(backfillButton.waitForExistence(timeout: 5))
+        backfillButton.tap()
+        XCTAssertTrue(app.navigationBars["补录过去训练"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.textFields["训练名称"].exists)
+    }
+
+    func testHistoricalWorkoutImportIsReachableFromToday() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing"]
+        app.launch()
+
+        let syncLink = app.buttons["同步过去几周训练"]
+        XCTAssertTrue(syncLink.waitForExistence(timeout: 8))
+        syncLink.tap()
+
+        XCTAssertTrue(app.navigationBars["历史同步"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["选择历史 CSV"].exists)
     }
 }

@@ -19,7 +19,9 @@ struct PlanView: View {
     @State private var showArchivedExercises = false
 
     private var sortedTemplates: [WorkoutTemplate] {
-        templates.sorted {
+        templates
+            .filter { !$0.isOneOff }
+            .sorted {
             let left = WeekdayName.orderedCalendarValues.firstIndex(of: $0.weekday) ?? 99
             let right = WeekdayName.orderedCalendarValues.firstIndex(of: $1.weekday) ?? 99
             return left == right ? $0.createdAt < $1.createdAt : left < right

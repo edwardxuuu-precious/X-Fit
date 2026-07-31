@@ -6,6 +6,7 @@ struct TodayView: View {
     @Query(sort: \ScheduledWorkout.plannedDate) private var schedules: [ScheduledWorkout]
     @Query private var templateExercises: [TemplateExercise]
     @Query private var exercises: [Exercise]
+    @Query private var templates: [WorkoutTemplate]
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
 
     @State private var workoutSessionID: UUID?
@@ -17,7 +18,15 @@ struct TodayView: View {
     }
 
     private var todaySchedules: [ScheduledWorkout] {
-        schedules.filter { $0.plannedDate.isSameDay(as: .now) && $0.status != .skipped }
+        schedules
+            .filter { $0.plannedDate.isSameDay(as: .now) && $0.status != .skipped }
+            .sorted { left, right in
+                let leftOneOff = templates.first(where: { $0.id == left.templateID })?.isOneOff == true
+                let rightOneOff = templates.first(where: { $0.id == right.templateID })?.isOneOff == true
+                if leftOneOff != rightOneOff { return leftOneOff }
+                if left.status != right.status { return left.status == .planned }
+                return left.createdAt > right.createdAt
+            }
     }
 
     private var upcomingSchedules: [ScheduledWorkout] {
@@ -75,6 +84,7 @@ struct TodayView: View {
 
                 SectionHeader(title: "快捷入口")
                 quickActions
+                historySyncShortcut
 
                 if !upcomingSchedules.isEmpty {
                     upcomingSection
@@ -265,19 +275,26 @@ struct TodayView: View {
     }
 
     private var restDayCard: some View {
-        HStack(spacing: 16) {
-            Image(systemName: "figure.cooldown")
-                .font(.title.bold())
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 58, height: 58)
-                .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
-            VStack(alignment: .leading, spacing: 5) {
-                Text("今天是恢复日")
-                    .font(.headline.bold())
-                    .foregroundStyle(.white)
-                Text("轻度活动、补水和睡眠，也是训练计划的一部分。")
-                    .font(.caption)
-                    .foregroundStyle(AppTheme.secondaryText)
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(spacing: 16) {
+                Image(systemName: "figure.cooldown")
+                    .font(.title.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(width: 58, height: 58)
+                    .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 16))
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("今天还没有训练菜单")
+                        .font(.headline.bold())
+                        .foregroundStyle(.white)
+                    Text("可以选择想练的肌群，让 X-Fit 根据近期记录推荐一套不重复的动作。")
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+            }
+
+            NavigationLink(destination: DailyWorkoutBuilderView()) {
+                Label("选择肌群并编排今天训练", systemImage: "wand.and.stars")
+                    .neonButtonStyle()
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -286,8 +303,8 @@ struct TodayView: View {
 
     private var quickActions: some View {
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 4), spacing: 10) {
-            NavigationLink(destination: PlanView()) {
-                QuickActionTile(title: "动作", icon: "figure.strengthtraining.traditional", tint: AppTheme.accent)
+            NavigationLink(destination: DailyWorkoutBuilderView()) {
+                QuickActionTile(title: "编排", icon: "wand.and.stars", tint: AppTheme.accent)
             }
             NavigationLink(destination: NutritionView()) {
                 QuickActionTile(title: "营养", icon: "fork.knife", tint: AppTheme.orange)
@@ -300,6 +317,33 @@ struct TodayView: View {
             }
         }
         .buttonStyle(.plain)
+    }
+
+    private var historySyncShortcut: some View {
+        NavigationLink(destination: HistoricalWorkoutImportView()) {
+            HStack(spacing: 13) {
+                Image(systemName: "square.and.arrow.down")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(width: 38, height: 38)
+                    .background(AppTheme.accent.opacity(0.11), in: RoundedRectangle(cornerRadius: 11))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("同步过去几周训练")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.white)
+                    Text("导入 CSV，或前往训练历史逐次补录")
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.secondaryText)
+            }
+            .cardSurface(padding: 14, cornerRadius: 18)
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("同步过去几周训练")
     }
 
     private var upcomingSection: some View {

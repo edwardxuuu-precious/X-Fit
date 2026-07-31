@@ -152,7 +152,16 @@ enum ScheduleService {
         guard schedule.isManuallyScheduled, schedule.status == .planned || schedule.status == .skipped else {
             throw ScheduleServiceError.immutableSchedule
         }
+        let templateID = schedule.templateID
+        let templates = try context.fetch(FetchDescriptor<WorkoutTemplate>())
+        let templateItems = try context.fetch(FetchDescriptor<TemplateExercise>())
         context.delete(schedule)
+        if let template = templates.first(where: { $0.id == templateID && $0.isOneOff }) {
+            templateItems
+                .filter { $0.templateID == templateID }
+                .forEach(context.delete)
+            context.delete(template)
+        }
         try context.save()
         syncNotifications(in: context)
     }

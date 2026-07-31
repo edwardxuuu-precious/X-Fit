@@ -34,6 +34,16 @@ struct HistoryView: View {
             }
         }
         .navigationTitle("训练历史")
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                NavigationLink(destination: HistoricalWorkoutEntryView()) {
+                    Label("补录", systemImage: "plus")
+                }
+                NavigationLink(destination: HistoricalWorkoutImportView()) {
+                    Label("批量同步", systemImage: "square.and.arrow.down")
+                }
+            }
+        }
         .navigationDestination(for: UUID.self) { sessionID in
             WorkoutDetailView(sessionID: sessionID)
         }
@@ -188,6 +198,12 @@ struct WorkoutDetailView: View {
                     }
                 }
                 .font(.subheadline)
+            }
+
+            if !exercise.performanceNotes.isEmpty {
+                Label(exercise.performanceNotes, systemImage: "note.text")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

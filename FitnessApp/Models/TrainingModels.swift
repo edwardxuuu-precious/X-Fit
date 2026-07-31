@@ -59,19 +59,40 @@ final class WorkoutTemplate {
     var weekday: Int
     var isActive: Bool
     var createdAt: Date
+    var isOneOff: Bool = false
+    var plannedForDate: Date?
+    var focusMuscleGroupsRaw: String = ""
+
+    var focusMuscleGroups: [String] {
+        get {
+            focusMuscleGroupsRaw
+                .split(separator: ",")
+                .map(String.init)
+                .filter { !$0.isEmpty }
+        }
+        set {
+            focusMuscleGroupsRaw = newValue.joined(separator: ",")
+        }
+    }
 
     init(
         id: UUID = UUID(),
         name: String,
         weekday: Int,
         isActive: Bool = true,
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        isOneOff: Bool = false,
+        plannedForDate: Date? = nil,
+        focusMuscleGroups: [String] = []
     ) {
         self.id = id
         self.name = name
         self.weekday = weekday
         self.isActive = isActive
         self.createdAt = createdAt
+        self.isOneOff = isOneOff
+        self.plannedForDate = plannedForDate?.startOfDay
+        self.focusMuscleGroupsRaw = focusMuscleGroups.joined(separator: ",")
     }
 }
 
@@ -167,6 +188,7 @@ final class WorkoutSession {
     var statusRaw: String
     var notes: String
     var restEndDate: Date?
+    var importIdentifier: String = ""
 
     var status: WorkoutSessionStatus {
         get { WorkoutSessionStatus(rawValue: statusRaw) ?? .inProgress }
@@ -183,7 +205,8 @@ final class WorkoutSession {
         completedAt: Date? = nil,
         status: WorkoutSessionStatus = .inProgress,
         notes: String = "",
-        restEndDate: Date? = nil
+        restEndDate: Date? = nil,
+        importIdentifier: String = ""
     ) {
         self.id = id
         self.scheduledWorkoutID = scheduledWorkoutID
@@ -195,6 +218,7 @@ final class WorkoutSession {
         self.statusRaw = status.rawValue
         self.notes = notes
         self.restEndDate = restEndDate
+        self.importIdentifier = importIdentifier
     }
 }
 
@@ -211,6 +235,9 @@ final class SessionExercise {
     var maxReps: Int
     var targetWeight: Double
     var restSeconds: Int
+    var muscleGroup: String = ""
+    var exerciseNotes: String = ""
+    var performanceNotes: String = ""
 
     init(
         id: UUID = UUID(),
@@ -222,7 +249,10 @@ final class SessionExercise {
         minReps: Int,
         maxReps: Int,
         targetWeight: Double,
-        restSeconds: Int
+        restSeconds: Int,
+        muscleGroup: String = "",
+        exerciseNotes: String = "",
+        performanceNotes: String = ""
     ) {
         self.id = id
         self.sessionID = sessionID
@@ -234,6 +264,9 @@ final class SessionExercise {
         self.maxReps = maxReps
         self.targetWeight = targetWeight
         self.restSeconds = restSeconds
+        self.muscleGroup = muscleGroup
+        self.exerciseNotes = exerciseNotes
+        self.performanceNotes = performanceNotes
     }
 }
 

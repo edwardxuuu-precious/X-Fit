@@ -51,7 +51,7 @@ struct AppSettingsView: View {
 
                 SectionHeader(title: "关于")
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("X-Fit 0.2.0 (2)")
+                    Text("X-Fit 0.3.0 (3)")
                         .font(.headline.bold())
                         .foregroundStyle(.white)
                     Text("训练、营养和身体数据默认保存在本机。你可以随时导出完整 JSON 备份或 CSV 训练记录。")

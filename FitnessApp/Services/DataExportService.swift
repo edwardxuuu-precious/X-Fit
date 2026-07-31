@@ -50,6 +50,9 @@ private struct TemplateRecord: Codable {
     let weekday: Int
     let isActive: Bool
     let createdAt: Date
+    let isOneOff: Bool?
+    let plannedForDate: Date?
+    let focusMuscleGroupsRaw: String?
 }
 
 private struct TemplateExerciseRecord: Codable {
@@ -89,6 +92,7 @@ private struct SessionRecord: Codable {
     let statusRaw: String
     let notes: String
     let restEndDate: Date?
+    let importIdentifier: String?
 }
 
 private struct SessionExerciseRecord: Codable {
@@ -102,6 +106,9 @@ private struct SessionExerciseRecord: Codable {
     let maxReps: Int
     let targetWeight: Double
     let restSeconds: Int
+    let muscleGroup: String?
+    let exerciseNotes: String?
+    let performanceNotes: String?
 }
 
 private struct SetLogRecord: Codable {
@@ -177,7 +184,7 @@ enum DataExportService {
         let exerciseByID = Dictionary(uniqueKeysWithValues: exercises.map { ($0.id, $0) })
         let formatter = ISO8601DateFormatter()
 
-        var rows = ["session_id,date,workout,exercise,set,weight_kg,reps,rir,completed"]
+        var rows = ["session_id,date,workout,exercise,muscle_group,set,weight_kg,reps,rir,exercise_notes,workout_notes,completed"]
         for log in logs.sorted(by: { ($0.completedAt ?? .distantPast) < ($1.completedAt ?? .distantPast) }) {
             guard let session = sessionByID[log.sessionID], let exercise = exerciseByID[log.sessionExerciseID] else { continue }
             rows.append([
@@ -185,10 +192,13 @@ enum DataExportService {
                 formatter.string(from: session.startedAt),
                 csv(session.templateName),
                 csv(exercise.exerciseName),
+                csv(exercise.muscleGroup),
                 String(log.setNumber),
                 String(log.actualWeight),
                 String(log.actualReps),
                 log.rir.map(String.init) ?? "",
+                csv(exercise.performanceNotes),
+                csv(session.notes),
                 log.isCompleted ? "true" : "false"
             ].joined(separator: ","))
         }
@@ -218,7 +228,7 @@ enum DataExportService {
 
     static func importBackup(_ data: Data, into context: ModelContext) throws -> BackupImportSummary {
         let backup = try decode(data)
-        guard backup.schemaVersion <= 2 else {
+        guard backup.schemaVersion <= 3 else {
             throw CocoaError(.fileReadCorruptFile, userInfo: [
                 NSLocalizedDescriptionKey: "这个备份来自更高版本的 X-Fit，当前版本无法安全导入。"
             ])
@@ -254,7 +264,12 @@ enum DataExportService {
                 name: record.name,
                 weekday: record.weekday,
                 isActive: record.isActive,
-                createdAt: record.createdAt
+                createdAt: record.createdAt,
+                isOneOff: record.isOneOff ?? false,
+                plannedForDate: record.plannedForDate,
+                focusMuscleGroups: (record.focusMuscleGroupsRaw ?? "")
+                    .split(separator: ",")
+                    .map(String.init)
             ))
             imported += 1
         }
@@ -309,7 +324,8 @@ enum DataExportService {
                 completedAt: record.completedAt,
                 status: WorkoutSessionStatus(rawValue: record.statusRaw) ?? .completed,
                 notes: record.notes,
-                restEndDate: record.restEndDate
+                restEndDate: record.restEndDate,
+                importIdentifier: record.importIdentifier ?? ""
             ))
             imported += 1
         }
@@ -327,7 +343,10 @@ enum DataExportService {
                 minReps: record.minReps,
                 maxReps: record.maxReps,
                 targetWeight: record.targetWeight,
-                restSeconds: record.restSeconds
+                restSeconds: record.restSeconds,
+                muscleGroup: record.muscleGroup ?? "",
+                exerciseNotes: record.exerciseNotes ?? "",
+                performanceNotes: record.performanceNotes ?? ""
             ))
             imported += 1
         }
@@ -420,13 +439,13 @@ enum DataExportService {
 
     private static func makeBackup(in context: ModelContext) throws -> XFitBackup {
         XFitBackup(
-            schemaVersion: 2,
+            schemaVersion: 3,
             exportedAt: .now,
             exercises: try context.fetch(FetchDescriptor<Exercise>()).map {
                 ExerciseRecord(id: $0.id, name: $0.name, muscleGroup: $0.muscleGroup, equipment: $0.equipment, defaultRestSeconds: $0.defaultRestSeconds, createdAt: $0.createdAt, isBuiltIn: $0.isBuiltIn, isArchived: $0.isArchived, notes: $0.notes, updatedAt: $0.updatedAt)
             },
             templates: try context.fetch(FetchDescriptor<WorkoutTemplate>()).map {
-                TemplateRecord(id: $0.id, name: $0.name, weekday: $0.weekday, isActive: $0.isActive, createdAt: $0.createdAt)
+                TemplateRecord(id: $0.id, name: $0.name, weekday: $0.weekday, isActive: $0.isActive, createdAt: $0.createdAt, isOneOff: $0.isOneOff, plannedForDate: $0.plannedForDate, focusMuscleGroupsRaw: $0.focusMuscleGroupsRaw)
             },
             templateExercises: try context.fetch(FetchDescriptor<TemplateExercise>()).map {
                 TemplateExerciseRecord(id: $0.id, templateID: $0.templateID, exerciseID: $0.exerciseID, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds)
@@ -435,10 +454,10 @@ enum DataExportService {
                 ScheduleRecord(id: $0.id, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, statusRaw: $0.statusRaw, createdAt: $0.createdAt, originalPlannedDate: $0.originalPlannedDate, isManuallyScheduled: $0.isManuallyScheduled, skipReason: $0.skipReason, reminderDate: $0.reminderDate, updatedAt: $0.updatedAt)
             },
             sessions: try context.fetch(FetchDescriptor<WorkoutSession>()).map {
-                SessionRecord(id: $0.id, scheduledWorkoutID: $0.scheduledWorkoutID, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, startedAt: $0.startedAt, completedAt: $0.completedAt, statusRaw: $0.statusRaw, notes: $0.notes, restEndDate: $0.restEndDate)
+                SessionRecord(id: $0.id, scheduledWorkoutID: $0.scheduledWorkoutID, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, startedAt: $0.startedAt, completedAt: $0.completedAt, statusRaw: $0.statusRaw, notes: $0.notes, restEndDate: $0.restEndDate, importIdentifier: $0.importIdentifier)
             },
             sessionExercises: try context.fetch(FetchDescriptor<SessionExercise>()).map {
-                SessionExerciseRecord(id: $0.id, sessionID: $0.sessionID, exerciseID: $0.exerciseID, exerciseName: $0.exerciseName, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds)
+                SessionExerciseRecord(id: $0.id, sessionID: $0.sessionID, exerciseID: $0.exerciseID, exerciseName: $0.exerciseName, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds, muscleGroup: $0.muscleGroup, exerciseNotes: $0.exerciseNotes, performanceNotes: $0.performanceNotes)
             },
             setLogs: try context.fetch(FetchDescriptor<SetLog>()).map {
                 SetLogRecord(id: $0.id, sessionID: $0.sessionID, sessionExerciseID: $0.sessionExerciseID, exerciseID: $0.exerciseID, setNumber: $0.setNumber, targetWeight: $0.targetWeight, targetReps: $0.targetReps, actualWeight: $0.actualWeight, actualReps: $0.actualReps, rir: $0.rir, isWarmup: $0.isWarmup, isCompleted: $0.isCompleted, completedAt: $0.completedAt)

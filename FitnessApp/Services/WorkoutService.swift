@@ -62,7 +62,9 @@ enum WorkoutService {
                 minReps: planned.minReps,
                 maxReps: planned.maxReps,
                 targetWeight: planned.targetWeight,
-                restSeconds: planned.restSeconds
+                restSeconds: planned.restSeconds,
+                muscleGroup: exercise.muscleGroup,
+                exerciseNotes: exercise.notes
             )
             context.insert(snapshot)
 

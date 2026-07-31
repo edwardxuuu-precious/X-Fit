@@ -222,6 +222,28 @@ struct ActiveWorkoutView: View {
                     onToggle: { toggle(log, restSeconds: exercise.restSeconds, session: session) }
                 )
             }
+
+            if !exercise.exerciseNotes.isEmpty {
+                Label(exercise.exerciseNotes, systemImage: "exclamationmark.circle")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.orange)
+            }
+
+            TextField(
+                "记录这个动作的状态、疼痛或技术提醒",
+                text: Binding(
+                    get: { exercise.performanceNotes },
+                    set: {
+                        exercise.performanceNotes = $0
+                        saveQuietly()
+                    }
+                ),
+                axis: .vertical
+            )
+            .lineLimit(2...4)
+            .font(.caption)
+            .padding(10)
+            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
         }
         .cardSurface()
     }
