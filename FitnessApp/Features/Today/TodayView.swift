@@ -9,6 +9,7 @@ struct TodayView: View {
     @Query private var exercises: [Exercise]
     @Query private var templates: [WorkoutTemplate]
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
+    @Query private var sessionExercises: [SessionExercise]
     @Query private var setLogs: [SetLog]
 
     @State private var workoutSessionID: UUID?
@@ -318,7 +319,7 @@ struct TodayView: View {
 
     private func resumeCard(_ session: WorkoutSession) -> some View {
         ZStack(alignment: .bottomLeading) {
-            HeroWorkoutImage()
+            HeroWorkoutImage(kind: heroKind(for: session))
                 .frame(height: 270)
                 .clipped()
             AppTheme.heroGradient
@@ -352,7 +353,7 @@ struct TodayView: View {
         let totalSets = items.reduce(0) { $0 + $1.targetSets }
 
         return ZStack(alignment: .bottomLeading) {
-            HeroWorkoutImage()
+            HeroWorkoutImage(kind: heroKind(for: schedule, items: items))
                 .frame(height: 310)
                 .clipped()
             LinearGradient(
@@ -413,6 +414,32 @@ struct TodayView: View {
         .overlay(alignment: .trailing) {
             Rectangle().fill(AppTheme.line).frame(width: 1, height: 26)
         }
+    }
+
+    private func heroKind(
+        for schedule: ScheduledWorkout,
+        items: [TemplateExercise]
+    ) -> WorkoutHeroKind {
+        let muscleGroups = items.compactMap { item in
+            exercises.first(where: { $0.id == item.exerciseID })?.muscleGroup
+        }
+        return WorkoutHeroKind.resolve(
+            workoutName: schedule.templateName,
+            muscleGroups: muscleGroups
+        )
+    }
+
+    private func heroKind(for session: WorkoutSession) -> WorkoutHeroKind {
+        let muscleGroups = sessionExercises
+            .filter { $0.sessionID == session.id }
+            .map { snapshot in
+                if !snapshot.muscleGroup.isEmpty { return snapshot.muscleGroup }
+                return exercises.first(where: { $0.id == snapshot.exerciseID })?.muscleGroup ?? ""
+            }
+        return WorkoutHeroKind.resolve(
+            workoutName: session.templateName,
+            muscleGroups: muscleGroups
+        )
     }
 
     private var restDayCard: some View {

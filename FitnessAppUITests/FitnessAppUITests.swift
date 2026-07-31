@@ -49,6 +49,7 @@ final class FitnessAppUITests: XCTestCase {
 
         XCTAssertTrue(app.staticTexts["今日训练"].waitForExistence(timeout: 8))
         XCTAssertFalse(app.staticTexts["查看全部"].exists)
+        XCTAssertTrue(app.images["推训练背景图"].waitForExistence(timeout: 3))
 
         let startButton = app.buttons["开始训练"]
         XCTAssertTrue(startButton.waitForExistence(timeout: 8))

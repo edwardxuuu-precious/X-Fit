@@ -304,6 +304,32 @@ final class TrainingMetricsTests: XCTestCase {
         XCTAssertEqual(summary.buckets.last?.volume, 600)
     }
 
+    func testWorkoutHeroMatchesTrainingGoalAndUsesFullBodyForTies() {
+        XCTAssertEqual(
+            WorkoutHeroKind.resolve(
+                workoutName: "推 · 胸肩三头",
+                muscleGroups: ["胸部", "胸部", "肩部", "手臂"]
+            ),
+            .push
+        )
+        XCTAssertEqual(
+            WorkoutHeroKind.resolve(workoutName: "拉 · 背部二头", muscleGroups: ["背部", "手臂"]),
+            .pull
+        )
+        XCTAssertEqual(
+            WorkoutHeroKind.resolve(workoutName: "腿 · 下肢力量", muscleGroups: ["腿部", "小腿"]),
+            .legs
+        )
+        XCTAssertEqual(
+            WorkoutHeroKind.resolve(workoutName: "核心稳定", muscleGroups: ["核心"]),
+            .core
+        )
+        XCTAssertEqual(
+            WorkoutHeroKind.resolve(workoutName: "背部与核心", muscleGroups: ["背部", "核心"]),
+            .full
+        )
+    }
+
     private func completedSet(for session: WorkoutSession, weight: Double) -> SetLog {
         SetLog(
             sessionID: session.id,

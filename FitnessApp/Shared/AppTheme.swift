@@ -177,14 +177,106 @@ struct MetricCard: View {
     }
 }
 
+enum WorkoutHeroKind: String, CaseIterable {
+    case push
+    case pull
+    case legs
+    case core
+    case full
+
+    var assetName: String {
+        switch self {
+        case .push: "WorkoutHeroPush"
+        case .pull: "WorkoutHeroPull"
+        case .legs: "WorkoutHeroLegs"
+        case .core: "WorkoutHeroCore"
+        case .full: "WorkoutHero"
+        }
+    }
+
+    var accessibilityLabel: String {
+        switch self {
+        case .push: "推训练背景图"
+        case .pull: "拉训练背景图"
+        case .legs: "下肢训练背景图"
+        case .core: "核心训练背景图"
+        case .full: "综合训练背景图"
+        }
+    }
+
+    var imageAlignment: Alignment {
+        switch self {
+        case .push, .pull, .core: .leading
+        case .legs, .full: .center
+        }
+    }
+
+    static func resolve(workoutName: String, muscleGroups: [String]) -> WorkoutHeroKind {
+        if workoutName.contains("全身") || workoutName.contains("综合") {
+            return .full
+        }
+
+        var scores: [WorkoutHeroKind: Int] = [
+            .push: 0,
+            .pull: 0,
+            .legs: 0,
+            .core: 0
+        ]
+
+        addNameScore(to: &scores, kind: .push, terms: ["推", "胸", "肩", "三头"], name: workoutName)
+        addNameScore(to: &scores, kind: .pull, terms: ["拉", "背", "二头"], name: workoutName)
+        addNameScore(to: &scores, kind: .legs, terms: ["腿", "下肢", "臀", "小腿"], name: workoutName)
+        addNameScore(to: &scores, kind: .core, terms: ["核心", "腹"], name: workoutName)
+
+        for group in muscleGroups {
+            if containsAny(group, terms: ["胸", "肩", "三头"]) { scores[.push, default: 0] += 1 }
+            if containsAny(group, terms: ["背", "二头"]) { scores[.pull, default: 0] += 1 }
+            if containsAny(group, terms: ["腿", "下肢", "臀", "小腿"]) { scores[.legs, default: 0] += 1 }
+            if containsAny(group, terms: ["核心", "腹"]) { scores[.core, default: 0] += 1 }
+        }
+
+        let ranked = scores.sorted { left, right in
+            if left.value != right.value { return left.value > right.value }
+            return left.key.rawValue < right.key.rawValue
+        }
+        guard let best = ranked.first, best.value > 0 else { return .full }
+        guard ranked.dropFirst().first?.value != best.value else { return .full }
+        return best.key
+    }
+
+    private static func addNameScore(
+        to scores: inout [WorkoutHeroKind: Int],
+        kind: WorkoutHeroKind,
+        terms: [String],
+        name: String
+    ) {
+        scores[kind, default: 0] += terms.filter(name.contains).count * 2
+    }
+
+    private static func containsAny(_ value: String, terms: [String]) -> Bool {
+        terms.contains(where: value.contains)
+    }
+}
+
 struct HeroWorkoutImage: View {
+    let kind: WorkoutHeroKind
+
+    init(kind: WorkoutHeroKind = .full) {
+        self.kind = kind
+    }
+
     var body: some View {
         GeometryReader { proxy in
-            Image("WorkoutHero")
+            Image(kind.assetName)
                 .resizable()
                 .scaledToFill()
-                .frame(width: proxy.size.width, height: proxy.size.height)
+                .frame(
+                    width: proxy.size.width,
+                    height: proxy.size.height,
+                    alignment: kind.imageAlignment
+                )
                 .clipped()
+                .accessibilityLabel(kind.accessibilityLabel)
         }
     }
 }
