@@ -75,7 +75,23 @@ final class FitnessAppUITests: XCTestCase {
         firstSetButton.tap()
 
         XCTAssertTrue(app.staticTexts["组间休息"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["计划默认休息 120 秒"].exists)
+        XCTAssertTrue(app.buttons["减少 30 秒休息"].exists)
+        XCTAssertTrue(app.buttons["增加 30 秒休息"].exists)
+
+        let timerValue = app.staticTexts["rest-timer-value"]
+        XCTAssertTrue(timerValue.exists)
+        let valueBeforeDecrease = timerValue.label
+        app.buttons["减少 30 秒休息"].tap()
+        XCTAssertNotEqual(timerValue.label, valueBeforeDecrease)
+        app.buttons["增加 30 秒休息"].tap()
+
         XCTAssertTrue(app.staticTexts["1/12 组"].exists)
+
+        let restTimerScreenshot = XCTAttachment(screenshot: app.screenshot())
+        restTimerScreenshot.name = "组间休息控制"
+        restTimerScreenshot.lifetime = .keepAlways
+        add(restTimerScreenshot)
     }
 
     func testScheduleAndNutritionPagesAreReachable() throws {

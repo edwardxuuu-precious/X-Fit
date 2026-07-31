@@ -36,6 +36,16 @@ struct ActiveWorkoutView: View {
         logs.filter(\.isCompleted).count
     }
 
+    private var activeRestExercise: SessionExercise? {
+        let completedLogs = logs.filter { $0.isCompleted && $0.completedAt != nil }
+        guard let latestCompletedLog = completedLogs.max(by: {
+            ($0.completedAt ?? .distantPast) < ($1.completedAt ?? .distantPast)
+        }) else {
+            return nil
+        }
+        return orderedExercises.first { $0.id == latestCompletedLog.sessionExerciseID }
+    }
+
     var body: some View {
         Group {
             if let session {
@@ -44,7 +54,7 @@ struct ActiveWorkoutView: View {
                         workoutHeader(session)
 
                         if session.restEndDate != nil {
-                            restTimer(session)
+                            restTimer(session, plannedRestSeconds: activeRestExercise?.restSeconds)
                         }
 
                         adjustmentCard
@@ -180,48 +190,69 @@ struct ActiveWorkoutView: View {
         .cardSurface()
     }
 
-    private func restTimer(_ session: WorkoutSession) -> some View {
+    private func restTimer(_ session: WorkoutSession, plannedRestSeconds: Int?) -> some View {
         TimelineView(.periodic(from: .now, by: 1)) { timeline in
             let remaining = max(0, Int((session.restEndDate ?? timeline.date).timeIntervalSince(timeline.date).rounded(.up)))
 
-            HStack(spacing: 14) {
-                ZStack {
-                    Circle()
-                        .fill(AppTheme.accent.opacity(0.14))
-                    Image(systemName: "timer")
-                        .font(.title2.bold())
-                        .foregroundStyle(AppTheme.accent)
-                }
-                .frame(width: 52, height: 52)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(remaining > 0 ? "组间休息" : "休息结束")
-                        .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.secondary)
-                    Text(TrainingFormatters.clock(remaining))
-                        .font(.title.bold().monospacedDigit())
-                }
-
-                Spacer()
-
-                Button("+30秒") {
-                    session.restEndDate = max(session.restEndDate ?? .now, .now).addingTimeInterval(30)
-                    saveQuietly()
-                    if let endDate = session.restEndDate {
-                        NotificationService.scheduleRestEnd(sessionID: session.id, at: endDate)
+            VStack(spacing: 14) {
+                HStack(spacing: 14) {
+                    ZStack {
+                        Circle()
+                            .fill(AppTheme.accent.opacity(0.14))
+                        Image(systemName: "timer")
+                            .font(.title2.bold())
+                            .foregroundStyle(AppTheme.accent)
                     }
-                }
-                .buttonStyle(.bordered)
+                    .frame(width: 52, height: 52)
 
-                Button {
-                    session.restEndDate = nil
-                    NotificationService.cancelRestEnd(sessionID: session.id)
-                    saveQuietly()
-                } label: {
-                    Image(systemName: "xmark")
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(remaining > 0 ? "组间休息" : "休息结束")
+                            .font(.subheadline.weight(.medium))
+                            .foregroundStyle(.secondary)
+                        Text(TrainingFormatters.clock(remaining))
+                            .font(.title.bold().monospacedDigit())
+                            .accessibilityIdentifier("rest-timer-value")
+                        if let plannedRestSeconds {
+                            Text("计划默认休息 \(plannedRestSeconds) 秒")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    Spacer()
+
+                    Button {
+                        endRest(session)
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                    .buttonStyle(.bordered)
+                    .accessibilityLabel("结束休息")
                 }
-                .buttonStyle(.bordered)
-                .accessibilityLabel("结束休息")
+
+                HStack(spacing: 12) {
+                    Button {
+                        adjustRest(session, by: -30)
+                    } label: {
+                        Label("−30 秒", systemImage: "minus")
+                            .font(.subheadline.bold().monospacedDigit())
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .accessibilityLabel("减少 30 秒休息")
+
+                    Button {
+                        adjustRest(session, by: 30)
+                    } label: {
+                        Label("+30 秒", systemImage: "plus")
+                            .font(.subheadline.bold().monospacedDigit())
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(AppTheme.accent)
+                    .foregroundStyle(.black)
+                    .accessibilityLabel("增加 30 秒休息")
+                }
             }
             .cardSurface()
             .onChange(of: remaining) { _, value in
@@ -245,7 +276,10 @@ struct ActiveWorkoutView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(exercise.exerciseName)
                         .font(.title3.bold())
-                    Text("目标 \(exercise.targetSets) 组 × \(exercise.minReps)–\(exercise.maxReps) 次 · 休息 \(exercise.restSeconds) 秒")
+                    Text("目标 \(exercise.targetSets) 组 × \(exercise.minReps)–\(exercise.maxReps) 次")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Label("计划默认组间休息 \(exercise.restSeconds) 秒", systemImage: "timer")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -434,6 +468,27 @@ struct ActiveWorkoutView: View {
             session.restEndDate = nil
             NotificationService.cancelRestEnd(sessionID: session.id)
         }
+        saveQuietly()
+    }
+
+    private func adjustRest(_ session: WorkoutSession, by seconds: Int) {
+        let now = Date.now
+        let currentEndDate = max(session.restEndDate ?? now, now)
+        let adjustedEndDate = currentEndDate.addingTimeInterval(TimeInterval(seconds))
+
+        guard adjustedEndDate > now else {
+            endRest(session)
+            return
+        }
+
+        session.restEndDate = adjustedEndDate
+        saveQuietly()
+        NotificationService.scheduleRestEnd(sessionID: session.id, at: adjustedEndDate)
+    }
+
+    private func endRest(_ session: WorkoutSession) {
+        session.restEndDate = nil
+        NotificationService.cancelRestEnd(sessionID: session.id)
         saveQuietly()
     }
 
