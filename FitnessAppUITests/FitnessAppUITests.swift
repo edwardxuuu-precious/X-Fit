@@ -25,6 +25,23 @@ final class FitnessAppUITests: XCTestCase {
         return expectedElement.exists
     }
 
+    private func scrollUp(
+        in app: XCUIApplication,
+        until element: XCUIElement,
+        attempts: Int = 3
+    ) -> Bool {
+        if element.waitForExistence(timeout: 3) {
+            return true
+        }
+        for _ in 0..<attempts {
+            app.swipeUp()
+            if element.waitForExistence(timeout: 2) {
+                return true
+            }
+        }
+        return element.exists
+    }
+
     func testStartWorkoutAndCompleteFirstSet() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
@@ -51,7 +68,7 @@ final class FitnessAppUITests: XCTestCase {
         app.launch()
 
         let scheduleButton = app.buttons["日程"]
-        XCTAssertTrue(scheduleButton.waitForExistence(timeout: 8))
+        XCTAssertTrue(scrollUp(in: app, until: scheduleButton))
         scheduleButton.tap()
         XCTAssertTrue(app.staticTexts["训练日程"].waitForExistence(timeout: 5))
 
@@ -61,6 +78,28 @@ final class FitnessAppUITests: XCTestCase {
         nutritionButton.tap()
         XCTAssertTrue(app.staticTexts["营养"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["当天还没有餐食"].exists)
+    }
+
+    func testHomeProgressSwitchesBetweenWeekAndMonth() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing", "--ui-testing-progress"]
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["本周进度"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.otherElements["周期训练容量图"].exists)
+        XCTAssertTrue(app.staticTexts["每日训练容量 · kg"].exists)
+        XCTAssertFalse(app.staticTexts["0 kg"].exists)
+
+        let monthButton = app.buttons["本月"]
+        XCTAssertTrue(monthButton.exists)
+        monthButton.tap()
+
+        XCTAssertTrue(app.staticTexts["本月进度"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["每周训练容量 · kg"].exists)
+        XCTAssertFalse(app.staticTexts["0 kg"].exists)
+        XCTAssertTrue(app.staticTexts["工作组"].exists)
+        XCTAssertTrue(app.staticTexts["分钟"].exists)
+        XCTAssertTrue(app.staticTexts["计划"].exists)
     }
 
     func testProfileGearOpensSettingsAndData() throws {

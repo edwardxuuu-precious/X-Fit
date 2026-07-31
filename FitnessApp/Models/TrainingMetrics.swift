@@ -1,5 +1,63 @@
 import Foundation
 
+enum TrainingProgressPeriod: String, CaseIterable, Identifiable {
+    case week
+    case month
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .week: return "本周"
+        case .month: return "本月"
+        }
+    }
+
+    var previousTitle: String {
+        switch self {
+        case .week: return "上周"
+        case .month: return "上月"
+        }
+    }
+
+    var bucketSubtitle: String {
+        switch self {
+        case .week: return "每日训练容量 · kg"
+        case .month: return "每周训练容量 · kg"
+        }
+    }
+}
+
+struct TrainingProgressBucket: Identifiable, Equatable {
+    let startDate: Date
+    let label: String
+    let completedSessions: Int
+    let workingSets: Int
+    let volume: Double
+    let activeMinutes: Int
+
+    var id: Date { startDate }
+}
+
+struct TrainingProgressSummary: Equatable {
+    let period: TrainingProgressPeriod
+    let interval: DateInterval
+    let completedSessions: Int
+    let plannedWorkouts: Int
+    let targetWorkouts: Int
+    let workingSets: Int
+    let volume: Double
+    let activeMinutes: Int
+    let previousVolume: Double
+    let volumeChangePercent: Double?
+    let buckets: [TrainingProgressBucket]
+
+    var completionProgress: Double {
+        guard targetWorkouts > 0 else { return 0 }
+        return min(Double(completedSessions) / Double(targetWorkouts), 1)
+    }
+}
+
 enum TrainingGoalMode: String, CaseIterable, Identifiable {
     case cuttingVolume
     case balancedProgression
@@ -196,5 +254,182 @@ enum TrainingMetrics {
             $0 + max(0, weights[$1]) * Double(max(0, reps[$1]))
         }
         return (volume / Double(totalReps) * 2).rounded() / 2
+    }
+
+    static func progressSummary(
+        period: TrainingProgressPeriod,
+        now: Date = .now,
+        calendar sourceCalendar: Calendar = .current,
+        schedules: [ScheduledWorkout],
+        sessions: [WorkoutSession],
+        setLogs: [SetLog]
+    ) -> TrainingProgressSummary {
+        var calendar = sourceCalendar
+        calendar.firstWeekday = 2
+        calendar.minimumDaysInFirstWeek = 4
+
+        let interval = progressInterval(for: period, containing: now, calendar: calendar)
+        let previousInterval = previousProgressInterval(
+            for: period,
+            currentInterval: interval,
+            calendar: calendar
+        )
+        let elapsed = max(0, min(now, interval.end).timeIntervalSince(interval.start))
+        let previousComparisonInterval = DateInterval(
+            start: previousInterval.start,
+            end: min(previousInterval.end, previousInterval.start.addingTimeInterval(elapsed))
+        )
+        let completedSessions = sessions.filter {
+            $0.status == .completed && interval.contains($0.startedAt)
+        }
+        let completedSessionIDs = Set(completedSessions.map(\.id))
+        let workingLogs = setLogs.filter {
+            $0.isCompleted && !$0.isWarmup && completedSessionIDs.contains($0.sessionID)
+        }
+        let eligibleSchedules = schedules.filter {
+            interval.contains($0.plannedDate) && $0.status != .skipped
+        }
+        let targetWorkouts = eligibleSchedules.count
+
+        let previousSessionIDs = Set(sessions.filter {
+            $0.status == .completed && previousComparisonInterval.contains($0.startedAt)
+        }.map(\.id))
+        let previousLogs = setLogs.filter {
+            $0.isCompleted && !$0.isWarmup && previousSessionIDs.contains($0.sessionID)
+        }
+        let previousVolume = volume(for: previousLogs)
+        let currentVolume = volume(for: workingLogs)
+        let volumeChangePercent = previousVolume > 0
+            ? (currentVolume - previousVolume) / previousVolume * 100
+            : nil
+
+        let bucketStarts = progressBucketStarts(
+            for: period,
+            interval: interval,
+            calendar: calendar
+        )
+        let buckets = bucketStarts.map { bucketStart in
+            let bucketInterval = progressBucketInterval(
+                startingAt: bucketStart,
+                period: period,
+                currentInterval: interval,
+                calendar: calendar
+            )
+            let bucketSessions = completedSessions.filter { bucketInterval.contains($0.startedAt) }
+            let bucketSessionIDs = Set(bucketSessions.map(\.id))
+            let bucketLogs = workingLogs.filter { bucketSessionIDs.contains($0.sessionID) }
+
+            return TrainingProgressBucket(
+                startDate: bucketStart,
+                label: progressBucketLabel(for: bucketStart, period: period, calendar: calendar),
+                completedSessions: bucketSessions.count,
+                workingSets: bucketLogs.count,
+                volume: volume(for: bucketLogs),
+                activeMinutes: activeMinutes(for: bucketSessions)
+            )
+        }
+
+        return TrainingProgressSummary(
+            period: period,
+            interval: interval,
+            completedSessions: completedSessions.count,
+            plannedWorkouts: eligibleSchedules.count,
+            targetWorkouts: targetWorkouts,
+            workingSets: workingLogs.count,
+            volume: currentVolume,
+            activeMinutes: activeMinutes(for: completedSessions),
+            previousVolume: previousVolume,
+            volumeChangePercent: volumeChangePercent,
+            buckets: buckets
+        )
+    }
+
+    private static func progressInterval(
+        for period: TrainingProgressPeriod,
+        containing date: Date,
+        calendar: Calendar
+    ) -> DateInterval {
+        let component: Calendar.Component = period == .week ? .weekOfYear : .month
+        return calendar.dateInterval(of: component, for: date)
+            ?? DateInterval(start: calendar.startOfDay(for: date), duration: 86_400)
+    }
+
+    private static func previousProgressInterval(
+        for period: TrainingProgressPeriod,
+        currentInterval: DateInterval,
+        calendar: Calendar
+    ) -> DateInterval {
+        let component: Calendar.Component = period == .week ? .weekOfYear : .month
+        let previousDate = calendar.date(byAdding: component, value: -1, to: currentInterval.start)
+            ?? currentInterval.start.addingTimeInterval(-currentInterval.duration)
+        return progressInterval(for: period, containing: previousDate, calendar: calendar)
+    }
+
+    private static func progressBucketStarts(
+        for period: TrainingProgressPeriod,
+        interval: DateInterval,
+        calendar: Calendar
+    ) -> [Date] {
+        switch period {
+        case .week:
+            return (0..<7).compactMap {
+                calendar.date(byAdding: .day, value: $0, to: interval.start)
+            }
+        case .month:
+            let firstWeekStart = calendar.dateInterval(of: .weekOfYear, for: interval.start)?.start
+                ?? interval.start
+            var starts: [Date] = []
+            var cursor = firstWeekStart
+            while cursor < interval.end {
+                starts.append(cursor)
+                guard let next = calendar.date(byAdding: .weekOfYear, value: 1, to: cursor),
+                      next > cursor else { break }
+                cursor = next
+            }
+            return starts
+        }
+    }
+
+    private static func progressBucketInterval(
+        startingAt bucketStart: Date,
+        period: TrainingProgressPeriod,
+        currentInterval: DateInterval,
+        calendar: Calendar
+    ) -> DateInterval {
+        let component: Calendar.Component = period == .week ? .day : .weekOfYear
+        let nextStart = calendar.date(byAdding: component, value: 1, to: bucketStart)
+            ?? currentInterval.end
+        let start = max(bucketStart, currentInterval.start)
+        let end = min(nextStart, currentInterval.end)
+        return DateInterval(start: start, end: max(start, end))
+    }
+
+    private static func progressBucketLabel(
+        for date: Date,
+        period: TrainingProgressPeriod,
+        calendar: Calendar
+    ) -> String {
+        if period == .month {
+            return "\(calendar.component(.month, from: date))/\(calendar.component(.day, from: date))"
+        }
+
+        switch calendar.component(.weekday, from: date) {
+        case 1: return "日"
+        case 2: return "一"
+        case 3: return "二"
+        case 4: return "三"
+        case 5: return "四"
+        case 6: return "五"
+        default: return "六"
+        }
+    }
+
+    private static func activeMinutes(for sessions: [WorkoutSession]) -> Int {
+        sessions.reduce(0) { total, session in
+            guard let completedAt = session.completedAt, completedAt >= session.startedAt else {
+                return total
+            }
+            return total + max(1, Int(completedAt.timeIntervalSince(session.startedAt) / 60))
+        }
     }
 }

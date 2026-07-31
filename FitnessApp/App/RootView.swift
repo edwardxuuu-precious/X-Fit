@@ -95,6 +95,7 @@ struct RootView: View {
                 try SeedDataService.prepareIfNeeded(in: modelContext)
                 #if DEBUG
                 try prepareUITestHistoryFixtureIfRequested()
+                try prepareUITestProgressFixtureIfRequested()
                 #endif
                 do {
                     launchImportMessage = try importLaunchHistoryIfRequested()
@@ -233,6 +234,65 @@ struct RootView: View {
                 )
             )
         }
+        try modelContext.save()
+    }
+
+    @MainActor
+    private func prepareUITestProgressFixtureIfRequested() throws {
+        guard CommandLine.arguments.contains("--ui-testing-progress") else { return }
+
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        calendar.minimumDaysInFirstWeek = 4
+        guard let currentWeek = calendar.dateInterval(of: .weekOfYear, for: .now),
+              let currentMonth = calendar.dateInterval(of: .month, for: .now),
+              let previousMonthDate = calendar.date(byAdding: .month, value: -1, to: currentMonth.start),
+              let previousMonth = calendar.dateInterval(of: .month, for: previousMonthDate) else {
+            return
+        }
+        let today = calendar.startOfDay(for: .now)
+        let dayOfMonth = calendar.component(.day, from: today)
+        let earlierMonthDay = currentMonth.start.addingDays(min(9, max(0, dayOfMonth - 1)))
+
+        let fixtures: [(String, Date, Int, Double)] = [
+            ("本周推训练", currentWeek.start, 46, 50),
+            ("本周拉训练", today, 52, 65),
+            ("本月腿训练", earlierMonthDay, 58, 80),
+            ("上周同期训练", currentWeek.start.addingDays(-7), 50, 70),
+            ("上月同期训练", previousMonth.start.addingDays(8), 55, 75)
+        ]
+
+        for (index, fixture) in fixtures.enumerated() {
+            let startedAt = calendar.date(bySettingHour: 10, minute: 0, second: 0, of: fixture.1)
+                ?? fixture.1
+            let completedAt = startedAt.addingTimeInterval(Double(fixture.2 * 60))
+            let session = WorkoutSession(
+                templateName: fixture.0,
+                plannedDate: startedAt,
+                startedAt: startedAt,
+                completedAt: completedAt,
+                status: .completed,
+                importIdentifier: "ui-test-progress-\(index)"
+            )
+            modelContext.insert(session)
+
+            for setNumber in 1...4 {
+                modelContext.insert(SetLog(
+                    sessionID: session.id,
+                    sessionExerciseID: UUID(),
+                    exerciseID: UUID(),
+                    setNumber: setNumber,
+                    targetWeight: fixture.3,
+                    targetReps: 10,
+                    actualWeight: fixture.3,
+                    actualReps: 10,
+                    rir: 2,
+                    isCompleted: true,
+                    completedAt: completedAt
+                ))
+            }
+        }
+
         try modelContext.save()
     }
     #endif

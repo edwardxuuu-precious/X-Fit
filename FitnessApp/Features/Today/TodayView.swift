@@ -1,3 +1,4 @@
+import Charts
 import SwiftData
 import SwiftUI
 
@@ -8,10 +9,14 @@ struct TodayView: View {
     @Query private var exercises: [Exercise]
     @Query private var templates: [WorkoutTemplate]
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
+    @Query private var setLogs: [SetLog]
 
     @State private var workoutSessionID: UUID?
     @State private var showWorkout = false
     @State private var errorMessage: String?
+    @State private var progressPeriod: TrainingProgressPeriod = CommandLine.arguments.contains(
+        "--ui-testing-progress-month"
+    ) ? .month : .week
 
     private var activeSession: WorkoutSession? {
         sessions.first { $0.status == .inProgress }
@@ -37,28 +42,13 @@ struct TodayView: View {
         .map { $0 }
     }
 
-    private var currentWeekSchedules: [ScheduledWorkout] {
-        let start = Date.now.addingDays(-6).startOfDay
-        return schedules.filter { $0.plannedDate >= start && $0.plannedDate <= Date.now.startOfDay }
-    }
-
-    private var weeklyCompletedCount: Int {
-        currentWeekSchedules.filter { $0.status == .completed }.count
-    }
-
-    private var weeklyProgress: Double {
-        guard !currentWeekSchedules.isEmpty else { return 0 }
-        return Double(weeklyCompletedCount) / Double(currentWeekSchedules.count)
-    }
-
-    private var completedMinutes: Int {
-        sessions
-            .filter { $0.status == .completed && $0.startedAt >= Date.now.addingDays(-6).startOfDay }
-            .compactMap { session -> Int? in
-                guard let end = session.completedAt else { return nil }
-                return max(1, Int(end.timeIntervalSince(session.startedAt) / 60))
-            }
-            .reduce(0, +)
+    private var progressSummary: TrainingProgressSummary {
+        TrainingMetrics.progressSummary(
+            period: progressPeriod,
+            schedules: schedules,
+            sessions: sessions,
+            setLogs: setLogs
+        )
     }
 
     var body: some View {
@@ -121,39 +111,190 @@ struct TodayView: View {
     }
 
     private var weeklyDashboard: some View {
-        HStack(spacing: 18) {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("本周进度")
+        let summary = progressSummary
+
+        return VStack(alignment: .leading, spacing: 16) {
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("\(summary.period.title)进度")
+                        .font(.headline.bold())
+                        .foregroundStyle(.white)
+                        .accessibilityIdentifier("周期进度标题")
+                    Text("完成率按计划，容量按已完成工作组")
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                Spacer(minLength: 4)
+                progressPeriodControl
+            }
+
+            HStack(spacing: 16) {
+                NeonProgressRing(
+                    progress: summary.completionProgress,
+                    value: "\(Int((summary.completionProgress * 100).rounded()))%",
+                    detail: summary.targetWorkouts == 0
+                        ? "暂无计划"
+                        : "\(summary.completedSessions)/\(summary.targetWorkouts) 次"
+                )
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(
+                    "\(summary.period.title)完成率 \(Int((summary.completionProgress * 100).rounded()))%，完成 \(summary.completedSessions) 次，目标 \(summary.targetWorkouts) 次"
+                )
+
+                Rectangle()
+                    .fill(AppTheme.line)
+                    .frame(width: 1, height: 88)
+
+                VStack(spacing: 12) {
+                    dashboardMetric(
+                        icon: "flame.fill",
+                        tint: AppTheme.orange,
+                        title: "完成训练",
+                        value: "\(summary.completedSessions) 次"
+                    )
+                    dashboardMetric(
+                        icon: "dumbbell.fill",
+                        tint: AppTheme.accent,
+                        title: "训练容量",
+                        value: formattedVolume(summary.volume)
+                    )
+                }
+            }
+
+            Divider().overlay(AppTheme.line)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(summary.period.bucketSubtitle)
                     .font(.caption.bold())
                     .foregroundStyle(AppTheme.secondaryText)
-                NeonProgressRing(
-                    progress: weeklyProgress,
-                    value: "\(Int((weeklyProgress * 100).rounded()))%",
-                    detail: "\(weeklyCompletedCount)/\(max(currentWeekSchedules.count, 1))"
+
+                progressVolumeChart(summary)
+            }
+
+            HStack(spacing: 0) {
+                progressFootMetric(value: "\(summary.workingSets)", label: "工作组")
+                progressFootMetric(value: "\(summary.activeMinutes)", label: "分钟")
+                progressFootMetric(
+                    value: summary.plannedWorkouts == 0 ? "—" : "\(summary.plannedWorkouts)",
+                    label: "计划"
                 )
             }
 
-            Rectangle()
-                .fill(AppTheme.line)
-                .frame(width: 1, height: 88)
+            Label(comparisonText(for: summary), systemImage: comparisonIcon(for: summary))
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(AppTheme.secondaryText)
+                .accessibilityIdentifier("周期容量对比")
+        }
+        .cardSurface(padding: 18, cornerRadius: 20)
+    }
 
-            VStack(spacing: 14) {
-                dashboardMetric(
-                    icon: "flame.fill",
-                    tint: AppTheme.orange,
-                    title: "完成训练",
-                    value: "\(weeklyCompletedCount) 次"
+    private var progressPeriodControl: some View {
+        HStack(spacing: 2) {
+            progressPeriodButton(.week)
+            progressPeriodButton(.month)
+        }
+        .padding(3)
+        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+        .overlay(RoundedRectangle(cornerRadius: 10).stroke(AppTheme.line, lineWidth: 1))
+    }
+
+    private func progressPeriodButton(_ period: TrainingProgressPeriod) -> some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                progressPeriod = period
+            }
+        } label: {
+            Text(period == .week ? "周" : "月")
+                .font(.caption.bold())
+                .foregroundStyle(progressPeriod == period ? .black : AppTheme.secondaryText)
+                .frame(width: 34, height: 28)
+                .background(
+                    progressPeriod == period ? AppTheme.accent : .clear,
+                    in: RoundedRectangle(cornerRadius: 8)
                 )
-                dashboardMetric(
-                    icon: "timer",
-                    tint: AppTheme.accent,
-                    title: "活跃时间",
-                    value: completedMinutes == 0 ? "等待记录" : "\(completedMinutes) 分钟"
-                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(period.title)
+        .accessibilityAddTraits(progressPeriod == period ? .isSelected : [])
+    }
+
+    private func progressVolumeChart(_ summary: TrainingProgressSummary) -> some View {
+        let ceiling = max(summary.buckets.map(\.volume).max() ?? 0, 1)
+
+        return Chart(summary.buckets) { bucket in
+            BarMark(
+                x: .value("周期", bucket.label),
+                y: .value("训练容量", bucket.volume)
+            )
+            .foregroundStyle(AppTheme.accent)
+            .cornerRadius(4)
+            .accessibilityLabel(
+                "\(bucket.label)，\(Int(bucket.volume)) 公斤，\(bucket.completedSessions) 次训练，\(bucket.workingSets) 个工作组"
+            )
+        }
+        .chartXAxis {
+            AxisMarks(values: summary.buckets.map(\.label)) { value in
+                AxisValueLabel {
+                    if let label = value.as(String.self) {
+                        Text(label)
+                            .font(.caption2)
+                            .foregroundStyle(AppTheme.secondaryText)
+                    }
+                }
+                AxisTick().foregroundStyle(.clear)
+                AxisGridLine().foregroundStyle(.clear)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .cardSurface(padding: 18, cornerRadius: 20)
+        .chartYAxis(.hidden)
+        .chartYScale(domain: 0...(ceiling * 1.08))
+        .chartPlotStyle { plot in
+            plot.background(Color.clear)
+        }
+        .frame(height: 96)
+        .overlay {
+            if summary.volume == 0 {
+                Text("完成训练后生成容量柱图")
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .padding(.bottom, 18)
+            }
+        }
+        .accessibilityIdentifier("周期训练容量图")
+    }
+
+    private func progressFootMetric(value: String, label: String) -> some View {
+        VStack(spacing: 2) {
+            Text(value)
+                .font(.subheadline.bold().monospacedDigit())
+                .foregroundStyle(.white)
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func formattedVolume(_ volume: Double) -> String {
+        if volume >= 10_000 {
+            return String(format: "%.1f 万 kg", volume / 10_000)
+        }
+        return "\(Int(volume).formatted()) kg"
+    }
+
+    private func comparisonText(for summary: TrainingProgressSummary) -> String {
+        guard let change = summary.volumeChangePercent else {
+            return "完成更多训练后建立与\(summary.period.previousTitle)同期的容量基线"
+        }
+        let rounded = Int(change.rounded())
+        let sign = rounded > 0 ? "+" : ""
+        return "较\(summary.period.previousTitle)同期训练容量 \(sign)\(rounded)%"
+    }
+
+    private func comparisonIcon(for summary: TrainingProgressSummary) -> String {
+        guard let change = summary.volumeChangePercent else { return "circle.dotted" }
+        if change > 0.5 { return "arrow.up.right" }
+        if change < -0.5 { return "arrow.down.right" }
+        return "arrow.right"
     }
 
     private func dashboardMetric(icon: String, tint: Color, title: String, value: String) -> some View {
