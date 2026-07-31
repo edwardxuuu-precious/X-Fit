@@ -128,6 +128,65 @@ final class AdaptivePlanningTests: XCTestCase {
         XCTAssertTrue(recommendation?.attentionText.contains("下放慢一点") == true)
     }
 
+    func testCuttingRecommendationPreservesSetsAndUsesWorkingWeight() throws {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let row = Exercise(name: "上背划船机", muscleGroup: "背部", equipment: "器械")
+        let session = WorkoutSession(
+            templateName: "背部训练",
+            plannedDate: now.addingDays(-7),
+            startedAt: now.addingDays(-7),
+            completedAt: now.addingDays(-7).addingTimeInterval(3_600),
+            status: .completed
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: row.id,
+            exerciseName: row.name,
+            order: 0,
+            targetSets: 4,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 55,
+            restSeconds: 90,
+            muscleGroup: "背部"
+        )
+        let weights = [40.0, 45.0, 50.0, 55.0]
+        let logs = weights.enumerated().map { index, weight in
+            SetLog(
+                sessionID: session.id,
+                sessionExerciseID: snapshot.id,
+                exerciseID: row.id,
+                setNumber: index + 1,
+                targetWeight: weight,
+                targetReps: 12,
+                actualWeight: weight,
+                actualReps: 12,
+                rir: nil,
+                isCompleted: true,
+                completedAt: session.startedAt
+            )
+        }
+
+        let recommendation = WorkoutRecommendationService.recommendations(
+            selectedMuscleGroups: ["背部"],
+            exercises: [row],
+            sessions: [session],
+            sessionExercises: [snapshot],
+            setLogs: logs,
+            templateExercises: [],
+            goalMode: .cuttingVolume,
+            now: now
+        ).first
+
+        XCTAssertEqual(recommendation?.suggestedSets, 4)
+        XCTAssertEqual(recommendation?.minReps, 10)
+        XCTAssertEqual(recommendation?.maxReps, 15)
+        XCTAssertEqual(recommendation?.suggestedWeight, 47.5)
+        XCTAssertEqual(recommendation?.suggestedVolume, 2_280)
+        XCTAssertEqual(recommendation?.progressionTitle, "维持重量与组数")
+        XCTAssertTrue(recommendation?.progressionDetail.contains("不据此加重") == true)
+    }
+
     func testDailyPlanCreatesOneOffAndSkipsExistingPlan() throws {
         let container = try makeContainer()
         let context = container.mainContext

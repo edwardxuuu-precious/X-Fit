@@ -148,6 +148,32 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["杠铃卧推"].exists)
         XCTAssertTrue(app.staticTexts["第 1 组"].exists)
         XCTAssertTrue(app.staticTexts["40 kg × 10"].exists)
+        XCTAssertTrue(app.staticTexts["维持重量与组数"].exists)
+
+        app.buttons["编辑历史"].tap()
+        XCTAssertTrue(app.navigationBars["编辑历史训练"].waitForExistence(timeout: 5))
+        let workoutNotes = app.textFields["历史训练备注"]
+        XCTAssertTrue(workoutNotes.waitForExistence(timeout: 5))
+        workoutNotes.tap()
+        workoutNotes.typeText(" UI已编辑")
+
+        let exerciseNotes = app.textFields["动作备注-杠铃卧推"]
+        XCTAssertTrue(exerciseNotes.exists)
+        exerciseNotes.tap()
+        exerciseNotes.typeText(" UI动作备注")
+        app.navigationBars["编辑历史训练"].buttons["保存"].tap()
+
+        XCTAssertTrue(app.navigationBars["历史详情验证"].waitForExistence(timeout: 5))
+        XCTAssertTrue(
+            app.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS %@", "UI已编辑")
+            ).firstMatch.waitForExistence(timeout: 5)
+        )
+        XCTAssertTrue(
+            app.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS %@", "UI动作备注")
+            ).firstMatch.exists
+        )
 
         app.navigationBars["历史详情验证"].buttons.firstMatch.tap()
         XCTAssertTrue(app.navigationBars["训练历史"].waitForExistence(timeout: 5))

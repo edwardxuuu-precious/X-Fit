@@ -21,6 +21,9 @@ struct DailyWorkoutBuilderView: View {
     @Query private var templates: [WorkoutTemplate]
     @Query private var schedules: [ScheduledWorkout]
 
+    @AppStorage(TrainingGoalMode.storageKey)
+    private var trainingGoalRaw = TrainingGoalMode.cuttingVolume.rawValue
+
     var isEmbedded = false
 
     @State private var selectedDate = Date.now.startOfDay
@@ -50,8 +53,13 @@ struct DailyWorkoutBuilderView: View {
             sessionExercises: sessionExercises,
             setLogs: setLogs,
             templateExercises: templateExercises,
-            variant: recommendationVariant
+            variant: recommendationVariant,
+            goalMode: trainingGoalMode
         )
+    }
+
+    private var trainingGoalMode: TrainingGoalMode {
+        TrainingGoalMode(rawValue: trainingGoalRaw) ?? .cuttingVolume
     }
 
     private var advice: [MuscleGroupAdvice] {
@@ -96,6 +104,8 @@ struct DailyWorkoutBuilderView: View {
                 if let activeSession {
                     activeWorkoutCard(activeSession)
                 }
+
+                trainingGoalCard
 
                 SectionHeader(title: "今天想练哪里")
                 muscleGroupPicker
@@ -242,6 +252,31 @@ struct DailyWorkoutBuilderView: View {
         .cardSurface()
     }
 
+    private var trainingGoalCard: some View {
+        VStack(alignment: .leading, spacing: 11) {
+            HStack {
+                Label("当前训练策略", systemImage: "scope")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(.white)
+                Spacer()
+                Text(trainingGoalMode.title)
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+            }
+
+            Picker("训练策略", selection: $trainingGoalRaw) {
+                Text("减脂容量").tag(TrainingGoalMode.cuttingVolume.rawValue)
+                Text("均衡进阶").tag(TrainingGoalMode.balancedProgression.rawValue)
+            }
+            .pickerStyle(.segmented)
+
+            Text(trainingGoalMode.detail)
+                .font(.caption)
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+        .cardSurface()
+    }
+
     private func activeWorkoutCard(_ session: WorkoutSession) -> some View {
         HStack(spacing: 13) {
             Image(systemName: "bolt.fill")
@@ -383,6 +418,25 @@ struct DailyWorkoutBuilderView: View {
                         .foregroundStyle(AppTheme.secondaryText)
                 }
 
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(recommendation.progressionTitle)
+                        .font(.caption.bold())
+                        .foregroundStyle(AppTheme.accent)
+                    Text(recommendation.progressionDetail)
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                    Text(
+                        "建议 \(recommendation.suggestedSets) 组 × \(recommendation.minReps)–\(recommendation.maxReps) 次 · "
+                            + "\(TrainingFormatters.weight(recommendation.suggestedWeight)) kg · "
+                            + "目标容量约 \(Int(recommendation.suggestedVolume)) kg"
+                    )
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(.white)
+                }
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(AppTheme.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 11))
+
                 Label(recommendation.attentionText, systemImage: "exclamationmark.circle")
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
@@ -409,7 +463,10 @@ struct DailyWorkoutBuilderView: View {
                 .font(.caption2.bold())
                 .foregroundStyle(.white)
             if let best {
-                Text("强度：\(last.sets.count) 组 · 最重 \(TrainingFormatters.weight(best.weight)) kg × \(best.reps) · 平均 RIR \(rir)")
+                Text("上次：\(last.sets.count) 组 · 工作均重 \(TrainingFormatters.weight(last.workingWeight)) kg · 最重 \(TrainingFormatters.weight(best.weight)) kg × \(best.reps)")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
+                Text("容量 \(Int(last.volume)) kg · 平均 RIR \(rir)")
                     .font(.caption)
                     .foregroundStyle(AppTheme.secondaryText)
             }

@@ -34,6 +34,13 @@ struct ExerciseLastPerformance {
     var volume: Double {
         sets.reduce(0) { $0 + $1.weight * Double($1.reps) }
     }
+
+    var workingWeight: Double {
+        TrainingMetrics.workingWeight(
+            weights: sets.map(\.weight),
+            reps: sets.map(\.reps)
+        )
+    }
 }
 
 struct ExerciseRecommendation: Identifiable {
@@ -48,6 +55,9 @@ struct ExerciseRecommendation: Identifiable {
     let maxReps: Int
     let suggestedWeight: Double
     let restSeconds: Int
+    let progressionTitle: String
+    let progressionDetail: String
+    let suggestedVolume: Double
     let attentionText: String
     let lastPerformance: ExerciseLastPerformance?
     let appearedInLastMenu: Bool
@@ -83,6 +93,7 @@ enum WorkoutRecommendationService {
         setLogs: [SetLog],
         templateExercises: [TemplateExercise],
         variant: Int = 0,
+        goalMode: TrainingGoalMode = .balancedProgression,
         now: Date = .now
     ) -> [ExerciseRecommendation] {
         guard !selectedMuscleGroups.isEmpty else { return [] }
@@ -127,6 +138,13 @@ enum WorkoutRecommendationService {
                     setLogs: setLogs
                 )
             }
+            let previous = history.dropFirst().first.flatMap { pair in
+                lastPerformance(
+                    session: pair.0,
+                    snapshot: pair.1,
+                    setLogs: setLogs
+                )
+            }
             let daysSince = last.map { max(0, Calendar.current.dateComponents([.day], from: $0.date.startOfDay, to: now.startOfDay).day ?? 0) }
             let recentCount = history.filter { $0.0.startedAt >= now.addingDays(-28) }.count
             let appearedInLastMenu = lastMenuExerciseIDs.contains(exercise.id)
@@ -135,8 +153,10 @@ enum WorkoutRecommendationService {
                 exercise: exercise,
                 lastHistory: history.first,
                 lastPerformance: last,
+                previousPerformance: previous,
                 baseline: baseline,
-                setLogs: setLogs
+                setLogs: setLogs,
+                goalMode: goalMode
             )
 
             var score = 50.0
@@ -186,6 +206,11 @@ enum WorkoutRecommendationService {
                 maxReps: target.maxReps,
                 suggestedWeight: target.weight,
                 restSeconds: target.restSeconds,
+                progressionTitle: target.assessment.title,
+                progressionDetail: target.assessment.detail,
+                suggestedVolume: target.weight
+                    * Double(target.sets)
+                    * Double((target.minReps + target.maxReps) / 2),
                 attentionText: attentionParts.isEmpty
                     ? "保持动作控制；出现明显疼痛时停止并调整。"
                     : attentionParts.joined(separator: "；"),
@@ -305,16 +330,37 @@ enum WorkoutRecommendationService {
         exercise: Exercise,
         lastHistory: (WorkoutSession, SessionExercise)?,
         lastPerformance: ExerciseLastPerformance?,
+        previousPerformance: ExerciseLastPerformance?,
         baseline: TemplateExercise?,
-        setLogs: [SetLog]
-    ) -> (sets: Int, minReps: Int, maxReps: Int, weight: Double, restSeconds: Int) {
+        setLogs: [SetLog],
+        goalMode: TrainingGoalMode
+    ) -> (
+        sets: Int,
+        minReps: Int,
+        maxReps: Int,
+        weight: Double,
+        restSeconds: Int,
+        assessment: ProgressionAssessment
+    ) {
         guard let lastHistory, let lastPerformance else {
+            let sets = baseline?.targetSets ?? (goalMode == .cuttingVolume ? 4 : 3)
+            let minReps = baseline?.minReps ?? (goalMode == .cuttingVolume ? 10 : 8)
+            let maxReps = baseline?.maxReps ?? (goalMode == .cuttingVolume ? 15 : 12)
+            let weight = baseline?.targetWeight ?? 0
             return (
-                baseline?.targetSets ?? 3,
-                baseline?.minReps ?? 8,
-                baseline?.maxReps ?? 12,
-                baseline?.targetWeight ?? 0,
-                baseline?.restSeconds ?? exercise.defaultRestSeconds
+                sets,
+                minReps,
+                maxReps,
+                weight,
+                baseline?.restSeconds ?? exercise.defaultRestSeconds,
+                TrainingMetrics.progressionAssessment(
+                    weights: [],
+                    completedReps: [],
+                    minimumReps: minReps,
+                    maximumReps: maxReps,
+                    rirValues: [],
+                    goalMode: goalMode
+                )
             )
         }
 
@@ -322,30 +368,65 @@ enum WorkoutRecommendationService {
         let logs = setLogs
             .filter { $0.sessionExerciseID == snapshot.id && $0.isCompleted }
             .sorted { $0.setNumber < $1.setNumber }
-        let progression = TrainingMetrics.progression(
-            completedReps: logs.map(\.actualReps),
-            minimumReps: snapshot.minReps,
-            maximumReps: snapshot.maxReps,
-            rirValues: logs.compactMap(\.rir)
+        let repRange = suggestedRepRange(
+            reps: logs.map(\.actualReps),
+            fallbackMinimum: snapshot.minReps,
+            fallbackMaximum: snapshot.maxReps,
+            goalMode: goalMode
         )
-        let lastWeight = lastPerformance.bestSet?.weight ?? snapshot.targetWeight
+        let assessment = TrainingMetrics.progressionAssessment(
+            weights: logs.map(\.actualWeight),
+            completedReps: logs.map(\.actualReps),
+            minimumReps: repRange.minimum,
+            maximumReps: repRange.maximum,
+            rirValues: logs.map(\.rir),
+            previousVolume: previousPerformance?.volume,
+            goalMode: goalMode
+        )
+        let lastWeight = goalMode == .cuttingVolume
+            ? lastPerformance.workingWeight
+            : lastPerformance.bestSet?.weight ?? snapshot.targetWeight
         let increment = (exercise.muscleGroup == "腿部" && exercise.equipment == "杠铃") ? 5.0 : 2.5
         let weight: Double
-        switch progression {
-        case .increase:
-            weight = lastWeight + increment
+        switch assessment.recommendation {
+        case .increase(let percent):
+            weight = goalMode == .cuttingVolume
+                ? roundedToHalf(lastWeight * (1 + percent))
+                : lastWeight + increment
         case .maintain:
             weight = lastWeight
         case .reduce:
-            weight = roundedToHalf(max(0, lastWeight * 0.9))
+            weight = roundedToHalf(max(0, lastWeight * (goalMode == .cuttingVolume ? 0.95 : 0.9)))
         }
         return (
             max(1, logs.count),
-            snapshot.minReps,
-            snapshot.maxReps,
+            repRange.minimum,
+            repRange.maximum,
             weight,
-            snapshot.restSeconds
+            snapshot.restSeconds,
+            assessment
         )
+    }
+
+    private static func suggestedRepRange(
+        reps: [Int],
+        fallbackMinimum: Int,
+        fallbackMaximum: Int,
+        goalMode: TrainingGoalMode
+    ) -> (minimum: Int, maximum: Int) {
+        guard goalMode == .cuttingVolume, !reps.isEmpty else {
+            return (fallbackMinimum, fallbackMaximum)
+        }
+        let average = Int(
+            (Double(reps.reduce(0, +)) / Double(reps.count)).rounded()
+        )
+        if average >= 12 {
+            return (max(8, average - 2), min(20, max(15, average + 2)))
+        }
+        if average <= 7 {
+            return (max(5, average - 1), max(8, average + 2))
+        }
+        return (max(6, average - 2), min(15, average + 2))
     }
 
     private static func roundedToHalf(_ value: Double) -> Double {
