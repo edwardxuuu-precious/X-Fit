@@ -47,12 +47,28 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
+        XCTAssertTrue(app.staticTexts["今日训练"].waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["查看全部"].exists)
+
         let startButton = app.buttons["开始训练"]
         XCTAssertTrue(startButton.waitForExistence(timeout: 8))
         let activeWorkoutTitle = app.staticTexts["训练进行中"]
         XCTAssertTrue(tap(startButton, until: activeWorkoutTitle))
-        XCTAssertTrue(app.staticTexts["按今天状态调整菜单"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.buttons["加动作"].exists)
+        XCTAssertTrue(app.staticTexts["按今天状态调整训练量"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["临时加动作"].exists)
+        XCTAssertTrue(app.buttons["调整训练量"].firstMatch.exists)
+
+        let rirHelpButton = app.buttons["了解 RIR"].firstMatch
+        XCTAssertTrue(rirHelpButton.exists)
+        rirHelpButton.tap()
+        let rirAlert = app.alerts["RIR 是什么？"]
+        XCTAssertTrue(rirAlert.waitForExistence(timeout: 3))
+        XCTAssertTrue(
+            rirAlert.staticTexts.matching(
+                NSPredicate(format: "label CONTAINS %@", "还能再完成几次")
+            ).firstMatch.exists
+        )
+        rirAlert.buttons["知道了"].tap()
 
         let firstSetButton = app.buttons["完成第 1 组"].firstMatch
         XCTAssertTrue(firstSetButton.waitForExistence(timeout: 5))

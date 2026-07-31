@@ -62,7 +62,7 @@ struct TodayView: View {
 
                 weeklyDashboard
 
-                SectionHeader(title: "今日训练", actionTitle: "查看全部")
+                SectionHeader(title: "今日训练")
 
                 if let activeSession {
                     resumeCard(activeSession)

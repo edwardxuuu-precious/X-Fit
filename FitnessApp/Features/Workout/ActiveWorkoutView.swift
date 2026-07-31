@@ -15,6 +15,7 @@ struct ActiveWorkoutView: View {
     @State private var showFinishConfirmation = false
     @State private var showDiscardConfirmation = false
     @State private var showExercisePicker = false
+    @State private var showRIRHelp = false
     @State private var errorMessage: String?
 
     private var session: WorkoutSession? {
@@ -66,7 +67,7 @@ struct ActiveWorkoutView: View {
                         Button {
                             showExercisePicker = true
                         } label: {
-                            Label("调整菜单", systemImage: "slider.horizontal.3")
+                            Label("临时加动作", systemImage: "plus")
                         }
                     }
                 }
@@ -108,6 +109,11 @@ struct ActiveWorkoutView: View {
             Button("知道了", role: .cancel) { errorMessage = nil }
         } message: {
             Text(errorMessage ?? "未知错误")
+        }
+        .alert("RIR 是什么？", isPresented: $showRIRHelp) {
+            Button("知道了", role: .cancel) {}
+        } message: {
+            Text("RIR 表示一组结束后，在动作标准不变的情况下，你估计还能再完成几次。\n\n0 = 已经无法再做\n1 = 还能做 1 次\n2 = 还能做 2 次\n3 = 还能做 3 次\n\n不确定时可以选择不记录。它用于判断本组强度和后续训练建议。")
         }
         .sheet(isPresented: $showExercisePicker) {
             WorkoutExercisePickerSheet(
@@ -155,16 +161,16 @@ struct ActiveWorkoutView: View {
                 .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("按今天状态调整菜单")
+                Text("按今天状态调整训练量")
                     .font(.subheadline.bold())
-                Text("可临时加动作、增减未完成组；重量、次数和 RIR 直接在下方修改。")
+                Text("可增减未完成组、修改重量与次数；需要时也可临时增加动作。")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
 
             Spacer(minLength: 6)
 
-            Button("加动作") {
+            Button("临时加动作") {
                 showExercisePicker = true
             }
             .font(.caption.bold())
@@ -268,7 +274,7 @@ struct ActiveWorkoutView: View {
                         }
                         .disabled(exerciseLogs.contains(where: \.isCompleted) || orderedExercises.count <= 1)
                     } label: {
-                        Label("调整动作", systemImage: "ellipsis")
+                        Label("调整训练量", systemImage: "ellipsis")
                             .font(.caption.bold())
                     }
                     .foregroundStyle(.secondary)
@@ -282,8 +288,18 @@ struct ActiveWorkoutView: View {
                     .frame(maxWidth: .infinity)
                 Text("次数")
                     .frame(maxWidth: .infinity)
-                Text("RIR")
-                    .frame(width: 48)
+                Button {
+                    showRIRHelp = true
+                } label: {
+                    HStack(spacing: 3) {
+                        Text("RIR")
+                        Image(systemName: "questionmark.circle")
+                            .font(.caption2)
+                    }
+                }
+                .buttonStyle(.plain)
+                .frame(width: 48)
+                .accessibilityLabel("了解 RIR")
                 Color.clear
                     .frame(width: 38)
             }
@@ -549,9 +565,9 @@ private struct SetLogRow: View {
                 .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
 
             Menu {
-                Button("不记录") { log.rir = nil }
+                Button("不记录 RIR") { log.rir = nil }
                 ForEach(0...5, id: \.self) { value in
-                    Button("RIR \(value)") { log.rir = value }
+                    Button(rirOptionTitle(value)) { log.rir = value }
                 }
             } label: {
                 Text(log.rir.map(String.init) ?? "–")
@@ -561,6 +577,7 @@ private struct SetLogRow: View {
                     .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
             }
             .foregroundStyle(.primary)
+            .accessibilityLabel(rirAccessibilityLabel)
 
             Button(action: onToggle) {
                 Image(systemName: log.isCompleted ? "checkmark.circle.fill" : "circle")
@@ -574,5 +591,22 @@ private struct SetLogRow: View {
         .onChange(of: log.actualWeight) { _, _ in onEdit() }
         .onChange(of: log.actualReps) { _, _ in onEdit() }
         .onChange(of: log.rir) { _, _ in onEdit() }
+    }
+
+    private func rirOptionTitle(_ value: Int) -> String {
+        if value == 0 {
+            return "RIR 0 · 已无余力"
+        }
+        return "RIR \(value) · 还能做 \(value) 次"
+    }
+
+    private var rirAccessibilityLabel: String {
+        guard let rir = log.rir else {
+            return "第 \(log.setNumber) 组 RIR，未记录"
+        }
+        if rir == 0 {
+            return "第 \(log.setNumber) 组 RIR 0，已无余力"
+        }
+        return "第 \(log.setNumber) 组 RIR \(rir)，还能做 \(rir) 次"
     }
 }
