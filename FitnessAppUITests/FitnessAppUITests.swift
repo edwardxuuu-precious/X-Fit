@@ -95,20 +95,23 @@ final class FitnessAppUITests: XCTestCase {
         add(restTimerScreenshot)
     }
 
-    func testScheduleAndNutritionPagesAreReachable() throws {
+    func testSecondaryPagesAreReachableWithoutDuplicateHomeShortcuts() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let scheduleButton = app.buttons["日程"]
+        XCTAssertTrue(app.staticTexts["今日训练"].waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["快捷入口"].exists)
+
+        let scheduleButton = app.buttons["管理日程"]
         XCTAssertTrue(scrollUp(in: app, until: scheduleButton))
         scheduleButton.tap()
         XCTAssertTrue(app.staticTexts["训练日程"].waitForExistence(timeout: 5))
 
-        app.tabBars.buttons["首页"].tap()
-        let nutritionButton = app.buttons["营养"]
+        app.tabBars.buttons["我的"].tap()
+        let nutritionButton = app.buttons["打开营养记录"]
         XCTAssertTrue(nutritionButton.waitForExistence(timeout: 5))
-        nutritionButton.tap()
+        XCTAssertTrue(tap(nutritionButton, until: app.staticTexts["当天还没有餐食"]))
         XCTAssertTrue(app.staticTexts["营养"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["当天还没有餐食"].exists)
     }
@@ -176,13 +179,14 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.buttons["换一组"].exists)
     }
 
-    func testHistoricalWorkoutEntryIsReachable() throws {
+    func testHistoricalWorkoutEntryIsReachableFromProfile() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let syncLink = app.buttons["同步过去几周训练"]
-        XCTAssertTrue(syncLink.waitForExistence(timeout: 8))
+        app.tabBars.buttons["我的"].tap()
+        let syncLink = app.buttons["历史同步"]
+        XCTAssertTrue(scrollUp(in: app, until: syncLink))
         syncLink.tap()
 
         let backfillButton = app.buttons["逐场手动补录"]
@@ -192,13 +196,14 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.textFields["训练名称"].exists)
     }
 
-    func testHistoricalWorkoutImportIsReachableFromToday() throws {
+    func testHistoricalWorkoutImportIsReachableFromProfile() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let syncLink = app.buttons["同步过去几周训练"]
-        XCTAssertTrue(syncLink.waitForExistence(timeout: 8))
+        app.tabBars.buttons["我的"].tap()
+        let syncLink = app.buttons["历史同步"]
+        XCTAssertTrue(scrollUp(in: app, until: syncLink))
         syncLink.tap()
 
         XCTAssertTrue(app.navigationBars["历史同步"].waitForExistence(timeout: 5))

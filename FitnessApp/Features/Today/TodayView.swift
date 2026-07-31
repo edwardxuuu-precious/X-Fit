@@ -73,13 +73,7 @@ struct TodayView: View {
                     restDayCard
                 }
 
-                SectionHeader(title: "快捷入口")
-                quickActions
-                historySyncShortcut
-
-                if !upcomingSchedules.isEmpty {
-                    upcomingSection
-                }
+                upcomingSection
             }
             .padding(.horizontal, 16)
             .padding(.top, 12)
@@ -469,51 +463,6 @@ struct TodayView: View {
         .cardSurface()
     }
 
-    private var quickActions: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 4), spacing: 10) {
-            NavigationLink(destination: DailyWorkoutBuilderView()) {
-                QuickActionTile(title: "编排", icon: "wand.and.stars", tint: AppTheme.accent)
-            }
-            NavigationLink(destination: NutritionView()) {
-                QuickActionTile(title: "营养", icon: "fork.knife", tint: AppTheme.orange)
-            }
-            NavigationLink(destination: StatsView()) {
-                QuickActionTile(title: "进度", icon: "chart.line.uptrend.xyaxis", tint: AppTheme.purple)
-            }
-            NavigationLink(destination: ScheduleView()) {
-                QuickActionTile(title: "日程", icon: "calendar", tint: .pink)
-            }
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var historySyncShortcut: some View {
-        NavigationLink(destination: HistoricalWorkoutImportView()) {
-            HStack(spacing: 13) {
-                Image(systemName: "square.and.arrow.down")
-                    .font(.subheadline.bold())
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 38, height: 38)
-                    .background(AppTheme.accent.opacity(0.11), in: RoundedRectangle(cornerRadius: 11))
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("同步过去几周训练")
-                        .font(.subheadline.bold())
-                        .foregroundStyle(.white)
-                    Text("导入 CSV，或前往训练历史逐次补录")
-                        .font(.caption2)
-                        .foregroundStyle(AppTheme.secondaryText)
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-            }
-            .cardSurface(padding: 14, cornerRadius: 18)
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("同步过去几周训练")
-    }
-
     private var upcomingSection: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
@@ -551,6 +500,14 @@ struct TodayView: View {
                         .foregroundStyle(AppTheme.secondaryText)
                 }
             }
+
+            if upcomingSchedules.isEmpty {
+                Label("还没有后续训练安排", systemImage: "calendar.badge.plus")
+                    .font(.subheadline)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 6)
+            }
         }
         .cardSurface()
     }
@@ -577,28 +534,5 @@ struct TodayView: View {
     private func openSession(_ id: UUID) {
         workoutSessionID = id
         showWorkout = true
-    }
-}
-
-private struct QuickActionTile: View {
-    let title: String
-    let icon: String
-    let tint: Color
-
-    var body: some View {
-        VStack(spacing: 9) {
-            Image(systemName: icon)
-                .font(.headline.bold())
-                .foregroundStyle(tint)
-                .frame(width: 34, height: 34)
-                .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 10))
-            Text(title)
-                .font(.caption2.weight(.semibold))
-                .foregroundStyle(.white)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 13)
-        .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 15))
-        .overlay(RoundedRectangle(cornerRadius: 15).stroke(AppTheme.line, lineWidth: 1))
     }
 }

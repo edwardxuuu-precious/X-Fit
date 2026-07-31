@@ -41,6 +41,7 @@ struct NutritionPreviewCard: View {
             .cardSurface()
         }
         .buttonStyle(.plain)
+        .accessibilityIdentifier("打开营养记录")
     }
 }
 

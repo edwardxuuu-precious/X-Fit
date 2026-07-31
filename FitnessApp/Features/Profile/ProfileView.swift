@@ -42,9 +42,10 @@ struct ProfileView: View {
                         settingsRow(icon: "clock.arrow.circlepath", title: "训练历史", subtitle: "查看全部完成记录")
                     }
                     Divider().overlay(AppTheme.line).padding(.leading, 54)
-                    NavigationLink(destination: NutritionView()) {
-                        settingsRow(icon: "fork.knife", title: "营养记录", subtitle: "记录热量和宏量营养")
+                    NavigationLink(destination: HistoricalWorkoutImportView()) {
+                        settingsRow(icon: "square.and.arrow.down", title: "历史同步", subtitle: "导入 CSV 或逐场补录过去训练")
                     }
+                    .accessibilityIdentifier("历史同步")
                     Divider().overlay(AppTheme.line).padding(.leading, 54)
                     NavigationLink(destination: BodyMeasurementsView()) {
                         settingsRow(icon: "figure.arms.open", title: "身体数据", subtitle: "记录体重、体脂和围度")
