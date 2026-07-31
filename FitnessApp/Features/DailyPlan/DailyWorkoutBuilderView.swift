@@ -21,12 +21,18 @@ struct DailyWorkoutBuilderView: View {
     @Query private var templates: [WorkoutTemplate]
     @Query private var schedules: [ScheduledWorkout]
 
+    var isEmbedded = false
+
     @State private var selectedDate = Date.now.startOfDay
     @State private var selectedMuscleGroups: Set<String> = []
     @State private var selectedExerciseIDs: [UUID] = []
     @State private var targets: [UUID: DailyExerciseTarget] = [:]
     @State private var recommendationVariant = 0
     @State private var replaceExistingPlans = true
+    @State private var loadedDate: Date?
+    @State private var workoutSessionID: UUID?
+    @State private var showWorkout = false
+    @State private var savedMessage: String?
     @State private var errorMessage: String?
 
     private var muscleGroups: [String] {
@@ -66,18 +72,30 @@ struct DailyWorkoutBuilderView: View {
         }
     }
 
+    private var activeSession: WorkoutSession? {
+        sessions.first { $0.status == .inProgress }
+    }
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(
-                    eyebrow: "ADAPTIVE WORKOUT",
-                    title: "编排当天训练",
-                    trailingSystemImage: "arrow.triangle.2.circlepath",
-                    trailingAccessibilityLabel: "换一组推荐",
-                    trailingAction: { recommendationVariant += 1 }
-                )
+                if isEmbedded {
+                    planningIntroCard
+                } else {
+                    ScreenHeader(
+                        eyebrow: "ADAPTIVE WORKOUT",
+                        title: "编排当天训练",
+                        trailingSystemImage: "arrow.triangle.2.circlepath",
+                        trailingAccessibilityLabel: "换一组推荐",
+                        trailingAction: { recommendationVariant += 1 }
+                    )
 
-                dateCard
+                    dateCard
+                }
+
+                if let activeSession {
+                    activeWorkoutCard(activeSession)
+                }
 
                 SectionHeader(title: "今天想练哪里")
                 muscleGroupPicker
@@ -136,14 +154,34 @@ struct DailyWorkoutBuilderView: View {
                         .cardSurface()
                     }
 
-                    Button {
-                        savePlan()
-                    } label: {
-                        Label(
-                            selectedDate.isSameDay(as: .now) ? "保存为今天训练" : "保存到所选日期",
-                            systemImage: "checkmark.circle.fill"
-                        )
-                        .neonButtonStyle()
+                    if selectedDate.isSameDay(as: .now), activeSession == nil {
+                        Button {
+                            savePlan(startAfterSaving: true)
+                        } label: {
+                            Label("保存并开始训练", systemImage: "play.fill")
+                                .neonButtonStyle()
+                        }
+
+                        Button {
+                            savePlan(startAfterSaving: false)
+                        } label: {
+                            Label("只保存菜单，稍后训练", systemImage: "tray.and.arrow.down")
+                                .font(.subheadline.bold())
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 12)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(AppTheme.accent)
+                    } else {
+                        Button {
+                            savePlan(startAfterSaving: false)
+                        } label: {
+                            Label(
+                                selectedDate.isSameDay(as: .now) ? "更新今天菜单" : "保存到所选日期",
+                                systemImage: "checkmark.circle.fill"
+                            )
+                            .neonButtonStyle()
+                        }
                     }
                 }
             }
@@ -154,6 +192,17 @@ struct DailyWorkoutBuilderView: View {
         .screenBackground()
         .navigationTitle("当天训练")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            loadExistingPlan(for: selectedDate)
+        }
+        .onChange(of: selectedDate) { _, newDate in
+            loadExistingPlan(for: newDate, force: true)
+        }
+        .navigationDestination(isPresented: $showWorkout) {
+            if let workoutSessionID {
+                ActiveWorkoutView(sessionID: workoutSessionID)
+            }
+        }
         .alert("无法保存菜单", isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
@@ -162,6 +211,62 @@ struct DailyWorkoutBuilderView: View {
         } message: {
             Text(errorMessage ?? "未知错误")
         }
+        .alert("菜单已保存", isPresented: Binding(
+            get: { savedMessage != nil },
+            set: { if !$0 { savedMessage = nil } }
+        )) {
+            Button("知道了", role: .cancel) { savedMessage = nil }
+        } message: {
+            Text(savedMessage ?? "")
+        }
+    }
+
+    private var planningIntroCard: some View {
+        HStack(alignment: .top, spacing: 13) {
+            Image(systemName: "wand.and.stars")
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.accent)
+                .frame(width: 44, height: 44)
+                .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 13))
+
+            VStack(alignment: .leading, spacing: 5) {
+                Text("先计划今天练什么")
+                    .font(.headline.bold())
+                    .foregroundStyle(.white)
+                Text("根据近期恢复和上次强度选动作；开始后仍可按身体状态增减组、临时加动作并记录感受。")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cardSurface()
+    }
+
+    private func activeWorkoutCard(_ session: WorkoutSession) -> some View {
+        HStack(spacing: 13) {
+            Image(systemName: "bolt.fill")
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.accent)
+                .frame(width: 42, height: 42)
+                .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+            VStack(alignment: .leading, spacing: 3) {
+                Text("当前训练进行中")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+                Text(session.templateName)
+                    .font(.subheadline.bold())
+                    .foregroundStyle(.white)
+            }
+            Spacer()
+            Button("继续训练") {
+                workoutSessionID = session.id
+                showWorkout = true
+            }
+            .font(.caption.bold())
+            .buttonStyle(.bordered)
+            .tint(AppTheme.accent)
+        }
+        .cardSurface()
     }
 
     private var dateCard: some View {
@@ -445,7 +550,53 @@ struct DailyWorkoutBuilderView: View {
         }
     }
 
-    private func savePlan() {
+    private func loadExistingPlan(for date: Date, force: Bool = false) {
+        let targetDate = date.startOfDay
+        if !force, loadedDate?.isSameDay(as: targetDate) == true { return }
+        loadedDate = targetDate
+        selectedMuscleGroups = []
+        selectedExerciseIDs = []
+        targets = [:]
+
+        let candidates = schedules
+            .filter { $0.plannedDate.isSameDay(as: targetDate) && $0.status == .planned }
+            .sorted { left, right in
+                let leftOneOff = templates.first(where: { $0.id == left.templateID })?.isOneOff == true
+                let rightOneOff = templates.first(where: { $0.id == right.templateID })?.isOneOff == true
+                if leftOneOff != rightOneOff { return leftOneOff }
+                return left.createdAt > right.createdAt
+            }
+        guard let schedule = candidates.first,
+              let template = templates.first(where: { $0.id == schedule.templateID }) else {
+            return
+        }
+
+        let items = templateExercises
+            .filter { $0.templateID == template.id }
+            .sorted { $0.order < $1.order }
+        selectedExerciseIDs = items.map(\.exerciseID)
+        targets = Dictionary(uniqueKeysWithValues: items.map { item in
+            (
+                item.exerciseID,
+                DailyExerciseTarget(
+                    sets: item.targetSets,
+                    minReps: item.minReps,
+                    maxReps: item.maxReps,
+                    weight: item.targetWeight,
+                    restSeconds: item.restSeconds
+                )
+            )
+        })
+        let derivedGroups = items.compactMap { item in
+            exercises.first(where: { $0.id == item.exerciseID })?.muscleGroup
+        }
+        selectedMuscleGroups = Set(
+            template.focusMuscleGroups.isEmpty ? derivedGroups : template.focusMuscleGroups
+        )
+        replaceExistingPlans = true
+    }
+
+    private func savePlan(startAfterSaving: Bool) {
         let inputs = selectedExerciseIDs.compactMap { id -> DailyPlanExerciseInput? in
             guard let target = targets[id] else { return nil }
             return DailyPlanExerciseInput(
@@ -459,14 +610,22 @@ struct DailyWorkoutBuilderView: View {
         }
 
         do {
-            _ = try DailyPlanService.create(
+            let schedule = try DailyPlanService.create(
                 on: selectedDate,
                 muscleGroups: selectedMuscleGroups.sorted(),
                 exercises: inputs,
                 replaceExistingPlans: replaceExistingPlans,
                 in: modelContext
             )
-            dismiss()
+            loadedDate = selectedDate.startOfDay
+            if startAfterSaving {
+                workoutSessionID = try WorkoutService.start(schedule: schedule, in: modelContext)
+                showWorkout = true
+            } else if isEmbedded {
+                savedMessage = "今天的菜单已更新。开始训练后仍可按身体状态临时调整动作和组数。"
+            } else {
+                dismiss()
+            }
         } catch {
             errorMessage = error.localizedDescription
         }

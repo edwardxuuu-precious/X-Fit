@@ -21,39 +21,46 @@ struct RootView: View {
     var body: some View {
         Group {
             if isPrepared {
-                TabView {
+                if isHistoryUITest {
                     NavigationStack {
-                        TodayView()
+                        HistoryView()
                     }
-                    .tabItem {
-                        Label("首页", systemImage: "house.fill")
-                    }
+                    .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
+                } else {
+                    TabView {
+                        NavigationStack {
+                            TodayView()
+                        }
+                        .tabItem {
+                            Label("首页", systemImage: "house.fill")
+                        }
 
-                    NavigationStack {
-                        PlanView()
-                    }
-                    .tabItem {
-                        Label("训练", systemImage: "dumbbell.fill")
-                    }
+                        NavigationStack {
+                            PlanView()
+                        }
+                        .tabItem {
+                            Label("训练", systemImage: "dumbbell.fill")
+                        }
 
-                    NavigationStack {
-                        StatsView()
-                    }
-                    .tabItem {
-                        Label("进度", systemImage: "chart.bar.fill")
-                    }
+                        NavigationStack {
+                            StatsView()
+                        }
+                        .tabItem {
+                            Label("进度", systemImage: "chart.bar.fill")
+                        }
 
-                    NavigationStack {
-                        ProfileView()
+                        NavigationStack {
+                            ProfileView()
+                        }
+                        .tabItem {
+                            Label("我的", systemImage: "person.fill")
+                        }
                     }
-                    .tabItem {
-                        Label("我的", systemImage: "person.fill")
-                    }
+                    .tint(AppTheme.accent)
+                    .toolbarBackground(AppTheme.tabBar, for: .tabBar)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 }
-                .tint(AppTheme.accent)
-                .toolbarBackground(AppTheme.tabBar, for: .tabBar)
-                .toolbarBackground(.visible, for: .tabBar)
-                .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
             } else if let preparationError {
                 ContentUnavailableView(
                     "无法载入训练数据",
@@ -86,6 +93,9 @@ struct RootView: View {
             guard !isPrepared else { return }
             do {
                 try SeedDataService.prepareIfNeeded(in: modelContext)
+                #if DEBUG
+                try prepareUITestHistoryFixtureIfRequested()
+                #endif
                 do {
                     launchImportMessage = try importLaunchHistoryIfRequested()
                 } catch {
@@ -111,6 +121,14 @@ struct RootView: View {
                 preparationError = error.localizedDescription
             }
         }
+    }
+
+    private var isHistoryUITest: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("--ui-testing-history")
+        #else
+        false
+        #endif
     }
 
     private var launchImportFileName: String? {
@@ -157,6 +175,67 @@ struct RootView: View {
             options: .atomic
         )
     }
+
+    #if DEBUG
+    @MainActor
+    private func prepareUITestHistoryFixtureIfRequested() throws {
+        guard CommandLine.arguments.contains("--ui-testing-history") else { return }
+        let sessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
+        guard !sessions.contains(where: { $0.importIdentifier == "ui-test-history-detail" }) else {
+            return
+        }
+        guard let exercise = try modelContext.fetch(FetchDescriptor<Exercise>())
+            .first(where: { $0.name == "杠铃卧推" }) else {
+            return
+        }
+
+        let completedAt = Date.now
+        let startedAt = completedAt.addingTimeInterval(-3_600)
+        let session = WorkoutSession(
+            templateName: "历史详情验证",
+            plannedDate: startedAt,
+            startedAt: startedAt,
+            completedAt: completedAt,
+            status: .completed,
+            notes: "用于验证历史详情导航和逐组内容",
+            importIdentifier: "ui-test-history-detail"
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 2,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 40,
+            restSeconds: 90,
+            muscleGroup: exercise.muscleGroup,
+            exerciseNotes: exercise.notes,
+            performanceNotes: "肩胛稳定"
+        )
+        modelContext.insert(session)
+        modelContext.insert(snapshot)
+        for setNumber in 1...2 {
+            modelContext.insert(
+                SetLog(
+                    sessionID: session.id,
+                    sessionExerciseID: snapshot.id,
+                    exerciseID: exercise.id,
+                    setNumber: setNumber,
+                    targetWeight: 40,
+                    targetReps: 10,
+                    actualWeight: 40,
+                    actualReps: 10,
+                    rir: 2,
+                    isCompleted: true,
+                    completedAt: completedAt
+                )
+            )
+        }
+        try modelContext.save()
+    }
+    #endif
 }
 
 private struct LaunchImportReceipt: Codable {

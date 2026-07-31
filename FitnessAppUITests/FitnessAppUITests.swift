@@ -34,6 +34,8 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(startButton.waitForExistence(timeout: 8))
         let activeWorkoutTitle = app.staticTexts["训练进行中"]
         XCTAssertTrue(tap(startButton, until: activeWorkoutTitle))
+        XCTAssertTrue(app.staticTexts["按今天状态调整菜单"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["加动作"].exists)
 
         let firstSetButton = app.buttons["完成第 1 组"].firstMatch
         XCTAssertTrue(firstSetButton.waitForExistence(timeout: 5))
@@ -82,20 +84,24 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let builderButton = app.buttons["编排"]
-        XCTAssertTrue(builderButton.waitForExistence(timeout: 8))
-        builderButton.tap()
+        let trainingTab = app.tabBars.buttons["训练"]
+        XCTAssertTrue(trainingTab.waitForExistence(timeout: 8))
+        trainingTab.tap()
 
-        XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["今日编排"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["先计划今天练什么"].waitForExistence(timeout: 5))
         let chestButton = app.buttons["胸部"].firstMatch
         XCTAssertTrue(chestButton.waitForExistence(timeout: 5))
-        chestButton.tap()
+        if !app.staticTexts["肌群建议"].exists {
+            chestButton.tap()
+        }
 
         XCTAssertTrue(app.staticTexts["肌群建议"].waitForExistence(timeout: 5))
-        let benchRecommendation = app.buttons.containing(.staticText, identifier: "杠铃卧推").firstMatch
-        XCTAssertTrue(benchRecommendation.waitForExistence(timeout: 5))
-        benchRecommendation.tap()
-        XCTAssertTrue(app.buttons["保存为今天训练"].waitForExistence(timeout: 5))
+        if !app.staticTexts["推荐动作"].exists {
+            app.swipeUp()
+        }
+        XCTAssertTrue(app.staticTexts["推荐动作"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["换一组"].exists)
     }
 
     func testHistoricalWorkoutEntryIsReachable() throws {
@@ -125,5 +131,26 @@ final class FitnessAppUITests: XCTestCase {
 
         XCTAssertTrue(app.navigationBars["历史同步"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["选择历史 CSV"].exists)
+    }
+
+    func testWorkoutHistoryShowsDetailsAndReturnsWithoutNavigationError() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--ui-testing", "--ui-testing-history"]
+        app.launch()
+
+        XCTAssertTrue(app.navigationBars["训练历史"].waitForExistence(timeout: 8))
+
+        let fixtureCard = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS %@", "历史详情验证")
+        ).firstMatch
+        XCTAssertTrue(fixtureCard.waitForExistence(timeout: 5))
+        XCTAssertTrue(tap(fixtureCard, until: app.navigationBars["历史详情验证"]))
+        XCTAssertTrue(app.staticTexts["杠铃卧推"].exists)
+        XCTAssertTrue(app.staticTexts["第 1 组"].exists)
+        XCTAssertTrue(app.staticTexts["40 kg × 10"].exists)
+
+        app.navigationBars["历史详情验证"].buttons.firstMatch.tap()
+        XCTAssertTrue(app.navigationBars["训练历史"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.images["exclamationmark.triangle.fill"].exists)
     }
 }

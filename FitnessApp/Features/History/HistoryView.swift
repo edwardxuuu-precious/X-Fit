@@ -22,7 +22,7 @@ struct HistoryView: View {
                 ScrollView {
                     LazyVStack(spacing: 12) {
                         ForEach(completedSessions) { session in
-                            NavigationLink(value: session.id) {
+                            NavigationLink(destination: WorkoutDetailView(sessionID: session.id)) {
                                 historyCard(session)
                             }
                             .buttonStyle(.plain)
@@ -34,6 +34,8 @@ struct HistoryView: View {
             }
         }
         .navigationTitle("训练历史")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink(destination: HistoricalWorkoutEntryView()) {
@@ -43,9 +45,6 @@ struct HistoryView: View {
                     Label("批量同步", systemImage: "square.and.arrow.down")
                 }
             }
-        }
-        .navigationDestination(for: UUID.self) { sessionID in
-            WorkoutDetailView(sessionID: sessionID)
         }
     }
 
@@ -95,18 +94,27 @@ struct WorkoutDetailView: View {
 
     let sessionID: UUID
 
+    init(sessionID: UUID) {
+        self.sessionID = sessionID
+        let targetID = sessionID
+        _sessions = Query(filter: #Predicate<WorkoutSession> { $0.id == targetID })
+        _sessionExercises = Query(
+            filter: #Predicate<SessionExercise> { $0.sessionID == targetID },
+            sort: \.order
+        )
+        _setLogs = Query(filter: #Predicate<SetLog> { $0.sessionID == targetID })
+    }
+
     private var session: WorkoutSession? {
-        sessions.first { $0.id == sessionID }
+        sessions.first
     }
 
     private var exercises: [SessionExercise] {
         sessionExercises
-            .filter { $0.sessionID == sessionID }
-            .sorted { $0.order < $1.order }
     }
 
     private var logs: [SetLog] {
-        setLogs.filter { $0.sessionID == sessionID && $0.isCompleted }
+        setLogs.filter(\.isCompleted)
     }
 
     var body: some View {
@@ -136,6 +144,7 @@ struct WorkoutDetailView: View {
                 .background(AppTheme.background)
                 .navigationTitle(session.templateName)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar(.visible, for: .navigationBar)
             } else {
                 ContentUnavailableView("找不到训练记录", systemImage: "questionmark.folder")
             }

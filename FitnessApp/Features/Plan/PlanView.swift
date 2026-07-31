@@ -41,54 +41,63 @@ struct PlanView: View {
     }
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(
-                    eyebrow: "WORKOUT CENTER",
-                    title: "训练",
-                    trailingSystemImage: "plus",
-                    trailingAction: {
-                        if selectedMode == 0 {
-                            editingTemplate = nil
-                            showEditor = true
-                        } else {
-                            editingExercise = nil
-                            showExerciseEditor = true
-                        }
+        VStack(spacing: 12) {
+            ScreenHeader(
+                eyebrow: "WORKOUT CENTER",
+                title: "训练",
+                trailingSystemImage: selectedMode == 0 ? nil : "plus",
+                trailingAccessibilityLabel: selectedMode == 1 ? "新建固定计划" : "新建动作",
+                trailingAction: {
+                    if selectedMode == 1 {
+                        editingTemplate = nil
+                        showEditor = true
+                    } else if selectedMode == 2 {
+                        editingExercise = nil
+                        showExerciseEditor = true
                     }
-                )
-
-                modePicker
-
-                if selectedMode == 0 {
-                    if let featured = sortedTemplates.first {
-                        featuredWorkout(featured)
-                    }
-                    weekOverview
-
-                    SectionHeader(title: "我的训练计划", actionTitle: "\(sortedTemplates.count) 个")
-                    ForEach(sortedTemplates) { template in
-                        templateCard(template)
-                            .contextMenu {
-                                Button {
-                                    edit(template)
-                                } label: {
-                                    Label("编辑", systemImage: "pencil")
-                                }
-                                Button(role: .destructive) {
-                                    pendingDelete = template
-                                } label: {
-                                    Label("删除计划", systemImage: "trash")
-                                }
-                            }
-                    }
-                } else {
-                    exerciseLibrary
                 }
-            }
+            )
             .padding(.horizontal, 16)
             .padding(.top, 12)
-            .padding(.bottom, 26)
+
+            modePicker
+                .padding(.horizontal, 16)
+
+            if selectedMode == 0 {
+                DailyWorkoutBuilderView(isEmbedded: true)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    LazyVStack(alignment: .leading, spacing: 18) {
+                        if selectedMode == 1 {
+                            if let featured = sortedTemplates.first {
+                                featuredWorkout(featured)
+                            }
+                            weekOverview
+
+                            SectionHeader(title: "我的固定计划", actionTitle: "\(sortedTemplates.count) 个")
+                            ForEach(sortedTemplates) { template in
+                                templateCard(template)
+                                    .contextMenu {
+                                        Button {
+                                            edit(template)
+                                        } label: {
+                                            Label("编辑", systemImage: "pencil")
+                                        }
+                                        Button(role: .destructive) {
+                                            pendingDelete = template
+                                        } label: {
+                                            Label("删除计划", systemImage: "trash")
+                                        }
+                                    }
+                            }
+                        } else {
+                            exerciseLibrary
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 26)
+                }
+            }
         }
         .screenBackground()
         .toolbar(.hidden, for: .navigationBar)
@@ -119,8 +128,9 @@ struct PlanView: View {
 
     private var modePicker: some View {
         HStack(spacing: 4) {
-            modeButton("训练计划", value: 0)
-            modeButton("动作库", value: 1)
+            modeButton("今日编排", value: 0)
+            modeButton("固定计划", value: 1)
+            modeButton("动作库", value: 2)
         }
         .padding(4)
         .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 13))

@@ -15,8 +15,25 @@ enum SeedDataService {
             context.insert(NutritionTarget())
         }
 
+        normalizeImportedWorkoutNames(in: context)
         try ScheduleService.refreshUpcoming(in: context)
         try context.save()
+    }
+
+    static func normalizedImportedWorkoutName(_ name: String) -> String {
+        let suffixes = [" (Notes)", "（Notes）"]
+        for suffix in suffixes where name.hasSuffix(suffix) {
+            return String(name.dropLast(suffix.count))
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return name
+    }
+
+    private static func normalizeImportedWorkoutNames(in context: ModelContext) {
+        guard let sessions = try? context.fetch(FetchDescriptor<WorkoutSession>()) else { return }
+        for session in sessions where !session.importIdentifier.isEmpty {
+            session.templateName = normalizedImportedWorkoutName(session.templateName)
+        }
     }
 
     private static func seedStarterProgram(in context: ModelContext) throws {

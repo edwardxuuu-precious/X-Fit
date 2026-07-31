@@ -14,6 +14,7 @@ struct ActiveWorkoutView: View {
 
     @State private var showFinishConfirmation = false
     @State private var showDiscardConfirmation = false
+    @State private var showExercisePicker = false
     @State private var errorMessage: String?
 
     private var session: WorkoutSession? {
@@ -45,6 +46,8 @@ struct ActiveWorkoutView: View {
                             restTimer(session)
                         }
 
+                        adjustmentCard
+
                         ForEach(orderedExercises) { exercise in
                             exerciseCard(exercise, session: session)
                         }
@@ -58,6 +61,15 @@ struct ActiveWorkoutView: View {
                 .background(AppTheme.background)
                 .navigationTitle(session.templateName)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            showExercisePicker = true
+                        } label: {
+                            Label("调整菜单", systemImage: "slider.horizontal.3")
+                        }
+                    }
+                }
                 .interactiveDismissDisabled()
                 .onAppear {
                     UIApplication.shared.isIdleTimerDisabled = true
@@ -97,6 +109,15 @@ struct ActiveWorkoutView: View {
         } message: {
             Text(errorMessage ?? "未知错误")
         }
+        .sheet(isPresented: $showExercisePicker) {
+            WorkoutExercisePickerSheet(
+                excludedExerciseIDs: Set(orderedExercises.map(\.exerciseID))
+            ) { exercise in
+                addExercise(exercise)
+            }
+            .preferredColorScheme(.dark)
+            .tint(AppTheme.accent)
+        }
     }
 
     private func workoutHeader(_ session: WorkoutSession) -> some View {
@@ -121,6 +142,34 @@ struct ActiveWorkoutView: View {
             Text("每一组都会立即保存在本机，退出后可以继续。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+        }
+        .cardSurface()
+    }
+
+    private var adjustmentCard: some View {
+        HStack(alignment: .center, spacing: 13) {
+            Image(systemName: "slider.horizontal.3")
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.accent)
+                .frame(width: 42, height: 42)
+                .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("按今天状态调整菜单")
+                    .font(.subheadline.bold())
+                Text("可临时加动作、增减未完成组；重量、次数和 RIR 直接在下方修改。")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer(minLength: 6)
+
+            Button("加动作") {
+                showExercisePicker = true
+            }
+            .font(.caption.bold())
+            .buttonStyle(.bordered)
+            .tint(AppTheme.accent)
         }
         .cardSurface()
     }
@@ -195,9 +244,35 @@ struct ActiveWorkoutView: View {
                         .foregroundStyle(.secondary)
                 }
                 Spacer()
-                Text("\(exerciseLogs.filter(\.isCompleted).count)/\(exerciseLogs.count)")
-                    .font(.subheadline.bold().monospacedDigit())
-                    .foregroundStyle(AppTheme.accent)
+                VStack(alignment: .trailing, spacing: 7) {
+                    Text("\(exerciseLogs.filter(\.isCompleted).count)/\(exerciseLogs.count)")
+                        .font(.subheadline.bold().monospacedDigit())
+                        .foregroundStyle(AppTheme.accent)
+                    Menu {
+                        Button {
+                            addSet(to: exercise)
+                        } label: {
+                            Label("增加一组", systemImage: "plus.circle")
+                        }
+                        Button {
+                            removeLastSet(from: exercise)
+                        } label: {
+                            Label("减少最后未完成组", systemImage: "minus.circle")
+                        }
+                        .disabled(exerciseLogs.count <= 1 || exerciseLogs.last?.isCompleted != false)
+                        Divider()
+                        Button(role: .destructive) {
+                            removeExercise(exercise, from: session)
+                        } label: {
+                            Label("移除未开始动作", systemImage: "trash")
+                        }
+                        .disabled(exerciseLogs.contains(where: \.isCompleted) || orderedExercises.count <= 1)
+                    } label: {
+                        Label("调整动作", systemImage: "ellipsis")
+                            .font(.caption.bold())
+                    }
+                    .foregroundStyle(.secondary)
+                }
             }
 
             HStack {
@@ -246,6 +321,40 @@ struct ActiveWorkoutView: View {
             .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
         }
         .cardSurface()
+    }
+
+    private func addExercise(_ exercise: Exercise) {
+        guard let session else { return }
+        do {
+            try WorkoutService.addExercise(exercise, to: session, in: modelContext)
+            showExercisePicker = false
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private func addSet(to exercise: SessionExercise) {
+        do {
+            try WorkoutService.addSet(to: exercise, in: modelContext)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private func removeLastSet(from exercise: SessionExercise) {
+        do {
+            try WorkoutService.removeLastIncompleteSet(from: exercise, in: modelContext)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private func removeExercise(_ exercise: SessionExercise, from session: WorkoutSession) {
+        do {
+            try WorkoutService.removeExercise(exercise, from: session, in: modelContext)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 
     private var finishButton: some View {
@@ -347,6 +456,65 @@ struct ActiveWorkoutView: View {
             try modelContext.save()
         } catch {
             errorMessage = error.localizedDescription
+        }
+    }
+}
+
+private struct WorkoutExercisePickerSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Query(sort: \Exercise.name) private var exercises: [Exercise]
+
+    let excludedExerciseIDs: Set<UUID>
+    let onSelect: (Exercise) -> Void
+
+    @State private var searchText = ""
+
+    private var availableExercises: [Exercise] {
+        exercises.filter {
+            !$0.isArchived
+                && !excludedExerciseIDs.contains($0.id)
+                && (searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText))
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            List {
+                if availableExercises.isEmpty {
+                    ContentUnavailableView(
+                        "没有可添加的动作",
+                        systemImage: "dumbbell",
+                        description: Text("可先在动作库新增动作，或尝试其他搜索词。")
+                    )
+                    .listRowBackground(Color.clear)
+                } else {
+                    ForEach(availableExercises) { exercise in
+                        Button {
+                            onSelect(exercise)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundStyle(AppTheme.accent)
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(exercise.name)
+                                        .foregroundStyle(.primary)
+                                    Text("\(exercise.muscleGroup) · \(exercise.equipment) · 默认休息 \(exercise.defaultRestSeconds) 秒")
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .searchable(text: $searchText, prompt: "搜索动作")
+            .navigationTitle("添加临时动作")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { dismiss() }
+                }
+            }
         }
     }
 }

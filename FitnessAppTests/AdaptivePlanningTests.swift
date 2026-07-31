@@ -336,6 +336,132 @@ final class AdaptivePlanningTests: XCTestCase {
         XCTAssertEqual(try context.fetch(FetchDescriptor<WorkoutSession>()).count, 1)
     }
 
+    func testImportedWorkoutNameRemovesNotesSourceLabel() {
+        XCTAssertEqual(
+            SeedDataService.normalizedImportedWorkoutName("肩胸训练 (Notes)"),
+            "肩胸训练"
+        )
+        XCTAssertEqual(
+            SeedDataService.normalizedImportedWorkoutName("背部训练（Notes）"),
+            "背部训练"
+        )
+        XCTAssertEqual(
+            SeedDataService.normalizedImportedWorkoutName("普通训练"),
+            "普通训练"
+        )
+    }
+
+    func testAppPreparationCleansImportedNotesLabelWithoutChangingLocalNames() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let imported = WorkoutSession(
+            templateName: "肩胸训练 (Notes)",
+            plannedDate: .now,
+            status: .completed,
+            importIdentifier: "notes:shoulder-chest"
+        )
+        let local = WorkoutSession(
+            templateName: "自定义训练 (Notes)",
+            plannedDate: .now,
+            status: .completed
+        )
+        context.insert(Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃"))
+        context.insert(imported)
+        context.insert(local)
+        try context.save()
+
+        try SeedDataService.prepareIfNeeded(in: context)
+
+        XCTAssertEqual(imported.templateName, "肩胸训练")
+        XCTAssertEqual(local.templateName, "自定义训练 (Notes)")
+    }
+
+    func testActiveWorkoutMenuCanAddExerciseAndAdjustIncompleteSets() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let session = WorkoutSession(
+            templateName: "今日训练",
+            plannedDate: .now,
+            status: .inProgress
+        )
+        let bench = Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃")
+        let fly = Exercise(name: "夹胸", muscleGroup: "胸部", equipment: "龙门架")
+        let benchSnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: bench.id,
+            exerciseName: bench.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 40,
+            restSeconds: 90,
+            muscleGroup: "胸部"
+        )
+        let benchLog = SetLog(
+            sessionID: session.id,
+            sessionExerciseID: benchSnapshot.id,
+            exerciseID: bench.id,
+            setNumber: 1,
+            targetWeight: 40,
+            targetReps: 8,
+            actualWeight: 40,
+            actualReps: 8
+        )
+        context.insert(session)
+        context.insert(bench)
+        context.insert(fly)
+        context.insert(benchSnapshot)
+        context.insert(benchLog)
+        try context.save()
+
+        let flySnapshot = try WorkoutService.addExercise(fly, to: session, in: context)
+        XCTAssertEqual(
+            try context.fetch(FetchDescriptor<SetLog>())
+                .filter { $0.sessionExerciseID == flySnapshot.id }
+                .count,
+            3
+        )
+
+        try WorkoutService.addSet(to: flySnapshot, in: context)
+        XCTAssertEqual(flySnapshot.targetSets, 4)
+        try WorkoutService.removeLastIncompleteSet(from: flySnapshot, in: context)
+        XCTAssertEqual(flySnapshot.targetSets, 3)
+
+        try WorkoutService.removeExercise(flySnapshot, from: session, in: context)
+        XCTAssertEqual(
+            try context.fetch(FetchDescriptor<SessionExercise>())
+                .filter { $0.sessionID == session.id }
+                .count,
+            1
+        )
+    }
+
+    func testActiveWorkoutCannotRemoveExerciseAfterASetIsCompleted() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let session = WorkoutSession(
+            templateName: "今日训练",
+            plannedDate: .now,
+            status: .inProgress
+        )
+        let bench = Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃")
+        let fly = Exercise(name: "夹胸", muscleGroup: "胸部", equipment: "龙门架")
+        context.insert(session)
+        context.insert(bench)
+        context.insert(fly)
+        let benchSnapshot = try WorkoutService.addExercise(bench, to: session, in: context)
+        _ = try WorkoutService.addExercise(fly, to: session, in: context)
+        let firstLog = try context.fetch(FetchDescriptor<SetLog>())
+            .first { $0.sessionExerciseID == benchSnapshot.id }
+        firstLog?.isCompleted = true
+        try context.save()
+
+        XCTAssertThrowsError(
+            try WorkoutService.removeExercise(benchSnapshot, from: session, in: context)
+        )
+    }
+
     private func completedLog(
         session: WorkoutSession,
         snapshot: SessionExercise,
