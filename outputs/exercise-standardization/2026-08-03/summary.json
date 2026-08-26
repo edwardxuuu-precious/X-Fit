@@ -1,0 +1,44 @@
+{
+  "generated_at": "2026-08-03T22:58:17+08:00",
+  "audit_status": "proposal_only",
+  "sources": {
+    "device_snapshot_sha256": "38fd35b58afbd8f9624a908aa5abddf10f19cf6e862203bb4865b46e07406e6e",
+    "history_csv_sha256": "dac904a31a3fbcbaa7bbfe4568e7bb27ef8b758ef91bbe6b7a729e78fa80947c",
+    "seed_source_sha256": "80755b2741ad40d8b7652da286e03a60a0323da18be716fcf2d3e20755d1d670",
+    "device_snapshot_quick_check": "ok"
+  },
+  "device": {
+    "catalog_rows": 55,
+    "builtin_rows": 12,
+    "sessions": 15,
+    "completed_sessions": 15,
+    "session_exercises": 101,
+    "set_logs": 442,
+    "completed_sets": 431
+  },
+  "history_csv": {
+    "rows": 430,
+    "sessions": 14,
+    "unique_exercises": 50,
+    "duplicate_set_keys": 0,
+    "muscle_group_conflicts": 0,
+    "equipment_conflicts": 0
+  },
+  "audit": {
+    "raw_names": 55,
+    "canonical_candidates": 50,
+    "review_status_counts": {
+      "approval_ready": 28,
+      "merge_review": 10,
+      "unresolved": 8,
+      "variant_review": 9
+    },
+    "merge_candidate_groups": 5,
+    "auto_merge_allowed": 0
+  },
+  "reconciliation": {
+    "device_minus_csv_sessions": 1,
+    "device_minus_csv_completed_sets": 1,
+    "explanation": "差额来自 2026-07-31 的一次设备训练：4 个动作快照、12 个 set log，仅杠铃卧推 1 组完成。"
+  }
+}

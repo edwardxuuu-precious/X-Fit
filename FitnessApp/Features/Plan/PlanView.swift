@@ -2,21 +2,305 @@ import SwiftData
 import SwiftUI
 
 struct PlanView: View {
+    @Query(sort: \ScheduledWorkout.plannedDate) private var schedules: [ScheduledWorkout]
+    @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
+    @Query private var sessionExercises: [SessionExercise]
+    @Query private var setLogs: [SetLog]
+    @Query private var templateExercises: [TemplateExercise]
+
+    private var progressSummary: TrainingProgressSummary {
+        TrainingMetrics.progressSummary(
+            period: .week,
+            schedules: schedules,
+            sessions: sessions,
+            sessionExercises: sessionExercises,
+            setLogs: setLogs
+        )
+    }
+
+    private var latestCompletedSession: WorkoutSession? {
+        sessions.first { $0.status == .completed }
+    }
+
+    private var nextSchedule: ScheduledWorkout? {
+        schedules.first {
+            $0.plannedDate >= Date.now.startOfDay && $0.status == .planned
+        }
+    }
+
+    var body: some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(alignment: .leading, spacing: 18) {
+                ScreenHeader(
+                    eyebrow: "TRAINING WORKSPACE",
+                    title: "训练"
+                )
+
+                progressCard
+
+                SectionHeader(title: "训练记录", actionTitle: "查看全部")
+                NavigationLink(destination: HistoryView()) {
+                    historyEntryCard
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("训练记录入口")
+
+                SectionHeader(title: "接下来训练计划", actionTitle: "编排日程")
+                NavigationLink(destination: ScheduleView()) {
+                    upcomingPlanCard
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("训练计划入口")
+
+                SectionHeader(title: "快捷设置")
+                quickSettings
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 28)
+        }
+        .screenBackground()
+        .toolbar(.hidden, for: .navigationBar)
+    }
+
+    private var progressCard: some View {
+        let summary = progressSummary
+        let weekSchedules = schedules.filter {
+            summary.interval.contains($0.plannedDate) && $0.status != .skipped
+        }
+        let completedSchedules = weekSchedules.filter { $0.status == .completed }.count
+
+        return VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("本周进度")
+                        .font(.headline.bold())
+                        .foregroundStyle(.white)
+                    Text("完成记录与工作组的简要汇总")
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                Spacer()
+                Image(systemName: "chart.bar.fill")
+                    .font(.headline)
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(width: 38, height: 38)
+                    .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 11))
+            }
+
+            HStack(spacing: 0) {
+                progressMetric("\(summary.completedSessions)", label: "完成训练")
+                progressMetric("\(summary.workingSets)", label: "工作组")
+                progressMetric("\(Int(summary.volume).formatted())", label: "容量 kg")
+            }
+
+            if !weekSchedules.isEmpty {
+                ProgressView(
+                    value: Double(completedSchedules) / Double(weekSchedules.count)
+                )
+                .tint(AppTheme.accent)
+                .accessibilityLabel("本周计划完成进度")
+                Text("日程完成 \(completedSchedules)/\(weekSchedules.count) · 容量包含本周全部完成记录")
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
+            } else {
+                Text("本周暂无训练计划，可在下方快速编排。")
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
+            }
+        }
+        .cardSurface(padding: 16, cornerRadius: 19)
+        .accessibilityIdentifier("训练页进度摘要")
+    }
+
+    private func progressMetric(_ value: String, label: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(value)
+                .font(.headline.bold().monospacedDigit())
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
+            Text(label)
+                .font(.caption2)
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var historyEntryCard: some View {
+        Group {
+            if let session = latestCompletedSession {
+                let logs = setLogs.filter {
+                    $0.sessionID == session.id && $0.isCompleted && !$0.isWarmup
+                }
+                let exerciseCount = sessionExercises.filter { $0.sessionID == session.id }.count
+
+                entryCard(
+                    icon: "clock.arrow.circlepath",
+                    eyebrow: briefDate(session.startedAt),
+                    title: session.templateName,
+                    detail: "\(exerciseCount) 个动作 · \(logs.count) 个工作组 · \(Int(TrainingMetrics.volume(for: logs, sessionExercises: sessionExercises)).formatted()) kg",
+                    empty: false
+                )
+            } else {
+                entryCard(
+                    icon: "clock.arrow.circlepath",
+                    eyebrow: "最近训练",
+                    title: "还没有完成的训练",
+                    detail: "完成训练后会自动保存在这里",
+                    empty: true
+                )
+            }
+        }
+    }
+
+    private var upcomingPlanCard: some View {
+        Group {
+            if let schedule = nextSchedule {
+                let items = templateExercises.filter { $0.templateID == schedule.templateID }
+                let totalSets = items.reduce(0) { $0 + $1.targetSets }
+
+                entryCard(
+                    icon: "calendar.badge.clock",
+                    eyebrow: briefDate(schedule.plannedDate),
+                    title: schedule.templateName,
+                    detail: "\(items.count) 个动作 · \(totalSets) 个工作组 · 点按调整日期或计划",
+                    empty: false
+                )
+            } else {
+                entryCard(
+                    icon: "calendar.badge.plus",
+                    eyebrow: "接下来",
+                    title: "还没有后续计划",
+                    detail: "点按进入日程并安排下一次训练",
+                    empty: true
+                )
+            }
+        }
+    }
+
+    private func entryCard(
+        icon: String,
+        eyebrow: String,
+        title: String,
+        detail: String,
+        empty: Bool
+    ) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: icon)
+                .font(.title3.bold())
+                .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.accent)
+                .frame(width: 48, height: 48)
+                .background(
+                    (empty ? AppTheme.elevatedSurface : AppTheme.accent.opacity(0.12)),
+                    in: RoundedRectangle(cornerRadius: 14)
+                )
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(eyebrow)
+                    .font(.caption2.bold())
+                    .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.accent)
+                Text(title)
+                    .font(.headline.bold())
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .lineLimit(2)
+            }
+
+            Spacer(minLength: 4)
+            Image(systemName: "chevron.right")
+                .font(.caption.bold())
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+        .cardSurface(padding: 14, cornerRadius: 18)
+    }
+
+    private func briefDate(_ date: Date) -> String {
+        let components = Calendar.current.dateComponents([.month, .day], from: date)
+        return "\(components.month ?? 0)月\(components.day ?? 0)日 \(WeekdayName.short(date.weekdayNumber))"
+    }
+
+    private var quickSettings: some View {
+        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+            NavigationLink(destination: DailyWorkoutBuilderView()) {
+                quickSettingCard(
+                    icon: "wand.and.stars",
+                    title: "今日编排",
+                    detail: "按状态选动作"
+                )
+            }
+            .accessibilityLabel("今日编排")
+            .accessibilityIdentifier("今日编排入口")
+            NavigationLink(destination: TrainingSetupView(initialMode: 1)) {
+                quickSettingCard(
+                    icon: "list.bullet.clipboard",
+                    title: "每周模板",
+                    detail: "自动生成日程"
+                )
+            }
+            .accessibilityLabel("每周模板")
+            .accessibilityIdentifier("每周模板入口")
+            NavigationLink(destination: TrainingSetupView(initialMode: 2)) {
+                quickSettingCard(
+                    icon: "dumbbell.fill",
+                    title: "动作库",
+                    detail: "管理动作参数"
+                )
+            }
+            .accessibilityLabel("动作库")
+            .accessibilityIdentifier("动作库入口")
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func quickSettingCard(icon: String, title: String, detail: String) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Image(systemName: icon)
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.accent)
+            Text(title)
+                .font(.subheadline.bold())
+                .foregroundStyle(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+            Text(detail)
+                .font(.caption2)
+                .foregroundStyle(AppTheme.secondaryText)
+                .lineLimit(2)
+        }
+        .frame(maxWidth: .infinity, minHeight: 112, alignment: .topLeading)
+        .cardSurface(padding: 12, cornerRadius: 16)
+    }
+}
+
+private struct TrainingSetupView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var templates: [WorkoutTemplate]
     @Query private var templateExercises: [TemplateExercise]
     @Query private var exercises: [Exercise]
     @Query private var schedules: [ScheduledWorkout]
+    @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var workoutSessions: [WorkoutSession]
+    @Query private var sessionExercises: [SessionExercise]
+    @Query private var setLogs: [SetLog]
 
     @State private var showEditor = false
     @State private var editingTemplate: WorkoutTemplate?
     @State private var pendingDelete: WorkoutTemplate?
     @State private var selectedMode = 0
-    @State private var selectedMuscleGroup = "全部"
+    @State private var selectedMajorMuscleGroup = "全部"
+    @State private var selectedMinorMuscleGroup = "全部"
     @State private var searchText = ""
-    @State private var showExerciseEditor = false
+    @State private var showNewExerciseEditor = false
     @State private var editingExercise: Exercise?
+    @State private var pendingDeleteExercise: Exercise?
     @State private var showArchivedExercises = false
+
+    init(initialMode: Int = 0) {
+        _selectedMode = State(initialValue: min(max(initialMode, 0), 2))
+    }
 
     private var sortedTemplates: [WorkoutTemplate] {
         templates
@@ -28,32 +312,69 @@ struct PlanView: View {
         }
     }
 
-    private var muscleGroups: [String] {
-        ["全部"] + Array(Set(exercises.filter { !$0.isArchived }.map(\.muscleGroup))).sorted()
+    private var librarySourceExercises: [Exercise] {
+        exercises.filter { showArchivedExercises ? $0.isArchived : !$0.isArchived }
+    }
+
+    private var libraryCategories: [ExerciseMuscleCategory] {
+        librarySourceExercises.map {
+            ExerciseMuscleTaxonomy.category(name: $0.name, muscleGroup: $0.muscleGroup)
+        }
+    }
+
+    private var majorMuscleGroups: [String] {
+        ["全部"] + ExerciseMuscleTaxonomy.orderedMajorGroups(in: libraryCategories)
+    }
+
+    private var minorMuscleGroups: [String] {
+        guard selectedMajorMuscleGroup != "全部" else { return [] }
+        return ["全部"] + ExerciseMuscleTaxonomy.orderedMinorGroups(
+            for: selectedMajorMuscleGroup,
+            in: libraryCategories
+        )
     }
 
     private var filteredExercises: [Exercise] {
-        exercises
-            .filter { showArchivedExercises ? $0.isArchived : !$0.isArchived }
-            .filter { selectedMuscleGroup == "全部" || $0.muscleGroup == selectedMuscleGroup }
-            .filter { searchText.isEmpty || $0.name.localizedCaseInsensitiveContains(searchText) }
-            .sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
+        let muscleMatches = librarySourceExercises
+            .filter { exercise in
+                let category = ExerciseMuscleTaxonomy.category(
+                    name: exercise.name,
+                    muscleGroup: exercise.muscleGroup
+                )
+                let matchesMajor = selectedMajorMuscleGroup == "全部"
+                    || category.majorGroup == selectedMajorMuscleGroup
+                let matchesMinor = selectedMinorMuscleGroup == "全部"
+                    || category.minorGroup == selectedMinorMuscleGroup
+                return matchesMajor && matchesMinor
+            }
+        guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return muscleMatches.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
+        }
+        return ExerciseCatalogService.search(muscleMatches, query: searchText)
+    }
+
+    private var setupTitle: String {
+        switch selectedMode {
+        case 1: return "每周模板"
+        case 2: return "动作库"
+        default: return "今日编排"
+        }
     }
 
     var body: some View {
         VStack(spacing: 12) {
             ScreenHeader(
-                eyebrow: "WORKOUT CENTER",
-                title: "训练",
+                eyebrow: "QUICK SETTINGS",
+                title: setupTitle,
                 trailingSystemImage: selectedMode == 0 ? nil : "plus",
-                trailingAccessibilityLabel: selectedMode == 1 ? "新建固定计划" : "新建动作",
+                trailingAccessibilityLabel: selectedMode == 1 ? "新建每周模板" : "新建动作",
                 trailingAction: {
                     if selectedMode == 1 {
                         editingTemplate = nil
                         showEditor = true
                     } else if selectedMode == 2 {
                         editingExercise = nil
-                        showExerciseEditor = true
+                        showNewExerciseEditor = true
                     }
                 }
             )
@@ -62,6 +383,14 @@ struct PlanView: View {
 
             modePicker
                 .padding(.horizontal, 16)
+
+            if selectedMode == 1 {
+                Text("设置一次，每周自动生成训练日程")
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+            }
 
             if selectedMode == 0 {
                 DailyWorkoutBuilderView(isEmbedded: true)
@@ -74,7 +403,7 @@ struct PlanView: View {
                             }
                             weekOverview
 
-                            SectionHeader(title: "我的固定计划", actionTitle: "\(sortedTemplates.count) 个")
+                            SectionHeader(title: "我的每周模板", actionTitle: "\(sortedTemplates.count) 个")
                             ForEach(sortedTemplates) { template in
                                 templateCard(template)
                                     .contextMenu {
@@ -100,14 +429,20 @@ struct PlanView: View {
             }
         }
         .screenBackground()
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .sheet(isPresented: $showEditor) {
             TemplateEditorView(template: editingTemplate)
                 .preferredColorScheme(.dark)
                 .tint(AppTheme.accent)
         }
-        .sheet(isPresented: $showExerciseEditor) {
-            ExerciseEditorView(exercise: editingExercise)
+        .sheet(isPresented: $showNewExerciseEditor) {
+            ExerciseEditorView()
+                .preferredColorScheme(.dark)
+                .tint(AppTheme.accent)
+        }
+        .sheet(item: $editingExercise) { exercise in
+            ExerciseEditorView(exercise: exercise)
                 .preferredColorScheme(.dark)
                 .tint(AppTheme.accent)
         }
@@ -124,12 +459,26 @@ struct PlanView: View {
         } message: {
             Text("历史训练不会被删除，尚未开始的未来安排会同步移除。")
         }
+        .alert("删除这个动作？", isPresented: Binding(
+            get: { pendingDeleteExercise != nil },
+            set: { if !$0 { pendingDeleteExercise = nil } }
+        )) {
+            Button("取消", role: .cancel) { pendingDeleteExercise = nil }
+            Button("删除", role: .destructive) {
+                if let exercise = pendingDeleteExercise {
+                    setArchived(exercise, archived: true)
+                }
+                pendingDeleteExercise = nil
+            }
+        } message: {
+            Text("动作会从搜索和新计划中移除，但历史训练记录仍会完整保留；之后可在已删除动作中恢复。")
+        }
     }
 
     private var modePicker: some View {
         HStack(spacing: 4) {
             modeButton("今日编排", value: 0)
-            modeButton("固定计划", value: 1)
+            modeButton("每周模板", value: 1)
             modeButton("动作库", value: 2)
         }
         .padding(4)
@@ -292,23 +641,32 @@ struct PlanView: View {
                 TextField("搜索动作…", text: $searchText)
                     .textInputAutocapitalization(.never)
                     .foregroundStyle(.white)
+                    .accessibilityIdentifier("exercise-library-search")
             }
             .padding(.horizontal, 14)
             .frame(height: 46)
             .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 13))
             .overlay(RoundedRectangle(cornerRadius: 13).stroke(AppTheme.line, lineWidth: 1))
 
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(muscleGroups, id: \.self) { group in
-                        Button(group) {
-                            selectedMuscleGroup = group
-                        }
-                        .font(.caption.bold())
-                        .foregroundStyle(selectedMuscleGroup == group ? .black : AppTheme.secondaryText)
-                        .padding(.horizontal, 15)
-                        .padding(.vertical, 8)
-                        .background(selectedMuscleGroup == group ? AppTheme.accent : AppTheme.surface, in: Capsule())
+            VStack(alignment: .leading, spacing: 12) {
+                muscleFilterRow(
+                    title: "大肌群",
+                    groups: majorMuscleGroups,
+                    selectedGroup: selectedMajorMuscleGroup,
+                    accessibilityPrefix: "大肌群"
+                ) { group in
+                    selectedMajorMuscleGroup = group
+                    selectedMinorMuscleGroup = "全部"
+                }
+
+                if selectedMajorMuscleGroup != "全部" {
+                    muscleFilterRow(
+                        title: "小肌群",
+                        groups: minorMuscleGroups,
+                        selectedGroup: selectedMinorMuscleGroup,
+                        accessibilityPrefix: "小肌群"
+                    ) { group in
+                        selectedMinorMuscleGroup = group
                     }
                 }
             }
@@ -317,9 +675,8 @@ struct PlanView: View {
 
             Button {
                 showArchivedExercises.toggle()
-                if showArchivedExercises {
-                    selectedMuscleGroup = "全部"
-                }
+                selectedMajorMuscleGroup = "全部"
+                selectedMinorMuscleGroup = "全部"
             } label: {
                 Label(
                     showArchivedExercises ? "返回可用动作" : "查看已归档动作",
@@ -337,68 +694,125 @@ struct PlanView: View {
         }
     }
 
-    private func exerciseRow(_ exercise: Exercise) -> some View {
-        HStack(spacing: 13) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 13)
-                    .fill(AppTheme.elevatedSurface)
-                Image(systemName: exerciseIcon(exercise.muscleGroup))
-                    .font(.title3.bold())
-                    .foregroundStyle(AppTheme.accent)
-            }
-            .frame(width: 52, height: 52)
-
-            VStack(alignment: .leading, spacing: 4) {
-                Text(exercise.name)
-                    .font(.subheadline.bold())
-                    .foregroundStyle(.white)
-                Text("\(exercise.muscleGroup) · \(exercise.equipment) · 休息 \(exercise.defaultRestSeconds) 秒")
-                    .font(.caption2)
-                    .foregroundStyle(AppTheme.secondaryText)
-            }
-            Spacer()
-            Text(exercise.isBuiltIn ? "内置" : "自定义")
+    private func muscleFilterRow(
+        title: String,
+        groups: [String],
+        selectedGroup: String,
+        accessibilityPrefix: String,
+        onSelect: @escaping (String) -> Void
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 7) {
+            Text(title)
                 .font(.caption2.bold())
-                .foregroundStyle(exercise.isBuiltIn ? AppTheme.secondaryText : AppTheme.accent)
-            Image(systemName: exercise.isArchived ? "archivebox.fill" : "chevron.right")
-                .font(.caption.bold())
-                .foregroundStyle(exercise.isArchived ? .orange : AppTheme.secondaryText)
-        }
-        .cardSurface(padding: 12, cornerRadius: 16)
-        .contentShape(Rectangle())
-        .onTapGesture {
-            guard !exercise.isBuiltIn, !exercise.isArchived else { return }
-            editingExercise = exercise
-            showExerciseEditor = true
-        }
-        .contextMenu {
-            if !exercise.isBuiltIn && !exercise.isArchived {
-                Button {
-                    editingExercise = exercise
-                    showExerciseEditor = true
-                } label: {
-                    Label("编辑动作", systemImage: "pencil")
+                .foregroundStyle(AppTheme.secondaryText)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(groups, id: \.self) { group in
+                        Button(group) {
+                            onSelect(group)
+                        }
+                        .font(.caption.bold())
+                        .foregroundStyle(selectedGroup == group ? .black : AppTheme.secondaryText)
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 8)
+                        .background(
+                            selectedGroup == group ? AppTheme.accent : AppTheme.surface,
+                            in: Capsule()
+                        )
+                        .accessibilityIdentifier("\(accessibilityPrefix)-\(group)")
+                    }
                 }
-            }
-            Button {
-                setArchived(exercise, archived: !exercise.isArchived)
-            } label: {
-                Label(
-                    exercise.isArchived ? "恢复动作" : "归档动作",
-                    systemImage: exercise.isArchived ? "arrow.uturn.backward" : "archivebox"
-                )
             }
         }
     }
 
-    private func exerciseIcon(_ muscleGroup: String) -> String {
-        switch muscleGroup {
-        case "腿部", "小腿": return "figure.strengthtraining.functional"
-        case "背部": return "figure.rower"
-        case "肩部": return "figure.cross.training"
-        case "手臂": return "dumbbell.fill"
-        default: return "figure.strengthtraining.traditional"
+    private func exerciseRow(_ exercise: Exercise) -> some View {
+        let latest = latestPerformance(for: exercise.id)
+
+        return HStack(spacing: 13) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(exercise.name)
+                    .font(.subheadline.bold())
+                    .foregroundStyle(.white)
+                    .accessibilityIdentifier("exercise-name-\(exercise.name)")
+                Text(latest?.dateText ?? "还没有训练记录")
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
+            }
+            Spacer()
+            if let latest {
+                Text("\(Int(latest.volume).formatted()) \(latest.unit)")
+                    .font(.caption.bold().monospacedDigit())
+                    .foregroundStyle(AppTheme.secondaryText)
+                Text(latest.feelingEmoji)
+                    .font(.title3)
+                    .accessibilityLabel(latest.feelingTitle)
+            }
+            Menu {
+                if exercise.isArchived {
+                    Button {
+                        setArchived(exercise, archived: false)
+                    } label: {
+                        Label("恢复动作", systemImage: "arrow.uturn.backward")
+                    }
+                } else {
+                    Button {
+                        editingExercise = exercise
+                    } label: {
+                        Label("编辑动作", systemImage: "pencil")
+                    }
+                    Button(role: .destructive) {
+                        pendingDeleteExercise = exercise
+                    } label: {
+                        Label("删除动作", systemImage: "trash")
+                    }
+                }
+            } label: {
+                Image(systemName: "ellipsis.circle")
+                    .font(.title3)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .accessibilityIdentifier("exercise-menu-\(exercise.name)")
+            }
         }
+        .cardSurface(padding: 12, cornerRadius: 16)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            guard !exercise.isArchived else { return }
+            editingExercise = exercise
+        }
+    }
+
+    private func latestPerformance(for exerciseID: UUID) -> (
+        dateText: String,
+        volume: Double,
+        unit: String,
+        feelingEmoji: String,
+        feelingTitle: String
+    )? {
+        let completedSessions = workoutSessions
+            .filter { $0.status == .completed }
+            .sorted { ($0.completedAt ?? $0.startedAt) > ($1.completedAt ?? $1.startedAt) }
+
+        for session in completedSessions {
+            guard let snapshot = sessionExercises.first(where: {
+                $0.sessionID == session.id && $0.exerciseID == exerciseID
+            }) else { continue }
+            let logs = setLogs.filter {
+                $0.sessionExerciseID == snapshot.id && $0.isCompleted && !$0.isWarmup
+            }
+            let volume = logs.reduce(0.0) {
+                $0 + snapshot.volumeUnit.volume(weight: $1.actualWeight, reps: $1.actualReps)
+            }
+            return (
+                dateText: "上次 \((session.completedAt ?? session.startedAt).formatted(.dateTime.month().day()))",
+                volume: volume,
+                unit: snapshot.volumeUnit.symbol,
+                feelingEmoji: snapshot.feeling?.emoji ?? "➖",
+                feelingTitle: snapshot.feeling?.title ?? "未记录感受"
+            )
+        }
+        return nil
     }
 
     private func templateIcon(_ template: WorkoutTemplate) -> String {
@@ -486,7 +900,7 @@ struct TemplateEditorView: View {
                             Text(WeekdayName.short(day)).tag(day)
                         }
                     }
-                    Toggle("加入每周计划", isOn: $isActive)
+                    Toggle("每周自动生成日程", isOn: $isActive)
                 }
 
                 Section {
@@ -646,7 +1060,7 @@ struct TemplateEditorView: View {
     }
 }
 
-private struct ExerciseEditorView: View {
+private struct LegacyExerciseEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query private var allExercises: [Exercise]
@@ -774,7 +1188,9 @@ private struct DraftExerciseEditor: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(exercise?.name ?? "未知动作")
                         .font(.headline)
-                    Text("\(exercise?.muscleGroup ?? "") · \(exercise?.equipment ?? "")")
+                    Text(
+                        "\(exercise?.muscleGroup ?? "") · \(exercise?.equipment ?? "") · \(exercise?.volumeUnit.symbol ?? "kg")"
+                    )
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -786,7 +1202,7 @@ private struct DraftExerciseEditor: View {
             Stepper("工作组：\(draft.targetSets)", value: $draft.targetSets, in: 1...10)
 
             HStack {
-                Text("次数")
+                Text(exercise?.volumeUnit == .count ? "数量（个）" : exercise?.volumeUnit.repetitionTitle ?? "次数")
                 Spacer()
                 TextField("最低", value: $draft.minReps, format: .number)
                     .keyboardType(.numberPad)
@@ -799,15 +1215,29 @@ private struct DraftExerciseEditor: View {
                     .frame(width: 44)
             }
 
-            HStack {
-                Text("目标重量")
-                Spacer()
-                TextField("kg", value: $draft.targetWeight, format: .number.precision(.fractionLength(0...1)))
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 80)
-                Text("kg")
-                    .foregroundStyle(.secondary)
+            if exercise?.volumeUnit.recordsNumericLoad == true {
+                HStack {
+                    Text("目标\(exercise?.volumeUnit.inputTitle ?? "重量")")
+                    Spacer()
+                    TextField(
+                        exercise?.volumeUnit.symbol ?? "kg",
+                        value: $draft.targetWeight,
+                        format: .number.precision(.fractionLength(0...3))
+                    )
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .frame(width: 80)
+                    Text(exercise?.volumeUnit.symbol ?? "kg")
+                        .foregroundStyle(.secondary)
+                }
+            } else if exercise?.volumeUnit == .bodyweight {
+                HStack {
+                    Text("目标负重")
+                    Spacer()
+                    Text("自重")
+                        .fontWeight(.semibold)
+                        .foregroundStyle(AppTheme.accent)
+                }
             }
 
             Picker("组间休息", selection: $draft.restSeconds) {

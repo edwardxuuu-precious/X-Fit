@@ -2,10 +2,8 @@ import SwiftData
 import SwiftUI
 
 private struct DailyExerciseTarget {
-    var sets: Int
-    var minReps: Int
-    var maxReps: Int
-    var weight: Double
+    var pattern: SetPlanPattern
+    var plannedSets: [WorkoutSetPlan]
     var restSeconds: Int
 }
 
@@ -24,7 +22,7 @@ struct DailyWorkoutBuilderView: View {
     @AppStorage(TrainingGoalMode.storageKey)
     private var trainingGoalRaw = TrainingGoalMode.cuttingVolume.rawValue
 
-    var isEmbedded = false
+    let isEmbedded: Bool
 
     @State private var selectedDate = Date.now.startOfDay
     @State private var selectedMuscleGroups: Set<String> = []
@@ -35,8 +33,20 @@ struct DailyWorkoutBuilderView: View {
     @State private var loadedDate: Date?
     @State private var workoutSessionID: UUID?
     @State private var showWorkout = false
+    @State private var showExercisePicker = false
     @State private var savedMessage: String?
     @State private var errorMessage: String?
+    private let initialScheduleID: UUID?
+
+    init(
+        initialDate: Date = .now,
+        initialScheduleID: UUID? = nil,
+        isEmbedded: Bool = false
+    ) {
+        self.isEmbedded = isEmbedded
+        self.initialScheduleID = initialScheduleID
+        _selectedDate = State(initialValue: initialDate.startOfDay)
+    }
 
     private var muscleGroups: [String] {
         let groups = Set(exercises.filter { !$0.isArchived }.map(\.muscleGroup))
@@ -84,6 +94,12 @@ struct DailyWorkoutBuilderView: View {
         sessions.first { $0.status == .inProgress }
     }
 
+    private var activeSessionForSelectedDate: WorkoutSession? {
+        activeSession.flatMap { session in
+            session.plannedDate.isSameDay(as: selectedDate) ? session : nil
+        }
+    }
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
@@ -103,6 +119,14 @@ struct DailyWorkoutBuilderView: View {
 
                 if let activeSession {
                     activeWorkoutCard(activeSession)
+                }
+
+                menuBuilderHeader
+
+                if !selectedExerciseIDs.isEmpty {
+                    selectedMenuSection
+                } else {
+                    emptyMenuCard
                 }
 
                 trainingGoalCard
@@ -141,59 +165,6 @@ struct DailyWorkoutBuilderView: View {
                     .padding(.vertical, 24)
                 }
 
-                if !selectedExerciseIDs.isEmpty {
-                    SectionHeader(title: "今天的菜单", actionTitle: "\(selectedExerciseIDs.count) 个动作")
-                    ForEach(selectedExerciseIDs, id: \.self) { exerciseID in
-                        if let exercise = exercises.first(where: { $0.id == exerciseID }) {
-                            selectedExerciseCard(exercise)
-                        }
-                    }
-
-                    if !existingPlansOnDate.isEmpty {
-                        Toggle(isOn: $replaceExistingPlans) {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("用自选菜单替代当天原计划")
-                                    .font(.subheadline.bold())
-                                    .foregroundStyle(.white)
-                                Text("原计划会标记为跳过，历史不会删除。")
-                                    .font(.caption2)
-                                    .foregroundStyle(AppTheme.secondaryText)
-                            }
-                        }
-                        .tint(AppTheme.accent)
-                        .cardSurface()
-                    }
-
-                    if selectedDate.isSameDay(as: .now), activeSession == nil {
-                        Button {
-                            savePlan(startAfterSaving: true)
-                        } label: {
-                            Label("保存并开始训练", systemImage: "play.fill")
-                                .neonButtonStyle()
-                        }
-
-                        Button {
-                            savePlan(startAfterSaving: false)
-                        } label: {
-                            Label("只保存菜单，稍后训练", systemImage: "tray.and.arrow.down")
-                                .font(.subheadline.bold())
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 12)
-                        }
-                        .buttonStyle(.bordered)
-                        .tint(AppTheme.accent)
-                    } else {
-                        Button {
-                            savePlan(startAfterSaving: false)
-                        } label: {
-                            Label(
-                                selectedDate.isSameDay(as: .now) ? "更新今天菜单" : "保存到所选日期",
-                                systemImage: "checkmark.circle.fill"
-                            )
-                            .neonButtonStyle()
-                        }
-                    }
-                }
             }
             .padding(.horizontal, 16)
             .padding(.top, 12)
@@ -213,6 +184,20 @@ struct DailyWorkoutBuilderView: View {
                 ActiveWorkoutView(sessionID: workoutSessionID)
             }
         }
+        .sheet(isPresented: $showExercisePicker) {
+            ExercisePickerSheet(
+                title: "添加到当天菜单",
+                initialMuscleGroup: selectedMuscleGroups.sorted().first ?? "",
+                excludedExerciseIDs: Set(selectedExerciseIDs),
+                onConfiguredSelect: { exercise, draft in
+                    addExerciseToMenu(exercise, draft: draft)
+                }
+            ) { exercise in
+                addExerciseToMenu(exercise)
+            }
+            .preferredColorScheme(.dark)
+            .tint(AppTheme.accent)
+        }
         .alert("无法保存菜单", isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
@@ -229,6 +214,48 @@ struct DailyWorkoutBuilderView: View {
         } message: {
             Text(savedMessage ?? "")
         }
+    }
+
+    private var menuBuilderHeader: some View {
+        HStack(alignment: .center) {
+            SectionHeader(
+                title: selectedDate.isSameDay(as: .now) ? "今天的菜单" : "当天菜单",
+                actionTitle: "\(selectedExerciseIDs.count) 个动作"
+            )
+            Spacer()
+            Button {
+                showExercisePicker = true
+            } label: {
+                Label("添加动作", systemImage: "plus.circle.fill")
+                    .font(.caption.bold())
+            }
+            .buttonStyle(.bordered)
+            .tint(AppTheme.accent)
+            .accessibilityIdentifier("当天菜单添加动作")
+        }
+    }
+
+    private var emptyMenuCard: some View {
+        Button {
+            showExercisePicker = true
+        } label: {
+            VStack(spacing: 10) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title2)
+                    .foregroundStyle(AppTheme.accent)
+                Text("从全部动作中选择，找不到时可立即新建")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(.white)
+                Text("新动作保存后会直接加入这一天的菜单，不会丢失当前编排。")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+            .cardSurface()
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("空菜单添加动作")
     }
 
     private var planningIntroCard: some View {
@@ -291,6 +318,9 @@ struct DailyWorkoutBuilderView: View {
                 Text(session.templateName)
                     .font(.subheadline.bold())
                     .foregroundStyle(.white)
+                Text("这里调整菜单后会同步到正在记录的训练")
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
             }
             Spacer()
             Button("继续训练") {
@@ -302,6 +332,91 @@ struct DailyWorkoutBuilderView: View {
             .tint(AppTheme.accent)
         }
         .cardSurface()
+    }
+
+    @ViewBuilder
+    private var selectedMenuSection: some View {
+        if loadedDate != nil {
+            Text(activeSessionForSelectedDate == nil ? "修改仅作用于当天" : "正在训练 · 修改会同步到本次记录")
+                .font(.caption2.bold())
+                .foregroundStyle(AppTheme.accent)
+        }
+
+        if activeSessionForSelectedDate == nil, !existingPlansOnDate.isEmpty {
+            Toggle(isOn: $replaceExistingPlans) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("用当天菜单替代原计划")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.white)
+                    Text("原计划会标记为跳过；每周模板和已完成历史不会改变。")
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+            }
+            .tint(AppTheme.accent)
+            .cardSurface()
+        }
+
+        if let activeSessionForSelectedDate {
+            Button {
+                savePlan(startAfterSaving: false)
+            } label: {
+                Label("同步到进行中的训练", systemImage: "arrow.triangle.2.circlepath")
+                    .neonButtonStyle()
+            }
+            .accessibilityIdentifier("同步进行中训练菜单")
+
+            Text("动作顺序、未开始动作和未完成组会立即更新；已完成组保持原记录。")
+                .font(.caption)
+                .foregroundStyle(AppTheme.secondaryText)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .accessibilityLabel("正在训练，可从外部调整菜单")
+                .id(activeSessionForSelectedDate.id)
+        } else if selectedDate.isSameDay(as: .now), activeSession == nil {
+            Button {
+                savePlan(startAfterSaving: true)
+            } label: {
+                Label("保存并开始记录", systemImage: "play.fill")
+                    .neonButtonStyle()
+            }
+            .accessibilityIdentifier("保存并开始记录")
+
+            Button {
+                savePlan(startAfterSaving: false)
+            } label: {
+                Label("保存计划，稍后记录", systemImage: "tray.and.arrow.down")
+                    .font(.subheadline.bold())
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
+            .buttonStyle(.bordered)
+            .tint(AppTheme.accent)
+            .accessibilityIdentifier("保存今日计划")
+        } else {
+            Button {
+                savePlan(startAfterSaving: false)
+            } label: {
+                Label(
+                    selectedDate.isSameDay(as: .now) ? "更新今天菜单" : "保存到所选日期",
+                    systemImage: "checkmark.circle.fill"
+                )
+                .neonButtonStyle()
+            }
+            .accessibilityIdentifier("保存当天计划")
+        }
+
+        ForEach(selectedExerciseIDs, id: \.self) { exerciseID in
+            if let exercise = exercises.first(where: { $0.id == exerciseID }) {
+                selectedExerciseCard(exercise)
+            }
+        }
+
+        Divider()
+            .overlay(AppTheme.line)
+
+        Text("需要增减动作时，继续在下方选择肌群和推荐动作。")
+            .font(.caption)
+            .foregroundStyle(AppTheme.secondaryText)
     }
 
     private var dateCard: some View {
@@ -344,6 +459,7 @@ struct DailyWorkoutBuilderView: View {
                         )
                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(AppTheme.line, lineWidth: 1))
                 }
+                .accessibilityValue(selectedMuscleGroups.contains(group) ? "已选择" : "未选择")
             }
         }
     }
@@ -376,6 +492,7 @@ struct DailyWorkoutBuilderView: View {
 
     private func recommendationCard(_ recommendation: ExerciseRecommendation) -> some View {
         let isSelected = selectedExerciseIDs.contains(recommendation.exerciseID)
+        let unit = exercises.first(where: { $0.id == recommendation.exerciseID })?.volumeUnit ?? .kilogram
 
         return Button {
             toggleExercise(recommendation)
@@ -411,7 +528,7 @@ struct DailyWorkoutBuilderView: View {
                     .foregroundStyle(recommendation.appearedInLastMenu ? .orange : AppTheme.accent)
 
                 if let last = recommendation.lastPerformance {
-                    lastPerformanceView(last)
+                    lastPerformanceView(last, unit: unit)
                 } else {
                     Text("没有上次强度记录 · 建议从 \(recommendation.suggestedSets) 组 × \(recommendation.minReps)–\(recommendation.maxReps) 次开始")
                         .font(.caption)
@@ -425,11 +542,7 @@ struct DailyWorkoutBuilderView: View {
                     Text(recommendation.progressionDetail)
                         .font(.caption2)
                         .foregroundStyle(AppTheme.secondaryText)
-                    Text(
-                        "建议 \(recommendation.suggestedSets) 组 × \(recommendation.minReps)–\(recommendation.maxReps) 次 · "
-                            + "\(TrainingFormatters.weight(recommendation.suggestedWeight)) kg · "
-                            + "目标容量约 \(Int(recommendation.suggestedVolume)) kg"
-                    )
+                    Text(recommendationSummary(recommendation, unit: unit))
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(.white)
                 }
@@ -452,7 +565,7 @@ struct DailyWorkoutBuilderView: View {
         .buttonStyle(.plain)
     }
 
-    private func lastPerformanceView(_ last: ExerciseLastPerformance) -> some View {
+    private func lastPerformanceView(_ last: ExerciseLastPerformance, unit: ExerciseVolumeUnit) -> some View {
         let best = last.bestSet
         let rir = last.averageRIR.map {
             $0.formatted(.number.precision(.fractionLength(0...1)))
@@ -463,10 +576,14 @@ struct DailyWorkoutBuilderView: View {
                 .font(.caption2.bold())
                 .foregroundStyle(.white)
             if let best {
-                Text("上次：\(last.sets.count) 组 · 工作均重 \(TrainingFormatters.weight(last.workingWeight)) kg · 最重 \(TrainingFormatters.weight(best.weight)) kg × \(best.reps)")
+                Text(
+                    unit == .bodyweight
+                        ? "上次：\(last.sets.count) 组 · 最多 \(best.reps) 次"
+                        : "上次：\(last.sets.count) 组 · 工作均重 \(TrainingFormatters.weight(last.workingWeight)) \(unit.symbol) · 最重 \(TrainingFormatters.weight(best.weight)) \(unit.symbol) × \(best.reps)"
+                )
                     .font(.caption)
                     .foregroundStyle(AppTheme.secondaryText)
-                Text("容量 \(Int(last.volume)) kg · 平均 RIR \(rir)")
+                Text("\(unit == .bodyweight ? "完成" : "容量") \(Int(last.volume)) \(unit == .bodyweight ? "次" : unit.symbol) · 平均 RIR \(rir)")
                     .font(.caption)
                     .foregroundStyle(AppTheme.secondaryText)
             }
@@ -474,6 +591,22 @@ struct DailyWorkoutBuilderView: View {
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 11))
+    }
+
+    private func recommendationSummary(
+        _ recommendation: ExerciseRecommendation,
+        unit: ExerciseVolumeUnit
+    ) -> String {
+        let base = "建议 \(recommendation.suggestedSets) 组 × \(recommendation.minReps)–\(recommendation.maxReps) 次"
+        if unit == .bodyweight {
+            return base + " · 自重 · 目标约 \(Int(recommendation.suggestedVolume)) 次"
+        }
+        if unit == .count {
+            return base + " · 目标约 \(Int(recommendation.suggestedVolume)) 个"
+        }
+        return base
+            + " · \(TrainingFormatters.weight(recommendation.suggestedWeight)) \(unit.symbol)"
+            + " · 目标容量约 \(Int(recommendation.suggestedVolume)) \(unit.symbol)"
     }
 
     private func selectedExerciseCard(_ exercise: Exercise) -> some View {
@@ -489,6 +622,13 @@ struct DailyWorkoutBuilderView: View {
                     Text("\(exercise.muscleGroup) · \(exercise.equipment)")
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
+                    if let url = URL(string: exercise.referenceURL), !exercise.referenceURL.isEmpty {
+                        Link(destination: url) {
+                            Label("查看动作资料", systemImage: "link")
+                                .font(.caption2.bold())
+                        }
+                        .foregroundStyle(AppTheme.accent)
+                    }
                 }
                 Spacer()
                 Button {
@@ -510,42 +650,67 @@ struct DailyWorkoutBuilderView: View {
                 }
             }
 
-            Stepper("工作组：\(binding.wrappedValue.sets)", value: binding.sets, in: 1...10)
-                .foregroundStyle(.white)
+            Picker("编排模式", selection: binding.pattern) {
+                ForEach(SetPlanPattern.allCases) { pattern in
+                    Text(pattern.title).tag(pattern)
+                }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("set-plan-pattern-\(exercise.name)")
+            .onChange(of: binding.wrappedValue.pattern) { _, _ in
+                applyPreset(to: exercise.id)
+            }
 
-            HStack {
-                Text("次数范围")
-                    .foregroundStyle(.white)
-                Spacer()
-                TextField("最低", value: binding.minReps, format: .number)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 48)
-                    .textFieldStyle(.roundedBorder)
-                Text("–")
-                    .foregroundStyle(AppTheme.secondaryText)
-                TextField("最高", value: binding.maxReps, format: .number)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.center)
-                    .frame(width: 48)
-                    .textFieldStyle(.roundedBorder)
+            if exercise.volumeUnit.usesMeasurementSide {
+                Picker("记录口径", selection: measurementSideBinding(for: exercise.id)) {
+                    ForEach(MeasurementSide.allCases) { side in
+                        Text(side.title).tag(side)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("plan-measurement-side-\(exercise.name)")
             }
 
             HStack {
-                Text("建议重量")
-                    .foregroundStyle(.white)
-                Spacer()
-                TextField(
-                    "kg",
-                    value: binding.weight,
-                    format: .number.precision(.fractionLength(0...1))
+                Stepper(
+                    "计划组数：\(binding.wrappedValue.plannedSets.count)",
+                    value: plannedSetCountBinding(for: exercise.id),
+                    in: 1...12
                 )
-                .keyboardType(.decimalPad)
-                .multilineTextAlignment(.trailing)
-                .frame(width: 82)
-                .textFieldStyle(.roundedBorder)
-                Text("kg")
-                    .foregroundStyle(AppTheme.secondaryText)
+                .foregroundStyle(.white)
+                Spacer()
+                Button("套用预设") {
+                    applyPreset(to: exercise.id)
+                }
+                .accessibilityIdentifier("apply-set-preset-\(exercise.name)")
+                .font(.caption.bold())
+                .buttonStyle(.bordered)
+                .tint(AppTheme.accent)
+            }
+
+            HStack(spacing: 8) {
+                Text("组").frame(width: 26)
+                if exercise.volumeUnit == .count {
+                    Text("计划数量 · 个").frame(maxWidth: .infinity)
+                } else if exercise.volumeUnit == .bodyweight {
+                    Text("负重").frame(maxWidth: .infinity)
+                    Text("计划次数").frame(maxWidth: .infinity)
+                } else {
+                    Text("计划\(exercise.volumeUnit.inputTitle) · \(exercise.volumeUnit.symbol)")
+                        .frame(maxWidth: .infinity)
+                    Text("计划\(exercise.volumeUnit.repetitionTitle)").frame(maxWidth: .infinity)
+                }
+            }
+            .font(.caption2)
+            .foregroundStyle(AppTheme.secondaryText)
+
+            ForEach(binding.wrappedValue.plannedSets.indices, id: \.self) { setIndex in
+                plannedSetRow(
+                    index: setIndex,
+                    binding: plannedSetBinding(for: exercise.id, index: setIndex),
+                    unit: exercise.volumeUnit,
+                    exerciseName: exercise.name
+                )
             }
 
             Picker("组间休息", selection: binding.restSeconds) {
@@ -578,13 +743,55 @@ struct DailyWorkoutBuilderView: View {
         } else {
             selectedExerciseIDs.append(recommendation.exerciseID)
             targets[recommendation.exerciseID] = DailyExerciseTarget(
-                sets: recommendation.suggestedSets,
-                minReps: recommendation.minReps,
-                maxReps: recommendation.maxReps,
-                weight: recommendation.suggestedWeight,
+                pattern: .fixed,
+                plannedSets: WorkoutSetPlan.preset(
+                    .fixed,
+                    count: recommendation.suggestedSets,
+                    baseWeight: recommendation.suggestedWeight,
+                    baseReps: recommendation.minReps
+                ),
                 restSeconds: recommendation.restSeconds
             )
         }
+    }
+
+    private func addExerciseToMenu(_ exercise: Exercise) {
+        guard !selectedExerciseIDs.contains(exercise.id) else { return }
+        selectedMuscleGroups.insert(exercise.muscleGroup)
+        selectedExerciseIDs.append(exercise.id)
+
+        let recommendation = WorkoutRecommendationService.recommendations(
+            selectedMuscleGroups: [exercise.muscleGroup],
+            exercises: exercises,
+            sessions: sessions,
+            sessionExercises: sessionExercises,
+            setLogs: setLogs,
+            templateExercises: templateExercises,
+            variant: recommendationVariant,
+            goalMode: trainingGoalMode
+        ).first { $0.exerciseID == exercise.id }
+
+        targets[exercise.id] = DailyExerciseTarget(
+            pattern: .fixed,
+            plannedSets: WorkoutSetPlan.preset(
+                .fixed,
+                count: recommendation?.suggestedSets ?? (trainingGoalMode == .cuttingVolume ? 4 : 3),
+                baseWeight: recommendation?.suggestedWeight ?? 0,
+                baseReps: recommendation?.minReps ?? (trainingGoalMode == .cuttingVolume ? 10 : 8)
+            ),
+            restSeconds: recommendation?.restSeconds ?? exercise.defaultRestSeconds
+        )
+    }
+
+    private func addExerciseToMenu(_ exercise: Exercise, draft: ExerciseSetupDraft) {
+        guard !selectedExerciseIDs.contains(exercise.id) else { return }
+        selectedMuscleGroups.insert(exercise.muscleGroup)
+        selectedExerciseIDs.append(exercise.id)
+        targets[exercise.id] = DailyExerciseTarget(
+            pattern: draft.pattern,
+            plannedSets: draft.plannedSets,
+            restSeconds: draft.restSeconds
+        )
     }
 
     private func removeExercise(_ id: UUID) {
@@ -597,13 +804,130 @@ struct DailyWorkoutBuilderView: View {
         let target = index + offset
         guard selectedExerciseIDs.indices.contains(target) else { return }
         selectedExerciseIDs.swapAt(index, target)
+        if activeSessionForSelectedDate != nil {
+            syncActiveWorkoutMenu(showConfirmation: false)
+        }
     }
 
     private func targetBinding(for id: UUID) -> Binding<DailyExerciseTarget> {
         Binding {
-            targets[id] ?? DailyExerciseTarget(sets: 3, minReps: 8, maxReps: 12, weight: 0, restSeconds: 90)
+            targets[id] ?? DailyExerciseTarget(
+                pattern: .fixed,
+                plannedSets: WorkoutSetPlan.preset(.fixed, count: 3, baseWeight: 0, baseReps: 8),
+                restSeconds: 90
+            )
         } set: { newValue in
             targets[id] = newValue
+        }
+    }
+
+    private func plannedSetBinding(for exerciseID: UUID, index: Int) -> Binding<WorkoutSetPlan> {
+        Binding {
+            guard let target = targets[exerciseID], target.plannedSets.indices.contains(index) else {
+                return WorkoutSetPlan(weight: 0, reps: 1)
+            }
+            return target.plannedSets[index]
+        } set: { newValue in
+            guard var target = targets[exerciseID], target.plannedSets.indices.contains(index) else { return }
+            target.plannedSets[index] = newValue
+            targets[exerciseID] = target
+        }
+    }
+
+    private func plannedSetCountBinding(for exerciseID: UUID) -> Binding<Int> {
+        Binding {
+            targets[exerciseID]?.plannedSets.count ?? 1
+        } set: { newCount in
+            guard var target = targets[exerciseID] else { return }
+            let safeCount = min(max(1, newCount), 12)
+            if safeCount > target.plannedSets.count {
+                let seed = target.plannedSets.last ?? WorkoutSetPlan(weight: 0, reps: 8)
+                for _ in target.plannedSets.count..<safeCount {
+                    target.plannedSets.append(
+                        WorkoutSetPlan(
+                            weight: seed.weight,
+                            reps: seed.reps,
+                            weightSide: seed.weightSide,
+                            repsSide: seed.repsSide
+                        )
+                    )
+                }
+            } else if safeCount < target.plannedSets.count {
+                target.plannedSets.removeLast(target.plannedSets.count - safeCount)
+            }
+            targets[exerciseID] = target
+            applyPreset(to: exerciseID)
+        }
+    }
+
+    private func applyPreset(to exerciseID: UUID) {
+        guard var target = targets[exerciseID], let first = target.plannedSets.first else { return }
+        target.plannedSets = WorkoutSetPlan.preset(
+            target.pattern,
+            count: target.plannedSets.count,
+            baseWeight: target.plannedSets.map(\.weight).min() ?? first.weight,
+            baseReps: target.plannedSets.map(\.reps).max() ?? first.reps,
+            weightSide: first.weightSide,
+            repsSide: first.repsSide
+        )
+        targets[exerciseID] = target
+    }
+
+    private func plannedSetRow(
+        index: Int,
+        binding: Binding<WorkoutSetPlan>,
+        unit: ExerciseVolumeUnit,
+        exerciseName: String
+    ) -> some View {
+        HStack(spacing: 8) {
+            Text("\(index + 1)")
+                .font(.caption.bold().monospacedDigit())
+                .frame(width: 26)
+
+            if unit.recordsNumericLoad {
+                StableNumericTextField(
+                    unit.symbol,
+                    value: binding.weight,
+                    maximumFractionDigits: 3,
+                    accessibilityIdentifier: "planned-weight-\(exerciseName)-\(index + 1)"
+                )
+                .padding(.vertical, 8)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 8))
+                .frame(maxWidth: .infinity)
+            } else if unit == .bodyweight {
+                Text("自重")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(maxWidth: .infinity)
+            }
+
+            StableNumericTextField(
+                unit == .count ? "个" : unit.repetitionTitle,
+                value: binding.reps,
+                accessibilityIdentifier: "planned-reps-\(exerciseName)-\(index + 1)"
+            )
+                .padding(.vertical, 8)
+                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 8))
+                .frame(maxWidth: .infinity)
+
+        }
+    }
+
+    private func measurementSideBinding(for exerciseID: UUID) -> Binding<MeasurementSide> {
+        Binding {
+            targets[exerciseID]?.plannedSets.first?.weightSide ?? .bilateral
+        } set: { side in
+            guard var target = targets[exerciseID] else { return }
+            target.plannedSets = target.plannedSets.map { plan in
+                WorkoutSetPlan(
+                    id: plan.id,
+                    weight: plan.weight,
+                    reps: plan.reps,
+                    weightSide: side,
+                    repsSide: side
+                )
+            }
+            targets[exerciseID] = target
         }
     }
 
@@ -615,15 +939,42 @@ struct DailyWorkoutBuilderView: View {
         selectedExerciseIDs = []
         targets = [:]
 
+        if let active = activeSession,
+           active.plannedDate.isSameDay(as: targetDate) {
+            let snapshots = sessionExercises
+                .filter { $0.sessionID == active.id }
+                .sorted { $0.order < $1.order }
+            selectedExerciseIDs = snapshots.map(\.exerciseID)
+            targets = Dictionary(uniqueKeysWithValues: snapshots.map { snapshot in
+                (
+                    snapshot.exerciseID,
+                    DailyExerciseTarget(
+                        pattern: snapshot.planPattern,
+                        plannedSets: snapshot.plannedSets,
+                        restSeconds: snapshot.restSeconds
+                    )
+                )
+            })
+            selectedMuscleGroups = Set(snapshots.map(\.muscleGroup).filter { !$0.isEmpty })
+            replaceExistingPlans = false
+            return
+        }
+
         let candidates = schedules
-            .filter { $0.plannedDate.isSameDay(as: targetDate) && $0.status == .planned }
+            .filter {
+                $0.plannedDate.isSameDay(as: targetDate)
+                    && ($0.status == .planned || $0.status == .skipped)
+            }
             .sorted { left, right in
                 let leftOneOff = templates.first(where: { $0.id == left.templateID })?.isOneOff == true
                 let rightOneOff = templates.first(where: { $0.id == right.templateID })?.isOneOff == true
                 if leftOneOff != rightOneOff { return leftOneOff }
                 return left.createdAt > right.createdAt
             }
-        guard let schedule = candidates.first,
+        let preferredSchedule = candidates.first(where: { $0.id == initialScheduleID })
+            ?? candidates.first(where: { $0.status == .planned })
+            ?? candidates.first
+        guard let schedule = preferredSchedule,
               let template = templates.first(where: { $0.id == schedule.templateID }) else {
             return
         }
@@ -636,10 +987,8 @@ struct DailyWorkoutBuilderView: View {
             (
                 item.exerciseID,
                 DailyExerciseTarget(
-                    sets: item.targetSets,
-                    minReps: item.minReps,
-                    maxReps: item.maxReps,
-                    weight: item.targetWeight,
+                    pattern: item.planPattern,
+                    plannedSets: item.plannedSets,
                     restSeconds: item.restSeconds
                 )
             )
@@ -654,17 +1003,12 @@ struct DailyWorkoutBuilderView: View {
     }
 
     private func savePlan(startAfterSaving: Bool) {
-        let inputs = selectedExerciseIDs.compactMap { id -> DailyPlanExerciseInput? in
-            guard let target = targets[id] else { return nil }
-            return DailyPlanExerciseInput(
-                exerciseID: id,
-                targetSets: target.sets,
-                minReps: target.minReps,
-                maxReps: target.maxReps,
-                targetWeight: target.weight,
-                restSeconds: target.restSeconds
-            )
+        if activeSessionForSelectedDate != nil {
+            syncActiveWorkoutMenu(showConfirmation: true)
+            return
         }
+
+        let inputs = currentMenuInputs
 
         do {
             let schedule = try DailyPlanService.create(
@@ -682,6 +1026,35 @@ struct DailyWorkoutBuilderView: View {
                 savedMessage = "今天的菜单已更新。开始训练后仍可按身体状态临时调整动作和组数。"
             } else {
                 dismiss()
+            }
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+    }
+
+    private var currentMenuInputs: [DailyPlanExerciseInput] {
+        selectedExerciseIDs.compactMap { id -> DailyPlanExerciseInput? in
+            guard let target = targets[id] else { return nil }
+            return DailyPlanExerciseInput(
+                exerciseID: id,
+                plannedSets: target.plannedSets,
+                planPattern: target.pattern,
+                restSeconds: target.restSeconds
+            )
+        }
+    }
+
+    private func syncActiveWorkoutMenu(showConfirmation: Bool) {
+        guard let activeSessionForSelectedDate else { return }
+        do {
+            try WorkoutService.syncMenu(
+                currentMenuInputs,
+                to: activeSessionForSelectedDate,
+                in: modelContext
+            )
+            loadedDate = selectedDate.startOfDay
+            if showConfirmation {
+                savedMessage = "进行中的训练菜单已同步；返回训练页即可继续记录。"
             }
         } catch {
             errorMessage = error.localizedDescription
@@ -708,45 +1081,12 @@ struct DailyWorkoutBuilderView: View {
 }
 
 private extension Binding where Value == DailyExerciseTarget {
-    var sets: Binding<Int> {
-        Binding<Int>(
-            get: { wrappedValue.sets },
+    var pattern: Binding<SetPlanPattern> {
+        Binding<SetPlanPattern>(
+            get: { wrappedValue.pattern },
             set: {
                 var value = wrappedValue
-                value.sets = $0
-                wrappedValue = value
-            }
-        )
-    }
-
-    var minReps: Binding<Int> {
-        Binding<Int>(
-            get: { wrappedValue.minReps },
-            set: {
-                var value = wrappedValue
-                value.minReps = $0
-                wrappedValue = value
-            }
-        )
-    }
-
-    var maxReps: Binding<Int> {
-        Binding<Int>(
-            get: { wrappedValue.maxReps },
-            set: {
-                var value = wrappedValue
-                value.maxReps = $0
-                wrappedValue = value
-            }
-        )
-    }
-
-    var weight: Binding<Double> {
-        Binding<Double>(
-            get: { wrappedValue.weight },
-            set: {
-                var value = wrappedValue
-                value.weight = $0
+                value.pattern = $0
                 wrappedValue = value
             }
         )
@@ -758,6 +1098,52 @@ private extension Binding where Value == DailyExerciseTarget {
             set: {
                 var value = wrappedValue
                 value.restSeconds = $0
+                wrappedValue = value
+            }
+        )
+    }
+}
+
+private extension Binding where Value == WorkoutSetPlan {
+    var weight: Binding<Double> {
+        Binding<Double>(
+            get: { wrappedValue.weight },
+            set: {
+                var value = wrappedValue
+                value.weight = Swift.max(0, $0)
+                wrappedValue = value
+            }
+        )
+    }
+
+    var reps: Binding<Int> {
+        Binding<Int>(
+            get: { wrappedValue.reps },
+            set: {
+                var value = wrappedValue
+                value.reps = Swift.max(1, $0)
+                wrappedValue = value
+            }
+        )
+    }
+
+    var weightSide: Binding<MeasurementSide> {
+        Binding<MeasurementSide>(
+            get: { wrappedValue.weightSide },
+            set: {
+                var value = wrappedValue
+                value.weightSide = $0
+                wrappedValue = value
+            }
+        )
+    }
+
+    var repsSide: Binding<MeasurementSide> {
+        Binding<MeasurementSide>(
+            get: { wrappedValue.repsSide },
+            set: {
+                var value = wrappedValue
+                value.repsSide = $0
                 wrappedValue = value
             }
         )

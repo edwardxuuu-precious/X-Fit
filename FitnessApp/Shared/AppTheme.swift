@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 enum AppTheme {
     static let accent = Color(red: 0.62, green: 0.91, blue: 0.02)
@@ -55,6 +56,158 @@ extension View {
             .padding(.vertical, 13)
             .frame(maxWidth: .infinity)
             .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+    }
+}
+
+/// A compact numeric field for workout logging. It selects the current value
+/// when editing begins and never rewrites the visible text while the field owns
+/// focus. That keeps rapid gym-floor entry from appending to an old value or
+/// losing the cursor when SwiftData publishes an edit.
+struct StableNumericTextField: UIViewRepresentable {
+    private enum Kind {
+        case decimal(maximumFractionDigits: Int)
+        case integer
+    }
+
+    private let decimalValue: Binding<Double>?
+    private let integerValue: Binding<Int>?
+    private let kind: Kind
+    private let placeholder: String
+    private let accessibilityIdentifier: String
+
+    init(
+        _ placeholder: String,
+        value: Binding<Double>,
+        maximumFractionDigits: Int = 3,
+        accessibilityIdentifier: String
+    ) {
+        decimalValue = value
+        integerValue = nil
+        kind = .decimal(maximumFractionDigits: maximumFractionDigits)
+        self.placeholder = placeholder
+        self.accessibilityIdentifier = accessibilityIdentifier
+    }
+
+    init(
+        _ placeholder: String,
+        value: Binding<Int>,
+        accessibilityIdentifier: String
+    ) {
+        decimalValue = nil
+        integerValue = value
+        kind = .integer
+        self.placeholder = placeholder
+        self.accessibilityIdentifier = accessibilityIdentifier
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(parent: self)
+    }
+
+    func makeUIView(context: Context) -> UITextField {
+        let field = UITextField()
+        field.delegate = context.coordinator
+        field.addTarget(context.coordinator, action: #selector(Coordinator.editingChanged(_:)), for: .editingChanged)
+        field.placeholder = placeholder
+        field.accessibilityIdentifier = accessibilityIdentifier
+        field.textAlignment = .center
+        field.font = .preferredFont(forTextStyle: .body)
+        field.adjustsFontForContentSizeCategory = true
+        field.textColor = .label
+        field.tintColor = UIColor(AppTheme.accent)
+        field.keyboardType = keyboardType
+        field.text = formattedValue
+        return field
+    }
+
+    func updateUIView(_ field: UITextField, context: Context) {
+        context.coordinator.parent = self
+        field.placeholder = placeholder
+        field.accessibilityIdentifier = accessibilityIdentifier
+        field.keyboardType = keyboardType
+
+        // Reformat only after editing ends. Replacing text during an active edit
+        // resets UIKit selection and was the source of the visible page/input jump.
+        if !field.isFirstResponder, field.text != formattedValue {
+            field.text = formattedValue
+        }
+    }
+
+    private var keyboardType: UIKeyboardType {
+        switch kind {
+        case .decimal: .decimalPad
+        case .integer: .numberPad
+        }
+    }
+
+    private var formattedValue: String {
+        switch kind {
+        case .decimal:
+            TrainingFormatters.weight(decimalValue?.wrappedValue ?? 0)
+        case .integer:
+            String(integerValue?.wrappedValue ?? 0)
+        }
+    }
+
+    private func accepts(_ candidate: String) -> Bool {
+        guard !candidate.isEmpty else { return true }
+        let normalized = candidate.replacingOccurrences(of: ",", with: ".")
+        switch kind {
+        case let .decimal(maximumFractionDigits):
+            guard normalized.allSatisfy({ $0.isNumber || $0 == "." }) else { return false }
+            let pieces = normalized.split(separator: ".", omittingEmptySubsequences: false)
+            guard pieces.count <= 2 else { return false }
+            return pieces.count == 1 || pieces[1].count <= maximumFractionDigits
+        case .integer:
+            return normalized.allSatisfy(\.isNumber)
+        }
+    }
+
+    private func commit(_ text: String) {
+        let normalized = text.replacingOccurrences(of: ",", with: ".")
+        guard !normalized.isEmpty else { return }
+        switch kind {
+        case .decimal:
+            if let value = Double(normalized) { decimalValue?.wrappedValue = value }
+        case .integer:
+            if let value = Int(normalized) { integerValue?.wrappedValue = value }
+        }
+    }
+
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        var parent: StableNumericTextField
+
+        init(parent: StableNumericTextField) {
+            self.parent = parent
+        }
+
+        @objc func editingChanged(_ field: UITextField) {
+            parent.commit(field.text ?? "")
+        }
+
+        func textFieldDidBeginEditing(_ field: UITextField) {
+            DispatchQueue.main.async {
+                field.selectAll(nil)
+            }
+        }
+
+        func textFieldDidEndEditing(_ field: UITextField) {
+            if field.text?.isEmpty == true {
+                parent.commit("0")
+            }
+            field.text = parent.formattedValue
+        }
+
+        func textField(
+            _ field: UITextField,
+            shouldChangeCharactersIn range: NSRange,
+            replacementString string: String
+        ) -> Bool {
+            guard let current = field.text,
+                  let swiftRange = Range(range, in: current)
+            else { return false }
+            return parent.accepts(current.replacingCharacters(in: swiftRange, with: string))
+        }
     }
 }
 
@@ -281,9 +434,464 @@ struct HeroWorkoutImage: View {
     }
 }
 
+struct ExerciseMuscleCategory: Equatable {
+    let majorGroup: String
+    let minorGroup: String
+}
+
+enum ExerciseMuscleTaxonomy {
+    static let majorGroupOrder = ["胸部", "背部", "肩部", "手臂", "腿部", "核心", "其他"]
+
+    static let minorGroupOrder: [String: [String]] = [
+        "胸部": ["上胸", "中胸", "下胸"],
+        "背部": ["上背", "中背", "背阔肌"],
+        "肩部": ["前束", "中束", "后束"],
+        "手臂": ["肱二头肌", "肱三头肌", "前臂"],
+        "腿部": ["股四头肌", "腘绳肌", "臀肌", "小腿"],
+        "核心": ["腹直肌", "腹斜肌"],
+        "其他": ["其他"]
+    ]
+
+    static func category(name: String, muscleGroup: String) -> ExerciseMuscleCategory {
+        let normalizedName = name.replacingOccurrences(of: " ", with: "").lowercased()
+        let normalizedGroup = muscleGroup.replacingOccurrences(of: " ", with: "").lowercased()
+        let combined = normalizedName + "|" + normalizedGroup
+
+        let majorGroup: String
+        if containsAny(normalizedGroup, terms: ["胸"]) {
+            majorGroup = "胸部"
+        } else if containsAny(normalizedGroup, terms: ["背", "背阔"]) {
+            majorGroup = "背部"
+        } else if containsAny(normalizedGroup, terms: ["肩", "三角肌"]) {
+            majorGroup = "肩部"
+        } else if containsAny(normalizedGroup, terms: ["手臂", "二头", "三头", "前臂"]) {
+            majorGroup = "手臂"
+        } else if containsAny(normalizedGroup, terms: ["腿", "臀", "小腿", "股四头", "腘绳"]) {
+            majorGroup = "腿部"
+        } else if containsAny(normalizedGroup, terms: ["核心", "腹", "躯干"]) {
+            majorGroup = "核心"
+        } else {
+            majorGroup = inferredMajorGroup(from: combined)
+        }
+
+        let minorGroup: String
+        switch majorGroup {
+        case "胸部":
+            if containsAny(combined, terms: ["上斜", "上胸"]) {
+                minorGroup = "上胸"
+            } else if containsAny(combined, terms: ["下斜", "下胸"]) {
+                minorGroup = "下胸"
+            } else {
+                minorGroup = "中胸"
+            }
+        case "背部":
+            if containsAny(combined, terms: ["上背"]) {
+                minorGroup = "上背"
+            } else if containsAny(combined, terms: ["划船", "中背"]) {
+                minorGroup = "中背"
+            } else {
+                minorGroup = "背阔肌"
+            }
+        case "肩部":
+            if containsAny(combined, terms: ["反向飞鸟", "面拉", "后束"]) {
+                minorGroup = "后束"
+            } else if containsAny(combined, terms: ["侧平举", "三角肌训练", "中束"]) {
+                minorGroup = "中束"
+            } else {
+                minorGroup = "前束"
+            }
+        case "手臂":
+            if containsAny(combined, terms: ["三头", "下压", "臂屈伸"]) {
+                minorGroup = "肱三头肌"
+            } else if containsAny(combined, terms: ["前臂", "腕弯举"]) {
+                minorGroup = "前臂"
+            } else {
+                minorGroup = "肱二头肌"
+            }
+        case "腿部":
+            if containsAny(combined, terms: ["小腿", "提踵"]) {
+                minorGroup = "小腿"
+            } else if containsAny(combined, terms: ["腿弯举", "硬拉", "腘绳", "股二头"]) {
+                minorGroup = "腘绳肌"
+            } else if containsAny(combined, terms: ["髋推", "臀推", "臀部", "臀肌"]) {
+                minorGroup = "臀肌"
+            } else {
+                minorGroup = "股四头肌"
+            }
+        case "核心":
+            minorGroup = containsAny(combined, terms: ["旋转", "伐木", "腹斜"])
+                ? "腹斜肌"
+                : "腹直肌"
+        default:
+            minorGroup = "其他"
+        }
+
+        return ExerciseMuscleCategory(majorGroup: majorGroup, minorGroup: minorGroup)
+    }
+
+    static func orderedMajorGroups(in categories: [ExerciseMuscleCategory]) -> [String] {
+        ordered(Set(categories.map(\.majorGroup)), preferredOrder: majorGroupOrder)
+    }
+
+    static func orderedMinorGroups(
+        for majorGroup: String,
+        in categories: [ExerciseMuscleCategory]
+    ) -> [String] {
+        let available = Set(
+            categories
+                .filter { $0.majorGroup == majorGroup }
+                .map(\.minorGroup)
+        )
+        return ordered(available, preferredOrder: minorGroupOrder[majorGroup] ?? [])
+    }
+
+    private static func inferredMajorGroup(from value: String) -> String {
+        if containsAny(value, terms: ["卧推", "夹胸", "飞鸟", "推胸"]) { return "胸部" }
+        if containsAny(value, terms: ["划船", "下拉", "引体"]) { return "背部" }
+        if containsAny(value, terms: ["肩推", "侧平举", "面拉"]) { return "肩部" }
+        if containsAny(value, terms: ["弯举", "下压", "臂屈伸"]) { return "手臂" }
+        if containsAny(value, terms: ["深蹲", "腿举", "硬拉", "髋推", "提踵", "弓步"]) { return "腿部" }
+        if containsAny(value, terms: ["卷腹", "举腿", "躯干旋转"]) { return "核心" }
+        return "其他"
+    }
+
+    private static func ordered(_ values: Set<String>, preferredOrder: [String]) -> [String] {
+        let preferred = preferredOrder.filter(values.contains)
+        let remaining = values.subtracting(preferredOrder).sorted()
+        return preferred + remaining
+    }
+
+    private static func containsAny(_ value: String, terms: [String]) -> Bool {
+        terms.contains(where: value.contains)
+    }
+}
+
+enum ExerciseGlyphKind: String, CaseIterable {
+    case chestPress
+    case chestFly
+    case shoulderPress
+    case lateralRaise
+    case armExtension
+    case armCurl
+    case verticalPull
+    case row
+    case squat
+    case hinge
+    case legPress
+    case lunge
+    case hipThrust
+    case legCurl
+    case calfRaise
+    case olympicLift
+    case crunch
+    case legRaise
+    case rotation
+    case general
+
+    static func resolve(name: String, muscleGroup: String, equipment: String) -> ExerciseGlyphKind {
+        let normalizedName = name
+            .replacingOccurrences(of: " ", with: "")
+            .lowercased()
+        let normalizedGroup = muscleGroup.lowercased()
+        let normalizedEquipment = equipment.lowercased()
+
+        func nameContains(_ terms: [String]) -> Bool {
+            terms.contains(where: normalizedName.contains)
+        }
+
+        if nameContains(["举腿"]) { return .legRaise }
+        if nameContains(["卷腹"]) { return .crunch }
+        if nameContains(["旋转", "伐木"]) { return .rotation }
+        if nameContains(["夹胸", "飞鸟"]) && normalizedGroup.contains("胸") { return .chestFly }
+        if nameContains(["侧平举", "反向飞鸟", "面拉", "三角肌"]) { return .lateralRaise }
+        if nameContains(["三头下压", "绳索下压", "臂屈伸"]) { return .armExtension }
+        if nameContains(["腿弯举", "腿弯曲"]) { return .legCurl }
+        if nameContains(["弯举"]) { return .armCurl }
+        if nameContains(["划船"]) { return .row }
+        if nameContains(["下拉", "引体向上"]) { return .verticalPull }
+        if nameContains(["提踵"]) { return .calfRaise }
+        if nameContains(["弓步"]) { return .lunge }
+        if nameContains(["腿举", "钟摆推举"]) { return .legPress }
+        if nameContains(["髋推", "臀推"]) { return .hipThrust }
+        if nameContains(["高翻", "抓举", "挺举"]) { return .olympicLift }
+        if nameContains(["硬拉"]) { return .hinge }
+        if nameContains(["深蹲"]) { return .squat }
+
+        if normalizedGroup.contains("胸") { return .chestPress }
+        if normalizedGroup.contains("背") { return .verticalPull }
+        if normalizedGroup.contains("肩") { return .shoulderPress }
+        if normalizedGroup.contains("手臂") || normalizedGroup.contains("二头") {
+            return normalizedEquipment.contains("龙门") ? .armExtension : .armCurl
+        }
+        if normalizedGroup.contains("三头") { return .armExtension }
+        if normalizedGroup.contains("核心") || normalizedGroup.contains("腹") { return .crunch }
+        if normalizedGroup.contains("小腿") { return .calfRaise }
+        if normalizedGroup.contains("腿") || normalizedGroup.contains("臀") { return .squat }
+        return .general
+    }
+}
+
+struct ExerciseGlyph: View {
+    let kind: ExerciseGlyphKind
+
+    var body: some View {
+        Canvas { context, size in
+            let geometry = kind.geometry
+            let scale = min(size.width, size.height) / 24
+            let offset = CGPoint(
+                x: (size.width - 24 * scale) / 2,
+                y: (size.height - 24 * scale) / 2
+            )
+            let stroke = StrokeStyle(
+                lineWidth: max(1.8, 2.05 * scale),
+                lineCap: .round,
+                lineJoin: .round
+            )
+
+            func renderedPoint(_ point: CGPoint) -> CGPoint {
+                CGPoint(x: offset.x + point.x * scale, y: offset.y + point.y * scale)
+            }
+
+            for segment in geometry.segments {
+                guard let first = segment.first else { continue }
+                var path = Path()
+                path.move(to: renderedPoint(first))
+                for point in segment.dropFirst() {
+                    path.addLine(to: renderedPoint(point))
+                }
+                context.stroke(path, with: .color(AppTheme.accent), style: stroke)
+            }
+
+            for circle in geometry.circles {
+                let rect = CGRect(
+                    x: offset.x + circle.origin.x * scale,
+                    y: offset.y + circle.origin.y * scale,
+                    width: circle.width * scale,
+                    height: circle.height * scale
+                )
+                context.fill(Path(ellipseIn: rect), with: .color(AppTheme.accent))
+            }
+        }
+        .aspectRatio(1, contentMode: .fit)
+        .accessibilityHidden(true)
+    }
+}
+
+private struct ExerciseGlyphGeometry {
+    let segments: [[CGPoint]]
+    let circles: [CGRect]
+}
+
+private extension ExerciseGlyphKind {
+    var geometry: ExerciseGlyphGeometry {
+        switch self {
+        case .chestPress:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 3, y: 18.5), CGPoint(x: 19, y: 18.5)],
+                    [CGPoint(x: 7, y: 15), CGPoint(x: 14, y: 15), CGPoint(x: 18.5, y: 19.5)],
+                    [CGPoint(x: 10.5, y: 15), CGPoint(x: 12, y: 10), CGPoint(x: 16.5, y: 7.5)],
+                    [CGPoint(x: 7, y: 7.5), CGPoint(x: 21, y: 7.5)]
+                ],
+                circles: [CGRect(x: 3.5, y: 12.5, width: 3.8, height: 3.8)]
+            )
+        case .chestFly:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 12, y: 7), CGPoint(x: 12, y: 16)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 7, y: 9), CGPoint(x: 3, y: 6.5)],
+                    [CGPoint(x: 13, y: 10), CGPoint(x: 17, y: 9), CGPoint(x: 21, y: 6.5)],
+                    [CGPoint(x: 12, y: 16), CGPoint(x: 8, y: 21), CGPoint(x: 12, y: 16), CGPoint(x: 16, y: 21)]
+                ],
+                circles: [CGRect(x: 10.1, y: 2, width: 3.8, height: 3.8)]
+            )
+        case .shoulderPress:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 12, y: 8), CGPoint(x: 12, y: 16)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 7, y: 7), CGPoint(x: 7, y: 3)],
+                    [CGPoint(x: 13, y: 10), CGPoint(x: 17, y: 7), CGPoint(x: 17, y: 3)],
+                    [CGPoint(x: 5, y: 3), CGPoint(x: 19, y: 3)],
+                    [CGPoint(x: 12, y: 16), CGPoint(x: 8, y: 21), CGPoint(x: 12, y: 16), CGPoint(x: 16, y: 21)]
+                ],
+                circles: [CGRect(x: 10.1, y: 3.7, width: 3.8, height: 3.8)]
+            )
+        case .lateralRaise:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 12, y: 7), CGPoint(x: 12, y: 16)],
+                    [CGPoint(x: 2.5, y: 8.5), CGPoint(x: 7, y: 9.5), CGPoint(x: 12, y: 10), CGPoint(x: 17, y: 9.5), CGPoint(x: 21.5, y: 8.5)],
+                    [CGPoint(x: 12, y: 16), CGPoint(x: 8, y: 21), CGPoint(x: 12, y: 16), CGPoint(x: 16, y: 21)]
+                ],
+                circles: [CGRect(x: 10.1, y: 2, width: 3.8, height: 3.8)]
+            )
+        case .armExtension:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 8, y: 8), CGPoint(x: 8, y: 20)],
+                    [CGPoint(x: 8, y: 10), CGPoint(x: 13, y: 11.5), CGPoint(x: 17, y: 17)],
+                    [CGPoint(x: 18.5, y: 3), CGPoint(x: 18.5, y: 17)],
+                    [CGPoint(x: 15.5, y: 17), CGPoint(x: 20.5, y: 17)],
+                    [CGPoint(x: 6, y: 20), CGPoint(x: 12, y: 20)]
+                ],
+                circles: [CGRect(x: 4.3, y: 3, width: 3.8, height: 3.8)]
+            )
+        case .armCurl:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 8, y: 8), CGPoint(x: 8, y: 20)],
+                    [CGPoint(x: 8, y: 10), CGPoint(x: 12, y: 15), CGPoint(x: 17, y: 9)],
+                    [CGPoint(x: 15.5, y: 7.5), CGPoint(x: 19.5, y: 10.5)],
+                    [CGPoint(x: 6, y: 20), CGPoint(x: 12, y: 20)]
+                ],
+                circles: [CGRect(x: 4.3, y: 3, width: 3.8, height: 3.8)]
+            )
+        case .verticalPull:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 3, y: 3), CGPoint(x: 21, y: 3)],
+                    [CGPoint(x: 12, y: 8), CGPoint(x: 12, y: 16)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 7, y: 7), CGPoint(x: 5, y: 3), CGPoint(x: 7, y: 7), CGPoint(x: 12, y: 10), CGPoint(x: 17, y: 7), CGPoint(x: 19, y: 3)],
+                    [CGPoint(x: 12, y: 16), CGPoint(x: 8, y: 21), CGPoint(x: 12, y: 16), CGPoint(x: 16, y: 21)]
+                ],
+                circles: [CGRect(x: 10.1, y: 3.9, width: 3.8, height: 3.8)]
+            )
+        case .row:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 4, y: 18), CGPoint(x: 11, y: 18)],
+                    [CGPoint(x: 8, y: 13), CGPoint(x: 12, y: 15), CGPoint(x: 18, y: 18)],
+                    [CGPoint(x: 11, y: 14), CGPoint(x: 15, y: 11), CGPoint(x: 20, y: 12)],
+                    [CGPoint(x: 20, y: 5), CGPoint(x: 20, y: 20)]
+                ],
+                circles: [CGRect(x: 4.1, y: 9, width: 3.8, height: 3.8)]
+            )
+        case .squat:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 4, y: 8), CGPoint(x: 20, y: 8)],
+                    [CGPoint(x: 12, y: 8), CGPoint(x: 13, y: 14)],
+                    [CGPoint(x: 13, y: 14), CGPoint(x: 8, y: 16), CGPoint(x: 6, y: 21), CGPoint(x: 8, y: 16), CGPoint(x: 13, y: 14), CGPoint(x: 18, y: 16), CGPoint(x: 20, y: 21)],
+                    [CGPoint(x: 8, y: 8), CGPoint(x: 6.5, y: 11), CGPoint(x: 8, y: 8), CGPoint(x: 16, y: 8), CGPoint(x: 17.5, y: 11)]
+                ],
+                circles: [CGRect(x: 10.1, y: 3, width: 3.8, height: 3.8)]
+            )
+        case .hinge:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 8, y: 8), CGPoint(x: 14, y: 12), CGPoint(x: 18, y: 17)],
+                    [CGPoint(x: 14, y: 12), CGPoint(x: 11, y: 21), CGPoint(x: 14, y: 12), CGPoint(x: 18, y: 21)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 8.5, y: 17)],
+                    [CGPoint(x: 4, y: 18), CGPoint(x: 21, y: 18)]
+                ],
+                circles: [CGRect(x: 4.1, y: 3.7, width: 3.8, height: 3.8)]
+            )
+        case .legPress:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 4, y: 19), CGPoint(x: 9, y: 13), CGPoint(x: 14, y: 15)],
+                    [CGPoint(x: 13, y: 15), CGPoint(x: 18, y: 9), CGPoint(x: 21, y: 11)],
+                    [CGPoint(x: 18, y: 4), CGPoint(x: 22, y: 8)],
+                    [CGPoint(x: 4, y: 20.5), CGPoint(x: 12, y: 20.5)]
+                ],
+                circles: [CGRect(x: 3.7, y: 9.2, width: 3.8, height: 3.8)]
+            )
+        case .lunge:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 11, y: 7), CGPoint(x: 12, y: 14)],
+                    [CGPoint(x: 12, y: 14), CGPoint(x: 7, y: 17), CGPoint(x: 3, y: 21), CGPoint(x: 7, y: 17), CGPoint(x: 12, y: 14), CGPoint(x: 18, y: 18), CGPoint(x: 21, y: 18)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 6, y: 12), CGPoint(x: 11, y: 10), CGPoint(x: 16, y: 12)]
+                ],
+                circles: [CGRect(x: 9.1, y: 2, width: 3.8, height: 3.8)]
+            )
+        case .hipThrust:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 3, y: 15), CGPoint(x: 8, y: 15)],
+                    [CGPoint(x: 7, y: 13), CGPoint(x: 14, y: 11), CGPoint(x: 19, y: 14)],
+                    [CGPoint(x: 19, y: 14), CGPoint(x: 17, y: 20), CGPoint(x: 19, y: 14), CGPoint(x: 22, y: 20)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 17, y: 10)]
+                ],
+                circles: [CGRect(x: 3.8, y: 9.7, width: 3.8, height: 3.8)]
+            )
+        case .legCurl:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 3, y: 15), CGPoint(x: 15, y: 15)],
+                    [CGPoint(x: 7, y: 12), CGPoint(x: 14, y: 13), CGPoint(x: 18, y: 9), CGPoint(x: 20, y: 6)],
+                    [CGPoint(x: 16, y: 17.5), CGPoint(x: 21, y: 17.5)]
+                ],
+                circles: [CGRect(x: 2.8, y: 9, width: 3.8, height: 3.8)]
+            )
+        case .calfRaise:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 11, y: 7), CGPoint(x: 11, y: 15)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 7, y: 12), CGPoint(x: 11, y: 10), CGPoint(x: 15, y: 12)],
+                    [CGPoint(x: 11, y: 15), CGPoint(x: 9, y: 20), CGPoint(x: 6, y: 20), CGPoint(x: 9, y: 20), CGPoint(x: 11, y: 15), CGPoint(x: 15, y: 19), CGPoint(x: 18, y: 18)],
+                    [CGPoint(x: 14, y: 21), CGPoint(x: 22, y: 21)]
+                ],
+                circles: [CGRect(x: 9.1, y: 2, width: 3.8, height: 3.8)]
+            )
+        case .olympicLift:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 4, y: 3), CGPoint(x: 20, y: 3)],
+                    [CGPoint(x: 12, y: 9), CGPoint(x: 12, y: 15)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 7, y: 7), CGPoint(x: 6, y: 3), CGPoint(x: 7, y: 7), CGPoint(x: 12, y: 10), CGPoint(x: 17, y: 7), CGPoint(x: 18, y: 3)],
+                    [CGPoint(x: 12, y: 15), CGPoint(x: 7, y: 20), CGPoint(x: 4, y: 20), CGPoint(x: 7, y: 20), CGPoint(x: 12, y: 15), CGPoint(x: 17, y: 20), CGPoint(x: 20, y: 20)]
+                ],
+                circles: [CGRect(x: 10.1, y: 4, width: 3.8, height: 3.8)]
+            )
+        case .crunch:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 7, y: 10), CGPoint(x: 11, y: 13), CGPoint(x: 14, y: 17)],
+                    [CGPoint(x: 14, y: 17), CGPoint(x: 19, y: 17), CGPoint(x: 21, y: 20)],
+                    [CGPoint(x: 12, y: 14), CGPoint(x: 8, y: 17)],
+                    [CGPoint(x: 4, y: 21), CGPoint(x: 22, y: 21)]
+                ],
+                circles: [CGRect(x: 3, y: 6, width: 3.8, height: 3.8)]
+            )
+        case .legRaise:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 4, y: 3), CGPoint(x: 20, y: 3)],
+                    [CGPoint(x: 12, y: 8), CGPoint(x: 12, y: 15)],
+                    [CGPoint(x: 11, y: 9), CGPoint(x: 7, y: 3), CGPoint(x: 11, y: 9), CGPoint(x: 17, y: 3)],
+                    [CGPoint(x: 12, y: 15), CGPoint(x: 18, y: 15), CGPoint(x: 21, y: 12)]
+                ],
+                circles: [CGRect(x: 10.1, y: 4, width: 3.8, height: 3.8)]
+            )
+        case .rotation:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 12, y: 7), CGPoint(x: 12, y: 16)],
+                    [CGPoint(x: 11, y: 10), CGPoint(x: 16, y: 9), CGPoint(x: 21, y: 6)],
+                    [CGPoint(x: 12, y: 16), CGPoint(x: 8, y: 21), CGPoint(x: 12, y: 16), CGPoint(x: 16, y: 21)],
+                    [CGPoint(x: 19, y: 3), CGPoint(x: 22, y: 6), CGPoint(x: 19, y: 9)]
+                ],
+                circles: [CGRect(x: 10.1, y: 2, width: 3.8, height: 3.8)]
+            )
+        case .general:
+            ExerciseGlyphGeometry(
+                segments: [
+                    [CGPoint(x: 5, y: 8), CGPoint(x: 5, y: 16)],
+                    [CGPoint(x: 8, y: 10), CGPoint(x: 8, y: 14)],
+                    [CGPoint(x: 8, y: 12), CGPoint(x: 16, y: 12)],
+                    [CGPoint(x: 16, y: 10), CGPoint(x: 16, y: 14)],
+                    [CGPoint(x: 19, y: 8), CGPoint(x: 19, y: 16)]
+                ],
+                circles: []
+            )
+        }
+    }
+}
+
 enum TrainingFormatters {
     static func weight(_ value: Double) -> String {
-        value.formatted(.number.precision(.fractionLength(value.rounded() == value ? 0 : 1)))
+        value.formatted(.number.precision(.fractionLength(0...3)))
     }
 
     static func duration(from start: Date, to end: Date) -> String {

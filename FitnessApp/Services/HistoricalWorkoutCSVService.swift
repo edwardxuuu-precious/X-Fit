@@ -27,8 +27,11 @@ private struct HistoricalCSVRow {
     let equipment: String
     let setNumber: Int
     let weight: Double
+    let volumeUnit: ExerciseVolumeUnit?
     let reps: Int
     let rir: Int?
+    let startedAt: Date?
+    let restDurationSeconds: Int?
     let exerciseNotes: String
 }
 
@@ -92,6 +95,7 @@ enum HistoricalWorkoutCSVService {
         let existingImportIDs = Set(existingSessions.map(\.importIdentifier).filter { !$0.isEmpty })
         let existingSessionIDs = Set(existingSessions.map { $0.id.uuidString.lowercased() })
         var exerciseModels = try context.fetch(FetchDescriptor<Exercise>())
+        try validateExerciseIdentities(rows, against: exerciseModels)
 
         var importedSessions = 0
         var skippedSessions = 0
@@ -112,10 +116,43 @@ enum HistoricalWorkoutCSVService {
 
             for key in rowsByExercise.keys.sorted() {
                 guard let actionRows = rowsByExercise[key], let action = actionRows.first else { continue }
+                let identities = Set(actionRows.map {
+                    [
+                        $0.muscleGroup.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
+                        $0.equipment.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
+                        ($0.volumeUnit ?? .kilogram).rawValue
+                    ].joined(separator: "|")
+                })
+                guard identities.count == 1 else {
+                    throw HistoricalWorkoutCSVError.invalidValue(
+                        line: action.line,
+                        field: "exercise（同场同名动作的肌群、器械或计量单位不一致）"
+                    )
+                }
                 let exercise: Exercise
                 if let existing = exerciseModels.first(where: {
                     $0.name.caseInsensitiveCompare(action.exercise) == .orderedSame
                 }) {
+                    if let importedUnit = action.volumeUnit,
+                       existing.volumeUnit != importedUnit {
+                        throw HistoricalWorkoutCSVError.invalidValue(
+                            line: action.line,
+                            field: "volume_unit（与动作库现有单位冲突）"
+                        )
+                    }
+                    let importedMuscleGroup = action.muscleGroup.isEmpty ? "其他" : action.muscleGroup
+                    let importedEquipment = action.equipment.isEmpty ? "未记录" : action.equipment
+                    guard ExerciseCatalogService.semanticallyCompatible(
+                        existing,
+                        muscleGroup: importedMuscleGroup,
+                        equipment: importedEquipment,
+                        volumeUnit: action.volumeUnit ?? .kilogram
+                    ) else {
+                        throw HistoricalWorkoutCSVError.invalidValue(
+                            line: action.line,
+                            field: "exercise（同名动作与动作库中的肌群、器械或计量单位冲突）"
+                        )
+                    }
                     exercise = existing
                 } else {
                     let newExercise = Exercise(
@@ -124,8 +161,10 @@ enum HistoricalWorkoutCSVService {
                         equipment: action.equipment.isEmpty ? "未记录" : action.equipment,
                         defaultRestSeconds: 90,
                         isBuiltIn: false,
-                        notes: ""
+                        notes: "",
+                        volumeUnit: action.volumeUnit ?? .kilogram
                     )
+                    ExerciseTerminologyService.stageCandidate(for: newExercise)
                     context.insert(newExercise)
                     exerciseModels.append(newExercise)
                     exercise = newExercise
@@ -140,7 +179,9 @@ enum HistoricalWorkoutCSVService {
                             HistoricalSetInput(
                                 weight: $0.weight,
                                 reps: $0.reps,
-                                rir: $0.rir
+                                rir: $0.rir,
+                                startedAt: $0.startedAt,
+                                restDurationSeconds: $0.restDurationSeconds
                             )
                         },
                         performanceNotes: orderedRows
@@ -172,6 +213,53 @@ enum HistoricalWorkoutCSVService {
             createdExercises: createdExercises,
             importedSets: importedSets
         )
+    }
+
+    /// Validate the complete file before the first insert/save. This makes an
+    /// identity conflict fail atomically instead of importing earlier sessions
+    /// and discovering the conflict later in the file.
+    private static func validateExerciseIdentities(
+        _ rows: [HistoricalCSVRow],
+        against exercises: [Exercise]
+    ) throws {
+        let rowsByName = Dictionary(grouping: rows) {
+            $0.exercise.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        }
+        for actionRows in rowsByName.values {
+            guard let first = actionRows.first else { continue }
+            let identities = Set(actionRows.map { row in
+                let muscleGroup = row.muscleGroup.isEmpty ? "其他" : row.muscleGroup
+                let equipment = row.equipment.isEmpty ? "未记录" : row.equipment
+                return [
+                    muscleGroup.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
+                    equipment.trimmingCharacters(in: .whitespacesAndNewlines).lowercased(),
+                    (row.volumeUnit ?? .kilogram).rawValue
+                ].joined(separator: "|")
+            })
+            guard identities.count == 1 else {
+                throw HistoricalWorkoutCSVError.invalidValue(
+                    line: first.line,
+                    field: "exercise（文件内同名动作的肌群、器械或计量单位不一致）"
+                )
+            }
+
+            guard let existing = exercises.first(where: {
+                $0.name.caseInsensitiveCompare(first.exercise) == .orderedSame
+            }) else { continue }
+            let muscleGroup = first.muscleGroup.isEmpty ? "其他" : first.muscleGroup
+            let equipment = first.equipment.isEmpty ? "未记录" : first.equipment
+            guard ExerciseCatalogService.semanticallyCompatible(
+                existing,
+                muscleGroup: muscleGroup,
+                equipment: equipment,
+                volumeUnit: first.volumeUnit ?? .kilogram
+            ) else {
+                throw HistoricalWorkoutCSVError.invalidValue(
+                    line: first.line,
+                    field: "exercise（同名动作与动作库中的肌群、器械或计量单位冲突）"
+                )
+            }
+        }
     }
 
     private static func decode(_ data: Data) throws -> [HistoricalCSVRow] {
@@ -221,6 +309,13 @@ enum HistoricalWorkoutCSVService {
             guard let weight = Double(value("weight_kg", from: columns)), weight >= 0 else {
                 throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "weight_kg")
             }
+            let volumeUnitText = value("volume_unit", from: columns)
+            let volumeUnit = volumeUnitText.isEmpty
+                ? nil
+                : ExerciseVolumeUnit(rawValue: volumeUnitText)
+            if !volumeUnitText.isEmpty, volumeUnit == nil {
+                throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "volume_unit")
+            }
             guard let reps = Int(value("reps", from: columns)), reps > 0 else {
                 throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "reps")
             }
@@ -228,6 +323,18 @@ enum HistoricalWorkoutCSVService {
             let rir = rirText.isEmpty ? nil : Int(rirText)
             if let rir, !(0...10).contains(rir) {
                 throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "rir")
+            }
+            let setStartedAtText = value("set_started_at", from: columns)
+            let setStartedAt = setStartedAtText.isEmpty ? nil : parseDate(setStartedAtText)
+            if !setStartedAtText.isEmpty, setStartedAt == nil {
+                throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "set_started_at")
+            }
+            let restText = value("rest_seconds", from: columns)
+            let restDurationSeconds = restText.isEmpty ? nil : Int(restText)
+            if !restText.isEmpty,
+               restDurationSeconds == nil
+                || !(0...RestDurationInput.maximumSeconds).contains(restDurationSeconds!) {
+                throw HistoricalWorkoutCSVError.invalidValue(line: line, field: "rest_seconds")
             }
 
             result.append(
@@ -243,8 +350,11 @@ enum HistoricalWorkoutCSVService {
                     equipment: value("equipment", from: columns),
                     setNumber: setNumber,
                     weight: weight,
+                    volumeUnit: volumeUnit,
                     reps: reps,
                     rir: rir,
+                    startedAt: setStartedAt,
+                    restDurationSeconds: restDurationSeconds,
                     exerciseNotes: value("exercise_notes", from: columns)
                 )
             )

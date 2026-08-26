@@ -8,19 +8,29 @@ private struct DailyVolumePoint: Identifiable {
     let volume: Double
 }
 
-private struct StrengthPoint: Identifiable {
-    let id = UUID()
-    let date: Date
-    let estimatedMax: Double
+private enum TrainingTrendMode: String, CaseIterable, Identifiable {
+    case overall
+    case exercise
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .overall: return "总容量"
+        case .exercise: return "按动作"
+        }
+    }
 }
 
 struct StatsView: View {
     @Query private var sessions: [WorkoutSession]
     @Query private var schedules: [ScheduledWorkout]
     @Query private var setLogs: [SetLog]
+    @Query private var sessionExercises: [SessionExercise]
     @Query(sort: \Exercise.name) private var exercises: [Exercise]
 
-    @State private var selectedExerciseID: UUID?
+    @State private var selectedExerciseKey: String?
+    @State private var trainingTrendMode: TrainingTrendMode = .overall
     @State private var selectedSegment = 0
 
     private var completedSessions: [WorkoutSession] {
@@ -58,10 +68,13 @@ struct StatsView: View {
         }.reduce(0, +)
     }
 
-    private var availableExercises: [Exercise] {
-        exercises.filter { exercise in
-            setLogs.contains { $0.exerciseID == exercise.id && $0.isCompleted }
-        }
+    private var volumeTrends: TrainingVolumeTrends {
+        TrainingMetrics.volumeTrends(
+            sessions: sessions,
+            sessionExercises: sessionExercises,
+            exercises: exercises,
+            setLogs: setLogs
+        )
     }
 
     var body: some View {
@@ -73,12 +86,12 @@ struct StatsView: View {
                     workoutFrequencyCard
                     summaryGrid
                     goalProgressCard
-                    strengthTrendCard
+                    volumeTrendCard
                     historyLink
                 } else if selectedSegment == 1 {
                     workoutFrequencyCard
                     summaryGrid
-                    strengthTrendCard
+                    volumeTrendCard
                     historyLink
                 } else {
                     bodyStatsCard
@@ -91,15 +104,15 @@ struct StatsView: View {
         .screenBackground()
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
-            if selectedExerciseID == nil {
-                selectedExerciseID = availableExercises.first?.id
+            if selectedExerciseKey == nil {
+                selectedExerciseKey = volumeTrends.exercises.first?.key
             }
         }
-        .onChange(of: availableExercises.map(\.id)) { _, ids in
-            if let selectedExerciseID, !ids.contains(selectedExerciseID) {
-                self.selectedExerciseID = ids.first
-            } else if selectedExerciseID == nil {
-                selectedExerciseID = ids.first
+        .onChange(of: volumeTrends.exercises.map(\.key)) { _, keys in
+            if let selectedExerciseKey, !keys.contains(selectedExerciseKey) {
+                self.selectedExerciseKey = keys.first
+            } else if selectedExerciseKey == nil {
+                selectedExerciseKey = keys.first
             }
         }
     }
@@ -183,7 +196,7 @@ struct StatsView: View {
         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
             MetricCard(
                 title: "训练容量",
-                value: "\(Int(TrainingMetrics.volume(for: recentLogs)))",
+                value: "\(Int(TrainingMetrics.volume(for: recentLogs, sessionExercises: sessionExercises)))",
                 detail: "近 7 天 · kg",
                 systemImage: "flame.fill",
                 tint: AppTheme.orange
@@ -223,45 +236,79 @@ struct StatsView: View {
         .cardSurface()
     }
 
-    private var strengthTrendCard: some View {
+    private var volumeTrendCard: some View {
         VStack(alignment: .leading, spacing: 14) {
-            HStack {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("力量趋势")
-                        .font(.headline.bold())
-                        .foregroundStyle(.white)
-                    Text("每次训练的最高估算 1RM")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                }
-                Spacer()
-
-                if !availableExercises.isEmpty {
-                    Menu {
-                        ForEach(availableExercises) { exercise in
-                            Button(exercise.name) {
-                                selectedExerciseID = exercise.id
-                            }
-                        }
-                    } label: {
-                        HStack(spacing: 4) {
-                            Text(selectedExerciseName).lineLimit(1)
-                            Image(systemName: "chevron.down")
-                        }
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
-                    }
-                }
+            VStack(alignment: .leading, spacing: 3) {
+                Text("训练容量趋势")
+                    .font(.headline.bold())
+                    .foregroundStyle(.white)
+                Text(
+                    trainingTrendMode == .overall
+                        ? "已完成的 kg 动作"
+                        : "所选动作每次训练的训练量 · \(selectedExerciseTrend?.unit.symbol ?? "")"
+                )
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
             }
 
-            if strengthPoints.isEmpty {
+            HStack(spacing: 4) {
+                ForEach(TrainingTrendMode.allCases) { mode in
+                    Button {
+                        trainingTrendMode = mode
+                    } label: {
+                        Text(mode.title)
+                            .font(.caption.bold())
+                            .foregroundStyle(trainingTrendMode == mode ? .black : AppTheme.secondaryText)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(
+                                trainingTrendMode == mode ? AppTheme.accent : .clear,
+                                in: RoundedRectangle(cornerRadius: 9)
+                            )
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(mode.title)
+                    .accessibilityIdentifier(mode == .overall ? "查看总容量" : "按动作查看")
+                }
+            }
+            .padding(3)
+            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 11))
+
+            if trainingTrendMode == .exercise, !volumeTrends.exercises.isEmpty {
+                Menu {
+                    ForEach(volumeTrends.exercises) { exercise in
+                        Button("\(exercise.name) · \(exercise.unit.symbol)") {
+                            selectedExerciseKey = exercise.key
+                        }
+                    }
+                } label: {
+                    HStack(spacing: 8) {
+                        Text("动作")
+                            .foregroundStyle(AppTheme.secondaryText)
+                        Text(selectedExerciseTrend?.name ?? "选择动作")
+                            .foregroundStyle(.white)
+                            .lineLimit(1)
+                        Spacer()
+                        Image(systemName: "chevron.down")
+                            .foregroundStyle(AppTheme.accent)
+                    }
+                    .font(.caption.bold())
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 11))
+                }
+                .accessibilityLabel("选择趋势动作")
+                .accessibilityIdentifier("选择趋势动作")
+            }
+
+            if displayedTrendPoints.isEmpty {
                 HStack {
                     Spacer()
                     VStack(spacing: 9) {
                         Image(systemName: "chart.line.uptrend.xyaxis")
                             .font(.title)
                             .foregroundStyle(AppTheme.accent)
-                        Text("完成训练后显示力量曲线")
+                        Text(trainingTrendMode == .overall ? "完成训练后显示容量变化" : "这个动作还没有完成组记录")
                             .font(.caption)
                             .foregroundStyle(AppTheme.secondaryText)
                     }
@@ -269,10 +316,10 @@ struct StatsView: View {
                 }
                 .frame(height: 130)
             } else {
-                Chart(strengthPoints) { point in
+                Chart(displayedTrendPoints) { point in
                     AreaMark(
                         x: .value("日期", point.date),
-                        y: .value("估算 1RM", point.estimatedMax)
+                        y: .value("训练容量", point.volume)
                     )
                     .foregroundStyle(
                         LinearGradient(
@@ -284,17 +331,56 @@ struct StatsView: View {
 
                     LineMark(
                         x: .value("日期", point.date),
-                        y: .value("估算 1RM", point.estimatedMax)
+                        y: .value("训练容量", point.volume)
                     )
                     .foregroundStyle(AppTheme.accent)
                     .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
+
+                    PointMark(
+                        x: .value("日期", point.date),
+                        y: .value("训练容量", point.volume)
+                    )
+                    .foregroundStyle(AppTheme.accent)
+                    .symbolSize(42)
+                    .accessibilityLabel(
+                        "\(point.date.formatted(date: .abbreviated, time: .omitted))，\(Int(point.volume)) \(displayedTrendUnit.symbol)，\(point.completedSets) 个完成组"
+                    )
                 }
-                .chartXAxis { AxisMarks { AxisValueLabel().foregroundStyle(AppTheme.secondaryText) } }
-                .chartYAxis { AxisMarks(position: .leading) { AxisValueLabel().foregroundStyle(AppTheme.secondaryText) } }
+                .chartYScale(domain: 0...displayedTrendCeiling)
+                .chartXAxis {
+                    AxisMarks(values: .automatic(desiredCount: 4)) {
+                        AxisValueLabel(format: .dateTime.month().day())
+                            .foregroundStyle(AppTheme.secondaryText)
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(position: .leading) {
+                        AxisGridLine().foregroundStyle(AppTheme.line)
+                        AxisValueLabel().foregroundStyle(AppTheme.secondaryText)
+                    }
+                }
                 .frame(height: 180)
+                .accessibilityIdentifier("训练容量趋势图")
+
+                HStack {
+                    Text("\(displayedTrendSessionCount) 次训练 · \(displayedTrendCompletedSets) 个完成组")
+                    Spacer()
+                    Text("累计 \(formattedTrendVolume(displayedTrendTotalVolume, unit: displayedTrendUnit))")
+                }
+                .font(.caption)
+                .foregroundStyle(AppTheme.secondaryText)
+                .accessibilityElement(children: .combine)
+                .accessibilityIdentifier("趋势记录摘要")
+
+                if displayedTrendTotalVolume == 0, displayedTrendCompletedSets > 0 {
+                    Text("这些完成组没有可计量的数据，动作记录已保留，但训练量为 0 \(displayedTrendUnit.symbol)。")
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
             }
         }
         .cardSurface()
+        .accessibilityIdentifier("训练容量趋势卡片")
     }
 
     private var historyLink: some View {
@@ -354,34 +440,58 @@ struct StatsView: View {
             let date = recentStart.addingDays(offset)
             let sessionIDs = Set(recentSessions.filter { $0.startedAt.isSameDay(as: date) }.map(\.id))
             let logs = setLogs.filter { $0.isCompleted && sessionIDs.contains($0.sessionID) }
-            return DailyVolumePoint(date: date, volume: TrainingMetrics.volume(for: logs))
-        }
-    }
-
-    private var selectedExerciseName: String {
-        exercises.first(where: { $0.id == selectedExerciseID })?.name ?? "选择动作"
-    }
-
-    private var strengthPoints: [StrengthPoint] {
-        guard let selectedExerciseID else { return [] }
-        let sessionByID = Dictionary(uniqueKeysWithValues: completedSessions.map { ($0.id, $0) })
-        let relevantLogs = setLogs.filter {
-            $0.exerciseID == selectedExerciseID && $0.isCompleted && sessionByID[$0.sessionID] != nil
-        }
-        let grouped = Dictionary(grouping: relevantLogs, by: \.sessionID)
-
-        return grouped.compactMap { sessionID, logs in
-            guard let session = sessionByID[sessionID],
-                  let best = logs.max(by: {
-                      TrainingMetrics.estimatedOneRepMax(weight: $0.actualWeight, reps: $0.actualReps)
-                      < TrainingMetrics.estimatedOneRepMax(weight: $1.actualWeight, reps: $1.actualReps)
-                  }) else { return nil }
-
-            return StrengthPoint(
-                date: session.startedAt,
-                estimatedMax: TrainingMetrics.estimatedOneRepMax(weight: best.actualWeight, reps: best.actualReps)
+            return DailyVolumePoint(
+                date: date,
+                volume: TrainingMetrics.volume(
+                    for: logs,
+                    sessionExercises: sessionExercises
+                )
             )
         }
-        .sorted { $0.date < $1.date }
+    }
+
+    private var selectedExerciseTrend: ExerciseVolumeTrend? {
+        guard let selectedExerciseKey else { return volumeTrends.exercises.first }
+        return volumeTrends.exercises.first(where: { $0.key == selectedExerciseKey })
+    }
+
+    private var displayedTrendPoints: [TrainingVolumeTrendPoint] {
+        trainingTrendMode == .overall ? volumeTrends.overall : selectedExerciseTrend?.points ?? []
+    }
+
+    private var displayedTrendCeiling: Double {
+        max((displayedTrendPoints.map(\.volume).max() ?? 0) * 1.12, 1)
+    }
+
+    private var displayedTrendTotalVolume: Double {
+        if trainingTrendMode == .exercise {
+            return selectedExerciseTrend?.totalVolume ?? 0
+        }
+        return displayedTrendPoints.reduce(0) { $0 + $1.volume }
+    }
+
+    private var displayedTrendCompletedSets: Int {
+        if trainingTrendMode == .exercise {
+            return selectedExerciseTrend?.completedSets ?? 0
+        }
+        return displayedTrendPoints.reduce(0) { $0 + $1.completedSets }
+    }
+
+    private var displayedTrendSessionCount: Int {
+        if trainingTrendMode == .exercise {
+            return selectedExerciseTrend?.sessionCount ?? 0
+        }
+        return displayedTrendPoints.reduce(0) { $0 + $1.sessionCount }
+    }
+
+    private var displayedTrendUnit: ExerciseVolumeUnit {
+        trainingTrendMode == .exercise ? selectedExerciseTrend?.unit ?? .kilogram : .kilogram
+    }
+
+    private func formattedTrendVolume(_ volume: Double, unit: ExerciseVolumeUnit) -> String {
+        if volume >= 10_000 {
+            return String(format: "%.1f 万 %@", volume / 10_000, unit.symbol)
+        }
+        return "\(Int(volume).formatted()) \(unit.symbol)"
     }
 }

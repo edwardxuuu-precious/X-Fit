@@ -3,16 +3,51 @@ import SwiftData
 
 struct DailyPlanExerciseInput {
     let exerciseID: UUID
-    let targetSets: Int
-    let minReps: Int
-    let maxReps: Int
-    let targetWeight: Double
+    let plannedSets: [WorkoutSetPlan]
+    let planPattern: SetPlanPattern
     let restSeconds: Int
+
+    init(
+        exerciseID: UUID,
+        plannedSets: [WorkoutSetPlan],
+        planPattern: SetPlanPattern,
+        restSeconds: Int
+    ) {
+        self.exerciseID = exerciseID
+        self.plannedSets = plannedSets
+        self.planPattern = planPattern
+        self.restSeconds = restSeconds
+    }
+
+    /// Compatibility for existing callers and legacy weekly targets.
+    init(
+        exerciseID: UUID,
+        targetSets: Int,
+        minReps: Int,
+        maxReps _: Int,
+        targetWeight: Double,
+        restSeconds: Int
+    ) {
+        self.init(
+            exerciseID: exerciseID,
+            plannedSets: WorkoutSetPlan.preset(
+                .fixed,
+                count: targetSets,
+                baseWeight: targetWeight,
+                baseReps: minReps
+            ),
+            planPattern: .fixed,
+            restSeconds: restSeconds
+        )
+    }
 }
 
 enum DailyPlanServiceError: LocalizedError {
     case emptyMuscleGroups
     case emptyExercises
+    case duplicateExercise
+    case missingExercise
+    case archivedExercise
     case immutableExistingPlan
 
     var errorDescription: String? {
@@ -21,6 +56,12 @@ enum DailyPlanServiceError: LocalizedError {
             return "请至少选择一个今天想训练的肌群。"
         case .emptyExercises:
             return "请至少选择一个动作。"
+        case .duplicateExercise:
+            return "当天菜单里有重复动作，请先移除重复项。"
+        case .missingExercise:
+            return "有动作已不在动作库中，请重新选择后再保存。"
+        case .archivedExercise:
+            return "有动作已归档，请恢复或替换后再保存。"
         case .immutableExistingPlan:
             return "今天的自选菜单已经开始或完成，不能直接覆盖。"
         }
@@ -44,6 +85,21 @@ enum DailyPlanService {
         }
         guard !exercises.isEmpty else {
             throw DailyPlanServiceError.emptyExercises
+        }
+        guard Set(exercises.map(\.exerciseID)).count == exercises.count else {
+            throw DailyPlanServiceError.duplicateExercise
+        }
+
+        // Validate the entire draft before deleting or skipping any existing plan.
+        let catalog = try context.fetch(FetchDescriptor<Exercise>())
+        let exerciseByID = Dictionary(uniqueKeysWithValues: catalog.map { ($0.id, $0) })
+        for item in exercises {
+            guard let exercise = exerciseByID[item.exerciseID] else {
+                throw DailyPlanServiceError.missingExercise
+            }
+            guard !exercise.isArchived else {
+                throw DailyPlanServiceError.archivedExercise
+            }
         }
 
         let targetDate = date.startOfDay
@@ -93,16 +149,21 @@ enum DailyPlanService {
         context.insert(template)
 
         for (index, item) in exercises.enumerated() {
+            let plans = item.plannedSets.isEmpty
+                ? [WorkoutSetPlan(weight: 0, reps: 1)]
+                : item.plannedSets
             context.insert(
                 TemplateExercise(
                     templateID: template.id,
                     exerciseID: item.exerciseID,
                     order: index,
-                    targetSets: max(1, item.targetSets),
-                    minReps: max(1, item.minReps),
-                    maxReps: max(max(1, item.minReps), item.maxReps),
-                    targetWeight: max(0, item.targetWeight),
-                    restSeconds: max(30, item.restSeconds)
+                    targetSets: plans.count,
+                    minReps: plans.map(\.reps).min() ?? 1,
+                    maxReps: plans.map(\.reps).max() ?? 1,
+                    targetWeight: plans.first?.weight ?? 0,
+                    restSeconds: max(30, item.restSeconds),
+                    plannedSets: plans,
+                    planPattern: item.planPattern
                 )
             )
         }

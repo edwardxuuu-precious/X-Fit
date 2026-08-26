@@ -521,6 +521,466 @@ final class AdaptivePlanningTests: XCTestCase {
         )
     }
 
+    func testExerciseCatalogCreatesSearchableExerciseAndRestoresArchivedMatch() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let archived = Exercise(
+            name: "高位绳索弯举",
+            muscleGroup: "手臂",
+            equipment: "龙门架",
+            isBuiltIn: false,
+            isArchived: true
+        )
+        context.insert(archived)
+
+        let result = try ExerciseCatalogService.save(
+            exercise: nil,
+            name: " 高位绳索弯举 ",
+            muscleGroup: "手臂",
+            equipment: "龙门架",
+            defaultRestSeconds: 60,
+            notes: "手肘保持固定",
+            referenceURL: "https://example.com/curl",
+            allExercises: [archived],
+            in: context
+        )
+
+        XCTAssertEqual(result.kind, .restored)
+        XCTAssertEqual(result.exercise.id, archived.id)
+        XCTAssertFalse(archived.isArchived)
+        XCTAssertEqual(archived.referenceURL, "https://example.com/curl")
+        XCTAssertEqual(
+            ExerciseCatalogService.search([archived], query: "手肘").first?.id,
+            archived.id
+        )
+    }
+
+    func testExerciseCatalogRejectsUnsafeReferenceURL() throws {
+        let container = try makeContainer()
+        XCTAssertThrowsError(
+            try ExerciseCatalogService.save(
+                exercise: nil,
+                name: "测试动作",
+                muscleGroup: "其他",
+                equipment: "自重",
+                defaultRestSeconds: 90,
+                notes: "",
+                referenceURL: "javascript:alert(1)",
+                allExercises: [],
+                in: container.mainContext
+            )
+        ) { error in
+            XCTAssertEqual(error as? ExerciseCatalogError, .invalidReferenceURL)
+        }
+    }
+
+    func testDailyPlanValidationDoesNotReplaceExistingPlanOnMissingExercise() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let date = Date.now.startOfDay
+        let template = WorkoutTemplate(name: "固定推日", weekday: date.weekdayNumber)
+        let schedule = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: date
+        )
+        context.insert(template)
+        context.insert(schedule)
+        try context.save()
+
+        XCTAssertThrowsError(
+            try DailyPlanService.create(
+                on: date,
+                muscleGroups: ["胸部"],
+                exercises: [
+                    DailyPlanExerciseInput(
+                        exerciseID: UUID(),
+                        targetSets: 3,
+                        minReps: 8,
+                        maxReps: 12,
+                        targetWeight: 0,
+                        restSeconds: 90
+                    )
+                ],
+                replaceExistingPlans: true,
+                in: context
+            )
+        )
+
+        XCTAssertEqual(schedule.status, .planned)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<ScheduledWorkout>()).count, 1)
+        XCTAssertFalse(try context.fetch(FetchDescriptor<WorkoutTemplate>()).contains(where: \.isOneOff))
+    }
+
+    func testDailyPlanRejectsEveryInvalidDraftBeforeMutation() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let active = Exercise(name: "有效动作", muscleGroup: "胸部", equipment: "哑铃")
+        let archived = Exercise(
+            name: "已归档动作",
+            muscleGroup: "胸部",
+            equipment: "哑铃",
+            isArchived: true
+        )
+        context.insert(active)
+        context.insert(archived)
+        try context.save()
+
+        let validInput = DailyPlanExerciseInput(
+            exerciseID: active.id,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 10,
+            restSeconds: 90
+        )
+        let archivedInput = DailyPlanExerciseInput(
+            exerciseID: archived.id,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 10,
+            restSeconds: 90
+        )
+        let missingInput = DailyPlanExerciseInput(
+            exerciseID: UUID(),
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 10,
+            restSeconds: 90
+        )
+
+        XCTAssertDailyPlanError(.emptyMuscleGroups) {
+            _ = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["  "],
+                exercises: [validInput],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+        XCTAssertDailyPlanError(.emptyExercises) {
+            _ = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["胸部"],
+                exercises: [],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+        XCTAssertDailyPlanError(.duplicateExercise) {
+            _ = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["胸部"],
+                exercises: [validInput, validInput],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+        XCTAssertDailyPlanError(.archivedExercise) {
+            _ = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["胸部"],
+                exercises: [archivedInput],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+        XCTAssertDailyPlanError(.missingExercise) {
+            _ = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["胸部"],
+                exercises: [missingInput],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+
+        XCTAssertTrue(try context.fetch(FetchDescriptor<ScheduledWorkout>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<WorkoutTemplate>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<TemplateExercise>()).isEmpty)
+    }
+
+    func testDailyPlanCannotReplaceStartedOrCompletedOneOff() throws {
+        for status in [ScheduleStatus.inProgress, .completed] {
+            let container = try makeContainer()
+            let context = container.mainContext
+            let date = Date.now.startOfDay
+            let exercise = Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃")
+            let template = WorkoutTemplate(
+                name: "胸部 · 当天菜单",
+                weekday: date.weekdayNumber,
+                isActive: false,
+                isOneOff: true,
+                plannedForDate: date,
+                focusMuscleGroups: ["胸部"]
+            )
+            let item = TemplateExercise(
+                templateID: template.id,
+                exerciseID: exercise.id,
+                order: 0,
+                targetSets: 3,
+                minReps: 8,
+                maxReps: 8,
+                targetWeight: 40,
+                restSeconds: 90
+            )
+            let schedule = ScheduledWorkout(
+                templateID: template.id,
+                templateName: template.name,
+                plannedDate: date,
+                status: status,
+                isManuallyScheduled: true
+            )
+            context.insert(exercise)
+            context.insert(template)
+            context.insert(item)
+            context.insert(schedule)
+            try context.save()
+
+            XCTAssertDailyPlanError(.immutableExistingPlan) {
+                _ = try DailyPlanService.create(
+                    on: date,
+                    muscleGroups: ["胸部"],
+                    exercises: [
+                        DailyPlanExerciseInput(
+                            exerciseID: exercise.id,
+                            targetSets: 4,
+                            minReps: 10,
+                            maxReps: 10,
+                            targetWeight: 30,
+                            restSeconds: 60
+                        )
+                    ],
+                    replaceExistingPlans: true,
+                    in: context
+                )
+            }
+
+            XCTAssertEqual(schedule.status, status)
+            XCTAssertEqual(try context.fetch(FetchDescriptor<ScheduledWorkout>()).count, 1)
+            XCTAssertEqual(try context.fetch(FetchDescriptor<WorkoutTemplate>()).count, 1)
+            XCTAssertEqual(try context.fetch(FetchDescriptor<TemplateExercise>()).count, 1)
+        }
+    }
+
+    func testRepeatedDailyPlanSaveLeavesOneAuthoritativeOneOff() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let date = Date.now.startOfDay
+        let exercise = Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃")
+        let weekly = WorkoutTemplate(name: "固定推日", weekday: date.weekdayNumber)
+        let weeklySchedule = ScheduledWorkout(
+            templateID: weekly.id,
+            templateName: weekly.name,
+            plannedDate: date
+        )
+        context.insert(exercise)
+        context.insert(weekly)
+        context.insert(weeklySchedule)
+        try context.save()
+
+        for weight in [40.0, 42.5, 45.0] {
+            _ = try DailyPlanService.create(
+                on: date,
+                muscleGroups: ["胸部"],
+                exercises: [
+                    DailyPlanExerciseInput(
+                        exerciseID: exercise.id,
+                        targetSets: 3,
+                        minReps: 8,
+                        maxReps: 8,
+                        targetWeight: weight,
+                        restSeconds: 90
+                    )
+                ],
+                replaceExistingPlans: true,
+                in: context
+            )
+        }
+
+        let templates = try context.fetch(FetchDescriptor<WorkoutTemplate>())
+        let oneOffs = templates.filter(\.isOneOff)
+        let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+        let oneOffSchedules = schedules.filter { oneOffs.map(\.id).contains($0.templateID) }
+        let items = try context.fetch(FetchDescriptor<TemplateExercise>())
+            .filter { oneOffs.map(\.id).contains($0.templateID) }
+
+        XCTAssertEqual(oneOffs.count, 1)
+        XCTAssertEqual(oneOffSchedules.count, 1)
+        XCTAssertEqual(oneOffSchedules.first?.status, .planned)
+        XCTAssertEqual(items.count, 1)
+        XCTAssertEqual(items.first?.targetWeight, 45)
+        XCTAssertEqual(weeklySchedule.status, .skipped)
+    }
+
+    func testWorkoutStartIsIdempotentAndPreservesPlanSnapshot() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let date = Date.now.startOfDay
+        let exercise = Exercise(
+            name: "哑铃卧推",
+            muscleGroup: "胸部",
+            equipment: "哑铃",
+            volumeUnit: .kilogram
+        )
+        context.insert(exercise)
+        try context.save()
+        let schedule = try DailyPlanService.create(
+            on: date,
+            muscleGroups: ["胸部"],
+            exercises: [
+                DailyPlanExerciseInput(
+                    exerciseID: exercise.id,
+                    plannedSets: [
+                        WorkoutSetPlan(weight: 20, reps: 10),
+                        WorkoutSetPlan(weight: 22.5, reps: 8)
+                    ],
+                    planPattern: .pyramidUp,
+                    restSeconds: 120
+                )
+            ],
+            replaceExistingPlans: true,
+            in: context
+        )
+
+        let firstSessionID = try WorkoutService.start(schedule: schedule, in: context)
+        let secondSessionID = try WorkoutService.start(schedule: schedule, in: context)
+        XCTAssertEqual(firstSessionID, secondSessionID)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<WorkoutSession>()).count, 1)
+
+        let snapshot = try XCTUnwrap(
+            context.fetch(FetchDescriptor<SessionExercise>()).first
+        )
+        let logs = try context.fetch(FetchDescriptor<SetLog>())
+            .sorted { $0.setNumber < $1.setNumber }
+        XCTAssertEqual(snapshot.exerciseName, "哑铃卧推")
+        XCTAssertEqual(snapshot.planPattern, .pyramidUp)
+        XCTAssertEqual(snapshot.plannedSets.map(\.weight), [20, 22.5])
+        XCTAssertEqual(logs.map(\.targetWeight), [20, 22.5])
+
+        exercise.name = "动作库后来改名"
+        exercise.volumeUnit = .count
+        let item = try XCTUnwrap(context.fetch(FetchDescriptor<TemplateExercise>()).first)
+        item.plannedSets = [WorkoutSetPlan(weight: 99, reps: 99)]
+        try context.save()
+
+        XCTAssertEqual(snapshot.exerciseName, "哑铃卧推")
+        XCTAssertEqual(snapshot.volumeUnit, .kilogram)
+        XCTAssertEqual(snapshot.plannedSets.map(\.weight), [20, 22.5])
+        XCTAssertEqual(logs.map(\.targetWeight), [20, 22.5])
+    }
+
+    func testDailyPlanAndCompletedVolumePersistAcrossContainerRestart() throws {
+        let directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("XFitHomePersistence-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let storeURL = directory.appendingPathComponent("HomeFeature.store")
+        var expectedScheduleID = UUID()
+        var expectedSessionID = UUID()
+
+        do {
+            let container = try makePersistentContainer(at: storeURL)
+            let context = container.mainContext
+            let exercise = Exercise(name: "持久化卧推", muscleGroup: "胸部", equipment: "杠铃")
+            context.insert(exercise)
+            try context.save()
+            let schedule = try DailyPlanService.create(
+                on: .now,
+                muscleGroups: ["胸部"],
+                exercises: [
+                    DailyPlanExerciseInput(
+                        exerciseID: exercise.id,
+                        targetSets: 1,
+                        minReps: 10,
+                        maxReps: 10,
+                        targetWeight: 42,
+                        restSeconds: 90
+                    )
+                ],
+                replaceExistingPlans: true,
+                in: context
+            )
+            expectedScheduleID = schedule.id
+            expectedSessionID = try WorkoutService.start(schedule: schedule, in: context)
+            let log = try XCTUnwrap(context.fetch(FetchDescriptor<SetLog>()).first)
+            log.actualWeight = 42
+            log.actualReps = 10
+            log.isCompleted = true
+            let session = try XCTUnwrap(context.fetch(FetchDescriptor<WorkoutSession>()).first)
+            session.status = .completed
+            session.completedAt = .now
+            schedule.status = .completed
+            try context.save()
+        }
+
+        do {
+            let container = try makePersistentContainer(at: storeURL)
+            let context = container.mainContext
+            let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+            let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+            let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+            let exercises = try context.fetch(FetchDescriptor<Exercise>())
+            let logs = try context.fetch(FetchDescriptor<SetLog>())
+
+            XCTAssertEqual(schedules.first?.id, expectedScheduleID)
+            XCTAssertEqual(schedules.first?.status, .completed)
+            XCTAssertEqual(sessions.first?.id, expectedSessionID)
+            XCTAssertEqual(sessions.first?.status, .completed)
+            XCTAssertEqual(
+                TrainingMetrics.volumeTrends(
+                    sessions: sessions,
+                    sessionExercises: snapshots,
+                    exercises: exercises,
+                    setLogs: logs
+                ).overall.first?.volume,
+                420
+            )
+        }
+    }
+
+    func testWorkoutStartSnapshotsExerciseReferenceURL() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(
+            name: "哑铃古巴推举",
+            muscleGroup: "肩部",
+            equipment: "哑铃",
+            referenceURL: "https://example.com/cuban-press"
+        )
+        let template = WorkoutTemplate(name: "肩部", weekday: Date.now.weekdayNumber)
+        let item = TemplateExercise(
+            templateID: template.id,
+            exerciseID: exercise.id,
+            order: 0,
+            targetSets: 3,
+            minReps: 10,
+            maxReps: 12,
+            targetWeight: 5,
+            restSeconds: 60
+        )
+        let schedule = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: .now
+        )
+        context.insert(exercise)
+        context.insert(template)
+        context.insert(item)
+        context.insert(schedule)
+        try context.save()
+
+        let sessionID = try WorkoutService.start(schedule: schedule, in: context)
+        let snapshot = try context.fetch(FetchDescriptor<SessionExercise>())
+            .first { $0.sessionID == sessionID }
+
+        XCTAssertEqual(snapshot?.referenceURL, exercise.referenceURL)
+        exercise.referenceURL = "https://example.com/changed"
+        XCTAssertEqual(snapshot?.referenceURL, "https://example.com/cuban-press")
+    }
+
     private func completedLog(
         session: WorkoutSession,
         snapshot: SessionExercise,
@@ -555,9 +1015,56 @@ final class AdaptivePlanningTests: XCTestCase {
             SetLog.self,
             NutritionTarget.self,
             MealEntry.self,
+            DailyBodyCheckIn.self,
             BodyMeasurement.self
         ])
-        let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let configuration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: true,
+            cloudKitDatabase: .none
+        )
         return try ModelContainer(for: schema, configurations: [configuration])
+    }
+
+    private func makePersistentContainer(at url: URL) throws -> ModelContainer {
+        let schema = Schema([
+            Exercise.self,
+            WorkoutTemplate.self,
+            TemplateExercise.self,
+            ScheduledWorkout.self,
+            WorkoutSession.self,
+            SessionExercise.self,
+            SetLog.self,
+            NutritionTarget.self,
+            MealEntry.self,
+            DailyBodyCheckIn.self,
+            BodyMeasurement.self
+        ])
+        let configuration = ModelConfiguration(
+            "HomeFeaturePersistenceTests",
+            schema: schema,
+            url: url,
+            cloudKitDatabase: .none
+        )
+        return try ModelContainer(for: schema, configurations: [configuration])
+    }
+
+    private func XCTAssertDailyPlanError(
+        _ expected: DailyPlanServiceError,
+        file: StaticString = #filePath,
+        line: UInt = #line,
+        _ operation: () throws -> Void
+    ) {
+        XCTAssertThrowsError(try operation(), file: file, line: line) { error in
+            guard let actual = error as? DailyPlanServiceError else {
+                return XCTFail("错误类型不正确：\(error)", file: file, line: line)
+            }
+            XCTAssertEqual(
+                actual.errorDescription,
+                expected.errorDescription,
+                file: file,
+                line: line
+            )
+        }
     }
 }

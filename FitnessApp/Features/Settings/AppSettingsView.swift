@@ -7,6 +7,7 @@ struct AppSettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var schedules: [ScheduledWorkout]
     @Query private var bodyMeasurements: [BodyMeasurement]
+    @Query private var exercises: [Exercise]
 
     @AppStorage(NotificationService.workoutEnabledKey) private var workoutRemindersEnabled = false
     @AppStorage(NotificationService.workoutHourKey) private var workoutReminderHour = 18
@@ -35,6 +36,13 @@ struct AppSettingsView: View {
         }
     }
 
+    private var dataStorageDescription: String {
+        if CloudSyncRuntime.isConfigured {
+            return "训练、营养和身体数据保存在本机，并通过你的私人 iCloud 自动同步。你仍可随时导出完整 JSON 备份或 CSV 训练记录。"
+        }
+        return "训练、营养和身体数据保存在本机。你仍可随时导出完整 JSON 备份或 CSV 训练记录。"
+    }
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
@@ -46,15 +54,18 @@ struct AppSettingsView: View {
                 SectionHeader(title: "Apple 健康")
                 healthCard
 
+                SectionHeader(title: "动作标准化")
+                terminologyCard
+
                 SectionHeader(title: "数据所有权")
                 dataCard
 
                 SectionHeader(title: "关于")
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("X-Fit 0.3.0 (3)")
+                    Text(appVersionText)
                         .font(.headline.bold())
                         .foregroundStyle(.white)
-                    Text("训练、营养和身体数据默认保存在本机。你可以随时导出完整 JSON 备份或 CSV 训练记录。")
+                    Text(dataStorageDescription)
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
                 }
@@ -105,6 +116,13 @@ struct AppSettingsView: View {
         } message: {
             Text(errorMessage ?? "未知错误")
         }
+    }
+
+    private var appVersionText: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "未知"
+        let build = info?["CFBundleVersion"] as? String ?? "未知"
+        return "X-Fit \(version) (\(build))"
     }
 
     private var reminderCard: some View {
@@ -206,6 +224,40 @@ struct AppSettingsView: View {
             }
             .buttonStyle(.plain)
         }
+        .cardSurface()
+    }
+
+    private var terminologyCard: some View {
+        let active = exercises.filter { !$0.isArchived }
+        let pending = active.filter { $0.terminologyDecision == .pending }.count
+        let unresolved = active.filter {
+            $0.terminologyDecision == .pending && $0.terminologyReviewStatus == .unresolved
+        }.count
+
+        return NavigationLink {
+            ExerciseTerminologyReviewView()
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "character.book.closed.fill")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(width: 38, height: 38)
+                    .background(AppTheme.accent.opacity(0.11), in: RoundedRectangle(cornerRadius: 11))
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("审核中英文动作名称")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.white)
+                    Text("待审核 \(pending) 个 · 未唯一解析 \(unresolved) 个")
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.secondaryText)
+            }
+        }
+        .buttonStyle(.plain)
         .cardSurface()
     }
 

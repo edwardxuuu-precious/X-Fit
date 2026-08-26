@@ -1,0 +1,765 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "X-Fit 动作标准化审计",
+    "description": "55 个当前动作的标准中英文候选、历史影响与人工审批边界。",
+    "generatedAt": "2026-08-03T22:58:17+08:00",
+    "cards": [
+      {
+        "id": "raw_names",
+        "description": "当前 iPhone 动作库原始名称数。",
+        "dataset": "summary",
+        "sourceId": "audit_profile",
+        "metrics": [
+          {
+            "label": "原始名称",
+            "field": "raw_names",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "canonical_candidates",
+        "description": "五组合并候选归一后的候选 canonical 数；尚未批准。",
+        "dataset": "summary",
+        "sourceId": "audit_profile",
+        "metrics": [
+          {
+            "label": "Canonical 候选",
+            "field": "canonical_candidates",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "completed_sets",
+        "description": "当前设备只读快照内完成组数。",
+        "dataset": "summary",
+        "sourceId": "device_snapshot",
+        "metrics": [
+          {
+            "label": "设备完成组",
+            "field": "completed_sets",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "unresolved_names",
+        "description": "需器械铭牌、照片/视频或动作细节才能唯一解析的名称。",
+        "dataset": "summary",
+        "sourceId": "audit_profile",
+        "metrics": [
+          {
+            "label": "未唯一解析",
+            "field": "unresolved_names",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "review_status_chart",
+        "title": "审核工作集中在 27 个需补证据或确认合并的名称",
+        "subtitle": "柱高为原始名称数；详情数据同时保留受影响完成组数。",
+        "type": "bar",
+        "dataset": "review_status",
+        "sourceId": "audit_profile",
+        "encodings": {
+          "x": {
+            "field": "review_status_label",
+            "type": "nominal",
+            "label": "审核状态"
+          },
+          "y": {
+            "field": "raw_name_count",
+            "type": "quantitative",
+            "label": "原始名称数",
+            "format": "number"
+          }
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "exercise_detail",
+        "title": "55 个动作逐项候选与审核状态",
+        "dataset": "exercise_detail",
+        "sourceId": "audit_profile",
+        "columns": [
+          {
+            "field": "raw_name",
+            "label": "原名称",
+            "type": "text"
+          },
+          {
+            "field": "standard_zh",
+            "label": "标准中文候选",
+            "type": "text"
+          },
+          {
+            "field": "standard_en",
+            "label": "Standard English",
+            "type": "text"
+          },
+          {
+            "field": "status",
+            "label": "审核状态",
+            "type": "text"
+          },
+          {
+            "field": "completed_sets",
+            "label": "完成组",
+            "format": "number"
+          },
+          {
+            "field": "review_note",
+            "label": "需确认/边界",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "audit_profile",
+        "label": "X-Fit 动作标准化审计表",
+        "path": "exercise_audit.csv"
+      },
+      {
+        "id": "device_snapshot",
+        "label": "Edward_iPhone X-Fit SwiftData 只读快照",
+        "path": "evidence/edward-iphone-xfit-swiftdata-snapshot"
+      },
+      {
+        "id": "history_csv",
+        "label": "X-Fit 2026-07 历史训练 CSV",
+        "path": "artifacts/private-history/x-fit-notes-2026-07.csv"
+      },
+      {
+        "id": "code_audit",
+        "label": "X-Fit 当前动作身份与历史聚合代码审计",
+        "path": "FitnessApp/Models/TrainingMetrics.swift"
+      },
+      {
+        "id": "terminology_refs",
+        "label": "公开动作库与厂商术语参考",
+        "url": "https://www.jefit.com/exercises"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# X-Fit 动作标准化审计\n\n第一阶段只读审计 · 所有标准名与 canonical ID 均为候选。"
+      },
+      {
+        "id": "summary_text",
+        "type": "markdown",
+        "sourceId": "audit_profile",
+        "body": "## 结论\n\n当前 **55 个原始名称**形成 **50 个 canonical 候选**。其中 28 个可进入审批，10 个属于 5 组合并候选，9 个缺少关键变式，8 个无法唯一解析。**自动合并许可为 0**。"
+      },
+      {
+        "id": "metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "raw_names",
+          "canonical_candidates",
+          "completed_sets",
+          "unresolved_names"
+        ]
+      },
+      {
+        "id": "status_chart",
+        "type": "chart",
+        "chartId": "review_status_chart"
+      },
+      {
+        "id": "device_reconciliation",
+        "type": "markdown",
+        "sourceId": "device_snapshot",
+        "body": "## 设备与 CSV 已对账\n\n手机有 **15 次训练、431 个完成组**；CSV 有 **14 次训练、430 行完成组**。差额来自 2026-07-31 的一次设备训练：4 个动作快照、12 个 set log，仅杠铃卧推 1 组完成。手机快照作为当前事实，CSV 不覆盖该记录。"
+      },
+      {
+        "id": "risk_text",
+        "type": "markdown",
+        "sourceId": "code_audit",
+        "body": "## 开发前的关键保护\n\n当前趋势按历史名称聚合，而推荐/起始重量按动作 UUID 聚合；仅重命名就可能让趋势和推荐产生不同身份。设备合并、CSV 导入和 Catalog 又使用不同匹配规则。因此 canonical 层必须统一身份解析，同时保留历史快照原名，并隔离器械、变式与重量口径不同的 PR。"
+      },
+      {
+        "id": "detail",
+        "type": "table",
+        "tableId": "exercise_detail"
+      },
+      {
+        "id": "approval",
+        "type": "markdown",
+        "body": "## 审批顺序\n\n1. 先补 8 个未解析动作的器械/姿势证据。\n2. 再确认 5 组合并候选的器械、附件与重量口径。\n3. 审批 9 个变式缺失项及其动作家族。\n4. 批准其余 28 个中英文候选。\n5. 最后才进入数据模型和 DeepSeek/API 检查层开发。"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "sourceId": "history_csv",
+        "body": "## 计重边界\n\nCSV 没有任何备注明确说明“总重”。只有 20 行明确按每侧记录，另有自重、缺失重量占位和空杆未知等情况。器械类型不能替代重量口径，标准化不得改变这些原始数值。"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-03T22:58:17+08:00",
+    "status": "ready",
+    "datasets": {
+      "summary": [
+        {
+          "raw_names": 55,
+          "canonical_candidates": 50,
+          "completed_sets": 431,
+          "unresolved_names": 8
+        }
+      ],
+      "review_status": [
+        {
+          "review_status": "approval_ready",
+          "review_status_label": "候选名可审批",
+          "raw_name_count": 28,
+          "completed_sets_affected": 231,
+          "canonical_candidate_count": 28
+        },
+        {
+          "review_status": "merge_review",
+          "review_status_label": "待确认是否合并",
+          "raw_name_count": 10,
+          "completed_sets_affected": 54,
+          "canonical_candidate_count": 5
+        },
+        {
+          "review_status": "variant_review",
+          "review_status_label": "待补具体变式",
+          "raw_name_count": 9,
+          "completed_sets_affected": 102,
+          "canonical_candidate_count": 9
+        },
+        {
+          "review_status": "unresolved",
+          "review_status_label": "名称未唯一解析",
+          "raw_name_count": 8,
+          "completed_sets_affected": 44,
+          "canonical_candidate_count": 8
+        }
+      ],
+      "exercise_detail": [
+        {
+          "raw_name": "MTS 下斜卧推",
+          "standard_zh": "Hammer Strength MTS Iso-Lateral 下斜推胸",
+          "standard_en": "Hammer Strength MTS Iso-Lateral Decline Press",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "品牌和系列不可丢失"
+        },
+        {
+          "raw_name": "MTS 划船",
+          "standard_zh": "Hammer Strength MTS Iso-Lateral 划船",
+          "standard_en": "Hammer Strength MTS Iso-Lateral Row",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "不能仅凭名称改成 High Row"
+        },
+        {
+          "raw_name": "V 型深蹲",
+          "standard_zh": "V 型深蹲机",
+          "standard_en": "V-Squat Machine",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "与哈克深蹲、钟摆深蹲分开"
+        },
+        {
+          "raw_name": "三头下压",
+          "standard_zh": "绳索三头肌下压",
+          "standard_en": "Cable Triceps Pushdown",
+          "status": "待确认是否合并",
+          "completed_sets": 8,
+          "review_note": "把手附件可能不同；附件差异是否隔离 PR 需确认"
+        },
+        {
+          "raw_name": "三头下压机",
+          "standard_zh": "器械三头肌下压（待确认）",
+          "standard_en": "Machine Triceps Press (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 4,
+          "review_note": "可能是坐姿臂屈伸机、双杠下压机或固定轨迹下压机"
+        },
+        {
+          "raw_name": "三角肌训练机",
+          "standard_zh": "三角肌训练机（待确认）",
+          "standard_en": "Deltoid Machine (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 10,
+          "review_note": "可能是侧平举机、反向蝴蝶机或肩推机"
+        },
+        {
+          "raw_name": "上斜卧推",
+          "standard_zh": "上斜杠铃卧推",
+          "standard_en": "Incline Barbell Bench Press",
+          "status": "候选名可审批",
+          "completed_sets": 6,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "上斜哑铃卧推",
+          "standard_zh": "上斜哑铃卧推",
+          "standard_en": "Incline Dumbbell Bench Press",
+          "status": "候选名可审批",
+          "completed_sets": 0,
+          "review_note": "长凳角度宜另存属性"
+        },
+        {
+          "raw_name": "上背下拉机",
+          "standard_zh": "上背下拉机（待确认）",
+          "standard_en": "Upper-Back Pulldown Machine (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 4,
+          "review_note": "需器械铭牌或照片；可能是 Front Pulldown 或 High Row"
+        },
+        {
+          "raw_name": "上背划船机",
+          "standard_zh": "上背划船机（待确认）",
+          "standard_en": "Upper-Back Row Machine (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 8,
+          "review_note": "水平划船、高位划船和胸托划船路径不同"
+        },
+        {
+          "raw_name": "严格深蹲",
+          "standard_zh": "严格深蹲（待确认）",
+          "standard_en": "Strict Squat (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 4,
+          "review_note": "不是稳定通用术语；可能指暂停、高杠、无护具或动作标准要求"
+        },
+        {
+          "raw_name": "举腿",
+          "standard_zh": "举腿",
+          "standard_en": "Leg Raise",
+          "status": "待补具体变式",
+          "completed_sets": 12,
+          "review_note": "需确认悬垂、仰卧或双杠支撑"
+        },
+        {
+          "raw_name": "单腿钟摆推举",
+          "standard_zh": "单腿钟摆式腿推/深蹲（待确认）",
+          "standard_en": "Single-Leg Pendulum Press/Squat (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 4,
+          "review_note": "“推举”无法判断是 Pendulum Squat 还是 Pendulum Leg Press"
+        },
+        {
+          "raw_name": "史密斯上斜卧推",
+          "standard_zh": "史密斯机上斜卧推",
+          "standard_en": "Smith Machine Incline Bench Press",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "史密斯卧推",
+          "standard_zh": "史密斯机平板卧推",
+          "standard_en": "Smith Machine Bench Press",
+          "status": "候选名可审批",
+          "completed_sets": 12,
+          "review_note": "推荐补“平板”"
+        },
+        {
+          "raw_name": "史密斯肩推",
+          "standard_zh": "史密斯机肩上推举",
+          "standard_en": "Smith Machine Shoulder Press",
+          "status": "候选名可审批",
+          "completed_sets": 6,
+          "review_note": "坐姿或站姿宜另存属性"
+        },
+        {
+          "raw_name": "哑铃侧平举",
+          "standard_zh": "哑铃侧平举",
+          "standard_en": "Dumbbell Lateral Raise",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "哑铃弯举",
+          "standard_zh": "哑铃二头肌弯举",
+          "standard_en": "Dumbbell Biceps Curl",
+          "status": "候选名可审批",
+          "completed_sets": 0,
+          "review_note": "同步、交替和握法宜另存属性"
+        },
+        {
+          "raw_name": "哑铃行走弓步",
+          "standard_zh": "哑铃行走弓步",
+          "standard_en": "Dumbbell Walking Lunge",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "器械上斜卧推",
+          "standard_zh": "坐姿上斜推胸机",
+          "standard_en": "Incline Chest Press Machine",
+          "status": "待确认是否合并",
+          "completed_sets": 8,
+          "review_note": "片载式与配重片式负重不可直接比较"
+        },
+        {
+          "raw_name": "器械下斜卧推",
+          "standard_zh": "坐姿下斜推胸机",
+          "standard_en": "Decline Chest Press Machine",
+          "status": "待确认是否合并",
+          "completed_sets": 4,
+          "review_note": "片载式与配重片式负重不可直接比较"
+        },
+        {
+          "raw_name": "器械肩推",
+          "standard_zh": "器械肩上推举",
+          "standard_en": "Shoulder Press Machine",
+          "status": "候选名可审批",
+          "completed_sets": 22,
+          "review_note": "握法和轨迹宜另存属性"
+        },
+        {
+          "raw_name": "坐姿上斜推胸机",
+          "standard_zh": "坐姿上斜推胸机",
+          "standard_en": "Incline Chest Press Machine",
+          "status": "待确认是否合并",
+          "completed_sets": 8,
+          "review_note": "需确认是否与“器械上斜卧推”同一器械/负重口径"
+        },
+        {
+          "raw_name": "坐姿下斜推胸机",
+          "standard_zh": "坐姿下斜推胸机",
+          "standard_en": "Decline Chest Press Machine",
+          "status": "待确认是否合并",
+          "completed_sets": 4,
+          "review_note": "需确认是否与“器械下斜卧推”同一器械/负重口径"
+        },
+        {
+          "raw_name": "坐姿划船",
+          "standard_zh": "坐姿器械划船",
+          "standard_en": "Seated Row Machine",
+          "status": "待补具体变式",
+          "completed_sets": 8,
+          "review_note": "“器械”未说明绳索、片载式或固定轨迹"
+        },
+        {
+          "raw_name": "坐姿哑铃侧平举",
+          "standard_zh": "坐姿哑铃侧平举",
+          "standard_en": "Seated Dumbbell Lateral Raise",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "不与站姿版本合并历史"
+        },
+        {
+          "raw_name": "坐姿推举",
+          "standard_zh": "坐姿哑铃肩上推举",
+          "standard_en": "Seated Dumbbell Shoulder Press",
+          "status": "待确认是否合并",
+          "completed_sets": 0,
+          "review_note": "需确认与“坐姿肩推”动作和重量口径一致"
+        },
+        {
+          "raw_name": "坐姿推胸机",
+          "standard_zh": "坐姿推胸机",
+          "standard_en": "Seated Chest Press Machine",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "默认水平推胸；轨迹宜另存属性"
+        },
+        {
+          "raw_name": "坐姿肩推",
+          "standard_zh": "坐姿哑铃肩上推举",
+          "standard_en": "Seated Dumbbell Shoulder Press",
+          "status": "待确认是否合并",
+          "completed_sets": 6,
+          "review_note": "需确认与“坐姿推举”动作和重量口径一致"
+        },
+        {
+          "raw_name": "坐姿飞鸟",
+          "standard_zh": "坐姿器械夹胸（蝴蝶机飞鸟）",
+          "standard_en": "Pec Deck Fly",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "历史肌群为胸部，因此不按反向飞鸟处理"
+        },
+        {
+          "raw_name": "引体向上",
+          "standard_zh": "引体向上",
+          "standard_en": "Pull-Up",
+          "status": "待补具体变式",
+          "completed_sets": 5,
+          "review_note": "需确认握向、握距以及是否负重"
+        },
+        {
+          "raw_name": "杠铃划船",
+          "standard_zh": "杠铃俯身划船",
+          "standard_en": "Barbell Bent-Over Row",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "躯干角度和正反握宜另存属性"
+        },
+        {
+          "raw_name": "杠铃卧推",
+          "standard_zh": "杠铃平板卧推",
+          "standard_en": "Barbell Bench Press",
+          "status": "候选名可审批",
+          "completed_sets": 14,
+          "review_note": "推荐补“平板”"
+        },
+        {
+          "raw_name": "深蹲",
+          "standard_zh": "杠铃后蹲（待确认）",
+          "standard_en": "Barbell Back Squat (Pending Confirmation)",
+          "status": "待补具体变式",
+          "completed_sets": 23,
+          "review_note": "需确认不是前蹲，并记录高杠/低杠等变式"
+        },
+        {
+          "raw_name": "火箭推",
+          "standard_zh": "杠铃火箭推（疑似前蹲推举）",
+          "standard_en": "Barbell Thruster (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 6,
+          "review_note": "很可能是 Thruster，但仅凭俗称不能唯一确认"
+        },
+        {
+          "raw_name": "窄握下拉",
+          "standard_zh": "窄握高位下拉",
+          "standard_en": "Close-Grip Lat Pulldown",
+          "status": "待补具体变式",
+          "completed_sets": 4,
+          "review_note": "需确认正握、反握或 V 把中立握"
+        },
+        {
+          "raw_name": "站姿哑铃肩推",
+          "standard_zh": "站姿哑铃肩上推举",
+          "standard_en": "Standing Dumbbell Shoulder Press",
+          "status": "候选名可审批",
+          "completed_sets": 5,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "站姿提踵",
+          "standard_zh": "器械站姿提踵",
+          "standard_en": "Standing Calf Raise Machine",
+          "status": "候选名可审批",
+          "completed_sets": 12,
+          "review_note": "负重口径宜另存属性"
+        },
+        {
+          "raw_name": "站姿绳索夹胸",
+          "standard_zh": "站姿绳索夹胸",
+          "standard_en": "Standing Cable Chest Fly",
+          "status": "待确认是否合并",
+          "completed_sets": 4,
+          "review_note": "滑轮高度宜另存属性"
+        },
+        {
+          "raw_name": "站姿髋推",
+          "standard_zh": "站姿髋推机（待确认）",
+          "standard_en": "Standing Hip Thrust Machine (Unverified)",
+          "status": "名称未唯一解析",
+          "completed_sets": 4,
+          "review_note": "可能是站姿髋伸展、髋推机或后踢腿机"
+        },
+        {
+          "raw_name": "绳索下压",
+          "standard_zh": "绳索三头肌下压",
+          "standard_en": "Cable Triceps Pushdown",
+          "status": "待确认是否合并",
+          "completed_sets": 0,
+          "review_note": "需确认与“三头下压”的把手和重量口径一致"
+        },
+        {
+          "raw_name": "绳索侧平举",
+          "standard_zh": "绳索侧平举",
+          "standard_en": "Cable Lateral Raise",
+          "status": "候选名可审批",
+          "completed_sets": 21,
+          "review_note": "单臂或双臂宜另存属性"
+        },
+        {
+          "raw_name": "绳索卷腹",
+          "standard_zh": "绳索卷腹",
+          "standard_en": "Cable Crunch",
+          "status": "候选名可审批",
+          "completed_sets": 8,
+          "review_note": "跪姿或站姿宜另存属性"
+        },
+        {
+          "raw_name": "绳索反向飞鸟",
+          "standard_zh": "绳索反向飞鸟（后三角肌飞鸟）",
+          "standard_en": "Cable Rear Delt Fly",
+          "status": "候选名可审批",
+          "completed_sets": 26,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "绳索夹胸",
+          "standard_zh": "站姿绳索夹胸",
+          "standard_en": "Standing Cable Chest Fly",
+          "status": "待确认是否合并",
+          "completed_sets": 12,
+          "review_note": "旧名未写站姿；需确认实际姿势与滑轮高度"
+        },
+        {
+          "raw_name": "绳索躯干旋转",
+          "standard_zh": "绳索躯干旋转",
+          "standard_en": "Cable Trunk Rotation",
+          "status": "待补具体变式",
+          "completed_sets": 12,
+          "review_note": "需确认水平旋转或高到低/低到高 Wood Chop"
+        },
+        {
+          "raw_name": "罗马尼亚硬拉",
+          "standard_zh": "杠铃罗马尼亚硬拉",
+          "standard_en": "Barbell Romanian Deadlift",
+          "status": "候选名可审批",
+          "completed_sets": 27,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "腿举",
+          "standard_zh": "器械腿举",
+          "standard_en": "Leg Press Machine",
+          "status": "待补具体变式",
+          "completed_sets": 12,
+          "review_note": "需确认 45°、水平、坐姿、垂直或单腿"
+        },
+        {
+          "raw_name": "腿弯举",
+          "standard_zh": "器械腿弯举",
+          "standard_en": "Leg Curl Machine",
+          "status": "待补具体变式",
+          "completed_sets": 20,
+          "review_note": "需确认坐姿、俯卧或站姿"
+        },
+        {
+          "raw_name": "臀推",
+          "standard_zh": "杠铃臀推",
+          "standard_en": "Barbell Hip Thrust",
+          "status": "候选名可审批",
+          "completed_sets": 8,
+          "review_note": "候选名待用户批准"
+        },
+        {
+          "raw_name": "钟摆深蹲",
+          "standard_zh": "钟摆深蹲机",
+          "standard_en": "Pendulum Squat Machine",
+          "status": "候选名可审批",
+          "completed_sets": 4,
+          "review_note": "不与 V 型深蹲合并"
+        },
+        {
+          "raw_name": "面拉",
+          "standard_zh": "绳索面拉",
+          "standard_en": "Cable Face Pull",
+          "status": "候选名可审批",
+          "completed_sets": 0,
+          "review_note": "把手附件宜另存属性"
+        },
+        {
+          "raw_name": "颈后下拉",
+          "standard_zh": "颈后高位下拉",
+          "standard_en": "Behind-the-Neck Lat Pulldown",
+          "status": "候选名可审批",
+          "completed_sets": 8,
+          "review_note": "独立动作，不作为普通高位下拉别名"
+        },
+        {
+          "raw_name": "高位下拉",
+          "standard_zh": "高位下拉",
+          "standard_en": "Lat Pulldown",
+          "status": "候选名可审批",
+          "completed_sets": 12,
+          "review_note": "握距和握向当前未知"
+        },
+        {
+          "raw_name": "高翻",
+          "standard_zh": "杠铃力量翻",
+          "standard_en": "Barbell Power Clean",
+          "status": "待补具体变式",
+          "completed_sets": 6,
+          "review_note": "“高翻”通常对应 Power Clean；仍需确认从地面或悬垂起始"
+        }
+      ]
+    }
+  },
+  "sources": [
+    {
+      "id": "audit_profile",
+      "label": "X-Fit 动作标准化审计表",
+      "path": "exercise_audit.csv",
+      "query": {
+        "engine": "python",
+        "language": "python",
+        "id": "exercise-audit-v1",
+        "description": "合并只读设备动作画像、历史 CSV 计数和候选词典，并按审核状态汇总。",
+        "sql": "SELECT raw_name, canonical_key, review_status, device_completed_sets, standard_zh_candidate, standard_en_candidate, ambiguity_or_boundary FROM exercise_audit",
+        "executed_at": "2026-08-03T22:58:17+08:00"
+      }
+    },
+    {
+      "id": "device_snapshot",
+      "label": "Edward_iPhone X-Fit SwiftData 只读快照",
+      "path": "evidence/edward-iphone-xfit-swiftdata-snapshot",
+      "query": {
+        "engine": "sqlite",
+        "language": "sql",
+        "id": "device-exercise-profile-v1",
+        "description": "按动作快照名汇总设备训练次数、完成组数与首次/最近使用日期。",
+        "sql": "SELECT se.ZEXERCISENAME AS exercise_name, COUNT(DISTINCT hex(se.ZSESSIONID)) AS sessions_used, SUM(CASE WHEN sl.ZISCOMPLETED = 1 THEN 1 ELSE 0 END) AS completed_sets FROM ZSESSIONEXERCISE se LEFT JOIN ZSETLOG sl ON hex(sl.ZSESSIONEXERCISEID) = hex(se.ZID) GROUP BY se.ZEXERCISENAME",
+        "executed_at": "2026-08-03T22:58:17+08:00"
+      }
+    },
+    {
+      "id": "history_csv",
+      "label": "X-Fit 2026-07 历史训练 CSV",
+      "path": "artifacts/private-history/x-fit-notes-2026-07.csv",
+      "query": {
+        "engine": "python_csv",
+        "language": "python",
+        "id": "history-csv-profile-v1",
+        "description": "使用标准 CSV 解析器统计 session、动作、组数、维度一致性与计重提示；不输出自由文本备注。",
+        "sql": "SELECT exercise, COUNT(DISTINCT session_id) AS sessions, COUNT(*) AS completed_sets, COUNT(DISTINCT muscle_group) AS muscle_group_values, COUNT(DISTINCT equipment) AS equipment_values FROM read_csv_auto('x-fit-notes-2026-07.csv') GROUP BY exercise",
+        "executed_at": "2026-08-03T22:58:17+08:00"
+      }
+    },
+    {
+      "id": "code_audit",
+      "label": "X-Fit 当前动作身份与历史聚合代码审计",
+      "path": "FitnessApp/Models/TrainingMetrics.swift",
+      "query": {
+        "engine": "source_review",
+        "language": "swift",
+        "id": "exercise-identity-code-audit-v1",
+        "description": "检查 TrainingMetrics、WorkoutRecommendation、Catalog、CSV 导入和设备合并的身份解析边界。",
+        "sql": "SELECT file_path, identity_key, normalization_rule, history_impact FROM reviewed_exercise_identity_code_paths",
+        "executed_at": "2026-08-03T22:58:17+08:00"
+      }
+    },
+    {
+      "id": "terminology_refs",
+      "label": "公开动作库与厂商术语参考",
+      "url": "https://www.jefit.com/exercises",
+      "query": {
+        "engine": "web_reference",
+        "language": "text",
+        "id": "exercise-terminology-reference-v1",
+        "description": "JEFIT、Hevy、ACE、Life Fitness/Hammer Strength 与 CrossFit 用于候选英文名交叉核验；不作为用户具体变式证明。",
+        "sql": "SELECT source_name, exercise_label, equipment_label, reference_url FROM reviewed_exercise_terminology_sources",
+        "executed_at": "2026-08-03T22:58:17+08:00"
+      }
+    }
+  ],
+  "package_info": {}
+}

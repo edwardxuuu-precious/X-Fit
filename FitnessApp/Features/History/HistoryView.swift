@@ -1,6 +1,19 @@
 import SwiftData
 import SwiftUI
 
+private func formattedVolumeTotals(
+    logs: [SetLog],
+    snapshots: [SessionExercise]
+) -> String {
+    let totals = TrainingMetrics.volumeTotals(for: logs, sessionExercises: snapshots)
+    let values = ExerciseVolumeUnit.allCases.compactMap { unit -> String? in
+        let value = totals[unit] ?? 0
+        guard value > 0 else { return nil }
+        return "\(Int(value).formatted()) \(unit.symbol)"
+    }
+    return values.isEmpty ? "0 kg" : values.joined(separator: " · ")
+}
+
 struct HistoryView: View {
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
     @Query private var setLogs: [SetLog]
@@ -49,9 +62,11 @@ struct HistoryView: View {
     }
 
     private func historyCard(_ session: WorkoutSession) -> some View {
-        let logs = setLogs.filter { $0.sessionID == session.id && $0.isCompleted }
+        let logs = setLogs.filter {
+            $0.sessionID == session.id && $0.isCompleted && !$0.isWarmup
+        }
         let exerciseCount = sessionExercises.filter { $0.sessionID == session.id }.count
-        let volume = TrainingMetrics.volume(for: logs)
+        let snapshots = sessionExercises.filter { $0.sessionID == session.id }
 
         return VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .top) {
@@ -72,7 +87,10 @@ struct HistoryView: View {
             HStack(spacing: 18) {
                 Label("\(exerciseCount) 动作", systemImage: "list.bullet")
                 Label("\(logs.count) 组", systemImage: "checkmark.circle")
-                Label("\(Int(volume)) kg", systemImage: "scalemass")
+                Label(
+                    formattedVolumeTotals(logs: logs, snapshots: snapshots),
+                    systemImage: "scalemass"
+                )
             }
             .font(.caption)
             .foregroundStyle(.secondary)
@@ -117,7 +135,7 @@ struct WorkoutDetailView: View {
     }
 
     private var logs: [SetLog] {
-        setLogs.filter(\.isCompleted)
+        setLogs.filter { $0.isCompleted && !$0.isWarmup }
     }
 
     private var trainingGoalMode: TrainingGoalMode {
@@ -173,7 +191,8 @@ struct WorkoutDetailView: View {
     }
 
     private func summary(_ session: WorkoutSession) -> some View {
-        let volume = TrainingMetrics.volume(for: logs)
+        let volumeText = formattedVolumeTotals(logs: logs, snapshots: exercises)
+        let recordedRests = logs.compactMap(\.restDurationSeconds)
         let duration = session.completedAt.map {
             TrainingFormatters.duration(from: session.startedAt, to: $0)
         } ?? "进行中"
@@ -183,10 +202,11 @@ struct WorkoutDetailView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
-            HStack(spacing: 12) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 miniMetric("\(logs.count)", label: "完成组数")
-                miniMetric("\(Int(volume))", label: "训练容量 kg")
+                miniMetric(volumeText, label: "训练量（按单位分开）")
                 miniMetric(duration, label: "训练时长")
+                miniMetric("\(recordedRests.count) 段", label: "已记录组间休息")
             }
         }
         .cardSurface()
@@ -204,44 +224,78 @@ struct WorkoutDetailView: View {
             rirValues: exerciseLogs.map(\.rir),
             goalMode: trainingGoalMode
         )
+        let exerciseVolume = TrainingMetrics.volume(for: exerciseLogs, unit: exercise.volumeUnit)
 
         return VStack(alignment: .leading, spacing: 13) {
             HStack {
                 Text(exercise.exerciseName)
                     .font(.headline)
                 Spacer()
-                Label(
-                    assessment.title,
-                    systemImage: recommendationIcon(assessment.recommendation)
-                )
+                if exercise.volumeUnit == .kilogram {
+                    Label(
+                        assessment.title,
+                        systemImage: recommendationIcon(assessment.recommendation)
+                    )
                     .font(.caption.bold())
                     .foregroundStyle(recommendationColor(assessment.recommendation))
+                } else {
+                    Text(exercise.volumeUnit.title)
+                        .font(.caption.bold())
+                        .foregroundStyle(AppTheme.accent)
+                }
+            }
+
+            if let feeling = exercise.feeling {
+                Label("\(feeling.emoji) \(feeling.title)", systemImage: "face.smiling")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .accessibilityLabel("动作体验，\(feeling.title)")
             }
 
             ForEach(exerciseLogs) { log in
-                HStack {
-                    Text("第 \(log.setNumber) 组")
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Text("\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps)")
-                        .font(.subheadline.bold().monospacedDigit())
-                    if let rir = log.rir {
-                        Text("RIR \(rir)")
-                            .font(.caption.monospacedDigit())
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("第 \(log.setNumber) 组")
                             .foregroundStyle(.secondary)
-                            .frame(width: 45, alignment: .trailing)
+                        Spacer()
+                        Text(setValueText(log, unit: exercise.volumeUnit))
+                            .font(.subheadline.bold().monospacedDigit())
+                        if let rir = log.rir {
+                            Text("RIR \(rir)")
+                                .font(.caption.monospacedDigit())
+                                .foregroundStyle(.secondary)
+                                .frame(width: 45, alignment: .trailing)
+                        }
                     }
+
+                    HStack(spacing: 10) {
+                        Text(
+                            "组训练量 \(Int(exercise.volumeUnit.volume(weight: log.actualWeight, reps: log.actualReps))) \(exercise.volumeUnit.symbol)"
+                        )
+                        if let restDurationSeconds = log.restDurationSeconds {
+                            Label(
+                                "组后休息 \(TrainingFormatters.clock(restDurationSeconds))",
+                                systemImage: "timer"
+                            )
+                        }
+                    }
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(.secondary)
                 }
                 .font(.subheadline)
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("容量 \(Int(assessment.currentVolume)) kg · \(trainingGoalMode.title)")
+                Text("训练量 \(Int(exerciseVolume)) \(exercise.volumeUnit.symbol)")
                     .font(.caption.bold().monospacedDigit())
                     .foregroundStyle(.white)
-                Text(assessment.detail)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                Text(
+                    exercise.volumeUnit == .kilogram
+                        ? assessment.detail
+                        : "该动作按 \(exercise.volumeUnit.symbol) 记录，不与 kg 训练容量相加。"
+                )
+                .font(.caption2)
+                .foregroundStyle(.secondary)
             }
             .padding(10)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -255,6 +309,19 @@ struct WorkoutDetailView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .cardSurface()
+    }
+
+    private func setValueText(_ log: SetLog, unit: ExerciseVolumeUnit) -> String {
+        switch unit {
+        case .count:
+            return "\(log.actualReps) 个"
+        case .meter:
+            return "\(TrainingFormatters.weight(log.actualWeight)) 米 × \(log.actualReps) 趟"
+        case .kilogram:
+            return "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps)"
+        case .bodyweight:
+            return "自重 × \(log.actualReps) 次"
+        }
     }
 
     private func miniMetric(_ value: String, label: String) -> some View {
@@ -293,19 +360,26 @@ private struct HistoricalSetEditDraft: Identifiable {
     var weight: Double
     var reps: Int
     var rir: Int?
+    var restDurationText: String
 
     init(
         id: UUID = UUID(),
         originalLogID: UUID? = nil,
         weight: Double = 0,
         reps: Int = 10,
-        rir: Int? = 2
+        rir: Int? = 2,
+        restDurationSeconds: Int? = nil
     ) {
         self.id = id
         self.originalLogID = originalLogID
         self.weight = weight
         self.reps = reps
         self.rir = rir
+        restDurationText = restDurationSeconds.map(String.init) ?? ""
+    }
+
+    var restValidation: RestDurationInputValidation {
+        RestDurationInput.validate(restDurationText)
     }
 }
 
@@ -316,6 +390,7 @@ private struct HistoricalExerciseEditDraft: Identifiable {
     let exerciseName: String
     let muscleGroup: String
     let equipment: String
+    let volumeUnit: ExerciseVolumeUnit
     var performanceNotes: String
     var sets: [HistoricalSetEditDraft]
 }
@@ -414,7 +489,7 @@ struct HistoricalWorkoutEditView: View {
             } header: {
                 Text("动作、完成组与动作备注")
             } footer: {
-                Text("修改后会重新计算训练容量，并用于下一次肌群恢复和动作建议。")
+                Text("修改训练量后会按动作单位自动重算；组后休息可按秒补录，最后一组没有后续训练时可留空。")
             }
         }
         .navigationTitle("编辑历史训练")
@@ -464,7 +539,8 @@ struct HistoricalWorkoutEditView: View {
                         originalLogID: log.id,
                         weight: log.actualWeight,
                         reps: log.actualReps,
-                        rir: log.rir
+                        rir: log.rir,
+                        restDurationSeconds: log.restDurationSeconds
                     )
                 }
             return HistoricalExerciseEditDraft(
@@ -474,6 +550,7 @@ struct HistoricalWorkoutEditView: View {
                 exerciseName: snapshot.exerciseName,
                 muscleGroup: snapshot.muscleGroup,
                 equipment: exercise?.equipment ?? "历史动作",
+                volumeUnit: snapshot.volumeUnit,
                 performanceNotes: snapshot.performanceNotes,
                 sets: setDrafts.isEmpty ? [HistoricalSetEditDraft()] : setDrafts
             )
@@ -489,6 +566,7 @@ struct HistoricalWorkoutEditView: View {
                 exerciseName: exercise.name,
                 muscleGroup: exercise.muscleGroup,
                 equipment: exercise.equipment,
+                volumeUnit: exercise.volumeUnit,
                 performanceNotes: "",
                 sets: [
                     HistoricalSetEditDraft(),
@@ -506,6 +584,13 @@ struct HistoricalWorkoutEditView: View {
         }
         guard exerciseDrafts.allSatisfy({ !$0.sets.isEmpty }) else {
             errorMessage = "每个动作至少需要保留一个完成组。"
+            return
+        }
+        if let error = exerciseDrafts
+            .flatMap(\.sets)
+            .compactMap({ $0.restValidation.errorMessage })
+            .first {
+            errorMessage = error
             return
         }
 
@@ -547,7 +632,8 @@ struct HistoricalWorkoutEditView: View {
                     targetWeight: draft.sets.map(\.weight).max() ?? 0,
                     restSeconds: libraryExercise?.defaultRestSeconds ?? 90,
                     muscleGroup: draft.muscleGroup,
-                    exerciseNotes: libraryExercise?.notes ?? ""
+                    exerciseNotes: libraryExercise?.notes ?? "",
+                    volumeUnit: draft.volumeUnit
                 )
                 modelContext.insert(snapshot)
             }
@@ -585,7 +671,8 @@ struct HistoricalWorkoutEditView: View {
                         actualReps: max(1, setDraft.reps),
                         rir: setDraft.rir,
                         isCompleted: true,
-                        completedAt: startedAt.addingTimeInterval(TimeInterval((index + 1) * 60))
+                        completedAt: startedAt.addingTimeInterval(TimeInterval((index + 1) * 60)),
+                        restDurationSeconds: setDraft.restValidation.seconds
                     )
                     modelContext.insert(log)
                 }
@@ -596,6 +683,12 @@ struct HistoricalWorkoutEditView: View {
                 log.actualReps = max(1, setDraft.reps)
                 log.rir = setDraft.rir
                 log.isCompleted = true
+                let normalizedRest = setDraft.restValidation.seconds
+                if log.restDurationSeconds != normalizedRest {
+                    log.restStartedAt = nil
+                    log.restEndedAt = nil
+                }
+                log.restDurationSeconds = normalizedRest
                 log.completedAt = log.completedAt ?? startedAt.addingTimeInterval(
                     TimeInterval((index + 1) * 60)
                 )
@@ -622,7 +715,7 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(draft.exerciseName)
                         .font(.headline)
-                    Text("\(draft.muscleGroup) · \(draft.equipment)")
+                    Text("\(draft.muscleGroup) · \(draft.equipment) · \(draft.volumeUnit.symbol)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -652,45 +745,86 @@ private struct HistoricalWorkoutEditExerciseCard: View {
 
             HStack {
                 Text("组").frame(width: 24)
-                Text("重量 kg").frame(maxWidth: .infinity)
-                Text("次数").frame(maxWidth: .infinity)
+                if draft.volumeUnit == .count {
+                    Text("数量 个").frame(maxWidth: .infinity)
+                } else if draft.volumeUnit == .bodyweight {
+                    Text("负重").frame(maxWidth: .infinity)
+                    Text("次数").frame(maxWidth: .infinity)
+                } else {
+                    Text("\(draft.volumeUnit.inputTitle) \(draft.volumeUnit.symbol)")
+                        .frame(maxWidth: .infinity)
+                    Text(draft.volumeUnit.repetitionTitle).frame(maxWidth: .infinity)
+                }
                 Text("RIR").frame(width: 54)
             }
             .font(.caption)
             .foregroundStyle(.secondary)
 
             ForEach(Array(draft.sets.indices), id: \.self) { index in
-                HStack {
-                    Text("\(index + 1)")
-                        .font(.subheadline.bold().monospacedDigit())
-                        .frame(width: 24)
-                    TextField(
-                        "kg",
-                        value: $draft.sets[index].weight,
-                        format: .number.precision(.fractionLength(0...1))
-                    )
-                    .keyboardType(.decimalPad)
-                    .multilineTextAlignment(.center)
-                    .textFieldStyle(.roundedBorder)
-
-                    TextField(
-                        "次数",
-                        value: $draft.sets[index].reps,
-                        format: .number
-                    )
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.center)
-                    .textFieldStyle(.roundedBorder)
-
-                    Menu {
-                        Button("不记录") { draft.sets[index].rir = nil }
-                        ForEach(0...5, id: \.self) { value in
-                            Button("RIR \(value)") { draft.sets[index].rir = value }
+                VStack(spacing: 8) {
+                    HStack {
+                        Text("\(index + 1)")
+                            .font(.subheadline.bold().monospacedDigit())
+                            .frame(width: 24)
+                        if draft.volumeUnit.recordsNumericLoad {
+                            TextField(
+                                draft.volumeUnit.symbol,
+                                value: $draft.sets[index].weight,
+                                format: .number.precision(.fractionLength(0...3))
+                            )
+                            .keyboardType(.decimalPad)
+                            .multilineTextAlignment(.center)
+                            .textFieldStyle(.roundedBorder)
+                        } else if draft.volumeUnit == .bodyweight {
+                            Text("自重")
+                                .font(.caption.bold())
+                                .foregroundStyle(AppTheme.accent)
+                                .frame(maxWidth: .infinity)
                         }
-                    } label: {
-                        Text(draft.sets[index].rir.map(String.init) ?? "–")
-                            .font(.subheadline.monospacedDigit())
-                            .frame(width: 54)
+
+                        TextField(
+                            draft.volumeUnit == .count ? "数量" : draft.volumeUnit.repetitionTitle,
+                            value: $draft.sets[index].reps,
+                            format: .number
+                        )
+                        .keyboardType(.numberPad)
+                        .multilineTextAlignment(.center)
+                        .textFieldStyle(.roundedBorder)
+
+                        Menu {
+                            Button("不记录") { draft.sets[index].rir = nil }
+                            ForEach(0...5, id: \.self) { value in
+                                Button("RIR \(value)") { draft.sets[index].rir = value }
+                            }
+                        } label: {
+                            Text(draft.sets[index].rir.map(String.init) ?? "–")
+                                .font(.subheadline.monospacedDigit())
+                                .frame(width: 54)
+                        }
+                    }
+
+                    HStack {
+                        Label("组后休息", systemImage: "timer")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        TextField("未记录", text: restDurationBinding(at: index))
+                            .keyboardType(.numberPad)
+                            .multilineTextAlignment(.trailing)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 88)
+                            .accessibilityLabel("第 \(index + 1) 组休息秒数")
+                            .accessibilityIdentifier("历史编辑第 \(index + 1) 组休息秒数")
+                        Text("秒")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    if let message = draft.sets[index].restValidation.errorMessage {
+                        Text(message)
+                            .font(.caption2)
+                            .foregroundStyle(.red)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .accessibilityIdentifier("第 \(index + 1) 组休息秒数错误")
                     }
                 }
             }
@@ -706,12 +840,17 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                     HistoricalSetEditDraft(
                         weight: last.weight,
                         reps: last.reps,
-                        rir: last.rir
+                        rir: last.rir,
+                        restDurationSeconds: nil
                     )
                 }
             )
         } else if count < draft.sets.count {
             draft.sets.removeLast(draft.sets.count - count)
         }
+    }
+
+    private func restDurationBinding(at index: Int) -> Binding<String> {
+        $draft.sets[index].restDurationText
     }
 }

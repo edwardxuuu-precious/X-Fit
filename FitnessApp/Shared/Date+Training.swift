@@ -1,6 +1,11 @@
 import Foundation
 
 extension Date {
+    private static let englishMonthAbbreviations = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ]
+
     var startOfDay: Date {
         Calendar.current.startOfDay(for: self)
     }
@@ -15,6 +20,16 @@ extension Date {
 
     func isSameDay(as other: Date) -> Bool {
         Calendar.current.isDate(self, inSameDayAs: other)
+    }
+
+    var compactDayMonthLabel: String {
+        let components = Calendar.current.dateComponents([.day, .month], from: self)
+        guard let day = components.day,
+              let month = components.month,
+              Self.englishMonthAbbreviations.indices.contains(month - 1) else {
+            return ""
+        }
+        return "\(day)/\(Self.englishMonthAbbreviations[month - 1])"
     }
 }
 

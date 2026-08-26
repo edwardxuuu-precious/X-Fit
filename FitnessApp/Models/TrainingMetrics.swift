@@ -117,16 +117,237 @@ struct ProgressionAssessment: Equatable {
     let hasCompleteRIR: Bool
 }
 
+struct TrainingVolumeTrendPoint: Identifiable, Equatable {
+    let date: Date
+    let volume: Double
+    let completedSets: Int
+    let sessionCount: Int
+
+    var id: Date { date }
+}
+
+struct ExerciseVolumeTrend: Identifiable, Equatable {
+    let key: String
+    let name: String
+    let unit: ExerciseVolumeUnit
+    let points: [TrainingVolumeTrendPoint]
+    let totalVolume: Double
+    let completedSets: Int
+    let sessionCount: Int
+
+    var id: String { key }
+}
+
+struct TrainingVolumeTrends: Equatable {
+    let overall: [TrainingVolumeTrendPoint]
+    let exercises: [ExerciseVolumeTrend]
+}
+
+private struct TrainingVolumeAccumulator {
+    var volume = 0.0
+    var completedSets = 0
+    var sessionIDs: Set<UUID> = []
+
+    mutating func add(_ log: SetLog, unit: ExerciseVolumeUnit, sessionID: UUID) {
+        let nextVolume = volume + unit.volume(weight: log.actualWeight, reps: log.actualReps)
+        if nextVolume.isFinite {
+            volume = nextVolume
+        }
+        completedSets += 1
+        sessionIDs.insert(sessionID)
+    }
+}
+
 enum TrainingMetrics {
-    static func volume(for logs: [SetLog]) -> Double {
+    static func volume(
+        for logs: [SetLog],
+        unit: ExerciseVolumeUnit = .kilogram
+    ) -> Double {
         logs
-            .filter(\.isCompleted)
-            .reduce(0) { $0 + ($1.actualWeight * Double($1.actualReps)) }
+            .filter { $0.isCompleted && !$0.isWarmup }
+            .reduce(0) { total, log in
+                let nextTotal = total + unit.volume(
+                    weight: log.actualWeight,
+                    reps: log.actualReps
+                )
+                return nextTotal.isFinite ? nextTotal : total
+            }
+    }
+
+    static func volume(
+        for logs: [SetLog],
+        sessionExercises: [SessionExercise],
+        unit: ExerciseVolumeUnit = .kilogram
+    ) -> Double {
+        let matchingSnapshotIDs = Set(
+            sessionExercises
+                .filter { $0.volumeUnit == unit }
+                .map(\.id)
+        )
+        return volume(
+            for: logs.filter { matchingSnapshotIDs.contains($0.sessionExerciseID) },
+            unit: unit
+        )
+    }
+
+    static func volumeTotals(
+        for logs: [SetLog],
+        sessionExercises: [SessionExercise]
+    ) -> [ExerciseVolumeUnit: Double] {
+        Dictionary(uniqueKeysWithValues: ExerciseVolumeUnit.allCases.map { unit in
+            (
+                unit,
+                volume(for: logs, sessionExercises: sessionExercises, unit: unit)
+            )
+        })
     }
 
     static func estimatedOneRepMax(weight: Double, reps: Int) -> Double {
         guard weight > 0, reps > 0 else { return 0 }
         return weight * (1 + Double(reps) / 30)
+    }
+
+    static func volumeTrends(
+        calendar: Calendar = .current,
+        sessions: [WorkoutSession],
+        sessionExercises: [SessionExercise],
+        exercises: [Exercise],
+        setLogs: [SetLog]
+    ) -> TrainingVolumeTrends {
+        let completedSessions = sessions.filter { $0.status == .completed }
+        var sessionByID: [UUID: WorkoutSession] = [:]
+        for session in completedSessions where sessionByID[session.id] == nil {
+            sessionByID[session.id] = session
+        }
+
+        var snapshotNameByID: [UUID: String] = [:]
+        var snapshotUnitByID: [UUID: ExerciseVolumeUnit] = [:]
+        for snapshot in sessionExercises where snapshotNameByID[snapshot.id] == nil {
+            let name = snapshot.exerciseName.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !name.isEmpty {
+                snapshotNameByID[snapshot.id] = name
+            }
+            snapshotUnitByID[snapshot.id] = snapshot.volumeUnit
+        }
+
+        var exerciseNameByID: [UUID: String] = [:]
+        var exerciseUnitByID: [UUID: ExerciseVolumeUnit] = [:]
+        var approvedCanonicalByExerciseID: [UUID: String] = [:]
+        var approvedDisplayNameByExerciseID: [UUID: String] = [:]
+        for exercise in exercises where exerciseNameByID[exercise.id] == nil {
+            let name = exercise.name.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !name.isEmpty {
+                exerciseNameByID[exercise.id] = name
+            }
+            exerciseUnitByID[exercise.id] = exercise.volumeUnit
+            if let canonicalID = exercise.approvedCanonicalID?.trimmingCharacters(in: .whitespacesAndNewlines),
+               !canonicalID.isEmpty {
+                approvedCanonicalByExerciseID[exercise.id] = canonicalID
+                approvedDisplayNameByExerciseID[exercise.id] = exercise.approvedStandardNameZH
+                    ?? exercise.name
+            }
+        }
+
+        var overallByDay: [Date: TrainingVolumeAccumulator] = [:]
+        var exerciseByDay: [String: [Date: TrainingVolumeAccumulator]] = [:]
+        var displayNameByKey: [String: String] = [:]
+        var unitByKey: [String: ExerciseVolumeUnit] = [:]
+
+        for log in setLogs where log.isCompleted && !log.isWarmup {
+            guard let session = sessionByID[log.sessionID] else { continue }
+            let day = calendar.startOfDay(for: session.startedAt)
+
+            let unit = snapshotUnitByID[log.sessionExerciseID]
+                ?? exerciseUnitByID[log.exerciseID]
+                ?? .kilogram
+            if unit == .kilogram {
+                var overall = overallByDay[day] ?? TrainingVolumeAccumulator()
+                overall.add(log, unit: unit, sessionID: session.id)
+                overallByDay[day] = overall
+            }
+
+            guard let exerciseName = snapshotNameByID[log.sessionExerciseID]
+                    ?? exerciseNameByID[log.exerciseID] else {
+                continue
+            }
+            let approvedCanonical = approvedCanonicalByExerciseID[log.exerciseID]
+            let nameKey = approvedCanonical.map { "canonical:\($0)" }
+                ?? exerciseHistoryKey(for: exerciseName)
+            guard !nameKey.isEmpty else { continue }
+            let key = "\(nameKey)|\(unit.rawValue)"
+            let displayName = approvedDisplayNameByExerciseID[log.exerciseID]
+                ?? historicalDisplayName(for: exerciseName)
+            displayNameByKey[key] = displayNameByKey[key] ?? displayName
+            unitByKey[key] = unit
+
+            var dayBuckets = exerciseByDay[key] ?? [:]
+            var exerciseAccumulator = dayBuckets[day] ?? TrainingVolumeAccumulator()
+            exerciseAccumulator.add(log, unit: unit, sessionID: session.id)
+            dayBuckets[day] = exerciseAccumulator
+            exerciseByDay[key] = dayBuckets
+        }
+
+        let exerciseTrends = exerciseByDay.compactMap { key, buckets -> ExerciseVolumeTrend? in
+            guard let name = displayNameByKey[key], let unit = unitByKey[key] else { return nil }
+            let points = volumeTrendPoints(from: buckets)
+            return ExerciseVolumeTrend(
+                key: key,
+                name: name,
+                unit: unit,
+                points: points,
+                totalVolume: points.reduce(0) { $0 + $1.volume },
+                completedSets: points.reduce(0) { $0 + $1.completedSets },
+                sessionCount: points.reduce(0) { $0 + $1.sessionCount }
+            )
+        }
+        .sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending }
+
+        return TrainingVolumeTrends(
+            overall: volumeTrendPoints(from: overallByDay),
+            exercises: exerciseTrends
+        )
+    }
+
+    static func recentOverallVolumePoints(
+        through date: Date = .now,
+        limit: Int = 6,
+        calendar: Calendar = .current,
+        sessions: [WorkoutSession],
+        sessionExercises: [SessionExercise],
+        exercises: [Exercise],
+        setLogs: [SetLog]
+    ) -> [TrainingVolumeTrendPoint] {
+        guard limit > 0,
+              let endOfDay = calendar.date(
+                byAdding: .day,
+                value: 1,
+                to: calendar.startOfDay(for: date)
+              ) else {
+            return []
+        }
+        let points = volumeTrends(
+            calendar: calendar,
+            sessions: sessions,
+            sessionExercises: sessionExercises,
+            exercises: exercises,
+            setLogs: setLogs
+        ).overall.filter { $0.date < endOfDay }
+        return Array(points.suffix(limit))
+    }
+
+    static func exerciseHistoryKey(for name: String) -> String {
+        let normalized = name
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(
+                options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive],
+                locale: Locale(identifier: "zh_Hans_CN")
+            )
+            .lowercased()
+        return normalized == "严格深蹲" ? "深蹲" : normalized
+    }
+
+    private static func historicalDisplayName(for name: String) -> String {
+        exerciseHistoryKey(for: name) == exerciseHistoryKey(for: "深蹲") ? "深蹲" : name
     }
 
     static func progression(
@@ -262,6 +483,7 @@ enum TrainingMetrics {
         calendar sourceCalendar: Calendar = .current,
         schedules: [ScheduledWorkout],
         sessions: [WorkoutSession],
+        sessionExercises: [SessionExercise] = [],
         setLogs: [SetLog]
     ) -> TrainingProgressSummary {
         var calendar = sourceCalendar
@@ -297,8 +519,15 @@ enum TrainingMetrics {
         let previousLogs = setLogs.filter {
             $0.isCompleted && !$0.isWarmup && previousSessionIDs.contains($0.sessionID)
         }
-        let previousVolume = volume(for: previousLogs)
-        let currentVolume = volume(for: workingLogs)
+        let kilogramSnapshotIDs = Set(
+            sessionExercises.filter { $0.volumeUnit == .kilogram }.map(\.id)
+        )
+        let kilogramLogs: ([SetLog]) -> [SetLog] = { logs in
+            guard !sessionExercises.isEmpty else { return logs }
+            return logs.filter { kilogramSnapshotIDs.contains($0.sessionExerciseID) }
+        }
+        let previousVolume = volume(for: kilogramLogs(previousLogs))
+        let currentVolume = volume(for: kilogramLogs(workingLogs))
         let volumeChangePercent = previousVolume > 0
             ? (currentVolume - previousVolume) / previousVolume * 100
             : nil
@@ -324,7 +553,7 @@ enum TrainingMetrics {
                 label: progressBucketLabel(for: bucketStart, period: period, calendar: calendar),
                 completedSessions: bucketSessions.count,
                 workingSets: bucketLogs.count,
-                volume: volume(for: bucketLogs),
+                volume: volume(for: kilogramLogs(bucketLogs)),
                 activeMinutes: activeMinutes(for: bucketSessions)
             )
         }
@@ -431,5 +660,19 @@ enum TrainingMetrics {
             }
             return total + max(1, Int(completedAt.timeIntervalSince(session.startedAt) / 60))
         }
+    }
+
+    private static func volumeTrendPoints(
+        from buckets: [Date: TrainingVolumeAccumulator]
+    ) -> [TrainingVolumeTrendPoint] {
+        buckets.map { date, accumulator in
+            TrainingVolumeTrendPoint(
+                date: date,
+                volume: accumulator.volume,
+                completedSets: accumulator.completedSets,
+                sessionCount: accumulator.sessionIDs.count
+            )
+        }
+        .sorted { $0.date < $1.date }
     }
 }

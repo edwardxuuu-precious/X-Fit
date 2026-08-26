@@ -1,0 +1,841 @@
+{
+  "generated_at": "2026-08-03T22:58:17+08:00",
+  "status": "proposal_only",
+  "exercises": [
+    {
+      "canonical_id": "hammer_strength_mts_iso_lateral_decline_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "Hammer Strength MTS Iso-Lateral 下斜推胸",
+      "standard_en_candidate": "Hammer Strength MTS Iso-Lateral Decline Press",
+      "exercise_family": "下斜推胸",
+      "raw_names": [
+        "MTS 下斜卧推"
+      ],
+      "aliases": [
+        "MTS 下斜卧推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "hammer_strength_mts_iso_lateral_row",
+      "status": "candidate_only",
+      "standard_zh_candidate": "Hammer Strength MTS Iso-Lateral 划船",
+      "standard_en_candidate": "Hammer Strength MTS Iso-Lateral Row",
+      "exercise_family": "水平拉",
+      "raw_names": [
+        "MTS 划船"
+      ],
+      "aliases": [
+        "MTS 划船"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_v_squat",
+      "status": "candidate_only",
+      "standard_zh_candidate": "V 型深蹲机",
+      "standard_en_candidate": "V-Squat Machine",
+      "exercise_family": "深蹲",
+      "raw_names": [
+        "V 型深蹲"
+      ],
+      "aliases": [
+        "V 型深蹲"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_triceps_pushdown",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索三头肌下压",
+      "standard_en_candidate": "Cable Triceps Pushdown",
+      "exercise_family": "肘伸",
+      "raw_names": [
+        "三头下压",
+        "绳索下压"
+      ],
+      "aliases": [
+        "三头下压",
+        "绳索下压"
+      ],
+      "review_statuses": [
+        "merge_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_triceps_press_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "器械三头肌下压（待确认）",
+      "standard_en_candidate": "Machine Triceps Press (Unverified)",
+      "exercise_family": "肘伸",
+      "raw_names": [
+        "三头下压机"
+      ],
+      "aliases": [
+        "三头下压机"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_deltoid_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "三角肌训练机（待确认）",
+      "standard_en_candidate": "Deltoid Machine (Unverified)",
+      "exercise_family": "肩部训练",
+      "raw_names": [
+        "三角肌训练机"
+      ],
+      "aliases": [
+        "三角肌训练机"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "incline_barbell_bench_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "上斜杠铃卧推",
+      "standard_en_candidate": "Incline Barbell Bench Press",
+      "exercise_family": "上斜推胸",
+      "raw_names": [
+        "上斜卧推"
+      ],
+      "aliases": [
+        "上斜卧推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "incline_dumbbell_bench_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "上斜哑铃卧推",
+      "standard_en_candidate": "Incline Dumbbell Bench Press",
+      "exercise_family": "上斜推胸",
+      "raw_names": [
+        "上斜哑铃卧推"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_upper_back_pulldown_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "上背下拉机（待确认）",
+      "standard_en_candidate": "Upper-Back Pulldown Machine (Unverified)",
+      "exercise_family": "垂直拉",
+      "raw_names": [
+        "上背下拉机"
+      ],
+      "aliases": [
+        "上背下拉机"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_upper_back_row_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "上背划船机（待确认）",
+      "standard_en_candidate": "Upper-Back Row Machine (Unverified)",
+      "exercise_family": "水平拉",
+      "raw_names": [
+        "上背划船机"
+      ],
+      "aliases": [
+        "上背划船机"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_strict_squat_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "严格深蹲（待确认）",
+      "standard_en_candidate": "Strict Squat (Unverified)",
+      "exercise_family": "深蹲",
+      "raw_names": [
+        "严格深蹲"
+      ],
+      "aliases": [
+        "严格深蹲"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "bodyweight_leg_raise",
+      "status": "candidate_only",
+      "standard_zh_candidate": "举腿",
+      "standard_en_candidate": "Leg Raise",
+      "exercise_family": "核心屈曲",
+      "raw_names": [
+        "举腿"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_single_leg_pendulum_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "单腿钟摆式腿推/深蹲（待确认）",
+      "standard_en_candidate": "Single-Leg Pendulum Press/Squat (Unverified)",
+      "exercise_family": "单腿推蹲",
+      "raw_names": [
+        "单腿钟摆推举"
+      ],
+      "aliases": [
+        "单腿钟摆推举"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "smith_machine_incline_bench_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "史密斯机上斜卧推",
+      "standard_en_candidate": "Smith Machine Incline Bench Press",
+      "exercise_family": "上斜推胸",
+      "raw_names": [
+        "史密斯上斜卧推"
+      ],
+      "aliases": [
+        "史密斯上斜卧推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "smith_machine_bench_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "史密斯机平板卧推",
+      "standard_en_candidate": "Smith Machine Bench Press",
+      "exercise_family": "水平推胸",
+      "raw_names": [
+        "史密斯卧推"
+      ],
+      "aliases": [
+        "史密斯卧推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "smith_machine_shoulder_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "史密斯机肩上推举",
+      "standard_en_candidate": "Smith Machine Shoulder Press",
+      "exercise_family": "垂直推",
+      "raw_names": [
+        "史密斯肩推"
+      ],
+      "aliases": [
+        "史密斯肩推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "dumbbell_lateral_raise",
+      "status": "candidate_only",
+      "standard_zh_candidate": "哑铃侧平举",
+      "standard_en_candidate": "Dumbbell Lateral Raise",
+      "exercise_family": "肩外展",
+      "raw_names": [
+        "哑铃侧平举"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "dumbbell_biceps_curl",
+      "status": "candidate_only",
+      "standard_zh_candidate": "哑铃二头肌弯举",
+      "standard_en_candidate": "Dumbbell Biceps Curl",
+      "exercise_family": "肘屈",
+      "raw_names": [
+        "哑铃弯举"
+      ],
+      "aliases": [
+        "哑铃弯举"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "dumbbell_walking_lunge",
+      "status": "candidate_only",
+      "standard_zh_candidate": "哑铃行走弓步",
+      "standard_en_candidate": "Dumbbell Walking Lunge",
+      "exercise_family": "弓步",
+      "raw_names": [
+        "哑铃行走弓步"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_incline_chest_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿上斜推胸机",
+      "standard_en_candidate": "Incline Chest Press Machine",
+      "exercise_family": "上斜推胸",
+      "raw_names": [
+        "器械上斜卧推",
+        "坐姿上斜推胸机"
+      ],
+      "aliases": [
+        "器械上斜卧推"
+      ],
+      "review_statuses": [
+        "merge_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_decline_chest_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿下斜推胸机",
+      "standard_en_candidate": "Decline Chest Press Machine",
+      "exercise_family": "下斜推胸",
+      "raw_names": [
+        "器械下斜卧推",
+        "坐姿下斜推胸机"
+      ],
+      "aliases": [
+        "器械下斜卧推"
+      ],
+      "review_statuses": [
+        "merge_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_shoulder_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "器械肩上推举",
+      "standard_en_candidate": "Shoulder Press Machine",
+      "exercise_family": "垂直推",
+      "raw_names": [
+        "器械肩推"
+      ],
+      "aliases": [
+        "器械肩推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_seated_row",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿器械划船",
+      "standard_en_candidate": "Seated Row Machine",
+      "exercise_family": "水平拉",
+      "raw_names": [
+        "坐姿划船"
+      ],
+      "aliases": [
+        "坐姿划船"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "seated_dumbbell_lateral_raise",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿哑铃侧平举",
+      "standard_en_candidate": "Seated Dumbbell Lateral Raise",
+      "exercise_family": "肩外展",
+      "raw_names": [
+        "坐姿哑铃侧平举"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "seated_dumbbell_shoulder_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿哑铃肩上推举",
+      "standard_en_candidate": "Seated Dumbbell Shoulder Press",
+      "exercise_family": "垂直推",
+      "raw_names": [
+        "坐姿推举",
+        "坐姿肩推"
+      ],
+      "aliases": [
+        "坐姿推举",
+        "坐姿肩推"
+      ],
+      "review_statuses": [
+        "merge_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_seated_chest_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿推胸机",
+      "standard_en_candidate": "Seated Chest Press Machine",
+      "exercise_family": "水平推胸",
+      "raw_names": [
+        "坐姿推胸机"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_pec_deck_fly",
+      "status": "candidate_only",
+      "standard_zh_candidate": "坐姿器械夹胸（蝴蝶机飞鸟）",
+      "standard_en_candidate": "Pec Deck Fly",
+      "exercise_family": "水平肩内收",
+      "raw_names": [
+        "坐姿飞鸟"
+      ],
+      "aliases": [
+        "坐姿飞鸟"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "bodyweight_pull_up",
+      "status": "candidate_only",
+      "standard_zh_candidate": "引体向上",
+      "standard_en_candidate": "Pull-Up",
+      "exercise_family": "垂直拉",
+      "raw_names": [
+        "引体向上"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_bent_over_row",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃俯身划船",
+      "standard_en_candidate": "Barbell Bent-Over Row",
+      "exercise_family": "水平拉",
+      "raw_names": [
+        "杠铃划船"
+      ],
+      "aliases": [
+        "杠铃划船"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_bench_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃平板卧推",
+      "standard_en_candidate": "Barbell Bench Press",
+      "exercise_family": "水平推胸",
+      "raw_names": [
+        "杠铃卧推"
+      ],
+      "aliases": [
+        "杠铃卧推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_back_squat",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃后蹲（待确认）",
+      "standard_en_candidate": "Barbell Back Squat (Pending Confirmation)",
+      "exercise_family": "深蹲",
+      "raw_names": [
+        "深蹲"
+      ],
+      "aliases": [
+        "深蹲"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_thruster_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃火箭推（疑似前蹲推举）",
+      "standard_en_candidate": "Barbell Thruster (Unverified)",
+      "exercise_family": "蹲推",
+      "raw_names": [
+        "火箭推"
+      ],
+      "aliases": [
+        "火箭推"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "close_grip_lat_pulldown",
+      "status": "candidate_only",
+      "standard_zh_candidate": "窄握高位下拉",
+      "standard_en_candidate": "Close-Grip Lat Pulldown",
+      "exercise_family": "垂直拉",
+      "raw_names": [
+        "窄握下拉"
+      ],
+      "aliases": [
+        "窄握下拉"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "standing_dumbbell_shoulder_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "站姿哑铃肩上推举",
+      "standard_en_candidate": "Standing Dumbbell Shoulder Press",
+      "exercise_family": "垂直推",
+      "raw_names": [
+        "站姿哑铃肩推"
+      ],
+      "aliases": [
+        "站姿哑铃肩推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_standing_calf_raise",
+      "status": "candidate_only",
+      "standard_zh_candidate": "器械站姿提踵",
+      "standard_en_candidate": "Standing Calf Raise Machine",
+      "exercise_family": "跖屈",
+      "raw_names": [
+        "站姿提踵"
+      ],
+      "aliases": [
+        "站姿提踵"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "standing_cable_chest_fly",
+      "status": "candidate_only",
+      "standard_zh_candidate": "站姿绳索夹胸",
+      "standard_en_candidate": "Standing Cable Chest Fly",
+      "exercise_family": "水平肩内收",
+      "raw_names": [
+        "站姿绳索夹胸",
+        "绳索夹胸"
+      ],
+      "aliases": [
+        "绳索夹胸"
+      ],
+      "review_statuses": [
+        "merge_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_standing_hip_thrust_unverified",
+      "status": "candidate_only",
+      "standard_zh_candidate": "站姿髋推机（待确认）",
+      "standard_en_candidate": "Standing Hip Thrust Machine (Unverified)",
+      "exercise_family": "髋伸",
+      "raw_names": [
+        "站姿髋推"
+      ],
+      "aliases": [
+        "站姿髋推"
+      ],
+      "review_statuses": [
+        "unresolved"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_lateral_raise",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索侧平举",
+      "standard_en_candidate": "Cable Lateral Raise",
+      "exercise_family": "肩外展",
+      "raw_names": [
+        "绳索侧平举"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_crunch",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索卷腹",
+      "standard_en_candidate": "Cable Crunch",
+      "exercise_family": "躯干屈曲",
+      "raw_names": [
+        "绳索卷腹"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_rear_delt_fly",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索反向飞鸟（后三角肌飞鸟）",
+      "standard_en_candidate": "Cable Rear Delt Fly",
+      "exercise_family": "水平肩外展",
+      "raw_names": [
+        "绳索反向飞鸟"
+      ],
+      "aliases": [
+        "绳索反向飞鸟"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_trunk_rotation",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索躯干旋转",
+      "standard_en_candidate": "Cable Trunk Rotation",
+      "exercise_family": "躯干旋转",
+      "raw_names": [
+        "绳索躯干旋转"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_romanian_deadlift",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃罗马尼亚硬拉",
+      "standard_en_candidate": "Barbell Romanian Deadlift",
+      "exercise_family": "髋铰链",
+      "raw_names": [
+        "罗马尼亚硬拉"
+      ],
+      "aliases": [
+        "罗马尼亚硬拉"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_leg_press",
+      "status": "candidate_only",
+      "standard_zh_candidate": "器械腿举",
+      "standard_en_candidate": "Leg Press Machine",
+      "exercise_family": "腿部推蹬",
+      "raw_names": [
+        "腿举"
+      ],
+      "aliases": [
+        "腿举"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_leg_curl",
+      "status": "candidate_only",
+      "standard_zh_candidate": "器械腿弯举",
+      "standard_en_candidate": "Leg Curl Machine",
+      "exercise_family": "膝屈",
+      "raw_names": [
+        "腿弯举"
+      ],
+      "aliases": [
+        "腿弯举"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_hip_thrust",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃臀推",
+      "standard_en_candidate": "Barbell Hip Thrust",
+      "exercise_family": "髋伸",
+      "raw_names": [
+        "臀推"
+      ],
+      "aliases": [
+        "臀推"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "machine_pendulum_squat",
+      "status": "candidate_only",
+      "standard_zh_candidate": "钟摆深蹲机",
+      "standard_en_candidate": "Pendulum Squat Machine",
+      "exercise_family": "深蹲",
+      "raw_names": [
+        "钟摆深蹲"
+      ],
+      "aliases": [
+        "钟摆深蹲"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "cable_face_pull",
+      "status": "candidate_only",
+      "standard_zh_candidate": "绳索面拉",
+      "standard_en_candidate": "Cable Face Pull",
+      "exercise_family": "肩外旋与水平拉",
+      "raw_names": [
+        "面拉"
+      ],
+      "aliases": [
+        "面拉"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "behind_neck_lat_pulldown",
+      "status": "candidate_only",
+      "standard_zh_candidate": "颈后高位下拉",
+      "standard_en_candidate": "Behind-the-Neck Lat Pulldown",
+      "exercise_family": "垂直拉",
+      "raw_names": [
+        "颈后下拉"
+      ],
+      "aliases": [
+        "颈后下拉"
+      ],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "lat_pulldown",
+      "status": "candidate_only",
+      "standard_zh_candidate": "高位下拉",
+      "standard_en_candidate": "Lat Pulldown",
+      "exercise_family": "垂直拉",
+      "raw_names": [
+        "高位下拉"
+      ],
+      "aliases": [],
+      "review_statuses": [
+        "approval_ready"
+      ],
+      "auto_merge_allowed": false
+    },
+    {
+      "canonical_id": "barbell_power_clean",
+      "status": "candidate_only",
+      "standard_zh_candidate": "杠铃力量翻",
+      "standard_en_candidate": "Barbell Power Clean",
+      "exercise_family": "奥举拉与接杠",
+      "raw_names": [
+        "高翻"
+      ],
+      "aliases": [
+        "高翻"
+      ],
+      "review_statuses": [
+        "variant_review"
+      ],
+      "auto_merge_allowed": false
+    }
+  ]
+}

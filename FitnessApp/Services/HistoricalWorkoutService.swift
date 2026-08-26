@@ -5,6 +5,8 @@ struct HistoricalSetInput {
     let weight: Double
     let reps: Int
     let rir: Int?
+    var startedAt: Date? = nil
+    var restDurationSeconds: Int? = nil
 }
 
 struct HistoricalExerciseInput {
@@ -28,6 +30,7 @@ enum HistoricalWorkoutServiceError: LocalizedError {
     case emptySets
     case missingExercise
     case duplicateRecord
+    case invalidRestDuration
 
     var errorDescription: String? {
         switch self {
@@ -36,6 +39,8 @@ enum HistoricalWorkoutServiceError: LocalizedError {
         case .emptySets: return "每个动作至少需要一组完成记录。"
         case .missingExercise: return "补录动作已不存在，请重新选择。"
         case .duplicateRecord: return "相同时间和名称的训练已经存在，请勿重复补录。"
+        case .invalidRestDuration:
+            return "组后休息必须在 0–\(RestDurationInput.maximumSeconds) 秒之间。"
         }
     }
 }
@@ -51,6 +56,14 @@ enum HistoricalWorkoutService {
         guard !input.exercises.isEmpty else { throw HistoricalWorkoutServiceError.emptyExercises }
         guard input.exercises.allSatisfy({ !$0.sets.isEmpty }) else {
             throw HistoricalWorkoutServiceError.emptySets
+        }
+        guard input.exercises
+            .flatMap(\.sets)
+            .allSatisfy({ set in
+                guard let rest = set.restDurationSeconds else { return true }
+                return (0...RestDurationInput.maximumSeconds).contains(rest)
+            }) else {
+            throw HistoricalWorkoutServiceError.invalidRestDuration
         }
 
         let existingSessions = try context.fetch(FetchDescriptor<WorkoutSession>())
@@ -98,6 +111,8 @@ enum HistoricalWorkoutService {
                 restSeconds: exercise.defaultRestSeconds,
                 muscleGroup: exercise.muscleGroup,
                 exerciseNotes: exercise.notes,
+                referenceURL: exercise.referenceURL,
+                volumeUnit: exercise.volumeUnit,
                 performanceNotes: item.performanceNotes.trimmingCharacters(in: .whitespacesAndNewlines)
             )
             context.insert(snapshot)
@@ -115,7 +130,9 @@ enum HistoricalWorkoutService {
                         actualReps: max(1, set.reps),
                         rir: set.rir,
                         isCompleted: true,
-                        completedAt: input.startedAt.addingTimeInterval(TimeInterval((setIndex + 1) * 60))
+                        startedAt: set.startedAt,
+                        completedAt: input.startedAt.addingTimeInterval(TimeInterval((setIndex + 1) * 60)),
+                        restDurationSeconds: set.restDurationSeconds
                     )
                 )
             }

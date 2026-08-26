@@ -6,7 +6,9 @@ struct ScheduleView: View {
     @Query(sort: \ScheduledWorkout.plannedDate) private var schedules: [ScheduledWorkout]
     @Query(sort: \WorkoutTemplate.name) private var templates: [WorkoutTemplate]
 
+    @State private var showAddOptions = false
     @State private var showAdd = false
+    @State private var showDailyBuilder = false
     @State private var rescheduling: ScheduledWorkout?
     @State private var skipping: ScheduledWorkout?
     @State private var skipReason = ""
@@ -25,7 +27,8 @@ struct ScheduleView: View {
                     eyebrow: "PLAN YOUR WEEK",
                     title: "训练日程",
                     trailingSystemImage: "plus",
-                    trailingAction: { showAdd = true }
+                    trailingAccessibilityLabel: "新增训练安排",
+                    trailingAction: { showAddOptions = true }
                 )
 
                 legend
@@ -50,6 +53,24 @@ struct ScheduleView: View {
         }
         .screenBackground()
         .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(isPresented: $showDailyBuilder) {
+            DailyWorkoutBuilderView(initialDate: .now)
+        }
+        .confirmationDialog(
+            "新增训练安排",
+            isPresented: $showAddOptions,
+            titleVisibility: .visible
+        ) {
+            Button("自选动作编排") {
+                showDailyBuilder = true
+            }
+            Button("从现有模板安排") {
+                showAdd = true
+            }
+            Button("取消", role: .cancel) {}
+        } message: {
+            Text("自选编排可按日期自由选择动作；模板安排会复用已经建立的训练模板。")
+        }
         .sheet(isPresented: $showAdd) {
             AddScheduledWorkoutView(templates: templates)
                 .preferredColorScheme(.dark)
@@ -108,85 +129,111 @@ struct ScheduleView: View {
     }
 
     private func scheduleRow(_ schedule: ScheduledWorkout) -> some View {
-        HStack(spacing: 14) {
-            VStack(spacing: 2) {
-                Text(schedule.plannedDate, format: .dateTime.day())
-                    .font(.title2.weight(.black).monospacedDigit())
-                    .foregroundStyle(.white)
-                Text(schedule.plannedDate, format: .dateTime.weekday(.short))
-                    .font(.caption2.bold())
-                    .foregroundStyle(statusColor(schedule.status))
-            }
-            .frame(width: 54, height: 58)
-            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 14))
-
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 6) {
-                    Text(schedule.templateName)
-                        .font(.subheadline.bold())
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 14) {
+                VStack(spacing: 2) {
+                    Text(schedule.plannedDate, format: .dateTime.day())
+                        .font(.title2.weight(.black).monospacedDigit())
                         .foregroundStyle(.white)
-                    if schedule.isManuallyScheduled {
-                        Text("临时")
-                            .font(.caption2.bold())
-                            .foregroundStyle(.black)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(AppTheme.accent, in: Capsule())
-                    } else if schedule.originalPlannedDate != nil {
-                        Text("已改期")
-                            .font(.caption2.bold())
-                            .foregroundStyle(AppTheme.accent)
-                    }
+                    Text(schedule.plannedDate, format: .dateTime.weekday(.short))
+                        .font(.caption2.bold())
+                        .foregroundStyle(statusColor(schedule.status))
                 }
-                Text(statusDescription(schedule))
-                    .font(.caption)
-                    .foregroundStyle(AppTheme.secondaryText)
-                    .lineLimit(2)
+                .frame(width: 54, height: 58)
+                .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 14))
+
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Text(schedule.templateName)
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.white)
+                        if schedule.isManuallyScheduled {
+                            Text("临时")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.black)
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 2)
+                                .background(AppTheme.accent, in: Capsule())
+                        } else if schedule.originalPlannedDate != nil {
+                            Text("已改期")
+                                .font(.caption2.bold())
+                                .foregroundStyle(AppTheme.accent)
+                        }
+                    }
+                    Text(statusDescription(schedule))
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.secondaryText)
+                        .lineLimit(2)
+                }
+
+                Spacer()
+
+                Menu {
+                    if schedule.status == .planned {
+                        Button {
+                            rescheduling = schedule
+                        } label: {
+                            Label("调整日期", systemImage: "calendar.badge.clock")
+                        }
+                        Button(role: .destructive) {
+                            skipReason = ""
+                            skipping = schedule
+                        } label: {
+                            Label("跳过训练", systemImage: "forward.end")
+                        }
+                    } else if schedule.status == .skipped {
+                        Button {
+                            restore(schedule)
+                        } label: {
+                            Label("恢复训练", systemImage: "arrow.uturn.backward")
+                        }
+                        Button {
+                            rescheduling = schedule
+                        } label: {
+                            Label("改期并恢复", systemImage: "calendar.badge.clock")
+                        }
+                    }
+
+                    if schedule.isManuallyScheduled && (schedule.status == .planned || schedule.status == .skipped) {
+                        Button(role: .destructive) {
+                            deleteManual(schedule)
+                        } label: {
+                            Label("删除临时安排", systemImage: "trash")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                        .font(.headline.bold())
+                        .foregroundStyle(AppTheme.secondaryText)
+                        .frame(width: 38, height: 38)
+                        .background(AppTheme.elevatedSurface, in: Circle())
+                }
+                .disabled(schedule.status == .completed || schedule.status == .inProgress)
             }
 
-            Spacer()
-
-            Menu {
-                if schedule.status == .planned {
-                    Button {
-                        rescheduling = schedule
-                    } label: {
-                        Label("调整日期", systemImage: "calendar.badge.clock")
+            if schedule.status == .planned || schedule.status == .skipped {
+                NavigationLink(destination: DailyWorkoutBuilderView(
+                    initialDate: schedule.plannedDate,
+                    initialScheduleID: schedule.id
+                )) {
+                    HStack {
+                        Label(
+                            schedule.status == .skipped ? "调整动作并恢复" : "调整当天动作",
+                            systemImage: "slider.horizontal.3"
+                        )
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .font(.caption.bold())
                     }
-                    Button(role: .destructive) {
-                        skipReason = ""
-                        skipping = schedule
-                    } label: {
-                        Label("跳过训练", systemImage: "forward.end")
-                    }
-                } else if schedule.status == .skipped {
-                    Button {
-                        restore(schedule)
-                    } label: {
-                        Label("恢复训练", systemImage: "arrow.uturn.backward")
-                    }
-                    Button {
-                        rescheduling = schedule
-                    } label: {
-                        Label("改期并恢复", systemImage: "calendar.badge.clock")
-                    }
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(AppTheme.accent.opacity(0.09), in: RoundedRectangle(cornerRadius: 11))
                 }
-
-                if schedule.isManuallyScheduled && (schedule.status == .planned || schedule.status == .skipped) {
-                    Button(role: .destructive) {
-                        deleteManual(schedule)
-                    } label: {
-                        Label("删除临时安排", systemImage: "trash")
-                    }
-                }
-            } label: {
-                Image(systemName: "ellipsis")
-                    .font(.headline.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-                    .frame(width: 38, height: 38)
-                    .background(AppTheme.elevatedSurface, in: Circle())
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("调整当天动作")
             }
-            .disabled(schedule.status == .completed || schedule.status == .inProgress)
         }
         .cardSurface(padding: 13, cornerRadius: 17)
     }

@@ -40,7 +40,7 @@ struct HistoricalWorkoutImportView: View {
                     .cardSurface()
 
                 SectionHeader(title: "可选字段")
-                Text("duration_minutes, workout_notes, muscle_group, equipment, rir, exercise_notes")
+                Text("duration_minutes, workout_notes, muscle_group, equipment, rir, set_started_at, rest_seconds, exercise_notes")
                     .font(.caption.monospaced())
                     .foregroundStyle(AppTheme.secondaryText)
                     .textSelection(.enabled)

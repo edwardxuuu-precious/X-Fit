@@ -3,18 +3,25 @@ import SwiftData
 
 @MainActor
 enum SeedDataService {
-    static func prepareIfNeeded(in context: ModelContext) throws {
+    static func prepareIfNeeded(
+        in context: ModelContext,
+        allowInitialSeed: Bool = true
+    ) throws {
         let exerciseDescriptor = FetchDescriptor<Exercise>()
         let existingExercises = try context.fetch(exerciseDescriptor)
+        var hasExercises = !existingExercises.isEmpty
 
-        if existingExercises.isEmpty {
+        if existingExercises.isEmpty, allowInitialSeed {
             try seedStarterProgram(in: context)
+            hasExercises = true
         }
 
-        if try context.fetch(FetchDescriptor<NutritionTarget>()).isEmpty {
+        if hasExercises, try context.fetch(FetchDescriptor<NutritionTarget>()).isEmpty {
             context.insert(NutritionTarget())
         }
 
+        try ExerciseCatalogService.consolidateConfirmedSquatDuplicate(in: context)
+        try ExerciseTerminologyService.stageCatalogCandidates(in: context)
         normalizeImportedWorkoutNames(in: context)
         try ScheduleService.refreshUpcoming(in: context)
         try context.save()
