@@ -6,7 +6,7 @@
 - 用户确认状态：`已确认`
 - 用户确认时间：`2026-08-26 18:25:44 +0800`
 - 用户确认摘要：`用户确认实施测试草稿隔离与首页精简：首页以今日训练优先；体感缩为摘要；不改变真实分享流程、容量逻辑或现有数据。`
-- 状态：`开发中`
+- 状态：`本地已验证`
 - 关联需求：无
 - 目标版本/阶段：待定
 
@@ -62,18 +62,18 @@
 
 | 需求/验收 ID | 代码或文档 | 测试 | 状态 |
 |---|---|---|---|
-| AC-01/02/03 | `ExerciseShareDraft.swift`、`ExerciseShareDraftInbox.swift`、`RootView.swift` | `ExerciseCaptureRobustnessTests`、`FitnessAppUITests` | 开发中 |
-| AC-04/05/06 | `TodayView.swift` | `FitnessAppUITests` | 开发中 |
-| AC-07 | 不改业务模型；执行完整非真机入口 | 全量单元/UI/构建 | 开发中 |
+| AC-01/02/03 | `ExerciseShareDraft.swift`、`ExerciseShareDraftInbox.swift`、`RootView.swift` | `ExerciseCaptureRobustnessTests`、`FitnessAppUITests` | 已完成 |
+| AC-04/05/06 | `TodayView.swift` | `FitnessAppUITests` | 已完成 |
+| AC-07 | 不改业务模型；执行完整非真机入口 | 全量单元/UI/构建 | 已完成 |
 
 ## 分层验证
 
 | AC ID / 层级 | 预期结果 | 实际结果 | 状态 | 证据 | 说明 |
 |---|---|---|---|---|---|
-| AC-01/03/07 / 单元测试 | 存储隔离及既有业务测试通过 |  | NOT_RUN |  |  |
-| AC-02/04/05/06 / 标准模拟器 UI | 弹窗隔离、首屏层级和摘要通过 |  | NOT_RUN |  |  |
-| AC-04/05/06 / 小屏模拟器 UI | 可滚动且无底栏遮挡 |  | NOT_RUN |  |  |
-| AC-01…07 / 完整非真机 | 静态检查、全量单元/UI、模拟器和通用 iPhoneOS 构建通过 |  | NOT_RUN |  | 使用项目统一入口 |
+| AC-01/03/07 / 单元测试 | 存储隔离及既有业务测试通过 | 153 项单元测试通过；隔离专项通过 | PASS | `/tmp/xfit-stage-validation-20260826-home-share-cleanup/non-device-unit.xcresult` | 生产键与测试键互不读写 |
+| AC-02/04/05/06 / 标准模拟器 UI | 弹窗隔离、首屏层级和摘要通过 | 分享全流程、普通启动隔离、首屏训练入口、紧凑体感摘要均通过 | PASS | `/tmp/xfit-home-cleanup-focused-dd/Logs/Test/` | 首页未渲染人体图和图例 |
+| AC-04/05/06 / 小屏模拟器 UI | 可滚动且无底栏遮挡 | 小屏开始训练可点击；最大辅助字体体感编辑/保存通过 | PASS | `/tmp/xfit-home-cleanup-focused-dd/Logs/Test/Test-FitnessApp-2026.08.26_18-53-59-+0800.xcresult` | 视觉复核截图：`/tmp/xfit-home-small-20260826.png` |
+| AC-01…07 / 完整非真机 | 静态检查、全量单元/UI、模拟器和通用 iPhoneOS 构建通过 | N01…N07 全部通过；153 单元、55 UI、3 后端测试通过 | PASS | `/tmp/xfit-stage-validation-report-20260826-home-share-cleanup/summary.md` | 使用项目统一入口；Release 无签名构建通过 |
 | AC-04/05/06 / 真人体验验收 | 用户确认真机首页清爽且操作优先级正确 |  | BLOCKED_HUMAN |  | 不以自动化代替 |
 
 ## 已执行动作
@@ -81,8 +81,14 @@
 - 完成只读代码、截图、测试日志和现有需求冲突检查。
 - 确认测试 seam：`ExerciseShareDraftInbox` 公共读写接口、SwiftUI 可访问性标识和模拟器 UI。
 - 创建本需求档案并进入开发。
+- 为分享草稿 inbox 注入存储键；正式启动固定读取生产键，UI 测试固定读写独立测试键。
+- 增加模拟器测试前置清理、teardown 后置清理与普通启动隔离测试；专项复跑 1 单元 + 5 UI 通过，证据为 `/tmp/xfit-home-cleanup-focused-dd/Logs/Test/Test-FitnessApp-2026.08.26_19-26-56-+0800.xcresult`；未加入任何真机生产草稿自动删除逻辑。
+- 首页重排为今日计划/继续训练优先，并把体感改为 Emoji、分数、一行摘要和修改入口；完整人体图保留在体感编辑页。
+- 统一首页间距并增加底部安全留白；完成标准、小屏、最大辅助字体专项验证和完整非真机回归。
 
 ## 结果与遗留项
 
-- 当前结论：需求已确认，开发中。
-- 下一步：按 AC-01→AC-06 逐条执行 TDD，再运行完整非真机验证。
+- 当前结论：代码与非真机验证已完成，需求状态为`本地已验证`。
+- 当前真机上来源未确认的旧草稿未被自动删除；用户可在旧版本弹窗中点击“丢弃这份资料”。新隔离逻辑需未来覆盖安装后才会生效。
+- 真人真机视觉验收仍为 `BLOCKED_HUMAN`；本轮未执行真机安装、tag、push 或发布。
+- 19:24:16 仓库外部出现提交 `a38dcb6` 并快进到 `main`，包含本需求文件与实现；本轮 Agent 未执行该提交，也未擅自回退。

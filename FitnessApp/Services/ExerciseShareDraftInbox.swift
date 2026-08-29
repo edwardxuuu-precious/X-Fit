@@ -7,6 +7,10 @@ struct ExerciseShareDraftInbox {
     private let decoder: JSONDecoder
     private let pendingDraftKey: String
 
+    private var deferredDraftIDKey: String {
+        "\(pendingDraftKey).deferred-id"
+    }
+
     init(
         defaults: UserDefaults? = ExerciseShareDraftStorage.makeUserDefaults(),
         decoder: JSONDecoder = JSONDecoder(),
@@ -29,6 +33,19 @@ struct ExerciseShareDraftInbox {
         return draft
     }
 
+    func pendingDraftForAutomaticPresentation() -> ExerciseShareDraft? {
+        guard let draft = pendingDraft() else { return nil }
+        guard defaults?.string(forKey: deferredDraftIDKey) != draft.id.uuidString else {
+            return nil
+        }
+        return draft
+    }
+
+    func deferPendingDraft(matching draftID: UUID) {
+        guard pendingDraft()?.id == draftID else { return }
+        defaults?.set(draftID.uuidString, forKey: deferredDraftIDKey)
+    }
+
     @discardableResult
     func consumePendingDraft() -> ExerciseShareDraft? {
         guard let draft = pendingDraft() else { return nil }
@@ -38,6 +55,7 @@ struct ExerciseShareDraftInbox {
 
     func clearPendingDraft() {
         defaults?.removeObject(forKey: pendingDraftKey)
+        defaults?.removeObject(forKey: deferredDraftIDKey)
     }
 
     /// Avoids deleting a newer draft if another share arrives while the app is

@@ -16,7 +16,9 @@ allow_device_tests="${XFIT_ALLOW_DEVICE_TESTS:-0}"
 run_id="${XFIT_RUN_ID:-$(date '+%Y%m%d-%H%M%S')}"
 artifact_dir="${XFIT_ARTIFACT_DIR:-$repo_root/artifacts/stage-validation/$run_id}"
 report_dir="${XFIT_REPORT_DIR:-$repo_root/outputs/stage-validation/$run_id}"
-derived_path="${XFIT_DERIVED_PATH:-$artifact_dir/DerivedData}"
+# Keep signed build products outside Documents/iCloud/File Provider paths.
+# Extended attributes added there can make codesign reject embedded extensions.
+derived_path="${XFIT_DERIVED_PATH:-/tmp/xfit-stage-validation-$run_id}"
 result_rows="$artifact_dir/results.tsv"
 
 usage() {
@@ -258,6 +260,7 @@ device_suite() {
         -derivedDataPath "$derived_path" \
         -resultBundlePath "$artifact_dir/device-unit.xcresult" \
         -only-testing:FitnessAppTests \
+        -collect-test-diagnostics never \
         -allowProvisioningUpdates || local_failed=1
 
     run_step D07B "真机全量 UI 测试" \
@@ -268,6 +271,7 @@ device_suite() {
         -derivedDataPath "$derived_path" \
         -resultBundlePath "$artifact_dir/device-ui.xcresult" \
         -only-testing:FitnessAppUITests \
+        -collect-test-diagnostics never \
         -allowProvisioningUpdates || local_failed=1
 
     run_step D08A "真机测试后活动 App Group 只读备份" copy_device_store post-tests || local_failed=1

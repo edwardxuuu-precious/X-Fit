@@ -10,6 +10,8 @@ enum AppTheme {
     static let line = Color.white.opacity(0.075)
     static let secondaryText = Color.white.opacity(0.56)
     static let tabBar = Color(red: 0.025, green: 0.031, blue: 0.034)
+    static let posterBackground = Color(red: 0.035, green: 0.043, blue: 0.045)
+    static let posterWarmWhite = Color(red: 0.96, green: 0.96, blue: 0.92)
     static let orange = Color(red: 1.00, green: 0.39, blue: 0.12)
     static let purple = Color(red: 0.73, green: 0.27, blue: 1.00)
 
@@ -23,6 +25,37 @@ enum AppTheme {
         colors: [Color(red: 0.035, green: 0.045, blue: 0.050), background],
         startPoint: .top,
         endPoint: .center
+    )
+
+    static let homeBackgroundGradient = LinearGradient(
+        stops: [
+            .init(color: Color(red: 0.055, green: 0.068, blue: 0.068), location: 0),
+            .init(color: Color(red: 0.020, green: 0.027, blue: 0.028), location: 0.42),
+            .init(color: Color(red: 0.006, green: 0.009, blue: 0.010), location: 1)
+        ],
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
+
+    static let homeAmbientGlow = RadialGradient(
+        colors: [Color.white.opacity(0.075), .clear],
+        center: UnitPoint(x: 0.78, y: 0.04),
+        startRadius: 0,
+        endRadius: 340
+    )
+
+    static let homeAccentGlow = RadialGradient(
+        colors: [accent.opacity(0.085), .clear],
+        center: UnitPoint(x: 0.10, y: 0.42),
+        startRadius: 0,
+        endRadius: 300
+    )
+
+    static let homeCoolGlow = RadialGradient(
+        colors: [Color(red: 0.18, green: 0.27, blue: 0.29).opacity(0.16), .clear],
+        center: UnitPoint(x: 0.90, y: 0.48),
+        startRadius: 0,
+        endRadius: 320
     )
 }
 
@@ -41,6 +74,38 @@ struct CardSurface: ViewModifier {
     }
 }
 
+struct FloatingGlassSurface: ViewModifier {
+    let cornerRadius: CGFloat
+
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+
+        if reduceTransparency {
+            content
+                .background(AppTheme.elevatedSurface, in: shape)
+                .shadow(color: .black.opacity(0.66), radius: 30, y: 20)
+        } else if #available(iOS 26.0, *) {
+            content
+                .glassEffect(.regular, in: shape)
+                .shadow(color: .black.opacity(0.72), radius: 34, y: 24)
+                .shadow(color: AppTheme.accent.opacity(0.075), radius: 44, y: 18)
+        } else {
+            content
+                .background {
+                    ZStack {
+                        shape.fill(.thinMaterial)
+                        shape.fill(Color.black.opacity(0.06))
+                    }
+                }
+                .shadow(color: .black.opacity(0.68), radius: 32, y: 22)
+                .shadow(color: AppTheme.accent.opacity(0.065), radius: 40, y: 16)
+        }
+    }
+}
+
 extension View {
     func cardSurface(padding: CGFloat = 16, cornerRadius: CGFloat = 18) -> some View {
         modifier(CardSurface(padding: padding, cornerRadius: cornerRadius))
@@ -48,6 +113,23 @@ extension View {
 
     func screenBackground() -> some View {
         background(AppTheme.screenGradient.ignoresSafeArea())
+    }
+
+    func homeScreenBackground() -> some View {
+        background {
+            ZStack {
+                AppTheme.background
+                AppTheme.homeBackgroundGradient
+                AppTheme.homeAmbientGlow
+                AppTheme.homeAccentGlow
+                AppTheme.homeCoolGlow
+            }
+            .ignoresSafeArea()
+        }
+    }
+
+    func floatingGlassSurface(cornerRadius: CGFloat) -> some View {
+        modifier(FloatingGlassSurface(cornerRadius: cornerRadius))
     }
 
     func neonButtonStyle() -> some View {

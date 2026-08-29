@@ -22,12 +22,13 @@ struct RootView: View {
 
     init() {
         let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(red: 0.025, green: 0.031, blue: 0.034, alpha: 1)
-        appearance.shadowColor = UIColor.white.withAlphaComponent(0.06)
+        appearance.configureWithTransparentBackground()
+        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+        appearance.backgroundColor = UIColor(red: 0.018, green: 0.022, blue: 0.025, alpha: 0.82)
+        appearance.shadowColor = .clear
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
-        UITabBar.appearance().unselectedItemTintColor = UIColor.white.withAlphaComponent(0.44)
+        UITabBar.appearance().unselectedItemTintColor = UIColor.white.withAlphaComponent(0.38)
     }
 
     var body: some View {
@@ -69,7 +70,7 @@ struct RootView: View {
                         }
                     }
                     .tint(AppTheme.accent)
-                    .toolbarBackground(AppTheme.tabBar, for: .tabBar)
+                    .toolbarBackground(.ultraThinMaterial, for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                     .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 }
@@ -137,7 +138,7 @@ struct RootView: View {
             "已收到一份动作资料",
             isPresented: Binding(
                 get: { pendingShareDraft != nil },
-                set: { if !$0 { pendingShareDraft = nil } }
+                set: { if !$0 { deferPendingShareDraft() } }
             ),
             titleVisibility: .visible
         ) {
@@ -152,7 +153,7 @@ struct RootView: View {
                 pendingShareDraft = nil
             }
             Button("稍后处理") {
-                pendingShareDraft = nil
+                deferPendingShareDraft()
             }
         } message: {
             Text("可以把 Safari 或其他 App 分享来的链接保存为新动作；保存前仍可修改名称、肌群和训练要点。")
@@ -265,7 +266,14 @@ struct RootView: View {
 
     private func loadPendingShareDraft() {
         guard CloudSyncRuntime.shouldReadShareDraft(), pendingShareDraft == nil else { return }
-        pendingShareDraft = shareDraftInbox.pendingDraft()
+        pendingShareDraft = shareDraftInbox.pendingDraftForAutomaticPresentation()
+    }
+
+    private func deferPendingShareDraft() {
+        if let draft = pendingShareDraft {
+            shareDraftInbox.deferPendingDraft(matching: draft.id)
+        }
+        pendingShareDraft = nil
     }
 
     private var shareDraftInbox: ExerciseShareDraftInbox {

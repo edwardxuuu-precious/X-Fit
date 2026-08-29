@@ -20,6 +20,7 @@ struct ActiveWorkoutView: View {
     @State private var showRestEndedAlert = false
     @State private var restPromptedForEndDate: Date?
     @State private var expandedCompletedExerciseIDs: Set<UUID> = []
+    @State private var pendingFeelingExerciseIDs: Set<UUID> = []
     @State private var errorMessage: String?
 
     private var session: WorkoutSession? {
@@ -27,12 +28,20 @@ struct ActiveWorkoutView: View {
     }
 
     private var orderedExercises: [SessionExercise] {
-        sessionExercises
+        let currentLogs = setLogs.filter { $0.sessionID == sessionID }
+        let logsByExerciseID = Dictionary(grouping: currentLogs, by: \.sessionExerciseID)
+        let completedExerciseIDs = Set(logsByExerciseID.compactMap { exerciseID, exerciseLogs in
+            exerciseLogs.allSatisfy(\.isCompleted) ? exerciseID : nil
+        })
+
+        return sessionExercises
             .filter { $0.sessionID == sessionID }
             .sorted { left, right in
-                let leftComplete = isExerciseCompleted(left)
-                let rightComplete = isExerciseCompleted(right)
-                if leftComplete != rightComplete { return !leftComplete }
+                let leftComplete = completedExerciseIDs.contains(left.id)
+                    && !pendingFeelingExerciseIDs.contains(left.id)
+                let rightComplete = completedExerciseIDs.contains(right.id)
+                    && !pendingFeelingExerciseIDs.contains(right.id)
+                if leftComplete != rightComplete { return leftComplete }
                 return left.order < right.order
             }
     }
@@ -492,7 +501,7 @@ struct ActiveWorkoutView: View {
                     .accessibilityIdentifier("adjust-volume-\(exercise.exerciseName)")
                     .foregroundStyle(.secondary)
 
-                    if isExerciseComplete {
+                    if isExerciseComplete && !pendingFeelingExerciseIDs.contains(exercise.id) {
                         Button {
                             expandedCompletedExerciseIDs.remove(exercise.id)
                         } label: {
@@ -578,9 +587,7 @@ struct ActiveWorkoutView: View {
                     HStack(spacing: 8) {
                         ForEach(WorkoutFeeling.allCases) { feeling in
                             Button {
-                                exercise.feeling = feeling
-                                saveQuietly()
-                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                                completeFeeling(feeling, for: exercise)
                             } label: {
                                 Text(feeling.emoji)
                                     .font(.title2)
@@ -610,6 +617,15 @@ struct ActiveWorkoutView: View {
                     Text("😣 不适 · 😥 太难 · 😮 有挑战 · 🙂 正合适 · 😄 轻松顺畅")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
+
+                    Button("跳过感受并收起") {
+                        skipFeeling(for: exercise)
+                    }
+                    .font(.caption.bold())
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("跳过感受并收起")
                 }
                 .padding(12)
                 .background(AppTheme.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
@@ -662,7 +678,7 @@ struct ActiveWorkoutView: View {
                     Text(exercise.exerciseName)
                         .font(.headline.bold())
                         .foregroundStyle(.white)
-                    Text("已完成 \(exerciseLogs.count) 组 · 已移到下方")
+                    Text("已完成 \(exerciseLogs.count) 组 · 已收在上方")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -682,12 +698,30 @@ struct ActiveWorkoutView: View {
         }
         .buttonStyle(.plain)
         .shadow(color: .black.opacity(0.30), radius: 14, y: 8)
-        .accessibilityLabel("\(exercise.exerciseName)，已完成 \(exerciseLogs.count) 组，点按展开记录")
+        .accessibilityLabel(
+            "\(exercise.exerciseName)，已完成 \(exerciseLogs.count) 组"
+                + (exercise.feeling.map { "，感受 \($0.emoji) \($0.title)" } ?? "")
+                + "，点按展开记录"
+        )
     }
 
     private func isExerciseCompleted(_ exercise: SessionExercise) -> Bool {
         let exerciseLogs = logs.filter { $0.sessionExerciseID == exercise.id }
         return !exerciseLogs.isEmpty && exerciseLogs.allSatisfy(\.isCompleted)
+    }
+
+    private func completeFeeling(_ feeling: WorkoutFeeling, for exercise: SessionExercise) {
+        exercise.feeling = feeling
+        pendingFeelingExerciseIDs.remove(exercise.id)
+        expandedCompletedExerciseIDs.remove(exercise.id)
+        saveQuietly()
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+    }
+
+    private func skipFeeling(for exercise: SessionExercise) {
+        pendingFeelingExerciseIDs.remove(exercise.id)
+        expandedCompletedExerciseIDs.remove(exercise.id)
+        saveQuietly()
     }
 
     private func addExercise(_ exercise: Exercise, configuration: ExerciseSetupDraft? = nil) {
@@ -807,8 +841,19 @@ struct ActiveWorkoutView: View {
     }
 
     private func toggle(_ log: SetLog, restSeconds: Int, session: WorkoutSession) {
+        let isCompletingExercise = !log.isCompleted && logs
+            .filter { $0.sessionExerciseID == log.sessionExerciseID }
+            .allSatisfy { $0.id == log.id || $0.isCompleted }
         log.isCompleted.toggle()
         log.completedAt = log.isCompleted ? .now : nil
+
+        if isCompletingExercise {
+            pendingFeelingExerciseIDs.insert(log.sessionExerciseID)
+            expandedCompletedExerciseIDs.insert(log.sessionExerciseID)
+        } else if !log.isCompleted {
+            pendingFeelingExerciseIDs.remove(log.sessionExerciseID)
+            expandedCompletedExerciseIDs.remove(log.sessionExerciseID)
+        }
 
         if WorkoutRestTracking.shouldBeginRest(after: log, logs: logs) {
             WorkoutRestTracking.begin(
@@ -1121,12 +1166,14 @@ private struct SetLogRow: View {
                 } label: {
                     Text(log.rir.map { "RIR \($0)" } ?? "RIR 可选")
                         .font(.caption.bold().monospacedDigit())
-                        .frame(width: 66)
-                        .padding(.vertical, 9)
+                        .frame(width: 72)
+                        .frame(minHeight: 44)
                         .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
                 }
                 .foregroundStyle(.primary)
+                .contentShape(Rectangle())
                 .accessibilityLabel(rirAccessibilityLabel)
+                .accessibilityIdentifier("rir-\(exerciseName)-\(log.setNumber)")
 
                 Button(action: onToggle) {
                     Image(systemName: log.isCompleted ? "checkmark.circle.fill" : "circle")

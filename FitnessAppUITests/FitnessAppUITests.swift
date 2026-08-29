@@ -26,64 +26,66 @@ final class FitnessAppUITests: XCTestCase {
     }
 
     private func tapRecoveringFromExternalInterruption(
-        _ element: XCUIElement,
+        _ element: @autoclosure () -> XCUIElement,
         in app: XCUIApplication,
-        until expectedElement: XCUIElement,
+        until expectedElement: @autoclosure () -> XCUIElement,
         attempts: Int = 3
     ) -> Bool {
         for _ in 0..<attempts {
-            if expectedElement.exists {
+            if expectedElement().exists {
                 return true
             }
             if app.state != .runningForeground {
                 app.activate()
                 _ = app.wait(for: .runningForeground, timeout: 3)
-                if expectedElement.waitForExistence(timeout: 2) {
+                if expectedElement().waitForExistence(timeout: 2) {
                     return true
                 }
             }
-            guard element.waitForExistence(timeout: 5) else {
-                return expectedElement.exists
+            let currentElement = element()
+            guard currentElement.waitForExistence(timeout: 5) else {
+                return expectedElement().exists
             }
 
             // A real-device notification banner can take focus between the
             // hittability check and XCUIElement.tap(). A coordinate tap avoids
             // recording a false test failure, while the expected state below
             // still proves that the intended control handled the event.
-            tapScreenCoordinate(of: element, in: app)
-            if expectedElement.waitForExistence(timeout: 4) {
+            tapScreenCoordinate(of: currentElement, in: app)
+            if expectedElement().waitForExistence(timeout: 4) {
                 return true
             }
         }
-        return expectedElement.exists
+        return expectedElement().exists
     }
 
     private func tapRecoveringFromExternalInterruption(
-        _ element: XCUIElement,
+        _ element: @autoclosure () -> XCUIElement,
         in app: XCUIApplication,
-        untilElementDisappears disappearingElement: XCUIElement,
+        untilElementDisappears disappearingElement: @autoclosure () -> XCUIElement,
         attempts: Int = 3
     ) -> Bool {
         for _ in 0..<attempts {
-            if !disappearingElement.exists {
+            if !disappearingElement().exists {
                 return true
             }
             if app.state != .runningForeground {
                 app.activate()
                 _ = app.wait(for: .runningForeground, timeout: 3)
-                if disappearingElement.waitForNonExistence(timeout: 2) {
+                if disappearingElement().waitForNonExistence(timeout: 2) {
                     return true
                 }
             }
-            guard element.waitForExistence(timeout: 5) else {
-                return !disappearingElement.exists
+            let currentElement = element()
+            guard currentElement.waitForExistence(timeout: 5) else {
+                return !disappearingElement().exists
             }
-            tapScreenCoordinate(of: element, in: app)
-            if disappearingElement.waitForNonExistence(timeout: 4) {
+            tapScreenCoordinate(of: currentElement, in: app)
+            if disappearingElement().waitForNonExistence(timeout: 4) {
                 return true
             }
         }
-        return !disappearingElement.exists
+        return !disappearingElement().exists
     }
 
     private func tapScreenCoordinate(of element: XCUIElement, in app: XCUIApplication) {
@@ -98,6 +100,12 @@ final class FitnessAppUITests: XCTestCase {
             dy: (elementFrame.midY - appFrame.minY) / appFrame.height
         )
         app.coordinate(withNormalizedOffset: offset).tap()
+    }
+
+    private func wakeUIInterruptionMonitor(in app: XCUIApplication) {
+        // Keep the fallback tap inside the status-bar edge so that, when no
+        // system alert is present, it cannot activate an app control.
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.98, dy: 0.02)).tap()
     }
 
     private func scrollUp(
@@ -148,6 +156,21 @@ final class FitnessAppUITests: XCTestCase {
     }
 
     private func launchSeededShareDraftApp() -> XCUIApplication {
+        addTeardownBlock {
+            let cleanupApp = XCUIApplication()
+            cleanupApp.launchArguments = [
+                "--ui-testing",
+                "--ui-testing-share-draft",
+                "--ui-testing-reset-share-draft"
+            ]
+            cleanupApp.launch()
+            XCTAssertTrue(
+                cleanupApp.tabBars.buttons["首页"].waitForExistence(timeout: 8),
+                "分享草稿测试 teardown 未完成测试键清理"
+            )
+            cleanupApp.terminate()
+        }
+
         let app = XCUIApplication()
         app.launchArguments = [
             "--ui-testing",
@@ -170,20 +193,10 @@ final class FitnessAppUITests: XCTestCase {
         app.launch()
         let trainingTab = app.tabBars.buttons["训练"]
         XCTAssertTrue(trainingTab.waitForExistence(timeout: 8))
-        trainingTab.tap()
         let builder = app.buttons["今日编排入口"]
-        XCTAssertTrue(builder.waitForExistence(timeout: 5))
+        XCTAssertTrue(tap(trainingTab, until: builder))
         XCTAssertTrue(tap(builder, until: app.staticTexts["编排当天训练"]))
         return app
-    }
-
-    private func recentVolumePointIdentifier(for date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = .current
-        formatter.dateFormat = "d/MMM"
-        return "最近容量点-\(formatter.string(from: date))"
     }
 
     private func openTerminologyReview(in app: XCUIApplication) {
@@ -242,8 +255,8 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["右肩 · 关节 / 筋膜"].exists)
 
         app.buttons["保存今日体感"].tap()
-        XCTAssertTrue(app.staticTexts["体感 4 / 5"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["1 处不适 · right shoulder test"].exists)
+        XCTAssertTrue(app.staticTexts["状态不错 · 1 处不适"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["right shoulder test"].exists)
         XCTAssertFalse(app.images["body-muscle-map"].exists)
         XCTAssertFalse(
             app.staticTexts["红色区域 = 肌肉 / 部位不适 · 红点 = 关节 / 筋膜"].exists
@@ -257,8 +270,8 @@ final class FitnessAppUITests: XCTestCase {
         app.buttons["body-score-1"].tap()
         app.buttons["取消今日体感"].tap()
 
-        XCTAssertTrue(app.staticTexts["体感 4 / 5"].waitForExistence(timeout: 5))
-        XCTAssertFalse(app.staticTexts["体感 1 / 5"].exists)
+        XCTAssertTrue(app.staticTexts["状态不错 · 1 处不适"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["状态很差"].exists)
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "今日体感区域与红点共存"
@@ -294,7 +307,7 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(save.waitForExistence(timeout: 3))
         XCTAssertTrue(save.isHittable)
         save.tap()
-        XCTAssertTrue(app.staticTexts["体感 3 / 5"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["状态一般 · 1 处不适"].waitForExistence(timeout: 5))
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "今日体感-深色模式-最大辅助字体"
@@ -302,7 +315,7 @@ final class FitnessAppUITests: XCTestCase {
         add(attachment)
     }
 
-    func testWorkoutFeelingAppearsOnlyAfterExerciseCompletionAndPersists() throws {
+    func testWorkoutFeelingIsRequestedBeforeCompletedExerciseCollapsesAndPersists() throws {
         let app = XCUIApplication()
         app.launchArguments = [
             "--ui-testing",
@@ -323,25 +336,24 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(scrollUp(in: app, until: finalSet, attempts: 6))
         finalSet.tap()
 
-        let completedExercise = app.buttons.matching(
-            NSPredicate(format: "label CONTAINS %@", "点按展开记录")
-        ).firstMatch
-        XCTAssertTrue(scrollUp(in: app, until: completedExercise, attempts: 6))
-        completedExercise.tap()
-
         let painful = app.buttons["动作感受-painful"]
         XCTAssertTrue(scrollUp(in: app, until: painful, attempts: 6))
         XCTAssertTrue(painful.waitForExistence(timeout: 3))
+        XCTAssertTrue(app.buttons["跳过感受并收起"].exists)
+        XCTAssertFalse(
+            app.buttons.matching(NSPredicate(format: "label CONTAINS %@", "点按展开记录")).firstMatch.exists,
+            "选择或跳过感受前不应自动折叠"
+        )
         for feeling in ["painful", "exhausted", "hard", "good", "strong"] {
             XCTAssertTrue(app.buttons["动作感受-\(feeling)"].exists)
         }
-        painful.tap()
-        XCTAssertTrue(painful.isSelected)
-
         let strong = app.buttons["动作感受-strong"]
         strong.tap()
-        XCTAssertTrue(strong.isSelected)
-        XCTAssertFalse(painful.isSelected)
+        let completedExercise = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS %@", "点按展开记录")
+        ).firstMatch
+        XCTAssertTrue(completedExercise.waitForExistence(timeout: 5))
+        XCTAssertTrue(completedExercise.label.contains("😄"))
 
         app.terminate()
         app.launchArguments = [
@@ -383,7 +395,8 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["今日计划"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["4 个动作"].waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["PUSH / 01"].exists)
         XCTAssertFalse(app.staticTexts["查看全部"].exists)
 
         let startButton = app.buttons["开始记录训练"]
@@ -628,7 +641,7 @@ final class FitnessAppUITests: XCTestCase {
             "--ui-testing-request-notification-authorization"
         ]
         app.launch()
-        app.tap()
+        wakeUIInterruptionMonitor(in: app)
         XCTAssertTrue(app.staticTexts["通知授权已通过"].waitForExistence(timeout: 8))
         XCTAssertTrue(app.staticTexts["通知横幅已启用"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["锁屏通知已启用"].waitForExistence(timeout: 5))
@@ -684,40 +697,68 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["已送达休息通知 0"].waitForExistence(timeout: 5))
     }
 
-    func testSecondaryPagesAreReachableWithoutDuplicateHomeShortcuts() throws {
+    func testHomeIsAnActionSurfaceWithoutDuplicateDashboards() throws {
         let app = XCUIApplication()
-        app.launchArguments = ["--ui-testing"]
+        app.launchArguments = ["--ui-testing", "--ui-testing-progress"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["今日计划"].waitForExistence(timeout: 8))
-        XCTAssertTrue(app.buttons["补录训练入口"].exists)
-        XCTAssertTrue(app.buttons["训练历史入口"].exists)
-
-        let scheduleButton = app.buttons["训练日程入口"]
-        XCTAssertTrue(scheduleButton.waitForExistence(timeout: 5))
-        scheduleButton.tap()
-        XCTAssertTrue(app.staticTexts["训练日程"].waitForExistence(timeout: 5))
-
-        app.tabBars.buttons["我的"].tap()
-        let nutritionButton = app.buttons["打开营养记录"]
-        XCTAssertTrue(nutritionButton.waitForExistence(timeout: 5))
-        XCTAssertTrue(tap(nutritionButton, until: app.staticTexts["当天还没有餐食"]))
-        XCTAssertTrue(app.staticTexts["营养"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.staticTexts["当天还没有餐食"].exists)
+        let start = app.buttons["开始记录训练"]
+        XCTAssertTrue(start.waitForExistence(timeout: 8))
+        XCTAssertTrue(start.isHittable)
+        XCTAssertTrue(app.descendants(matching: .any)["首页日期"].exists)
+        XCTAssertTrue(app.otherElements["今日训练海报"].exists)
+        XCTAssertTrue(app.otherElements["首页状态轨道"].exists)
+        XCTAssertTrue(app.buttons["最近一次训练入口"].exists)
+        XCTAssertFalse(app.buttons["补录训练入口"].exists)
+        XCTAssertFalse(app.buttons["训练历史入口"].exists)
+        XCTAssertFalse(app.buttons["训练日程入口"].exists)
+        XCTAssertFalse(app.staticTexts["最近训练容量"].exists)
+        XCTAssertFalse(app.descendants(matching: .any)["最近训练容量图"].exists)
     }
 
-    func testHomePlanCanBeViewedAndOpenedForEditing() throws {
+    func testHomePrimaryActionRemainsReachableAtAccessibilityXXXL() throws {
+        let app = XCUIApplication()
+        app.launchArguments = [
+            "--ui-testing",
+            "-UIPreferredContentSizeCategoryName",
+            "UICTContentSizeCategoryAccessibilityExtraExtraExtraLarge"
+        ]
+        app.launch()
+
+        let start = app.buttons["开始记录训练"]
+        XCTAssertTrue(scrollUp(in: app, until: start, attempts: 4))
+        XCTAssertTrue(start.isHittable)
+        XCTAssertFalse(app.staticTexts["PUSH / 01"].exists)
+        XCTAssertFalse(app.images["body-muscle-map"].exists)
+    }
+
+    func testHomePlanCanBeOpenedForEditing() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let viewPlan = app.buttons["查看今日计划"]
-        XCTAssertTrue(scrollDown(in: app, until: viewPlan))
-        viewPlan.tap()
-        XCTAssertEqual(viewPlan.label, "收起计划")
+        XCTAssertTrue(app.staticTexts["4 个动作"].waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["今天练什么"].exists)
+        XCTAssertFalse(app.staticTexts["12 组"].exists)
+        XCTAssertTrue(app.staticTexts["今天感觉怎么样"].exists)
+        XCTAssertFalse(app.staticTexts["PUSH / 01"].exists)
+        XCTAssertTrue(app.buttons["开始记录训练"].exists)
+        XCTAssertFalse(app.staticTexts["准备记录"].exists)
+        XCTAssertFalse(app.staticTexts["预计 kg 容量"].exists)
+        XCTAssertFalse(app.buttons["今日计划更多操作"].exists)
 
         let editPlan = app.buttons["修改今日计划"]
-        XCTAssertTrue(editPlan.exists)
+        XCTAssertTrue(editPlan.waitForExistence(timeout: 8))
+        XCTAssertEqual(editPlan.label, "调整今日计划")
+        let workoutTitle = app.staticTexts["推 · 胸肩三头"]
+        XCTAssertTrue(workoutTitle.exists)
+        XCTAssertLessThan(
+            abs(editPlan.frame.midY - workoutTitle.frame.midY),
+            2,
+            "计划图标应与训练标题垂直居中"
+        )
+        XCTAssertGreaterThanOrEqual(editPlan.frame.width, 44)
+        XCTAssertGreaterThanOrEqual(editPlan.frame.height, 44)
         editPlan.tap()
         XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["今天的菜单"].waitForExistence(timeout: 5))
@@ -725,20 +766,16 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.buttons["保存今日计划"].exists)
     }
 
-    func testHomeShowsRecentTrainingDatesAndVolumeTogether() throws {
+    func testHomeShowsOnlyTheLatestCompletedWorkout() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing", "--ui-testing-progress"]
         app.launch()
 
-        let card = app.staticTexts["最近训练容量"]
-        XCTAssertTrue(scrollUp(in: app, until: card))
-        XCTAssertTrue(app.staticTexts["最近训练容量"].exists)
-        XCTAssertTrue(app.staticTexts["日期与实际完成容量 · kg"].exists)
-        XCTAssertTrue(
-            app.descendants(matching: .any)["最近训练容量图"].exists
-        )
-        XCTAssertTrue(app.buttons["全部记录"].exists)
-        XCTAssertFalse(app.buttons["本月"].exists)
+        let latest = app.buttons["最近一次训练入口"]
+        XCTAssertTrue(latest.waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["本周拉训练"].exists)
+        XCTAssertFalse(app.staticTexts["最近训练容量"].exists)
+        XCTAssertFalse(app.descendants(matching: .any)["最近训练容量图"].exists)
     }
 
     func testHomeEmptyStateOffersPlanAndHistoricalEntry() throws {
@@ -746,60 +783,36 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing", "--ui-testing-home-empty"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["今天还没有训练计划"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["安排一场训练"].waitForExistence(timeout: 8))
         XCTAssertTrue(app.buttons["编排今日训练"].exists)
-        XCTAssertTrue(app.buttons["补录训练入口"].exists)
-
-        let volumeTitle = app.staticTexts["最近训练容量"]
-        XCTAssertTrue(scrollUp(in: app, until: volumeTitle, attempts: 5))
-        XCTAssertTrue(
-            app.staticTexts["完成或补录训练后，这里会显示最近训练日的容量变化。"]
-                .waitForExistence(timeout: 3)
-        )
-        XCTAssertTrue(app.buttons["补录一场训练"].exists)
+        XCTAssertFalse(app.buttons["补录训练入口"].exists)
+        XCTAssertFalse(app.buttons["最近一次训练入口"].exists)
+        XCTAssertFalse(app.staticTexts["最近训练容量"].exists)
         XCTAssertFalse(app.descendants(matching: .any)["最近训练容量图"].exists)
     }
 
-    func testHomeSingleVolumePointShowsBaselineWithoutPercentage() throws {
+    func testHomeSingleCompletedWorkoutShowsOneRecentEntry() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing", "--ui-testing-home-single-volume"]
         app.launch()
 
-        let volumeTitle = app.staticTexts["最近训练容量"]
-        XCTAssertTrue(scrollUp(in: app, until: volumeTitle, attempts: 5))
-        XCTAssertTrue(app.staticTexts["已建立首个基线"].waitForExistence(timeout: 5))
-        XCTAssertFalse(
-            app.staticTexts.matching(
-                NSPredicate(format: "label BEGINSWITH %@", "较上次")
-            ).firstMatch.exists
-        )
-        XCTAssertTrue(app.descendants(matching: .any)["最近训练容量图"].exists)
+        let latest = app.buttons["最近一次训练入口"]
+        XCTAssertTrue(latest.waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["首页容量夹具 0"].exists)
+        XCTAssertEqual(app.buttons.matching(identifier: "最近一次训练入口").count, 1)
+        XCTAssertFalse(app.staticTexts["最近训练容量"].exists)
     }
 
-    func testHomeChartKeepsOnlyLatestSixActualTrainingDays() throws {
+    func testHomeWithManyCompletedWorkoutsStillShowsOneRecentEntry() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing", "--ui-testing-home-seven-volumes"]
         app.launch()
 
-        let chart = app.descendants(matching: .any)["最近训练容量图"]
-        XCTAssertTrue(scrollUp(in: app, until: chart, attempts: 5))
-        guard let chartValue = chart.value as? String else {
-            return XCTFail("最近训练容量图缺少可读取的数据摘要")
-        }
-        let today = Calendar.current.startOfDay(for: .now)
-        let omitted = recentVolumePointIdentifier(for: today.addingTimeInterval(-6 * 86_400))
-            .replacingOccurrences(of: "最近容量点-", with: "")
-        XCTAssertFalse(chartValue.contains("\(omitted):"))
-        for offset in 0..<6 {
-            let identifier = recentVolumePointIdentifier(
-                for: today.addingTimeInterval(TimeInterval(-offset * 86_400))
-            )
-            let dayLabel = identifier.replacingOccurrences(of: "最近容量点-", with: "")
-            XCTAssertTrue(
-                chartValue.contains("\(dayLabel):"),
-                "缺少最近容量点：\(identifier)"
-            )
-        }
+        let latest = app.buttons["最近一次训练入口"]
+        XCTAssertTrue(latest.waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["首页容量夹具 0"].exists)
+        XCTAssertEqual(app.buttons.matching(identifier: "最近一次训练入口").count, 1)
+        XCTAssertFalse(app.descendants(matching: .any)["最近训练容量图"].exists)
     }
 
     func testHomeCompletedPlanOffersRecordEditingWithoutStartButton() throws {
@@ -807,11 +820,15 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing", "--ui-testing-home-completed"]
         app.launch()
 
-        XCTAssertTrue(app.staticTexts["今日已完成"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["今天已完成"].waitForExistence(timeout: 8))
         XCTAssertTrue(app.buttons["查看今日训练记录"].exists)
         XCTAssertTrue(app.buttons["修改今日记录"].exists)
         XCTAssertFalse(app.buttons["开始记录训练"].exists)
         XCTAssertFalse(app.buttons["修改今日计划"].exists)
+        XCTAssertFalse(app.buttons["今日计划更多操作"].exists)
+
+        app.buttons["修改今日记录"].tap()
+        XCTAssertTrue(app.navigationBars["编辑历史训练"].waitForExistence(timeout: 5))
     }
 
     func testHomeActiveSessionSurvivesPersistentRelaunchWithoutDuplication() throws {
@@ -847,7 +864,7 @@ final class FitnessAppUITests: XCTestCase {
         app.launch()
 
         let editPlan = app.buttons["修改今日计划"]
-        XCTAssertTrue(scrollUp(in: app, until: editPlan, attempts: 5))
+        XCTAssertTrue(editPlan.waitForExistence(timeout: 8))
         editPlan.tap()
         XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
 
@@ -857,15 +874,19 @@ final class FitnessAppUITests: XCTestCase {
         let save = app.buttons["保存今日计划"]
         XCTAssertTrue(save.exists)
         save.tap()
-        XCTAssertTrue(app.staticTexts["今日计划"].waitForExistence(timeout: 8))
+        XCTAssertTrue(app.staticTexts["4 个动作"].waitForExistence(timeout: 8))
+        XCTAssertFalse(app.staticTexts["PUSH / 01"].exists)
 
         app.terminate()
         app.launchArguments = ["--ui-testing", "--ui-testing-persistent"]
         app.launch()
-        let viewPlan = app.buttons["查看今日计划"]
-        XCTAssertTrue(scrollUp(in: app, until: viewPlan, attempts: 5))
-        viewPlan.tap()
-        XCTAssertTrue(app.staticTexts["55.5 kg"].waitForExistence(timeout: 5))
+        let relaunchedEditPlan = app.buttons["修改今日计划"]
+        XCTAssertTrue(relaunchedEditPlan.waitForExistence(timeout: 8))
+        relaunchedEditPlan.tap()
+        XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
+        let relaunchedWeight = app.textFields["planned-weight-杠铃卧推-1"]
+        XCTAssertTrue(scrollUp(in: app, until: relaunchedWeight, attempts: 12))
+        XCTAssertEqual(relaunchedWeight.value as? String, "55.5")
     }
 
     func testStatsVolumeTrendSwitchesFromOverallToExerciseHistory() throws {
@@ -1107,7 +1128,7 @@ final class FitnessAppUITests: XCTestCase {
         XCTAssertTrue(app.buttons["换一组"].exists)
     }
 
-    func testShareDraftDeferralKeepsDraftAvailable() throws {
+    func testShareDraftDeferralSuppressesTheSameDraftUntilANewShareArrives() throws {
         let app = launchSeededShareDraftApp()
         let received = app.staticTexts["已收到一份动作资料"]
         XCTAssertTrue(received.waitForExistence(timeout: 8))
@@ -1119,7 +1140,39 @@ final class FitnessAppUITests: XCTestCase {
         let reloadDraftButton = app.buttons["重新检查分享草稿"]
         XCTAssertTrue(reloadDraftButton.waitForExistence(timeout: 3))
         reloadDraftButton.tap()
-        XCTAssertTrue(received.waitForExistence(timeout: 8))
+        XCTAssertFalse(received.waitForExistence(timeout: 3))
+
+        app.terminate()
+        app.launchArguments = [
+            "--ui-testing",
+            "--ui-testing-persistent",
+            "--ui-testing-share-draft"
+        ]
+        app.launch()
+        XCTAssertTrue(app.tabBars.buttons["首页"].waitForExistence(timeout: 8))
+        XCTAssertFalse(received.waitForExistence(timeout: 3))
+
+        app.terminate()
+        app.launchArguments.append("--ui-testing-seed-share-draft")
+        app.launch()
+        XCTAssertTrue(received.waitForExistence(timeout: 8), "新 ID 的分享草稿必须重新提醒")
+    }
+
+    func testDailyBuilderCanReorderCompactNameCardsByDragging() throws {
+        let app = launchAndOpenDailyBuilder()
+        let reorder = app.buttons["拖动排序"]
+        XCTAssertTrue(reorder.waitForExistence(timeout: 5))
+        reorder.tap()
+
+        let first = app.descendants(matching: .any)["排序动作-杠铃卧推"]
+        let second = app.descendants(matching: .any)["排序动作-上斜哑铃卧推"]
+        XCTAssertTrue(first.waitForExistence(timeout: 5))
+        XCTAssertTrue(second.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.textFields["planned-weight-杠铃卧推-1"].exists)
+
+        first.press(forDuration: 0.8, thenDragTo: second)
+        XCTAssertTrue(app.staticTexts["1. 上斜哑铃卧推"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["2. 杠铃卧推"].exists)
     }
 
     func testUITestShareDraftDoesNotLeakIntoProductionStartup() throws {
@@ -1137,22 +1190,52 @@ final class FitnessAppUITests: XCTestCase {
         productionApp.launch()
 
         XCTAssertTrue(productionApp.tabBars.buttons["首页"].waitForExistence(timeout: 8))
-        XCTAssertFalse(
-            productionApp.staticTexts["已收到一份动作资料"].waitForExistence(timeout: 3),
-            "UI 测试草稿不应被普通启动读取"
-        )
+        let received = productionApp.staticTexts["已收到一份动作资料"]
+        if received.waitForExistence(timeout: 3) {
+            XCTAssertTrue(
+                tapRecoveringFromExternalInterruption(
+                    productionApp.buttons["补充信息并加入动作库"],
+                    in: productionApp,
+                    until: productionApp.navigationBars["新建动作"]
+                )
+            )
+            let nameField = productionApp.textFields["动作名称"]
+            XCTAssertTrue(nameField.waitForExistence(timeout: 5))
+            XCTAssertNotEqual(
+                nameField.value as? String,
+                "UI 测试绳索划船",
+                "普通启动读取到了 UI 测试键中的草稿"
+            )
+            productionApp.navigationBars["新建动作"].buttons["取消"].tap()
+        }
     }
 
     func testShareDraftEditorCancellationKeepsDraftAvailable() throws {
         let app = launchSeededShareDraftApp()
         let received = app.staticTexts["已收到一份动作资料"]
         XCTAssertTrue(received.waitForExistence(timeout: 8))
-        app.buttons["补充信息并加入动作库"].tap()
-        XCTAssertTrue(app.navigationBars["新建动作"].waitForExistence(timeout: 5))
-        app.navigationBars["新建动作"].buttons["取消"].tap()
+        XCTAssertTrue(
+            tapRecoveringFromExternalInterruption(
+                app.buttons["补充信息并加入动作库"],
+                in: app,
+                until: app.navigationBars["新建动作"]
+            )
+        )
+        XCTAssertTrue(
+            tapRecoveringFromExternalInterruption(
+                app.navigationBars["新建动作"].buttons["取消"],
+                in: app,
+                untilElementDisappears: app.navigationBars["新建动作"]
+            )
+        )
 
-        app.buttons["重新检查分享草稿"].tap()
-        XCTAssertTrue(received.waitForExistence(timeout: 8))
+        XCTAssertTrue(
+            tapRecoveringFromExternalInterruption(
+                app.buttons["重新检查分享草稿"],
+                in: app,
+                until: received
+            )
+        )
     }
 
     func testShareDraftSaveFailureKeepsDraftAvailable() throws {
@@ -1361,17 +1444,26 @@ final class FitnessAppUITests: XCTestCase {
             let create = app.buttons["新建并加入"]
             XCTAssertTrue(create.waitForExistence(timeout: 5), "第 \(cycle) 轮零结果入口缺失")
             create.tap()
-            XCTAssertTrue(app.navigationBars["新建动作"].waitForExistence(timeout: 5))
-            app.navigationBars["新建动作"].buttons["取消"].tap()
-            let cancelAndReturn = app.buttons["取消并返回"]
-            XCTAssertTrue(cancelAndReturn.waitForExistence(timeout: 5), "第 \(cycle) 轮无法返回计划")
+            let editorNavigationBar = app.navigationBars["新建动作"]
+            XCTAssertTrue(editorNavigationBar.waitForExistence(timeout: 5))
             XCTAssertTrue(
                 tapRecoveringFromExternalInterruption(
-                    cancelAndReturn,
+                    editorNavigationBar.buttons["取消"],
                     in: app,
-                    untilElementDisappears: cancelAndReturn
+                    untilElementDisappears: editorNavigationBar
                 ),
-                "第 \(cycle) 轮通知抢占后仍无法返回计划"
+                "第 \(cycle) 轮无法关闭新建动作页"
+            )
+
+            let cancelPicker = app.buttons["取消并返回"]
+            XCTAssertTrue(cancelPicker.waitForExistence(timeout: 5), "第 \(cycle) 轮未返回动作选择器")
+            XCTAssertTrue(
+                tapRecoveringFromExternalInterruption(
+                    cancelPicker,
+                    in: app,
+                    untilElementDisappears: cancelPicker
+                ),
+                "第 \(cycle) 轮无法返回计划"
             )
             XCTAssertTrue(app.staticTexts["4 个动作"].waitForExistence(timeout: 5))
         }
@@ -1507,6 +1599,7 @@ final class FitnessAppUITests: XCTestCase {
             NSPredicate(format: "label CONTAINS %@", "RIR，未记录")
         ).firstMatch
         XCTAssertTrue(rir.waitForExistence(timeout: 3))
+        XCTAssertGreaterThanOrEqual(rir.frame.height, 44, "RIR 点击区域高度必须至少为 44pt")
         rir.tap()
         XCTAssertTrue(app.staticTexts["本组还剩多少余力？"].waitForExistence(timeout: 3))
         app.buttons["RIR 3 · 还能做 3 次"].tap()
@@ -1820,11 +1913,8 @@ final class FitnessAppUITests: XCTestCase {
         app.launchArguments = ["--ui-testing"]
         app.launch()
 
-        let viewPlan = app.buttons["查看今日计划"]
-        XCTAssertTrue(scrollDown(in: app, until: viewPlan, attempts: 4))
-        viewPlan.tap()
         let editPlan = app.buttons["修改今日计划"]
-        XCTAssertTrue(editPlan.waitForExistence(timeout: 4))
+        XCTAssertTrue(editPlan.waitForExistence(timeout: 8))
         editPlan.tap()
         XCTAssertTrue(app.staticTexts["编排当天训练"].waitForExistence(timeout: 5))
 

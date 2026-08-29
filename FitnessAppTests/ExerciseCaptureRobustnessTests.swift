@@ -684,6 +684,31 @@ final class ExerciseCaptureRobustnessTests: XCTestCase {
         XCTAssertNil(inbox.pendingDraft())
     }
 
+    func testShareInboxDeferralSuppressesOnlyTheMatchingDraftUntilANewShareArrives() throws {
+        let suiteName = "xfit-share-deferral-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let inbox = ExerciseShareDraftInbox(defaults: defaults)
+        let deferred = ExerciseShareDraft(sharedText: "稍后处理的动作")
+        let newer = ExerciseShareDraft(sharedText: "新分享的动作")
+
+        defaults.set(
+            try JSONEncoder().encode(deferred),
+            forKey: ExerciseShareDraftStorage.pendingDraftKey
+        )
+        XCTAssertEqual(inbox.pendingDraftForAutomaticPresentation(), deferred)
+
+        inbox.deferPendingDraft(matching: deferred.id)
+        XCTAssertNil(inbox.pendingDraftForAutomaticPresentation())
+        XCTAssertEqual(inbox.pendingDraft(), deferred, "稍后处理不应删除真实分享内容")
+
+        defaults.set(
+            try JSONEncoder().encode(newer),
+            forKey: ExerciseShareDraftStorage.pendingDraftKey
+        )
+        XCTAssertEqual(inbox.pendingDraftForAutomaticPresentation(), newer)
+    }
+
     func testProductionAndUITestShareInboxesUseIsolatedKeys() throws {
         let suiteName = "xfit-share-key-isolation-\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))

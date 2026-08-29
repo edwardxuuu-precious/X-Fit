@@ -33,7 +33,9 @@ struct DailyWorkoutBuilderView: View {
     @State private var loadedDate: Date?
     @State private var workoutSessionID: UUID?
     @State private var showWorkout = false
+    @State private var draggingExerciseID: UUID?
     @State private var showExercisePicker = false
+    @State private var isReorderingExercises = false
     @State private var savedMessage: String?
     @State private var errorMessage: String?
     private let initialScheduleID: UUID?
@@ -342,6 +344,28 @@ struct DailyWorkoutBuilderView: View {
                 .foregroundStyle(AppTheme.accent)
         }
 
+        Button {
+            withAnimation(.easeInOut(duration: 0.2)) {
+                isReorderingExercises.toggle()
+            }
+        } label: {
+            Label(
+                isReorderingExercises ? "完成排序" : "拖动排序",
+                systemImage: isReorderingExercises ? "checkmark" : "line.3.horizontal"
+            )
+            .font(.subheadline.bold())
+            .frame(maxWidth: .infinity, minHeight: 44)
+        }
+        .buttonStyle(.bordered)
+        .tint(AppTheme.accent)
+        .accessibilityIdentifier(isReorderingExercises ? "完成排序" : "拖动排序")
+
+        if isReorderingExercises {
+            Text("按住右侧把手，上下拖动动作；这里只显示名称，训练参数不会改变。")
+                .font(.caption)
+                .foregroundStyle(AppTheme.secondaryText)
+        }
+
         if activeSessionForSelectedDate == nil, !existingPlansOnDate.isEmpty {
             Toggle(isOn: $replaceExistingPlans) {
                 VStack(alignment: .leading, spacing: 3) {
@@ -405,9 +429,17 @@ struct DailyWorkoutBuilderView: View {
             .accessibilityIdentifier("保存当天计划")
         }
 
-        ForEach(selectedExerciseIDs, id: \.self) { exerciseID in
-            if let exercise = exercises.first(where: { $0.id == exerciseID }) {
-                selectedExerciseCard(exercise)
+        if isReorderingExercises {
+            ForEach(selectedExerciseIDs, id: \.self) { exerciseID in
+                if let exercise = exercises.first(where: { $0.id == exerciseID }) {
+                    reorderExerciseCard(exercise)
+                }
+            }
+        } else {
+            ForEach(selectedExerciseIDs, id: \.self) { exerciseID in
+                if let exercise = exercises.first(where: { $0.id == exerciseID }) {
+                    selectedExerciseCard(exercise)
+                }
             }
         }
 
@@ -723,6 +755,43 @@ struct DailyWorkoutBuilderView: View {
         .cardSurface()
     }
 
+    private func reorderExerciseCard(_ exercise: Exercise) -> some View {
+        let index = selectedExerciseIDs.firstIndex(of: exercise.id) ?? 0
+
+        return HStack(spacing: 12) {
+            Text("\(index + 1). \(exercise.name)")
+                .font(.headline.bold())
+                .foregroundStyle(.white)
+
+            Spacer(minLength: 8)
+
+            Image(systemName: "line.3.horizontal")
+                .font(.headline.bold())
+                .foregroundStyle(AppTheme.accent)
+                .frame(width: 44, height: 44)
+                .accessibilityHidden(true)
+        }
+        .padding(.leading, 16)
+        .padding(.trailing, 8)
+        .frame(maxWidth: .infinity, minHeight: 58)
+        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 14))
+        .contentShape(RoundedRectangle(cornerRadius: 14))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("第 \(index + 1) 个动作，\(exercise.name)，可拖动排序")
+        .accessibilityIdentifier("排序动作-\(exercise.name)")
+        .opacity(draggingExerciseID == exercise.id ? 0.72 : 1)
+        .highPriorityGesture(
+            DragGesture(minimumDistance: 4)
+                .onChanged { _ in
+                    draggingExerciseID = exercise.id
+                }
+                .onEnded { value in
+                    reorderExercise(exercise.id, verticalTranslation: value.translation.height)
+                    draggingExerciseID = nil
+                }
+        )
+    }
+
     private func toggleMuscleGroup(_ group: String) {
         if selectedMuscleGroups.contains(group) {
             selectedMuscleGroups.remove(group)
@@ -804,6 +873,30 @@ struct DailyWorkoutBuilderView: View {
         let target = index + offset
         guard selectedExerciseIDs.indices.contains(target) else { return }
         selectedExerciseIDs.swapAt(index, target)
+        if activeSessionForSelectedDate != nil {
+            syncActiveWorkoutMenu(showConfirmation: false)
+        }
+    }
+
+    private func reorderExercise(_ id: UUID, verticalTranslation: CGFloat) {
+        guard let sourceIndex = selectedExerciseIDs.firstIndex(of: id) else { return }
+        let rowStride: CGFloat = 66
+        let offset = Int((verticalTranslation / rowStride).rounded())
+        guard offset != 0 else { return }
+
+        let destinationIndex = min(
+            max(sourceIndex + offset, selectedExerciseIDs.startIndex),
+            selectedExerciseIDs.index(before: selectedExerciseIDs.endIndex)
+        )
+        guard destinationIndex != sourceIndex else { return }
+
+        withAnimation(.easeInOut(duration: 0.18)) {
+            selectedExerciseIDs.move(
+                fromOffsets: IndexSet(integer: sourceIndex),
+                toOffset: destinationIndex > sourceIndex ? destinationIndex + 1 : destinationIndex
+            )
+        }
+
         if activeSessionForSelectedDate != nil {
             syncActiveWorkoutMenu(showConfirmation: false)
         }
