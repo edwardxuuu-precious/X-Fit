@@ -1,0 +1,51 @@
+{
+  "scope": "肌群图二视觉修订",
+  "protectedSourceMatches": {
+    "FitnessApp/App/FitnessAppApp.swift": true,
+    "FitnessApp/App/RootView.swift": true,
+    "FitnessApp/Models/FatLossModels.swift": true,
+    "FitnessApp/Models/TrainingMetrics.swift": true,
+    "FitnessApp/Models/TrainingModels.swift": true,
+    "FitnessApp/Models/WellnessModels.swift": true,
+    "FitnessApp/Services/CloudSyncRuntime.swift": true,
+    "FitnessApp/Services/DailyPlanService.swift": true,
+    "FitnessApp/Services/DataExportService.swift": true,
+    "FitnessApp/Services/DeviceHistoryMergeService.swift": true,
+    "FitnessApp/Services/EquipmentRecognitionService.swift": true,
+    "FitnessApp/Services/ExerciseCatalogService.swift": true,
+    "FitnessApp/Services/ExerciseShareDraftInbox.swift": true,
+    "FitnessApp/Services/ExerciseTerminologyService.swift": true,
+    "FitnessApp/Services/FatLossBackup.swift": true,
+    "FitnessApp/Services/FatLossCatalog.swift": true,
+    "FitnessApp/Services/FatLossService.swift": true,
+    "FitnessApp/Services/HealthKitService.swift": true,
+    "FitnessApp/Services/HistoricalWorkoutCSVService.swift": true,
+    "FitnessApp/Services/HistoricalWorkoutService.swift": true,
+    "FitnessApp/Services/MuscleCoverageService.swift": true,
+    "FitnessApp/Services/NotificationService.swift": true,
+    "FitnessApp/Services/ScheduleService.swift": true,
+    "FitnessApp/Services/SeedDataService.swift": true,
+    "FitnessApp/Services/WellnessAgentService.swift": true,
+    "FitnessApp/Services/WorkoutRecommendationService.swift": true,
+    "FitnessApp/Services/WorkoutService.swift": true
+  },
+  "sourceHashes": {
+    "FitnessApp/Shared/MuscleSelectionView.swift": "37a92d6738de17f4d3aa277acea990aefcb6eeae3727a1283dce7a28743b3d03",
+    "FitnessAppUITests/RedesignUITests.swift": "fb588c087128c2d7c0bd8b5c7112305bd8a84ff11063daee523210fad2ec1d25"
+  },
+  "device": "NOT_RUN",
+  "human": "BLOCKED_HUMAN",
+  "validation": {
+    "unitTests": {
+      "passed": 8,
+      "log": "targeted-tests.log"
+    },
+    "finalUITests": {
+      "passed": 2,
+      "log": "final-ui-tests.log"
+    },
+    "simulatorBuild": "PASS",
+    "device": "NOT_RUN",
+    "fullStageRerun": "NOT_RUN"
+  }
+}

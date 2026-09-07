@@ -1,0 +1,35 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "B62D6E36-EF8D-4FEE-910D-920AD2219307.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "19-review-draft_0_6FC153B4-36A6-4A69-8973-FB57F1A4D612.png",
+        "timestamp" : 1788698816.726
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "7128CCD7-274A-43C7-B763-7D05E84627A6.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "19a-review-keyboard_0_478E458F-2671-40E2-BB17-7459403602E1.png",
+        "timestamp" : 1788698813.748
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "DB08A216-2F18-4E58-BE8D-846DEF323B3F.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "18-weekly-progress_0_775178FF-9104-431F-894F-61848856DA9A.png",
+        "timestamp" : 1788698809.53
+      }
+    ],
+    "testIdentifier" : "RedesignUITests/testReviewDraftSaveAndHistoricalReadback()",
+    "testIdentifierURL" : "test://com.apple.xcode/FitnessApp/FitnessAppUITests/RedesignUITests/testReviewDraftSaveAndHistoricalReadback"
+  }
+]

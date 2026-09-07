@@ -30,6 +30,8 @@
 	<string>X-Fit 使用相机拍摄健身器械和说明标牌，识别可做动作与目标肌群。</string>
 	<key>EQUIPMENT_RECOGNITION_ENDPOINT</key>
 	<string>$(EQUIPMENT_RECOGNITION_ENDPOINT)</string>
+	<key>WELLNESS_AGENT_ENDPOINT</key>
+	<string>$(WELLNESS_AGENT_ENDPOINT)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

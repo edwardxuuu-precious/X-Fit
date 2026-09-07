@@ -1,0 +1,38 @@
+{
+  "requirement": "REQ-20260905-225730",
+  "status": "local_verified",
+  "stage": "PARTIAL_NOT_GO",
+  "unit_tests": {
+    "passed": 236,
+    "failed": 0,
+    "skipped": 0
+  },
+  "backend_tests": {
+    "passed": 6,
+    "failed": 0
+  },
+  "full_ui_initial": {
+    "passed": 77,
+    "failed": 1,
+    "retired_tests_skipped": 7
+  },
+  "ui_followup": {
+    "passed": 6,
+    "failed": 0
+  },
+  "unique_active_ui_after_followup": 78,
+  "source_fingerprint_unchanged": true,
+  "generic_iphoneos_release": "PASS",
+  "historical_store_copy_migration": "PASS",
+  "device_install": "NOT_RUN",
+  "device_automation": "NOT_RUN",
+  "human_acceptance": "BLOCKED_HUMAN",
+  "medical_portions": "PENDING_CLINICIAN",
+  "evidence": "artifacts/stage-validation/20260905-fat-loss-local/final-followup.xcresult",
+  "learning_gate": {
+    "status": "FAILED",
+    "closeout": "NOT_FOUND: original receipt expired",
+    "recovery_preflight": "INTERNAL: Context Router plugin shared module missing",
+    "app_validation_impact": "none"
+  }
+}

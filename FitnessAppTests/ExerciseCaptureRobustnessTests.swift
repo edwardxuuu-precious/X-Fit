@@ -55,6 +55,41 @@ final class ExerciseCaptureRobustnessTests: XCTestCase {
         XCTAssertEqual(try context.fetch(FetchDescriptor<Exercise>()).count, validURLs.count)
     }
 
+    func testCatalogExtractsFirstHTTPURLFromPastedShareText() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let pastedShareText = """
+        爆发力遇到了瓶颈期？试试这4个等长训练！ [https://xhslink.cn/o/39wxGiDcs6G](https://xhslink.cn/o/39wxGiDcs6G)
+        Copy and open rednote to view the note
+        """
+
+        let result = try saveExercise(
+            name: "等长训练参考",
+            referenceURL: pastedShareText,
+            in: context
+        )
+
+        XCTAssertEqual(result.exercise.referenceURL, "https://xhslink.cn/o/39wxGiDcs6G")
+    }
+
+    func testCatalogUsesFirstValidHTTPURLWhenPastedTextContainsSeveralLinks() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let pastedShareText = """
+        无效来源 ftp://example.com/video
+        首选 https://example.com/first
+        备用 https://example.com/second
+        """
+
+        let result = try saveExercise(
+            name: "多个参考链接",
+            referenceURL: pastedShareText,
+            in: context
+        )
+
+        XCTAssertEqual(result.exercise.referenceURL, "https://example.com/first")
+    }
+
     func testCatalogReusesCompatibleActiveExerciseWithoutOverwritingIt() throws {
         let container = try makeContainer()
         let context = container.mainContext
@@ -263,6 +298,48 @@ final class ExerciseCaptureRobustnessTests: XCTestCase {
                 query: "mts",
                 excludedExerciseIDs: [primary.id]
             ).isEmpty
+        )
+    }
+
+    func testCatalogSearchDerivesBilingualAliasesAndIgnoresSearchSeparators() {
+        let squat = Exercise(
+            name: "深蹲",
+            muscleGroup: "腿部",
+            equipment: "杠铃"
+        )
+        let englishSquat = Exercise(
+            name: "Barbell Squat",
+            muscleGroup: "Legs",
+            equipment: "Barbell"
+        )
+
+        for query in ["squat", "squa", "BARBELL-SQUAT", "barbell squat", "barbellsquat", "深蹲"] {
+            XCTAssertEqual(
+                ExerciseCatalogService.search([squat], query: query).map(\.id),
+                [squat.id],
+                "双语搜索未命中：\(query)"
+            )
+        }
+
+        XCTAssertEqual(
+            ExerciseCatalogService.search([englishSquat], query: "杠铃深蹲").map(\.id),
+            [englishSquat.id],
+            "英文动作名也必须能被对应中文标准名找到"
+        )
+        XCTAssertTrue(
+            ExerciseCatalogService.search([squat], query: "sqaut").isEmpty,
+            "本需求不包含拼写纠错"
+        )
+    }
+
+    func testCatalogSearchSortsChineseNamesByPinyinInitialWithStableFallbacks() {
+        let zRow = Exercise(name: "坐姿划船", muscleGroup: "背部", equipment: "器械")
+        let aPress = Exercise(name: "阿诺德推举", muscleGroup: "肩部", equipment: "哑铃")
+        let gPulldown = Exercise(name: "高位下拉", muscleGroup: "背部", equipment: "器械")
+
+        XCTAssertEqual(
+            ExerciseCatalogService.search([zRow, gPulldown, aPress], query: "").map(\.name),
+            ["阿诺德推举", "高位下拉", "坐姿划船"]
         )
     }
 

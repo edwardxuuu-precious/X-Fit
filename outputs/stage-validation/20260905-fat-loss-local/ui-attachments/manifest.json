@@ -1,0 +1,17 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "676F4E1E-3174-42D0-A286-895B705CA901.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "减脂周复盘完整流程_0_6D1F4C69-A387-418F-A3C9-628E990108A1.png",
+        "timestamp" : 1788622895.549
+      }
+    ],
+    "testIdentifier" : "FatLossUITests/testMealActualFeedbackPartialNutritionPrepAndReviewFlow()",
+    "testIdentifierURL" : "test://com.apple.xcode/FitnessApp/FitnessAppUITests/FatLossUITests/testMealActualFeedbackPartialNutritionPrepAndReviewFlow"
+  }
+]

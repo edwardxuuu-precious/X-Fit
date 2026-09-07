@@ -42,7 +42,7 @@ struct EquipmentRecognitionSheet: View {
                         resultCard(response)
                     }
                 }
-                .padding()
+                .padding(20)
             }
             .background(AppTheme.background)
             .navigationTitle("拍照识别器械")

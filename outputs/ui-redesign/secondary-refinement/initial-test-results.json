@@ -1,0 +1,53 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "modelName" : "iPhone 17 Pro",
+        "osBuildNumber" : "23F77",
+        "osVersion" : "26.5",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 1,
+      "passedTests" : 40,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "FitnessApp · Built with macOS 26.6.2",
+  "expectedFailures" : 0,
+  "failedTests" : 1,
+  "finishTime" : 1788698702.709,
+  "passedTests" : 40,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1788698530.707,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "Failed to synthesize event: Neither element nor any descendant has keyboard focus. Event dispatch snapshot: TextField, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\nElement debug description:\nAttributes: TextField, 0x117739e00, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\nElement subtree:\n →TextField, 0x117739e00, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\n    Other, 0x11773abc0, {{36.0, 804.3}, {330.0, 30.0}}, label: 'Horizontal scroll bar, 1 page', value: 0%\n      Other, 0x11773af80, {{39.0, 831.3}, {324.0, 3.0}}\nPath to element:\n →Application, 0x11772a940, pid: 29688, label: 'X-Fit'\n  ↳Window (Main), 0x117729900, {{0.0, 0.0}, {402.0, 874.0}}\n   ↳Other, 0x117729b80, {{0.0, 0.0}, {402.0, 874.0}}\n    ↳Other, 0x11772a080, {{0.0, 0.0}, {402.0, 874.0}}\n     ↳Other, 0x11772af80, {{0.0, 0.0}, {402.0, 874.0}}\n      ↳Other, 0x11772ad00, {{0.0, 0.0}, {402.0, 874.0}}\n       ↳Other, 0x11772b840, {{0.0, 0.0}, {402.0, 874.0}}\n        ↳Other, 0x11772b5c0, {{0.0, 0.0}, {402.0, 874.0}}\n         ↳Other, 0x11772bd40, {{0.0, 0.0}, {402.0, 874.0}}\n          ↳Other, 0x11772ae40, {{0.0, 0.0}, {402.0, 874.0}}\n           ↳Other, 0x11772b980, {{0.0, 0.0}, {402.0, 874.0}}\n            ↳Other, 0x11772b0c0, {{0.0, 0.0}, {402.0, 874.0}}\n             ↳Other, 0x11772b200, {{0.0, 0.0}, {402.0, 874.0}}\n              ↳Other, 0x116880dc0, {{0.0, 0.0}, {402.0, 874.0}}\n               ↳Other, 0x116880c80, {{0.0, 0.0}, {402.0, 874.0}}\n                ↳Other, 0x116883980, {{0.0, 0.0}, {402.0, 874.0}}\n                 ↳Other, 0x116881f40, {{0.0, 0.0}, {402.0, 874.0}}\n                  ↳ScrollView, 0x116881cc0, {{0.0, 0.0}, {402.0, 874.0}}\n                   ↳Other, 0x117738c80, {{0.0, 116.0}, {402.0, 1169.7}}\n                    ↳TextField, 0x117739e00, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\nQuery chain:\n →Find: Target Application 'com.edward.FitnessApp'\n  Output: {\n    Application, 0x116a2bc00, pid: 29688, label: 'X-Fit'\n  }\n  ↪︎Find: Descendants matching type TextField\n    Output: {\n      TextField, 0x11762f0c0, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\n      TextField, 0x11762f5c0, {{36.0, 921.7}, {330.0, 42.3}}, placeholderValue: '下一步（如维持观察、换菜、复查）', value: 下一步（如维持观察、换菜、复查）\n    }\n    ↪︎Find: Elements matching predicate '\"本周体重、饥饿、腹胀与训练表现\" IN identifiers'\n      Output: {\n        TextField, 0x1178b7200, {{36.0, 773.0}, {330.0, 64.3}}, placeholderValue: '本周体重、饥饿、腹胀与训练表现', value: 本周体重、饥饿、腹胀与训练表现\n      }\n",
+      "targetName" : "FitnessAppUITests",
+      "testIdentifier" : 41,
+      "testIdentifierString" : "RedesignUITests/testReviewDraftSaveAndHistoricalReadback()",
+      "testIdentifierURL" : "test://com.apple.xcode/FitnessApp/FitnessAppUITests/RedesignUITests/testReviewDraftSaveAndHistoricalReadback",
+      "testName" : "testReviewDraftSaveAndHistoricalReadback()"
+    }
+  ],
+  "title" : "Test - FitnessApp",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "63% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 0.60s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 41
+}

@@ -1,0 +1,52 @@
+{
+  "scope": "本轮其他页面风格统一",
+  "status": "本地已验证（已实施范围）",
+  "unitTests": {
+    "passed": 36
+  },
+  "uiTests": {
+    "passed": 11,
+    "distinct": true
+  },
+  "build": "PASS simulator debug",
+  "evidence": [
+    {
+      "bundle": "/tmp/xfit-secondary-refinement.xcresult",
+      "result": "40 PASS / 1 FAIL; 36 unit and 5 UI",
+      "log": "tests.log"
+    },
+    {
+      "bundle": "/tmp/xfit-secondary-review-rerun.xcresult",
+      "result": "review draft save and readback PASS",
+      "log": "review-rerun.log"
+    },
+    {
+      "bundle": "/tmp/xfit-training-secondary.xcresult",
+      "result": "5 PASS / 1 FAIL UI",
+      "log": "training-tools-tests.log"
+    },
+    {
+      "bundle": "/tmp/xfit-history-refinement-rerun.xcresult",
+      "result": "history edit and readback PASS",
+      "log": "history-rerun.log"
+    }
+  ],
+  "failureResolution": [
+    {
+      "test": "testReviewDraftSaveAndHistoricalReadback",
+      "cause": "测试在多行输入框仅部分可见时点击了固定保存区；先滚动使点击点位于保存区上方，并断言键盘实际出现。",
+      "appSourceChangedForRecovery": false
+    },
+    {
+      "test": "testWorkoutHistoryShowsDetailsAndReturnsWithoutNavigationError",
+      "cause": "多行输入框默认中心点击未获得焦点；层级显示该区域含滚动条。改点首行文本区域、显式验证键盘并收起键盘后定位下一字段。",
+      "appSourceChangedForRecovery": false
+    }
+  ],
+  "preserved": "模型/服务/进行中训练/目标首页五个已记录文件哈希保持不变，见 protected-comparison.json；备份协议、保存与历史 handlers 保留",
+  "humanAcceptance": "BLOCKED_HUMAN",
+  "device": "NOT_RUN",
+  "fullStage": "NOT_RUN for current source",
+  "pending": "工具页顺序与 9 月 2 日对话优先规则冲突，已询问；决定前保留原顺序和默认展开偏好，仅统一配色",
+  "preview": "index.html"
+}

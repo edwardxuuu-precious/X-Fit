@@ -1,0 +1,9 @@
+{
+  "script_sha256": "737052da624bc3f4b866f79694f41f23136dca29573453fc2216c9bc99d30ee8",
+  "checks": {
+    "includes_live_wal_row": true,
+    "detects_same_uuid_field_change": true,
+    "detects_same_count_uuid_replacement": true,
+    "detects_duplicate_ids": true
+  }
+}

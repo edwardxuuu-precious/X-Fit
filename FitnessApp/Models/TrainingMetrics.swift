@@ -159,6 +159,23 @@ private struct TrainingVolumeAccumulator {
 }
 
 enum TrainingMetrics {
+    static func volumeSummary(
+        sessionExercises: [SessionExercise],
+        setLogs: [SetLog]
+    ) -> [ExerciseVolumeUnit: Double] {
+        let snapshotsByID = Dictionary(uniqueKeysWithValues: sessionExercises.map { ($0.id, $0) })
+        return setLogs
+            .filter { $0.isCompleted && !$0.isWarmup }
+            .reduce(into: [:]) { result, log in
+                guard let snapshot = snapshotsByID[log.sessionExerciseID] else { return }
+                let weight = snapshot.volumeUnit == .bodyweight
+                    ? snapshot.bodyWeightKgSnapshot
+                    : log.actualWeight
+                guard let volume = snapshot.volumeUnit.volume(weight: weight, reps: log.actualReps) else { return }
+                result[snapshot.volumeUnit, default: 0] += volume
+            }
+    }
+
     static func volume(
         for logs: [SetLog],
         unit: ExerciseVolumeUnit = .kilogram

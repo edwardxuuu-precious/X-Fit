@@ -1,0 +1,101 @@
+Application, 0x1181630c0, pid: 65084, label: 'X-Fit' <App element pid: 65084>
+  Window (Main), 0x118163340, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4408018944.4>
+    Other, 0x118163480, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418618880.5>
+      Other, 0x118163200, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418288640.6>
+        Other, 0x118163700, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4408017920.7>
+          Other, 0x118162d00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418035136.8>
+            Other, 0x118163c00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418610816.9>
+              Other, 0x118163d40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418625024.10>
+                Other, 0x118163e80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418121984.137>
+                  Other, 0x118162300, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4408027136.138>
+                    Other, 0x118162440, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418227264.139>
+                      Other, 0x118162580, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418226816.140>
+                        Other, 0x1181626c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4417511296.141>
+                          NavigationBar, 0x118162800, {{0.0, 62.0}, {402.0, 54.0}}, identifier: '_TtGC7SwiftUI32NavigationStackHosting' <AX element pid: 65084, elementOrHash.elementID: 4513492992.188>
+                            Button, 0x118162940, {{16.0, 62.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Back' <AX element pid: 65084, elementOrHash.elementID: 4987660288.189>
+                          Other, 0x118162bc0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4417517120.142>
+                            Other, 0x118162a80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5001168640.420>
+                              Other, 0x11816ea80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4987406080.421>
+                                Other, 0x11816fc00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5001676544.422>
+                                  ScrollView, 0x11816e1c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4988570624.423>
+                                    Other, 0x11816f980, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5000015680.424>
+                                      Other, 0x11816fac0, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 65084, elementOrHash.elementID: 5001172224.427>
+                                      Other, 0x11816c500, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 5001174464.428>
+                                    Other, 0x11816c640, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5000015232.425>
+                                      Other, 0x11816dcc0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 4997638784.429>
+                                        Image, 0x11816de00, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay' <AX element pid: 65084, elementOrHash.elementID: 5000690688.431>
+                                        Other, 0x11816df40, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 4990262784.432>
+                                          Other, 0x11816e6c0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 5001174912.462>
+                                        Other, 0x11816ed00, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 4997639424.433>
+                                          Other, 0x11816e580, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 5001175360.463>
+                                          Other, 0x11816c3c0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 65084, elementOrHash.elementID: 5001178048.464>
+                                    Other, 0x11816cc80, {{0.0, 116.0}, {402.0, 759.0}} <AX element pid: 65084, elementOrHash.elementID: 4982275072.426>
+                                      Other, 0x11816cdc0, {{20.0, 128.0}, {346.0, 702.3}} <AX element pid: 65084, elementOrHash.elementID: 5001675648.430>
+                                        StaticText, 0x11816fe80, {{20.0, 128.0}, {135.3, 26.3}}, label: 'MTS 下斜卧推' <AX element pid: 65084, elementOrHash.elementID: 5001599552.434>
+                                        Image, 0x11816c000, {{38.0, 190.0}, {14.0, 17.0}}, identifier: 'lock.shield.fill', label: 'lock.shield.fill' <AX element pid: 65084, elementOrHash.elementID: 5001600000.435>
+                                        StaticText, 0x11816f0c0, {{38.0, 188.3}, {125.3, 20.3}}, label: '当前原始记录' <AX element pid: 65084, elementOrHash.elementID: 5001600448.436>
+                                        StaticText, 0x11816c780, {{36.0, 221.7}, {24.0, 14.3}}, label: '名称' <AX element pid: 65084, elementOrHash.elementID: 5001600896.437>
+                                        StaticText, 0x11816c8c0, {{124.0, 218.7}, {96.0, 18.0}}, label: 'MTS 下斜卧推' <AX element pid: 65084, elementOrHash.elementID: 5001601344.438>
+                                        StaticText, 0x117ae0f00, {{36.0, 249.7}, {24.0, 14.3}}, label: '肌群' <AX element pid: 65084, elementOrHash.elementID: 5001601792.439>
+                                        StaticText, 0x117ae0780, {{124.0, 246.7}, {30.0, 18.0}}, label: '胸部' <AX element pid: 65084, elementOrHash.elementID: 5001602240.440>
+                                        StaticText, 0x117ae03c0, {{36.0, 277.7}, {24.0, 14.3}}, label: '器械' <AX element pid: 65084, elementOrHash.elementID: 5001602688.441>
+                                        StaticText, 0x117ae17c0, {{124.0, 274.7}, {30.0, 18.0}}, label: '器械' <AX element pid: 65084, elementOrHash.elementID: 5001603136.442>
+                                        StaticText, 0x117ae1e00, {{36.0, 302.7}, {295.3, 13.3}}, label: '接受候选后，这三个原始字段和已完成训练快照仍保持不变。' <AX element pid: 65084, elementOrHash.elementID: 5001603584.443>
+                                        Image, 0x117ae0000, {{38.0, 367.3}, {14.7, 18.3}}, identifier: 'character.book.closed.fill', label: 'character.book.closed.fill' <AX element pid: 65084, elementOrHash.elementID: 5001604032.444>
+                                        StaticText, 0x117ae2bc0, {{38.0, 366.3}, {126.0, 20.3}}, label: '标准名称候选' <AX element pid: 65084, elementOrHash.elementID: 5001604480.445>
+                                        StaticText, 0x117ae08c0, {{322.0, 369.8}, {44.0, 13.3}}, label: '高置信度' <AX element pid: 65084, elementOrHash.elementID: 5001604928.446>
+                                        StaticText, 0x117ae0a00, {{36.0, 400.0}, {24.0, 14.3}}, label: '中文' <AX element pid: 65084, elementOrHash.elementID: 5001605376.447>
+                                        StaticText, 0x117ae3340, {{124.0, 397.0}, {195.7, 38.0}}, label: 'Hammer Strength MTS Iso-Lateral 下斜推胸' <AX element pid: 65084, elementOrHash.elementID: 5001605824.448>
+                                        StaticText, 0x117ae1040, {{36.0, 448.0}, {24.0, 14.3}}, label: '英文' <AX element pid: 65084, elementOrHash.elementID: 5001606272.449>
+                                        StaticText, 0x117ae0280, {{124.0, 445.0}, {195.7, 38.0}}, label: 'Hammer Strength MTS Iso-Lateral Decline Press' <AX element pid: 65084, elementOrHash.elementID: 5001606720.450>
+                                        StaticText, 0x117ae0640, {{36.0, 496.0}, {55.7, 14.3}}, label: 'Canonical' <AX element pid: 65084, elementOrHash.elementID: 5001607168.451>
+                                        StaticText, 0x117ae2080, {{124.0, 493.0}, {226.7, 38.0}}, label: 'hammer_strength_mts_iso_lateral_decline_press' <AX element pid: 65084, elementOrHash.elementID: 5001607616.452>
+                                        StaticText, 0x118184000, {{36.0, 544.0}, {24.0, 14.3}}, label: '状态' <AX element pid: 65084, elementOrHash.elementID: 5001608064.453>
+                                        StaticText, 0x118184140, {{124.0, 541.0}, {89.3, 18.0}}, label: '候选名可审批' <AX element pid: 65084, elementOrHash.elementID: 5001608512.454>
+                                        StaticText, 0x118184280, {{36.0, 569.0}, {119.3, 14.3}}, label: '品牌和系列不可丢失。' <AX element pid: 65084, elementOrHash.elementID: 5000014784.455>
+                                        Image, 0x1181843c0, {{35.7, 635.0}, {19.3, 17.3}}, identifier: 'clock.arrow.circlepath', label: 'clock.arrow.circlepath' <AX element pid: 65084, elementOrHash.elementID: 4418496128.456>
+                                        StaticText, 0x118184500, {{35.7, 633.3}, {96.3, 20.3}}, label: '历史影响' <AX element pid: 65084, elementOrHash.elementID: 4418496576.457>
+                                        StaticText, 0x118184640, {{36.0, 663.7}, {98.0, 18.0}}, identifier: 'terminology-completed-set-row', label: '当前完成组、0' <AX element pid: 65084, elementOrHash.elementID: 4999222080.458>
+                                          StaticText, 0x118184780, {{36.0, 666.7}, {59.7, 14.3}}, label: '当前完成组' <AX element pid: 65084, elementOrHash.elementID: 5001167296.465>
+                                          StaticText, 0x1181848c0, {{124.0, 663.7}, {10.0, 18.0}}, label: '0' <AX element pid: 65084, elementOrHash.elementID: 5001167744.466>
+                                        StaticText, 0x118184a00, {{36.0, 691.7}, {312.3, 14.3}}, label: '批准后只增加可追溯的标准身份；不会改写这 0 个完成组。' <AX element pid: 65084, elementOrHash.elementID: 4999221632.459>
+                                        Image, 0x118184b40, {{37.3, 757.3}, {19.7, 19.7}}, identifier: 'checkmark.seal.fill', label: '已验证', Selected <AX element pid: 65084, elementOrHash.elementID: 5002646336.540>
+                                        StaticText, 0x118184c80, {{37.3, 757.0}, {113.3, 20.3}}, label: '已接受候选' <AX element pid: 65084, elementOrHash.elementID: 5002644992.541>
+                                        StaticText, 0x118184dc0, {{243.3, 760.5}, {122.7, 13.3}}, label: 'Sep 7, 2026 at 9:48 AM' <AX element pid: 65084, elementOrHash.elementID: 5002645888.542>
+                                        Button, 0x118184f00, {{36.0, 788.3}, {330.0, 42.0}}, identifier: 'terminology-reset-button', label: '撤销审核决定' <AX element pid: 65084, elementOrHash.elementID: 5002645440.543>
+                          Other, 0x118185040, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4897963520.143>
+                            Other, 0x118185180, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4418621952.145>
+              Other, 0x1181852c0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4418611264.11>
+                Other, 0x118185400, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4417538688.13>
+                  TabBar, 0x118185540, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar' <AX element pid: 65084, elementOrHash.elementID: 4420030208.16>
+                    Other, 0x118185680, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 65084, elementOrHash.elementID: 4418611712.19>
+                      Other, 0x1181857c0, {{21.0, 791.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4417544064.22>
+                      Other, 0x118185900, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 65084, elementOrHash.elementID: 4418612160.23>
+                        Button, 0x118185a40, {{25.0, 795.0}, {98.0, 54.0}}, identifier: 'dumbbell.fill', label: '训练' <AX element pid: 65084, elementOrHash.elementID: 4407990528.28>
+                          Image, 0x118185b80, {{57.0, 804.3}, {35.0, 21.0}}, identifier: 'dumbbell.fill', label: 'dumbbell.fill' <AX element pid: 65084, elementOrHash.elementID: 4418625536.37>
+                        Button, 0x118185cc0, {{109.7, 795.0}, {98.0, 54.0}}, identifier: 'fork.knife', label: '饮食' <AX element pid: 65084, elementOrHash.elementID: 4407993088.29>
+                          Image, 0x118185e00, {{147.7, 798.7}, {21.7, 30.7}}, identifier: 'fork.knife', label: 'Food' <AX element pid: 65084, elementOrHash.elementID: 4418626560.38>
+                        Button, 0x118185f40, {{194.3, 795.0}, {98.0, 54.0}}, identifier: 'scope', label: '目标' <AX element pid: 65084, elementOrHash.elementID: 4407995648.30>
+                          Image, 0x118186080, {{227.3, 799.0}, {31.7, 31.7}}, identifier: 'scope', label: 'scope' <AX element pid: 65084, elementOrHash.elementID: 4418627584.39>
+                        Button, 0x1181861c0, {{279.0, 795.0}, {98.0, 54.0}}, identifier: 'person.fill', label: '我的', Selected <AX element pid: 65084, elementOrHash.elementID: 4407998208.31>
+                          Image, 0x118186300, {{315.0, 802.7}, {25.3, 24.7}}, identifier: 'person.fill', label: 'person.fill' <AX element pid: 65084, elementOrHash.elementID: 4418628608.40>
+                      Other, 0x118186440, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4420030848.24>
+                        Other, 0x118186580, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418613952.32>
+                          Other, 0x1181866c0, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418612608.41>
+                          Other, 0x118186800, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418614400.42>
+                            Other, 0x118186940, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418615744.46>
+                              Other, 0x118186a80, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418616192.49>
+                                Other, 0x118186bc0, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418616640.52>
+                              Other, 0x118186d00, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418614848.50>
+                            Other, 0x118186e40, {{279.0, 795.0}, {98.0, 54.0}} <AX element pid: 65084, elementOrHash.elementID: 4418615296.47>
+                Other, 0x118186f80, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4418623488.14>
+                  Other, 0x1181870c0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4417559552.17>
+                    Other, 0x118187200, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4417544512.20>
+                      Other, 0x118187340, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4417544960.25>
+                        Other, 0x118187480, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4418629632.33>
+                          Other, 0x1181875c0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4417545408.43>
+                      Other, 0x118187700, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4418630144.26>
+                        Other, 0x118187840, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 65084, elementOrHash.elementID: 4417546304.34>
+  Window, 0x118187980, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 4515443200.467>
+    Other, 0x118187ac0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5001688640.470>
+      Other, 0x118187c00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 65084, elementOrHash.elementID: 5001689984.473>

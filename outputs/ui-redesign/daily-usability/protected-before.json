@@ -1,0 +1,8 @@
+{
+  "FitnessApp/Models/TrainingMetrics.swift": "90008e467ba2f740ce0c01236a08615813f0ac2b1a05fbb00c4e7d538398d546",
+  "FitnessApp/Models/TrainingModels.swift": "1a9bb626c0af1de03a0f44f81836e9afa12cbaa4bb566aff27a365d03e5abc21",
+  "FitnessApp/Models/WellnessModels.swift": "090fac7ad2500c34730c1678d44273aba7fa157571b2394ac08c028925c3d98e",
+  "FitnessApp/Models/FatLossModels.swift": "5c7c19b1aa267d2f19583eac0a507ddcd0b623cb7a61a416ee4d825543c8e6c0",
+  "FitnessApp/App/FitnessAppApp.swift": "52fcb0acfb3fdeefe5512a12f41f7e97d55b466dfaa1052c1d19e0cd52eab9bc",
+  "FitnessApp/App/RootView.swift": "c65f6b5855713c5e87fbfdad05569884460fdfa53848b318234d07b8c589fa30"
+}

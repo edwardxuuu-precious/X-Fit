@@ -1,0 +1,19 @@
+[
+  "xcodebuild",
+  "test",
+  "-project",
+  "FitnessApp.xcodeproj",
+  "-scheme",
+  "FitnessApp",
+  "-destination",
+  "platform=iOS Simulator,id=0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+  "-derivedDataPath",
+  "/tmp/xfit-ui-redesign-build",
+  "-resultBundlePath",
+  "/tmp/xfit-ui-redesign-final-5.xcresult",
+  "-parallel-testing-enabled",
+  "NO",
+  "CODE_SIGNING_ALLOWED=NO",
+  "-only-testing:FitnessAppUITests/FatLossUITests/testMealActualFeedbackPartialNutritionPrepAndReviewFlow",
+  "-only-testing:FitnessAppUITests/RedesignUITests"
+]

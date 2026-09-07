@@ -28,6 +28,7 @@ struct StatsView: View {
     @Query private var setLogs: [SetLog]
     @Query private var sessionExercises: [SessionExercise]
     @Query(sort: \Exercise.name) private var exercises: [Exercise]
+    @Query(sort: \BodyMeasurement.date, order: .reverse) private var bodyMeasurements: [BodyMeasurement]
 
     @State private var selectedExerciseKey: String?
     @State private var trainingTrendMode: TrainingTrendMode = .overall
@@ -80,7 +81,6 @@ struct StatsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: "YOUR PERFORMANCE", title: "训练进度")
                 segmentControl
                 if selectedSegment == 0 {
                     workoutFrequencyCard
@@ -97,12 +97,15 @@ struct StatsView: View {
                     bodyStatsCard
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 26)
         }
         .screenBackground()
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationTitle("力量与训练趋势")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
+        .environment(\.defaultMinListRowHeight, 52)
         .onAppear {
             if selectedExerciseKey == nil {
                 selectedExerciseKey = volumeTrends.exercises.first?.key
@@ -134,10 +137,9 @@ struct StatsView: View {
         } label: {
             Text(title)
                 .font(.caption.bold())
-                .foregroundStyle(selectedSegment == value ? .black : AppTheme.secondaryText)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 9)
-                .background(selectedSegment == value ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 10))
+                .foregroundStyle(selectedSegment == value ? .white : AppTheme.secondaryText)
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .background(selectedSegment == value ? AppTheme.elevatedSurface : .clear, in: RoundedRectangle(cornerRadius: 10))
         }
     }
 
@@ -145,15 +147,15 @@ struct StatsView: View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("训练频率")
+                    Text("近 7 天训练容量")
                         .font(.headline.bold())
                         .foregroundStyle(.white)
-                    Text("本周完成 \(recentSessions.count) 次训练")
+                    Text("完成 \(recentSessions.count) 次训练")
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
                 }
                 Spacer()
-                Text("本周")
+                Text("近 7 天")
                     .font(.caption.bold())
                     .foregroundStyle(AppTheme.accent)
             }
@@ -189,51 +191,30 @@ struct StatsView: View {
                     .foregroundStyle(AppTheme.secondaryText)
             }
         }
-        .cardSurface()
+        .padding(.vertical, 8)
     }
 
     private var summaryGrid: some View {
-        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-            MetricCard(
-                title: "训练容量",
-                value: "\(Int(TrainingMetrics.volume(for: recentLogs, sessionExercises: sessionExercises)))",
-                detail: "近 7 天 · kg",
-                systemImage: "flame.fill",
-                tint: AppTheme.orange
-            )
-            MetricCard(
-                title: "活跃时间",
-                value: activeMinutes == 0 ? "0m" : "\(activeMinutes)m",
-                detail: "近 7 天累计",
-                systemImage: "timer",
-                tint: AppTheme.purple
-            )
-        }
+        ViewThatFits(in: .horizontal) {
+            HStack(spacing: 24) { summaryValues }
+            VStack(alignment: .leading, spacing: 16) { summaryValues }
+        }.padding(.vertical, 8)
+    }
+
+    @ViewBuilder private var summaryValues: some View {
+        FatLossMetric(value: "\(Int(TrainingMetrics.volume(for: recentLogs, sessionExercises: sessionExercises)).formatted()) kg", label: "近 7 天容量")
+        FatLossMetric(value: "\(activeMinutes) 分钟", label: "累计训练时长")
     }
 
     private var goalProgressCard: some View {
-        HStack(spacing: 18) {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("目标进度")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-                Text("保持训练节奏")
-                    .font(.headline.bold())
-                    .foregroundStyle(.white)
-                Text("计划完成率按最近 7 天已到期训练计算。")
-                    .font(.caption)
-                    .foregroundStyle(AppTheme.secondaryText)
-                ProgressView(value: Double(completionRate), total: 100)
-                    .tint(AppTheme.accent)
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("到期计划完成率").font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                Spacer()
+                Text("\(completionRate)%").font(.headline.monospacedDigit()).foregroundStyle(.white)
             }
-            Spacer()
-            NeonProgressRing(
-                progress: Double(completionRate) / 100,
-                value: "\(completionRate)%",
-                detail: "计划"
-            )
-        }
-        .cardSurface()
+            ProgressView(value: Double(completionRate), total: 100).tint(AppTheme.accent)
+        }.padding(.vertical, 8)
     }
 
     private var volumeTrendCard: some View {
@@ -258,11 +239,10 @@ struct StatsView: View {
                     } label: {
                         Text(mode.title)
                             .font(.caption.bold())
-                            .foregroundStyle(trainingTrendMode == mode ? .black : AppTheme.secondaryText)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 8)
+                            .foregroundStyle(trainingTrendMode == mode ? .white : AppTheme.secondaryText)
+                            .frame(maxWidth: .infinity, minHeight: 44)
                             .background(
-                                trainingTrendMode == mode ? AppTheme.accent : .clear,
+                                trainingTrendMode == mode ? AppTheme.surface : .clear,
                                 in: RoundedRectangle(cornerRadius: 9)
                             )
                     }
@@ -287,7 +267,7 @@ struct StatsView: View {
                             .foregroundStyle(AppTheme.secondaryText)
                         Text(selectedExerciseTrend?.name ?? "选择动作")
                             .foregroundStyle(.white)
-                            .lineLimit(1)
+                            .fixedSize(horizontal: false, vertical: true)
                         Spacer()
                         Image(systemName: "chevron.down")
                             .foregroundStyle(AppTheme.accent)
@@ -295,6 +275,7 @@ struct StatsView: View {
                     .font(.caption.bold())
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
+                    .frame(minHeight: 44)
                     .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 11))
                 }
                 .accessibilityLabel("选择趋势动作")
@@ -379,60 +360,18 @@ struct StatsView: View {
                 }
             }
         }
-        .cardSurface()
+        .padding(.vertical, 8)
         .accessibilityIdentifier("训练容量趋势卡片")
     }
 
     private var historyLink: some View {
         NavigationLink(destination: HistoryView()) {
-            HStack(spacing: 13) {
-                Image(systemName: "clock.arrow.circlepath")
-                    .font(.headline.bold())
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 42, height: 42)
-                    .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("完整训练历史")
-                        .font(.subheadline.bold())
-                        .foregroundStyle(.white)
-                    Text("查看每次训练的动作、组数和容量")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-            }
-            .cardSurface()
-        }
-        .buttonStyle(.plain)
+            FatLossNavigationRow(title: "完整训练历史", icon: "clock.arrow.circlepath")
+        }.buttonStyle(.plain)
     }
 
     private var bodyStatsCard: some View {
-        NavigationLink(destination: BodyMeasurementsView()) {
-            VStack(spacing: 18) {
-                Image(systemName: "figure.arms.open")
-                    .font(.system(size: 42, weight: .bold))
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 84, height: 84)
-                    .background(AppTheme.accent.opacity(0.10), in: Circle())
-                Text("身体数据")
-                    .font(.title3.bold())
-                    .foregroundStyle(.white)
-                Text("记录体重、体脂和围度，查看随训练变化的趋势。")
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(AppTheme.secondaryText)
-                Label("打开身体记录", systemImage: "arrow.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 30)
-            .cardSurface()
-        }
-        .buttonStyle(.plain)
+        BodyWeightTrendCard(measurements: bodyMeasurements, showsHistoryLink: true)
     }
 
     private var dailyVolumePoints: [DailyVolumePoint] {

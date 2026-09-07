@@ -1,0 +1,2204 @@
+{
+  "started_at": "2026-09-05 22:14:02 +0800",
+  "df_before": "Filesystem   1024-blocks      Used Available Capacity iused      ifree %iused  Mounted on\n/dev/disk3s5   482746452 313114604 127729632    72% 3855110 1277296320    0%   /System/Volumes/Data\n",
+  "deleted": [
+    {
+      "path": "/private/tmp/xfit-acceptance-1.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 9510912,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-service-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 151552,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-full.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 368640,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 61304832,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-green2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 229376,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 65646592,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-regression.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1171456,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-regression2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 60096512,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-regression3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 152879104,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-ui-regression4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 278528,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-replan-unit-all.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1900544,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 64782336,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-green2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 64155648,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-green3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 76189696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-green4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 74797056,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-green5.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2342912,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bugfix-template-paste-sim-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 67915776,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-body-keyboard-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2445312,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-five-cycle-and-template.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3088384,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-picker-helper-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 58245120,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-picker-helper-green2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 323584,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-two-failures-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2654208,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-two-failures-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 90255360,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-compat-tests.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 421888,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-final-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 55394304,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-final-scope-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 157065216,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-final-scope.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 61440,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 86016,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-skip-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 60690432,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui-without-build.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 58564608,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-merged-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 81920,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-cards-regression.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 49455104,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-independent-cards.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2461696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-ui-retry.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3141632,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-ui.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3649536,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-mirror-check.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2392064,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-mirror-now.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 10919936,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-mirror-now.small.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2064384,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-mirror-state2.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1781760,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-now2.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 11149312,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-now2.small.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2138112,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-now3.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 10141696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-now3.small.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1646592,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-replan-home-cards-targeted.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 626688,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-replan-home-cards-units.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1863680,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-replan-single-entry-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 62803968,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-replan-single-entry-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 50270208,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-sc-test3.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2387968,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-squat-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 294912,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-run.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2977792,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3588096,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 16384,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 6995968,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 8220672,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback5.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 618496,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback6.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 606208,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-writeback7.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 626688,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-bugfix-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 180224,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-core-final-prebuilt.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 483328,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-core-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 77824,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-core-ui-current-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 389120,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-core-ui-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 81920,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-core-units-current-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 184320,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-device-two-failures-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 9973760,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 50565120,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 50073600,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 51044352,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-5.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 53014528,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 229376,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-pass-2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 50794496,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final-pass.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 51511296,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-editor-ui-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 48869376,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 52232192,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-flatgroup.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 56950784,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-fullscreen.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 56360960,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-lifecycle.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 59174912,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 66134016,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-picker-reverted.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 59904000,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-remaining-ui-current-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 85401600,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-ui-failures-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 104054784,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 20480,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-ui-tests-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 28672,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-data-regression.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 376832,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-green-ipad.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 368640,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-red-ipad.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 49152,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 49152,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-related-regression.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 663552,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-ui-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 54427648,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-unit-final.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 65536,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-unit-final2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 385024,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-allattachments.5B1vR0/994521C2-28B9-4149-8B6A-A518FC8DE254.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2527232,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-bodyweight-all.Rm2dpb/73676D34-816F-4D9B-A017-96A3863699E0.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 6799360,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-current-failure-attachments/CAC8669D-BB8A-4A8D-A2AA-32767160B6AB.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 10129408,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-current-failure-attachments/F23C24ED-4823-435A-8E55-7B93E000607C.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 24121344,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-merge-tdd-green/Debug-iphonesimulator",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 50503680,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-fail-shots/F555407C-B44A-4130-91A1-B9E6387C004F.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 8359936,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-failures.LeAtNk/614D0FD1-E773-4662-A8C6-A8952D14227F.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 24510464,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-final-deploy-failures.LeAtNk/7A337DAF-0DE2-44D0-898C-945CD924F86D.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 11534336,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-green4-attachments.egRhrZ/D9794E54-DEC0-45AB-A6B9-893272D2E305.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 16797696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-xcresult-attachments/E3C931FB-98FA-4FB0-8A2C-961D472E30A0.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1789952,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-xcresult-retry/E8017094-E132-429B-80DE-B12D17FF4A79.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1871872,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-picker-attachments.OkHCK4/F9208CB3-123B-43BB-B263-9B5063293FC5.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 19312640,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-picker-current2-attachments/1E3EF8AE-3CC9-4751-B8C7-6C3CE04CDA70.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 7905280,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-picker-final-attachments.l2w3zg/A5AE1ACA-DBBA-4288-84D3-F1F2F918CE70.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 6475776,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5-shots/CE3FCA37-AF9F-4CCA-BCD6-65629A0B725F.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2977792,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-t5c-shots/F6FC0B64-0F64-43ED-B62C-08BFBF56FF37.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 6037504,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-device-two-failures-rerun-attachments/01086E5C-0A1E-4A0C-ADCF-2F6C76AF60F7.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 4562944,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-device-two-failures-rerun-attachments/4581C158-B706-4C58-8336-17F6FDD87258.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3969024,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-merge-tdd-green/obj/FitnessApp.build",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 57683968,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-merge-tdd-green/obj/SwiftExplicitPrecompiledModules",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 144674816,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror.fE3deL/build/Debug-iphonesimulator",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 71970816,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror.fE3deL/build/FitnessApp.build",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 143593472,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror.fE3deL/build/SwiftExplicitPrecompiledModules",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 290635776,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/CompilationCache.noindex",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 28672,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/Index.noindex",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 40976384,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/ModuleCache.noindex",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 277049344,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/SDKStatCaches.noindex",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 1544192,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/current-simulator.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3145728,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/xfit-progress-month-data.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1388544,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/xfit-progress-week-data.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1388544,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/xfit-progress-week.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1372160,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/build/Debug-iphonesimulator",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 71970816,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/build/FitnessApp.build",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 143593472,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/build/SwiftExplicitPrecompiledModules",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 290635776,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-tdd-red/Logs/Test/Test-FitnessApp-2026.09.02_12-24-08-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-tdd-red/Logs/Test/Test-FitnessApp-2026.09.02_12-24-35-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 86016,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-tdd-red/Logs/Test/Test-FitnessApp-2026.09.02_12-25-50-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 397312,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-ui-green/Logs/Test/Test-FitnessApp-2026.09.02_12-42-16-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 577536,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-ui-red/Logs/Test/Test-FitnessApp-2026.09.02_12-30-22-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-ui-red/Logs/Test/Test-FitnessApp-2026.09.02_12-31-41-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 53248,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-unit2/Logs/Test/Test-FitnessApp-2026.09.02_12-48-16-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 413696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-active-menu-unit2/Logs/Test/Test-FitnessApp-2026.09.02_13-24-37-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4177920,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-agent-v2-build/Logs/Test/Test-FitnessApp-2026.09.02_15-18-53-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 12288,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-agent-v2-tests/Logs/Test/Test-FitnessApp-2026.09.02_14-48-09-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-agent-v2-tests/Logs/Test/Test-FitnessApp-2026.09.02_14-52-06-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 81920,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-agent-v2-tests/Logs/Test/Test-FitnessApp-2026.09.02_14-52-57-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 24576,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-agent-v2-tests/Logs/Test/Test-FitnessApp-2026.09.02_14-56-22-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 150794240,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-cleanup-tdd-155115/Logs/Test/Test-FitnessApp-2026.09.02_16-03-45-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-cleanup-tdd-155115/Logs/Test/Test-FitnessApp-2026.09.02_16-09-41-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 155648,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-daily-builder/Logs/Test/Test-FitnessApp-2026.09.02_12-06-37-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 59949056,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-daily-builder/Logs/Test/Test-FitnessApp-2026.09.02_12-08-26-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 63434752,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-no-card-gesture/Logs/Test/Test-FitnessApp-2026.09.02_12-09-49-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 62418944,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-no-card-gesture/Logs/Test/Test-FitnessApp-2026.09.02_12-12-29-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 54177792,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-no-card-gesture/Logs/Test/Test-FitnessApp-2026.09.02_12-14-27-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 54259712,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-diagnose-no-card-gesture/Logs/Test/Test-FitnessApp-2026.09.02_12-15-37-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 225280,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-editor-keyboard.51v64k/Logs/Test/Test-FitnessApp-2026.09.02_13-56-57-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 88866816,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-editor-keyboard.51v64k/Logs/Test/Test-FitnessApp-2026.09.02_14-03-14-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1683456,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-merge-tdd-red/Logs/Test/Test-FitnessApp-2026.09.02_13-30-43-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 49491968,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-exercise-merge-tdd-red/Logs/Test/Test-FitnessApp-2026.09.02_13-36-00-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 159744,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror-build.FyAOxZ/Logs/Test/Test-FitnessApp-2026.09.02_12-44-36-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 56459264,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror-build.FyAOxZ/Logs/Test/Test-FitnessApp-2026.09.02_12-51-00-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 155615232,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-mirror-build.FyAOxZ/Logs/Test/Test-FitnessApp-2026.09.02_13-01-56-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3866624,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-red.Gycn1I/Logs/Test/Test-FitnessApp-2026.09.02_12-26-41-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 106496,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-red.Gycn1I/Logs/Test/Test-FitnessApp-2026.09.02_12-29-07-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 86016,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-red.Gycn1I/Logs/Test/Test-FitnessApp-2026.09.02_12-30-18-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 81920,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-ui-only.npn9tF/Logs/Test/Test-FitnessApp-2026.09.02_12-30-57-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 56598528,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-home-menu-ui-only.npn9tF/Logs/Test/Test-FitnessApp-2026.09.02_12-36-58-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 77824,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current/Logs/Test/Test-FitnessApp-2026.09.02_15-35-39-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 35594240,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current2/Logs/Test/Test-FitnessApp-2026.09.02_15-52-51-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 62152704,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current2/Logs/Test/Test-FitnessApp-2026.09.02_15-55-15-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 62439424,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current2/Logs/Test/Test-FitnessApp-2026.09.02_15-57-49-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 61960192,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current2/Logs/Test/Test-FitnessApp-2026.09.02_16-00-47-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 434176,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-current2/Logs/Test/Test-FitnessApp-2026.09.02_16-02-21-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 7995392,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-v2/Logs/Test/Test-FitnessApp-2026.09.02_14-25-52-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2461696,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-v2/Logs/Test/Test-FitnessApp-2026.09.02_14-29-16-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2678784,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-v2/Logs/Test/Test-FitnessApp-2026.09.02_14-32-30-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 192512,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure-v2/Logs/Test/Test-FitnessApp-2026.09.02_14-33-23-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 393216,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-local-closure/Logs/Test/Test-FitnessApp-2026.09.02_14-06-10-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 110592,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-search-budget-current/Logs/Test/Test-FitnessApp-2026.09.02_16-24-15-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 51167232,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-search-budget-current/Logs/Test/Test-FitnessApp-2026.09.02_16-29-00-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 147456,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-seconds-arm64/Logs/Test/Test-FitnessApp-2026.09.02_13-24-42-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 157274112,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-seconds-arm64/Logs/Test/Test-FitnessApp-2026.09.02_13-42-20-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 110592,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-seconds-tdd/Logs/Test/Test-FitnessApp-2026.09.02_12-56-34-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 77824,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-isometric-seconds-tdd/Logs/Test/Test-FitnessApp-2026.09.02_13-00-49-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 45858816,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-feature-mac/Logs/Test/Test-FitnessApp-2026.09.02_13-23-06-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 77451264,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-feature-mac/Logs/Test/Test-FitnessApp-2026.09.02_13-27-36-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 69632,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-feature-sim/Logs/Test/Test-FitnessApp-2026.09.02_13-30-43-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 192512,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-feature-sim/Logs/Test/Test-FitnessApp-2026.09.02_13-36-24-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 208896,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-feature-sim/Logs/Test/Test-FitnessApp-2026.09.02_13-38-43-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 397312,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/Build/Products",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 30986240,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-search-red.aJqmXG/Logs/Test/Test-FitnessApp-2026.09.02_12-53-40-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 159744,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-search-red.aJqmXG/Logs/Test/Test-FitnessApp-2026.09.02_13-11-50-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 110592,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-agent-red-water/Logs/Test/Test-FitnessApp-2026.09.02_12-27-09-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102400,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-agent-red-water/Logs/Test/Test-FitnessApp-2026.09.02_12-28-36-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 155648,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-domain-green3/Logs/Test/Test-FitnessApp-2026.09.02_12-44-00-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 24576,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-tools-domain-tests/Logs/Test/Test-FitnessApp-2026.09.02_12-48-14-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 221184,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-xhs-url-red-dd/Logs/Test/Test-FitnessApp-2026.09.02_12-52-12-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 159744,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/exercise-picker-20260902/targeted-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 466944,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/exercise-picker-20260902/targeted-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 167936,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-history-edit-172627/9096B9F7-2206-4F2F-BC90-5A4F54C93075.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 5423104,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-review/home-v2.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1646592,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-review/home-v3.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1671168,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-review/xfit-0.2-migration.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 1675264,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-review/xfit-settings.png",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3100672,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-test-history-164833/7D8AFF64-E571-4EA3-8F07-80E57761EC54.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 13832192,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-test-history-all/8CC7FFEA-D918-4A01-8345-974CB63A8BF8.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 7766016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/ui-test-history-current/86F63EF6-A4C3-4E5D-B853-67F4ACACF608.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 10485760,
+      "deleted": true
+    },
+    {
+      "path": "/private/tmp/xfit-template-isolated.EXJUqZ/DerivedData/Build/Intermediates.noindex/FitnessApp.build",
+      "kind": "old_rebuildable_build_or_cache",
+      "before_allocated_bytes": 78065664,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/device-ui-resume-remaining.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 90824704,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/device-ui-resume.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 74608640,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/device-unit-resume.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1478656,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-share-save-recovery.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 253952,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-stress-focus-mode.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4648960,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-stress-recovery-2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 36241408,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-stress-recovery-3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 67072000,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-stress-recovery.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5099520,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testActionEditorPersistsBodyweightVolumeUnit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 233472,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testExercisePickerFiftyCycleStressPreservesMenuAndAvoidsDuplicates.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 83660800,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testShareDraftEditorCancellationKeepsDraftAvailable.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 163840,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testShareDraftSaveFailureKeepsDraftAvailable.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 9605120,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testTerminologyDecisionsPersistAcrossRelaunchAndPreserveHistoricalSnapshots.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 471040,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testTerminologyReviewIsReachableAndExplainsNoHistoryRewrite.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 180224,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-device-unlocked/focused-testTrainingOverviewOpensHistoryScheduleAndQuickSettings.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 229376,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-nondevice-final/non-device-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 127987712,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-nondevice-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 134832128,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-nondevice-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1462272,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-nondevice/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 136421376,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/0.5.0-build11-20260826-nondevice/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1458176,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-device-online/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-device-online/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1519616,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-device-rerun/device-ui-failed-retry.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 352256,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-device-rerun/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 36061184,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-device-rerun/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1519616,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-ux-rerun/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 19677184,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-ux-rerun/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1503232,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-ux/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 120840192,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260830-daily-planner-ux/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1503232,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 229273600,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1572864,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final2/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 19099648,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final2/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1568768,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final3/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 19025920,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final3/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1576960,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final4/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 19120128,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final4/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1589248,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final5/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 19095552,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-final5/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1593344,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-rerun/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 149286912,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization-rerun/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1572864,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 181723136,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260831-training-record-optimization/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 52064256,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-device-final/device-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 135352320,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-device-final/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-device-final/device-unit-notes-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 143360,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-device-final/device-unit-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1597440,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-device-final/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1638400,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 95862784,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1622016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-final2/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 114507776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-final2/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1622016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-always-bounce-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5234688,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-automation-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 114688,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-automation-smoke2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4784128,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-expanded-drag-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5353472,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-final-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 25739264,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-focused-drag-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5226496,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-keyboard-bridge-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 7450624,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-keyboard-wait-probe.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4743168,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-pan-bridge-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 73728,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-pan-bridge-smoke2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4984832,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-real-drag-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5124096,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 126976,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-scroll-phase-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4153344,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-scrollable-content-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5042176,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-two-failures-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 700416,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-user-scroll-phase-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5259264,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-visible-drag-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 262144,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui-window-drag-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5672960,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-device-final/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1966080,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 261550080,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1622016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final2/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 116035584,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final2/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1622016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final3/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 116895744,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260901-weight-entry-keyboard-final3/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1622016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-exercise-picker-device/device-ui-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 109142016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-exercise-picker-device/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 15896576,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-exercise-picker-device/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1884160,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-exercise-picker-full-local/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 121188352,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-exercise-picker-full-local/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1867776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 118288384,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1867776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure-rerun/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 69632,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure-rerun/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 52551680,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 261820416,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-isometric-seconds-local-closure/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1826816,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-template-bilingual-volume/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 193396736,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-template-bilingual-volume/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1826816,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-xhs-reference-url-device-xctest/device-ui-xhs-targeted-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 352256,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-xhs-reference-url-device-xctest/device-ui-xhs-targeted.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 401408,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-xhs-reference-url-device-xctest/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 335872,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260902-xhs-reference-url-device-xctest/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2220032,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-exercise-picker-reinstall/device-ui-targeted-unlocked-serial.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 114688,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-exercise-picker-reinstall/device-ui-targeted-unlocked.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 12017664,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-device-resume/device-ui-automation-smoke.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 159744,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-device-resume/device-ui-full-after-enable.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 119627776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-device-resume/device-ui-retry.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 126976,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-device-resume/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-device-resume/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1884160,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-ui-standalone-after-reenable.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 58707968,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-ui-targeted-rerun-2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 9277440,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-ui-targeted-rerun-4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 16302080,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-ui-targeted-rerun-search.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 303104,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1884160,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 102809600,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1867776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-rerun/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 125923328,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment-rerun/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1867776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 158855168,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-final-deployment/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1867776,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-template-bilingual-volume-device-tests-unlocked/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 33218560,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-template-bilingual-volume-device-tests-unlocked/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1884160,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-template-bugfix-targeted-device-unlocked/device-targeted.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2265088,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-template-bugfix-targeted-device/device-targeted-retry.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 507904,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260903-template-bugfix-targeted-device/device-targeted.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 155648,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1738-manual-replan/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 291119104,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1738-manual-replan/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1875968,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1755-manual-replan-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 116744192,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1755-manual-replan-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1875968,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1812-manual-replan-final/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 104828928,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1812-manual-replan-final/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1875968,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1852-manual-replan-device-trusted/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 13058048,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260904-1852-manual-replan-device-trusted/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1892352,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/iphone-device-20260827-1620/device-ui-core-4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 815104,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/iphone-device-20260827-1620/device-ui-resume-2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 266219520,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/iphone-device-20260827-1620/device-ui-resume.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 32768,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/iphone-device-20260827-1620/device-ui-short-failure-rerun.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3506176,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/iphone-device-20260827-1620/device-unit-resume.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1814528,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/countdown-sim-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 245760,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/countdown-sim-red.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 60686336,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/picker-stress-sim.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 7254016,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/share-cancel-sim-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 221184,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/share-focused-sim.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 66990080,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-profile-drag-hitches.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 196608,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-profile-drag-time.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 196608,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-green.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 82214912,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-notification-isolated.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 18464768,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v2.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 4685824,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v3.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 27394048,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v4.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3035136,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v5.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 3649536,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v6.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 2301952,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed-v7.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 7225344,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-stress-race-fixed.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 5181440,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-ui-retry.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 82300928,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 122880,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1495040,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/simulator-stress-race-fixed.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 7663616,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-non-device-20260828-1724/non-device-ui.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 21274624,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-non-device-20260828-1724/non-device-unit.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 1478656,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/DerivedDataProgress/Logs/Test/Test-FitnessApp-2026.07.31_17-56-30-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 94208,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/countdown-sim-attachments/396D27CB-CD45-48D9-BC17-568445398068.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 3952640,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-20260828-1656/share-focused-sim-attachments/82FDFF36-957D-4AE6-B8DD-78D124DA2ADF.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 14077952,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/instruments/app-launch.trace",
+      "kind": "old_instruments_trace",
+      "before_allocated_bytes": 39018496,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/instruments/app-leaks.trace",
+      "kind": "old_instruments_trace",
+      "before_allocated_bytes": 16240640,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/instruments/drag-animation-hitches.trace",
+      "kind": "old_instruments_trace",
+      "before_allocated_bytes": 66392064,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/instruments/drag-time-profiler-v2.trace",
+      "kind": "old_instruments_trace",
+      "before_allocated_bytes": 16658432,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/instruments/stress-app-allocations.trace",
+      "kind": "old_instruments_trace",
+      "before_allocated_bytes": 2911420416,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/stress-isolated-attachments/F6DED500-9B5A-45F5-A8D0-76EA8946264D.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 15724544,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/notification-perf-device-20260828-1828/stress-v4-attachments/ABF3B0D7-64CB-4FBB-B8BE-2D42FF3F4239.mp4",
+      "kind": "old_test_media_or_activity_log",
+      "before_allocated_bytes": 2555904,
+      "deleted": true
+    },
+    {
+      "path": "/Users/edward/Library/Developer/Xcode/DerivedData/FitnessApp-behaymxjzadztadvqatugxlymuxm/Logs/Test/Test-FitnessApp-2026.09.02_13-28-57-+0800.xcresult",
+      "kind": "old_test_result",
+      "before_allocated_bytes": 168603648,
+      "deleted": true
+    }
+  ],
+  "retained_file_count": 13824,
+  "authorization": "User requested removal of unneeded XFit temporary builds and old local real-device test materials; real device data and backups excluded.",
+  "finished_at": "2026-09-05 22:14:12 +0800",
+  "df_after": "Filesystem   1024-blocks      Used Available Capacity iused      ifree %iused  Mounted on\n/dev/disk3s5   482746452 305165232 135679004    70% 3716499 1356790040    0%   /System/Volumes/Data\n",
+  "retained_metadata_unchanged": true,
+  "git_status_unchanged": true,
+  "removed_allocated_bytes": 14345969664,
+  "retained_file_count_after_excluding_authorized_nested_builds": 13123,
+  "verification_correction": {
+    "initial_inventory_included_authorized_cache_children_of_preserved_source_mirrors": 701,
+    "unexpected_missing": [],
+    "unexpected_changed": [],
+    "explanation": "Source mirror roots are preserved, with explicitly authorized generated build subtrees removed; compare protected inventory excluding exact deletion targets."
+  }
+}

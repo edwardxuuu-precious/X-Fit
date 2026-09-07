@@ -1,0 +1,34 @@
+{
+  "snapshots": [
+    {
+      "label": "pre-smoke",
+      "source": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260907-human-assisted-smoke/device-data/pre-smoke/default.store",
+      "integrity_check": [
+        "ok"
+      ],
+      "source_files_unchanged": true,
+      "entity_count": 22,
+      "total_rows": 1257
+    },
+    {
+      "label": "post-smoke",
+      "source": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260907-human-assisted-smoke/device-data/post-smoke/default.store",
+      "integrity_check": [
+        "ok"
+      ],
+      "source_files_unchanged": true,
+      "entity_count": 22,
+      "total_rows": 1257
+    }
+  ],
+  "comparisons": [
+    {
+      "before": "pre-smoke",
+      "after": "post-smoke",
+      "status": "REQUIRES_CHANGE_REVIEW",
+      "removed_ids_count": 0,
+      "added_ids_count": 0,
+      "business_changed_records_count": 1
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "备餐菜单与采购展示层",
+  "status": "本地已验证",
+  "xcresult": "/tmp/xfit-prep-refinement-final.xcresult",
+  "targeted_unit": {
+    "status": "PASS",
+    "count": 6
+  },
+  "targeted_ui": {
+    "status": "PASS",
+    "count": 3
+  },
+  "dynamic_type": {
+    "status": "PASS",
+    "category": "UICTContentSizeCategoryAccessibilityXXXL",
+    "evidence": "实际标题高度断言、分段纵向布局、分享可达与库存展开"
+  },
+  "human_visual_acceptance": "BLOCKED_HUMAN",
+  "device_install": "NOT_RUN",
+  "full_stage_validation": "NOT_RUN for this iteration",
+  "notes": [
+    "早期 tests.log 使用无效大字体参数，不能作为大字体证据",
+    "tests-final.log 和 final xcresult 为当前版本",
+    "业务与数据模型等五个文件哈希不变，见 protected-comparison.json"
+  ]
+}

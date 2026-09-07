@@ -1,0 +1,32 @@
+{
+  "FitnessApp/Features/FatLoss/FatLossMealsView.swift": {
+    "before": "be67190c096c700d6e300cb8e95d2e9ef925e4c8b169ecce63e154919e753c0c",
+    "after": "1b9ed97d4f8b1aac7e5ffc7e1043d8f52f63655866d0ca1d13744526bf653e33",
+    "unchanged": false
+  },
+  "FitnessApp/Features/FatLoss/PrepPresentation.swift": {
+    "before": "2558e4e63f8127917c3dc72ab9ff3e33211268af2e89cc2d317f3c35931d2956",
+    "after": "2558e4e63f8127917c3dc72ab9ff3e33211268af2e89cc2d317f3c35931d2956",
+    "unchanged": true
+  },
+  "FitnessApp/Services/FatLossService.swift": {
+    "before": "efbc8ec6383e600b2ff64d30f1f20f90611639711e4f49f4d4692a3d89295124",
+    "after": "efbc8ec6383e600b2ff64d30f1f20f90611639711e4f49f4d4692a3d89295124",
+    "unchanged": true
+  },
+  "FitnessApp/Models/FatLossModels.swift": {
+    "before": "5c7c19b1aa267d2f19583eac0a507ddcd0b623cb7a61a416ee4d825543c8e6c0",
+    "after": "5c7c19b1aa267d2f19583eac0a507ddcd0b623cb7a61a416ee4d825543c8e6c0",
+    "unchanged": true
+  },
+  "FitnessApp/Features/Workout/ActiveWorkoutView.swift": {
+    "before": "90837bd193554893f70eef212acf13305e2c8dedc8b1a3ba8d075ceafe839968",
+    "after": "90837bd193554893f70eef212acf13305e2c8dedc8b1a3ba8d075ceafe839968",
+    "unchanged": true
+  },
+  "FitnessApp/Features/Redesign/GoalHomeView.swift": {
+    "before": "1c36cfc9619e1df196a2c8a689bc5411ffc657ea6cf4e6329b09317057ef1ce1",
+    "after": "1c36cfc9619e1df196a2c8a689bc5411ffc657ea6cf4e6329b09317057ef1ce1",
+    "unchanged": true
+  }
+}

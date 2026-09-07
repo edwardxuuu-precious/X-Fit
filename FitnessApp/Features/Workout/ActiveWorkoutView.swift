@@ -17,9 +17,13 @@ struct ActiveWorkoutView: View {
     @State private var showDiscardConfirmation = false
     @State private var showExercisePicker = false
     @State private var showRIRHelp = false
+    // Legacy rest helpers remain decode-compatible but are no longer reachable from the workout UI.
     @State private var showRestEndedAlert = false
     @State private var restPromptedForEndDate: Date?
-    @State private var expandedCompletedExerciseIDs: Set<UUID> = []
+    @State private var selectedExerciseID: UUID?
+    @State private var detailedExerciseIDs: Set<UUID> = []
+    @AppStorage("xfit.active.expandedExercise") private var storedExpandedExercise = ""
+    @State private var showsSessionNotes = false
     @State private var pendingFeelingExerciseIDs: Set<UUID> = []
     @State private var errorMessage: String?
 
@@ -28,22 +32,7 @@ struct ActiveWorkoutView: View {
     }
 
     private var orderedExercises: [SessionExercise] {
-        let currentLogs = setLogs.filter { $0.sessionID == sessionID }
-        let logsByExerciseID = Dictionary(grouping: currentLogs, by: \.sessionExerciseID)
-        let completedExerciseIDs = Set(logsByExerciseID.compactMap { exerciseID, exerciseLogs in
-            exerciseLogs.allSatisfy(\.isCompleted) ? exerciseID : nil
-        })
-
-        return sessionExercises
-            .filter { $0.sessionID == sessionID }
-            .sorted { left, right in
-                let leftComplete = completedExerciseIDs.contains(left.id)
-                    && !pendingFeelingExerciseIDs.contains(left.id)
-                let rightComplete = completedExerciseIDs.contains(right.id)
-                    && !pendingFeelingExerciseIDs.contains(right.id)
-                if leftComplete != rightComplete { return leftComplete }
-                return left.order < right.order
-            }
+        MuscleCoverageService.stableOrder(sessionExercises, sessionID: sessionID)
     }
 
     private var logs: [SetLog] {
@@ -54,6 +43,8 @@ struct ActiveWorkoutView: View {
         logs.filter(\.isCompleted).count
     }
 
+    // Read-only legacy helpers keep old persisted rest state recoverable while the
+    // active workout flow no longer exposes or starts rest tracking.
     private var activeRestLog: SetLog? {
         WorkoutRestTracking.activeLog(in: logs)
     }
@@ -62,68 +53,83 @@ struct ActiveWorkoutView: View {
         activeRestLog != nil || session?.restEndDate != nil
     }
 
-    private var activeRestExercise: SessionExercise? {
-        if let activeRestLog {
-            return orderedExercises.first { $0.id == activeRestLog.sessionExerciseID }
-        }
-        let completedLogs = logs.filter { $0.isCompleted && $0.completedAt != nil }
-        guard let latestCompletedLog = completedLogs.max(by: {
-            ($0.completedAt ?? .distantPast) < ($1.completedAt ?? .distantPast)
-        }) else {
-            return nil
-        }
-        return orderedExercises.first { $0.id == latestCompletedLog.sessionExerciseID }
-    }
-
     var body: some View {
         Group {
             if let session {
                 ScrollView {
-                    VStack(spacing: 16) {
+                    VStack(spacing: 12) {
                         workoutHeader(session)
-
-                        restModeCard(session)
-
-                        if hasActiveRest {
-                            restTimer(session, plannedRestSeconds: activeRestExercise?.restSeconds)
-                        }
-
-                        adjustmentCard
 
                         ForEach(orderedExercises) { exercise in
                             exerciseCard(exercise, session: session)
                         }
 
-                        notesCard(session)
+                        DisclosureGroup("训练备注", isExpanded: $showsSessionNotes) {
+                            notesCard(session)
+                        }.font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                         finishButton
                         discardButton
                     }
-                    .padding()
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 20)
                 }
-                .scrollDismissesKeyboard(.interactively)
+                .accessibilityIdentifier("active-workout-scroll")
+                .scrollDismissesKeyboard(.immediately)
+                .dismissKeyboardWhenScrolling {
+                    dismissKeyboard()
+                }
+                .simultaneousGesture(
+                    DragGesture(minimumDistance: 4)
+                        .onChanged { _ in dismissKeyboard() }
+                )
                 .background(AppTheme.background)
+                .contentShape(Rectangle())
+                .onTapGesture { dismissKeyboard() }
                 .navigationTitle(session.templateName)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        NavigationLink {
+                            DailyWorkoutBuilderView(initialDate: session.plannedDate)
+                        } label: {
+                            Label("调整今日菜单", systemImage: "list.bullet")
+                        }
+                        .accessibilityIdentifier("调整今日菜单")
+
                         Button {
                             showExercisePicker = true
                         } label: {
                             Label("临时加动作", systemImage: "plus")
                         }
                     }
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("完成") { dismissKeyboard() }
+                    }
                 }
                 .interactiveDismissDisabled()
                 .onAppear {
                     UIApplication.shared.isIdleTimerDisabled = true
-                    recoverRestState(session)
+                    if selectedExerciseID == nil {
+                        let parts = storedExpandedExercise.split(separator: ":")
+                        let restored = parts.count == 2 && parts[0] == sessionID.uuidString
+                            ? UUID(uuidString: String(parts[1])) : nil
+                        selectedExerciseID = orderedExercises.contains { $0.id == restored }
+                            ? restored : MuscleCoverageService.initialExpandedID(orderedExercises, logs: logs)
+                    }
+                    WorkoutExerciseTracking.startFirstExercise(in: orderedExercises, at: session.startedAt)
+                    saveQuietly()
+                }
+                .onChange(of: selectedExerciseID) { _, id in
+                    storedExpandedExercise = id.map { "\(sessionID.uuidString):\($0.uuidString)" } ?? ""
+                }
+                .onChange(of: orderedExercises.map(\.id)) { _, ids in
+                    if let selectedExerciseID, !ids.contains(selectedExerciseID) {
+                        self.selectedExerciseID = MuscleCoverageService.initialExpandedID(orderedExercises, logs: logs)
+                    }
                 }
                 .onDisappear {
                     UIApplication.shared.isIdleTimerDisabled = false
-                }
-                .onChange(of: scenePhase) { _, phase in
-                    guard phase == .active else { return }
-                    recoverRestState(session)
                 }
             } else {
                 ContentUnavailableView("训练记录不存在", systemImage: "questionmark.folder")
@@ -162,16 +168,6 @@ struct ActiveWorkoutView: View {
         } message: {
             Text("RIR 表示一组结束后，在动作标准不变的情况下，你估计还能再完成几次。\n\n0 = 已经无法再做\n1 = 还能做 1 次\n2 = 还能做 2 次\n3 = 还能做 3 次\n\n不确定时可以选择不记录。它用于判断本组强度和后续训练建议。")
         }
-        .alert("休息结束", isPresented: $showRestEndedAlert) {
-            Button("开始下一组") {
-                if let session { finishRest(session) }
-            }
-            Button("+30 秒") {
-                if let session { adjustRest(session, by: 30) }
-            }
-        } message: {
-            Text("可以开始下一组；如果还没准备好，可以再休息 30 秒。")
-        }
         .sheet(isPresented: $showExercisePicker) {
             ExercisePickerSheet(
                 title: "添加临时动作",
@@ -188,29 +184,34 @@ struct ActiveWorkoutView: View {
     }
 
     private func workoutHeader(_ session: WorkoutSession) -> some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("训练进行中")
-                        .font(.caption.bold())
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Label("训练进行中", systemImage: "record.circle")
+                        .font(.caption.weight(.semibold))
                         .foregroundStyle(AppTheme.accent)
                     Text("开始于 \(session.startedAt, format: .dateTime.hour().minute())")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
                 }
                 Spacer()
-                Text("\(completedCount)/\(logs.count) 组")
-                    .font(.headline.monospacedDigit())
+                HStack(alignment: .firstTextBaseline, spacing: 3) {
+                    Text("\(completedCount)")
+                        .font(.title2.weight(.black).monospacedDigit())
+                        .fontWidth(.condensed)
+                        .foregroundStyle(AppTheme.accent)
+                    Text("/ \(logs.count) 组")
+                        .font(.subheadline.monospacedDigit())
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(completedCount)/\(logs.count) 组")
+                .accessibilityAddTraits(.isStaticText)
             }
-
             ProgressView(value: Double(completedCount), total: Double(max(1, logs.count)))
                 .tint(AppTheme.accent)
-
-            Text("每一组都会立即保存在本机，退出后可以继续。")
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
-        .cardSurface()
+        .padding(.bottom, 4)
     }
 
     private func restModeCard(_ session: WorkoutSession) -> some View {
@@ -434,20 +435,23 @@ struct ActiveWorkoutView: View {
     private func exerciseCard(_ exercise: SessionExercise, session: WorkoutSession) -> some View {
         let exerciseLogs = logs
             .filter { $0.sessionExerciseID == exercise.id }
-            .sorted { left, right in
-                if left.isCompleted != right.isCompleted { return !left.isCompleted }
-                return left.setNumber < right.setNumber
-            }
+            .sorted { $0.setNumber < $1.setNumber }
         let isExerciseComplete = !exerciseLogs.isEmpty && exerciseLogs.allSatisfy(\.isCompleted)
 
-        if isExerciseComplete && !expandedCompletedExerciseIDs.contains(exercise.id) {
+        if selectedExerciseID != exercise.id {
             completedExerciseCard(exercise, logs: exerciseLogs)
         } else {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 10) {
+                Text(String(format: "%02d", (orderedExercises.firstIndex { $0.id == exercise.id } ?? 0) + 1))
+                    .font(.title2.weight(.black).monospacedDigit())
+                    .fontWidth(.condensed)
+                    .foregroundStyle(AppTheme.accent)
+                    .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(exercise.exerciseName)
-                        .font(.title3.bold())
+                        .font(.title3.weight(.bold))
+                        .accessibilityIdentifier("展开动作标题-\(exercise.exerciseName)")
                     if !exercise.exerciseNotes.isEmpty {
                         Label(exercise.exerciseNotes, systemImage: "exclamationmark.circle")
                             .font(.caption2)
@@ -455,62 +459,18 @@ struct ActiveWorkoutView: View {
                             .lineLimit(2)
                             .accessibilityLabel("动作注意事项：\(exercise.exerciseNotes)")
                     }
-                    Text("计划 \(exercise.plannedSets.count) 组 · \(exercise.planPattern.title)")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text("训练量单位：\(exercise.volumeUnit.symbol)")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Label("计划默认组间休息 \(exercise.restSeconds) 秒", systemImage: "timer")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
                 }
                 Spacer()
-                VStack(alignment: .trailing, spacing: 7) {
-                    Text("实际 \(exerciseLogs.filter(\.isCompleted).count)/\(exerciseLogs.count) 组")
-                        .font(.subheadline.bold().monospacedDigit())
-                        .foregroundStyle(AppTheme.accent)
-                    if exerciseLogs.count != exercise.plannedSets.count {
-                        Text("组数差 \(exerciseLogs.count > exercise.plannedSets.count ? "+" : "")\(exerciseLogs.count - exercise.plannedSets.count)")
-                            .font(.caption2.bold().monospacedDigit())
-                            .foregroundStyle(AppTheme.orange)
-                    }
-                    Menu {
-                        Button {
-                            addSet(to: exercise)
-                        } label: {
-                            Label("增加一组", systemImage: "plus.circle")
-                        }
-                        Button {
-                            removeLastSet(from: exercise)
-                        } label: {
-                            Label("减少最后未完成组", systemImage: "minus.circle")
-                        }
-                        .disabled(exerciseLogs.count <= 1 || exerciseLogs.last?.isCompleted != false)
-                        Divider()
-                        Button(role: .destructive) {
-                            removeExercise(exercise, from: session)
-                        } label: {
-                            Label("移除未开始动作", systemImage: "trash")
-                        }
-                        .disabled(exerciseLogs.contains(where: \.isCompleted) || orderedExercises.count <= 1)
+                if !pendingFeelingExerciseIDs.contains(exercise.id) {
+                    Button {
+                        selectedExerciseID = nil
                     } label: {
-                        Label("调整训练量", systemImage: "ellipsis")
+                        Label("折叠", systemImage: "chevron.up")
                             .font(.caption.bold())
+                            .frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())
                     }
-                    .accessibilityIdentifier("adjust-volume-\(exercise.exerciseName)")
-                    .foregroundStyle(.secondary)
-
-                    if isExerciseComplete && !pendingFeelingExerciseIDs.contains(exercise.id) {
-                        Button {
-                            expandedCompletedExerciseIDs.remove(exercise.id)
-                        } label: {
-                            Label("折叠", systemImage: "chevron.up")
-                                .font(.caption.bold())
-                        }
-                        .buttonStyle(.plain)
-                        .foregroundStyle(AppTheme.accent)
-                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(AppTheme.accent)
                 }
             }
 
@@ -521,14 +481,15 @@ struct ActiveWorkoutView: View {
                     }
                 }
                 .pickerStyle(.segmented)
+                .disabled(exerciseLogs.allSatisfy(\.isCompleted))
                 .accessibilityIdentifier("active-measurement-side-\(exercise.exerciseName)")
             }
 
             HStack {
                 Text("组")
                     .frame(width: 30)
-                if exercise.volumeUnit == .count {
-                    Text("数量 个")
+                if exercise.volumeUnit.recordsSingleAmount {
+                    Text("\(exercise.volumeUnit.inputTitle) \(exercise.volumeUnit.symbol)")
                         .frame(maxWidth: .infinity)
                 } else if exercise.volumeUnit == .bodyweight {
                     Text("负重")
@@ -541,35 +502,36 @@ struct ActiveWorkoutView: View {
                     Text(exercise.volumeUnit.repetitionTitle)
                         .frame(maxWidth: .infinity)
                 }
-                Button {
-                    showRIRHelp = true
-                } label: {
-                    HStack(spacing: 3) {
-                        Text("RIR")
-                        Image(systemName: "questionmark.circle")
-                            .font(.caption2)
-                    }
+                if detailedExerciseIDs.contains(exercise.id) {
+                    Button("RIR ?") { showRIRHelp = true }
+                        .font(.caption).frame(width: 66, height: 44).contentShape(Rectangle()).accessibilityLabel("了解 RIR")
                 }
-                .buttonStyle(.plain)
-                .frame(width: 66)
-                .accessibilityLabel("了解 RIR")
                 Color.clear
-                    .frame(width: 38)
+                    .frame(width: 44)
             }
             .font(.caption)
             .foregroundStyle(.secondary)
 
+            if let reference = MuscleCoverageService.lastReference(for: exercise, sessions: sessions, snapshots: sessionExercises, logs: setLogs) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("上次实际 · \(reference.date.formatted(date: .abbreviated, time: .omitted))")
+                        .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    Text(reference.rows.joined(separator: "  /  "))
+                        .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
+                }.accessibilityIdentifier("上次实际-\(exercise.exerciseName)")
+            }
             ForEach(exerciseLogs) { log in
                 SetLogRow(
                     log: log,
                     exerciseName: exercise.exerciseName,
                     volumeUnit: exercise.volumeUnit,
-                    restMode: session.restMode,
-                    isActiveRest: activeRestLog?.id == log.id,
-                    isExtraSet: log.setNumber > exercise.plannedSets.count,
-                    onEdit: saveQuietly,
-                    onStart: { startSet(log, session: session) },
-                    onToggle: { toggle(log, restSeconds: exercise.restSeconds, session: session) }
+                    bodyWeightKgSnapshot: exercise.bodyWeightKgSnapshot,
+                    showsRIR: detailedExerciseIDs.contains(exercise.id),
+                    onEdit: {
+                        WorkoutExerciseTracking.recordInteraction(with: exercise)
+                        saveQuietly()
+                    },
+                    onToggle: { toggle(log, exercise: exercise) }
                 )
             }
 
@@ -631,6 +593,10 @@ struct ActiveWorkoutView: View {
                 .background(AppTheme.accent.opacity(0.06), in: RoundedRectangle(cornerRadius: 12))
             }
 
+            DisclosureGroup("RIR、动作资料与备注", isExpanded: Binding(
+                get: { detailedExerciseIDs.contains(exercise.id) },
+                set: { if $0 { detailedExerciseIDs.insert(exercise.id) } else { detailedExerciseIDs.remove(exercise.id) } }
+            )) {
             if let url = URL(string: exercise.referenceURL), !exercise.referenceURL.isEmpty {
                 Link(destination: url) {
                     Label("查看动作资料", systemImage: "link")
@@ -654,9 +620,16 @@ struct ActiveWorkoutView: View {
             .font(.caption)
             .padding(10)
             .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+            }.font(.caption).foregroundStyle(AppTheme.secondaryText)
+
         }
-        .cardSurface()
-        .shadow(color: .black.opacity(0.22), radius: 12, y: 7)
+        .padding(16)
+        .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 20))
+        .overlay(alignment: .topLeading) {
+            Capsule().fill(AppTheme.accent).frame(width: 30, height: 3)
+                .padding(.leading, 16)
+                .accessibilityHidden(true)
+        }
         }
     }
 
@@ -664,21 +637,32 @@ struct ActiveWorkoutView: View {
         _ exercise: SessionExercise,
         logs exerciseLogs: [SetLog]
     ) -> some View {
-        Button {
-            expandedCompletedExerciseIDs.insert(exercise.id)
+        let completed = exerciseLogs.filter(\.isCompleted).count
+        let complete = !exerciseLogs.isEmpty && completed == exerciseLogs.count
+        return Button {
+            selectedExerciseID = exercise.id
         } label: {
             HStack(spacing: 13) {
-                Image(systemName: "checkmark.seal.fill")
-                    .font(.title2)
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 44, height: 44)
-                    .background(AppTheme.accent.opacity(0.13), in: RoundedRectangle(cornerRadius: 13))
+                ZStack {
+                    if complete {
+                        Image(systemName: "checkmark").font(.headline.bold())
+                    } else {
+                        Text(String(format: "%02d", (orderedExercises.firstIndex { $0.id == exercise.id } ?? 0) + 1))
+                            .font(.title2.weight(.black).monospacedDigit()).fontWidth(.condensed)
+                    }
+                }
+                .foregroundStyle(complete ? AppTheme.accent : AppTheme.secondaryText)
+                .frame(width: 36, height: 44)
+                .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 4) {
                     Text(exercise.exerciseName)
                         .font(.headline.bold())
                         .foregroundStyle(.white)
-                    Text("已完成 \(exerciseLogs.count) 组 · 已收在上方")
+                    Text(
+                        "\(completed)/\(exerciseLogs.count) 组"
+                            + (exercise.durationSeconds.map { " · 用时 \(TrainingFormatters.clock($0))" } ?? "")
+                    )
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -694,12 +678,14 @@ struct ActiveWorkoutView: View {
                     .foregroundStyle(AppTheme.accent)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .cardSurface()
+            .padding(.vertical, 12)
+            .overlay(alignment: .bottom) { Rectangle().fill(AppTheme.line).frame(height: 0.5) }
+            .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .shadow(color: .black.opacity(0.30), radius: 14, y: 8)
+        .accessibilityIdentifier("切换动作-\(exercise.exerciseName)")
         .accessibilityLabel(
-            "\(exercise.exerciseName)，已完成 \(exerciseLogs.count) 组"
+            "\(exercise.exerciseName)，" + (complete ? "已完成 \(completed) 组" : "已完成 \(completed)/\(exerciseLogs.count) 组")
                 + (exercise.feeling.map { "，感受 \($0.emoji) \($0.title)" } ?? "")
                 + "，点按展开记录"
         )
@@ -713,14 +699,14 @@ struct ActiveWorkoutView: View {
     private func completeFeeling(_ feeling: WorkoutFeeling, for exercise: SessionExercise) {
         exercise.feeling = feeling
         pendingFeelingExerciseIDs.remove(exercise.id)
-        expandedCompletedExerciseIDs.remove(exercise.id)
+        selectedExerciseID = MuscleCoverageService.initialExpandedID(orderedExercises.filter { $0.id != exercise.id }, logs: logs)
         saveQuietly()
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
     }
 
     private func skipFeeling(for exercise: SessionExercise) {
         pendingFeelingExerciseIDs.remove(exercise.id)
-        expandedCompletedExerciseIDs.remove(exercise.id)
+        selectedExerciseID = MuscleCoverageService.initialExpandedID(orderedExercises.filter { $0.id != exercise.id }, logs: logs)
         saveQuietly()
     }
 
@@ -734,6 +720,12 @@ struct ActiveWorkoutView: View {
                 in: modelContext
             )
             showExercisePicker = false
+            let activeSessionID = session.id
+            let addedExerciseID = exercise.id
+            let descriptor = FetchDescriptor<SessionExercise>(predicate: #Predicate {
+                $0.sessionID == activeSessionID && $0.exerciseID == addedExerciseID
+            }, sortBy: [SortDescriptor(\SessionExercise.order, order: .reverse)])
+            selectedExerciseID = try modelContext.fetch(descriptor).first?.id
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -741,30 +733,9 @@ struct ActiveWorkoutView: View {
 
     private func measurementSideBinding(for exercise: SessionExercise) -> Binding<MeasurementSide> {
         Binding {
-            logs
-                .filter { $0.sessionExerciseID == exercise.id }
-                .sorted { $0.setNumber < $1.setNumber }
-                .first?.actualWeightSide ?? .bilateral
+            WorkoutMeasurementSideEditing.selected(in: logs.filter { $0.sessionExerciseID == exercise.id })
         } set: { side in
-            var plans = exercise.plannedSets
-            plans = plans.map { plan in
-                WorkoutSetPlan(
-                    id: plan.id,
-                    weight: plan.weight,
-                    reps: plan.reps,
-                    weightSide: side,
-                    repsSide: side
-                )
-            }
-            exercise.plannedSets = plans
-            logs
-                .filter { $0.sessionExerciseID == exercise.id && !$0.isCompleted }
-                .forEach { log in
-                    log.targetWeightSide = side
-                    log.targetRepsSide = side
-                    log.actualWeightSide = side
-                    log.actualRepsSide = side
-                }
+            WorkoutMeasurementSideEditing.apply(side, to: exercise, logs: logs)
             saveQuietly()
         }
     }
@@ -840,43 +811,33 @@ struct ActiveWorkoutView: View {
         .cardSurface()
     }
 
-    private func toggle(_ log: SetLog, restSeconds: Int, session: WorkoutSession) {
+    private func toggle(_ log: SetLog, exercise: SessionExercise) {
+        let now = Date.now
         let isCompletingExercise = !log.isCompleted && logs
             .filter { $0.sessionExerciseID == log.sessionExerciseID }
             .allSatisfy { $0.id == log.id || $0.isCompleted }
         log.isCompleted.toggle()
-        log.completedAt = log.isCompleted ? .now : nil
+        log.completedAt = log.isCompleted ? now : nil
 
         if isCompletingExercise {
             pendingFeelingExerciseIDs.insert(log.sessionExerciseID)
-            expandedCompletedExerciseIDs.insert(log.sessionExerciseID)
+            selectedExerciseID = log.sessionExerciseID
         } else if !log.isCompleted {
             pendingFeelingExerciseIDs.remove(log.sessionExerciseID)
-            expandedCompletedExerciseIDs.remove(log.sessionExerciseID)
+            selectedExerciseID = log.sessionExerciseID
         }
 
-        if WorkoutRestTracking.shouldBeginRest(after: log, logs: logs) {
-            WorkoutRestTracking.begin(
-                after: log,
-                session: session,
-                logs: logs,
-                plannedRestSeconds: restSeconds
-            )
-            if session.restMode == .countdown, let endDate = session.restEndDate {
-                // Adding with the same identifier atomically replaces an older
-                // timer. A separate asynchronous remove can arrive after this
-                // add on a physical device and delete the new request.
-                NotificationService.scheduleRestEnd(sessionID: session.id, at: endDate)
-            } else {
-                NotificationService.cancelRestEnd(sessionID: session.id)
-            }
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-        } else if !log.isCompleted {
-            if activeRestLog?.id == log.id {
-                abandonRest(session, save: false)
-            }
-            WorkoutRestTracking.clearRest(on: log)
-        }
+        let exerciseLogs = logs.filter { $0.sessionExerciseID == exercise.id }
+        let following = sessionExercises
+            .filter { $0.sessionID == sessionID && $0.order > exercise.order }
+            .min { $0.order < $1.order }
+        WorkoutExerciseTracking.updateAfterSetChange(
+            exercise: exercise,
+            logs: exerciseLogs,
+            followingExercise: following,
+            at: now
+        )
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
         saveQuietly()
     }
 
@@ -943,7 +904,6 @@ struct ActiveWorkoutView: View {
     private func finishWorkout() {
         guard let session else { return }
         do {
-            WorkoutRestTracking.abandon(session: session, logs: logs)
             try WorkoutService.finish(session: session, schedules: schedules, in: modelContext)
             NotificationService.cancelRestEnd(sessionID: session.id)
             if UserDefaults.standard.bool(forKey: HealthKitService.enabledKey),
@@ -963,7 +923,6 @@ struct ActiveWorkoutView: View {
     private func discardWorkout() {
         guard let session else { return }
         do {
-            WorkoutRestTracking.abandon(session: session, logs: logs)
             try WorkoutService.discard(session: session, schedules: schedules, in: modelContext)
             NotificationService.cancelRestEnd(sessionID: session.id)
             dismiss()
@@ -978,6 +937,10 @@ struct ActiveWorkoutView: View {
         } catch {
             errorMessage = error.localizedDescription
         }
+    }
+
+    private func dismissKeyboard() {
+        KeyboardDismissal.dismiss()
     }
 }
 
@@ -1041,15 +1004,14 @@ private struct LegacyWorkoutExercisePickerSheet: View {
 }
 
 private struct SetLogRow: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Bindable var log: SetLog
     @State private var showRIRPicker = false
     let exerciseName: String
     let volumeUnit: ExerciseVolumeUnit
-    let restMode: WorkoutRestMode
-    let isActiveRest: Bool
-    let isExtraSet: Bool
+    let bodyWeightKgSnapshot: Double?
+    let showsRIR: Bool
     let onEdit: () -> Void
-    let onStart: () -> Void
     let onToggle: () -> Void
 
     var body: some View {
@@ -1085,7 +1047,7 @@ private struct SetLogRow: View {
                 Text(completedSummary)
                     .font(.caption.monospacedDigit())
                     .foregroundStyle(.secondary)
-                    .lineLimit(1)
+                    .fixedSize(horizontal: false, vertical: true)
                 Spacer(minLength: 4)
                 Image(systemName: "arrow.uturn.backward.circle")
                     .font(.caption)
@@ -1093,175 +1055,103 @@ private struct SetLogRow: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 11)
-            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 12))
-            .overlay {
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(AppTheme.accent.opacity(0.18), lineWidth: 1)
-            }
+            .frame(minHeight: 44)
+            .background(AppTheme.accent.opacity(0.055), in: RoundedRectangle(cornerRadius: 10))
         }
         .buttonStyle(.plain)
-        .shadow(color: .black.opacity(0.22), radius: 7, y: 4)
         .accessibilityLabel("第 \(log.setNumber) 组已完成，\(completedSummary)，点按撤销完成")
         .accessibilityIdentifier("第 \(log.setNumber) 组已完成")
+        .accessibilityValue("已完成")
     }
 
     private var editableRow: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 8) {
-                if isExtraSet {
-                    Text("加练")
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
+        VStack(alignment: .leading, spacing: 10) {
+            if dynamicTypeSize.isAccessibilitySize {
+                HStack {
+                    Text("第 \(log.setNumber) 组").font(.subheadline.bold())
+                    Spacer()
+                    completionButton
                 }
-                Spacer()
-                if volumeUnit == .count {
-                    Text("\(log.targetReps) 个 · \(log.targetRepsSide.title)")
-                } else if volumeUnit == .bodyweight {
-                    Text("自重 × \(log.targetReps) 次")
-                } else {
-                    Text(
-                        "\(TrainingFormatters.weight(log.targetWeight)) \(volumeUnit.symbol)（\(log.targetWeightSide.title)） × "
-                            + "\(log.targetReps)（\(log.targetRepsSide.title)）"
-                    )
+                amountInputs
+                if showsRIR { rirButton }
+            } else {
+                HStack(spacing: 8) {
+                    Text("\(log.setNumber)").font(.subheadline.bold().monospacedDigit()).frame(width: 30)
+                    amountInputs
+                    completionButton
                 }
-            }
-            .font(.caption.monospacedDigit())
-            .foregroundStyle(.secondary)
-
-            HStack(spacing: 8) {
-                Text("\(log.setNumber)")
-                    .font(.subheadline.bold().monospacedDigit())
-                    .frame(width: 30)
-
-                if volumeUnit.recordsNumericLoad {
-                    StableNumericTextField(
-                        volumeUnit.inputTitle,
-                        value: $log.actualWeight,
-                        maximumFractionDigits: 3,
-                        accessibilityIdentifier: "actual-weight-\(exerciseName)-\(log.setNumber)"
-                    )
-                    .padding(.vertical, 9)
-                    .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
-                    .frame(maxWidth: .infinity)
-                } else if volumeUnit == .bodyweight {
-                    Text("自重")
-                        .font(.subheadline.bold())
-                        .foregroundStyle(AppTheme.accent)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 9)
-                        .background(AppTheme.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
+                if showsRIR {
+                    HStack { Spacer(); rirButton }
                 }
-
-                StableNumericTextField(
-                    volumeUnit == .count ? "数量" : volumeUnit.repetitionTitle,
-                    value: $log.actualReps,
-                    accessibilityIdentifier: "actual-reps-\(exerciseName)-\(log.setNumber)"
-                )
-                .padding(.vertical, 9)
-                .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
-                .frame(maxWidth: .infinity)
-
-                Button {
-                    showRIRPicker = true
-                } label: {
-                    Text(log.rir.map { "RIR \($0)" } ?? "RIR 可选")
-                        .font(.caption.bold().monospacedDigit())
-                        .frame(width: 72)
-                        .frame(minHeight: 44)
-                        .background(Color(.tertiarySystemFill), in: RoundedRectangle(cornerRadius: 10))
-                }
-                .foregroundStyle(.primary)
-                .contentShape(Rectangle())
-                .accessibilityLabel(rirAccessibilityLabel)
-                .accessibilityIdentifier("rir-\(exerciseName)-\(log.setNumber)")
-
-                Button(action: onToggle) {
-                    Image(systemName: log.isCompleted ? "checkmark.circle.fill" : "circle")
-                        .font(.title2)
-                        .foregroundStyle(log.isCompleted ? AppTheme.accent : Color.secondary)
-                }
-                .frame(width: 38)
-                .accessibilityLabel(log.isCompleted ? "标记为未完成" : "完成第 \(log.setNumber) 组")
-                .accessibilityIdentifier(
-                    log.isCompleted ? "第 \(log.setNumber) 组已完成" : "完成第 \(log.setNumber) 组"
-                )
-            }
-
-            if let differenceText {
-                Text(differenceText)
-                    .font(.caption2.bold())
-                    .foregroundStyle(AppTheme.accent)
-            }
-
-            if restMode == .freestyle, !log.isCompleted {
-                Button(action: onStart) {
-                    Label(
-                        log.startedAt == nil ? "开始本组" : "本组进行中",
-                        systemImage: log.startedAt == nil ? "play.fill" : "figure.strengthtraining.traditional"
-                    )
-                    .font(.caption.bold())
-                    .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .tint(AppTheme.accent)
-                .disabled(log.startedAt != nil)
-                .accessibilityLabel(log.startedAt == nil ? "开始第 \(log.setNumber) 组" : "第 \(log.setNumber) 组进行中")
-                .accessibilityIdentifier(
-                    log.startedAt == nil ? "开始第 \(log.setNumber) 组" : "第 \(log.setNumber) 组进行中"
-                )
-            }
-
-            if isActiveRest {
-                Label("组后休息计时中", systemImage: "stopwatch")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
-            } else if let restDurationSeconds = log.restDurationSeconds {
-                Label(
-                    "组后休息 \(TrainingFormatters.clock(restDurationSeconds))",
-                    systemImage: "timer"
-                )
-                .font(.caption)
-                .foregroundStyle(.secondary)
             }
         }
+    }
+
+    private var amountInputs: some View {
+        HStack(spacing: 8) {
+            if volumeUnit.recordsNumericLoad {
+                StableNumericTextField(volumeUnit.inputTitle, value: $log.actualWeight,
+                    maximumFractionDigits: 3,
+                    accessibilityIdentifier: "actual-weight-\(exerciseName)-\(log.setNumber)")
+                    .padding(.horizontal, 8).frame(minHeight: 44)
+                    .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+                    .frame(maxWidth: .infinity)
+            } else if volumeUnit == .bodyweight {
+                Text(bodyWeightKgSnapshot.map { "\(TrainingFormatters.weight($0)) kg" } ?? "暂无体重")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(bodyWeightKgSnapshot == nil ? AppTheme.orange : AppTheme.secondaryText)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+            }
+            StableNumericTextField(volumeUnit.recordsSingleAmount ? volumeUnit.inputTitle : volumeUnit.repetitionTitle,
+                value: $log.actualReps, accessibilityIdentifier: "actual-reps-\(exerciseName)-\(log.setNumber)")
+                .padding(.horizontal, 8).frame(minHeight: 44)
+                .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+                .frame(maxWidth: .infinity)
+        }
+    }
+
+    private var completionButton: some View {
+        Button(action: onToggle) {
+            Image(systemName: "circle").font(.title2.weight(.regular)).foregroundStyle(AppTheme.secondaryText)
+                .frame(width: 44, height: 44)
+                .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+                .contentShape(Rectangle())
+        }.buttonStyle(.plain)
+            .accessibilityLabel("完成第 \(log.setNumber) 组")
+            .accessibilityIdentifier("完成第 \(log.setNumber) 组")
+            .accessibilityValue("未完成")
+    }
+
+    private var rirButton: some View {
+        Button { showRIRPicker = true } label: {
+            Text(log.rir.map { "RIR \($0)" } ?? "RIR 可选")
+                .font(.caption.bold().monospacedDigit()).padding(.horizontal, 12).frame(minHeight: 44)
+                .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 10))
+        }.foregroundStyle(AppTheme.secondaryText).contentShape(Rectangle())
+            .accessibilityLabel(rirAccessibilityLabel)
+            .accessibilityIdentifier("rir-\(exerciseName)-\(log.setNumber)")
     }
 
     private var completedSummary: String {
         var parts: [String] = []
-        if volumeUnit == .count {
-            parts.append("\(log.actualReps) 个")
+        if volumeUnit.recordsSingleAmount {
+            parts.append("\(log.actualReps) \(volumeUnit.symbol)")
         } else if volumeUnit == .bodyweight {
-            parts.append("自重 × \(log.actualReps)")
+            if let bodyWeightKgSnapshot {
+                parts.append("\(TrainingFormatters.weight(bodyWeightKgSnapshot)) kg × \(log.actualReps)")
+            } else {
+                parts.append("暂无体重 × \(log.actualReps)")
+            }
         } else {
-            parts.append("\(TrainingFormatters.weight(log.actualWeight)) \(volumeUnit.symbol) × \(log.actualReps)")
-        }
-        if let rir = log.rir { parts.append("RIR \(rir)") }
-        if let restDurationSeconds = log.restDurationSeconds {
-            parts.append("组后休息 \(TrainingFormatters.clock(restDurationSeconds))")
-        }
-        return parts.joined(separator: " · ")
-    }
-
-    private var differenceText: String? {
-        var differences: [String] = []
-        if volumeUnit.recordsNumericLoad {
-            let weightDelta = log.actualWeight - log.targetWeight
-            if abs(weightDelta) > 0.001 || log.actualWeightSide != log.targetWeightSide {
-                let sign = weightDelta > 0 ? "+" : ""
-                differences.append(
-                    "重量 \(sign)\(TrainingFormatters.weight(weightDelta)) \(volumeUnit.symbol)（\(log.actualWeightSide.title)）"
-                )
+            if volumeUnit.usesMeasurementSide {
+                parts.append("\(TrainingFormatters.weight(log.actualWeight)) \(volumeUnit.symbol)（\(log.actualWeightSide.title)） × \(log.actualReps)（\(log.actualRepsSide.title)）")
+            } else {
+                parts.append("\(TrainingFormatters.weight(log.actualWeight)) \(volumeUnit.symbol) × \(log.actualReps)")
             }
         }
-        let repsDelta = log.actualReps - log.targetReps
-        if repsDelta != 0 || log.actualRepsSide != log.targetRepsSide {
-            let sign = repsDelta > 0 ? "+" : ""
-            differences.append("次数 \(sign)\(repsDelta)（\(log.actualRepsSide.title)）")
-        }
-        if isExtraSet {
-            differences.insert("比计划多 1 组", at: 0)
-        }
-        return differences.isEmpty ? nil : "与计划：" + differences.joined(separator: " · ")
+        if let rir = log.rir { parts.append("RIR \(rir)") }
+        return parts.joined(separator: " · ")
     }
 
     private func rirOptionTitle(_ value: Int) -> String {

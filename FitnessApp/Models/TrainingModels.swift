@@ -68,6 +68,7 @@ enum RestDurationInput {
 
 enum ExerciseVolumeUnit: String, Codable, CaseIterable, Identifiable {
     case count
+    case second
     case meter
     case kilogram
     case bodyweight
@@ -77,24 +78,27 @@ enum ExerciseVolumeUnit: String, Codable, CaseIterable, Identifiable {
     var symbol: String {
         switch self {
         case .count: return "个"
+        case .second: return "秒"
         case .meter: return "米"
         case .kilogram: return "kg"
-        case .bodyweight: return "自重"
+        case .bodyweight: return "kg·次"
         }
     }
 
     var title: String {
         switch self {
         case .count: return "个（次数）"
+        case .second: return "秒（时长）"
         case .meter: return "米（距离）"
         case .kilogram: return "kg（重量 × 次数）"
-        case .bodyweight: return "自重（按次数）"
+        case .bodyweight: return "自重（体重 × 次数）"
         }
     }
 
     var inputTitle: String {
         switch self {
         case .count: return "数量"
+        case .second: return "秒数"
         case .meter: return "距离"
         case .kilogram: return "重量"
         case .bodyweight: return "自重"
@@ -103,7 +107,7 @@ enum ExerciseVolumeUnit: String, Codable, CaseIterable, Identifiable {
 
     var repetitionTitle: String {
         switch self {
-        case .count: return ""
+        case .count, .second: return ""
         case .meter: return "趟数"
         case .kilogram: return "次数"
         case .bodyweight: return "次数"
@@ -112,17 +116,33 @@ enum ExerciseVolumeUnit: String, Codable, CaseIterable, Identifiable {
 
     func volume(weight: Double, reps: Int) -> Double {
         switch self {
-        case .count, .bodyweight:
+        case .count, .second:
             return Double(max(0, reps))
-        case .meter, .kilogram:
+        case .meter, .kilogram, .bodyweight:
             guard weight.isFinite else { return 0 }
             let result = max(0, weight) * Double(max(0, reps))
             return result.isFinite ? result : 0
         }
     }
 
+    func volume(weight: Double?, reps: Int) -> Double? {
+        switch self {
+        case .count, .second:
+            return Double(max(0, reps))
+        case .meter, .kilogram, .bodyweight:
+            guard let weight, weight > 0 else { return nil }
+            guard weight.isFinite else { return nil }
+            let result = weight * Double(max(0, reps))
+            return result.isFinite ? result : nil
+        }
+    }
+
     var recordsNumericLoad: Bool {
         self == .meter || self == .kilogram
+    }
+
+    var recordsSingleAmount: Bool {
+        self == .count || self == .second
     }
 
     var usesMeasurementSide: Bool {
@@ -194,6 +214,13 @@ enum SetPlanPattern: String, Codable, CaseIterable, Identifiable {
         case .pyramidDown: return "金字塔递减"
         }
     }
+}
+
+enum PlanPatternSource: String, Codable, CaseIterable, Identifiable {
+    case dayDefault
+    case exerciseOverride
+
+    var id: String { rawValue }
 }
 
 enum MeasurementSide: String, Codable, CaseIterable, Identifiable {
@@ -432,6 +459,13 @@ final class WorkoutTemplate {
     var isOneOff: Bool = false
     var plannedForDate: Date?
     var focusMuscleGroupsRaw: String = ""
+    /// Optional so stores created before day-level patterns remain lightweight-migratable.
+    var defaultPlanPatternRaw: String?
+
+    var defaultPlanPattern: SetPlanPattern {
+        get { defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
+        set { defaultPlanPatternRaw = newValue.rawValue }
+    }
 
     var focusMuscleGroups: [String] {
         get {
@@ -453,7 +487,8 @@ final class WorkoutTemplate {
         createdAt: Date = .now,
         isOneOff: Bool = false,
         plannedForDate: Date? = nil,
-        focusMuscleGroups: [String] = []
+        focusMuscleGroups: [String] = [],
+        defaultPlanPattern: SetPlanPattern? = nil
     ) {
         self.id = id
         self.name = name
@@ -463,6 +498,7 @@ final class WorkoutTemplate {
         self.isOneOff = isOneOff
         self.plannedForDate = plannedForDate?.startOfDay
         self.focusMuscleGroupsRaw = focusMuscleGroups.joined(separator: ",")
+        self.defaultPlanPatternRaw = defaultPlanPattern?.rawValue
     }
 }
 
@@ -480,10 +516,17 @@ final class TemplateExercise {
     /// Optional JSON keeps stores from older versions lightweight-migratable.
     var plannedSetsJSON: String?
     var planPatternRaw: String?
+    /// Nil means a legacy per-exercise value that must not be silently changed.
+    var patternSourceRaw: String?
 
     var planPattern: SetPlanPattern {
         get { planPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
         set { planPatternRaw = newValue.rawValue }
+    }
+
+    var patternSource: PlanPatternSource {
+        get { patternSourceRaw.flatMap(PlanPatternSource.init(rawValue:)) ?? .exerciseOverride }
+        set { patternSourceRaw = newValue.rawValue }
     }
 
     var plannedSets: [WorkoutSetPlan] {
@@ -519,7 +562,8 @@ final class TemplateExercise {
         targetWeight: Double,
         restSeconds: Int,
         plannedSets: [WorkoutSetPlan]? = nil,
-        planPattern: SetPlanPattern = .fixed
+        planPattern: SetPlanPattern = .fixed,
+        patternSource: PlanPatternSource = .exerciseOverride
     ) {
         self.id = id
         self.templateID = templateID
@@ -531,6 +575,7 @@ final class TemplateExercise {
         self.targetWeight = targetWeight
         self.restSeconds = restSeconds
         self.planPatternRaw = planPattern.rawValue
+        self.patternSourceRaw = patternSource.rawValue
         self.plannedSetsJSON = WorkoutSetPlanCoding.encode(
             plannedSets ?? WorkoutSetPlan.preset(
                 planPattern,
@@ -602,6 +647,13 @@ final class WorkoutSession {
     /// Optional for lightweight migration from stores created before rest modes existed.
     var restModeRaw: String?
     var importIdentifier: String = ""
+    /// Snapshot of the day-level pattern used when this workout began.
+    var defaultPlanPatternRaw: String?
+
+    var defaultPlanPattern: SetPlanPattern {
+        get { defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
+        set { defaultPlanPatternRaw = newValue.rawValue }
+    }
 
     var status: WorkoutSessionStatus {
         get { WorkoutSessionStatus(rawValue: statusRaw) ?? .inProgress }
@@ -625,7 +677,8 @@ final class WorkoutSession {
         notes: String = "",
         restEndDate: Date? = nil,
         restMode: WorkoutRestMode = .countdown,
-        importIdentifier: String = ""
+        importIdentifier: String = "",
+        defaultPlanPattern: SetPlanPattern? = nil
     ) {
         self.id = id
         self.scheduledWorkoutID = scheduledWorkoutID
@@ -639,6 +692,7 @@ final class WorkoutSession {
         self.restEndDate = restEndDate
         self.restModeRaw = restMode.rawValue
         self.importIdentifier = importIdentifier
+        self.defaultPlanPatternRaw = defaultPlanPattern?.rawValue
     }
 }
 
@@ -665,11 +719,22 @@ final class SessionExercise {
     /// Per-set plan snapshot; later template edits must not change this session.
     var plannedSetsJSON: String?
     var planPatternRaw: String?
+    var patternSourceRaw: String?
     var feelingRaw: String?
+    /// Exercise-level timing survives app restarts and may overlap with other exercises.
+    var exerciseStartedAt: Date?
+    var exerciseCompletedAt: Date?
+    /// Frozen at session start/first interaction so later body measurements cannot rewrite history.
+    var bodyWeightKgSnapshot: Double?
 
     var planPattern: SetPlanPattern {
         get { planPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
         set { planPatternRaw = newValue.rawValue }
+    }
+
+    var patternSource: PlanPatternSource {
+        get { patternSourceRaw.flatMap(PlanPatternSource.init(rawValue:)) ?? .exerciseOverride }
+        set { patternSourceRaw = newValue.rawValue }
     }
 
     var plannedSets: [WorkoutSetPlan] {
@@ -713,7 +778,11 @@ final class SessionExercise {
         performanceNotes: String = "",
         plannedSets: [WorkoutSetPlan]? = nil,
         planPattern: SetPlanPattern = .fixed,
-        feeling: WorkoutFeeling? = nil
+        feeling: WorkoutFeeling? = nil,
+        patternSource: PlanPatternSource = .exerciseOverride,
+        exerciseStartedAt: Date? = nil,
+        exerciseCompletedAt: Date? = nil,
+        bodyWeightKgSnapshot: Double? = nil
     ) {
         self.id = id
         self.sessionID = sessionID
@@ -731,6 +800,7 @@ final class SessionExercise {
         self.volumeUnitRaw = volumeUnit.rawValue
         self.performanceNotes = performanceNotes
         self.planPatternRaw = planPattern.rawValue
+        self.patternSourceRaw = patternSource.rawValue
         self.plannedSetsJSON = WorkoutSetPlanCoding.encode(
             plannedSets ?? WorkoutSetPlan.preset(
                 planPattern,
@@ -740,6 +810,15 @@ final class SessionExercise {
             )
         )
         self.feelingRaw = feeling?.rawValue
+        self.exerciseStartedAt = exerciseStartedAt
+        self.exerciseCompletedAt = exerciseCompletedAt
+        self.bodyWeightKgSnapshot = bodyWeightKgSnapshot
+    }
+
+
+    var durationSeconds: Int? {
+        guard let exerciseStartedAt, let exerciseCompletedAt else { return nil }
+        return max(0, Int(exerciseCompletedAt.timeIntervalSince(exerciseStartedAt).rounded()))
     }
 }
 

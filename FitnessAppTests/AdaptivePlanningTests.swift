@@ -9,6 +9,138 @@ final class AdaptivePlanningTests: XCTestCase {
         UserDefaults.standard.set(false, forKey: NotificationService.workoutEnabledKey)
     }
 
+    func testConfirmedAliasCatalogIncludesNewlyApprovedSixGroups() {
+        let groups = Dictionary(
+            uniqueKeysWithValues: ExerciseCatalogService.confirmedAliasGroups.map {
+                ($0.canonicalID, ($0.primaryName, Set($0.aliases)))
+            }
+        )
+
+        XCTAssertEqual(ExerciseCatalogService.confirmedAliasGroups.count, 15)
+        XCTAssertEqual(groups["landmine_zercher_squat"]?.0, "地雷杆泽奇蹲")
+        XCTAssertEqual(groups["landmine_zercher_squat"]?.1, ["地雷杆泽奇蹲", "地雷杠泽奇蹲"])
+        XCTAssertEqual(groups["landmine_rotation"]?.0, "地雷杆转体")
+        XCTAssertEqual(groups["landmine_rotation"]?.1, ["地雷杆转体", "地雷杆转向"])
+        XCTAssertEqual(groups["barbell_conventional_deadlift"]?.0, "传统硬拉")
+        XCTAssertEqual(groups["machine_pec_deck_fly"]?.1, ["坐姿飞鸟", "fly"])
+        XCTAssertEqual(
+            groups["machine_reverse_fly"]?.1,
+            ["器械反向飞鸟", "Reverse Fly", "rear dealt"]
+        )
+        XCTAssertEqual(
+            groups["machine_decline_chest_press"]?.1,
+            ["器械下斜卧推", "坐姿下斜推胸机", "declined bench press", "MTS 下斜卧推"]
+        )
+        XCTAssertEqual(
+            groups["machine_shoulder_press"]?.1,
+            ["器械肩推", "shoulder press", "side press", "三角肌训练机"]
+        )
+        XCTAssertEqual(groups["barbell_hip_thrust"]?.0, "杠铃臀推")
+        XCTAssertEqual(groups["barbell_thruster"]?.0, "杠铃火箭推")
+        XCTAssertEqual(groups["machine_triceps_press"]?.1, ["三头下压机", "seated dip"])
+        XCTAssertEqual(groups["dumbbell_side_lunge"]?.1, ["哑铃侧弓步", "哑铃侧边蹲"])
+    }
+
+    func testConfirmedSecondPassCleanupMergesNonConflictingGroupsRenamesAndArchives() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let inputs = [
+            Exercise(name: "declined bench press", muscleGroup: "胸部", equipment: "待审核"),
+            Exercise(name: "器械下斜卧推", muscleGroup: "胸部", equipment: "器械"),
+            Exercise(name: "MTS 下斜卧推", muscleGroup: "胸部", equipment: "MTS 器械"),
+            Exercise(name: "臀推", muscleGroup: "腿部", equipment: "杠铃"),
+            Exercise(name: "顶髋", muscleGroup: "臀部", equipment: "杠铃"),
+            Exercise(name: "火箭推", muscleGroup: "肩部", equipment: "杠铃"),
+            Exercise(name: "半蹲上推", muscleGroup: "其他", equipment: "杠铃"),
+            Exercise(name: "seated dip", muscleGroup: "手臂", equipment: "器械"),
+            Exercise(name: "三头下压机", muscleGroup: "手臂", equipment: "器械"),
+            Exercise(name: "side press", muscleGroup: "肩部", equipment: "器械"),
+            Exercise(name: "三角肌训练机", muscleGroup: "肩部", equipment: "器械"),
+            Exercise(name: "器械肩推", muscleGroup: "肩部", equipment: "器械"),
+            Exercise(name: "器械反向飞鸟", muscleGroup: "肩部", equipment: "器械"),
+            Exercise(name: "哑铃侧弓步", muscleGroup: "腿部", equipment: "哑铃"),
+            Exercise(name: "哑铃侧边蹲", muscleGroup: "腿部", equipment: "哑铃"),
+            Exercise(name: "地雷杠侧边蹲", muscleGroup: "腿部", equipment: "地雷杆"),
+            Exercise(name: "壶铃饶颈侧拉", muscleGroup: "核心", equipment: "壶铃"),
+            Exercise(name: "真机分享动作 20260823", muscleGroup: "其他", equipment: "自重"),
+            Exercise(name: "真机菜单动作 20260823", muscleGroup: "手臂", equipment: "自重"),
+            Exercise(name: "真机训练中动作 20260823", muscleGroup: "其他", equipment: "自重")
+        ]
+        inputs.forEach(context.insert)
+
+        let mts = try XCTUnwrap(inputs.first { $0.name == "MTS 下斜卧推" })
+        let completedSession = WorkoutSession(
+            templateName: "历史胸部训练",
+            plannedDate: .now.addingDays(-7),
+            startedAt: .now.addingDays(-7),
+            completedAt: .now.addingDays(-7).addingTimeInterval(3_600),
+            status: .completed
+        )
+        let historicalSnapshot = SessionExercise(
+            sessionID: completedSession.id,
+            exerciseID: mts.id,
+            exerciseName: mts.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 12,
+            targetWeight: 40,
+            restSeconds: 90,
+            muscleGroup: "胸部"
+        )
+        context.insert(completedSession)
+        context.insert(historicalSnapshot)
+        try context.save()
+
+        try SeedDataService.prepareIfNeeded(in: context, allowInitialSeed: false)
+
+        let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        let activeNames = Set(exercises.filter { !$0.isArchived }.map(\.name))
+        XCTAssertTrue(activeNames.contains("器械下斜卧推"))
+        XCTAssertTrue(activeNames.contains("杠铃臀推"))
+        XCTAssertTrue(activeNames.contains("杠铃火箭推"))
+        XCTAssertTrue(activeNames.contains("三头下压机"))
+        XCTAssertTrue(activeNames.contains("器械肩推"))
+        XCTAssertTrue(activeNames.contains("器械反向飞鸟"))
+        XCTAssertTrue(activeNames.contains("哑铃侧弓步"))
+        XCTAssertTrue(activeNames.contains("地雷杆侧边蹲"))
+        XCTAssertTrue(activeNames.contains("壶铃绕颈侧拉"))
+        XCTAssertFalse(activeNames.contains("declined bench press"))
+        XCTAssertFalse(activeNames.contains("MTS 下斜卧推"))
+        XCTAssertFalse(activeNames.contains("臀推"))
+        XCTAssertFalse(activeNames.contains("顶髋"))
+        XCTAssertFalse(activeNames.contains("火箭推"))
+        XCTAssertFalse(activeNames.contains("半蹲上推"))
+        XCTAssertFalse(activeNames.contains("seated dip"))
+        XCTAssertFalse(activeNames.contains("side press"))
+        XCTAssertFalse(activeNames.contains("三角肌训练机"))
+        XCTAssertFalse(activeNames.contains("哑铃侧边蹲"))
+        XCTAssertFalse(activeNames.contains("地雷杠侧边蹲"))
+        XCTAssertFalse(activeNames.contains("壶铃饶颈侧拉"))
+        XCTAssertFalse(activeNames.contains("真机分享动作 20260823"))
+        XCTAssertFalse(activeNames.contains("真机菜单动作 20260823"))
+        XCTAssertFalse(activeNames.contains("真机训练中动作 20260823"))
+
+        XCTAssertEqual(
+            exercises.filter { $0.terminologyCanonicalID == "machine_decline_chest_press" && !$0.isArchived }.count,
+            1
+        )
+        XCTAssertEqual(
+            exercises.filter { $0.terminologyCanonicalID == "barbell_hip_thrust" && !$0.isArchived }.count,
+            1
+        )
+        XCTAssertEqual(
+            exercises.filter { $0.terminologyCanonicalID == "machine_shoulder_press" && !$0.isArchived }.count,
+            1
+        )
+        XCTAssertEqual(
+            exercises.filter { $0.terminologyCanonicalID == "machine_reverse_fly" && !$0.isArchived }.count,
+            1
+        )
+        XCTAssertEqual(historicalSnapshot.exerciseID, mts.id)
+        XCTAssertEqual(historicalSnapshot.exerciseName, "MTS 下斜卧推")
+    }
+
     func testRecommendationPrioritizesActionOutsideLastMenu() throws {
         let now = Date(timeIntervalSince1970: 1_800_000_000)
         let bench = Exercise(name: "卧推", muscleGroup: "胸部", equipment: "杠铃")
@@ -126,6 +258,71 @@ final class AdaptivePlanningTests: XCTestCase {
         XCTAssertEqual(recommendation?.suggestedWeight, 42.5)
         XCTAssertTrue(recommendation?.attentionText.contains("肩胛稳定") == true)
         XCTAssertTrue(recommendation?.attentionText.contains("下放慢一点") == true)
+    }
+
+    func testRecommendationAggregatesArchivedAliasHistoryWithoutChangingSnapshotIdentity() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let primary = Exercise(
+            name: "地雷杆泽奇蹲",
+            muscleGroup: "腿部",
+            equipment: "地雷杆",
+            terminologyCanonicalID: "landmine_zercher_squat",
+            terminologyDecision: .accepted
+        )
+        let alias = Exercise(
+            name: "地雷杠泽奇蹲",
+            muscleGroup: "腿部",
+            equipment: "地雷杆",
+            isBuiltIn: false,
+            isArchived: true,
+            terminologyCanonicalID: "landmine_zercher_squat",
+            terminologyDecision: .accepted
+        )
+        let session = WorkoutSession(
+            templateName: "下肢训练",
+            plannedDate: now.addingDays(-3),
+            startedAt: now.addingDays(-3),
+            completedAt: now.addingDays(-3).addingTimeInterval(3_600),
+            status: .completed
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: alias.id,
+            exerciseName: alias.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 20,
+            restSeconds: 90,
+            muscleGroup: "腿部"
+        )
+        let log = completedLog(
+            session: session,
+            snapshot: snapshot,
+            exercise: alias,
+            weight: 20,
+            reps: 10,
+            rir: 2
+        )
+
+        let recommendations = WorkoutRecommendationService.recommendations(
+            selectedMuscleGroups: ["腿部"],
+            exercises: [primary, alias],
+            sessions: [session],
+            sessionExercises: [snapshot],
+            setLogs: [log],
+            templateExercises: [],
+            now: now
+        )
+
+        XCTAssertEqual(recommendations.count, 1)
+        XCTAssertEqual(recommendations.first?.exerciseID, primary.id)
+        XCTAssertEqual(recommendations.first?.lastPerformance?.workoutName, "下肢训练")
+        XCTAssertEqual(recommendations.first?.lastPerformance?.volume, 200)
+        XCTAssertTrue(recommendations.first?.appearedInLastMenu == true)
+        XCTAssertEqual(snapshot.exerciseID, alias.id)
+        XCTAssertEqual(snapshot.exerciseName, "地雷杠泽奇蹲")
     }
 
     func testCuttingRecommendationPreservesSetsAndUsesWorkingWeight() throws {
@@ -979,6 +1176,293 @@ final class AdaptivePlanningTests: XCTestCase {
         XCTAssertEqual(snapshot?.referenceURL, exercise.referenceURL)
         exercise.referenceURL = "https://example.com/changed"
         XCTAssertEqual(snapshot?.referenceURL, "https://example.com/cuban-press")
+    }
+
+    func testRunningWorkoutMenuRemovesAutoStartedExerciseWithNoCompletedSetsWithoutReplacingHistory() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let bulgarian = Exercise(name: "保加利亚单腿蹲", muscleGroup: "腿部", equipment: "哑铃")
+        let legCurl = Exercise(name: "俯卧腿弯举", muscleGroup: "腿部", equipment: "固定器械")
+        let historicalDate = Date(timeIntervalSince1970: 1_799_000_000)
+        let historicalSession = WorkoutSession(
+            templateName: "腿部历史",
+            plannedDate: historicalDate,
+            startedAt: historicalDate,
+            completedAt: historicalDate.addingTimeInterval(1_800),
+            status: .completed
+        )
+        let historicalSnapshot = SessionExercise(
+            sessionID: historicalSession.id,
+            exerciseID: bulgarian.id,
+            exerciseName: bulgarian.name,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 15,
+            restSeconds: 90,
+            muscleGroup: bulgarian.muscleGroup
+        )
+        let historicalLog = SetLog(
+            sessionID: historicalSession.id,
+            sessionExerciseID: historicalSnapshot.id,
+            exerciseID: bulgarian.id,
+            setNumber: 1,
+            targetWeight: 15,
+            targetReps: 8,
+            actualWeight: 15,
+            actualReps: 8,
+            isCompleted: true,
+            completedAt: historicalDate.addingTimeInterval(600)
+        )
+
+        let activeDate = Date(timeIntervalSince1970: 1_800_000_000)
+        let activeSession = WorkoutSession(
+            templateName: "腿部 · 当天菜单",
+            plannedDate: activeDate,
+            startedAt: activeDate,
+            status: .inProgress
+        )
+        let removableSnapshot = SessionExercise(
+            sessionID: activeSession.id,
+            exerciseID: bulgarian.id,
+            exerciseName: bulgarian.name,
+            order: 0,
+            targetSets: 4,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 20,
+            restSeconds: 90,
+            muscleGroup: bulgarian.muscleGroup,
+            exerciseStartedAt: activeDate
+        )
+        let keptSnapshot = SessionExercise(
+            sessionID: activeSession.id,
+            exerciseID: legCurl.id,
+            exerciseName: legCurl.name,
+            order: 1,
+            targetSets: 1,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 30,
+            restSeconds: 90,
+            muscleGroup: legCurl.muscleGroup
+        )
+        let removableLogs = (1...4).map { setNumber in
+            SetLog(
+                sessionID: activeSession.id,
+                sessionExerciseID: removableSnapshot.id,
+                exerciseID: bulgarian.id,
+                setNumber: setNumber,
+                targetWeight: 20,
+                targetReps: 8,
+                actualWeight: 20,
+                actualReps: 8
+            )
+        }
+        let keptLog = SetLog(
+            sessionID: activeSession.id,
+            sessionExerciseID: keptSnapshot.id,
+            exerciseID: legCurl.id,
+            setNumber: 1,
+            targetWeight: 30,
+            targetReps: 10,
+            actualWeight: 30,
+            actualReps: 10,
+            isCompleted: true,
+            completedAt: activeDate.addingTimeInterval(900)
+        )
+
+        [bulgarian, legCurl].forEach(context.insert)
+        [historicalSession, activeSession].forEach(context.insert)
+        [historicalSnapshot, removableSnapshot, keptSnapshot].forEach(context.insert)
+        context.insert(historicalLog)
+        removableLogs.forEach(context.insert)
+        context.insert(keptLog)
+        try context.save()
+
+        try WorkoutService.syncMenu(
+            [
+                DailyPlanExerciseInput(
+                    exerciseID: legCurl.id,
+                    plannedSets: [WorkoutSetPlan(weight: 30, reps: 10)],
+                    planPattern: .fixed,
+                    restSeconds: 90
+                )
+            ],
+            to: activeSession,
+            in: context
+        )
+
+        let currentSnapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+            .filter { $0.sessionID == activeSession.id }
+        let currentLogs = try context.fetch(FetchDescriptor<SetLog>())
+            .filter { $0.sessionID == activeSession.id }
+        XCTAssertEqual(currentSnapshots.map(\.exerciseID), [legCurl.id])
+        XCTAssertEqual(currentLogs.map(\.id), [keptLog.id])
+        XCTAssertEqual(keptLog.actualWeight, 30, accuracy: 0.0001)
+        XCTAssertTrue(keptLog.isCompleted)
+
+        activeSession.status = .completed
+        activeSession.completedAt = activeDate.addingTimeInterval(1_800)
+        try context.save()
+        let recommendations = WorkoutRecommendationService.recommendations(
+            selectedMuscleGroups: ["腿部"],
+            exercises: [bulgarian, legCurl],
+            sessions: [historicalSession, activeSession],
+            sessionExercises: try context.fetch(FetchDescriptor<SessionExercise>()),
+            setLogs: try context.fetch(FetchDescriptor<SetLog>()),
+            templateExercises: [],
+            now: activeDate.addingTimeInterval(86_400)
+        )
+        let bulgarianRecommendation = try XCTUnwrap(
+            recommendations.first { $0.exerciseID == bulgarian.id }
+        )
+        XCTAssertFalse(bulgarianRecommendation.appearedInLastMenu)
+        XCTAssertEqual(bulgarianRecommendation.lastPerformance?.date, historicalDate)
+        XCTAssertEqual(bulgarianRecommendation.lastPerformance?.bestSet?.weight, 15)
+    }
+
+    func testRunningWorkoutMenuKeepsExerciseThatHasACompletedSet() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let bench = Exercise(name: "杠铃卧推", muscleGroup: "胸部", equipment: "杠铃")
+        let fly = Exercise(name: "绳索夹胸", muscleGroup: "胸部", equipment: "龙门架")
+        let session = WorkoutSession(
+            templateName: "胸部 · 当天菜单",
+            plannedDate: .now,
+            status: .inProgress
+        )
+        let benchSnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: bench.id,
+            exerciseName: bench.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 40,
+            restSeconds: 90,
+            muscleGroup: bench.muscleGroup
+        )
+        let flySnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: fly.id,
+            exerciseName: fly.name,
+            order: 1,
+            targetSets: 1,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 10,
+            restSeconds: 60,
+            muscleGroup: fly.muscleGroup
+        )
+        let completedBenchSet = SetLog(
+            sessionID: session.id,
+            sessionExerciseID: benchSnapshot.id,
+            exerciseID: bench.id,
+            setNumber: 1,
+            targetWeight: 40,
+            targetReps: 8,
+            actualWeight: 40,
+            actualReps: 8,
+            isCompleted: true,
+            completedAt: .now
+        )
+        let pendingFlySet = SetLog(
+            sessionID: session.id,
+            sessionExerciseID: flySnapshot.id,
+            exerciseID: fly.id,
+            setNumber: 1,
+            targetWeight: 10,
+            targetReps: 12,
+            actualWeight: 10,
+            actualReps: 12
+        )
+        [bench, fly].forEach(context.insert)
+        context.insert(session)
+        [benchSnapshot, flySnapshot].forEach(context.insert)
+        [completedBenchSet, pendingFlySet].forEach(context.insert)
+        try context.save()
+
+        XCTAssertThrowsError(
+            try WorkoutService.syncMenu(
+                [
+                    DailyPlanExerciseInput(
+                        exerciseID: fly.id,
+                        plannedSets: [WorkoutSetPlan(weight: 10, reps: 12)],
+                        planPattern: .fixed,
+                        restSeconds: 60
+                    )
+                ],
+                to: session,
+                in: context
+            )
+        ) { error in
+            XCTAssertEqual(
+                error.localizedDescription,
+                WorkoutServiceError.cannotRemoveStartedExercise.localizedDescription
+            )
+        }
+        XCTAssertTrue(
+            try context.fetch(FetchDescriptor<SessionExercise>()).contains { $0.id == benchSnapshot.id }
+        )
+        XCTAssertTrue(
+            try context.fetch(FetchDescriptor<SetLog>()).contains { $0.id == completedBenchSet.id }
+        )
+    }
+
+    func testRunningWorkoutMenuKeepsAtLeastOneExercise() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(name: "保加利亚单腿蹲", muscleGroup: "腿部", equipment: "哑铃")
+        let session = WorkoutSession(
+            templateName: "腿部 · 当天菜单",
+            plannedDate: .now,
+            status: .inProgress
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 20,
+            restSeconds: 90,
+            muscleGroup: exercise.muscleGroup
+        )
+        let log = SetLog(
+            sessionID: session.id,
+            sessionExerciseID: snapshot.id,
+            exerciseID: exercise.id,
+            setNumber: 1,
+            targetWeight: 20,
+            targetReps: 8,
+            actualWeight: 20,
+            actualReps: 8
+        )
+        context.insert(exercise)
+        context.insert(session)
+        context.insert(snapshot)
+        context.insert(log)
+        try context.save()
+
+        XCTAssertThrowsError(
+            try WorkoutService.syncMenu([], to: session, in: context)
+        ) { error in
+            XCTAssertEqual(
+                error.localizedDescription,
+                WorkoutServiceError.emptyTemplate.localizedDescription
+            )
+        }
+        XCTAssertTrue(
+            try context.fetch(FetchDescriptor<SessionExercise>()).contains { $0.id == snapshot.id }
+        )
+        XCTAssertTrue(
+            try context.fetch(FetchDescriptor<SetLog>()).contains { $0.id == log.id }
+        )
     }
 
     private func completedLog(

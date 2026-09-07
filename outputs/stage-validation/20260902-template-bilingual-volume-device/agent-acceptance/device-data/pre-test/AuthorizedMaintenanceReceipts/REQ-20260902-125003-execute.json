@@ -1,0 +1,44 @@
+{
+  "after" : {
+    "exercises" : 92,
+    "notesSessionExercises" : 150,
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "scheduledWorkouts" : 28,
+    "sessionExercises" : 200,
+    "sessions" : 35,
+    "setLogs" : 829,
+    "templateExercises" : 50,
+    "templates" : 10
+  },
+  "before" : {
+    "exercises" : 95,
+    "notesSessionExercises" : 150,
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "scheduledWorkouts" : 29,
+    "sessionExercises" : 215,
+    "sessions" : 38,
+    "setLogs" : 876,
+    "templateExercises" : 56,
+    "templates" : 11
+  },
+  "message" : "已按固定 ID 完成清理并通过 App 内守恒检查",
+  "mode" : "execute",
+  "protectedIDsPresent" : true,
+  "recordedAt" : "2026-09-02T05:21:03Z",
+  "removed" : {
+    "exercises" : 3,
+    "notesSessionExercises" : 0,
+    "notesSessions" : 0,
+    "notesSetLogs" : 0,
+    "scheduledWorkouts" : 1,
+    "sessionExercises" : 15,
+    "sessions" : 3,
+    "setLogs" : 47,
+    "templateExercises" : 6,
+    "templates" : 1
+  },
+  "requestID" : "REQ-20260902-125003",
+  "succeeded" : true
+}

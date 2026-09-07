@@ -39,6 +39,209 @@ enum WorkoutServiceError: LocalizedError {
     }
 }
 
+enum BodyWeightSnapshotResolver {
+    static func resolve(
+        for workoutDate: Date,
+        measurements: [BodyMeasurement],
+        currentHealthWeightKg: Double?
+    ) -> Double? {
+        let historical = measurements
+            .filter { $0.date <= workoutDate && ($0.weightKg ?? 0) > 0 }
+            .sorted { $0.date > $1.date }
+            .compactMap(\.weightKg)
+            .first
+        if let historical { return historical }
+        if let currentHealthWeightKg, currentHealthWeightKg > 0 { return currentHealthWeightKg }
+        return nil
+    }
+}
+
+enum WorkoutExerciseTracking {
+    static func startFirstExercise(in exercises: [SessionExercise], at date: Date = .now) {
+        guard let first = exercises.min(by: { $0.order < $1.order }) else { return }
+        recordInteraction(with: first, at: date)
+    }
+
+    static func recordInteraction(with exercise: SessionExercise, at date: Date = .now) {
+        if exercise.exerciseStartedAt == nil {
+            exercise.exerciseStartedAt = date
+        }
+    }
+
+    static func updateAfterSetChange(
+        exercise: SessionExercise,
+        logs: [SetLog],
+        followingExercise: SessionExercise?,
+        at date: Date = .now
+    ) {
+        recordInteraction(with: exercise, at: date)
+        let isComplete = !logs.isEmpty && logs.allSatisfy(\.isCompleted)
+        if isComplete {
+            exercise.exerciseCompletedAt = max(date, exercise.exerciseStartedAt ?? date)
+            if let followingExercise {
+                recordInteraction(with: followingExercise, at: date)
+            }
+        } else {
+            exercise.exerciseCompletedAt = nil
+        }
+    }
+}
+
+@MainActor
+enum WeightedExerciseIdentityMigration {
+    private struct Correction {
+        let muscleGroup: String
+        let equipment: String
+    }
+
+    /// Correct only catalog identities that were explicitly verified against the
+    /// user's existing data. Historical SessionExercise snapshots remain unchanged.
+    private static let confirmedCorrections: [String: Correction] = [
+        "传统硬拉": Correction(muscleGroup: "腿部", equipment: "杠铃"),
+        "哑铃侧边蹲": Correction(muscleGroup: "腿部", equipment: "哑铃"),
+        "地雷杆转体": Correction(muscleGroup: "核心", equipment: "地雷杆"),
+        "地雷杆泽奇蹲": Correction(muscleGroup: "腿部", equipment: "地雷杆")
+    ]
+
+    static func applyConfirmedCorrections(in context: ModelContext) throws {
+        let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        for exercise in exercises {
+            guard let correction = confirmedCorrections[exercise.name] else { continue }
+            let needsUpdate = exercise.muscleGroup != correction.muscleGroup
+                || exercise.equipment != correction.equipment
+                || exercise.volumeUnit != .kilogram
+            guard needsUpdate else { continue }
+            exercise.muscleGroup = correction.muscleGroup
+            exercise.equipment = correction.equipment
+            exercise.volumeUnit = .kilogram
+            exercise.updatedAt = .now
+        }
+    }
+}
+
+@MainActor
+enum BodyweightVolumeMigration {
+    private static let canonicalIDs: Set<String> = [
+        "bodyweight_leg_raise",
+        "bodyweight_pull_up"
+    ]
+    private static let confirmedNames: Set<String> = [
+        "举腿", "引体向上", "仰卧起坐", "蜘蛛跳", "跳箱", "侧边提髋", "保加利亚横向踮脚跳"
+    ]
+
+    static func applyConfirmedAllowlist(in context: ModelContext) throws {
+        let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        let confirmedIDs = Set(exercises.compactMap { exercise -> UUID? in
+            guard canonicalIDs.contains(exercise.terminologyCanonicalID ?? "")
+                    || confirmedNames.contains(exercise.name) else { return nil }
+            exercise.volumeUnit = .bodyweight
+            return exercise.id
+        })
+        guard !confirmedIDs.isEmpty else { return }
+
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let sessionByID = Dictionary(uniqueKeysWithValues: sessions.map { ($0.id, $0) })
+        let measurements = try context.fetch(FetchDescriptor<BodyMeasurement>())
+        let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+        let logs = try context.fetch(FetchDescriptor<SetLog>())
+
+        for snapshot in snapshots where confirmedIDs.contains(snapshot.exerciseID) {
+            snapshot.volumeUnit = .bodyweight
+            if snapshot.bodyWeightKgSnapshot == nil,
+               let session = sessionByID[snapshot.sessionID] {
+                snapshot.bodyWeightKgSnapshot = BodyWeightSnapshotResolver.resolve(
+                    for: session.startedAt,
+                    measurements: measurements,
+                    currentHealthWeightKg: nil
+                )
+            }
+            guard let bodyWeight = snapshot.bodyWeightKgSnapshot else { continue }
+            for log in logs where log.sessionExerciseID == snapshot.id {
+                log.actualWeight = bodyWeight
+                if log.targetWeight <= 0 { log.targetWeight = bodyWeight }
+            }
+        }
+    }
+
+    static func applyHealthWeightFallbacks(
+        in context: ModelContext,
+        historicalWeightKg: (Date) -> Double?,
+        currentWeightKg: Double?
+    ) throws {
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let sessionByID = Dictionary(uniqueKeysWithValues: sessions.map { ($0.id, $0) })
+        let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+        let logs = try context.fetch(FetchDescriptor<SetLog>())
+        let measurements = try context.fetch(FetchDescriptor<BodyMeasurement>())
+        let latestLocalMeasurement = measurements
+            .filter { ($0.weightKg ?? 0) > 0 }
+            .max(by: { $0.date < $1.date })?
+            .weightKg
+        let latestStoredSnapshotWeight = snapshots.compactMap { snapshot -> (Date, Double)? in
+            guard let weight = snapshot.bodyWeightKgSnapshot,
+                  weight.isFinite,
+                  weight > 0,
+                  let session = sessionByID[snapshot.sessionID] else { return nil }
+            return (session.startedAt, weight)
+        }
+        .max(by: { $0.0 < $1.0 })?
+        .1
+        let validatedCurrentHealthWeight = currentWeightKg.flatMap { weight in
+            weight.isFinite && weight > 0 ? weight : nil
+        }
+        let currentFallbackWeight = validatedCurrentHealthWeight
+            ?? latestLocalMeasurement
+            ?? latestStoredSnapshotWeight
+
+        for snapshot in snapshots where snapshot.volumeUnit == .bodyweight
+            && snapshot.bodyWeightKgSnapshot == nil {
+            guard let session = sessionByID[snapshot.sessionID] else { continue }
+            let weight = BodyWeightSnapshotResolver.resolve(
+                for: session.startedAt,
+                measurements: measurements,
+                currentHealthWeightKg: historicalWeightKg(session.startedAt)
+            ) ?? currentFallbackWeight
+            guard let weight, weight.isFinite, weight > 0 else { continue }
+            snapshot.bodyWeightKgSnapshot = weight
+            for log in logs where log.sessionExerciseID == snapshot.id {
+                log.actualWeight = weight
+                if log.targetWeight <= 0 { log.targetWeight = weight }
+            }
+        }
+    }
+
+    static func backfillMissingSnapshotsFromHealth(in context: ModelContext) async throws {
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let sessionByID = Dictionary(uniqueKeysWithValues: sessions.map { ($0.id, $0) })
+        let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+        let dates = Set(snapshots.compactMap { snapshot -> Date? in
+            guard snapshot.volumeUnit == .bodyweight,
+                  snapshot.bodyWeightKgSnapshot == nil else { return nil }
+            return sessionByID[snapshot.sessionID]?.startedAt
+        })
+        guard !dates.isEmpty else { return }
+
+        let healthEnabled = UserDefaults.standard.bool(forKey: HealthKitService.enabledKey)
+        var historicalWeights: [Date: Double] = [:]
+        var currentWeight: Double?
+        if healthEnabled {
+            for date in dates {
+                if let weight = try? await HealthKitService.shared.weightKg(onOrBefore: date),
+                   weight.isFinite, weight > 0 {
+                    historicalWeights[date] = weight
+                }
+            }
+            currentWeight = try? await HealthKitService.shared.latestBodySnapshot()?.weightKg
+        }
+        try applyHealthWeightFallbacks(
+            in: context,
+            historicalWeightKg: { historicalWeights[$0] },
+            currentWeightKg: currentWeight
+        )
+        try context.save()
+    }
+}
+
 enum WorkoutRestTracking {
     static func shouldBeginRest(after completedLog: SetLog, logs: [SetLog]) -> Bool {
         completedLog.isCompleted
@@ -145,8 +348,28 @@ enum WorkoutRestTracking {
 
 @MainActor
 enum WorkoutService {
+    static func startUsingAvailableBodyWeight(
+        schedule: ScheduledWorkout,
+        in context: ModelContext
+    ) async throws -> UUID {
+        let healthWeight: Double?
+        if UserDefaults.standard.bool(forKey: HealthKitService.enabledKey) {
+            let historicalWeight = try? await HealthKitService.shared.weightKg(onOrBefore: schedule.plannedDate)
+            let currentWeight = try? await HealthKitService.shared.latestBodySnapshot()?.weightKg
+            healthWeight = historicalWeight ?? currentWeight
+        } else {
+            healthWeight = nil
+        }
+        return try start(
+            schedule: schedule,
+            currentHealthWeightKg: healthWeight,
+            in: context
+        )
+    }
+
     static func start(
         schedule: ScheduledWorkout,
+        currentHealthWeightKg: Double? = nil,
         in context: ModelContext
     ) throws -> UUID {
         if let active = try activeSession(in: context) {
@@ -166,6 +389,8 @@ enum WorkoutService {
         )
         let plannedExercises = try context.fetch(descriptor)
         guard !plannedExercises.isEmpty else { throw WorkoutServiceError.emptyTemplate }
+        let sourceTemplate = try context.fetch(FetchDescriptor<WorkoutTemplate>())
+            .first { $0.id == templateID }
 
         let exercises = try context.fetch(FetchDescriptor<Exercise>())
         let exerciseByID = Dictionary(uniqueKeysWithValues: exercises.map { ($0.id, $0) })
@@ -177,11 +402,20 @@ enum WorkoutService {
                 throw WorkoutServiceError.archivedExercise
             }
         }
+        let sessionStart = Date.now
+        let measurements = try context.fetch(FetchDescriptor<BodyMeasurement>())
+        let bodyWeightKg = BodyWeightSnapshotResolver.resolve(
+            for: schedule.plannedDate,
+            measurements: measurements,
+            currentHealthWeightKg: currentHealthWeightKg
+        )
         let session = WorkoutSession(
             scheduledWorkoutID: schedule.id,
             templateID: templateID,
             templateName: schedule.templateName,
-            plannedDate: schedule.plannedDate
+            plannedDate: schedule.plannedDate,
+            startedAt: sessionStart,
+            defaultPlanPattern: sourceTemplate?.defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:))
         )
         context.insert(session)
 
@@ -207,7 +441,10 @@ enum WorkoutService {
                 referenceURL: exercise.referenceURL,
                 volumeUnit: exercise.volumeUnit,
                 plannedSets: plannedSets,
-                planPattern: planned.planPattern
+                planPattern: planned.planPattern,
+                patternSource: planned.patternSource,
+                exerciseStartedAt: planned.order == plannedExercises.map(\.order).min() ? sessionStart : nil,
+                bodyWeightKgSnapshot: exercise.volumeUnit == .bodyweight ? bodyWeightKg : nil
             )
             context.insert(snapshot)
 
@@ -220,7 +457,7 @@ enum WorkoutService {
                         setNumber: index + 1,
                         targetWeight: setPlan.weight,
                         targetReps: setPlan.reps,
-                        actualWeight: setPlan.weight,
+                        actualWeight: exercise.volumeUnit == .bodyweight ? (bodyWeightKg ?? 0) : setPlan.weight,
                         actualReps: setPlan.reps,
                         targetWeightSide: setPlan.weightSide,
                         targetRepsSide: setPlan.repsSide
@@ -272,6 +509,13 @@ enum WorkoutService {
             repsSide: previous?.actualWeightSide ?? .bilateral
         )
         let order = (snapshots.map(\.order).max() ?? -1) + 1
+        let existingBodyWeight = snapshots.compactMap(\.bodyWeightKgSnapshot).first
+        let localBodyWeight = BodyWeightSnapshotResolver.resolve(
+            for: session.startedAt,
+            measurements: try context.fetch(FetchDescriptor<BodyMeasurement>()),
+            currentHealthWeightKg: nil
+        )
+        let bodyWeightKg = existingBodyWeight ?? localBodyWeight
 
         let snapshot = SessionExercise(
             sessionID: session.id,
@@ -288,7 +532,9 @@ enum WorkoutService {
             referenceURL: exercise.referenceURL,
             volumeUnit: exercise.volumeUnit,
             plannedSets: plannedSets,
-            planPattern: configuration?.pattern ?? .fixed
+            planPattern: configuration?.pattern ?? .fixed,
+            exerciseStartedAt: Date.now,
+            bodyWeightKgSnapshot: exercise.volumeUnit == .bodyweight ? bodyWeightKg : nil
         )
         context.insert(snapshot)
 
@@ -301,7 +547,7 @@ enum WorkoutService {
                     setNumber: index + 1,
                     targetWeight: setPlan.weight,
                     targetReps: setPlan.reps,
-                    actualWeight: setPlan.weight,
+                    actualWeight: exercise.volumeUnit == .bodyweight ? (bodyWeightKg ?? 0) : setPlan.weight,
                     actualReps: setPlan.reps,
                     targetWeightSide: setPlan.weightSide,
                     targetRepsSide: setPlan.repsSide,
@@ -320,6 +566,8 @@ enum WorkoutService {
     static func syncMenu(
         _ inputs: [DailyPlanExerciseInput],
         to session: WorkoutSession,
+        muscleGroups: [String]? = nil,
+        defaultPlanPattern: SetPlanPattern? = nil,
         in context: ModelContext
     ) throws {
         guard session.status == .inProgress else {
@@ -330,6 +578,15 @@ enum WorkoutService {
         }
         guard Set(inputs.map(\.exerciseID)).count == inputs.count else {
             throw DailyPlanServiceError.duplicateExercise
+        }
+        let normalizedMuscleGroups = muscleGroups?.map {
+            $0.trimmingCharacters(in: .whitespacesAndNewlines)
+        }.filter { !$0.isEmpty }
+        if muscleGroups != nil, normalizedMuscleGroups?.isEmpty != false {
+            throw DailyPlanServiceError.emptyMuscleGroups
+        }
+        if let defaultPlanPattern {
+            session.defaultPlanPattern = defaultPlanPattern
         }
 
         let catalog = try context.fetch(FetchDescriptor<Exercise>())
@@ -345,13 +602,34 @@ enum WorkoutService {
 
         var snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
             .filter { $0.sessionID == session.id }
+        let bodyMeasurements = try context.fetch(FetchDescriptor<BodyMeasurement>())
+        let availableBodyWeight = snapshots.compactMap(\.bodyWeightKgSnapshot).first
+            ?? BodyWeightSnapshotResolver.resolve(
+                for: session.startedAt,
+                measurements: bodyMeasurements,
+                currentHealthWeightKg: nil
+            )
         let allLogs = try context.fetch(FetchDescriptor<SetLog>())
             .filter { $0.sessionID == session.id }
         let requestedIDs = Set(inputs.map(\.exerciseID))
+        let startedExerciseIDs = Set(snapshots.compactMap { snapshot -> UUID? in
+            let hasStarted = allLogs.contains {
+                $0.sessionExerciseID == snapshot.id && ($0.isCompleted || $0.startedAt != nil)
+            }
+            return hasStarted ? snapshot.exerciseID : nil
+        })
+        let lockedOrders = Dictionary(uniqueKeysWithValues: snapshots.compactMap { snapshot in
+            startedExerciseIDs.contains(snapshot.exerciseID)
+                ? (snapshot.exerciseID, snapshot.order)
+                : nil
+        })
+        let availableOrders = (0..<inputs.count).filter { !Set(lockedOrders.values).contains($0) }
+        let movableIDs = inputs.map(\.exerciseID).filter { !startedExerciseIDs.contains($0) }
+        let movableOrders = Dictionary(uniqueKeysWithValues: zip(movableIDs, availableOrders))
 
         for snapshot in snapshots where !requestedIDs.contains(snapshot.exerciseID) {
             let exerciseLogs = allLogs.filter { $0.sessionExerciseID == snapshot.id }
-            guard !exerciseLogs.contains(where: { $0.isCompleted || $0.startedAt != nil }) else {
+            guard !exerciseLogs.contains(where: \.isCompleted) else {
                 throw WorkoutServiceError.cannotRemoveStartedExercise
             }
             exerciseLogs.forEach(context.delete)
@@ -384,24 +662,34 @@ enum WorkoutService {
                     referenceURL: catalogExercise.referenceURL,
                     volumeUnit: catalogExercise.volumeUnit,
                     plannedSets: plans,
-                    planPattern: input.planPattern
+                    planPattern: input.planPattern,
+                    patternSource: input.patternSource,
+                    bodyWeightKgSnapshot: catalogExercise.volumeUnit == .bodyweight
+                        ? availableBodyWeight
+                        : nil
                 )
                 context.insert(snapshot)
                 snapshots.append(snapshot)
             }
 
-            snapshot.order = order
-            snapshot.targetSets = plans.count
-            snapshot.minReps = plans.map(\.reps).min() ?? 1
-            snapshot.maxReps = plans.map(\.reps).max() ?? 1
-            snapshot.targetWeight = plans.first?.weight ?? 0
-            snapshot.restSeconds = max(30, input.restSeconds)
-            snapshot.plannedSets = plans
-            snapshot.planPattern = input.planPattern
+            snapshot.order = lockedOrders[input.exerciseID] ?? movableOrders[input.exerciseID] ?? order
 
             var exerciseLogs = allLogs
                 .filter { $0.sessionExerciseID == snapshot.id }
                 .sorted { $0.setNumber < $1.setNumber }
+            let exerciseHasStarted = exerciseLogs.contains { $0.isCompleted || $0.startedAt != nil }
+
+            snapshot.restSeconds = max(30, input.restSeconds)
+            snapshot.planPattern = input.planPattern
+            snapshot.patternSource = input.patternSource
+
+            if !exerciseHasStarted {
+                snapshot.targetSets = plans.count
+                snapshot.minReps = plans.map(\.reps).min() ?? 1
+                snapshot.maxReps = plans.map(\.reps).max() ?? 1
+                snapshot.targetWeight = plans.first?.weight ?? 0
+                snapshot.plannedSets = plans
+            }
 
             for (index, plan) in plans.enumerated() {
                 if exerciseLogs.indices.contains(index) {
@@ -428,7 +716,9 @@ enum WorkoutService {
                         setNumber: index + 1,
                         targetWeight: plan.weight,
                         targetReps: plan.reps,
-                        actualWeight: plan.weight,
+                        actualWeight: catalogExercise.volumeUnit == .bodyweight
+                            ? (availableBodyWeight ?? 0)
+                            : plan.weight,
                         actualReps: plan.reps,
                         targetWeightSide: plan.weightSide,
                         targetRepsSide: plan.repsSide,
@@ -442,6 +732,46 @@ enum WorkoutService {
 
             for log in exerciseLogs.dropFirst(plans.count) where !log.isCompleted && log.startedAt == nil {
                 context.delete(log)
+            }
+
+            if exerciseHasStarted {
+                let protectedLogs = exerciseLogs.filter { $0.isCompleted || $0.startedAt != nil }
+                let protectedUpperBound = protectedLogs.map(\.setNumber).max() ?? 0
+                let mergedCount = max(plans.count, protectedUpperBound)
+                let originalPlans = snapshot.plannedSets
+                let mergedPlans = (0..<mergedCount).map { index -> WorkoutSetPlan in
+                    if let log = exerciseLogs.first(where: {
+                        $0.setNumber == index + 1 && ($0.isCompleted || $0.startedAt != nil)
+                    }) {
+                        return WorkoutSetPlan(
+                            weight: log.targetWeight,
+                            reps: log.targetReps,
+                            weightSide: log.targetWeightSide,
+                            repsSide: log.targetRepsSide
+                        )
+                    }
+                    if plans.indices.contains(index) { return plans[index] }
+                    if originalPlans.indices.contains(index) { return originalPlans[index] }
+                    return WorkoutSetPlan(weight: snapshot.targetWeight, reps: snapshot.minReps)
+                }
+                snapshot.plannedSets = mergedPlans
+                snapshot.targetSets = mergedPlans.count
+                snapshot.minReps = mergedPlans.map(\.reps).min() ?? 1
+                snapshot.maxReps = mergedPlans.map(\.reps).max() ?? 1
+                snapshot.targetWeight = mergedPlans.first?.weight ?? snapshot.targetWeight
+            }
+        }
+
+        if let normalizedMuscleGroups {
+            let titleGroups = normalizedMuscleGroups.prefix(3).joined(separator: " + ")
+            let updatedTitle = "\(titleGroups) · 当天菜单"
+            session.templateName = updatedTitle
+            if let scheduledWorkoutID = session.scheduledWorkoutID {
+                let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+                if let schedule = schedules.first(where: { $0.id == scheduledWorkoutID }) {
+                    schedule.templateName = updatedTitle
+                    schedule.updatedAt = .now
+                }
             }
         }
 
@@ -553,6 +883,11 @@ enum WorkoutService {
         schedules: [ScheduledWorkout],
         in context: ModelContext
     ) throws {
+        let templatePlanUpdates = try persistentTemplatePlanUpdates(
+            for: session,
+            in: context
+        )
+
         session.status = .completed
         session.completedAt = .now
         session.restEndDate = nil
@@ -561,7 +896,67 @@ enum WorkoutService {
            let schedule = schedules.first(where: { $0.id == scheduledID }) {
             schedule.status = .completed
         }
-        try context.save()
+
+        templatePlanUpdates.forEach { update in
+            update.item.plannedSets = update.plans
+        }
+
+        do {
+            try context.save()
+        } catch {
+            context.rollback()
+            throw error
+        }
+    }
+
+    private static func persistentTemplatePlanUpdates(
+        for session: WorkoutSession,
+        in context: ModelContext
+    ) throws -> [(item: TemplateExercise, plans: [WorkoutSetPlan])] {
+        guard let templateID = session.templateID else { return [] }
+
+        let templates = try context.fetch(FetchDescriptor<WorkoutTemplate>())
+        guard let template = templates.first(where: { $0.id == templateID }),
+              !template.isOneOff else {
+            return []
+        }
+
+        let templateItems = try context.fetch(FetchDescriptor<TemplateExercise>())
+            .filter { $0.templateID == templateID }
+        let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+            .filter { $0.sessionID == session.id }
+        let snapshotByExerciseID = Dictionary(
+            snapshots.map { ($0.exerciseID, $0) },
+            uniquingKeysWith: { first, _ in first }
+        )
+        let completedWorkingSets = try context.fetch(FetchDescriptor<SetLog>())
+            .filter {
+                $0.sessionID == session.id
+                    && $0.isCompleted
+                    && !$0.isWarmup
+                    && $0.actualReps > 0
+            }
+
+        return templateItems.compactMap { item in
+            guard let snapshot = snapshotByExerciseID[item.exerciseID] else { return nil }
+            let matchingSets = completedWorkingSets
+                .filter { $0.sessionExerciseID == snapshot.id }
+                .sorted { lhs, rhs in
+                    if lhs.setNumber != rhs.setNumber { return lhs.setNumber < rhs.setNumber }
+                    return lhs.id.uuidString < rhs.id.uuidString
+                }
+            guard !matchingSets.isEmpty else { return nil }
+
+            let plans = matchingSets.map { log in
+                WorkoutSetPlan(
+                    weight: snapshot.volumeUnit.recordsNumericLoad ? log.actualWeight : 0,
+                    reps: log.actualReps,
+                    weightSide: log.actualWeightSide,
+                    repsSide: log.actualRepsSide
+                )
+            }
+            return (item, plans)
+        }
     }
 
     static func discard(

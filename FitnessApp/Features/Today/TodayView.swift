@@ -8,765 +8,246 @@ struct TodayView: View {
     @Query private var templateExercises: [TemplateExercise]
     @Query private var exercises: [Exercise]
     @Query private var templates: [WorkoutTemplate]
+    @Query(sort: \FatLossProgram.createdAt, order: .reverse) private var programs: [FatLossProgram]
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
-    @Query private var sessionExercises: [SessionExercise]
-    @Query private var setLogs: [SetLog]
-    @Query(sort: \DailyBodyCheckIn.date, order: .reverse) private var bodyCheckIns: [DailyBodyCheckIn]
-
+    @State private var selectedDate = Date.now.startOfDay
     @State private var workoutSessionID: UUID?
     @State private var showWorkout = false
-    @State private var showBodyCheckIn = false
+    @State private var showRope = false
+    @State private var starting = false
     @State private var errorMessage: String?
 
-    private var activeSession: WorkoutSession? {
-        sessions.first { $0.status == .inProgress }
+    private var activeSession: WorkoutSession? { sessions.first { $0.status == .inProgress } }
+    private var daySchedules: [ScheduledWorkout] {
+        schedules.filter { $0.plannedDate.isSameDay(as: selectedDate) && $0.status != .skipped }.sorted { left, right in
+            let leftManual = templates.first { $0.id == left.templateID }?.isOneOff == true
+            let rightManual = templates.first { $0.id == right.templateID }?.isOneOff == true
+            if leftManual != rightManual { return leftManual }
+            if left.status != right.status { return left.status == .planned }
+            return left.createdAt > right.createdAt
+        }
     }
-
-    private var todayBodyCheckIn: DailyBodyCheckIn? {
-        bodyCheckIns.first { $0.date.isSameDay(as: .now) }
+    private var weekDays: [Date] {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2
+        let start = calendar.dateInterval(of: .weekOfYear, for: Date.now)?.start ?? Date.now.startOfDay
+        return (0..<7).map { start.addingDays($0) }
     }
-
-    private var todaySchedules: [ScheduledWorkout] {
-        schedules
-            .filter { $0.plannedDate.isSameDay(as: .now) && $0.status != .skipped }
-            .sorted { left, right in
-                let leftOneOff = templates.first(where: { $0.id == left.templateID })?.isOneOff == true
-                let rightOneOff = templates.first(where: { $0.id == right.templateID })?.isOneOff == true
-                if leftOneOff != rightOneOff { return leftOneOff }
-                if left.status != right.status { return left.status == .planned }
-                return left.createdAt > right.createdAt
-            }
-    }
-
-    private var latestCompletedSession: WorkoutSession? {
-        sessions
-            .filter { $0.status == .completed }
-            .max { left, right in
-                (left.completedAt ?? left.startedAt) < (right.completedAt ?? right.startedAt)
-            }
-    }
-
-    private var recentVolumePoints: [TrainingVolumeTrendPoint] {
-        TrainingMetrics.recentOverallVolumePoints(
-            through: .now,
-            limit: 6,
-            sessions: sessions,
-            sessionExercises: sessionExercises,
-            exercises: exercises,
-            setLogs: setLogs
-        )
-    }
-
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 18) {
-                todayHeader
-
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack(alignment: .center, spacing: 12) {
+                    ScreenHeader(eyebrow: "X-FIT / TRAINING", title: "今天，练得更强")
+                    NavigationLink(destination: ScheduleView()) {
+                        Image(systemName: "calendar").frame(width: 44, height: 44)
+                            .background(AppTheme.elevatedSurface, in: Circle())
+                    }.accessibilityLabel("训练日程")
+                }
+                HStack(spacing: 2) {
+                    ForEach(weekDays, id: \.self) { day in
+                        let selected = day.isSameDay(as: selectedDate)
+                        Button { selectedDate = day } label: {
+                            VStack(spacing: 5) {
+                                Text(day, format: .dateTime.weekday(.narrow)).font(.caption)
+                                Text("\(Calendar.current.component(.day, from: day))").font(.body.bold().monospacedDigit())
+                                Circle().fill(schedules.contains { $0.plannedDate.isSameDay(as: day) && $0.status != .skipped } ? (selected ? Color.black : AppTheme.accent) : .clear).frame(width: 4, height: 4)
+                            }.frame(maxWidth: .infinity, minHeight: 60)
+                                .foregroundStyle(selected ? .black : .white)
+                                .background(selected ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 9))
+                        }.buttonStyle(.plain).accessibilityLabel(day.formatted(.dateTime.month().day().weekday(.wide)))
+                            .accessibilityAddTraits(selected ? .isSelected : [])
+                    }
+                }.accessibilityElement(children: .contain).accessibilityIdentifier("训练周历")
                 if let activeSession {
-                    resumeCard(activeSession)
-                } else if let schedule = todaySchedules.first {
-                    todayPlanCard(schedule)
+                    VStack(alignment: .leading, spacing: 18) {
+                        Label("训练进行中", systemImage: "record.circle").font(.subheadline).foregroundStyle(AppTheme.accent)
+                        Text(activeSession.templateName).font(.title2.bold())
+                        Button { open(activeSession.id) } label: { Label("继续训练", systemImage: "play.fill").neonButtonStyle() }
+                            .accessibilityIdentifier("继续训练")
+                    }.padding(20).padding(.top, 30).background { trainingArtwork }.clipShape(RoundedRectangle(cornerRadius: 12))
+                } else if let schedule = daySchedules.first {
+                    workoutCard(schedule)
                 } else {
-                    emptyPlanCard
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(selectedDate.isSameDay(as: .now) ? "今天，按自己的节奏" : selectedDate.formatted(.dateTime.month().day()))
+                            .font(.title2.bold())
+                        Text("还没有训练安排").foregroundStyle(AppTheme.secondaryText)
+                        NavigationLink(destination: DailyWorkoutBuilderView(initialDate: selectedDate)) {
+                            Label(selectedDate.isSameDay(as: .now) ? "安排今天训练" : "安排这天训练", systemImage: "plus").neonButtonStyle()
+                        }.accessibilityIdentifier("安排今天训练")
+                    }.padding(20).padding(.top, 30).background { trainingArtwork }.clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-
-                homeStatusRail
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 18)
-            .padding(.bottom, 112)
-        }
-        .homeScreenBackground()
-        .toolbar(.hidden, for: .navigationBar)
-        .navigationDestination(isPresented: $showWorkout) {
-            if let workoutSessionID {
-                ActiveWorkoutView(sessionID: workoutSessionID)
-            }
-        }
-        .sheet(isPresented: $showBodyCheckIn) {
-            NavigationStack {
-                DailyBodyCheckInEditor(checkIn: todayBodyCheckIn)
-            }
-            .preferredColorScheme(.dark)
-            .tint(AppTheme.accent)
-        }
-        .alert("无法开始训练", isPresented: Binding(
-            get: { errorMessage != nil },
-            set: { if !$0 { errorMessage = nil } }
-        )) {
-            Button("知道了", role: .cancel) { errorMessage = nil }
-        } message: {
-            Text(errorMessage ?? "未知错误")
-        }
-    }
-
-    private var todayHeader: some View {
-        HStack(alignment: .center, spacing: 12) {
-            Text(Date.now, format: .dateTime.day())
-                .font(.system(size: 46, weight: .black, design: .rounded))
-                .tracking(-2)
-                .monospacedDigit()
-                .foregroundStyle(AppTheme.posterWarmWhite)
-
-            RoundedRectangle(cornerRadius: 2, style: .continuous)
-                .fill(AppTheme.accent)
-                .frame(width: 3, height: 38)
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text(Date.now, format: .dateTime.month(.wide))
-                    .font(.subheadline.weight(.black))
-                    .foregroundStyle(AppTheme.posterWarmWhite)
-
-                Text(Date.now, format: .dateTime.weekday(.wide))
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(AppTheme.secondaryText)
-            }
-
-            Spacer()
-
-            Text("X—FIT")
-                .font(.caption2.weight(.black).monospaced())
-                .tracking(1.8)
-                .foregroundStyle(AppTheme.secondaryText)
-        }
-        .padding(.horizontal, 2)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text(Date.now, format: .dateTime.year().month().day().weekday(.wide)))
-        .accessibilityIdentifier("首页日期")
-    }
-
-    private var homeStatusRail: some View {
-        VStack(spacing: 0) {
-            bodyCheckInCard
-
-            if let latestCompletedSession {
-                Rectangle()
-                    .fill(AppTheme.line)
-                    .frame(height: 1)
-                    .padding(.leading, 56)
-
-                latestWorkoutRow(latestCompletedSession)
-            }
-        }
-        .floatingGlassSurface(cornerRadius: 22)
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("首页状态轨道")
-    }
-
-    private var bodyCheckInCard: some View {
-        Button { showBodyCheckIn = true } label: {
-            HStack(spacing: 12) {
-                if let checkIn = todayBodyCheckIn {
-                    Text(ConditionScorePresentation.emoji(for: checkIn.conditionScore))
-                        .font(.title3)
-                        .frame(width: 32)
-
-                    Text(bodyCheckInSummary(checkIn))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
+                HStack {
+                    Text("本周安排").font(.headline)
+                    Spacer()
+                    NavigationLink("查看全部", destination: ScheduleView()).frame(minHeight: 44)
+                }
+                let weekSchedules = schedules.filter { item in weekDays.contains { $0.isSameDay(as: item.plannedDate) } && item.status != .skipped }
+                if weekSchedules.isEmpty {
+                    Text("本周暂无安排。可以逐日添加，也可以导入已有计划。")
+                        .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 } else {
-                    Image(systemName: "figure.mind.and.body")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(AppTheme.accent)
-                        .frame(width: 32)
-
-                    Text("今天感觉怎么样")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.white)
-                }
-
-                Spacer(minLength: 8)
-
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText.opacity(0.7))
-            }
-            .padding(.horizontal, 18)
-            .frame(minHeight: 64)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier(todayBodyCheckIn == nil ? "记录今日体感" : "修改今日体感")
-    }
-
-    private func bodyCheckInSummary(_ checkIn: DailyBodyCheckIn) -> String {
-        let regionCount = Set(checkIn.bodyMarkers.map(\.regionID)).count
-        let status = ConditionScorePresentation.shortTitle(for: checkIn.conditionScore)
-        if regionCount > 0 {
-            return "\(status) · \(regionCount) 处不适"
-        }
-        return status
-    }
-
-    private func resumeCard(_ session: WorkoutSession) -> some View {
-        let snapshots = sessionExercises.filter { $0.sessionID == session.id }
-        let logs = setLogs.filter { $0.sessionID == session.id && !$0.isWarmup }
-        let completedSets = logs.filter(\.isCompleted).count
-        let identity = WorkoutPosterIdentity(
-            name: session.templateName,
-            muscleGroups: snapshots.map(\.muscleGroup)
-        )
-
-        return workoutPoster(
-            identity: identity,
-            eyebrow: "正在训练",
-            title: session.templateName,
-            metadata: "\(snapshots.count) 个动作 · \(completedSets)/\(logs.count) 组"
-        ) {
-            Text("LIVE")
-                .font(.caption2.weight(.black).monospaced())
-                .tracking(1.2)
-                .foregroundStyle(.black)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(AppTheme.accent, in: Capsule())
-        } action: {
-            Button {
-                openSession(session.id)
-            } label: {
-                posterActionLabel("继续训练", systemImage: "arrow.right")
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("继续记录训练")
-        }
-    }
-
-    private func todayPlanCard(_ schedule: ScheduledWorkout) -> some View {
-        let items = items(for: schedule)
-        let completedSession = completedSession(for: schedule)
-        let isCompleted = schedule.status == .completed
-        let identity = WorkoutPosterIdentity(
-            name: schedule.templateName,
-            muscleGroups: items.compactMap { item in
-                exercises.first(where: { $0.id == item.exerciseID })?.muscleGroup
-            }
-        )
-
-        return workoutPoster(
-            identity: identity,
-            eyebrow: isCompleted ? "今天已完成" : nil,
-            title: schedule.templateName,
-            metadata: "\(items.count) 个动作",
-            accessoryAlignment: .title
-        ) {
-            if isCompleted, let completedSession {
-                NavigationLink(destination: HistoricalWorkoutEditView(sessionID: completedSession.id)) {
-                    posterAccessoryIcon("pencil")
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("修改今日记录")
-                .accessibilityIdentifier("修改今日记录")
-            } else if !isCompleted {
-                NavigationLink(destination: DailyWorkoutBuilderView(
-                    initialDate: schedule.plannedDate,
-                    initialScheduleID: schedule.id
-                )) {
-                    posterAccessoryIcon("list.bullet")
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("调整今日计划")
-                .accessibilityIdentifier("修改今日计划")
-            }
-        } action: {
-            if isCompleted, let completedSession {
-                NavigationLink(destination: WorkoutDetailView(sessionID: completedSession.id)) {
-                    posterActionLabel("查看训练记录", systemImage: "arrow.up.right")
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("查看今日训练记录")
-            } else if !isCompleted {
-                Button {
-                    start(schedule)
-                } label: {
-                    posterActionLabel("开始训练", systemImage: "arrow.right")
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("开始记录训练")
-            }
-        }
-    }
-
-    private var emptyPlanCard: some View {
-        workoutPoster(
-            identity: WorkoutPosterIdentity(name: "自由训练"),
-            eyebrow: nil,
-            title: "安排一场训练",
-            metadata: "从今天的状态开始"
-        ) {
-            Image(systemName: "plus")
-                .font(.subheadline.bold())
-                .foregroundStyle(AppTheme.posterWarmWhite)
-                .frame(width: 42, height: 42)
-                .background(.black.opacity(0.28), in: Circle())
-        } action: {
-            NavigationLink(destination: DailyWorkoutBuilderView(initialDate: .now)) {
-                posterActionLabel("制定今日计划", systemImage: "arrow.right")
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("编排今日训练")
-        }
-    }
-
-    private func workoutPoster<Accessory: View, Action: View>(
-        identity: WorkoutPosterIdentity,
-        eyebrow: String?,
-        title: String,
-        metadata: String,
-        accessoryAlignment: WorkoutPosterAccessoryAlignment = .top,
-        @ViewBuilder accessory: () -> Accessory,
-        @ViewBuilder action: () -> Action
-    ) -> some View {
-        let accessoryContent = accessory()
-
-        return VStack(spacing: 0) {
-            ZStack {
-                WorkoutPosterArtwork(identity: identity)
-
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(alignment: .top, spacing: 12) {
-                        if let eyebrow {
-                            Text(eyebrow)
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(AppTheme.posterWarmWhite.opacity(0.68))
-                        }
-
-                        Spacer(minLength: 12)
-                        if accessoryAlignment == .top {
-                            accessoryContent
-                        }
-                    }
-                    .frame(minHeight: 44, alignment: .top)
-
-                    Spacer(minLength: 34)
-
-                    HStack(alignment: .center, spacing: 12) {
-                        Text(title)
-                            .font(.system(size: 40, weight: .black, design: .rounded))
-                            .tracking(-1.1)
-                            .foregroundStyle(AppTheme.posterWarmWhite)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.68)
-                            .layoutPriority(1)
-                            .accessibilityAddTraits(.isHeader)
-
-                        if accessoryAlignment == .title {
-                            Spacer(minLength: 8)
-                            accessoryContent
-                        }
-                    }
-
-                    Text(metadata)
-                        .font(.caption.weight(.bold).monospacedDigit())
-                        .tracking(0.35)
-                        .foregroundStyle(AppTheme.posterWarmWhite.opacity(0.58))
-                        .padding(.top, 12)
-                }
-                .padding(24)
-            }
-            .frame(minHeight: 246)
-
-            action()
-                .frame(minHeight: 64)
-                .background(AppTheme.accent)
-        }
-        .background(AppTheme.posterBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-        .shadow(color: .black.opacity(0.76), radius: 38, y: 26)
-        .shadow(color: AppTheme.accent.opacity(0.085), radius: 48, y: 20)
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("今日训练海报")
-    }
-
-    private func posterActionLabel(_ title: String, systemImage: String) -> some View {
-        HStack(spacing: 16) {
-            Text(title)
-                .font(.headline.weight(.black))
-                .foregroundStyle(.black)
-
-            Spacer(minLength: 12)
-
-            Image(systemName: systemImage)
-                .font(.subheadline.weight(.black))
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 34, height: 34)
-                .background(.black, in: Circle())
-        }
-        .padding(.horizontal, 22)
-        .frame(maxWidth: .infinity, minHeight: 64)
-        .contentShape(Rectangle())
-    }
-
-    private func posterAccessoryIcon(_ systemImage: String) -> some View {
-        Image(systemName: systemImage)
-            .font(.subheadline.bold())
-            .foregroundStyle(AppTheme.posterWarmWhite)
-            .frame(width: 44, height: 44)
-            .contentShape(Rectangle())
-    }
-
-    private var quickRecordActions: some View {
-        HStack(spacing: 10) {
-            NavigationLink(destination: HistoricalWorkoutEntryView()) {
-                quickActionLabel("补录", detail: "加入记录", systemImage: "plus.circle.fill")
-            }
-            .accessibilityIdentifier("补录训练入口")
-
-            NavigationLink(destination: HistoryView()) {
-                quickActionLabel("历史", detail: "查看编辑", systemImage: "clock.arrow.circlepath")
-            }
-            .accessibilityIdentifier("训练历史入口")
-
-            NavigationLink(destination: ScheduleView()) {
-                quickActionLabel("日程", detail: "调整计划", systemImage: "calendar")
-            }
-            .accessibilityIdentifier("训练日程入口")
-        }
-        .buttonStyle(.plain)
-    }
-
-    private var recentVolumeCard: some View {
-        let points = recentVolumePoints
-        let ceiling = max(points.map(\.volume).max() ?? 0, 1)
-        let chartCeiling = ceiling <= Double.greatestFiniteMagnitude / 1.28
-            ? ceiling * 1.28
-            : Double.greatestFiniteMagnitude
-
-        return VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .firstTextBaseline) {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("最近训练容量")
-                        .font(.headline.bold())
-                        .foregroundStyle(.white)
-                    Text("日期与实际完成容量 · kg")
-                        .font(.caption2)
-                        .foregroundStyle(AppTheme.secondaryText)
-                }
-
-                Spacer()
-
-                NavigationLink("全部记录", destination: HistoryView())
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
-            }
-
-            if points.isEmpty {
-                VStack(spacing: 10) {
-                    Image(systemName: "chart.xyaxis.line")
-                        .font(.title2)
-                        .foregroundStyle(AppTheme.secondaryText)
-                    Text("完成或补录训练后，这里会显示最近训练日的容量变化。")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                        .multilineTextAlignment(.center)
-                    NavigationLink("补录一场训练", destination: HistoricalWorkoutEntryView())
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 18)
-            } else {
-                latestVolumeSummary(points)
-
-                Chart(points) { point in
-                    AreaMark(
-                        x: .value("日期", point.date, unit: .day),
-                        y: .value("训练容量", point.volume)
-                    )
-                    .foregroundStyle(
-                        LinearGradient(
-                            colors: [AppTheme.accent.opacity(0.26), AppTheme.accent.opacity(0.02)],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    )
-
-                    LineMark(
-                        x: .value("日期", point.date, unit: .day),
-                        y: .value("训练容量", point.volume)
-                    )
-                    .foregroundStyle(AppTheme.accent)
-                    .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
-
-                    PointMark(
-                        x: .value("日期", point.date, unit: .day),
-                        y: .value("训练容量", point.volume)
-                    )
-                    .foregroundStyle(AppTheme.accent)
-                    .symbolSize(48)
-                    .annotation(position: .top, spacing: 5) {
-                        Text(formattedCompactVolume(point.volume))
-                            .font(.caption2.bold().monospacedDigit())
-                            .foregroundStyle(.white)
-                    }
-                    .accessibilityLabel(
-                        "\(point.date.formatted(.dateTime.month().day()))，训练容量 \(formattedVolume(point.volume))，\(point.completedSets) 个工作组"
-                    )
-                    .accessibilityIdentifier("最近容量点-\(point.date.compactDayMonthLabel)")
-                }
-                .chartXAxis {
-                    AxisMarks(values: points.map(\.date)) { value in
-                        AxisValueLabel {
-                            if let date = value.as(Date.self) {
-                                Text(date, format: .dateTime.month(.defaultDigits).day())
-                                    .font(.caption2.monospacedDigit())
-                                    .foregroundStyle(AppTheme.secondaryText)
+                    VStack(spacing: 0) {
+                        ForEach(weekSchedules) { item in
+                            NavigationLink(destination: DailyWorkoutBuilderView(initialDate: item.plannedDate, initialScheduleID: item.id)) {
+                                HStack(spacing: 14) {
+                                    Text(item.plannedDate, format: .dateTime.weekday(.short)).font(.caption).foregroundStyle(AppTheme.secondaryText).frame(width: 42)
+                                    Text(item.templateName).font(.subheadline.weight(.medium)).foregroundStyle(.white)
+                                    Spacer()
+                                    Image(systemName: item.status == .completed ? "checkmark.circle.fill" : "chevron.right")
+                                        .foregroundStyle(item.status == .completed ? AppTheme.accent : AppTheme.secondaryText)
+                                }.frame(minHeight: 56).contentShape(Rectangle())
                             }
                         }
-                        AxisTick().foregroundStyle(.clear)
-                        AxisGridLine().foregroundStyle(.clear)
                     }
                 }
-                .chartYAxis(.hidden)
-                .chartYScale(domain: 0...chartCeiling)
-                .chartPlotStyle { plot in
-                    plot.background(Color.clear)
-                }
-                .frame(height: 150)
-                .accessibilityLabel("最近训练容量图")
-                .accessibilityValue(
-                    points.map {
-                        "\($0.date.compactDayMonthLabel): \(formattedVolume($0.volume))"
+                VStack(spacing: 0) {
+                    if let program = programs.first(where: { $0.statusRaw == "active" }) {
+                        NavigationLink(destination: FatLossTrainingView(program: program)) {
+                            destinationRow("减脂训练计划", "calendar.badge.plus")
+                        }.accessibilityIdentifier("训练-减脂计划导入")
+                        Divider()
                     }
-                    .joined(separator: "; ")
-                )
-                .accessibilityIdentifier("最近训练容量图")
-
-                Text("每个点代表当天已完成的非热身工作组；完整周/月分析保留在“进度”。")
-                    .font(.caption2)
-                    .foregroundStyle(AppTheme.secondaryText)
+                    NavigationLink(destination: PlanView()) { destinationRow("训练计划与动作库", "square.stack.3d.up") }
+                        .accessibilityIdentifier("训练计划与动作库")
+                    Divider()
+                    NavigationLink(destination: HistoryView()) { destinationRow("训练历史", "clock.arrow.circlepath") }
+                    Divider()
+                    Button { showRope = true } label: { destinationRow("记录跳绳", "figure.jumprope") }
+                        .accessibilityIdentifier("训练-记录跳绳")
+                }.padding(.top, 4)
+            }.padding(.horizontal, 20).padding(.top, 16).padding(.bottom, 24)
+        }.screenBackground().buttonStyle(.plain).toolbar(.hidden, for: .navigationBar)
+            .navigationDestination(isPresented: $showWorkout) {
+                if let workoutSessionID { ActiveWorkoutView(sessionID: workoutSessionID) }
             }
-        }
-        .cardSurface()
+            .sheet(isPresented: $showRope) {
+                JumpRopeQuickEntrySheet(initialDate: min(selectedDate, .now)) { count, active, elapsed, date in
+                    do { _ = try WellnessToolService.recordJumpRope(count: count, activeDurationSeconds: active, elapsedDurationSeconds: elapsed, at: date, in: modelContext) }
+                    catch { errorMessage = error.localizedDescription }
+                }
+            }
+            .alert("操作未完成", isPresented: Binding(get: { errorMessage != nil }, set: { if !$0 { errorMessage = nil } })) {
+                Button("知道了", role: .cancel) { errorMessage = nil }
+            } message: { Text(errorMessage ?? "") }
+    }
+    private var trainingArtwork: some View {
+        GeometryReader { geometry in
+            Image("EditorialTraining")
+                .resizable().scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+                .overlay {
+                    LinearGradient(colors: [.black.opacity(0.88), .black.opacity(0.12)], startPoint: .leading, endPoint: .trailing)
+                }
+                .overlay {
+                    LinearGradient(colors: [.clear, AppTheme.background.opacity(0.96)], startPoint: .center, endPoint: .bottom)
+                }
+        }.allowsHitTesting(false).accessibilityHidden(true)
     }
 
-    private func latestVolumeSummary(_ points: [TrainingVolumeTrendPoint]) -> some View {
-        let latest = points[points.count - 1]
-
-        return HStack(alignment: .lastTextBaseline) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(latest.date, format: .dateTime.month().day().weekday(.short))
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-                Text(formattedVolume(latest.volume))
-                    .font(.title2.bold().monospacedDigit())
-                    .foregroundStyle(.white)
+    private func workoutCard(_ schedule: ScheduledWorkout) -> some View {
+        let items = templateExercises.filter { $0.templateID == schedule.templateID }.sorted { $0.order < $1.order }
+        return VStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack {
+                    Text(selectedDate.isSameDay(as: .now) ? "今日训练" : selectedDate.formatted(.dateTime.month().day()))
+                        .font(.caption.weight(.semibold)).foregroundStyle(AppTheme.posterWarmWhite)
+                    Spacer()
+                    if schedule.status == .completed,
+                       let session = sessions.first(where: { $0.scheduledWorkoutID == schedule.id && $0.status == .completed }) {
+                        NavigationLink(destination: HistoricalWorkoutEditView(sessionID: session.id)) {
+                            Label("修改记录", systemImage: "pencil").font(.caption).frame(minHeight: 44).contentShape(Rectangle())
+                        }.accessibilityIdentifier("修改今日记录")
+                    } else {
+                        NavigationLink(destination: DailyWorkoutBuilderView(initialDate: selectedDate, initialScheduleID: schedule.id)) {
+                            Label("调整", systemImage: "slider.horizontal.3").font(.caption).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())
+                        }.accessibilityIdentifier("修改今日计划")
+                    }
+                }
+                Text(schedule.templateName)
+                    .font(AppTheme.pageTitle).foregroundStyle(AppTheme.posterWarmWhite)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Text("\(items.reduce(0) { $0 + $1.targetSets })")
+                        .font(AppTheme.metricValue)
+                        .foregroundStyle(AppTheme.accent)
+                    Text("组").font(.caption).foregroundStyle(AppTheme.posterWarmWhite)
+                    Text("/").font(.subheadline).foregroundStyle(AppTheme.posterWarmWhite).accessibilityHidden(true)
+                    Text("\(items.count) 个动作").font(.subheadline).foregroundStyle(AppTheme.posterWarmWhite)
+                }.padding(.bottom, 8)
+                workoutAction(schedule)
             }
+            .padding(18)
+            .background { trainingArtwork }
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            if !items.isEmpty {
+                HStack {
+                    Text("今日动作").font(.subheadline.weight(.semibold))
+                    Rectangle().fill(AppTheme.line).frame(height: 1)
+                }
+                VStack(spacing: 0) {
+                    ForEach(Array(items.prefix(4).enumerated()), id: \.element.id) { index, item in
+                        HStack(spacing: 12) {
+                            Text(String(format: "%02d", index + 1))
+                                .font(.caption.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
+                            Text(exercises.first { $0.id == item.exerciseID }?.name ?? "已保存动作").font(.subheadline)
+                            Spacer(minLength: 8)
+                            Text("\(item.targetSets) 组").font(.caption.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
+                        }.frame(minHeight: 44)
+                        Rectangle().fill(AppTheme.line).frame(height: 1)
+                    }
+                }
+                if items.count > 4 {
+                    NavigationLink(destination: DailyWorkoutBuilderView(initialDate: selectedDate, initialScheduleID: schedule.id)) {
+                        HStack { Text("查看全部 \(items.count) 个动作"); Spacer(); Image(systemName: "arrow.right") }
+                            .font(.caption.weight(.semibold)).foregroundStyle(AppTheme.accent).frame(minHeight: 44)
+                    }
+                }
+            }
+        }.accessibilityElement(children: .contain).accessibilityIdentifier("训练-今日安排")
+    }
 
+    @ViewBuilder private func workoutAction(_ schedule: ScheduledWorkout) -> some View {
+        if schedule.status == .completed {
+            if let session = sessions.first(where: { $0.scheduledWorkoutID == schedule.id && $0.status == .completed }) {
+                NavigationLink(destination: WorkoutDetailView(sessionID: session.id)) {
+                    heroActionLabel("查看训练记录", icon: "checkmark.circle")
+                }
+            } else { Label("已完成", systemImage: "checkmark.circle").foregroundStyle(AppTheme.accent) }
+        } else if selectedDate.isSameDay(as: .now) {
+            Button { start(schedule) } label: { heroActionLabel(starting ? "正在准备…" : "开始训练") }
+                .disabled(starting).accessibilityIdentifier("开始记录训练")
+        } else {
+            NavigationLink(destination: DailyWorkoutBuilderView(initialDate: selectedDate, initialScheduleID: schedule.id)) {
+                heroActionLabel("查看训练安排")
+            }
+        }
+    }
+    private func heroActionLabel(_ title: String, icon: String = "arrow.right") -> some View {
+        HStack { Text(title); Spacer(); Image(systemName: icon) }
+            .padding(.horizontal, 16).neonButtonStyle()
+    }
+    private func destinationRow(_ title: String, _ icon: String) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon).foregroundStyle(AppTheme.accent).frame(width: 24)
+            Text(title).foregroundStyle(.white)
             Spacer()
-
-            if points.count > 1 {
-                let previous = points[points.count - 2]
-                Text(volumeChangeText(current: latest.volume, previous: previous.volume))
-                    .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(volumeChangeColor(current: latest.volume, previous: previous.volume))
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 6)
-                    .background(
-                        volumeChangeColor(current: latest.volume, previous: previous.volume).opacity(0.12),
-                        in: Capsule()
-                    )
-            } else {
-                Text("已建立首个基线")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText)
-            }
-        }
+            Image(systemName: "chevron.right").font(.caption).foregroundStyle(AppTheme.secondaryText)
+        }.frame(minHeight: 52).contentShape(Rectangle())
     }
-
-    private func planMetric(value: String, label: String) -> some View {
-        VStack(spacing: 3) {
-            Text(value)
-                .font(.headline.bold().monospacedDigit())
-                .foregroundStyle(.white)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-            Text(label)
-                .font(.caption2)
-                .foregroundStyle(AppTheme.secondaryText)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
-        .overlay(alignment: .trailing) {
-            Rectangle().fill(AppTheme.line).frame(width: 1, height: 28)
-        }
-    }
-
-    private func quickActionLabel(_ title: String, detail: String, systemImage: String) -> some View {
-        VStack(spacing: 7) {
-            Image(systemName: systemImage)
-                .font(.headline.bold())
-                .foregroundStyle(AppTheme.accent)
-            Text(title)
-                .font(.subheadline.bold())
-                .foregroundStyle(.white)
-            Text(detail)
-                .font(.caption2)
-                .foregroundStyle(AppTheme.secondaryText)
-        }
-        .frame(maxWidth: .infinity, minHeight: 78)
-        .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 15))
-        .overlay(RoundedRectangle(cornerRadius: 15).stroke(AppTheme.line, lineWidth: 1))
-    }
-
-    private func formattedVolume(_ volume: Double) -> String {
-        guard volume.isFinite, volume > 0 else { return "0 kg" }
-        if volume >= 1_000_000_000 {
-            return volume.formatted(
-                .number.notation(.scientific).precision(.fractionLength(1))
-            ) + " kg"
-        }
-        if volume >= 10_000 {
-            return String(format: "%.1f 万 kg", volume / 10_000)
-        }
-        return "\(Int(volume).formatted()) kg"
-    }
-
-    private func formattedCompactVolume(_ volume: Double) -> String {
-        guard volume.isFinite, volume > 0 else { return "0" }
-        if volume >= 1_000_000_000 {
-            return volume.formatted(
-                .number.notation(.scientific).precision(.fractionLength(1))
-            )
-        }
-        if volume >= 10_000 {
-            return String(format: "%.1f万", volume / 10_000)
-        }
-        if volume >= 1_000 {
-            return String(format: "%.1fk", volume / 1_000)
-        }
-        return "\(Int(volume))"
-    }
-
-    private func volumeChangeText(current: Double, previous: Double) -> String {
-        guard previous > 0 else { return "新基线" }
-        let change = (current - previous) / previous * 100
-        guard change.isFinite,
-              change >= Double(Int.min),
-              change <= Double(Int.max) else {
-            return "较上次变化超出范围"
-        }
-        let rounded = Int(change.rounded())
-        let sign = rounded > 0 ? "+" : ""
-        return "较上次 \(sign)\(rounded)%"
-    }
-
-    private func volumeChangeColor(current: Double, previous: Double) -> Color {
-        guard previous > 0 else { return AppTheme.secondaryText }
-        if current > previous { return AppTheme.accent }
-        if current < previous { return AppTheme.orange }
-        return AppTheme.secondaryText
-    }
-
-    private func latestWorkoutRow(_ session: WorkoutSession) -> some View {
-        NavigationLink(destination: WorkoutDetailView(sessionID: session.id)) {
-            HStack(spacing: 12) {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.title3)
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 32)
-
-                VStack(alignment: .leading, spacing: 3) {
-                    Text("最近一次训练")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                    Text(session.templateName)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.white)
-                        .lineLimit(1)
-                }
-
-                Spacer(minLength: 8)
-
-                Text(session.completedAt ?? session.startedAt, format: .dateTime.month().day())
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(AppTheme.secondaryText)
-
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(AppTheme.secondaryText.opacity(0.7))
-            }
-            .padding(.horizontal, 18)
-            .frame(minHeight: 64)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("最近一次训练入口")
-    }
-
-    private func completedSession(for schedule: ScheduledWorkout) -> WorkoutSession? {
-        sessions.first {
-            $0.scheduledWorkoutID == schedule.id && $0.status == .completed
-        }
-    }
-
-    private func items(for schedule: ScheduledWorkout) -> [TemplateExercise] {
-        templateExercises
-            .filter { $0.templateID == schedule.templateID }
-            .sorted { $0.order < $1.order }
-    }
-
-    private func exerciseName(for id: UUID) -> String {
-        exercises.first(where: { $0.id == id })?.name ?? "未知动作"
-    }
-
+    private func open(_ id: UUID) { workoutSessionID = id; showWorkout = true }
     private func start(_ schedule: ScheduledWorkout) {
-        do {
-            let sessionID = try WorkoutService.start(schedule: schedule, in: modelContext)
-            openSession(sessionID)
-        } catch {
-            errorMessage = error.localizedDescription
+        starting = true
+        Task { @MainActor in
+            defer { starting = false }
+            do { open(try await WorkoutService.startUsingAvailableBodyWeight(schedule: schedule, in: modelContext)) }
+            catch { errorMessage = error.localizedDescription }
         }
     }
-
-    private func openSession(_ id: UUID) {
-        workoutSessionID = id
-        showWorkout = true
-    }
 }
 
-private enum WorkoutPosterAccessoryAlignment {
-    case top
-    case title
-}
-
-private struct WorkoutPosterIdentity {
-    let heroKind: WorkoutHeroKind
-
-    init(name: String, muscleGroups: [String] = []) {
-        heroKind = WorkoutHeroKind.resolve(workoutName: name, muscleGroups: muscleGroups)
-    }
-}
-
-private struct WorkoutPosterArtwork: View {
-    let identity: WorkoutPosterIdentity
-
-    var body: some View {
-        ZStack {
-            HeroWorkoutImage(kind: identity.heroKind)
-                .saturation(0.78)
-                .contrast(1.08)
-
-            Color.black.opacity(0.16)
-
-            LinearGradient(
-                colors: [.black.opacity(0.88), .black.opacity(0.48), .black.opacity(0.08)],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-
-            LinearGradient(
-                colors: [.clear, .black.opacity(0.76)],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        }
-        .allowsHitTesting(false)
-        .accessibilityHidden(true)
-    }
-}
-
-private enum ConditionScorePresentation {
+enum ConditionScorePresentation {
     static func emoji(for score: Int) -> String {
         switch min(max(score, 1), 5) {
         case 1: return "😵"
@@ -798,11 +279,12 @@ private enum ConditionScorePresentation {
     }
 }
 
-private struct DailyBodyCheckInEditor: View {
+struct DailyBodyCheckInEditor: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
 
     let checkIn: DailyBodyCheckIn?
+    let date: Date
 
     @State private var score: Int
     @State private var notes: String
@@ -811,8 +293,9 @@ private struct DailyBodyCheckInEditor: View {
     @State private var errorMessage: String?
     @State private var inferenceMessage: String?
 
-    init(checkIn: DailyBodyCheckIn?) {
+    init(checkIn: DailyBodyCheckIn?, date: Date = .now) {
         self.checkIn = checkIn
+        self.date = date
         _score = State(initialValue: checkIn?.conditionScore ?? 3)
         _notes = State(initialValue: checkIn?.discomfortNotes ?? "")
         _markers = State(initialValue: checkIn?.bodyMarkers ?? [])
@@ -827,8 +310,12 @@ private struct DailyBodyCheckInEditor: View {
             }
             .padding()
         }
+        .scrollDismissesKeyboard(.immediately)
+        .dismissKeyboardWhenScrolling {
+            KeyboardDismissal.dismiss()
+        }
         .background(AppTheme.background)
-        .navigationTitle("今日体感")
+        .navigationTitle(date.isSameDay(as: .now) ? "今日体感" : "身体体感")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
@@ -839,6 +326,7 @@ private struct DailyBodyCheckInEditor: View {
                 Button("保存", action: save)
                     .fontWeight(.bold)
                     .accessibilityIdentifier("保存今日体感")
+                    .disabled(date.startOfDay > Date.now.startOfDay)
             }
         }
         .alert("保存失败", isPresented: Binding(
@@ -1028,7 +516,7 @@ private struct DailyBodyCheckInEditor: View {
         do {
             try DailyBodyCheckInService.save(
                 existing: checkIn,
-                date: .now,
+                date: date,
                 conditionScore: score,
                 discomfortNotes: notes,
                 bodyMarkers: markers,

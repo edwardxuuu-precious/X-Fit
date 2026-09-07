@@ -87,6 +87,77 @@ final class TrainingMetricsTests: XCTestCase {
         XCTAssertEqual(ExerciseVolumeUnit.kilogram.volume(weight: 20, reps: -5), 0)
     }
 
+    func testSecondVolumeUnitUsesRecordedSecondsWithoutMultiplyingLoad() {
+        XCTAssertEqual(ExerciseVolumeUnit.second.volume(weight: 99, reps: 45), 45)
+    }
+
+    func testSecondVolumeUnitDescribesOneDurationInput() {
+        XCTAssertEqual(ExerciseVolumeUnit.second.rawValue, "second")
+        XCTAssertEqual(ExerciseVolumeUnit.second.title, "秒（时长）")
+        XCTAssertEqual(ExerciseVolumeUnit.second.symbol, "秒")
+        XCTAssertEqual(ExerciseVolumeUnit.second.inputTitle, "秒数")
+        XCTAssertTrue(ExerciseVolumeUnit.second.recordsSingleAmount)
+        XCTAssertFalse(ExerciseVolumeUnit.second.recordsNumericLoad)
+        XCTAssertFalse(ExerciseVolumeUnit.second.usesMeasurementSide)
+    }
+
+    func testSecondVolumeSummaryCountsOnlyCompletedWorkingSeconds() {
+        let sessionID = UUID()
+        let snapshot = SessionExercise(
+            sessionID: sessionID,
+            exerciseID: UUID(),
+            exerciseName: "平板支撑",
+            order: 0,
+            targetSets: 3,
+            minReps: 45,
+            maxReps: 45,
+            targetWeight: 0,
+            restSeconds: 60,
+            volumeUnit: .second
+        )
+        let completed = SetLog(
+            sessionID: sessionID,
+            sessionExerciseID: snapshot.id,
+            exerciseID: snapshot.exerciseID,
+            setNumber: 1,
+            targetWeight: 0,
+            targetReps: 45,
+            actualWeight: 99,
+            actualReps: 45,
+            isCompleted: true
+        )
+        let incomplete = SetLog(
+            sessionID: sessionID,
+            sessionExerciseID: snapshot.id,
+            exerciseID: snapshot.exerciseID,
+            setNumber: 2,
+            targetWeight: 0,
+            targetReps: 30,
+            actualWeight: 0,
+            actualReps: 30
+        )
+        let warmup = SetLog(
+            sessionID: sessionID,
+            sessionExerciseID: snapshot.id,
+            exerciseID: snapshot.exerciseID,
+            setNumber: 3,
+            targetWeight: 0,
+            targetReps: 15,
+            actualWeight: 0,
+            actualReps: 15,
+            isWarmup: true,
+            isCompleted: true
+        )
+
+        let summary = TrainingMetrics.volumeSummary(
+            sessionExercises: [snapshot],
+            setLogs: [completed, incomplete, warmup]
+        )
+
+        XCTAssertEqual(summary[.second], 45)
+        XCTAssertNil(summary[.kilogram])
+    }
+
     func testInvalidOrMissingStoredVolumeUnitFallsBackToKilogram() {
         let exercise = Exercise(name: "旧动作", muscleGroup: "背部", equipment: "器械")
         exercise.volumeUnitRaw = nil

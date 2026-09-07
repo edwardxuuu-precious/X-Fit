@@ -1,0 +1,30 @@
+{
+  "status": "本地已验证",
+  "scope": [
+    "记组状态与紧凑头部",
+    "当前7日均重优先与比较阈值",
+    "备餐分组与分享文本"
+  ],
+  "validation": {
+    "FitnessAppTests": {
+      "passed": 46
+    },
+    "FitnessAppUITests": {
+      "passed": 13
+    }
+  },
+  "evidence": [
+    "local-tests.log（首次构建的actor隔离错误，修复后重跑）",
+    "local-tests-v2.log（最终通过）",
+    "screenshot-manifest.json",
+    "source-sha256.json",
+    "protected-comparison.json"
+  ],
+  "staticChecks": "PASS",
+  "protectedAppAndModelFiles": 6,
+  "medicalTargets": "保持待确认语义",
+  "device": "NOT_RUN",
+  "human": "BLOCKED_HUMAN",
+  "fullStageAndReleaseRerun": "NOT_RUN",
+  "sourceBundle": "/tmp/xfit-daily-usability-v2.xcresult"
+}

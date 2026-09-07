@@ -1,0 +1,53 @@
+{
+  "source": "/tmp/xfit-anatomy-v4.xcresult",
+  "attachments": [
+    {
+      "attachments": [
+        {
+          "configurationName": "Test Scheme Action",
+          "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+          "deviceName": "iPhone 17 Pro",
+          "exportedFileName": "7042C760-35B3-47EB-9F0D-A4C8D05593A4.png",
+          "isAssociatedWithFailure": false,
+          "suggestedHumanReadableName": "03b-muscle-back_0_2BF474D2-78BB-4C72-A6E3-C112F8940341.png",
+          "timestamp": 1788694539.645
+        },
+        {
+          "configurationName": "Test Scheme Action",
+          "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+          "deviceName": "iPhone 17 Pro",
+          "exportedFileName": "607542AD-75F7-4EBF-BF83-C920FB01CFA9.png",
+          "isAssociatedWithFailure": false,
+          "suggestedHumanReadableName": "03c-muscle-reference-selection_0_CF2485EE-FA16-47E5-B995-AA7D51D23404.png",
+          "timestamp": 1788694537.351
+        },
+        {
+          "configurationName": "Test Scheme Action",
+          "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+          "deviceName": "iPhone 17 Pro",
+          "exportedFileName": "A3E6A5DF-1DA4-434A-ACCC-FB94319672E7.png",
+          "isAssociatedWithFailure": false,
+          "suggestedHumanReadableName": "03-muscle-selection_0_02704CE5-4677-491A-83AF-7A54057C0A8B.png",
+          "timestamp": 1788694536.008
+        }
+      ],
+      "testIdentifier": "RedesignUITests/testCoreMuscleSelection()",
+      "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/RedesignUITests/testCoreMuscleSelection"
+    },
+    {
+      "attachments": [
+        {
+          "configurationName": "Test Scheme Action",
+          "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+          "deviceName": "iPhone 17 Pro",
+          "exportedFileName": "66EF7DA3-607A-4753-96C9-14D6262FF229.png",
+          "isAssociatedWithFailure": false,
+          "suggestedHumanReadableName": "12-large-type-distribution_0_2746155E-0F15-4B25-90D3-D88E92CED2C4.png",
+          "timestamp": 1788694555.491
+        }
+      ],
+      "testIdentifier": "RedesignUITests/testLargeTypeTrainingDistributionCanScrollToExplanation()",
+      "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/RedesignUITests/testLargeTypeTrainingDistributionCanScrollToExplanation"
+    }
+  ]
+}

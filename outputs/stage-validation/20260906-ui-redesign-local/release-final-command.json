@@ -1,0 +1,15 @@
+[
+  "xcodebuild",
+  "build",
+  "-project",
+  "FitnessApp.xcodeproj",
+  "-scheme",
+  "FitnessApp",
+  "-configuration",
+  "Release",
+  "-destination",
+  "generic/platform=iOS",
+  "-derivedDataPath",
+  "/tmp/xfit-ui-redesign-build",
+  "CODE_SIGNING_ALLOWED=NO"
+]

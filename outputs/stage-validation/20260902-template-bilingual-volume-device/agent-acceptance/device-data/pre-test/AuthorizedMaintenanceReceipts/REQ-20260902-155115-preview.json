@@ -1,0 +1,37 @@
+{
+  "after" : {
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "notesSnapshots" : 150,
+    "sessions" : 35,
+    "setLogs" : 829,
+    "snapshots" : 200
+  },
+  "before" : {
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "notesSnapshots" : 150,
+    "sessions" : 35,
+    "setLogs" : 829,
+    "snapshots" : 200
+  },
+  "message" : "固定数据库、文件、分享草稿与保护集合预检通过；业务数据未改变",
+  "mode" : "preview",
+  "protectedSessionIDsPresent" : true,
+  "recordedAt" : "2026-09-02T08:13:42Z",
+  "removedExportFiles" : [
+
+  ],
+  "removedPreferenceFiles" : [
+
+  ],
+  "removedSetIDs" : [
+
+  ],
+  "removedSnapshotIDs" : [
+
+  ],
+  "removedUITestStore" : false,
+  "requestID" : "REQ-20260902-155115",
+  "succeeded" : true
+}

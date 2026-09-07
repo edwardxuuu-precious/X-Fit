@@ -105,9 +105,9 @@ struct ExerciseSetupSheet: View {
                         .accessibilityIdentifier("动作记录口径")
                     }
 
-                    HStack {
+                    VStack(alignment: .leading, spacing: 12) {
                         Stepper("组数：\(draft.plannedSets.count)", value: setCountBinding, in: 1...12)
-                        Spacer()
+                            .frame(minHeight: 44)
                         Picker("休息", selection: $draft.restSeconds) {
                             ForEach([30, 45, 60, 90, 120, 150, 180, 240, 300], id: \.self) { seconds in
                                 Text("\(seconds) 秒").tag(seconds)
@@ -121,26 +121,32 @@ struct ExerciseSetupSheet: View {
                         }
                     }
 
-                    Button {
-                        onConfirm(draft)
-                        dismiss()
-                    } label: {
-                        Label("使用这些设置", systemImage: "checkmark.circle.fill")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 13)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(AppTheme.accent)
-                    .foregroundStyle(.black)
-                    .accessibilityIdentifier("使用上次设置")
                 }
-                .padding()
+                .padding(20)
+            }
+            .scrollDismissesKeyboard(.interactively)
+            .safeAreaInset(edge: .bottom) {
+                Button {
+                    KeyboardDismissal.dismiss()
+                    onConfirm(draft)
+                    dismiss()
+                } label: {
+                    Label("使用这些设置", systemImage: "checkmark.circle.fill")
+                        .neonButtonStyle()
+                }
+                .accessibilityIdentifier("使用上次设置")
+                .padding(.horizontal, 20)
+                .padding(.vertical, 12)
+                .background(AppTheme.background)
             }
             .background(AppTheme.background)
             .navigationTitle("本次设置")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("完成") { KeyboardDismissal.dismiss() }
+                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("取消") { dismiss() }
                 }
@@ -202,6 +208,7 @@ struct ExerciseSetupSheet: View {
                 .keyboardType(.decimalPad)
                 .multilineTextAlignment(.center)
                 .textFieldStyle(.roundedBorder)
+                .frame(minHeight: 44)
             } else if exercise.volumeUnit == .bodyweight {
                 Text("自重")
                     .font(.subheadline.bold())
@@ -212,13 +219,16 @@ struct ExerciseSetupSheet: View {
             }
 
             TextField(
-                exercise.volumeUnit == .count ? "数量" : exercise.volumeUnit.repetitionTitle,
+                exercise.volumeUnit.recordsSingleAmount
+                    ? exercise.volumeUnit.inputTitle
+                    : exercise.volumeUnit.repetitionTitle,
                 value: binding.reps,
                 format: .number
             )
             .keyboardType(.numberPad)
             .multilineTextAlignment(.center)
             .textFieldStyle(.roundedBorder)
+            .frame(minHeight: 44)
         }
         .opacity(draft.previousDate == nil ? 0.82 : 1)
     }

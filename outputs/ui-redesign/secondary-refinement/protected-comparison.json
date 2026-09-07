@@ -1,0 +1,7 @@
+{
+  "FitnessApp/Features/FatLoss/PrepPresentation.swift": true,
+  "FitnessApp/Services/FatLossService.swift": true,
+  "FitnessApp/Models/FatLossModels.swift": true,
+  "FitnessApp/Features/Workout/ActiveWorkoutView.swift": true,
+  "FitnessApp/Features/Redesign/GoalHomeView.swift": true
+}

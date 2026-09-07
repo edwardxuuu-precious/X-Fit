@@ -1,0 +1,60 @@
+{
+  "scope": "目标首页视觉精修",
+  "direction": "A-目标轨迹",
+  "timestamp": "2026-09-07 15:08:46 +0800",
+  "source": {
+    "path": "FitnessApp/Features/Redesign/GoalHomeView.swift",
+    "sha256": "975211f84236363069f69b83e1babcd5d7e70fe82928e06b939ba0ffba478485"
+  },
+  "validation": [
+    {
+      "layer": "simulator-build",
+      "status": "PASS",
+      "evidence": "xcodebuild Debug build for iPhone 17 Pro"
+    },
+    {
+      "layer": "unit-targeted",
+      "status": "PASS",
+      "evidence": "GoalProgressPresentationTests 4/4"
+    },
+    {
+      "layer": "ui-core",
+      "status": "PASS",
+      "evidence": "outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult; RedesignUITests/testCoreGoalReviewAndMuscles 1/1"
+    },
+    {
+      "layer": "ui-accessibility",
+      "status": "PASS",
+      "evidence": "outputs/ui-redesign/goal-refinement/goal-refinement.xcresult; RedesignUITests/testLargeTypeCurrentProgressAndPrepRemainReachable 1/1"
+    },
+    {
+      "layer": "ui-semantics",
+      "status": "PASS",
+      "evidence": "outputs/ui-redesign/goal-refinement/goal-semantics.xcresult; FatLossUITests 2/2"
+    },
+    {
+      "layer": "visual-review-simulator",
+      "status": "PASS",
+      "evidence": "outputs/ui-redesign/goal-refinement/goal-home.png; chart fill corrected and contained"
+    },
+    {
+      "layer": "device-install-and-data",
+      "status": "PARTIAL",
+      "evidence": "outputs/stage-validation/20260907-goal-refinement-device-retry/summary.md; signed Release 0.5.0 (11) cover install, launch, version readback, 258 device unit tests and pre/post/post-test SQLite conservation passed; device UI runner timed out twice while enabling automation mode before any UI test executed"
+    },
+    {
+      "layer": "human-visual-and-operation",
+      "status": "BLOCKED_HUMAN",
+      "evidence": "awaiting user review of the final running screen"
+    }
+  ],
+  "screenshot": {
+    "path": "outputs/ui-redesign/goal-refinement/goal-home.png",
+    "sha256": "8d0e87aadfa35f3ae6b28c1e8377b8508a788cd4781aaec42b5b8ddcddcb6019"
+  },
+  "boundaries": [
+    "No real user data was imported or modified during simulator verification.",
+    "The signed app was cover-installed without uninstalling or clearing its container; 258 device unit tests passed, while device UI tests did not initialize because iOS automation mode timed out.",
+    "No commit, tag, push or release was performed."
+  ]
+}

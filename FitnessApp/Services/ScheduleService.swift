@@ -19,41 +19,23 @@ enum ScheduleServiceError: LocalizedError, Equatable {
 enum ScheduleService {
     static func refreshUpcoming(in context: ModelContext, days: Int = 14) throws {
         let templates = try context.fetch(FetchDescriptor<WorkoutTemplate>())
-        let activeTemplates = templates.filter(\.isActive)
         let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
         let today = Date.now.startOfDay
+        _ = days
+
+        for template in templates where !template.isOneOff {
+            template.isActive = false
+        }
 
         for schedule in schedules where schedule.plannedDate >= today && schedule.status == .planned {
-            let isOverride = schedule.isManuallyScheduled || schedule.originalPlannedDate != nil
             guard let template = templates.first(where: { $0.id == schedule.templateID }) else {
                 context.delete(schedule)
                 continue
             }
             schedule.templateName = template.name
 
-            if !isOverride, (!template.isActive || template.weekday != schedule.plannedDate.weekdayNumber) {
+            if !schedule.isManuallyScheduled && schedule.originalPlannedDate == nil {
                 context.delete(schedule)
-            }
-        }
-
-        for offset in 0..<days {
-            let date = today.addingDays(offset)
-            for template in activeTemplates where template.weekday == date.weekdayNumber {
-                let alreadyExists = schedules.contains {
-                    $0.templateID == template.id && (
-                        $0.plannedDate.isSameDay(as: date)
-                        || $0.originalPlannedDate?.isSameDay(as: date) == true
-                    )
-                }
-                if !alreadyExists {
-                    context.insert(
-                        ScheduledWorkout(
-                            templateID: template.id,
-                            templateName: template.name,
-                            plannedDate: date
-                        )
-                    )
-                }
             }
         }
     }
@@ -155,6 +137,10 @@ enum ScheduleService {
         let templateID = schedule.templateID
         let templates = try context.fetch(FetchDescriptor<WorkoutTemplate>())
         let templateItems = try context.fetch(FetchDescriptor<TemplateExercise>())
+        if FatLossBackupService.isRegistered(ProgramWorkoutLink.self, in: context) {
+            let links = try context.fetch(FetchDescriptor<ProgramWorkoutLink>())
+            links.filter { $0.scheduledWorkoutID == schedule.id }.forEach(context.delete)
+        }
         context.delete(schedule)
         if let template = templates.first(where: { $0.id == templateID && $0.isOneOff }) {
             templateItems

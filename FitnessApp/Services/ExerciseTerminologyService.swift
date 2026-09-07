@@ -168,13 +168,18 @@ enum ExerciseTerminologyService {
     ]
 
     static func candidate(for rawName: String) -> ExerciseTerminologyCandidate? {
-        let target = normalized(rawName)
-        return catalog.first { item in
-            item.rawNames.contains { normalized($0) == target }
-                || normalized(item.standardNameZH) == target
-                || normalized(item.standardNameEN) == target
-        }
+        catalogByNormalizedName[normalized(rawName)]
     }
+
+    private static let catalogByNormalizedName: [String: ExerciseTerminologyCandidate] = {
+        var index: [String: ExerciseTerminologyCandidate] = [:]
+        for item in catalog {
+            for name in item.rawNames + [item.standardNameZH, item.standardNameEN] {
+                index[normalized(name)] = item
+            }
+        }
+        return index
+    }()
 
     @MainActor
     static func stageCatalogCandidates(in context: ModelContext) throws {

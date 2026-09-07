@@ -23,15 +23,9 @@ struct ScheduleView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 14) {
-                ScreenHeader(
-                    eyebrow: "PLAN YOUR WEEK",
-                    title: "训练日程",
-                    trailingSystemImage: "plus",
-                    trailingAccessibilityLabel: "新增训练安排",
-                    trailingAction: { showAddOptions = true }
-                )
-
-                legend
+                Text("显示近 7 天与未来 30 天的训练")
+                    .font(.caption)
+                    .foregroundStyle(AppTheme.secondaryText)
 
                 if visibleSchedules.isEmpty {
                     ContentUnavailableView(
@@ -47,12 +41,23 @@ struct ScheduleView: View {
                     }
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
         .screenBackground()
+        .navigationTitle("训练日程")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button { showAddOptions = true } label: {
+                    Label("新增训练安排", systemImage: "plus")
+                        .frame(minWidth: 44, minHeight: 44)
+                }
+                .accessibilityIdentifier("新增训练安排")
+            }
+        }
         .navigationDestination(isPresented: $showDailyBuilder) {
             DailyWorkoutBuilderView(initialDate: .now)
         }
@@ -103,28 +108,6 @@ struct ScheduleView: View {
             Button("知道了", role: .cancel) { errorMessage = nil }
         } message: {
             Text(errorMessage ?? "未知错误")
-        }
-    }
-
-    private var legend: some View {
-        HStack(spacing: 14) {
-            legendItem("计划", color: AppTheme.accent)
-            legendItem("完成", color: .blue)
-            legendItem("跳过", color: .orange)
-            Spacer()
-            Text("近 7 天 / 未来 30 天")
-                .font(.caption2)
-                .foregroundStyle(AppTheme.secondaryText)
-        }
-        .cardSurface(padding: 12, cornerRadius: 14)
-    }
-
-    private func legendItem(_ title: String, color: Color) -> some View {
-        HStack(spacing: 5) {
-            Circle().fill(color).frame(width: 7, height: 7)
-            Text(title)
-                .font(.caption2.bold())
-                .foregroundStyle(AppTheme.secondaryText)
         }
     }
 
@@ -205,9 +188,10 @@ struct ScheduleView: View {
                     Image(systemName: "ellipsis")
                         .font(.headline.bold())
                         .foregroundStyle(AppTheme.secondaryText)
-                        .frame(width: 38, height: 38)
+                        .frame(width: 44, height: 44)
                         .background(AppTheme.elevatedSurface, in: Circle())
                 }
+                .accessibilityLabel("安排操作：\(schedule.templateName)")
                 .disabled(schedule.status == .completed || schedule.status == .inProgress)
             }
 
@@ -301,20 +285,20 @@ private struct AddScheduledWorkoutView: View {
     @State private var selectedDate = Date.now.startOfDay
     @State private var errorMessage: String?
 
-    private var activeTemplates: [WorkoutTemplate] {
-        templates.filter(\.isActive)
+    private var availableTemplates: [WorkoutTemplate] {
+        templates.filter { !$0.isOneOff }
     }
 
     var body: some View {
         NavigationStack {
             Form {
                 Section("训练计划") {
-                    if activeTemplates.isEmpty {
-                        Text("请先在训练页创建并启用一个训练计划。")
+                    if availableTemplates.isEmpty {
+                        Text("请先在训练页创建一个专项模板。")
                             .foregroundStyle(.secondary)
                     } else {
                         Picker("选择计划", selection: $selectedTemplateID) {
-                            ForEach(activeTemplates) { template in
+                            ForEach(availableTemplates) { template in
                                 Text(template.name).tag(Optional(template.id))
                             }
                         }
@@ -330,6 +314,8 @@ private struct AddScheduledWorkoutView: View {
                     )
                 }
             }
+            .scrollContentBackground(.hidden)
+            .screenBackground()
             .navigationTitle("临时加练")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -343,7 +329,7 @@ private struct AddScheduledWorkoutView: View {
                 }
             }
             .onAppear {
-                selectedTemplateID = selectedTemplateID ?? activeTemplates.first?.id
+                selectedTemplateID = selectedTemplateID ?? availableTemplates.first?.id
             }
             .alert("无法添加", isPresented: Binding(
                 get: { errorMessage != nil },
@@ -357,7 +343,7 @@ private struct AddScheduledWorkoutView: View {
     }
 
     private func addSchedule() {
-        guard let template = activeTemplates.first(where: { $0.id == selectedTemplateID }) else { return }
+        guard let template = availableTemplates.first(where: { $0.id == selectedTemplateID }) else { return }
         do {
             _ = try ScheduleService.addManual(template: template, on: selectedDate, in: modelContext)
             dismiss()
@@ -395,6 +381,8 @@ private struct RescheduleWorkoutView: View {
                     )
                 }
             }
+            .scrollContentBackground(.hidden)
+            .screenBackground()
             .navigationTitle("调整训练日期")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

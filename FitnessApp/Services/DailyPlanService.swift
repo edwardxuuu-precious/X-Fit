@@ -1,21 +1,130 @@
 import Foundation
 import SwiftData
 
+struct DailyPlanPatternTarget: Equatable {
+    var pattern: SetPlanPattern
+    var patternSource: PlanPatternSource
+    var plannedSets: [WorkoutSetPlan]
+    var restSeconds: Int
+}
+
+struct DailyPlanPatternChange: Equatable {
+    let targets: [UUID: DailyPlanPatternTarget]
+    let updatedCount: Int
+    let overrideCount: Int
+}
+
+enum DailyPlanPatternPolicy {
+    static func applying(
+        _ pattern: SetPlanPattern,
+        to targets: [UUID: DailyPlanPatternTarget],
+        orderedIDs: [UUID],
+        includeLegacyValues: Bool = false
+    ) -> DailyPlanPatternChange {
+        var updatedTargets = targets
+        let inheritedIDs = orderedIDs.filter {
+            includeLegacyValues || targets[$0]?.patternSource == .dayDefault
+        }
+
+        for id in inheritedIDs {
+            guard var target = updatedTargets[id] else { continue }
+            target.pattern = pattern
+            target.patternSource = .dayDefault
+            target.plannedSets = presetPlans(for: target, pattern: pattern)
+            updatedTargets[id] = target
+        }
+
+        return DailyPlanPatternChange(
+            targets: updatedTargets,
+            updatedCount: inheritedIDs.count,
+            overrideCount: max(0, orderedIDs.count - inheritedIDs.count)
+        )
+    }
+
+    static func restoring(
+        _ target: DailyPlanPatternTarget,
+        to pattern: SetPlanPattern
+    ) -> DailyPlanPatternTarget {
+        var restored = target
+        restored.pattern = pattern
+        restored.patternSource = .dayDefault
+        restored.plannedSets = presetPlans(for: restored, pattern: pattern)
+        return restored
+    }
+
+    private static func presetPlans(
+        for target: DailyPlanPatternTarget,
+        pattern: SetPlanPattern
+    ) -> [WorkoutSetPlan] {
+        guard let first = target.plannedSets.first else {
+            return WorkoutSetPlan.preset(pattern, count: 3, baseWeight: 0, baseReps: 8)
+        }
+        return WorkoutSetPlan.preset(
+            pattern,
+            count: target.plannedSets.count,
+            baseWeight: target.plannedSets.map(\.weight).min() ?? first.weight,
+            baseReps: target.plannedSets.map(\.reps).max() ?? first.reps
+        )
+    }
+}
+
+struct DailyPlanPatternLoadResolution: Equatable {
+    let dayPattern: SetPlanPattern
+    let isLegacyMixed: Bool
+    let sources: [UUID: PlanPatternSource]
+}
+
+enum DailyPlanPatternMetadataPolicy {
+    static func resolve(
+        explicitPatternRaw: String?,
+        itemPatterns: [(UUID, SetPlanPattern, String?)]
+    ) -> DailyPlanPatternLoadResolution {
+        if let explicitPattern = explicitPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) {
+            let sources = Dictionary(uniqueKeysWithValues: itemPatterns.map { item in
+                (item.0, item.2.flatMap(PlanPatternSource.init(rawValue:)) ?? .exerciseOverride)
+            })
+            return DailyPlanPatternLoadResolution(
+                dayPattern: explicitPattern,
+                isLegacyMixed: false,
+                sources: sources
+            )
+        }
+
+        let uniquePatterns = Set(itemPatterns.map { $0.1 })
+        if uniquePatterns.count == 1, let inferred = uniquePatterns.first {
+            return DailyPlanPatternLoadResolution(
+                dayPattern: inferred,
+                isLegacyMixed: false,
+                sources: Dictionary(uniqueKeysWithValues: itemPatterns.map { ($0.0, .dayDefault) })
+            )
+        }
+
+        return DailyPlanPatternLoadResolution(
+            dayPattern: itemPatterns.first?.1 ?? .fixed,
+            isLegacyMixed: !itemPatterns.isEmpty,
+            sources: Dictionary(uniqueKeysWithValues: itemPatterns.map { ($0.0, .exerciseOverride) })
+        )
+    }
+}
+
 struct DailyPlanExerciseInput {
     let exerciseID: UUID
     let plannedSets: [WorkoutSetPlan]
     let planPattern: SetPlanPattern
+    let patternSource: PlanPatternSource
     let restSeconds: Int
 
     init(
         exerciseID: UUID,
         plannedSets: [WorkoutSetPlan],
         planPattern: SetPlanPattern,
+        patternSource: PlanPatternSource = .exerciseOverride,
         restSeconds: Int
     ) {
         self.exerciseID = exerciseID
         self.plannedSets = plannedSets
         self.planPattern = planPattern
+        self.patternSource = patternSource
         self.restSeconds = restSeconds
     }
 
@@ -37,6 +146,7 @@ struct DailyPlanExerciseInput {
                 baseReps: minReps
             ),
             planPattern: .fixed,
+            patternSource: .exerciseOverride,
             restSeconds: restSeconds
         )
     }
@@ -73,6 +183,7 @@ enum DailyPlanService {
     static func create(
         on date: Date,
         muscleGroups: [String],
+        defaultPlanPattern: SetPlanPattern = .fixed,
         exercises: [DailyPlanExerciseInput],
         replaceExistingPlans: Bool,
         in context: ModelContext
@@ -144,7 +255,8 @@ enum DailyPlanService {
             isActive: false,
             isOneOff: true,
             plannedForDate: targetDate,
-            focusMuscleGroups: normalizedGroups
+            focusMuscleGroups: normalizedGroups,
+            defaultPlanPattern: defaultPlanPattern
         )
         context.insert(template)
 
@@ -163,7 +275,8 @@ enum DailyPlanService {
                     targetWeight: plans.first?.weight ?? 0,
                     restSeconds: max(30, item.restSeconds),
                     plannedSets: plans,
-                    planPattern: item.planPattern
+                    planPattern: item.planPattern,
+                    patternSource: item.patternSource
                 )
             )
         }

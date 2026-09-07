@@ -1,0 +1,950 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project FitnessApp.xcodeproj -scheme FitnessApp -destination "platform=iOS Simulator,id=0B1E41EF-D1D4-49BD-9490-E30F45D833DC" -derivedDataPath /tmp/xfit-fat-loss-build "-only-testing:FitnessAppUITests/FatLossUITests/testMealActualFeedbackPartialNutritionPrepAndReviewFlow" CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    CODE_SIGNING_ALLOWED = NO
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (4 targets)
+    Target 'FitnessAppUITests' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'FitnessApp' in project 'FitnessApp'
+    Target 'FitnessAppTests' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'FitnessApp' in project 'FitnessApp'
+    Target 'FitnessApp' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'XFitShareExtension' in project 'FitnessApp'
+    Target 'XFitShareExtension' in project 'FitnessApp' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/edward/Documents/Fitness\ App/FitnessApp.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+SwiftDriver FitnessApp normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessApp -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+2026-09-05 23:38:19.866 xcodebuild[67221:10240921]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc108150b0 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f828 _dispatch_sync_invoke_and_complete_recurse + 64
+	8   libdispatch.dylib                   0x000000018169f214 _dispatch_sync_f_slow + 168
+	9   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	10  DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	11  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	12  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	13  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	14  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	15  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	16  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	17  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	18  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	19  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	20  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	21  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	22  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	23  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ FitnessApp (in target 'FitnessApp' from project 'FitnessApp')
+
+EmitSwiftModule normal arm64 (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+2026-09-05 23:38:21.790 xcodebuild[67221:10240793]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc0fe9ae80 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+
+SwiftCompile normal arm64 Compiling\ FatLossService.swift /Users/edward/Documents/Fitness\ App/FitnessApp/Services/FatLossService.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessApp/Services/FatLossService.swift (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossService.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftCompile normal arm64 Compiling\ FatLossViews.swift /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossRecordViews.swift /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossRecordViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossRecordViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossTrainingView.swift /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossTrainingView.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossTrainingView.swift (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossMealsView.swift /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossMealsView.swift (in target 'FitnessApp' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessApp/Features/FatLoss/FatLossMealsView.swift (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossTrainingView.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossRecordViews.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossMealsView.swift (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftDriver\ Compilation FitnessApp normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessApp -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for FitnessApp (in target 'FitnessApp' from project 'FitnessApp')
+
+SwiftDriver\ Compilation\ Requirements FitnessApp normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessApp -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/arm64-apple-ios-simulator.abi.json /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.abi.json (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.abi.json /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/arm64-apple-ios-simulator.swiftmodule /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftsourceinfo (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+Ld /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib normal (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -dynamiclib -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -filelist /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.LinkFileList -install_name @rpath/FitnessApp.debug.dylib -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.swiftmodule @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp-linker-args.resp -Xlinker -alias -Xlinker _main -Xlinker ___debug_main_executable_dylib_entry_point -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib
+2026-09-05 23:38:23.667 xcodebuild[67221:10240921]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc10815a70 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+
+ConstructStubExecutorLinkFileList /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-ExecutorLinkFileList-normal-arm64.txt (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    construct-stub-executor-link-file-list /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor_no_swift_entry_point.a /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libPreviewsJITStubExecutor.a --output /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-ExecutorLinkFileList-normal-arm64.txt
+note: Using stub executor library with Swift entry point. (in target 'FitnessApp' from project 'FitnessApp')
+
+Ld /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp normal (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Xlinker -rpath -Xlinker @executable_path -Xlinker -rpath -Xlinker @executable_path/Frameworks -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -e ___debug_blank_executor_main -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_dylib -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-DebugDylibPath-normal-arm64.txt -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __debug_instlnm -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-DebugDylibInstallName-normal-arm64.txt -Xlinker -filelist -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp-ExecutorLinkFileList-normal-arm64.txt /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp
+
+ExtractAppIntentsMetadata (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name FitnessApp --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.edward.FitnessApp --output /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app --target-triple arm64-apple-ios17.0-simulator --binary-file /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp --dependency-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp_dependency_info.dat --stringsdata-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.SwiftFileList --metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp.DependencyMetadataFileList --static-metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/FitnessApp.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/Objects-normal/arm64/FitnessApp.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-09-05 23:38:23.832 appintentsmetadataprocessor[67282:10241246] Starting appintentsmetadataprocessor export
+2026-09-05 23:38:23.836 appintentsmetadataprocessor[67282:10241246] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+ProcessInfoPlistFile /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/Info.plist /Users/edward/Documents/Fitness\ App/FitnessApp/Info.plist (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-infoPlistUtility /Users/edward/Documents/Fitness\ App/FitnessApp/Info.plist -producttype com.apple.product-type.application -genpkginfo /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/assetcatalog_generated_info.plist -scanforprivacyfile /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/XFitShareExtension.appex -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/Info.plist
+
+SwiftDriver FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+SwiftDriver FitnessAppTests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppTests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.SwiftFileList -DDEBUG -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+CopySwiftLibs /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/Frameworks --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/SystemExtensions --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/Frameworks --strip-bitcode --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessApp.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+ProcessInfoPlistFile /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/Info.plist /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/empty-FitnessAppTests.plist (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-infoPlistUtility /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/empty-FitnessAppTests.plist -producttype com.apple.product-type.bundle.unit-test -expandbuildsettings -format binary -platform iphonesimulator -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/Info.plist
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ FitnessAppUITests (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+EmitSwiftModule normal arm64 (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossUITests.swift /Users/edward/Documents/Fitness\ App/FitnessAppUITests/FatLossUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppUITests/FatLossUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for FitnessAppUITests (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation\ Requirements FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftsourceinfo (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.abi.json /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.abi.json (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.abi.json /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.swiftmodule /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+SwiftExplicitDependencyGeneratePcm arm64 /tmp/xfit-fat-loss-build/ModuleCache.noindex/SQLite3-EFWML40Z2C1M0Y6840DRUKIAS.pcm
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+SwiftCompile normal arm64 Compiling\ FatLossServiceTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossServiceTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossServiceTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+2026-09-05 23:38:25.242 xcodebuild[67221:10240793]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc0fe986c0 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+
+SwiftCompile normal arm64 Compiling\ WellnessAgentTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/WellnessAgentTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/WellnessAgentTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ FitnessAppTests (in target 'FitnessAppTests' from project 'FitnessApp')
+
+EmitSwiftModule normal arm64 (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ ScheduleAndDataTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/ScheduleAndDataTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/ScheduleAndDataTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossCatalogTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossCatalogTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossCatalogTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ TrainingMetricsTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/TrainingMetricsTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/TrainingMetricsTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ EquipmentRecognitionTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/EquipmentRecognitionTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/EquipmentRecognitionTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ AdaptivePlanningTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/AdaptivePlanningTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/AdaptivePlanningTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ FatLossBackupTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossBackupTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/FatLossBackupTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ ExerciseTerminologyTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/ExerciseTerminologyTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/ExerciseTerminologyTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ ExerciseCaptureRobustnessTests.swift /Users/edward/Documents/Fitness\ App/FitnessAppTests/ExerciseCaptureRobustnessTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppTests/ExerciseCaptureRobustnessTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for FitnessAppTests (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation\ Requirements FitnessAppTests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppTests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.SwiftFileList -DDEBUG -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossCatalogTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftsourceinfo (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftsourceinfo /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling EquipmentRecognitionTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling WellnessAgentTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/arm64-apple-ios-simulator.abi.json /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.abi.json (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.abi.json /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/arm64-apple-ios-simulator.swiftmodule /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppTests.swiftmodule/arm64-apple-ios-simulator.swiftmodule
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossServiceTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling TrainingMetricsTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ExerciseTerminologyTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling FatLossBackupTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ExerciseCaptureRobustnessTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling AdaptivePlanningTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriverJobDiscovery normal arm64 Compiling ScheduleAndDataTests.swift (in target 'FitnessAppTests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation FitnessAppTests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppTests -Onone @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.SwiftFileList -DDEBUG -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-fat-loss-build/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-fat-loss-build/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-fat-loss-build/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-fat-loss-build/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-generated-files.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-own-target-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests-project-headers.hmap -Xcc -I/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+Ld /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/FitnessAppTests normal (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -filelist /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -bundle_loader /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp -Xlinker -object_path_lto -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.swiftmodule @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests-linker-args.resp -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/FitnessApp.debug.dylib -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/FitnessAppTests
+2026-09-05 23:38:26.739 xcodebuild[67221:10240793]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc0fe9bbd0 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+
+CopySwiftLibs /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/FitnessAppTests --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/Frameworks --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/PlugIns --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/SystemExtensions --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+ExtractAppIntentsMetadata (in target 'FitnessAppTests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name FitnessAppTests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.edward.FitnessAppTests --output /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest --target-triple arm64-apple-ios17.0-simulator --binary-file /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app/PlugIns/FitnessAppTests.xctest/FitnessAppTests --dependency-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests_dependency_info.dat --stringsdata-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.SwiftFileList --metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests.DependencyMetadataFileList --static-metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/FitnessAppTests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppTests.build/Objects-normal/arm64/FitnessAppTests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-09-05 23:38:26.898 appintentsmetadataprocessor[67336:10241524] Starting appintentsmetadataprocessor export
+2026-09-05 23:38:26.900 appintentsmetadataprocessor[67336:10241524] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+Validate /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app (in target 'FitnessApp' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-validationUtility /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessApp.app -shallow-bundle -infoplist-subpath Info.plist
+
+ProcessInfoPlistFile /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Info.plist /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/empty-FitnessAppUITests.plist (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-infoPlistUtility /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/empty-FitnessAppUITests.plist -producttype com.apple.product-type.bundle.ui-testing -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/ProductTypeInfoPlistAdditions.plist -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Info.plist
+
+Ld /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests normal (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -filelist /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule @/tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-linker-args.resp -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport -o /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests
+
+CopySwiftLibs /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-swiftStdLibTool --copy --verbose --scan-executable /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Frameworks --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/PlugIns --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/SystemExtensions --scan-folder /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+Ignoring --strip-bitcode because --sign was not passed
+
+ExtractAppIntentsMetadata (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name FitnessAppUITests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.edward.FitnessAppUITests --output /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest --target-triple arm64-apple-ios17.0-simulator --binary-file /tmp/xfit-fat-loss-build/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests --dependency-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_dependency_info.dat --stringsdata-file /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList --metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.DependencyMetadataFileList --static-metadata-file-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/xfit-fat-loss-build/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-09-05 23:38:27.110 appintentsmetadataprocessor[67339:10241538] Starting appintentsmetadataprocessor export
+2026-09-05 23:38:27.112 appintentsmetadataprocessor[67339:10241538] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+2026-09-05 23:38:29.241237+0800 FitnessAppUITests-Runner[67350:10241788] [Default] Running tests...
+2026-09-05 23:38:29.564 xcodebuild[67221:10240908]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc108d7120 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-09-05 23:38:30.134.
+Test Suite 'FitnessAppUITests.xctest' started at 2026-09-05 23:38:30.134.
+Test Suite 'FatLossUITests' started at 2026-09-05 23:38:30.134.
+Test Case '-[FitnessAppUITests.FatLossUITests testMealActualFeedbackPartialNutritionPrepAndReviewFlow]' started.
+    t =     0.00s Start Test at 2026-09-05 23:38:30.135
+    t =     0.05s Set Up
+    t =     0.05s Open com.edward.FitnessApp
+    t =     0.05s     Launch com.edward.FitnessApp
+2026-09-05 23:38:30.373 xcodebuild[67221:10240791] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-09-05 23:38:30.373 xcodebuild[67221:10240791] [MT] IDELaunchParametersSnapshot: no debugger version
+objc[67350]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x109e84310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x109324398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     1.32s         Setting up automation session
+2026-09-05 23:38:32.180 xcodebuild[67221:10240908]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc108d7720 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =     2.44s         Wait for com.edward.FitnessApp to idle
+    t =     4.63s Waiting 15.0s for "首页减脂周期" Button to exist
+2026-09-05 23:38:35.177 xcodebuild[67221:10240900]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc113ec4e0 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =     5.68s     Checking `Expect predicate `existsNoRetry == 1` for object "首页减脂周期" Button`
+    t =     5.68s         Checking existence of `"首页减脂周期" Button`
+    t =     5.83s Tap "首页减脂周期" Button
+    t =     5.83s     Wait for com.edward.FitnessApp to idle
+    t =     5.83s     Find the "首页减脂周期" Button
+    t =     5.86s     Check for interrupting elements affecting "首页减脂周期" Button
+    t =     5.89s     Synthesize event
+    t =     6.19s     Wait for com.edward.FitnessApp to idle
+    t =     6.26s Checking existence of `"创建减脂周期" Button`
+    t =     6.29s Find the "创建减脂周期" Button
+    t =     6.33s Swipe up Target Application 'com.edward.FitnessApp'
+    t =     6.33s     Wait for com.edward.FitnessApp to idle
+    t =     6.33s     Find the Target Application 'com.edward.FitnessApp'
+    t =     6.35s     Check for interrupting elements affecting "X-Fit" Application
+    t =     6.37s     Synthesize event
+    t =     6.79s     Wait for com.edward.FitnessApp to idle
+    t =     7.25s Checking existence of `"创建减脂周期" Button`
+    t =     7.29s Find the "创建减脂周期" Button
+    t =     7.33s Waiting 5.0s for "创建减脂周期" Button to exist
+    t =     8.38s     Checking `Expect predicate `existsNoRetry == 1` for object "创建减脂周期" Button`
+    t =     8.38s         Checking existence of `"创建减脂周期" Button`
+    t =     8.42s Tap "创建减脂周期" Button
+    t =     8.42s     Wait for com.edward.FitnessApp to idle
+    t =     8.42s     Find the "创建减脂周期" Button
+    t =     8.45s     Check for interrupting elements affecting "创建减脂周期" Button
+    t =     8.48s     Synthesize event
+    t =     8.76s     Wait for com.edward.FitnessApp to idle
+    t =     8.82s Waiting 5.0s for "餐单与备餐" Button to exist
+2026-09-05 23:38:39.057 xcodebuild[67221:10240908]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc0f277d50 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =     9.86s     Checking `Expect predicate `existsNoRetry == 1` for object "餐单与备餐" Button`
+    t =     9.86s         Checking existence of `"餐单与备餐" Button`
+    t =     9.92s Tap "餐单与备餐" Button
+    t =     9.92s     Wait for com.edward.FitnessApp to idle
+    t =     9.93s     Find the "餐单与备餐" Button
+    t =     9.96s     Check for interrupting elements affecting "餐单与备餐" Button
+    t =     9.99s     Synthesize event
+    t =    10.28s     Wait for com.edward.FitnessApp to idle
+    t =    10.29s Tap "预览导入餐单" Button
+    t =    10.29s     Wait for com.edward.FitnessApp to idle
+    t =    10.29s     Find the "预览导入餐单" Button
+    t =    10.32s     Check for interrupting elements affecting "预览导入餐单" Button
+    t =    10.35s     Synthesize event
+    t =    10.64s     Wait for com.edward.FitnessApp to idle
+    t =    10.70s Tap "确认导入餐单" Button
+    t =    10.70s     Wait for com.edward.FitnessApp to idle
+    t =    10.71s     Find the "确认导入餐单" Button
+    t =    10.79s     Check for interrupting elements affecting "确认导入餐单" Button
+    t =    10.84s     Synthesize event
+    t =    11.13s     Wait for com.edward.FitnessApp to idle
+    t =    11.14s Waiting 5.0s for "计划餐-早餐" Button to exist
+    t =    12.18s     Checking `Expect predicate `existsNoRetry == 1` for object "计划餐-早餐" Button`
+    t =    12.18s         Checking existence of `"计划餐-早餐" Button`
+    t =    12.21s Tap "计划餐-早餐" Button
+    t =    12.21s     Wait for com.edward.FitnessApp to idle
+    t =    12.21s     Find the "计划餐-早餐" Button
+    t =    12.24s     Check for interrupting elements affecting "计划餐-早餐" Button
+    t =    12.26s     Synthesize event
+    t =    12.55s     Wait for com.edward.FitnessApp to idle
+    t =    12.63s Checking existence of `"计划餐实吃备注" TextField`
+    t =    12.73s Find the "计划餐实吃备注" TextField
+    t =    12.77s Tap "计划餐实吃备注" TextField
+    t =    12.77s     Wait for com.edward.FitnessApp to idle
+    t =    12.77s     Find the "计划餐实吃备注" TextField
+    t =    12.80s     Check for interrupting elements affecting "计划餐实吃备注" TextField
+    t =    12.83s     Synthesize event
+    t =    13.12s     Wait for com.edward.FitnessApp to idle
+    t =    13.21s Type '按餐单吃完，口味清淡' into "计划餐实吃备注" TextField
+    t =    13.21s     Wait for com.edward.FitnessApp to idle
+    t =    13.22s     Find the "计划餐实吃备注" TextField
+    t =    13.29s     Check for interrupting elements affecting "计划餐实吃备注" TextField
+    t =    13.34s     Synthesize event
+    t =    13.70s     Wait for com.edward.FitnessApp to idle
+    t =    13.70s Waiting 2.0s for "减脂完成输入" Button to exist
+2026-09-05 23:38:43.924 xcodebuild[67221:10240908]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc115dddd0 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =    14.74s     Checking `Expect predicate `existsNoRetry == 1` for object "减脂完成输入" Button`
+    t =    14.74s         Checking existence of `"减脂完成输入" Button`
+    t =    14.82s Tap "减脂完成输入" Button
+    t =    14.82s     Wait for com.edward.FitnessApp to idle
+    t =    14.82s     Find the "减脂完成输入" Button
+    t =    14.87s     Check for interrupting elements affecting "减脂完成输入" Button
+    t =    14.91s     Synthesize event
+    t =    15.20s     Wait for com.edward.FitnessApp to idle
+    t =    15.20s Checking existence of `"计划餐腹胀反馈" Button`
+    t =    15.28s Find the "计划餐腹胀反馈" Button
+    t =    15.33s Tap "计划餐腹胀反馈" Button
+    t =    15.33s     Wait for com.edward.FitnessApp to idle
+    t =    15.34s     Find the "计划餐腹胀反馈" Button
+    t =    15.39s     Check for interrupting elements affecting "计划餐腹胀反馈" Button
+    t =    15.43s     Synthesize event
+    t =    15.71s     Wait for com.edward.FitnessApp to idle
+    t =    15.71s Tap "轻" Button
+    t =    15.71s     Wait for com.edward.FitnessApp to idle
+    t =    15.71s     Find the "轻" Button
+    t =    15.76s     Check for interrupting elements affecting "轻" Button
+    t =    15.80s     Synthesize event
+    t =    16.09s     Wait for com.edward.FitnessApp to idle
+    t =    16.09s Checking existence of `"实吃-热量 kcal" TextField`
+    t =    16.13s Find the "实吃-热量 kcal" TextField
+    t =    16.18s Tap "实吃-热量 kcal" TextField
+    t =    16.18s     Wait for com.edward.FitnessApp to idle
+    t =    16.18s     Find the "实吃-热量 kcal" TextField
+    t =    16.22s     Check for interrupting elements affecting "实吃-热量 kcal" TextField
+    t =    16.26s     Synthesize event
+    t =    16.55s     Wait for com.edward.FitnessApp to idle
+    t =    16.55s Type '300' into "实吃-热量 kcal" TextField
+    t =    16.55s     Wait for com.edward.FitnessApp to idle
+    t =    16.55s     Find the "实吃-热量 kcal" TextField
+    t =    16.60s     Check for interrupting elements affecting "实吃-热量 kcal" TextField
+    t =    16.64s     Synthesize event
+    t =    16.89s     Wait for com.edward.FitnessApp to idle
+    t =    16.89s Waiting 2.0s for "减脂完成输入" Button to exist
+    t =    17.93s     Checking `Expect predicate `existsNoRetry == 1` for object "减脂完成输入" Button`
+    t =    17.93s         Checking existence of `"减脂完成输入" Button`
+    t =    18.00s Tap "减脂完成输入" Button
+    t =    18.00s     Wait for com.edward.FitnessApp to idle
+    t =    18.00s     Find the "减脂完成输入" Button
+    t =    18.05s     Check for interrupting elements affecting "减脂完成输入" Button
+    t =    18.08s     Synthesize event
+    t =    18.37s     Wait for com.edward.FitnessApp to idle
+    t =    18.38s Checking existence of `"保存计划实吃" Button`
+    t =    18.43s Find the "保存计划实吃" Button
+    t =    18.48s Tap "保存计划实吃" Button
+    t =    18.48s     Wait for com.edward.FitnessApp to idle
+    t =    18.48s     Find the "保存计划实吃" Button
+    t =    18.52s     Check for interrupting elements affecting "保存计划实吃" Button
+    t =    18.56s     Synthesize event
+    t =    18.85s     Wait for com.edward.FitnessApp to idle
+    t =    18.85s Waiting 5.0s for "计划餐-早餐" Button to exist
+2026-09-05 23:38:49.995 xcodebuild[67221:10240920]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc0f3cd050 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =    19.89s     Checking `Expect predicate `existsNoRetry == 1` for object "计划餐-早餐" Button`
+    t =    19.89s         Checking existence of `"计划餐-早餐" Button`
+    t =    19.93s Checking existence of `"已记录实吃" StaticText`
+    t =    19.96s Tap "计划餐-早餐" Button
+    t =    19.96s     Wait for com.edward.FitnessApp to idle
+    t =    19.96s     Find the "计划餐-早餐" Button
+    t =    19.98s     Check for interrupting elements affecting "计划餐-早餐" Button
+    t =    20.00s     Synthesize event
+    t =    20.29s     Wait for com.edward.FitnessApp to idle
+    t =    20.29s Checking existence of `"实吃-热量 kcal" TextField`
+    t =    20.35s Find the "实吃-热量 kcal" TextField
+    t =    20.39s Swipe up Target Application 'com.edward.FitnessApp'
+    t =    20.39s     Wait for com.edward.FitnessApp to idle
+    t =    20.39s     Find the Target Application 'com.edward.FitnessApp'
+    t =    20.42s     Check for interrupting elements affecting "X-Fit" Application
+    t =    20.44s     Synthesize event
+    t =    20.87s     Wait for com.edward.FitnessApp to idle
+    t =    21.61s Checking existence of `"实吃-热量 kcal" TextField`
+    t =    21.65s Find the "实吃-热量 kcal" TextField
+    t =    21.69s Find the "实吃-热量 kcal" TextField
+    t =    21.72s Find the "实吃-蛋白质 g" TextField
+    t =    21.76s Tap Button (Element at index 0)
+    t =    21.76s     Wait for com.edward.FitnessApp to idle
+    t =    21.76s     Find the Button (Element at index 0)
+    t =    21.79s     Check for interrupting elements affecting "BackButton" Button
+    t =    21.82s     Synthesize event
+    t =    22.11s     Wait for com.edward.FitnessApp to idle
+    t =    22.11s Find the "明日备餐" Button
+    t =    22.15s Find the "明日备餐" Button
+    t =    22.18s Find the "明日备餐" Button
+    t =    22.21s Find the "明日备餐" Button
+    t =    22.24s Tap "明日备餐" Button
+    t =    22.24s     Wait for com.edward.FitnessApp to idle
+    t =    22.24s     Find the "明日备餐" Button
+    t =    22.26s     Check for interrupting elements affecting "明日备餐" Button
+    t =    22.28s     Synthesize event
+    t =    22.57s     Wait for com.edward.FitnessApp to idle
+    t =    22.57s Checking existence of `"分享备餐与采购清单" Button`
+    t =    22.62s Swipe up Target Application 'com.edward.FitnessApp'
+    t =    22.62s     Wait for com.edward.FitnessApp to idle
+    t =    22.62s     Find the Target Application 'com.edward.FitnessApp'
+    t =    22.65s     Check for interrupting elements affecting "X-Fit" Application
+    t =    22.69s     Synthesize event
+    t =    23.10s     Wait for com.edward.FitnessApp to idle
+    t =    25.21s Checking existence of `"分享备餐与采购清单" Button`
+    t =    25.28s Swipe up Target Application 'com.edward.FitnessApp'
+    t =    25.28s     Wait for com.edward.FitnessApp to idle
+    t =    25.28s     Find the Target Application 'com.edward.FitnessApp'
+    t =    25.32s     Check for interrupting elements affecting "X-Fit" Application
+    t =    25.35s     Synthesize event
+    t =    25.77s     Wait for com.edward.FitnessApp to idle
+2026-09-05 23:38:57.302 xcodebuild[67221:10240898]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc11929b00 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =    27.86s Checking existence of `"分享备餐与采购清单" Button`
+    t =    27.93s Find the "分享备餐与采购清单" Button
+    t =    27.98s Checking existence of `"分享备餐与采购清单" Button`
+    t =    28.02s Tap "分享备餐与采购清单" Button
+    t =    28.02s     Wait for com.edward.FitnessApp to idle
+    t =    28.02s     Find the "分享备餐与采购清单" Button
+    t =    28.07s     Check for interrupting elements affecting "分享备餐与采购清单" Button
+    t =    28.10s     Synthesize event
+    t =    28.39s     Wait for com.edward.FitnessApp to idle
+    t =    28.42s Waiting 3.0s for "ActivityListView" Other to exist
+    t =    29.46s     Checking `Expect predicate `existsNoRetry == 1` for object "ActivityListView" Other`
+    t =    29.46s         Checking existence of `"ActivityListView" Other`
+    t =    29.78s Checking existence of `"Close" Button`
+    t =    29.84s Checking existence of `"关闭" Button`
+    t =    29.90s Swipe down Target Application 'com.edward.FitnessApp'
+    t =    29.90s     Wait for com.edward.FitnessApp to idle
+    t =    29.90s     Find the Target Application 'com.edward.FitnessApp'
+    t =    29.94s     Check for interrupting elements affecting "X-Fit" Application
+    t =    29.99s     Synthesize event
+    t =    30.41s     Wait for com.edward.FitnessApp to idle
+    t =    32.51s Tap "完成" Button
+    t =    32.51s     Wait for com.edward.FitnessApp to idle
+    t =    32.52s     Find the "完成" Button
+    t =    32.54s     Check for interrupting elements affecting "完成" Button
+    t =    32.59s     Synthesize event
+    t =    32.88s     Wait for com.edward.FitnessApp to idle
+    t =    32.89s Tap Button (Element at index 0)
+    t =    32.89s     Wait for com.edward.FitnessApp to idle
+    t =    32.89s     Find the Button (Element at index 0)
+    t =    32.91s     Check for interrupting elements affecting "BackButton" Button
+    t =    32.94s     Synthesize event
+    t =    33.23s     Wait for com.edward.FitnessApp to idle
+    t =    33.24s Checking existence of `"减脂每周复盘" Button`
+    t =    33.28s Find the "减脂每周复盘" Button
+    t =    33.31s Tap "减脂每周复盘" Button
+    t =    33.31s     Wait for com.edward.FitnessApp to idle
+    t =    33.31s     Find the "减脂每周复盘" Button
+    t =    33.34s     Check for interrupting elements affecting "减脂每周复盘" Button
+    t =    33.37s     Synthesize event
+    t =    33.65s     Wait for com.edward.FitnessApp to idle
+    t =    33.65s Checking existence of `"保存减脂周复盘" Button`
+    t =    33.69s Find the "保存减脂周复盘" Button
+    t =    33.73s Swipe up Target Application 'com.edward.FitnessApp'
+    t =    33.73s     Wait for com.edward.FitnessApp to idle
+    t =    33.74s     Find the Target Application 'com.edward.FitnessApp'
+    t =    33.76s     Check for interrupting elements affecting "X-Fit" Application
+    t =    33.79s     Synthesize event
+    t =    34.21s     Wait for com.edward.FitnessApp to idle
+2026-09-05 23:39:05.614 xcodebuild[67221:10240793]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc11780210 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+    t =    36.30s Checking existence of `"保存减脂周复盘" Button`
+    t =    36.35s Find the "保存减脂周复盘" Button
+    t =    36.39s Waiting 5.0s for "保存减脂周复盘" Button to exist
+    t =    37.41s     Checking `Expect predicate `existsNoRetry == 1` for object "保存减脂周复盘" Button`
+    t =    37.41s         Checking existence of `"保存减脂周复盘" Button`
+    t =    37.47s Tap "保存减脂周复盘" Button
+    t =    37.47s     Wait for com.edward.FitnessApp to idle
+    t =    37.47s     Find the "保存减脂周复盘" Button
+    t =    37.51s     Check for interrupting elements affecting "保存减脂周复盘" Button
+    t =    37.54s     Synthesize event
+    t =    37.83s     Wait for com.edward.FitnessApp to idle
+    t =    37.83s Waiting 5.0s for "已保存。后续补记不会修改这个快照。" StaticText to exist
+    t =    38.87s     Checking `Expect predicate `existsNoRetry == 1` for object "已保存。后续补记不会修改这个快照。" StaticText`
+    t =    38.87s         Checking existence of `"已保存。后续补记不会修改这个快照。" StaticText`
+    t =    38.93s Tear Down
+Test Case '-[FitnessAppUITests.FatLossUITests testMealActualFeedbackPartialNutritionPrepAndReviewFlow]' passed (39.302 seconds).
+Test Suite 'FatLossUITests' passed at 2026-09-05 23:39:09.438.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.302 (39.304) seconds
+Test Suite 'FitnessAppUITests.xctest' passed at 2026-09-05 23:39:09.439.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.302 (39.305) seconds
+Test Suite 'Selected tests' passed at 2026-09-05 23:39:09.439.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.302 (39.306) seconds
+2026-09-05 23:39:15.179 xcodebuild[67221:10240899]  DTDKRemoteDeviceConnection: Failed to start remote service "com.apple.mobile.notification_proxy" on device. Error: Error Domain=com.apple.dtdevicekit Code=811 "Failed to start remote service "com.apple.mobile.notification_proxy" on device." UserInfo={NSUnderlyingError=0xc117dc180 {Error Domain=com.apple.dt.MobileDeviceErrorDomain Code=-402653158 "The device is passcode protected." UserInfo={MobileDeviceErrorCode=(0xE800001A), com.apple.dtdevicekit.stacktrace=(
+	0   DTDeviceKitBase                     0x0000000118c6265c DTDKCreateNSErrorFromAMDErrorCode + 312
+	1   DTDeviceKitBase                     0x0000000118c6e598 __63-[DTDKRemoteDeviceConnection startFirstServiceOf:unlockKeybag:]_block_invoke + 376
+	2   DTDeviceKitBase                     0x0000000118c6dda0 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_4 + 28
+	3   DTDeviceKitBase                     0x0000000118c646d8 __DTDKExecuteInSession_block_invoke_2 + 68
+	4   DTDeviceKitBase                     0x0000000118c63e24 __DTDKExecuteWithConnection_block_invoke_2 + 216
+	5   DTDeviceKitBase                     0x0000000118c63d1c __DTDKExecuteWithConnection_block_invoke + 116
+	6   libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	7   libdispatch.dylib                   0x000000018169f360 _dispatch_lane_barrier_sync_invoke_and_complete + 56
+	8   DVTFoundation                       0x000000010f663808 DVTDispatchBarrierSync + 148
+	9   DVTFoundation                       0x000000010f66497c -[DVTDispatchLock performLockedBlock:] + 60
+	10  DTDeviceKitBase                     0x0000000118c63c14 DTDKExecuteWithConnection + 192
+	11  DTDeviceKitBase                     0x0000000118c6456c DTDKExecuteInSession + 248
+	12  DTDeviceKitBase                     0x0000000118c6db74 __48-[DTDKRemoteDeviceConnection futureWithSession:]_block_invoke_2 + 212
+	13  DVTFoundation                       0x000000010f662bd0 __DVT_CALLING_CLIENT_BLOCK__ + 16
+	14  DVTFoundation                       0x000000010f663548 __DVTDispatchAsync_block_invoke + 152
+	15  libdispatch.dylib                   0x000000018168fa28 _dispatch_call_block_and_release + 32
+	16  libdispatch.dylib                   0x00000001816a94b0 _dispatch_client_callout + 16
+	17  libdispatch.dylib                   0x0000000181698030 _dispatch_lane_serial_drain + 740
+	18  libdispatch.dylib                   0x0000000181698b64 _dispatch_lane_invoke + 448
+	19  libdispatch.dylib                   0x00000001816a2e34 _dispatch_root_queue_drain_deferred_wlh + 284
+	20  libdispatch.dylib                   0x00000001816a2734 _dispatch_workloop_worker_thread + 720
+	21  libsystem_pthread.dylib             0x0000000181847ec0 _pthread_wqthread + 292
+	22  libsystem_pthread.dylib             0x0000000181846c10 start_wqthread + 8
+), DVTRadarComponentKey=261622, NSLocalizedDescription=The device is passcode protected.}}, NSLocalizedRecoverySuggestion=Please check your connection to your device., DVTRadarComponentKey=261622, NSLocalizedDescription=Failed to start remote service "com.apple.mobile.notification_proxy" on device.}
+2026-09-05 23:39:24.017 xcodebuild[67221:10240791] [MT] IDETestOperationsObserverDebug: 56.892 elapsed -- Testing started completed.
+2026-09-05 23:39:24.017 xcodebuild[67221:10240791] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-05 23:39:24.017 xcodebuild[67221:10240791] [MT] IDETestOperationsObserverDebug: 56.892 sec, +56.892 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/xfit-fat-loss-build/Logs/Test/Test-FitnessApp-2026.09.05_23-38-17-+0800.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

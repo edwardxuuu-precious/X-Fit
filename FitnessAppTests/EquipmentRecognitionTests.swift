@@ -5,9 +5,9 @@ import XCTest
 @MainActor
 final class EquipmentRecognitionTests: XCTestCase {
     func testBodyweightIsExplicitAndCountsRepetitions() {
-        XCTAssertEqual(ExerciseVolumeUnit.bodyweight.symbol, "自重")
+        XCTAssertEqual(ExerciseVolumeUnit.bodyweight.symbol, "kg·次")
         XCTAssertFalse(ExerciseVolumeUnit.bodyweight.recordsNumericLoad)
-        XCTAssertEqual(ExerciseVolumeUnit.bodyweight.volume(weight: 92, reps: 12), 12)
+        XCTAssertEqual(ExerciseVolumeUnit.bodyweight.volume(weight: 92, reps: 12), 1_104)
     }
 
     func testEquipmentEnglishNameAndAliasParticipateInExerciseSearch() {

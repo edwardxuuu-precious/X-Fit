@@ -1,0 +1,111 @@
+{
+  "runID": "20260907-full-ui-final",
+  "overall": "PARTIAL",
+  "localValidation": "PASS",
+  "entry": "scripts/xfit-stage-validation.sh non-device",
+  "rawFullEntry": {
+    "N01": "PASS",
+    "N02": "PASS",
+    "N03": "PASS",
+    "N04": "PASS",
+    "N05": "PASS",
+    "N06": "FAIL",
+    "N07": "PASS"
+  },
+  "effectiveUIStatus": "PASS",
+  "latestUI": {
+    "passed": 91,
+    "skipped": 7
+  },
+  "expectedUITestCount": 98,
+  "unit": {
+    "passed": 258,
+    "failed": 0,
+    "evidence": "supplement.log"
+  },
+  "backend": {
+    "passed": 6,
+    "failed": 0,
+    "evidence": "../../../artifacts/stage-validation/20260907-full-ui-final/N03.log"
+  },
+  "release": {
+    "status": "PASS",
+    "signed": false,
+    "platform": "iPhoneOS",
+    "evidence": "final-release-build.log"
+  },
+  "sourceHashes": "final-source-sha256.json",
+  "sourceFileCount": 113,
+  "uiHistory": [
+    {
+      "log": "artifacts/stage-validation/20260907-full-ui-final/N06.log",
+      "counts": {
+        "passed": 85,
+        "skipped": 7,
+        "failed": 6
+      }
+    },
+    {
+      "log": "outputs/stage-validation/20260907-full-ui-final/supplement.log",
+      "counts": {
+        "passed": 15,
+        "failed": 2
+      }
+    },
+    {
+      "log": "outputs/stage-validation/20260907-full-ui-final/final-two.log",
+      "counts": {
+        "passed": 2
+      }
+    }
+  ],
+  "uiPerTest": "ui-test-results.json",
+  "failureResolution": [
+    {
+      "case": "testHomePlanCanBeOpenedForEditing",
+      "cause": "44pt AX value differed by floating-point roundoff",
+      "fix": "1e-6 pt test tolerance; original touch-size requirement preserved"
+    },
+    {
+      "case": "testProfileGearOpensSettingsAndData",
+      "cause": "old flat settings assertion",
+      "fix": "navigate data segment and expand backup explanation; verify duplicate UUID protection text"
+    },
+    {
+      "case": "terminology reset flows",
+      "cause": "reset tap was beneath tab bar; raw frame y788.3..830.3, tab bar begins791",
+      "fix": "scroll fully into viewport; label touch areas now at least44pt; reset/reject and restart/history readback pass"
+    },
+    {
+      "case": "recipe/prep fixture",
+      "cause": "real date rotated tomorrow recipe away from fixed test ingredient",
+      "fix": "DEBUG nonpersistent UI preview starts today; production Sep6-Dec6 period unchanged"
+    },
+    {
+      "case": "terminology history assertion",
+      "cause": "old group label after history layout migration",
+      "fix": "assert 3 working sets and original exercise names/weights/reps/RIR"
+    },
+    {
+      "case": "prep portion explanation",
+      "cause": "partially visible button tapped beneath fixed share area, opening share sheet",
+      "fix": "scroll full button above share inset before tap; explanation and return verified"
+    }
+  ],
+  "preview": "../../ui-redesign/normal-type/index.html",
+  "devicePrerequisite": {
+    "status": "BLOCKED_ENV",
+    "evidence": "device-availability.json",
+    "reason": "Edward_iPhone unavailable"
+  },
+  "deviceInstallation": "NOT_RUN",
+  "activeDatabaseConservation": "NOT_RUN",
+  "humanAcceptance": "BLOCKED_HUMAN",
+  "pending": [
+    "Physical-device readiness and data-conservation checks",
+    "Human operation and visual acceptance",
+    "Tool page order decision; existing assistant-first behavior retained",
+    "Clinician-confirmed nutrition targets and portions"
+  ],
+  "gitCommitTagPush": "NOT_RUN"
+}

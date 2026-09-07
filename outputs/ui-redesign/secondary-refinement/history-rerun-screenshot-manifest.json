@@ -1,0 +1,17 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "58C505C0-6094-4FAD-9D33-31B6FC76C723.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "28-history_0_D0FFD065-2754-4A24-AE05-91709B43A3B0.png",
+        "timestamp" : 1788699433.698
+      }
+    ],
+    "testIdentifier" : "FitnessAppUITests/testWorkoutHistoryShowsDetailsAndReturnsWithoutNavigationError()",
+    "testIdentifierURL" : "test://com.apple.xcode/FitnessApp/FitnessAppUITests/FitnessAppUITests/testWorkoutHistoryShowsDetailsAndReturnsWithoutNavigationError"
+  }
+]

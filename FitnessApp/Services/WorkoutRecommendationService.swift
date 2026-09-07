@@ -15,6 +15,8 @@ struct ExerciseLastPerformance {
     let sets: [ExerciseSetSnapshot]
     let workoutNotes: String
     let performanceNotes: String
+    let volumeUnit: ExerciseVolumeUnit
+    let bodyWeightKgSnapshot: Double?
 
     var bestSet: ExerciseSetSnapshot? {
         sets.max {
@@ -32,7 +34,10 @@ struct ExerciseLastPerformance {
     }
 
     var volume: Double {
-        sets.reduce(0) { $0 + $1.weight * Double($1.reps) }
+        sets.reduce(0) { total, set in
+            let weight = volumeUnit == .bodyweight ? bodyWeightKgSnapshot : set.weight
+            return total + (volumeUnit.volume(weight: weight, reps: set.reps) ?? 0)
+        }
     }
 
     var workingWeight: Double {
@@ -79,6 +84,8 @@ struct MuscleGroupAdvice: Identifiable {
     let detail: String
     let lastTrainedAt: Date?
     let completedSetsLast7Days: Int
+    let lastWorkoutName: String?
+    let lastVolumeSummaries: [String]
 
     var id: String { muscleGroup }
 }
@@ -98,8 +105,42 @@ enum WorkoutRecommendationService {
     ) -> [ExerciseRecommendation] {
         guard !selectedMuscleGroups.isEmpty else { return [] }
 
-        let activeExercises = exercises.filter {
+        let eligibleExercises = exercises.filter {
             !$0.isArchived && selectedMuscleGroups.contains($0.muscleGroup)
+        }
+        let approvedCanonicalByExerciseID = Dictionary(
+            uniqueKeysWithValues: exercises.compactMap { exercise in
+                exercise.approvedCanonicalID.map { (exercise.id, $0) }
+            }
+        )
+        let exerciseIDsByCanonical = Dictionary(
+            grouping: approvedCanonicalByExerciseID,
+            by: \.value
+        ).mapValues { Set($0.map(\.key)) }
+        let confirmedPrimaryNameByCanonical = Dictionary(
+            uniqueKeysWithValues: ExerciseCatalogService.confirmedAliasGroups.map {
+                ($0.canonicalID, $0.primaryName)
+            }
+        )
+        let activeExercises: [Exercise] = Dictionary(
+            grouping: eligibleExercises,
+            by: { exercise in
+                exercise.approvedCanonicalID.map { "canonical:\($0)" }
+                    ?? "exercise:\(exercise.id.uuidString)"
+            }
+        ).values.compactMap { matches in
+            guard let first = matches.first else { return nil }
+            guard let canonicalID = first.approvedCanonicalID,
+                  let primaryName = confirmedPrimaryNameByCanonical[canonicalID] else {
+                return matches.min { lhs, rhs in
+                    if lhs.createdAt == rhs.createdAt {
+                        return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+                    }
+                    return lhs.createdAt < rhs.createdAt
+                }
+            }
+            return matches.first { $0.name == primaryName }
+                ?? matches.min { $0.createdAt < $1.createdAt }
         }
         let completedSessions = sessions.filter { $0.status == .completed }
         let sessionByID = Dictionary(uniqueKeysWithValues: completedSessions.map { ($0.id, $0) })
@@ -123,8 +164,14 @@ enum WorkoutRecommendationService {
         )
 
         return activeExercises.map { exercise in
+            let identityExerciseIDs = exercise.approvedCanonicalID
+                .flatMap { exerciseIDsByCanonical[$0] }
+                ?? [exercise.id]
             let history = sessionExercises
-                .filter { $0.exerciseID == exercise.id && sessionByID[$0.sessionID] != nil }
+                .filter {
+                    identityExerciseIDs.contains($0.exerciseID)
+                        && sessionByID[$0.sessionID] != nil
+                }
                 .compactMap { snapshot -> (WorkoutSession, SessionExercise)? in
                     guard let session = sessionByID[snapshot.sessionID] else { return nil }
                     return (session, snapshot)
@@ -147,8 +194,9 @@ enum WorkoutRecommendationService {
             }
             let daysSince = last.map { max(0, Calendar.current.dateComponents([.day], from: $0.date.startOfDay, to: now.startOfDay).day ?? 0) }
             let recentCount = history.filter { $0.0.startedAt >= now.addingDays(-28) }.count
-            let appearedInLastMenu = lastMenuExerciseIDs.contains(exercise.id)
+            let appearedInLastMenu = !lastMenuExerciseIDs.isDisjoint(with: identityExerciseIDs)
             let baseline = templateExercises.first { $0.exerciseID == exercise.id }
+                ?? templateExercises.first { identityExerciseIDs.contains($0.exerciseID) }
             let target = recommendedTarget(
                 exercise: exercise,
                 lastHistory: history.first,
@@ -264,10 +312,35 @@ enum WorkoutRecommendationService {
                     title: "没有近期记录",
                     detail: "可以从中等训练量开始，完成后用真实 RIR 调整下一次建议。",
                     lastTrainedAt: nil,
-                    completedSetsLast7Days: recentSets
+                    completedSetsLast7Days: recentSets,
+                    lastWorkoutName: nil,
+                    lastVolumeSummaries: []
                 )
             }
 
+            let lastSession = matchingSnapshots
+                .map(\.1)
+                .max { $0.startedAt < $1.startedAt }
+            let lastSessionSnapshots = matchingSnapshots
+                .filter { $0.1.id == lastSession?.id }
+                .map(\.0)
+            let volumeByUnit = Dictionary(grouping: lastSessionSnapshots, by: \.volumeUnit)
+                .mapValues { snapshots in
+                    snapshots.reduce(0.0) { total, snapshot in
+                        let snapshotLogs = setLogs.filter {
+                            $0.sessionExerciseID == snapshot.id && $0.isCompleted && !$0.isWarmup
+                        }
+                        return total + snapshotLogs.reduce(0.0) { subtotal, log in
+                            let weight = snapshot.volumeUnit == .bodyweight
+                                ? snapshot.bodyWeightKgSnapshot
+                                : log.actualWeight
+                            return subtotal + (snapshot.volumeUnit.volume(weight: weight, reps: log.actualReps) ?? 0)
+                        }
+                    }
+                }
+            let volumeSummaries = volumeByUnit
+                .map { "\(Int($0.value)) \($0.key.symbol)" }
+                .sorted()
             let days = max(0, Calendar.current.dateComponents([.day], from: lastDate.startOfDay, to: now.startOfDay).day ?? 0)
             if days <= 1 {
                 return MuscleGroupAdvice(
@@ -276,7 +349,9 @@ enum WorkoutRecommendationService {
                     title: "优先恢复或换肌群",
                     detail: "上次训练距今 \(days) 天，近 7 天已完成 \(recentSets) 组；若仍酸痛，今天降低训练量。",
                     lastTrainedAt: lastDate,
-                    completedSetsLast7Days: recentSets
+                    completedSetsLast7Days: recentSets,
+                    lastWorkoutName: lastSession?.templateName,
+                    lastVolumeSummaries: volumeSummaries
                 )
             } else if days <= 3 || recentSets >= 16 {
                 return MuscleGroupAdvice(
@@ -285,7 +360,9 @@ enum WorkoutRecommendationService {
                     title: "适合中等训练量",
                     detail: "距上次 \(days) 天，近 7 天 \(recentSets) 组；建议保留 1–3 RIR。",
                     lastTrainedAt: lastDate,
-                    completedSetsLast7Days: recentSets
+                    completedSetsLast7Days: recentSets,
+                    lastWorkoutName: lastSession?.templateName,
+                    lastVolumeSummaries: volumeSummaries
                 )
             } else {
                 return MuscleGroupAdvice(
@@ -294,7 +371,9 @@ enum WorkoutRecommendationService {
                     title: "恢复较充分",
                     detail: "距上次 \(days) 天，近 7 天 \(recentSets) 组；可安排主项加不同模式的辅助动作。",
                     lastTrainedAt: lastDate,
-                    completedSetsLast7Days: recentSets
+                    completedSetsLast7Days: recentSets,
+                    lastWorkoutName: lastSession?.templateName,
+                    lastVolumeSummaries: volumeSummaries
                 )
             }
         }
@@ -322,7 +401,9 @@ enum WorkoutRecommendationService {
             workoutName: session.templateName,
             sets: sets,
             workoutNotes: session.notes,
-            performanceNotes: snapshot.performanceNotes
+            performanceNotes: snapshot.performanceNotes,
+            volumeUnit: snapshot.volumeUnit,
+            bodyWeightKgSnapshot: snapshot.bodyWeightKgSnapshot
         )
     }
 

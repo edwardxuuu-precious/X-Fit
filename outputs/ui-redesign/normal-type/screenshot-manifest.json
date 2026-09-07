@@ -1,0 +1,134 @@
+[
+  {
+    "file": "08-weekly-review.png",
+    "test": "RedesignUITests/testCoreGoalReviewAndMuscles()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "1d4bad79cb7fa4b2ebf31ad9b4fceb3e386468f072ffe8338ba28b394c9c98d8"
+  },
+  {
+    "file": "07-goal-home.png",
+    "test": "RedesignUITests/testCoreGoalReviewAndMuscles()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "98ca594696da38772bbed77193eb09819e09ebf5c4df33e0df17ec03f565c277"
+  },
+  {
+    "file": "03b-muscle-back.png",
+    "test": "RedesignUITests/testCoreMuscleSelection()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "2bf7ad54a86c92b6363951da1237749a779e6b140d43179a873c7dce5b9c5c65"
+  },
+  {
+    "file": "03c-muscle-reference-selection.png",
+    "test": "RedesignUITests/testCoreMuscleSelection()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "a1b23564c5f7f473bd49b7b8c375e4300fe319b8a568f3708c9259040ec58e74"
+  },
+  {
+    "file": "03-muscle-selection.png",
+    "test": "RedesignUITests/testCoreMuscleSelection()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "a1bd9ad957e9e31c9fb3d2934414103900c848ac76516c5e4062f98dfc084379"
+  },
+  {
+    "file": "02a-training-completed-set.png",
+    "test": "RedesignUITests/testCoreTrainingAndResume()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "6e556777b0584bf8d0e3d69500e32f5ae35323c0c8c038222a5c1038db0566d3"
+  },
+  {
+    "file": "02-training-record.png",
+    "test": "RedesignUITests/testCoreTrainingAndResume()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "fe9409a5432443d5e1693da5a8936cac554d7f2b6e414d2b6a26f2ce2ef741ed"
+  },
+  {
+    "file": "01-training-home.png",
+    "test": "RedesignUITests/testCoreTrainingAndResume()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "7b4afba14c0da520e94064c9f1f5f67fc676000657f00aa6e4962d0d049db2d1"
+  },
+  {
+    "file": "11-cycle-export.png",
+    "test": "RedesignUITests/testCycleImportAndExportRemainReachable()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "baea161157465fd34664567d26986c51b6820f893d13432233e3e37743198041"
+  },
+  {
+    "file": "22-preferences.png",
+    "test": "RedesignUITests/testProfileBackupDirectEntryAndSettingsTabs()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "ad7daac08c8f247189ffe59df79f25a7dba9d6813d30327fae0dda804ffb1cc1"
+  },
+  {
+    "file": "21-backup.png",
+    "test": "RedesignUITests/testProfileBackupDirectEntryAndSettingsTabs()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "cc15d3eb2e34efd2df72f919b522b5db142a42552abe86c7a802f8cb8a9ed433"
+  },
+  {
+    "file": "20-profile.png",
+    "test": "RedesignUITests/testProfileBackupDirectEntryAndSettingsTabs()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "9ca85be2384e43f254d0fd0d34209aa1692912dda421daa18d2ab2fc1ccd121d"
+  },
+  {
+    "file": "17-recipe-steps.png",
+    "test": "RedesignUITests/testRecipeIngredientsStepsAndReferencePortions()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "e1ee695aa12b1e23e44e401756971d62b99b74a2119abd96130605015fc0dd58"
+  },
+  {
+    "file": "16-recipe-ingredients.png",
+    "test": "RedesignUITests/testRecipeIngredientsStepsAndReferencePortions()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "0020f5c0608521a90cd89c3d8d3edced75271d5f389b24985f4c86f27442f128"
+  },
+  {
+    "file": "19-review-draft.png",
+    "test": "RedesignUITests/testReviewDraftSaveAndHistoricalReadback()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "ef85e68ea0287cc45b97df0e899edeb40c4f5f31b50b37fea9675bec654a52aa"
+  },
+  {
+    "file": "19a-review-keyboard.png",
+    "test": "RedesignUITests/testReviewDraftSaveAndHistoricalReadback()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "f37c473c1e290317bfadfd1aa7eaed5a0d38cb4ca663a9a2a2d6c02117fef31d"
+  },
+  {
+    "file": "18-weekly-progress.png",
+    "test": "RedesignUITests/testReviewDraftSaveAndHistoricalReadback()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/supplement.xcresult",
+    "sha256": "be97c7f3d49764fbcb2909ad8fdfb860b2191e476cedbd8055995408a8f066c9"
+  },
+  {
+    "file": "06c-portion-info.png",
+    "test": "RedesignUITests/testCoreFoodActualAndPrep()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/final-two.xcresult",
+    "sha256": "9c74b29f7bcfe09facf8f5b5c5962ef2de7265a46ac1459705fa5153e389e433"
+  },
+  {
+    "file": "06b-shopping-list.png",
+    "test": "RedesignUITests/testCoreFoodActualAndPrep()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/final-two.xcresult",
+    "sha256": "8c6bc0f705641eef797ac9d42e53785a038b5941e3a7a5eeaee4d1c20f16daab"
+  },
+  {
+    "file": "06-tomorrow-prep.png",
+    "test": "RedesignUITests/testCoreFoodActualAndPrep()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/final-two.xcresult",
+    "sha256": "5974246c520f2771981603b2e4ae882713e5853d597d2cbaf3eaa899a09927be"
+  },
+  {
+    "file": "05-actual-meal-editor.png",
+    "test": "RedesignUITests/testCoreFoodActualAndPrep()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/final-two.xcresult",
+    "sha256": "2da2d1963982da5c9658299d3385d1772456f056ebbd8504dd39d5128ee2168c"
+  },
+  {
+    "file": "04-food-home.png",
+    "test": "RedesignUITests/testCoreFoodActualAndPrep()",
+    "bundle": "artifacts/stage-validation/20260907-full-ui-final/final-two.xcresult",
+    "sha256": "76117af3aa676b6b382ccecc8560443997341021379b4c4fd187e4e8b809aed7"
+  }
+]

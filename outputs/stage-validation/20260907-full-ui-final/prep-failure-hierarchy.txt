@@ -1,0 +1,303 @@
+Application, 0x1148dc3c0, pid: 73996, label: 'X-Fit' <App element pid: 73996>
+  Window (Main), 0x1148de580, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4361881600.4>
+    Other, 0x1148ded00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443254592.480>
+    Other, 0x1148de6c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443751936.5>
+      Other, 0x1148de440, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443405312.6>
+        Other, 0x1148de940, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 73996, elementOrHash.elementID: 4955822336.375>
+        Other, 0x1148dea80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4361880576.7>
+          Other, 0x114fb4b40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443167744.8>
+            Other, 0x114fadcc0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443743872.9>
+              Other, 0x114faca00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443758080.10>
+                Other, 0x114facdc0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443277056.141>
+                  Other, 0x114facf00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4361887744.142>
+                    Other, 0x114fad040, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443365696.143>
+                      Other, 0x114fad180, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443364800.144>
+                        Other, 0x114fad2c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443280192.145>
+                          Other, 0x114fad900, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443280640.146>
+                            Other, 0x114fad540, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443286912.148>
+                              Other, 0x114fad400, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4442697088.150>
+                                Other, 0x114fad7c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443447616.151>
+                                  ScrollView, 0x114fad680, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4361528320.152>
+                                    Other, 0x114facb40, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443279744.153>
+                                      Other, 0x114fada40, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4442627968.157>
+                                    Other, 0x114fafe80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4443279296.154>
+                                      Other, 0x114fadb80, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4933799040.158>
+                                        Image, 0x114facc80, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay' <AX element pid: 73996, elementOrHash.elementID: 4935483904.173>
+                                        Other, 0x114fc8000, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4935126016.174>
+                                          Other, 0x114fc8140, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4442633792.215>
+                                        Other, 0x114fc8280, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4933799680.175>
+                                          Other, 0x114fc83c0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4443255488.216>
+                                          Other, 0x114fc8500, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 73996, elementOrHash.elementID: 4443258176.217>
+                                    Other, 0x114fc8640, {{0.0, 62.0}, {402.0, 1009.0}} <AX element pid: 73996, elementOrHash.elementID: 4851954176.155>
+                                      StaticText, 0x114fc8780, {{20.0, 78.0}, {140.3, 13.3}}, label: 'X-FIT / NUTRITION' <AX element pid: 73996, elementOrHash.elementID: 4443366592.159>
+                                      StaticText, 0x114fc88c0, {{20.0, 106.2}, {84.0, 26.3}}, label: '今日饮食' <AX element pid: 73996, elementOrHash.elementID: 4443367040.160>
+                                      Button, 0x114fc8a00, {{338.0, 97.3}, {44.0, 44.0}}, identifier: '饮食-日期选择', label: '选择饮食日期' <AX element pid: 73996, elementOrHash.elementID: 4443367488.161>
+                                      StaticText, 0x114fc8b40, {{20.0, 147.3}, {96.3, 18.0}}, label: '9月7日 星期一' <AX element pid: 73996, elementOrHash.elementID: 4443368384.162>
+                                      StaticText, 0x114fc8c80, {{323.3, 149.2}, {58.7, 14.3}}, identifier: '饮食-已记录餐数', label: '1/3 餐已记', value: 1/3 <AX element pid: 73996, elementOrHash.elementID: 4443368832.163>
+                                      Other, 0x114fc8dc0, {{19.3, 201.3}, {362.7, 144.0}}, identifier: '饮食-餐次-早餐' <AX element pid: 73996, elementOrHash.elementID: 4443373568.164>
+                                        Image, 0x114fc8f00, {{19.3, 201.3}, {117.3, 88.0}}, label: 'EditorialBreakfast' <AX element pid: 73996, elementOrHash.elementID: 4443369728.176>
+                                        StaticText, 0x114fc9040, {{60.0, 275.3}, {36.0, 11.0}}, label: '菜式示意' <AX element pid: 73996, elementOrHash.elementID: 4443370176.177>
+                                        StaticText, 0x114fc9180, {{152.0, 201.3}, {24.0, 14.3}}, label: '早餐' <AX element pid: 73996, elementOrHash.elementID: 4443371072.178>
+                                        Image, 0x114fc92c0, {{325.0, 202.3}, {12.0, 12.0}}, identifier: 'checkmark.circle.fill', label: '已选择', Selected <AX element pid: 73996, elementOrHash.elementID: 4443672064.368>
+                                        StaticText, 0x114fc9400, {{325.0, 201.3}, {57.0, 14.3}}, label: '已记录' <AX element pid: 73996, elementOrHash.elementID: 4443672960.369>
+                                        StaticText, 0x114fc9540, {{152.0, 223.7}, {101.3, 20.3}}, label: '小馒头＋蒸蛋' <AX element pid: 73996, elementOrHash.elementID: 4443371520.179>
+                                        StaticText, 0x114fc9680, {{152.0, 252.0}, {59.7, 14.3}}, label: '营养待核算' <AX element pid: 73996, elementOrHash.elementID: 4443673408.370>
+                                        Button, 0x114fc97c0, {{294.0, 301.3}, {88.0, 44.0}}, identifier: '饮食-调整实吃-早餐', label: '调整实吃' <AX element pid: 73996, elementOrHash.elementID: 4443673856.371>
+                                      Other, 0x114fc9900, {{19.3, 369.7}, {362.7, 144.0}}, identifier: '饮食-餐次-午餐' <AX element pid: 73996, elementOrHash.elementID: 4443378496.165>
+                                        Image, 0x114fc9a40, {{19.3, 369.7}, {117.3, 88.0}}, label: 'EditorialLunch' <AX element pid: 73996, elementOrHash.elementID: 4443374016.183>
+                                        StaticText, 0x114fc9b80, {{60.0, 443.7}, {36.0, 11.0}}, label: '菜式示意' <AX element pid: 73996, elementOrHash.elementID: 4443374464.184>
+                                        StaticText, 0x114fc9cc0, {{152.0, 369.7}, {24.0, 14.3}}, label: '午餐' <AX element pid: 73996, elementOrHash.elementID: 4443374912.185>
+                                        StaticText, 0x114fc9e00, {{152.0, 392.0}, {202.3, 20.3}}, label: '姜葱鸡片＋清炒冬瓜＋米饭' <AX element pid: 73996, elementOrHash.elementID: 4443375360.186>
+                                        StaticText, 0x114fc9f40, {{152.0, 420.3}, {143.3, 14.3}}, label: '计划已安排，等待实吃记录' <AX element pid: 73996, elementOrHash.elementID: 4443376256.187>
+                                        Button, 0x114fca080, {{20.0, 469.7}, {175.0, 44.0}}, identifier: '饮食-按计划吃了-午餐', label: '按计划吃了', Selected <AX element pid: 73996, elementOrHash.elementID: 4443377600.188>
+                                          Image, 0x114fca1c0, {{59.3, 485.0}, {13.7, 13.3}}, identifier: 'checkmark', label: '已选择', Selected <AX element pid: 73996, elementOrHash.elementID: 4443376704.220>
+                                          StaticText, 0x114fca300, {{83.0, 482.7}, {74.7, 18.0}}, label: '按计划吃了' <AX element pid: 73996, elementOrHash.elementID: 4443377152.221>
+                                        Button, 0x114fca440, {{207.0, 469.7}, {175.0, 44.0}}, identifier: '饮食-调整实吃-午餐', label: '调整实吃' <AX element pid: 73996, elementOrHash.elementID: 4443378048.189>
+                                      Other, 0x114fca580, {{19.3, 538.0}, {362.7, 144.0}}, identifier: '饮食-餐次-晚餐' <AX element pid: 73996, elementOrHash.elementID: 4443383424.166>
+                                        Image, 0x114fca6c0, {{19.3, 538.0}, {117.3, 88.0}}, label: 'EditorialDinner' <AX element pid: 73996, elementOrHash.elementID: 4443378944.190>
+                                        StaticText, 0x114fca800, {{60.0, 612.0}, {36.0, 11.0}}, label: '菜式示意' <AX element pid: 73996, elementOrHash.elementID: 4443379840.191>
+                                        StaticText, 0x114fca940, {{152.0, 538.0}, {24.0, 14.3}}, label: '晚餐' <AX element pid: 73996, elementOrHash.elementID: 4443380288.192>
+                                        StaticText, 0x114fcaa80, {{152.0, 560.3}, {168.7, 20.3}}, label: '番茄蒸蛋＋菜心＋米饭' <AX element pid: 73996, elementOrHash.elementID: 4443380736.193>
+                                        StaticText, 0x114fcabc0, {{152.0, 588.7}, {143.3, 14.3}}, label: '计划已安排，等待实吃记录' <AX element pid: 73996, elementOrHash.elementID: 4443381184.194>
+                                        Button, 0x114fcad00, {{20.0, 638.0}, {175.0, 44.0}}, identifier: '饮食-按计划吃了-晚餐', label: '按计划吃了', Selected <AX element pid: 73996, elementOrHash.elementID: 4443382528.195>
+                                          Image, 0x114fcae40, {{59.3, 653.3}, {13.7, 13.3}}, identifier: 'checkmark', label: '已选择', Selected <AX element pid: 73996, elementOrHash.elementID: 4443381632.222>
+                                          StaticText, 0x114fcaf80, {{83.0, 651.0}, {74.7, 18.0}}, label: '按计划吃了' <AX element pid: 73996, elementOrHash.elementID: 4443382080.223>
+                                        Button, 0x114fcb0c0, {{207.0, 638.0}, {175.0, 44.0}}, identifier: '饮食-调整实吃-晚餐', label: '调整实吃' <AX element pid: 73996, elementOrHash.elementID: 4443382976.196>
+                                      Button, 0x114fcb200, {{20.0, 718.0}, {362.0, 92.0}}, identifier: '饮食-明日备餐', label: '明日备餐、午晚餐 · 采购清单 · 一键分享' <AX element pid: 73996, elementOrHash.elementID: 4443386112.167>
+                                        Image, 0x114fcb340, {{32.0, 753.0}, {24.3, 22.3}}, identifier: 'basket', label: 'basket' <AX element pid: 73996, elementOrHash.elementID: 4443383872.197>
+                                        StaticText, 0x114fcb480, {{84.0, 741.8}, {76.7, 24.0}}, label: '明日备餐' <AX element pid: 73996, elementOrHash.elementID: 4443384320.198>
+                                        StaticText, 0x114fcb5c0, {{84.0, 771.8}, {152.0, 14.3}}, label: '午晚餐 · 采购清单 · 一键分享' <AX element pid: 73996, elementOrHash.elementID: 4443384768.199>
+                                        Image, 0x114fcb700, {{364.3, 756.3}, {15.3, 15.3}}, identifier: 'arrow.up.right', label: 'arrow.up.right' <AX element pid: 73996, elementOrHash.elementID: 4443385664.200>
+                                      Button, 0x114fcb840, {{20.0, 834.0}, {362.0, 52.0}}, identifier: '饮食-记录外卖加餐', label: '记录外卖 / 加餐、手动填写' <AX element pid: 73996, elementOrHash.elementID: 4443389248.168>
+                                        Image, 0x114fcb980, {{25.0, 853.0}, {14.0, 14.0}}, identifier: 'plus', label: '添加' <AX element pid: 73996, elementOrHash.elementID: 4443386560.201>
+                                        StaticText, 0x114fcbac0, {{57.0, 851.0}, {101.7, 18.0}}, label: '记录外卖 / 加餐' <AX element pid: 73996, elementOrHash.elementID: 4443387008.202>
+                                        StaticText, 0x114fcbc00, {{312.7, 852.8}, {48.0, 14.3}}, label: '手动填写' <AX element pid: 73996, elementOrHash.elementID: 4443387456.203>
+                                        Image, 0x114fcbd40, {{375.7, 855.3}, {5.7, 9.7}}, identifier: 'chevron.right', label: '前进' <AX element pid: 73996, elementOrHash.elementID: 4443388352.204>
+                                      Button, 0x114fcbe80, {{20.0, 886.3}, {362.0, 52.0}}, identifier: '饮食-饮水', label: '饮水、0 ml' <AX element pid: 73996, elementOrHash.elementID: 4443440896.169>
+                                        Image, 0x114fcc000, {{26.3, 904.0}, {11.7, 17.0}}, identifier: 'drop', label: 'drop' <AX element pid: 73996, elementOrHash.elementID: 4443439104.205>
+                                        StaticText, 0x114fcc140, {{57.0, 903.3}, {30.0, 18.0}}, label: '饮水' <AX element pid: 73996, elementOrHash.elementID: 4443439552.206>
+                                        StaticText, 0x114fcc280, {{336.0, 905.2}, {24.7, 14.3}}, label: '0 ml' <AX element pid: 73996, elementOrHash.elementID: 4443440000.207>
+                                        Image, 0x114fcc3c0, {{375.7, 907.7}, {5.7, 9.7}}, identifier: 'chevron.right', label: '前进' <AX element pid: 73996, elementOrHash.elementID: 4443440448.208>
+                                      Button, 0x114fcc500, {{20.0, 938.7}, {362.0, 52.0}}, identifier: '饮食-全部记录', label: '饮食记录' <AX element pid: 73996, elementOrHash.elementID: 4443443136.170>
+                                        Image, 0x114fcc640, {{21.7, 956.3}, {19.0, 17.0}}, identifier: 'clock.arrow.circlepath', label: 'clock.arrow.circlepath' <AX element pid: 73996, elementOrHash.elementID: 4443441344.209>
+                                        StaticText, 0x114fcc780, {{57.0, 955.7}, {59.7, 18.0}}, label: '饮食记录' <AX element pid: 73996, elementOrHash.elementID: 4443441792.210>
+                                        Image, 0x114fcc8c0, {{375.7, 960.0}, {5.7, 9.7}}, identifier: 'chevron.right', label: '前进' <AX element pid: 73996, elementOrHash.elementID: 4443442688.211>
+                                      Button, 0x114fcca00, {{20.0, 991.0}, {362.0, 52.0}}, identifier: '饮食-餐单日历', label: '餐单日历与食谱' <AX element pid: 73996, elementOrHash.elementID: 4443446272.171>
+                                        Image, 0x114fccb40, {{23.7, 1009.3}, {16.7, 15.3}}, identifier: 'calendar', label: '日历' <AX element pid: 73996, elementOrHash.elementID: 4443443584.212>
+                                        StaticText, 0x114fccc80, {{57.0, 1008.0}, {104.3, 18.0}}, label: '餐单日历与食谱' <AX element pid: 73996, elementOrHash.elementID: 4443444480.213>
+                                        Image, 0x114fccdc0, {{375.7, 1012.3}, {5.7, 9.7}}, identifier: 'chevron.right', label: '前进' <AX element pid: 73996, elementOrHash.elementID: 4443445376.214>
+                                    Other, 0x114fccf00, {{369.0, 62.0}, {30.0, 729.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 73996, elementOrHash.elementID: 4851950080.156>
+                                      Other, 0x114fcd040, {{396.0, 65.0}, {3.0, 547.7}} <AX element pid: 73996, elementOrHash.elementID: 4443288704.172>
+                                    Other, 0x114fcd180, {{369.0, 62.0}, {30.0, 729.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 73996, elementOrHash.elementID: 4851950080.156>
+                                      Other, 0x114fcd2c0, {{396.0, 65.0}, {3.0, 547.7}} <AX element pid: 73996, elementOrHash.elementID: 4443288704.172>
+                          Other, 0x114fcd400, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4850359296.147>
+                            Other, 0x114fcd540, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4850361344.149>
+              Other, 0x114fcd680, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4443744320.11>
+                Other, 0x114fcd7c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4442671744.13>
+                  TabBar, 0x114fcd900, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Tab Bar' <AX element pid: 73996, elementOrHash.elementID: 4445130496.16>
+                    Other, 0x114fcda40, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 73996, elementOrHash.elementID: 4443744768.19>
+                      Other, 0x114fcdb80, {{21.0, 791.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4442677120.22>
+                      Other, 0x114fcdcc0, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 73996, elementOrHash.elementID: 4443745216.23>
+                        Button, 0x114fcde00, {{25.0, 795.0}, {98.0, 54.0}}, identifier: 'dumbbell.fill', label: '训练' <AX element pid: 73996, elementOrHash.elementID: 4361853184.28>
+                          Image, 0x114fcdf40, {{57.0, 804.3}, {35.0, 21.0}}, identifier: 'dumbbell.fill', label: 'dumbbell.fill' <AX element pid: 73996, elementOrHash.elementID: 4443758592.37>
+                        Button, 0x114fce080, {{109.7, 795.0}, {98.0, 54.0}}, identifier: 'fork.knife', label: '饮食', Selected <AX element pid: 73996, elementOrHash.elementID: 4361855744.29>
+                          Image, 0x114fce1c0, {{147.7, 798.7}, {21.7, 30.7}}, identifier: 'fork.knife', label: 'Food' <AX element pid: 73996, elementOrHash.elementID: 4443759616.38>
+                        Button, 0x114fce300, {{194.3, 795.0}, {98.0, 54.0}}, identifier: 'scope', label: '目标' <AX element pid: 73996, elementOrHash.elementID: 4361858304.30>
+                          Image, 0x114fce440, {{227.3, 799.0}, {31.7, 31.7}}, identifier: 'scope', label: 'scope' <AX element pid: 73996, elementOrHash.elementID: 4443760640.39>
+                        Button, 0x114fce580, {{279.0, 795.0}, {98.0, 54.0}}, identifier: 'person.fill', label: '我的' <AX element pid: 73996, elementOrHash.elementID: 4361860864.31>
+                          Image, 0x114fce6c0, {{315.0, 802.7}, {25.3, 24.7}}, identifier: 'person.fill', label: 'person.fill' <AX element pid: 73996, elementOrHash.elementID: 4443761664.40>
+                      Other, 0x114fce800, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4445131136.24>
+                        Other, 0x114fce940, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443747008.32>
+                          Other, 0x114fcea80, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443745664.41>
+                          Other, 0x114fcebc0, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443747456.42>
+                            Other, 0x114fced00, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443748800.46>
+                              Other, 0x114fcee40, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443749248.49>
+                                Other, 0x114fcef80, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443749696.52>
+                              Other, 0x114fcf0c0, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443747904.50>
+                            Other, 0x114fcf200, {{109.7, 795.0}, {98.0, 54.0}} <AX element pid: 73996, elementOrHash.elementID: 4443748352.47>
+                Other, 0x114fcf340, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4443756544.14>
+                  Other, 0x114fcf480, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4442692608.17>
+                    Other, 0x114fcf5c0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4442677568.20>
+                      Other, 0x114fcf700, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4442678016.25>
+                        Other, 0x114fcf840, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4443762688.33>
+                          Other, 0x114fcf980, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 73996, elementOrHash.elementID: 4442678464.43>
+    Other, 0x114fcfac0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4975513088.372>
+      Other, 0x114fcfc00, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 73996, elementOrHash.elementID: 4955822976.373>
+      Other, 0x114fcfd40, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4955820416.374>
+        Other, 0x114fcfe80, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443671616.376>
+          Other, 0x114fe0000, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443668480.377>
+            Other, 0x114fe0140, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4855026688.378>
+              Other, 0x114fe0280, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443484864.379>
+                Other, 0x114fe03c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443675648.380>
+                  NavigationBar, 0x114fe0500, {{0.0, 78.0}, {402.0, 54.0}}, identifier: '明日备餐' <AX element pid: 73996, elementOrHash.elementID: 4935134464.381>
+                    Other, 0x114fe0640, {{20.0, 82.0}, {58.0, 36.0}}, identifier: '备餐-完成', label: '完成' <AX element pid: 73996, elementOrHash.elementID: 4473642496.384>
+                      Other, 0x114fe0780, {{20.0, 82.0}, {58.0, 36.0}} <AX element pid: 73996, elementOrHash.elementID: 4443600448.389>
+                        Button, 0x114fe08c0, {{20.0, 82.0}, {58.0, 36.0}}, identifier: '备餐-完成', label: '完成' <AX element pid: 73996, elementOrHash.elementID: 4443601344.392>
+                    StaticText, 0x114fe0a00, {{167.0, 89.7}, {67.7, 20.7}}, label: '明日备餐' <AX element pid: 73996, elementOrHash.elementID: 4954096512.385>
+                    Other, 0x114fe0b40, {{334.0, 82.0}, {48.0, 36.0}}, identifier: '备餐-分享', label: '分享备餐与采购清单' <AX element pid: 73996, elementOrHash.elementID: 4473641216.386>
+                      Other, 0x114fe0c80, {{334.0, 82.0}, {48.0, 36.0}} <AX element pid: 73996, elementOrHash.elementID: 4443601792.390>
+                        Button, 0x114fe0dc0, {{334.0, 82.0}, {48.0, 36.0}}, identifier: '备餐-分享', label: '分享备餐与采购清单' <AX element pid: 73996, elementOrHash.elementID: 4443600896.393>
+                  Other, 0x114fe0f00, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443676096.382>
+                    Other, 0x114fe1040, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443602240.387>
+                      Other, 0x114fe1180, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4442699776.391>
+                        Other, 0x114fe12c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443629632.394>
+                          ScrollView, 0x114fe1400, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4361531392.395>
+                            Other, 0x114fe1540, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443669376.397>
+                              Other, 0x114fe1680, {{0.0, 62.0}, {402.0, 124.8}} <AX element pid: 73996, elementOrHash.elementID: 4443474560.403>
+                            Other, 0x114fe17c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4443670272.398>
+                            Other, 0x114fe1900, {{0.0, 132.0}, {402.0, 882.7}} <AX element pid: 73996, elementOrHash.elementID: 4975524352.399>
+                              StaticText, 0x114fe1a40, {{20.0, 152.0}, {72.0, 14.3}}, label: '2026-09-08' <AX element pid: 73996, elementOrHash.elementID: 4443485760.404>
+                              StaticText, 0x114fe1b80, {{20.0, 174.3}, {84.0, 26.3}}, label: '照单采购' <AX element pid: 73996, elementOrHash.elementID: 4443485312.405>
+                              StaticText, 0x114fe1cc0, {{20.0, 208.7}, {137.0, 18.0}}, identifier: '备餐-份数摘要', label: '1 人 · 2 餐 · 每餐 1 份' <AX element pid: 73996, elementOrHash.elementID: 4443484416.406>
+                              Button, 0x114fe1e00, {{20.0, 234.7}, {104.7, 44.0}}, identifier: '备餐-首屏用量说明', label: '2 项用量待确认' <AX element pid: 73996, elementOrHash.elementID: 4443483968.407>
+                                Image, 0x114fe1f40, {{21.0, 250.3}, {12.3, 12.3}}, identifier: 'info.circle', label: '简介' <AX element pid: 73996, elementOrHash.elementID: 4443473216.414>
+                                StaticText, 0x114fe2080, {{20.0, 234.7}, {104.7, 44.0}}, label: '2 项用量待确认' <AX element pid: 73996, elementOrHash.elementID: 4443472768.415>
+                              Button, 0x114fe21c0, {{60.7, 319.0}, {103.7, 19.0}}, identifier: '备餐-菜单页', label: '菜单与分装' <AX element pid: 73996, elementOrHash.elementID: 4443479936.408>
+                                Image, 0x114fe2300, {{60.7, 319.3}, {20.3, 18.7}}, identifier: 'takeoutbag.and.cup.and.straw', label: 'takeoutbag.and.cup.and.straw' <AX element pid: 73996, elementOrHash.elementID: 4443474112.416>
+                                StaticText, 0x114fe2440, {{60.7, 319.0}, {103.7, 19.0}}, label: '菜单与分装' <AX element pid: 73996, elementOrHash.elementID: 4443479040.417>
+                              Button, 0x114fe2580, {{203.0, 304.7}, {175.0, 48.0}}, identifier: '备餐-采购页', label: '采购清单', Selected <AX element pid: 73996, elementOrHash.elementID: 4443480832.409>
+                                Image, 0x114fe26c0, {{248.0, 320.7}, {17.7, 16.3}}, identifier: 'basket', label: 'basket' <AX element pid: 73996, elementOrHash.elementID: 4443478144.418>
+                                StaticText, 0x114fe2800, {{248.0, 319.8}, {87.2, 18.0}}, label: '采购清单' <AX element pid: 73996, elementOrHash.elementID: 4443478592.419>
+                              StaticText, 0x114fe2940, {{20.0, 378.7}, {76.7, 24.0}}, label: '需要购买' <AX element pid: 73996, elementOrHash.elementID: 4443631424.441>
+                              StaticText, 0x114fe2a80, {{358.7, 383.5}, {23.3, 14.3}}, label: '4 项' <AX element pid: 73996, elementOrHash.elementID: 4443631872.442>
+                              StaticText, 0x114fe2bc0, {{20.0, 406.7}, {167.3, 14.3}}, label: '已合并 2 餐 · 克重为未称重参考' <AX element pid: 73996, elementOrHash.elementID: 4443633216.443>
+                              Button, 0x114fe2d00, {{36.0, 435.0}, {330.0, 72.0}}, identifier: '备餐用量-冬瓜', label: '冬瓜、用于 1 餐、约 250 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443628736.444>
+                                StaticText, 0x114fe2e40, {{36.0, 451.2}, {34.0, 20.3}}, label: '冬瓜' <AX element pid: 73996, elementOrHash.elementID: 4443633664.452>
+                                StaticText, 0x114fe2f80, {{36.0, 476.5}, {48.3, 14.3}}, label: '用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443634112.453>
+                                StaticText, 0x114fe30c0, {{292.3, 462.0}, {55.3, 18.0}}, identifier: '备餐用量-冬瓜', label: '约 250 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443634560.454>
+                                Image, 0x114fe3200, {{358.3, 465.0}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443628288.455>
+                              Button, 0x114fe3340, {{36.0, 507.3}, {330.0, 72.0}}, identifier: '备餐用量-生大米', label: '生大米、用于 2 餐、约 120 g 合计 · 用于 2 餐' <AX element pid: 73996, elementOrHash.elementID: 4443525952.445>
+                                StaticText, 0x114fe3480, {{36.0, 523.5}, {50.7, 20.3}}, label: '生大米' <AX element pid: 73996, elementOrHash.elementID: 4443622912.456>
+                                StaticText, 0x114fe35c0, {{36.0, 548.8}, {50.0, 14.3}}, label: '用于 2 餐' <AX element pid: 73996, elementOrHash.elementID: 4443623360.457>
+                                StaticText, 0x114fe3700, {{292.3, 534.3}, {55.3, 18.0}}, identifier: '备餐用量-生大米', label: '约 120 g 合计 · 用于 2 餐' <AX element pid: 73996, elementOrHash.elementID: 4443619328.458>
+                                Image, 0x114fe3840, {{358.3, 537.3}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443619776.459>
+                              Button, 0x114fe3980, {{36.0, 579.7}, {330.0, 72.0}}, identifier: '备餐用量-番茄', label: '番茄、用于 1 餐、约 75 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443525056.446>
+                                StaticText, 0x114fe3ac0, {{36.0, 595.8}, {34.0, 20.3}}, label: '番茄' <AX element pid: 73996, elementOrHash.elementID: 4443527296.460>
+                                StaticText, 0x114fe3c00, {{36.0, 621.2}, {48.3, 14.3}}, label: '用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443526848.461>
+                                StaticText, 0x114fe3d40, {{302.0, 606.7}, {45.7, 18.0}}, identifier: '备餐用量-番茄', label: '约 75 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443526400.462>
+                                Image, 0x114fe3e80, {{358.3, 609.7}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443525504.463>
+                              Button, 0x114fec000, {{36.0, 652.0}, {330.0, 72.0}}, identifier: '备餐用量-菜心', label: '菜心、用于 1 餐、约 150 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443523264.447>
+                                StaticText, 0x114fec140, {{36.0, 668.2}, {34.0, 20.3}}, label: '菜心' <AX element pid: 73996, elementOrHash.elementID: 4443524608.464>
+                                StaticText, 0x114fec280, {{36.0, 693.5}, {48.3, 14.3}}, label: '用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443524160.465>
+                                StaticText, 0x114fec3c0, {{292.3, 679.0}, {55.3, 18.0}}, identifier: '备餐用量-菜心', label: '约 150 g 合计 · 用于 1 餐' <AX element pid: 73996, elementOrHash.elementID: 4443522368.466>
+                                Image, 0x114fec500, {{358.3, 682.0}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443523712.467>
+                              Button, 0x114fec640, {{20.0, 744.0}, {362.0, 60.3}}, identifier: '备餐-用量说明', label: '2 项食材用量待确认、去皮鸡肉 · 鸡蛋' <AX element pid: 73996, elementOrHash.elementID: 4443534016.448>
+                                Image, 0x114fec780, {{21.7, 764.3}, {20.0, 20.0}}, identifier: 'info.circle', label: '简介' <AX element pid: 73996, elementOrHash.elementID: 4443522816.468>
+                                StaticText, 0x114fec8c0, {{55.3, 756.0}, {132.0, 18.0}}, label: '2 项食材用量待确认' <AX element pid: 73996, elementOrHash.elementID: 4443521920.469>
+                                StaticText, 0x114feca00, {{55.3, 778.0}, {82.0, 14.3}}, label: '去皮鸡肉 · 鸡蛋' <AX element pid: 73996, elementOrHash.elementID: 4443521472.470>
+                                Image, 0x114fecb40, {{375.3, 769.0}, {6.0, 10.3}}, identifier: 'chevron.right', label: '前进' <AX element pid: 73996, elementOrHash.elementID: 4443521024.471>
+                              Button, 0x114fecc80, {{20.0, 824.3}, {362.0, 58.0}}, label: '家中常备 · 核对库存、先看家里有没有，缺少再买' <AX element pid: 73996, elementOrHash.elementID: 4443534912.449>
+                                Image, 0x114fecdc0, {{24.0, 836.0}, {16.0, 22.7}}, identifier: 'cabinet', label: 'cabinet' <AX element pid: 73996, elementOrHash.elementID: 4443534464.472>
+                                StaticText, 0x114fecf00, {{56.0, 834.7}, {131.3, 18.0}}, label: '家中常备 · 核对库存' <AX element pid: 73996, elementOrHash.elementID: 4443535808.473>
+                                StaticText, 0x114fed040, {{56.0, 857.7}, {143.3, 14.3}}, label: '先看家里有没有，缺少再买' <AX element pid: 73996, elementOrHash.elementID: 4443536256.474>
+                                Image, 0x114fed180, {{374.3, 847.3}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443536704.475>
+                              Button, 0x114fed2c0, {{20.0, 902.3}, {362.0, 58.0}}, label: '烹调用水、备好清水，无需计入采购' <AX element pid: 73996, elementOrHash.elementID: 4443533120.450>
+                                Image, 0x114fed400, {{25.3, 914.0}, {13.7, 20.0}}, identifier: 'drop', label: 'drop' <AX element pid: 73996, elementOrHash.elementID: 4443535360.476>
+                                StaticText, 0x114fed540, {{56.0, 912.7}, {59.7, 18.0}}, label: '烹调用水' <AX element pid: 73996, elementOrHash.elementID: 4443530432.477>
+                                StaticText, 0x114fed680, {{56.0, 935.7}, {131.3, 14.3}}, label: '备好清水，无需计入采购' <AX element pid: 73996, elementOrHash.elementID: 4443530880.478>
+                                Image, 0x114fed7c0, {{374.3, 925.3}, {7.0, 12.0}}, identifier: 'collapsed' <AX element pid: 73996, elementOrHash.elementID: 4443532224.479>
+                              StaticText, 0x114fed900, {{20.0, 980.3}, {345.7, 14.3}}, label: '查看食材行可展开原配方用量；个人主食份量仍待整体菜单确认。' <AX element pid: 73996, elementOrHash.elementID: 4443529088.451>
+                            Other, 0x114feda40, {{369.0, 132.0}, {30.0, 633.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 73996, elementOrHash.elementID: 4935486976.400>
+                              Other, 0x114fedb80, {{396.0, 135.0}, {3.0, 572.3}} <AX element pid: 73996, elementOrHash.elementID: 4443595968.413>
+                            Other, 0x114fedcc0, {{369.0, 132.0}, {30.0, 633.0}}, label: 'Vertical scroll bar, 2 pages', value: 0% <AX element pid: 73996, elementOrHash.elementID: 4935486976.400>
+                              Other, 0x114fede00, {{396.0, 135.0}, {3.0, 572.3}} <AX element pid: 73996, elementOrHash.elementID: 4443595968.413>
+                          Button, 0x114fedf40, {{20.0, 777.0}, {362.0, 51.0}}, identifier: '备餐-底部分享', label: '分享给备餐人' <AX element pid: 73996, elementOrHash.elementID: 4443629184.396>
+                            Image, 0x114fee080, {{145.7, 793.3}, {13.7, 18.3}}, identifier: 'square.and.arrow.up', label: '共享' <AX element pid: 73996, elementOrHash.elementID: 4443626944.401>
+                            StaticText, 0x114fee1c0, {{20.0, 777.0}, {362.0, 51.0}}, label: '分享给备餐人' <AX element pid: 73996, elementOrHash.elementID: 4443627840.402>
+                  Other, 0x114fee300, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4975517184.383>
+                    Other, 0x114fee440, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 73996, elementOrHash.elementID: 4975510528.388>
+    Other, 0x114fee580, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 73996, elementOrHash.elementID: 4956303360.481>
+      Other, 0x114fee6c0, {{0.0, 0.0}, {402.0, 874.0}}, identifier: 'PopoverDismissRegion', label: 'dismiss popup' <AX element pid: 73996, elementOrHash.elementID: 4955827456.482>
+      Popover, 0x114fee800, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4933809920.483>
+        Image, 0x114fee940, {{-141.0, 348.0}, {684.0, 666.7}} <AX element pid: 73996, elementOrHash.elementID: 4955828096.484>
+        Other, 0x114feea80, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443624704.485>
+          Other, 0x114feebc0, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4933804160.486>
+            Other, 0x114feed00, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443670720.488>
+              Other, 0x114feee40, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443483520.490>
+                Other, 0x114feef80, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443372416.492>
+                  Other, 0x114fef0c0, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443371968.494>
+                    Other, 0x114fef200, {{9.0, 498.0}, {0.0, 0.0}} <AX element pid: 73996, elementOrHash.elementID: 4443684864.496>
+                      Other, 0x114fef340, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443372864.497>
+                        Other, 0x114fef480, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443685312.498>
+                          Other, 0x114fef5c0, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4933808000.499>
+                            Other, 0x114fef700, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443481280.500>
+          Other, 0x114fef840, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4443450304.487>
+            Other, 0x114fef980, {{9.0, 498.0}, {384.0, 366.7}}, identifier: 'ActivityListView' <AX element pid: 73996, elementOrHash.elementID: 4443625600.489>
+              Other, 0x114fefac0, {{9.0, 498.0}, {384.0, 366.7}}, identifier: 'ShareSheet.RemoteContainerView' <AX element pid: 73996, elementOrHash.elementID: 4443625152.491>
+                Other, 0x114fefc00, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4955829376.493>
+                  Other, 0x114fefd40, {{9.0, 498.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 4956291584.495>
+                    Other, 0x114fefe80, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 73996, elementOrHash.elementID: 1392725882639714732.9999>
+                      Other, 0x114ff4000, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4549104640.133>
+                        Other, 0x114ff4140, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4548426112.134>
+                          Other, 0x114ff4280, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547202560.135>
+                            Other, 0x114ff43c0, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547201664.136>
+                              Other, 0x114ff4500, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547212416.137>
+                                NavigationBar, 0x114ff4640, {{0.0, 0.0}, {384.0, 104.3}}, identifier: 'UIActivityContentView' <AX element pid: 39213, elementOrHash.elementID: 4585865984.138>
+                                  Image, 0x114ff4780, {{24.3, 24.3}, {64.0, 64.0}}, identifier: 'text.cursor', label: 'insert text' <AX element pid: 39213, elementOrHash.elementID: 4547195392.141>
+                                  Other, 0x114ff48c0, {{103.3, 47.3}, {256.3, 18.0}}, identifier: 'LP.CaptionBar.BottomCaption', label: '2026-09-08 午晚餐备餐单 给 1 人准备；每餐 1 份，共 2 餐。早餐自理。
+
+做什么 / 怎么分装 • 午餐：姜葱鸡片＋清炒冬瓜＋米饭   准备 1 份 · 装入午餐餐盒 • 晚餐：番茄蒸蛋＋菜心＋米饭   准备 1 份 · 装入晚餐餐盒
+
+食材按每餐 1 份折算；原配方若为 2 份，备这一餐只取一半。不要把整份配方都装进一人一餐。 已知克重为未称重参考，不是个性化摄入目标。
+
+个人份量待确认 以下肉蛋奶豆等用量需结合医生建议确认；未确认前不能照参考克重定量。 • 去皮鸡肉：待确认用量 · 用于 1 餐 • 鸡蛋：待确认用量 · 用于 1 餐
+
+需要购买 • 冬瓜：约 250 g 合计 · 用于 1 餐 • 生大米：约 120 g 合计 · 用于 2 餐 • 番茄：约 75 g 合计 · 用于 1 餐 • 菜心：约 150 g 合计 · 用于 1 餐
+
+家中常备 · 核对库存 请先核对库存，缺少的再购买。 • 姜葱蒜：用量待折算 · 用于 2 餐   原配方用量参考：姜2片、葱1根或蒜2瓣；按菜式选用（原配方 2 份，每餐取 1 份）；按份数折算。 • 生抽：用量待折算 · 用于 2 餐   原配方用量参考：5 mL量勺1勺；整批两份合计，可不用，不另叠加盐和其他酱料（原配方 2 份，每餐取 1 份）；按份数折算。 • 食用油：用量待折算 · 用于 2 餐   原配方用量参考：5 mL量勺2勺；整批两份合计（原配方 2 份，每餐取 1 份）；按份数折算。
+
+烹调用水 • 温水：用量待折算 · 用于 1 餐   原配方用量参考：蛋液体积约1–1.5倍，随确认蛋量调整（原配方 2 份，每餐取 1 份）；按份数折算。
+
+制作 / 保存与复热（原配方步骤） 下列做法保留原配方的分份说明；本单每餐只准备 1 份，食材与分装按上方备餐单执行。
+
+午餐：姜葱鸡片＋清炒冬瓜＋米饭（原配方 2 份） 1. 大米煮饭。鸡肉按确认量切片，冬瓜去皮切薄片；生肉与熟食砧板分开。 2. 用1勺油炒香姜葱，加入鸡片炒透，可加少量水加盖，禽肉中心至少74°C。 3. 另1勺油炒冬瓜，加少量清水焖软；将生抽在两道菜中分配，不另加浓汤。 4. 鸡片、冬瓜和米饭按两份分盒；稍晚的第2天米饭份尽快冷冻。 厨具：电饭煲、蒸锅或炒锅、5 mL量勺、带盖浅盒 保存与复热：熟食分浅盒尽快降温，2小时' <AX element pid: 39213, elementOrHash.elementID: 4548413952.142>
+                                Other, 0x114ff4a00, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547208384.139>
+                                  Other, 0x114ff4b40, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547203904.143>
+                                    Other, 0x114ff4c80, {{0.0, 0.0}, {384.0, 366.7}}, identifier: 'shareSheet.activity.contentView' <AX element pid: 39213, elementOrHash.elementID: 4547200768.145>
+                                      CollectionView, 0x114ff4dc0, {{0.0, 0.0}, {384.0, 366.7}}, identifier: 'activityCollectionView' <AX element pid: 39213, elementOrHash.elementID: 4350803968.146>
+                                        Other, 0x114ff4f00, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547213760.148>
+                                          Other, 0x114ff5040, {{0.0, 0.0}, {384.0, 159.1}} <AX element pid: 39213, elementOrHash.elementID: 4547201216.153>
+                                        Other, 0x114ff5180, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4547214208.149>
+                                        ScrollView, 0x114ff52c0, {{18.3, 104.3}, {347.3, 123.0}} <AX element pid: 39213, elementOrHash.elementID: 4352016384.150>
+                                          Cell, 0x114ff5400, {{18.3, 104.3}, {82.0, 122.3}}, identifier: 'shareCell', label: 'Reminders' <AX element pid: 39213, elementOrHash.elementID: 4352903808.154>
+                                            Other, 0x114ff5540, {{18.3, 104.3}, {82.0, 122.3}} <AX element pid: 39213, elementOrHash.elementID: 4353578240.159>
+                                              Other, 0x114ff5680, {{18.3, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4546820480.164>
+                                                StaticText, 0x114ff57c0, {{18.3, 196.3}, {82.0, 14.3}}, identifier: 'cellTitleLabel', label: 'Reminders' <AX element pid: 39213, elementOrHash.elementID: 4352904704.176>
+                                                StaticText, 0x114ff5900, {{18.3, 196.3}, {32.7, 30.3}}, identifier: 'cellTitleLabel', label: 'Apple Inc' <AX element pid: 39213, elementOrHash.elementID: 4352905600.177>
+                                                Other, 0x114ff5a40, {{18.3, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4547207488.178>
+                                              Image, 0x114ff5b80, {{25.3, 120.3}, {68.0, 68.0}}, identifier: 'activityImageView' <AX element pid: 39213, elementOrHash.elementID: 4586235392.165>
+                                          Cell, 0x114ff5cc0, {{106.7, 104.3}, {82.0, 122.3}}, identifier: 'shareCell', label: 'X-Fit' <AX element pid: 39213, elementOrHash.elementID: 4352906496.155>
+                                            Other, 0x114ff5e00, {{106.7, 104.3}, {82.0, 122.3}} <AX element pid: 39213, elementOrHash.elementID: 4352871936.160>
+                                              Other, 0x114ff5f40, {{106.7, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4546819840.166>
+                                                StaticText, 0x114ff6080, {{106.7, 196.3}, {82.0, 14.3}}, identifier: 'cellTitleLabel', label: 'X-Fit' <AX element pid: 39213, elementOrHash.elementID: 4352907392.179>
+                                                StaticText, 0x114ff61c0, {{106.7, 196.3}, {32.7, 30.3}}, identifier: 'cellTitleLabel', label: 'Apple Inc' <AX element pid: 39213, elementOrHash.elementID: 4352908288.180>
+                                                Other, 0x114ff6300, {{106.7, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4352879104.181>
+                                              Image, 0x114ff6440, {{113.7, 120.3}, {68.0, 68.0}}, identifier: 'activityImageView' <AX element pid: 39213, elementOrHash.elementID: 4586227200.167>
+                                          Cell, 0x114ff6580, {{195.0, 104.3}, {82.0, 122.3}}, identifier: 'shareCell', label: 'More' <AX element pid: 39213, elementOrHash.elementID: 4352911872.156>
+                                            Other, 0x114ff66c0, {{195.0, 104.3}, {82.0, 122.3}} <AX element pid: 39213, elementOrHash.elementID: 4352878208.161>
+                                              Other, 0x114ff6800, {{195.0, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4586384640.168>
+                                                StaticText, 0x114ff6940, {{195.0, 196.3}, {82.0, 14.3}}, identifier: 'cellTitleLabel', label: 'More' <AX element pid: 39213, elementOrHash.elementID: 4352912768.182>
+                                                StaticText, 0x114ff6a80, {{195.0, 196.3}, {32.7, 30.3}}, identifier: 'cellTitleLabel', label: 'Apple Inc' <AX element pid: 39213, elementOrHash.elementID: 4352913664.183>
+                                                Other, 0x114ff6bc0, {{195.0, 196.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4352874624.184>
+                                              Image, 0x114ff6d00, {{202.0, 120.3}, {68.0, 68.0}}, identifier: 'activityImageView' <AX element pid: 39213, elementOrHash.elementID: 4586238464.169>
+                                        ScrollView, 0x114ff6e40, {{18.3, 228.3}, {347.3, 138.3}} <AX element pid: 39213, elementOrHash.elementID: 4352018944.151>
+                                          Cell, 0x114ff6f80, {{18.3, 228.3}, {82.0, 138.3}}, identifier: 'actionGroupCell', label: 'Copy' <AX element pid: 39213, elementOrHash.elementID: 4352909184.157>
+                                            Other, 0x114ff70c0, {{18.3, 228.3}, {82.0, 138.3}} <AX element pid: 39213, elementOrHash.elementID: 4352872384.162>
+                                              Other, 0x114ff7200, {{18.3, 320.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4586380160.170>
+                                                StaticText, 0x114ff7340, {{18.3, 320.3}, {82.0, 14.3}}, identifier: 'cellTitleLabel', label: 'Copy' <AX element pid: 39213, elementOrHash.elementID: 4352910080.185>
+                                                StaticText, 0x114ff7480, {{18.3, 320.3}, {32.7, 30.3}}, identifier: 'cellTitleLabel', label: 'Apple Inc' <AX element pid: 39213, elementOrHash.elementID: 4352910976.186>
+                                                Other, 0x114ff75c0, {{18.3, 320.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4352874176.187>
+                                              Other, 0x114ff7700, {{24.3, 244.3}, {70.0, 70.0}} <AX element pid: 39213, elementOrHash.elementID: 4586374400.171>
+                                              Image, 0x114ff7840, {{43.3, 261.0}, {32.0, 36.7}}, identifier: 'activityImageView', label: 'copy' <AX element pid: 39213, elementOrHash.elementID: 4586230272.172>
+                                          Cell, 0x114ff7980, {{106.7, 228.3}, {82.0, 138.3}}, identifier: 'actionGroupCell', label: 'Save to Files' <AX element pid: 39213, elementOrHash.elementID: 4352914560.158>
+                                            Other, 0x114ff7ac0, {{106.7, 228.3}, {82.0, 138.3}} <AX element pid: 39213, elementOrHash.elementID: 4352876416.163>
+                                              Other, 0x114ff7c00, {{106.7, 320.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4586385920.173>
+                                                StaticText, 0x114ff7d40, {{106.7, 320.3}, {82.0, 14.3}}, identifier: 'cellTitleLabel', label: 'Save to Files' <AX element pid: 39213, elementOrHash.elementID: 4352915456.188>
+                                                StaticText, 0x114ff7e80, {{106.7, 320.3}, {32.7, 30.3}}, identifier: 'cellTitleLabel', label: 'Apple Inc' <AX element pid: 39213, elementOrHash.elementID: 4352916352.189>
+                                                Other, 0x114ffc000, {{106.7, 320.3}, {82.0, 14.3}} <AX element pid: 39213, elementOrHash.elementID: 4353599104.190>
+                                              Other, 0x114ffc140, {{112.7, 244.3}, {70.0, 70.0}} <AX element pid: 39213, elementOrHash.elementID: 4586385280.174>
+                                              Image, 0x114ffc280, {{126.0, 257.7}, {43.3, 43.3}}, identifier: 'activityImageView' <AX element pid: 39213, elementOrHash.elementID: 4587595264.175>
+                                        Other, 0x114ffc3c0, {{24.3, 227.3}, {335.3, 1.0}}, identifier: 'collectionView.footerView' <AX element pid: 39213, elementOrHash.elementID: 4587596288.152>
+                                      Other, 0x114ffc500, {{24.3, 104.3}, {335.3, 1.0}} <AX element pid: 39213, elementOrHash.elementID: 4547203456.147>
+                                Other, 0x114ffc640, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4549100544.140>
+                                  Other, 0x114ffc780, {{0.0, 0.0}, {384.0, 366.7}} <AX element pid: 39213, elementOrHash.elementID: 4549105664.144>

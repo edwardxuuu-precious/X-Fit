@@ -1,0 +1,15 @@
+[
+  "FitnessAppTests",
+  "FitnessAppUITests/FatLossUITests",
+  "FitnessAppUITests/RedesignUITests",
+  "FitnessAppUITests/FitnessAppUITests/testActionEditorCanDismissKeyboardAndKeepSaveReachable",
+  "FitnessAppUITests/FitnessAppUITests/testActiveWorkoutTopMenuRemovesZeroCompletedExerciseAndPersistsAfterRelaunch",
+  "FitnessAppUITests/FitnessAppUITests/testExercisePickerDismissesKeyboardAndEditsBuiltInDefinitionWithoutSelecting",
+  "FitnessAppUITests/FitnessAppUITests/testHomeIsAnActionSurfaceWithoutDuplicateDashboards",
+  "FitnessAppUITests/FitnessAppUITests/testHomePlanCanBeOpenedForEditing",
+  "FitnessAppUITests/FitnessAppUITests/testIsometricWorkoutRecordsOneSecondsFieldAndCompletedSummary",
+  "FitnessAppUITests/FitnessAppUITests/testPerSetPlanSideModesAndLiveSetDeltaWithoutPatternControls",
+  "FitnessAppUITests/FitnessAppUITests/testStartWorkoutAndCompleteFirstSet",
+  "FitnessAppUITests/FitnessAppUITests/testTrainingOverviewOpensHistoryScheduleAndQuickSettings",
+  "FitnessAppUITests/FitnessAppUITests/testWorkoutFeelingIsRequestedBeforeCompletedExerciseCollapsesAndPersists"
+]

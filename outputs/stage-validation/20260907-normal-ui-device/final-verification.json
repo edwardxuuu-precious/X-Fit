@@ -1,0 +1,63 @@
+{
+  "updated_at": "2026-09-07T12:04:00.854571+08:00",
+  "status": "DEVICE_AUTOMATED_PASS_HUMAN_PENDING",
+  "version": {
+    "configuration": "Release",
+    "bundle_id": "com.edward.FitnessApp",
+    "version": "0.5.0",
+    "build": "11",
+    "get_task_allow": true,
+    "executable_sha256": "76273cf52ce26978a3b4f8729b77512abe983b0906018488d3ecb9efb111b07b",
+    "source_path": "/tmp/xfit-stage-validation-20260907-normal-ui-device-retry/Build/Products/Release-iphoneos/FitnessApp.app",
+    "created_at": "2026-09-07T11:55:21.102149+08:00"
+  },
+  "non_device_baseline": "outputs/stage-validation/20260907-full-ui-final/final-verification.json",
+  "device_unit": {
+    "passed": 256,
+    "skipped": 2
+  },
+  "device_ui_initial": {
+    "passed": 87,
+    "failed": 4,
+    "skipped": 7
+  },
+  "device_ui_latest": {
+    "passed": 91,
+    "skipped": 7
+  },
+  "supplement_device": {
+    "passed": 4
+  },
+  "simulator_harness_regression": {
+    "passed": 4,
+    "evidence": "artifacts/stage-validation/20260907-normal-ui-device-retry/simulator-harness-regression.log"
+  },
+  "data": {
+    "snapshots": 7,
+    "existing_rows": 1257,
+    "workouts": 36,
+    "session_exercises": 203,
+    "set_logs": 837,
+    "all_existing_uuids_preserved": true,
+    "review_status": "PASS_WITH_EXPLAINED_TIMESTAMP_CHANGE",
+    "exception": "One archived duplicate Exercise updatedAt refreshed by existing startup consolidation; all other common business fields and UUID references unchanged."
+  },
+  "unresolved": [
+    "Human usability/system permission acceptance BLOCKED_HUMAN; not GO.",
+    "Actual fat-loss program tables empty; user must create cycle then preview/import meals and training.",
+    "Medical portions and nutrition targets remain unconfirmed."
+  ],
+  "evidence": {
+    "tests": "outputs/stage-validation/20260907-normal-ui-device/device-test-results.json",
+    "conservation": "outputs/stage-validation/20260907-normal-ui-device/data-conservation/conservation.json",
+    "reviewed_differences": "outputs/stage-validation/20260907-normal-ui-device/data-conservation/reviewed-differences.json",
+    "final_release": "artifacts/stage-validation/20260907-normal-ui-device-retry/final-release-results.json",
+    "source_fingerprints": "outputs/stage-validation/20260907-normal-ui-device/final-source-sha256.json"
+  },
+  "learning_gate": {
+    "status": "BLOCKED_TRANSPORT",
+    "error": "Transport closed",
+    "same_receipt_payload_retry": true,
+    "execution_deliverables_complete": true
+  }
+}

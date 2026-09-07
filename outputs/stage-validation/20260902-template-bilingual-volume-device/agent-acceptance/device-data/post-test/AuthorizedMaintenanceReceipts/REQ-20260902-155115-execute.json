@@ -1,0 +1,64 @@
+{
+  "after" : {
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "notesSnapshots" : 150,
+    "sessions" : 35,
+    "setLogs" : 825,
+    "snapshots" : 199
+  },
+  "before" : {
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "notesSnapshots" : 150,
+    "sessions" : 35,
+    "setLogs" : 829,
+    "snapshots" : 200
+  },
+  "message" : "固定真机测试残留与 0\/4 空动作已精确清理，并通过 App 内守恒检查",
+  "mode" : "execute",
+  "protectedSessionIDsPresent" : true,
+  "recordedAt" : "2026-09-02T08:15:32Z",
+  "removedExportFiles" : [
+    "X-Fit-Backup-20260901-140310.json",
+    "X-Fit-Backup-20260901-140311.json",
+    "X-Fit-Backup-20260901-140615.json",
+    "X-Fit-Backup-20260901-200517.json",
+    "X-Fit-Backup-20260901-200518.json",
+    "X-Fit-Sets-20260901-140310.csv",
+    "X-Fit-Sets-20260901-140311.csv",
+    "X-Fit-Sets-20260901-140615.csv",
+    "X-Fit-Sets-20260901-200517.csv",
+    "X-Fit-Sets-20260901-200518.csv"
+  ],
+  "removedPreferenceFiles" : [
+    "xfit-share-deferral-1D93CBEB-A0C0-47A3-97C5-DA921F1B535D.plist",
+    "xfit-share-deferral-573B2696-C5D8-4788-B609-F95B24C0ADBB.plist",
+    "xfit-share-deferral-EB70D553-8446-4302-9296-FC670990FB70.plist",
+    "xfit-share-inbox-tests-112340A7-D78D-4BE8-B355-D9CD09C55651.plist",
+    "xfit-share-inbox-tests-5756E54E-5A10-4320-92DD-69DC7E3C3FCB.plist",
+    "xfit-share-inbox-tests-EF93319C-3FD1-4343-BEB9-C22DA832BBDC.plist",
+    "xfit-share-key-isolation-B355659A-39AA-4BFB-B5BA-42E69A246EDD.plist",
+    "xfit-share-key-isolation-D6703DE8-5A6F-408D-9F82-DC5EC3795305.plist",
+    "xfit-share-key-isolation-F6570431-6462-4C2F-B2D5-82305B62C409.plist",
+    "xfit-share-robustness-105D7106-1EFD-440A-A7A5-512B9477CA74.plist",
+    "xfit-share-robustness-3B19882E-1CB0-4D8C-889B-DB86D064B5EB.plist",
+    "xfit-share-robustness-EE73AAFA-8EDF-42F6-832D-2EB0E55DEB24.plist",
+    "xfit-share-schema-364DC866-C33E-4CCA-B180-A32A6617D278.plist",
+    "xfit-share-schema-7AE49383-2D66-4ABB-ACB2-9A13F1365AAE.plist",
+    "xfit-share-schema-B18D045D-D78F-4ABB-81EE-527DE789C3C1.plist"
+  ],
+  "removedSetIDs" : [
+    "1565D855-818C-44DD-B874-5D9BC7A529AA",
+    "195F664A-C59F-4AF5-A3FF-EA1B61E82FEF",
+    "D8CDC13D-C706-4DD7-BC90-4DD1DDE21B55",
+    "D954C297-7EB5-4360-82C6-198470706433"
+  ],
+  "removedShareDraftID" : "6538E240-A044-4848-B5F7-76F515CE4FE5",
+  "removedSnapshotIDs" : [
+    "781A6B9E-C6F6-4BDA-917D-FE9955007756"
+  ],
+  "removedUITestStore" : true,
+  "requestID" : "REQ-20260902-155115",
+  "succeeded" : true
+}

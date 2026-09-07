@@ -1,0 +1,26 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "11B8E3C5-AE1B-451C-A533-30985DFB761D.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "08-weekly-review_0_F0CCAB34-BDB6-42F2-8E89-3721BD5FE090.png",
+        "timestamp" : 1788764767.442
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+        "deviceName" : "iPhone 17 Pro",
+        "exportedFileName" : "7CB8B04B-FDCD-46CB-971B-E30C0DC8320F.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "07-goal-home_0_EA2CCFC0-5358-4D84-B5A1-21D72204FF6B.png",
+        "timestamp" : 1788764764.835
+      }
+    ],
+    "testIdentifier" : "RedesignUITests/testCoreGoalReviewAndMuscles()",
+    "testIdentifierURL" : "test://com.apple.xcode/FitnessApp/FitnessAppUITests/RedesignUITests/testCoreGoalReviewAndMuscles"
+  }
+]

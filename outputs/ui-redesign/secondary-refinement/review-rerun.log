@@ -1,0 +1,251 @@
+Command line invocation:
+    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild test -project FitnessApp.xcodeproj -scheme FitnessApp -destination "platform=iOS Simulator,id=0B1E41EF-D1D4-49BD-9490-E30F45D833DC" -derivedDataPath /tmp/xfit-editorial -resultBundlePath /tmp/xfit-secondary-review-rerun.xcresult -parallel-testing-enabled NO "-only-testing:FitnessAppUITests/RedesignUITests/testReviewDraftSaveAndHistoricalReadback"
+
+Writing result bundle at path:
+	/tmp/xfit-secondary-review-rerun.xcresult
+
+ComputePackagePrebuildTargetDependencyGraph
+
+Prepare packages
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (4 targets)
+    Target 'FitnessAppUITests' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'FitnessApp' in project 'FitnessApp'
+    Target 'FitnessAppTests' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'FitnessApp' in project 'FitnessApp'
+    Target 'FitnessApp' in project 'FitnessApp'
+        ➜ Explicit dependency on target 'XFitShareExtension' in project 'FitnessApp'
+    Target 'XFitShareExtension' in project 'FitnessApp' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ClangStatCache /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /tmp/xfit-editorial/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache
+    cd /Users/edward/Documents/Fitness\ App/FitnessApp.xcodeproj
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /tmp/xfit-editorial/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache
+
+SwiftDriver FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-SwiftDriver -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-editorial/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-editorial/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-editorial/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-editorial/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+SwiftEmitModule normal arm64 Emitting\ module\ for\ FitnessAppUITests (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+EmitSwiftModule normal arm64 (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftCompile normal arm64 Compiling\ RedesignUITests.swift /Users/edward/Documents/Fitness\ App/FitnessAppUITests/RedesignUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+SwiftCompile normal arm64 /Users/edward/Documents/Fitness\ App/FitnessAppUITests/RedesignUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+
+SwiftDriverJobDiscovery normal arm64 Emitting module for FitnessAppUITests (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation\ Requirements FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation-Requirements -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-editorial/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-editorial/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-editorial/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-editorial/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+Copy /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.abi.json /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.abi.json (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.abi.json /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/arm64-apple-ios-simulator.abi.json
+
+Copy /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftsourceinfo (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks -rename /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftsourceinfo /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo
+
+SwiftDriverJobDiscovery normal arm64 Compiling RedesignUITests.swift (in target 'FitnessAppUITests' from project 'FitnessApp')
+
+SwiftDriver\ Compilation FitnessAppUITests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-Swift-Compilation -- /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name FitnessAppUITests -Onone @/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList -DDEBUG -module-alias Testing\=_Testing_Unavailable -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -Xfrontend -serialize-debugging-options -enable-testing -index-store-path /tmp/xfit-editorial/Index.noindex/DataStore -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -Isystem /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -F /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -c -j10 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /tmp/xfit-editorial/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-6cfe768891a92b912361537c460fe42b.sdkstatcache -output-file-map /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /tmp/xfit-editorial/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -sdk-module-cache-path /tmp/xfit-editorial/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule -validate-clang-modules-once -clang-build-session-file /tmp/xfit-editorial/ModuleCache.noindex/Session.modulevalidation -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_const_extract_protocols.json -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-generated-files.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-own-target-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-all-target-headers.hmap -Xcc -iquote -Xcc /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests-project-headers.hmap -Xcc -I/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/include -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources-normal/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources/arm64 -Xcc -I/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-Swift.h -working-directory /Users/edward/Documents/Fitness\ App -experimental-emit-module-separately -disable-cmo
+
+Ld /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests normal (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -Xlinker -reproducible -target arm64-apple-ios17.0-simulator -bundle -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O0 -L/tmp/xfit-editorial/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -L/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -L/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib -F/tmp/xfit-editorial/Build/Intermediates.noindex/EagerLinkingTBDs/Debug-iphonesimulator -F/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks -iframework /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/Developer/Library/Frameworks -filelist /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.LinkFileList -Xlinker -rpath -Xlinker /usr/lib/swift -Xlinker -rpath -Xlinker @loader_path/Frameworks -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_lto.o -rdynamic -Xlinker -no_deduplicate -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_dependency_info.dat -fobjc-link-runtime -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator -L/usr/lib/swift -Xlinker -add_ast_path -Xlinker /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.swiftmodule @/tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests-linker-args.resp -Xlinker -needed_framework -Xlinker XCTest -framework XCTest -Xlinker -needed-lXCTestSwiftSupport -lXCTestSwiftSupport -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __entitlements -Xlinker /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.xctest-Simulated.xcent -Xlinker -sectcreate -Xlinker __TEXT -Xlinker __ents_der -Xlinker /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.xctest-Simulated.xcent.der -Xlinker -no_adhoc_codesign -o /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests
+
+CopySwiftLibs /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    builtin-swiftStdLibTool --copy --verbose --sign - --scan-executable /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests --scan-folder /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Frameworks --scan-folder /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/PlugIns --scan-folder /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/SystemExtensions --scan-folder /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Extensions --platform iphonesimulator --toolchain /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --destination /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/Frameworks --strip-bitcode --scan-executable /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib --strip-bitcode-tool /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/bitcode_strip --emit-dependency-info /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/SwiftStdLibToolInputDependencies.dep --filter-for-swift-os
+
+ExtractAppIntentsMetadata (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/appintentsmetadataprocessor --toolchain-dir /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain --module-name FitnessAppUITests --sdk-root /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk --xcode-version 17F113 --platform-family iOS --deployment-target 17.0 --bundle-identifier com.edward.FitnessAppUITests --output /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest --target-triple arm64-apple-ios17.0-simulator --binary-file /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest/FitnessAppUITests --dependency-file /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests_dependency_info.dat --stringsdata-file /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/ExtractedAppShortcutsMetadata.stringsdata --source-file-list /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftFileList --metadata-file-list /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.DependencyMetadataFileList --static-metadata-file-list /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/FitnessAppUITests.DependencyStaticMetadataFileList --swift-const-vals-list /tmp/xfit-editorial/Build/Intermediates.noindex/FitnessApp.build/Debug-iphonesimulator/FitnessAppUITests.build/Objects-normal/arm64/FitnessAppUITests.SwiftConstValuesFileList --compile-time-extraction --deployment-aware-processing --validate-assistant-intents --no-app-shortcuts-localization
+2026-09-06 20:46:33.879 appintentsmetadataprocessor[30766:13034970] Starting appintentsmetadataprocessor export
+2026-09-06 20:46:33.883 appintentsmetadataprocessor[30766:13034970] warning: Metadata extraction skipped. No AppIntents.framework dependency found.
+
+CodeSign /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app/PlugIns/FitnessAppUITests.xctest
+
+CodeSign /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app (in target 'FitnessAppUITests' from project 'FitnessApp')
+    cd /Users/edward/Documents/Fitness\ App
+    
+    Signing Identity:     "Sign to Run Locally"
+    
+    /usr/bin/codesign --force --sign - --timestamp\=none --generate-entitlement-der /tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app
+/tmp/xfit-editorial/Build/Products/Debug-iphonesimulator/FitnessAppUITests-Runner.app: replacing existing signature
+
+2026-09-06 20:46:36.271737+0800 FitnessAppUITests-Runner[30788:13035249] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-09-06 20:46:37.304.
+Test Suite 'FitnessAppUITests.xctest' started at 2026-09-06 20:46:37.305.
+Test Suite 'RedesignUITests' started at 2026-09-06 20:46:37.305.
+Test Case '-[FitnessAppUITests.RedesignUITests testReviewDraftSaveAndHistoricalReadback]' started.
+    t =     0.00s Start Test at 2026-09-06 20:46:37.305
+    t =     0.06s Set Up
+    t =     0.06s Open com.edward.FitnessApp
+    t =     0.06s     Launch com.edward.FitnessApp
+2026-09-06 20:46:37.640 xcodebuild[30646:13033884] [MT] IDELaunchParametersSnapshot: The operation couldn’t be completed. (DebuggerLLDB.DebuggerVersionStore.StoreError error 0.)
+2026-09-06 20:46:37.640 xcodebuild[30646:13033884] [MT] IDELaunchParametersSnapshot: no debugger version
+objc[30788]: Class UIAccessibilityLoaderWebShared is implemented in both /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebCore.axbundle/WebCore (0x10b62c310) and /Library/Developer/CoreSimulator/Volumes/iOS_23F77/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS 26.5.simruntime/Contents/Resources/RuntimeRoot/System/Library/AccessibilityBundles/WebKit.axbundle/WebKit (0x109edc398). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.
+    t =     2.10s         Setting up automation session
+    t =     3.33s         Wait for com.edward.FitnessApp to idle
+    t =     5.81s Waiting 15.0s for "训练" Button to exist
+    t =     6.85s     Checking `Expect predicate `existsNoRetry == 1` for object "训练" Button`
+    t =     6.85s         Checking existence of `"训练" Button`
+    t =     6.99s Tap "目标" Button
+    t =     6.99s     Wait for com.edward.FitnessApp to idle
+    t =     6.99s     Find the "目标" Button
+    t =     7.02s     Check for interrupting elements affecting "目标" Button
+    t =     7.06s     Synthesize event
+    t =     7.36s     Wait for com.edward.FitnessApp to idle
+    t =     7.59s Checking existence of `"减脂每周复盘" Button`
+    t =     7.65s Find the "减脂每周复盘" Button
+    t =     7.72s Swipe up Target Application 'com.edward.FitnessApp'
+    t =     7.72s     Wait for com.edward.FitnessApp to idle
+    t =     7.73s     Find the Target Application 'com.edward.FitnessApp'
+    t =     7.76s     Check for interrupting elements affecting "X-Fit" Application
+    t =     7.79s     Synthesize event
+    t =     8.21s     Wait for com.edward.FitnessApp to idle
+    t =    10.32s Checking existence of `"减脂每周复盘" Button`
+    t =    10.36s Find the "减脂每周复盘" Button
+    t =    10.41s Find the "减脂每周复盘" Button
+    t =    10.44s Find the Target Application 'com.edward.FitnessApp'
+    t =    10.46s Tap "减脂每周复盘" Button
+    t =    10.46s     Wait for com.edward.FitnessApp to idle
+    t =    10.47s     Find the "减脂每周复盘" Button
+    t =    10.51s     Check for interrupting elements affecting "减脂每周复盘" Button
+    t =    10.56s     Synthesize event
+    t =    10.85s     Wait for com.edward.FitnessApp to idle
+    t =    11.01s Waiting 5.0s for "复盘-均重" StaticText to exist
+    t =    12.05s     Checking `Expect predicate `existsNoRetry == 1` for object "复盘-均重" StaticText`
+    t =    12.05s         Checking existence of `"复盘-均重" StaticText`
+    t =    12.11s Find the Target Application 'com.edward.FitnessApp'
+    t =    12.23s Added attachment named '18-weekly-progress'
+    t =    12.23s Checking existence of `"本周体重、饥饿、腹胀与训练表现" TextField`
+    t =    12.27s Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    12.32s Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    12.36s Find the "复盘-底部保存" Button
+    t =    12.40s Swipe up Target Application 'com.edward.FitnessApp'
+    t =    12.40s     Wait for com.edward.FitnessApp to idle
+    t =    12.40s     Find the Target Application 'com.edward.FitnessApp'
+    t =    12.43s     Check for interrupting elements affecting "X-Fit" Application
+    t =    12.46s     Synthesize event
+    t =    12.89s     Wait for com.edward.FitnessApp to idle
+    t =    13.87s Checking existence of `"本周体重、饥饿、腹胀与训练表现" TextField`
+    t =    13.94s Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    14.00s Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    14.04s Find the "复盘-底部保存" Button
+    t =    14.08s Tap "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    14.08s     Wait for com.edward.FitnessApp to idle
+    t =    14.09s     Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    14.13s     Check for interrupting elements affecting "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    14.16s     Synthesize event
+    t =    14.45s     Wait for com.edward.FitnessApp to idle
+    t =    14.66s Waiting 3.0s for Keyboard (First Match) to exist
+    t =    15.70s     Checking `Expect predicate `existsNoRetry == 1` for object Keyboard (First Match)`
+    t =    15.70s         Checking existence of `Keyboard (First Match)`
+    t =    15.75s Type '本周训练状态稳定' into "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    15.75s     Wait for com.edward.FitnessApp to idle
+    t =    15.76s     Find the "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    15.83s     Check for interrupting elements affecting "本周体重、饥饿、腹胀与训练表现" TextField
+    t =    15.88s     Synthesize event
+    t =    16.22s     Wait for com.edward.FitnessApp to idle
+    t =    16.22s Find the "复盘-底部保存" Button
+    t =    16.30s Find the Target Application 'com.edward.FitnessApp'
+    t =    16.44s Added attachment named '19a-review-keyboard'
+    t =    16.44s Tap "减脂完成输入" Button
+    t =    16.44s     Wait for com.edward.FitnessApp to idle
+    t =    16.45s     Find the "减脂完成输入" Button
+    t =    16.51s     Check for interrupting elements affecting "减脂完成输入" Button
+    t =    16.56s     Synthesize event
+    t =    16.85s     Wait for com.edward.FitnessApp to idle
+    t =    16.86s Checking existence of `"下一步（如维持观察、换菜、复查）" TextField`
+    t =    16.90s Find the "下一步（如维持观察、换菜、复查）" TextField
+    t =    16.96s Find the "下一步（如维持观察、换菜、复查）" TextField
+    t =    17.01s Find the "复盘-底部保存" Button
+    t =    17.05s Tap "下一步（如维持观察、换菜、复查）" TextField
+    t =    17.05s     Wait for com.edward.FitnessApp to idle
+    t =    17.06s     Find the "下一步（如维持观察、换菜、复查）" TextField
+    t =    17.10s     Check for interrupting elements affecting "下一步（如维持观察、换菜、复查）" TextField
+    t =    17.14s     Synthesize event
+    t =    17.44s     Wait for com.edward.FitnessApp to idle
+    t =    17.44s Waiting 3.0s for Keyboard (First Match) to exist
+    t =    18.48s     Checking `Expect predicate `existsNoRetry == 1` for object Keyboard (First Match)`
+    t =    18.48s         Checking existence of `Keyboard (First Match)`
+    t =    18.50s Type '继续观察腰围' into "下一步（如维持观察、换菜、复查）" TextField
+    t =    18.50s     Wait for com.edward.FitnessApp to idle
+    t =    18.50s     Find the "下一步（如维持观察、换菜、复查）" TextField
+    t =    18.55s     Check for interrupting elements affecting "下一步（如维持观察、换菜、复查）" TextField
+    t =    18.59s     Synthesize event
+    t =    18.89s     Wait for com.edward.FitnessApp to idle
+    t =    18.89s Tap "减脂完成输入" Button
+    t =    18.89s     Wait for com.edward.FitnessApp to idle
+    t =    18.90s     Find the "减脂完成输入" Button
+    t =    18.97s     Check for interrupting elements affecting "减脂完成输入" Button
+    t =    19.02s     Synthesize event
+    t =    19.31s     Wait for com.edward.FitnessApp to idle
+    t =    19.31s Find the Target Application 'com.edward.FitnessApp'
+    t =    19.42s Added attachment named '19-review-draft'
+    t =    19.42s Tap "复盘-底部保存" Button
+    t =    19.42s     Wait for com.edward.FitnessApp to idle
+    t =    19.42s     Find the "复盘-底部保存" Button
+    t =    19.48s     Check for interrupting elements affecting "复盘-底部保存" Button
+    t =    19.52s     Synthesize event
+    t =    19.81s     Wait for com.edward.FitnessApp to idle
+    t =    19.81s Checking existence of `"复盘-历史" Button`
+    t =    19.86s Find the "复盘-历史" Button
+    t =    19.91s Find the "复盘-历史" Button
+    t =    19.96s Find the Target Application 'com.edward.FitnessApp'
+    t =    19.99s Tap "复盘-历史" Button
+    t =    19.99s     Wait for com.edward.FitnessApp to idle
+    t =    20.00s     Find the "复盘-历史" Button
+    t =    20.04s     Check for interrupting elements affecting "复盘-历史" Button
+    t =    20.09s     Synthesize event
+    t =    20.38s     Wait for com.edward.FitnessApp to idle
+    t =    20.38s Checking existence of `"本周训练状态稳定" StaticText`
+    t =    20.43s Find the "本周训练状态稳定" StaticText
+    t =    20.49s Find the "复盘-历史" StaticText
+    t =    20.55s Find the Target Application 'com.edward.FitnessApp'
+    t =    20.59s Find the "复盘-历史" StaticText
+    t =    20.64s Checking existence of `"下一步：继续观察腰围" StaticText`
+    t =    20.69s Tear Down
+Test Case '-[FitnessAppUITests.RedesignUITests testReviewDraftSaveAndHistoricalReadback]' passed (20.943 seconds).
+Test Suite 'RedesignUITests' passed at 2026-09-06 20:46:58.249.
+	 Executed 1 test, with 0 failures (0 unexpected) in 20.943 (20.945) seconds
+Test Suite 'FitnessAppUITests.xctest' passed at 2026-09-06 20:46:58.250.
+	 Executed 1 test, with 0 failures (0 unexpected) in 20.943 (20.945) seconds
+Test Suite 'Selected tests' passed at 2026-09-06 20:46:58.250.
+	 Executed 1 test, with 0 failures (0 unexpected) in 20.943 (20.946) seconds
+2026-09-06 20:47:15.854 xcodebuild[30646:13033884] [MT] IDETestOperationsObserverDebug: 41.870 elapsed -- Testing started completed.
+2026-09-06 20:47:15.854 xcodebuild[30646:13033884] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-09-06 20:47:15.854 xcodebuild[30646:13033884] [MT] IDETestOperationsObserverDebug: 41.871 sec, +41.871 sec -- end
+
+Test session results, code coverage, and logs:
+	/tmp/xfit-secondary-review-rerun.xcresult
+
+** TEST SUCCEEDED **
+
+Testing started

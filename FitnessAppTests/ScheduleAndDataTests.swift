@@ -39,6 +39,633 @@ final class ScheduleAndDataTests: XCTestCase {
         XCTAssertFalse(CloudSyncRuntime.shouldReadShareDraft(arguments: arguments))
     }
 
+    func testBodyweightVolumeUsesSnapshotAndNeverFallsBackToZeroKilograms() {
+        XCTAssertEqual(ExerciseVolumeUnit.bodyweight.volume(weight: 72.5, reps: 10), 725)
+        XCTAssertNil(ExerciseVolumeUnit.bodyweight.volume(weight: nil, reps: 10))
+        XCTAssertEqual(ExerciseVolumeUnit.count.volume(weight: nil, reps: 10), 10)
+    }
+
+    func testExerciseTimingStartsFirstExerciseCompletesOnFinalSetAndStartsNext() {
+        let sessionID = UUID()
+        let base = Date(timeIntervalSince1970: 1_800_000_000)
+        let first = SessionExercise(
+            sessionID: sessionID,
+            exerciseID: UUID(),
+            exerciseName: "深蹲",
+            order: 0,
+            targetSets: 2,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 50,
+            restSeconds: 90
+        )
+        let second = SessionExercise(
+            sessionID: sessionID,
+            exerciseID: UUID(),
+            exerciseName: "硬拉",
+            order: 1,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 60,
+            restSeconds: 90
+        )
+        let firstLog = makeSet(sessionID: sessionID, setNumber: 1, sessionExerciseID: first.id)
+        let lastLog = makeSet(sessionID: sessionID, setNumber: 2, sessionExerciseID: first.id)
+
+        WorkoutExerciseTracking.startFirstExercise(in: [second, first], at: base)
+        XCTAssertEqual(first.exerciseStartedAt, base)
+        XCTAssertNil(second.exerciseStartedAt)
+
+        firstLog.isCompleted = true
+        WorkoutExerciseTracking.updateAfterSetChange(
+            exercise: first,
+            logs: [firstLog, lastLog],
+            followingExercise: second,
+            at: base.addingTimeInterval(90)
+        )
+        XCTAssertNil(first.exerciseCompletedAt)
+
+        lastLog.isCompleted = true
+        WorkoutExerciseTracking.updateAfterSetChange(
+            exercise: first,
+            logs: [firstLog, lastLog],
+            followingExercise: second,
+            at: base.addingTimeInterval(180)
+        )
+        XCTAssertEqual(first.exerciseCompletedAt, base.addingTimeInterval(180))
+        XCTAssertEqual(second.exerciseStartedAt, base.addingTimeInterval(180))
+        XCTAssertEqual(first.durationSeconds, 180)
+
+        lastLog.isCompleted = false
+        WorkoutExerciseTracking.updateAfterSetChange(
+            exercise: first,
+            logs: [firstLog, lastLog],
+            followingExercise: second,
+            at: base.addingTimeInterval(200)
+        )
+        XCTAssertNil(first.exerciseCompletedAt)
+        XCTAssertEqual(first.exerciseStartedAt, base)
+    }
+
+    func testExerciseTimingAllowsOverlappingIntervals() {
+        let sessionID = UUID()
+        let base = Date(timeIntervalSince1970: 1_800_000_000)
+        let first = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "A", order: 0,
+            targetSets: 1, minReps: 1, maxReps: 1, targetWeight: 0, restSeconds: 0
+        )
+        let second = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "B", order: 1,
+            targetSets: 1, minReps: 1, maxReps: 1, targetWeight: 0, restSeconds: 0
+        )
+
+        WorkoutExerciseTracking.startFirstExercise(in: [first, second], at: base)
+        WorkoutExerciseTracking.recordInteraction(with: second, at: base.addingTimeInterval(15))
+
+        XCTAssertEqual(first.exerciseStartedAt, base)
+        XCTAssertEqual(second.exerciseStartedAt, base.addingTimeInterval(15))
+        XCTAssertNil(first.exerciseCompletedAt)
+        XCTAssertNil(second.exerciseCompletedAt)
+    }
+
+    func testBodyWeightResolverUsesLatestValueOnOrBeforeWorkoutThenCurrentFallback() {
+        let workoutDate = Date(timeIntervalSince1970: 1_800_000_000)
+        let earlier = BodyMeasurement(date: workoutDate.addingTimeInterval(-86_400), weightKg: 71)
+        let later = BodyMeasurement(date: workoutDate.addingTimeInterval(86_400), weightKg: 72)
+
+        XCTAssertEqual(
+            BodyWeightSnapshotResolver.resolve(
+                for: workoutDate,
+                measurements: [later, earlier],
+                currentHealthWeightKg: 73
+            ),
+            71
+        )
+        XCTAssertEqual(
+            BodyWeightSnapshotResolver.resolve(
+                for: workoutDate,
+                measurements: [later],
+                currentHealthWeightKg: 73
+            ),
+            73
+        )
+        XCTAssertNil(
+            BodyWeightSnapshotResolver.resolve(
+                for: workoutDate,
+                measurements: [],
+                currentHealthWeightKg: nil
+            )
+        )
+    }
+
+    func testQuickWeightSaveUpdatesSameDayManualRecordWithoutTouchingHealthSource() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 8 * 3_600)!
+        let morning = Date(timeIntervalSince1970: 1_800_000_000)
+        let evening = morning.addingTimeInterval(4 * 3_600)
+        let manual = BodyMeasurement(
+            date: morning,
+            weightKg: 83.8,
+            waistCm: 80,
+            source: .manual
+        )
+        let health = BodyMeasurement(
+            date: morning.addingTimeInterval(60),
+            weightKg: 83.7,
+            source: .healthKit
+        )
+        context.insert(manual)
+        context.insert(health)
+        try context.save()
+
+        let saved = try BodyMeasurementService.saveQuickEntry(
+            BodyMeasurementQuickEntry(
+                date: evening,
+                weightKg: 84,
+                bodyFatPercent: nil,
+                waistCm: nil,
+                chestCm: nil,
+                armCm: nil,
+                notes: "晚间复测"
+            ),
+            in: context,
+            calendar: calendar
+        )
+        let records = try context.fetch(FetchDescriptor<BodyMeasurement>())
+
+        XCTAssertEqual(saved.id, manual.id)
+        XCTAssertEqual(saved.weightKg, 84)
+        XCTAssertEqual(saved.date, evening)
+        XCTAssertEqual(saved.waistCm, 80, "快速录入未展开的旧扩展数据应保留")
+        XCTAssertEqual(saved.notes, "晚间复测")
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(health.weightKg, 83.7)
+        XCTAssertEqual(health.source, .healthKit)
+    }
+
+    func testDailyRepresentativeWeightPrefersManualThenLatestHealthRecord() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 8 * 3_600)!
+        let dayOne = Date(timeIntervalSince1970: 1_800_000_000)
+        let dayTwo = calendar.date(byAdding: .day, value: 1, to: dayOne)!
+        let healthBeforeManual = BodyMeasurement(
+            date: dayOne,
+            weightKg: 83.5,
+            source: .healthKit
+        )
+        let manual = BodyMeasurement(
+            date: dayOne.addingTimeInterval(60),
+            weightKg: 84,
+            source: .manual
+        )
+        let healthAfterManual = BodyMeasurement(
+            date: dayOne.addingTimeInterval(120),
+            weightKg: 84.2,
+            source: .healthKit
+        )
+        let olderHealth = BodyMeasurement(
+            date: dayTwo,
+            weightKg: 84.1,
+            source: .healthKit
+        )
+        let latestHealth = BodyMeasurement(
+            date: dayTwo.addingTimeInterval(120),
+            weightKg: 84.4,
+            source: .healthKit
+        )
+        let invalid = BodyMeasurement(
+            date: dayTwo.addingTimeInterval(180),
+            weightKg: 0,
+            source: .manual
+        )
+
+        let values = BodyMeasurementService.dailyRepresentativeWeights(
+            from: [healthBeforeManual, manual, healthAfterManual, olderHealth, latestHealth, invalid],
+            calendar: calendar
+        )
+
+        XCTAssertEqual(values.count, 2)
+        XCTAssertEqual(values[0].measurementID, manual.id)
+        XCTAssertEqual(values[0].weightKg, 84)
+        XCTAssertEqual(values[0].source, .manual)
+        XCTAssertEqual(values[1].measurementID, latestHealth.id)
+        XCTAssertEqual(values[1].weightKg, 84.4)
+        XCTAssertEqual(values[1].source, .healthKit)
+    }
+
+    func testWeightTrendUsesSevenDayMovingAverageAndPeriodFiltering() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(secondsFromGMT: 8 * 3_600)!
+        let firstDay = calendar.startOfDay(for: Date(timeIntervalSince1970: 1_800_000_000))
+        let values = (0..<8).map { offset in
+            BodyWeightDailyValue(
+                date: calendar.date(byAdding: .day, value: offset, to: firstDay)!,
+                weightKg: 70 + Double(offset),
+                source: .manual,
+                measurementID: UUID()
+            )
+        }
+
+        let points = BodyMeasurementService.trendPoints(from: values)
+
+        XCTAssertEqual(points.count, 8)
+        XCTAssertNil(points[5].movingAverageKg)
+        XCTAssertEqual(points[6].movingAverageKg, 73)
+        XCTAssertEqual(points[7].movingAverageKg, 74)
+        XCTAssertEqual(
+            BodyMeasurementService.filteredTrendPoints(
+                points,
+                period: .oneMonth,
+                through: values.last!.date,
+                calendar: calendar
+            ).count,
+            8
+        )
+    }
+
+    func testBodyweightHealthBackfillUsesHistoricalWeightThenCurrentFallbackAndSnapshotsLogs() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(
+            name: "引体向上",
+            muscleGroup: "背部",
+            equipment: "自重",
+            volumeUnit: .bodyweight
+        )
+        context.insert(exercise)
+
+        let historicalDate = Date(timeIntervalSince1970: 1_800_000_000)
+        let fallbackDate = historicalDate.addingTimeInterval(86_400)
+        let historicalSession = WorkoutSession(
+            templateName: "历史体重",
+            plannedDate: historicalDate,
+            startedAt: historicalDate,
+            completedAt: historicalDate.addingTimeInterval(1_800),
+            status: .completed
+        )
+        let fallbackSession = WorkoutSession(
+            templateName: "当前体重回退",
+            plannedDate: fallbackDate,
+            startedAt: fallbackDate,
+            completedAt: fallbackDate.addingTimeInterval(1_800),
+            status: .completed
+        )
+        context.insert(historicalSession)
+        context.insert(fallbackSession)
+
+        let historicalSnapshot = SessionExercise(
+            sessionID: historicalSession.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 0,
+            restSeconds: 0,
+            volumeUnit: .bodyweight
+        )
+        let fallbackSnapshot = SessionExercise(
+            sessionID: fallbackSession.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 0,
+            restSeconds: 0,
+            volumeUnit: .bodyweight
+        )
+        context.insert(historicalSnapshot)
+        context.insert(fallbackSnapshot)
+
+        let historicalLog = SetLog(
+            sessionID: historicalSession.id,
+            sessionExerciseID: historicalSnapshot.id,
+            exerciseID: exercise.id,
+            setNumber: 1,
+            targetWeight: 0,
+            targetReps: 8,
+            actualWeight: 0,
+            actualReps: 8,
+            isCompleted: true
+        )
+        let fallbackLog = SetLog(
+            sessionID: fallbackSession.id,
+            sessionExerciseID: fallbackSnapshot.id,
+            exerciseID: exercise.id,
+            setNumber: 1,
+            targetWeight: 0,
+            targetReps: 10,
+            actualWeight: 0,
+            actualReps: 10,
+            isCompleted: true
+        )
+        context.insert(historicalLog)
+        context.insert(fallbackLog)
+
+        try BodyweightVolumeMigration.applyHealthWeightFallbacks(
+            in: context,
+            historicalWeightKg: { date in
+                date == historicalDate ? 84 : nil
+            },
+            currentWeightKg: 90
+        )
+
+        XCTAssertEqual(historicalSnapshot.bodyWeightKgSnapshot, 84)
+        XCTAssertEqual(historicalLog.actualWeight, 84)
+        XCTAssertEqual(historicalLog.targetWeight, 84)
+        XCTAssertEqual(fallbackSnapshot.bodyWeightKgSnapshot, 90)
+        XCTAssertEqual(fallbackLog.actualWeight, 90)
+        XCTAssertEqual(fallbackLog.targetWeight, 90)
+    }
+
+    func testBodyweightBackfillUsesLatestStoredSnapshotWhenLocalAndHealthWeightsAreUnavailable() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(
+            name: "仰卧起坐",
+            muscleGroup: "核心",
+            equipment: "自重",
+            volumeUnit: .bodyweight
+        )
+        let importedDate = Date(timeIntervalSince1970: 1_800_000_000)
+        let knownDate = importedDate.addingTimeInterval(86_400)
+        let importedSession = WorkoutSession(
+            templateName: "导入训练",
+            plannedDate: importedDate,
+            startedAt: importedDate,
+            completedAt: importedDate.addingTimeInterval(1_800),
+            status: .completed
+        )
+        let knownSession = WorkoutSession(
+            templateName: "已有体重快照",
+            plannedDate: knownDate,
+            startedAt: knownDate,
+            completedAt: knownDate.addingTimeInterval(1_800),
+            status: .completed
+        )
+        let importedSnapshot = SessionExercise(
+            sessionID: importedSession.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 0,
+            restSeconds: 0,
+            volumeUnit: .bodyweight
+        )
+        let knownSnapshot = SessionExercise(
+            sessionID: knownSession.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 84,
+            restSeconds: 0,
+            volumeUnit: .bodyweight,
+            bodyWeightKgSnapshot: 84
+        )
+        let importedLog = SetLog(
+            sessionID: importedSession.id,
+            sessionExerciseID: importedSnapshot.id,
+            exerciseID: exercise.id,
+            setNumber: 1,
+            targetWeight: 0,
+            targetReps: 12,
+            actualWeight: 0,
+            actualReps: 12,
+            isCompleted: true
+        )
+        context.insert(exercise)
+        context.insert(importedSession)
+        context.insert(knownSession)
+        context.insert(importedSnapshot)
+        context.insert(knownSnapshot)
+        context.insert(importedLog)
+
+        try BodyweightVolumeMigration.applyHealthWeightFallbacks(
+            in: context,
+            historicalWeightKg: { _ in nil },
+            currentWeightKg: nil
+        )
+
+        XCTAssertEqual(importedSnapshot.bodyWeightKgSnapshot, 84)
+        XCTAssertEqual(importedLog.actualWeight, 84)
+        XCTAssertEqual(importedLog.targetWeight, 84)
+    }
+
+    func testConfirmedAliasConsolidationArchivesGroupsAndKeepsHistorySnapshotIdentity() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let template = WorkoutTemplate(name: "别名测试", weekday: 2)
+        context.insert(template)
+        var historicalDuplicateID: UUID?
+
+        for group in ExerciseCatalogService.confirmedAliasGroups {
+            let primary = Exercise(
+                name: group.primaryName,
+                muscleGroup: "测试肌群",
+                equipment: "测试器械",
+                isBuiltIn: false
+            )
+            let duplicate = Exercise(
+                name: group.aliases.first(where: { $0 != group.primaryName }) ?? group.primaryName,
+                muscleGroup: "测试肌群",
+                equipment: "测试器械",
+                isBuiltIn: false
+            )
+            context.insert(primary)
+            context.insert(duplicate)
+            context.insert(TemplateExercise(
+                templateID: template.id,
+                exerciseID: duplicate.id,
+                order: 0,
+                targetSets: 1,
+                minReps: 10,
+                maxReps: 10,
+                targetWeight: 10,
+                restSeconds: 60
+            ))
+            if historicalDuplicateID == nil {
+                historicalDuplicateID = duplicate.id
+                context.insert(SessionExercise(
+                    sessionID: UUID(),
+                    exerciseID: duplicate.id,
+                    exerciseName: duplicate.name,
+                    order: 0,
+                    targetSets: 1,
+                    minReps: 10,
+                    maxReps: 10,
+                    targetWeight: 10,
+                    restSeconds: 60
+                ))
+            }
+        }
+        try context.save()
+
+        try ExerciseCatalogService.consolidateConfirmedAliases(in: context)
+        try ExerciseCatalogService.consolidateConfirmedAliases(in: context)
+
+        let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        for group in ExerciseCatalogService.confirmedAliasGroups {
+            XCTAssertEqual(exercises.filter { $0.name == group.primaryName && !$0.isArchived }.count, 1)
+            XCTAssertTrue(exercises.filter {
+                group.aliases.contains($0.name) && $0.name != group.primaryName
+            }.allSatisfy(\.isArchived))
+        }
+        let history = try context.fetch(FetchDescriptor<SessionExercise>())
+        XCTAssertEqual(history.first?.exerciseID, historicalDuplicateID)
+    }
+
+    func testBodyweightMigrationUsesAllowlistAndLeavesMisclassifiedWeightedMovesUntouched() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let date = Date(timeIntervalSince1970: 1_800_000_000)
+        let bodyweight = Exercise(
+            name: "举腿", muscleGroup: "核心", equipment: "自重", isBuiltIn: false
+        )
+        let weighted = Exercise(
+            name: "传统硬拉", muscleGroup: "腿部", equipment: "自重", isBuiltIn: false
+        )
+        let session = WorkoutSession(
+            templateName: "历史",
+            plannedDate: date,
+            startedAt: date,
+            completedAt: date.addingTimeInterval(3_600),
+            status: .completed
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: bodyweight.id,
+            exerciseName: bodyweight.name,
+            order: 0,
+            targetSets: 1,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 0,
+            restSeconds: 0
+        )
+        let log = makeSet(sessionID: session.id, setNumber: 1, sessionExerciseID: snapshot.id)
+        log.actualWeight = 0
+        context.insert(bodyweight)
+        context.insert(weighted)
+        context.insert(session)
+        context.insert(snapshot)
+        context.insert(log)
+        context.insert(BodyMeasurement(date: date.addingTimeInterval(-60), weightKg: 72))
+        try context.save()
+
+        try BodyweightVolumeMigration.applyConfirmedAllowlist(in: context)
+
+        XCTAssertEqual(bodyweight.volumeUnit, .bodyweight)
+        XCTAssertEqual(snapshot.bodyWeightKgSnapshot, 72)
+        XCTAssertEqual(log.actualWeight, 72)
+        XCTAssertEqual(weighted.volumeUnit, .kilogram)
+    }
+
+    func testWeightedEquipmentCorrectionFixesOnlyConfirmedMisclassifiedCatalogEntries() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let deadlift = Exercise(name: "传统硬拉", muscleGroup: "腿部", equipment: "自重")
+        let dumbbellSideSquat = Exercise(name: "哑铃侧边蹲", muscleGroup: "其他", equipment: "自重")
+        let landmineRotation = Exercise(name: "地雷杆转体", muscleGroup: "核心", equipment: "杠铃")
+        let landmineZercher = Exercise(name: "地雷杆泽奇蹲", muscleGroup: "其他", equipment: "自重")
+        let unrelated = Exercise(name: "未确认动作", muscleGroup: "其他", equipment: "自重")
+        [deadlift, dumbbellSideSquat, landmineRotation, landmineZercher, unrelated].forEach(context.insert)
+
+        try WeightedExerciseIdentityMigration.applyConfirmedCorrections(in: context)
+
+        XCTAssertEqual(deadlift.equipment, "杠铃")
+        XCTAssertEqual(deadlift.muscleGroup, "腿部")
+        XCTAssertEqual(deadlift.volumeUnit, .kilogram)
+        XCTAssertEqual(dumbbellSideSquat.equipment, "哑铃")
+        XCTAssertEqual(dumbbellSideSquat.muscleGroup, "腿部")
+        XCTAssertEqual(landmineRotation.equipment, "地雷杆")
+        XCTAssertEqual(landmineRotation.muscleGroup, "核心")
+        XCTAssertEqual(landmineZercher.equipment, "地雷杆")
+        XCTAssertEqual(landmineZercher.muscleGroup, "腿部")
+        XCTAssertEqual(unrelated.equipment, "自重")
+    }
+
+    func testVolumeSummaryKeepsKilogramsCountsMetersAndBodyweightSeparate() {
+        let sessionID = UUID()
+        let kilogram = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "负重", order: 0,
+            targetSets: 1, minReps: 10, maxReps: 10, targetWeight: 20, restSeconds: 0,
+            volumeUnit: .kilogram
+        )
+        let count = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "跳绳", order: 1,
+            targetSets: 1, minReps: 100, maxReps: 100, targetWeight: 0, restSeconds: 0,
+            volumeUnit: .count
+        )
+        let meter = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "步行", order: 2,
+            targetSets: 1, minReps: 1, maxReps: 1, targetWeight: 6000, restSeconds: 0,
+            volumeUnit: .meter
+        )
+        let bodyweight = SessionExercise(
+            sessionID: sessionID, exerciseID: UUID(), exerciseName: "举腿", order: 3,
+            targetSets: 1, minReps: 10, maxReps: 10, targetWeight: 0, restSeconds: 0,
+            volumeUnit: .bodyweight, bodyWeightKgSnapshot: 70
+        )
+        let specs: [(SessionExercise, Double, Int)] = [
+            (kilogram, 20, 10), (count, 0, 100), (meter, 6000, 1), (bodyweight, 0, 10)
+        ]
+        let logs = specs.map { snapshot, weight, reps in
+            let log = makeSet(sessionID: sessionID, setNumber: 1, sessionExerciseID: snapshot.id)
+            log.actualWeight = weight
+            log.actualReps = reps
+            log.isCompleted = true
+            return log
+        }
+
+        let summary = TrainingMetrics.volumeSummary(
+            sessionExercises: specs.map(\.0),
+            setLogs: logs
+        )
+        XCTAssertEqual(summary[.kilogram], 200)
+        XCTAssertEqual(summary[.count], 100)
+        XCTAssertEqual(summary[.meter], 6000)
+        XCTAssertEqual(summary[.bodyweight], 700)
+    }
+
+    func testNotesImportPackageHasThirteenSessionsAndIsIdempotent() throws {
+        let repositoryRoot = URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let url = repositoryRoot
+            .appendingPathComponent("outputs/notes-import/20260831/notes-workouts-2026-08.csv")
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            throw XCTSkip("Notes 导入包只存在于仓库主机；其内容与幂等性由 non-device 门禁验证。")
+        }
+        let data = try Data(contentsOf: url)
+        let container = try makeContainer()
+        let context = container.mainContext
+
+        let preview = try HistoricalWorkoutCSVService.preview(data, in: context)
+        XCTAssertEqual(preview.sessions, 13)
+        XCTAssertEqual(preview.duplicateSessions, 0)
+
+        let first = try HistoricalWorkoutCSVService.importCSV(data, into: context)
+        let second = try HistoricalWorkoutCSVService.importCSV(data, into: context)
+        XCTAssertEqual(first.importedSessions, 13)
+        XCTAssertEqual(second.importedSessions, 0)
+        XCTAssertEqual(second.skippedSessions, 13)
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let august22 = Calendar.current.date(from: DateComponents(year: 2026, month: 8, day: 22))!
+        XCTAssertFalse(sessions.contains { $0.plannedDate.isSameDay(as: august22) })
+    }
+
     func testDedicatedUITestsMustExplicitlyEnableExternalSideEffects() {
         XCTAssertTrue(CloudSyncRuntime.shouldSyncWorkoutReminders(arguments: [
             "FitnessApp", "--ui-testing", "--ui-testing-workout-reminders"
@@ -75,6 +702,63 @@ final class ScheduleAndDataTests: XCTestCase {
         XCTAssertEqual(schedules.count, 1)
         XCTAssertTrue(schedule.plannedDate.isSameDay(as: newDate))
         XCTAssertTrue(schedule.originalPlannedDate?.isSameDay(as: originalDate) == true)
+    }
+
+    func testRefreshUpcomingRetiresAutomaticPlansWithoutTouchingUserOwnedSchedules() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let today = Date.now.startOfDay
+        let tomorrow = today.addingDays(1)
+        let template = WorkoutTemplate(
+            name: "手动模板",
+            weekday: tomorrow.weekdayNumber,
+            isActive: true
+        )
+        let untouchedAutomatic = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: tomorrow
+        )
+        let manual = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: tomorrow.addingDays(1),
+            isManuallyScheduled: true
+        )
+        let rescheduledByUser = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: tomorrow.addingDays(2),
+            originalPlannedDate: today
+        )
+        let skippedByUser = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: tomorrow.addingDays(3),
+            status: .skipped,
+            skipReason: "用户已处理"
+        )
+        let completed = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: tomorrow.addingDays(4),
+            status: .completed
+        )
+        context.insert(template)
+        [untouchedAutomatic, manual, rescheduledByUser, skippedByUser, completed]
+            .forEach(context.insert)
+        try context.save()
+
+        try ScheduleService.refreshUpcoming(in: context, days: 14)
+
+        let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+        XCTAssertFalse(template.isActive)
+        XCTAssertFalse(schedules.contains { $0.id == untouchedAutomatic.id })
+        XCTAssertTrue(schedules.contains { $0.id == manual.id })
+        XCTAssertTrue(schedules.contains { $0.id == rescheduledByUser.id })
+        XCTAssertTrue(schedules.contains { $0.id == skippedByUser.id })
+        XCTAssertTrue(schedules.contains { $0.id == completed.id })
+        XCTAssertEqual(schedules.count, 4)
     }
 
     func testSkipAndRestoreSchedule() throws {
@@ -178,6 +862,12 @@ final class ScheduleAndDataTests: XCTestCase {
             equipment: "无",
             volumeUnit: .count
         )
+        let hold = Exercise(
+            name: "测试平板支撑",
+            muscleGroup: "核心",
+            equipment: "自重",
+            volumeUnit: .second
+        )
         let session = WorkoutSession(
             templateName: "有氧测试",
             plannedDate: .now,
@@ -207,6 +897,18 @@ final class ScheduleAndDataTests: XCTestCase {
             restSeconds: 30,
             volumeUnit: .count
         )
+        let holdSnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: hold.id,
+            exerciseName: hold.name,
+            order: 2,
+            targetSets: 1,
+            minReps: 45,
+            maxReps: 45,
+            targetWeight: 0,
+            restSeconds: 60,
+            volumeUnit: .second
+        )
         let logs = [
             SetLog(
                 sessionID: session.id, sessionExerciseID: runSnapshot.id, exerciseID: run.id,
@@ -217,13 +919,20 @@ final class ScheduleAndDataTests: XCTestCase {
                 sessionID: session.id, sessionExerciseID: jumpSnapshot.id, exerciseID: jump.id,
                 setNumber: 1, targetWeight: 0, targetReps: 40, actualWeight: 0, actualReps: 40,
                 isCompleted: true
+            ),
+            SetLog(
+                sessionID: session.id, sessionExerciseID: holdSnapshot.id, exerciseID: hold.id,
+                setNumber: 1, targetWeight: 0, targetReps: 45, actualWeight: 0, actualReps: 45,
+                isCompleted: true
             )
         ]
         context.insert(run)
         context.insert(jump)
+        context.insert(hold)
         context.insert(session)
         context.insert(runSnapshot)
         context.insert(jumpSnapshot)
+        context.insert(holdSnapshot)
         logs.forEach(context.insert)
         try context.save()
 
@@ -232,6 +941,7 @@ final class ScheduleAndDataTests: XCTestCase {
         XCTAssertTrue(csv.contains("volume_unit"))
         XCTAssertTrue(csv.contains(",meter,"))
         XCTAssertTrue(csv.contains(",count,"))
+        XCTAssertTrue(csv.contains(",second,"))
 
         let destination = try makeContainer()
         _ = try DataExportService.importBackup(backup, into: destination.mainContext)
@@ -240,8 +950,10 @@ final class ScheduleAndDataTests: XCTestCase {
 
         XCTAssertEqual(importedExercises.first(where: { $0.name == run.name })?.volumeUnit, .meter)
         XCTAssertEqual(importedExercises.first(where: { $0.name == jump.name })?.volumeUnit, .count)
+        XCTAssertEqual(importedExercises.first(where: { $0.name == hold.name })?.volumeUnit, .second)
         XCTAssertEqual(importedSnapshots.first(where: { $0.exerciseName == run.name })?.volumeUnit, .meter)
         XCTAssertEqual(importedSnapshots.first(where: { $0.exerciseName == jump.name })?.volumeUnit, .count)
+        XCTAssertEqual(importedSnapshots.first(where: { $0.exerciseName == hold.name })?.volumeUnit, .second)
     }
 
     func testLegacyBackupWithoutVolumeUnitDefaultsToKilogram() throws {
@@ -807,7 +1519,7 @@ final class ScheduleAndDataTests: XCTestCase {
         XCTAssertNil(log.restDurationSeconds)
     }
 
-    func testHistoricalBackfillPersistsBoundaryRestValues() throws {
+    func testHistoricalBackfillIgnoresLegacyRestInputAndWritesNoNewRestValues() throws {
         let container = try makeContainer()
         let context = container.mainContext
         let exercise = Exercise(name: "补录测试动作", muscleGroup: "背部", equipment: "器械")
@@ -841,7 +1553,7 @@ final class ScheduleAndDataTests: XCTestCase {
             .filter { $0.sessionID == session.id }
             .sorted { $0.setNumber < $1.setNumber }
 
-        XCTAssertEqual(logs.map(\.restDurationSeconds), [0, RestDurationInput.maximumSeconds, nil])
+        XCTAssertEqual(logs.map(\.restDurationSeconds), [nil, nil, nil])
         XCTAssertTrue(logs.allSatisfy(\.isCompleted))
     }
 
@@ -1447,6 +2159,146 @@ final class ScheduleAndDataTests: XCTestCase {
         XCTAssertEqual(descending.map(\.reps), [6, 8, 10])
     }
 
+    func testDailyPlanPersistsDayPatternAndExerciseOverrideIntoWorkoutSnapshot() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let bench = Exercise(name: "杠铃卧推", muscleGroup: "胸部", equipment: "杠铃")
+        let fly = Exercise(name: "绳索夹胸", muscleGroup: "胸部", equipment: "龙门架")
+        context.insert(bench)
+        context.insert(fly)
+
+        let schedule = try DailyPlanService.create(
+            on: .now,
+            muscleGroups: ["胸部"],
+            defaultPlanPattern: .pyramidUp,
+            exercises: [
+                DailyPlanExerciseInput(
+                    exerciseID: bench.id,
+                    plannedSets: WorkoutSetPlan.preset(.pyramidUp, count: 3, baseWeight: 40, baseReps: 10),
+                    planPattern: .pyramidUp,
+                    patternSource: .dayDefault,
+                    restSeconds: 120
+                ),
+                DailyPlanExerciseInput(
+                    exerciseID: fly.id,
+                    plannedSets: WorkoutSetPlan.preset(.fixed, count: 3, baseWeight: 10, baseReps: 12),
+                    planPattern: .fixed,
+                    patternSource: .exerciseOverride,
+                    restSeconds: 90
+                )
+            ],
+            replaceExistingPlans: true,
+            in: context
+        )
+
+        let template = try XCTUnwrap(
+            context.fetch(FetchDescriptor<WorkoutTemplate>()).first { $0.id == schedule.templateID }
+        )
+        let items = try context.fetch(FetchDescriptor<TemplateExercise>())
+            .filter { $0.templateID == template.id }
+            .sorted { $0.order < $1.order }
+        XCTAssertEqual(template.defaultPlanPattern, .pyramidUp)
+        XCTAssertEqual(items.map(\.patternSource), [.dayDefault, .exerciseOverride])
+        XCTAssertEqual(items.map(\.planPattern), [.pyramidUp, .fixed])
+
+        let sessionID = try WorkoutService.start(schedule: schedule, in: context)
+        let session = try XCTUnwrap(
+            context.fetch(FetchDescriptor<WorkoutSession>()).first { $0.id == sessionID }
+        )
+        let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
+            .filter { $0.sessionID == sessionID }
+            .sorted { $0.order < $1.order }
+        XCTAssertEqual(session.defaultPlanPattern, .pyramidUp)
+        XCTAssertEqual(snapshots.map(\.patternSource), [.dayDefault, .exerciseOverride])
+        XCTAssertEqual(snapshots.map(\.planPattern), [.pyramidUp, .fixed])
+    }
+
+    func testDayPatternChangeOnlyUpdatesInheritedExercisesAndRestoreRejoinsDefault() {
+        let inheritedID = UUID()
+        let overrideID = UUID()
+        let originalOverridePlans = WorkoutSetPlan.preset(
+            .fixed,
+            count: 3,
+            baseWeight: 20,
+            baseReps: 12
+        )
+        let targets = [
+            inheritedID: DailyPlanPatternTarget(
+                pattern: .fixed,
+                patternSource: .dayDefault,
+                plannedSets: WorkoutSetPlan.preset(.fixed, count: 3, baseWeight: 40, baseReps: 10),
+                restSeconds: 120
+            ),
+            overrideID: DailyPlanPatternTarget(
+                pattern: .fixed,
+                patternSource: .exerciseOverride,
+                plannedSets: originalOverridePlans,
+                restSeconds: 90
+            )
+        ]
+
+        let change = DailyPlanPatternPolicy.applying(
+            .pyramidUp,
+            to: targets,
+            orderedIDs: [inheritedID, overrideID]
+        )
+
+        XCTAssertEqual(change.updatedCount, 1)
+        XCTAssertEqual(change.overrideCount, 1)
+        XCTAssertEqual(change.targets[inheritedID]?.pattern, .pyramidUp)
+        XCTAssertEqual(change.targets[inheritedID]?.plannedSets.map(\.weight), [40, 42.5, 45])
+        XCTAssertEqual(change.targets[overrideID]?.pattern, .fixed)
+        XCTAssertEqual(change.targets[overrideID]?.plannedSets, originalOverridePlans)
+
+        let restored = DailyPlanPatternPolicy.restoring(
+            try! XCTUnwrap(change.targets[overrideID]),
+            to: .pyramidDown
+        )
+        XCTAssertEqual(restored.patternSource, .dayDefault)
+        XCTAssertEqual(restored.pattern, .pyramidDown)
+        XCTAssertEqual(restored.plannedSets.map(\.weight), [25, 22.5, 20])
+    }
+
+    func testLegacyPatternMetadataInfersUniformPlansButPreservesMixedPlansAsOverrides() {
+        let firstID = UUID()
+        let secondID = UUID()
+
+        let uniform = DailyPlanPatternMetadataPolicy.resolve(
+            explicitPatternRaw: nil,
+            itemPatterns: [
+                (firstID, .pyramidUp, nil),
+                (secondID, .pyramidUp, nil)
+            ]
+        )
+        XCTAssertEqual(uniform.dayPattern, .pyramidUp)
+        XCTAssertFalse(uniform.isLegacyMixed)
+        XCTAssertEqual(uniform.sources[firstID], .dayDefault)
+        XCTAssertEqual(uniform.sources[secondID], .dayDefault)
+
+        let mixed = DailyPlanPatternMetadataPolicy.resolve(
+            explicitPatternRaw: nil,
+            itemPatterns: [
+                (firstID, .fixed, nil),
+                (secondID, .pyramidDown, nil)
+            ]
+        )
+        XCTAssertEqual(mixed.dayPattern, .fixed)
+        XCTAssertTrue(mixed.isLegacyMixed)
+        XCTAssertEqual(mixed.sources[firstID], .exerciseOverride)
+        XCTAssertEqual(mixed.sources[secondID], .exerciseOverride)
+
+        let explicit = DailyPlanPatternMetadataPolicy.resolve(
+            explicitPatternRaw: SetPlanPattern.pyramidDown.rawValue,
+            itemPatterns: [
+                (firstID, .pyramidDown, PlanPatternSource.dayDefault.rawValue),
+                (secondID, .fixed, PlanPatternSource.exerciseOverride.rawValue)
+            ]
+        )
+        XCTAssertEqual(explicit.dayPattern, .pyramidDown)
+        XCTAssertEqual(explicit.sources[firstID], .dayDefault)
+        XCTAssertEqual(explicit.sources[secondID], .exerciseOverride)
+    }
+
     func testWorkoutStartCopiesPerSetPlanAndSideModesIntoLogs() throws {
         let container = try makeContainer()
         let context = container.mainContext
@@ -1550,6 +2402,69 @@ final class ScheduleAndDataTests: XCTestCase {
             ExerciseCatalogService.exactNameMatch(named: "严格深蹲", in: [squat, strictSquat])?.id,
             squat.id
         )
+    }
+
+    func testEditingBuiltInExerciseUpdatesCatalogWithoutRewritingHistorySnapshot() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(
+            name: "测试内置深蹲",
+            muscleGroup: "腿部",
+            equipment: "杠铃",
+            defaultRestSeconds: 120,
+            isBuiltIn: true,
+            notes: "原始动作提醒",
+            referenceURL: "https://example.com/original",
+            volumeUnit: .kilogram
+        )
+        let snapshot = SessionExercise(
+            sessionID: UUID(),
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 60,
+            restSeconds: exercise.defaultRestSeconds,
+            muscleGroup: exercise.muscleGroup,
+            exerciseNotes: exercise.notes,
+            referenceURL: exercise.referenceURL,
+            volumeUnit: exercise.volumeUnit
+        )
+        context.insert(exercise)
+        context.insert(snapshot)
+        try context.save()
+
+        let result = try ExerciseCatalogService.save(
+            exercise: exercise,
+            name: "测试内置高杠深蹲",
+            muscleGroup: "臀部",
+            equipment: "力量架",
+            volumeUnit: .count,
+            defaultRestSeconds: 90,
+            notes: "更新后的动作提醒",
+            referenceURL: "https://example.com/updated",
+            allExercises: [exercise],
+            in: context
+        )
+
+        XCTAssertEqual(result.kind, .updated)
+        XCTAssertTrue(exercise.isBuiltIn)
+        XCTAssertEqual(exercise.name, "测试内置高杠深蹲")
+        XCTAssertEqual(exercise.muscleGroup, "臀部")
+        XCTAssertEqual(exercise.equipment, "力量架")
+        XCTAssertEqual(exercise.volumeUnit, .count)
+        XCTAssertEqual(exercise.defaultRestSeconds, 90)
+        XCTAssertEqual(exercise.notes, "更新后的动作提醒")
+        XCTAssertEqual(exercise.referenceURL, "https://example.com/updated")
+
+        XCTAssertEqual(snapshot.exerciseName, "测试内置深蹲")
+        XCTAssertEqual(snapshot.muscleGroup, "腿部")
+        XCTAssertEqual(snapshot.restSeconds, 120)
+        XCTAssertEqual(snapshot.exerciseNotes, "原始动作提醒")
+        XCTAssertEqual(snapshot.referenceURL, "https://example.com/original")
+        XCTAssertEqual(snapshot.volumeUnit, .kilogram)
     }
 
     func testSetPlanPresetClampsUnsafeInputsAndPreservesSideModes() {
@@ -1706,11 +2621,191 @@ final class ScheduleAndDataTests: XCTestCase {
         }
     }
 
+    func testFinishingPersistentTemplateUpdatesOnlyExistingExercisesFromCompletedWorkingSets() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let squat = Exercise(name: "深蹲", muscleGroup: "腿部", equipment: "杠铃")
+        let row = Exercise(name: "坐姿划船", muscleGroup: "背部", equipment: "器械")
+        let temporary = Exercise(name: "临时加练", muscleGroup: "核心", equipment: "自重")
+        let template = WorkoutTemplate(name: "力量专项", weekday: Date.now.weekdayNumber)
+        let squatItem = TemplateExercise(
+            templateID: template.id,
+            exerciseID: squat.id,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 50,
+            restSeconds: 120
+        )
+        let rowItem = TemplateExercise(
+            templateID: template.id,
+            exerciseID: row.id,
+            order: 1,
+            targetSets: 3,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 40,
+            restSeconds: 90
+        )
+        let originalRowPlan = rowItem.plannedSets
+        let schedule = ScheduledWorkout(
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: .now,
+            status: .inProgress
+        )
+        let session = WorkoutSession(
+            scheduledWorkoutID: schedule.id,
+            templateID: template.id,
+            templateName: template.name,
+            plannedDate: .now
+        )
+        let squatSnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: squat.id,
+            exerciseName: squat.name,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 50,
+            restSeconds: 120
+        )
+        let rowSnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: row.id,
+            exerciseName: row.name,
+            order: 1,
+            targetSets: 3,
+            minReps: 10,
+            maxReps: 10,
+            targetWeight: 40,
+            restSeconds: 90
+        )
+        let temporarySnapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: temporary.id,
+            exerciseName: temporary.name,
+            order: 2,
+            targetSets: 1,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 0,
+            restSeconds: 60,
+            volumeUnit: .count
+        )
+        let logs = [
+            SetLog(sessionID: session.id, sessionExerciseID: squatSnapshot.id, exerciseID: squat.id, setNumber: 1, targetWeight: 20, targetReps: 10, actualWeight: 20, actualReps: 10, isWarmup: true, isCompleted: true),
+            SetLog(sessionID: session.id, sessionExerciseID: squatSnapshot.id, exerciseID: squat.id, setNumber: 2, targetWeight: 50, targetReps: 8, actualWeight: 62.5, actualReps: 8, isCompleted: true, actualWeightSide: .single, actualRepsSide: .bilateral),
+            SetLog(sessionID: session.id, sessionExerciseID: squatSnapshot.id, exerciseID: squat.id, setNumber: 3, targetWeight: 50, targetReps: 8, actualWeight: 65, actualReps: 6, isCompleted: true),
+            SetLog(sessionID: session.id, sessionExerciseID: squatSnapshot.id, exerciseID: squat.id, setNumber: 4, targetWeight: 67.5, targetReps: 5, actualWeight: 67.5, actualReps: 4),
+            SetLog(sessionID: session.id, sessionExerciseID: rowSnapshot.id, exerciseID: row.id, setNumber: 1, targetWeight: 40, targetReps: 10, actualWeight: 45, actualReps: 8),
+            SetLog(sessionID: session.id, sessionExerciseID: temporarySnapshot.id, exerciseID: temporary.id, setNumber: 1, targetWeight: 0, targetReps: 12, actualWeight: 0, actualReps: 15, isCompleted: true)
+        ]
+
+        context.insert(squat)
+        context.insert(row)
+        context.insert(temporary)
+        context.insert(template)
+        context.insert(squatItem)
+        context.insert(rowItem)
+        context.insert(schedule)
+        context.insert(session)
+        context.insert(squatSnapshot)
+        context.insert(rowSnapshot)
+        context.insert(temporarySnapshot)
+        logs.forEach(context.insert)
+        try context.save()
+
+        try WorkoutService.finish(session: session, schedules: [schedule], in: context)
+
+        XCTAssertEqual(session.status, .completed)
+        XCTAssertEqual(schedule.status, .completed)
+        XCTAssertEqual(squatItem.plannedSets.map(\.weight), [62.5, 65])
+        XCTAssertEqual(squatItem.plannedSets.map(\.reps), [8, 6])
+        XCTAssertEqual(squatItem.plannedSets.map(\.weightSide), [.single, .bilateral])
+        XCTAssertEqual(squatItem.targetSets, 2)
+        XCTAssertEqual(squatItem.minReps, 6)
+        XCTAssertEqual(squatItem.maxReps, 8)
+        XCTAssertEqual(rowItem.plannedSets, originalRowPlan, "未完成有效组的模板动作必须保持原计划")
+        XCTAssertFalse(
+            try context.fetch(FetchDescriptor<TemplateExercise>()).contains { $0.exerciseID == temporary.id },
+            "临时加练动作不能自动加入模板"
+        )
+
+        let storedLogs = try context.fetch(FetchDescriptor<SetLog>()).filter { $0.sessionID == session.id }
+        XCTAssertEqual(storedLogs.count, logs.count)
+        XCTAssertEqual(storedLogs.first { $0.setNumber == 2 && $0.exerciseID == squat.id }?.actualWeight, 62.5)
+    }
+
+    func testFinishingOneOffWorkoutDoesNotRewriteTemplatePlan() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(name: "深蹲", muscleGroup: "腿部", equipment: "杠铃")
+        let template = WorkoutTemplate(
+            name: "当天菜单",
+            weekday: Date.now.weekdayNumber,
+            isActive: false,
+            isOneOff: true,
+            plannedForDate: .now
+        )
+        let item = TemplateExercise(
+            templateID: template.id,
+            exerciseID: exercise.id,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 50,
+            restSeconds: 120
+        )
+        let originalPlan = item.plannedSets
+        let session = WorkoutSession(templateID: template.id, templateName: template.name, plannedDate: .now)
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 3,
+            minReps: 8,
+            maxReps: 8,
+            targetWeight: 50,
+            restSeconds: 120
+        )
+        let log = SetLog(
+            sessionID: session.id,
+            sessionExerciseID: snapshot.id,
+            exerciseID: exercise.id,
+            setNumber: 1,
+            targetWeight: 50,
+            targetReps: 8,
+            actualWeight: 70,
+            actualReps: 5,
+            isCompleted: true
+        )
+        context.insert(exercise)
+        context.insert(template)
+        context.insert(item)
+        context.insert(session)
+        context.insert(snapshot)
+        context.insert(log)
+        try context.save()
+
+        try WorkoutService.finish(session: session, schedules: [], in: context)
+
+        XCTAssertEqual(item.plannedSets, originalPlan)
+    }
+
     func testBackupRoundTripPreservesPerSetPlansPatternsAndIndependentSideModes() throws {
         let source = try makeContainer()
         let context = source.mainContext
         let exercise = Exercise(name: "保加利亚分腿蹲", muscleGroup: "腿部", equipment: "哑铃")
-        let template = WorkoutTemplate(name: "逐组计划", weekday: Date.now.weekdayNumber)
+        let template = WorkoutTemplate(
+            name: "逐组计划",
+            weekday: Date.now.weekdayNumber,
+            defaultPlanPattern: .pyramidUp
+        )
         let plans = [
             WorkoutSetPlan(weight: 12, reps: 12, weightSide: .single, repsSide: .single),
             WorkoutSetPlan(weight: 14, reps: 10, weightSide: .single, repsSide: .bilateral)
@@ -1725,9 +2820,15 @@ final class ScheduleAndDataTests: XCTestCase {
             targetWeight: 12,
             restSeconds: 90,
             plannedSets: plans,
-            planPattern: .pyramidUp
+            planPattern: .pyramidUp,
+            patternSource: .dayDefault
         )
-        let session = WorkoutSession(templateName: template.name, plannedDate: .now, status: .completed)
+        let session = WorkoutSession(
+            templateName: template.name,
+            plannedDate: .now,
+            status: .completed,
+            defaultPlanPattern: .pyramidUp
+        )
         let snapshot = SessionExercise(
             sessionID: session.id,
             exerciseID: exercise.id,
@@ -1739,7 +2840,8 @@ final class ScheduleAndDataTests: XCTestCase {
             targetWeight: 12,
             restSeconds: 90,
             plannedSets: plans,
-            planPattern: .pyramidUp
+            planPattern: .pyramidUp,
+            patternSource: .dayDefault
         )
         let log = SetLog(
             sessionID: session.id,
@@ -1769,11 +2871,17 @@ final class ScheduleAndDataTests: XCTestCase {
         _ = try DataExportService.importBackup(data, into: destination.mainContext)
 
         let importedItem = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<TemplateExercise>()).first)
+        let importedTemplate = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<WorkoutTemplate>()).first)
+        let importedSession = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<WorkoutSession>()).first)
         let importedSnapshot = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<SessionExercise>()).first)
         let importedLog = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<SetLog>()).first)
+        XCTAssertEqual(importedTemplate.defaultPlanPattern, .pyramidUp)
         XCTAssertEqual(importedItem.planPattern, .pyramidUp)
+        XCTAssertEqual(importedItem.patternSource, .dayDefault)
         XCTAssertEqual(importedItem.plannedSets, plans)
+        XCTAssertEqual(importedSession.defaultPlanPattern, .pyramidUp)
         XCTAssertEqual(importedSnapshot.planPattern, .pyramidUp)
+        XCTAssertEqual(importedSnapshot.patternSource, .dayDefault)
         XCTAssertEqual(importedSnapshot.plannedSets, plans)
         XCTAssertEqual(importedLog.targetWeightSide, .single)
         XCTAssertEqual(importedLog.targetRepsSide, .single)
@@ -1830,11 +2938,17 @@ final class ScheduleAndDataTests: XCTestCase {
         let object = try XCTUnwrap(JSONSerialization.jsonObject(with: currentData) as? [String: Any])
         var legacy = object
         legacy["schemaVersion"] = 7
+        legacy["templates"] = (object["templates"] as? [[String: Any]] ?? []).map { record in
+            record.filter { $0.key != "defaultPlanPatternRaw" }
+        }
         legacy["templateExercises"] = (object["templateExercises"] as? [[String: Any]] ?? []).map { record in
-            record.filter { !["plannedSetsJSON", "planPatternRaw"].contains($0.key) }
+            record.filter { !["plannedSetsJSON", "planPatternRaw", "patternSourceRaw"].contains($0.key) }
+        }
+        legacy["sessions"] = (object["sessions"] as? [[String: Any]] ?? []).map { record in
+            record.filter { $0.key != "defaultPlanPatternRaw" }
         }
         legacy["sessionExercises"] = (object["sessionExercises"] as? [[String: Any]] ?? []).map { record in
-            record.filter { !["plannedSetsJSON", "planPatternRaw"].contains($0.key) }
+            record.filter { !["plannedSetsJSON", "planPatternRaw", "patternSourceRaw"].contains($0.key) }
         }
         legacy["setLogs"] = (object["setLogs"] as? [[String: Any]] ?? []).map { record in
             record.filter {
@@ -1910,7 +3024,14 @@ final class ScheduleAndDataTests: XCTestCase {
         let context = container.mainContext
         let fly = Exercise(name: "绳索反向飞鸟", muscleGroup: "肩部", equipment: "龙门架")
         let decline = Exercise(name: "MTS 下斜卧推", muscleGroup: "胸部", equipment: "固定器械")
+        let schedule = ScheduledWorkout(
+            templateID: UUID(),
+            templateName: "肩部 + 胸部 · 当天菜单",
+            plannedDate: .now,
+            status: .inProgress
+        )
         let session = WorkoutSession(
+            scheduledWorkoutID: schedule.id,
             templateName: "肩部 + 胸部 · 当天菜单",
             plannedDate: .now,
             status: .inProgress
@@ -1961,6 +3082,7 @@ final class ScheduleAndDataTests: XCTestCase {
             actualReps: 10
         )
         [fly, decline].forEach(context.insert)
+        context.insert(schedule)
         context.insert(session)
         [flySnapshot, declineSnapshot].forEach(context.insert)
         [completedFlySet, pendingDeclineSet].forEach(context.insert)
@@ -1971,34 +3093,203 @@ final class ScheduleAndDataTests: XCTestCase {
                 DailyPlanExerciseInput(
                     exerciseID: decline.id,
                     plannedSets: [WorkoutSetPlan(weight: 30.125, reps: 8)],
-                    planPattern: .fixed,
+                    planPattern: .pyramidUp,
+                    patternSource: .dayDefault,
                     restSeconds: 120
                 ),
                 DailyPlanExerciseInput(
                     exerciseID: fly.id,
-                    plannedSets: [WorkoutSetPlan(weight: 5, reps: 10)],
+                    plannedSets: [
+                        WorkoutSetPlan(weight: 5, reps: 10),
+                        WorkoutSetPlan(weight: 7.5, reps: 8)
+                    ],
                     planPattern: .fixed,
-                    restSeconds: 90
+                    restSeconds: 150
                 )
             ],
             to: session,
+            muscleGroups: ["背部", "核心"],
+            defaultPlanPattern: .pyramidUp,
             in: context
         )
 
         let snapshots = try context.fetch(FetchDescriptor<SessionExercise>())
             .filter { $0.sessionID == session.id }
             .sorted { $0.order < $1.order }
-        XCTAssertEqual(snapshots.map(\.exerciseID), [decline.id, fly.id])
+        XCTAssertEqual(snapshots.map(\.exerciseID), [fly.id, decline.id])
+        XCTAssertEqual(session.templateName, "背部 + 核心 · 当天菜单")
+        XCTAssertEqual(schedule.templateName, "背部 + 核心 · 当天菜单")
+        XCTAssertEqual(session.defaultPlanPattern, .pyramidUp)
+        XCTAssertEqual(declineSnapshot.patternSource, .dayDefault)
         XCTAssertEqual(declineSnapshot.restSeconds, 120)
+        XCTAssertEqual(flySnapshot.restSeconds, 150)
+        XCTAssertEqual(flySnapshot.plannedSets.map(\.weight), [5, 7.5])
         XCTAssertEqual(pendingDeclineSet.targetWeight, 30.125, accuracy: 0.0001)
         XCTAssertEqual(pendingDeclineSet.actualWeight, 30.125, accuracy: 0.0001)
         XCTAssertEqual(completedFlySet.actualWeight, 8.875, accuracy: 0.0001)
+        XCTAssertEqual(completedFlySet.targetWeight, 5, accuracy: 0.0001)
+        let pendingFlySet = try XCTUnwrap(
+            try context.fetch(FetchDescriptor<SetLog>())
+                .first { $0.sessionExerciseID == flySnapshot.id && $0.setNumber == 2 }
+        )
+        XCTAssertEqual(pendingFlySet.targetWeight, 7.5, accuracy: 0.0001)
+        XCTAssertEqual(pendingFlySet.targetReps, 8)
+        XCTAssertEqual(flySnapshot.order, 0, "已开始动作的顺序不应被外部编排改写")
         XCTAssertTrue(completedFlySet.isCompleted)
     }
 
     func testWeightFormatterShowsUpToThreeDecimalsWithoutPadding() {
         XCTAssertEqual(TrainingFormatters.weight(5), "5")
         XCTAssertTrue(TrainingFormatters.weight(8.875).contains("875"))
+    }
+
+    func testLocalAgentPreviewsJumpRopeWithoutWriting() throws {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+
+        let interpretation = LocalWellnessAgent.interpret("刚跳绳 1200 个", now: now)
+
+        XCTAssertEqual(
+            interpretation,
+            .pending(.recordJumpRope(count: 1_200, durationMinutes: nil, at: now))
+        )
+    }
+
+    func testLocalAgentPreviewsWaterAndRejectsUnsupportedRequests() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("喝了 300ml 水", now: now),
+            .pending(.recordWater(milliliters: 300, at: now))
+        )
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("帮我制定减脂食谱", now: now),
+            .unsupported(message: "我暂时只能处理跳绳、喝水、久坐和体重记录。")
+        )
+    }
+
+    func testWellnessToolExecutesWaterAndBuildsTodaySummary() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let date = Date(timeIntervalSince1970: 1_800_000_000)
+
+        let result = try WellnessToolService.execute(
+            .recordWater(milliliters: 300, at: date),
+            in: context
+        )
+
+        XCTAssertEqual(result.message, "已记录 300 ml 饮水")
+        let entries = try context.fetch(FetchDescriptor<HydrationEntry>())
+        XCTAssertEqual(entries.count, 1)
+        XCTAssertEqual(entries.first?.milliliters, 300)
+        XCTAssertEqual(
+            WellnessToolService.todaySummary(
+                on: date,
+                hydrationEntries: entries,
+                jumpRopeEntries: [],
+                sedentarySessions: []
+            ).waterMilliliters,
+            300
+        )
+    }
+
+    func testLocalAgentPreviewsSedentaryWeightAndSummaryCommands() {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("开始久坐", now: now),
+            .pending(.startSedentary(at: now))
+        )
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("刚才坐了 90 分钟", now: now),
+            .pending(.recordSedentary(
+                startedAt: now.addingTimeInterval(-5_400),
+                durationMinutes: 90
+            ))
+        )
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("体重 83.6 kg", now: now),
+            .pending(.recordWeight(kilograms: 83.6, at: now))
+        )
+        XCTAssertEqual(
+            LocalWellnessAgent.interpret("我今天喝了多少水？", now: now),
+            .pending(.queryTodaySummary(on: now))
+        )
+    }
+
+    func testWellnessToolExecutesJumpRopeAndSedentaryLifecycle() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+
+        _ = try WellnessToolService.execute(
+            .recordJumpRope(count: 1_200, durationMinutes: 12, at: start),
+            in: context
+        )
+        let started = try WellnessToolService.execute(.startSedentary(at: start), in: context)
+        XCTAssertThrowsError(try WellnessToolService.execute(.startSedentary(at: start), in: context)) { error in
+            XCTAssertEqual(error as? WellnessToolError, .sedentaryAlreadyActive)
+        }
+        let stopped = try WellnessToolService.execute(
+            .stopSedentary(at: start.addingTimeInterval(5_400)),
+            in: context
+        )
+
+        let jumps = try context.fetch(FetchDescriptor<JumpRopeEntry>())
+        let sedentary = try context.fetch(FetchDescriptor<SedentarySession>())
+        let summary = WellnessToolService.todaySummary(
+            on: start.addingTimeInterval(5_400),
+            hydrationEntries: [],
+            jumpRopeEntries: jumps,
+            sedentarySessions: sedentary
+        )
+        XCTAssertEqual(jumps.first?.durationSeconds, 720)
+        XCTAssertEqual(summary.jumpRopeCount, 1_200)
+        XCTAssertEqual(summary.sedentaryMinutes, 90)
+        XCTAssertEqual(started.message, "久坐计时已开始")
+        XCTAssertEqual(stopped.message, "已记录久坐 90 分钟")
+    }
+
+    func testWellnessToolSupportsManualSedentaryAndUndo() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        let result = try WellnessToolService.execute(
+            .recordSedentary(startedAt: start, durationMinutes: 45),
+            in: context
+        )
+        let undo = try XCTUnwrap(result.undoAction)
+
+        XCTAssertEqual(try context.fetch(FetchDescriptor<SedentarySession>()).count, 1)
+        try WellnessToolService.undo(undo, in: context)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<SedentarySession>()).count, 0)
+    }
+
+    func testBackupRoundTripsWellnessToolRecordsIdempotently() throws {
+        let source = try makeContainer()
+        let date = Date(timeIntervalSince1970: 1_800_000_000)
+        source.mainContext.insert(HydrationEntry(milliliters: 250, date: date))
+        source.mainContext.insert(JumpRopeEntry(count: 1_200, durationSeconds: 720, date: date))
+        source.mainContext.insert(SedentarySession(
+            startedAt: date,
+            endedAt: date.addingTimeInterval(3_600)
+        ))
+        try source.mainContext.save()
+
+        let url = try DataExportService.createBackup(in: source.mainContext)
+        let data = try Data(contentsOf: url)
+        let preview = try DataExportService.preview(data)
+        XCTAssertEqual(preview.hydrationEntries, 1)
+        XCTAssertEqual(preview.jumpRopeEntries, 1)
+        XCTAssertEqual(preview.sedentarySessions, 1)
+
+        let destination = try makeContainer()
+        let first = try DataExportService.importBackup(data, into: destination.mainContext)
+        let second = try DataExportService.importBackup(data, into: destination.mainContext)
+        XCTAssertEqual(first.imported, 3)
+        XCTAssertEqual(second.imported, 0)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<HydrationEntry>()).count, 1)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).count, 1)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<SedentarySession>()).count, 1)
     }
 
     private func makeContainer() throws -> ModelContainer {
@@ -2013,7 +3304,10 @@ final class ScheduleAndDataTests: XCTestCase {
             NutritionTarget.self,
             MealEntry.self,
             DailyBodyCheckIn.self,
-            BodyMeasurement.self
+            BodyMeasurement.self,
+            HydrationEntry.self,
+            JumpRopeEntry.self,
+            SedentarySession.self
         ])
         let configuration = ModelConfiguration(
             schema: schema,
@@ -2035,7 +3329,10 @@ final class ScheduleAndDataTests: XCTestCase {
             NutritionTarget.self,
             MealEntry.self,
             DailyBodyCheckIn.self,
-            BodyMeasurement.self
+            BodyMeasurement.self,
+            HydrationEntry.self,
+            JumpRopeEntry.self,
+            SedentarySession.self
         ])
         let configuration = ModelConfiguration(
             "RestPersistenceTests",
@@ -2046,10 +3343,14 @@ final class ScheduleAndDataTests: XCTestCase {
         return try ModelContainer(for: schema, configurations: [configuration])
     }
 
-    private func makeSet(sessionID: UUID, setNumber: Int) -> SetLog {
+    private func makeSet(
+        sessionID: UUID,
+        setNumber: Int,
+        sessionExerciseID: UUID = UUID()
+    ) -> SetLog {
         SetLog(
             sessionID: sessionID,
-            sessionExerciseID: UUID(),
+            sessionExerciseID: sessionExerciseID,
             exerciseID: UUID(),
             setNumber: setNumber,
             targetWeight: 50,

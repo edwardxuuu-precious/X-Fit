@@ -1,5 +1,7 @@
 # X-Fit 真机自动化与性能续测
 
+> 2026-09-05 存储清理：本页引用的旧 `.trace`、`.xcresult` 和部分测试媒体已按用户要求删除；轻量统计、摘要和真实设备数据保留。本页结论仅为当时记录，本轮未重新测试。逐项清单见 [清理记录](../20260905-storage-cleanup/summary.md)。
+
 - Run ID：`notification-perf-device-20260828-1828`
 - 设备：iPhone 17 / iOS 26.6
 - 安装方式：签名 Release 覆盖安装；未卸载、未清容器

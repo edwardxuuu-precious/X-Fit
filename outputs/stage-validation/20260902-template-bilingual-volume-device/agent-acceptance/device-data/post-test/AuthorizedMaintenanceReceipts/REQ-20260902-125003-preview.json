@@ -1,0 +1,44 @@
+{
+  "after" : {
+    "exercises" : 95,
+    "notesSessionExercises" : 150,
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "scheduledWorkouts" : 29,
+    "sessionExercises" : 215,
+    "sessions" : 38,
+    "setLogs" : 876,
+    "templateExercises" : 56,
+    "templates" : 11
+  },
+  "before" : {
+    "exercises" : 95,
+    "notesSessionExercises" : 150,
+    "notesSessions" : 27,
+    "notesSetLogs" : 634,
+    "scheduledWorkouts" : 29,
+    "sessionExercises" : 215,
+    "sessions" : 38,
+    "setLogs" : 876,
+    "templateExercises" : 56,
+    "templates" : 11
+  },
+  "message" : "固定 ID 与保护集合预检通过，未删除数据",
+  "mode" : "preview",
+  "protectedIDsPresent" : true,
+  "recordedAt" : "2026-09-02T05:20:44Z",
+  "removed" : {
+    "exercises" : 0,
+    "notesSessionExercises" : 0,
+    "notesSessions" : 0,
+    "notesSetLogs" : 0,
+    "scheduledWorkouts" : 0,
+    "sessionExercises" : 0,
+    "sessions" : 0,
+    "setLogs" : 0,
+    "templateExercises" : 0,
+    "templates" : 0
+  },
+  "requestID" : "REQ-20260902-125003",
+  "succeeded" : true
+}

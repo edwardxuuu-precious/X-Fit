@@ -1,0 +1,8 @@
+{
+  "FitnessApp/Models/TrainingMetrics.swift": true,
+  "FitnessApp/Models/TrainingModels.swift": true,
+  "FitnessApp/Models/WellnessModels.swift": true,
+  "FitnessApp/Models/FatLossModels.swift": true,
+  "FitnessApp/App/FitnessAppApp.swift": true,
+  "FitnessApp/App/RootView.swift": true
+}

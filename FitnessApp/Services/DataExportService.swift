@@ -8,8 +8,15 @@ struct BackupPreview {
     let meals: Int
     let bodyCheckIns: Int
     let bodyMeasurements: Int
+    let hydrationEntries: Int
+    let jumpRopeEntries: Int
+    let sedentarySessions: Int
+    let fatLossRecords: Int
 
-    var total: Int { exercises + templates + sessions + meals + bodyCheckIns + bodyMeasurements }
+    var total: Int {
+        exercises + templates + sessions + meals + bodyCheckIns + bodyMeasurements
+            + hydrationEntries + jumpRopeEntries + sedentarySessions + fatLossRecords
+    }
 }
 
 struct BackupImportSummary {
@@ -32,6 +39,11 @@ private struct XFitBackup: Codable {
     /// Optional so backups created before daily body check-ins still decode.
     let bodyCheckIns: [DailyBodyCheckInRecord]?
     let bodyMeasurements: [BodyMeasurementRecord]
+    /// Optional so backups created before the tools hub still decode.
+    let hydrationEntries: [HydrationRecord]?
+    let jumpRopeEntries: [JumpRopeRecord]?
+    let sedentarySessions: [SedentaryRecord]?
+    let fatLoss: FatLossBackup?
 }
 
 private struct ExerciseRecord: Codable {
@@ -68,6 +80,7 @@ private struct TemplateRecord: Codable {
     let isOneOff: Bool?
     let plannedForDate: Date?
     let focusMuscleGroupsRaw: String?
+    let defaultPlanPatternRaw: String?
 }
 
 private struct TemplateExerciseRecord: Codable {
@@ -82,6 +95,7 @@ private struct TemplateExerciseRecord: Codable {
     let restSeconds: Int
     let plannedSetsJSON: String?
     let planPatternRaw: String?
+    let patternSourceRaw: String?
 }
 
 private struct ScheduleRecord: Codable {
@@ -111,6 +125,7 @@ private struct SessionRecord: Codable {
     let restEndDate: Date?
     let restModeRaw: String?
     let importIdentifier: String?
+    let defaultPlanPatternRaw: String?
 }
 
 private struct SessionExerciseRecord: Codable {
@@ -132,6 +147,10 @@ private struct SessionExerciseRecord: Codable {
     let feelingRaw: String?
     let plannedSetsJSON: String?
     let planPatternRaw: String?
+    let patternSourceRaw: String?
+    let exerciseStartedAt: Date?
+    let exerciseCompletedAt: Date?
+    let bodyWeightKgSnapshot: Double?
 }
 
 private struct SetLogRecord: Codable {
@@ -178,6 +197,18 @@ private struct MealRecord: Codable {
     let fatGrams: Int
     let createdAt: Date
     let updatedAt: Date
+    let programID: UUID?
+    let plannedMealID: UUID?
+    let recipeSnapshotJSON: String?
+    let actualPortions: Double?
+    let nutritionKnown: Bool?
+    let knownNutritionFieldsRaw: String?
+    let estimationMethod: String?
+    let isVoided: Bool?
+    let tasteRating: Int?
+    let preparationDifficulty: Int?
+    let bloatingScore: Int?
+    let feedbackNotes: String?
 }
 
 private struct BodyMeasurementRecord: Codable {
@@ -202,6 +233,30 @@ private struct DailyBodyCheckInRecord: Codable {
     let bodyMarkersJSON: String?
     let createdAt: Date
     let updatedAt: Date
+}
+
+private struct HydrationRecord: Codable {
+    let id: UUID
+    let milliliters: Int
+    let date: Date
+    let createdAt: Date
+}
+
+private struct JumpRopeRecord: Codable {
+    let id: UUID
+    let count: Int
+    let durationSeconds: Int?
+    let activeDurationSeconds: Int?
+    let elapsedDurationSeconds: Int?
+    let date: Date
+    let createdAt: Date
+}
+
+private struct SedentaryRecord: Codable {
+    let id: UUID
+    let startedAt: Date
+    let endedAt: Date?
+    let createdAt: Date
 }
 
 @MainActor
@@ -278,19 +333,26 @@ enum DataExportService {
             sessions: backup.sessions.count,
             meals: backup.meals.count,
             bodyCheckIns: backup.bodyCheckIns?.count ?? 0,
-            bodyMeasurements: backup.bodyMeasurements.count
+            bodyMeasurements: backup.bodyMeasurements.count,
+            hydrationEntries: backup.hydrationEntries?.count ?? 0,
+            jumpRopeEntries: backup.jumpRopeEntries?.count ?? 0,
+            sedentarySessions: backup.sedentarySessions?.count ?? 0,
+            fatLossRecords: backup.fatLoss?.total ?? 0
         )
     }
 
     static func importBackup(_ data: Data, into context: ModelContext) throws -> BackupImportSummary {
         let backup = try decode(data)
-        guard backup.schemaVersion <= 9 else {
+        guard backup.schemaVersion <= 13 else {
             throw CocoaError(.fileReadCorruptFile, userInfo: [
                 NSLocalizedDescriptionKey: "这个备份来自更高版本的 X-Fit，当前版本无法安全导入。"
             ])
         }
         try validateUniqueIdentifiers(in: backup)
         try validateRestIntervals(in: backup)
+        try validateWellnessRecords(in: backup)
+        try FatLossBackupService.validate(backup.fatLoss, in: context)
+        try validateProgramReferences(in: backup, context: context)
 
         var imported = 0
         var skipped = 0
@@ -340,7 +402,8 @@ enum DataExportService {
                 plannedForDate: record.plannedForDate,
                 focusMuscleGroups: (record.focusMuscleGroupsRaw ?? "")
                     .split(separator: ",")
-                    .map(String.init)
+                    .map(String.init),
+                defaultPlanPattern: record.defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:))
             ))
             templateIDs.insert(record.id)
             imported += 1
@@ -366,6 +429,7 @@ enum DataExportService {
             if let planPatternRaw = record.planPatternRaw {
                 model.planPatternRaw = planPatternRaw
             }
+            model.patternSourceRaw = record.patternSourceRaw
             context.insert(model)
             templateExerciseIDs.insert(record.id)
             imported += 1
@@ -407,7 +471,8 @@ enum DataExportService {
                 notes: record.notes,
                 restEndDate: record.restEndDate,
                 restMode: record.restModeRaw.flatMap(WorkoutRestMode.init(rawValue:)) ?? .countdown,
-                importIdentifier: record.importIdentifier ?? ""
+                importIdentifier: record.importIdentifier ?? "",
+                defaultPlanPattern: record.defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:))
             ))
             sessionIDs.insert(record.id)
             imported += 1
@@ -432,7 +497,10 @@ enum DataExportService {
                 referenceURL: record.referenceURL ?? "",
                 volumeUnit: record.volumeUnitRaw.flatMap(ExerciseVolumeUnit.init(rawValue:)) ?? .kilogram,
                 performanceNotes: record.performanceNotes ?? "",
-                feeling: record.feelingRaw.flatMap(WorkoutFeeling.init(rawValue:))
+                feeling: record.feelingRaw.flatMap(WorkoutFeeling.init(rawValue:)),
+                exerciseStartedAt: record.exerciseStartedAt,
+                exerciseCompletedAt: record.exerciseCompletedAt,
+                bodyWeightKgSnapshot: record.bodyWeightKgSnapshot
             )
             if let plannedSetsJSON = record.plannedSetsJSON {
                 model.plannedSetsJSON = plannedSetsJSON
@@ -440,6 +508,7 @@ enum DataExportService {
             if let planPatternRaw = record.planPatternRaw {
                 model.planPatternRaw = planPatternRaw
             }
+            model.patternSourceRaw = record.patternSourceRaw
             context.insert(model)
             sessionExerciseIDs.insert(record.id)
             imported += 1
@@ -506,6 +575,18 @@ enum DataExportService {
                 createdAt: record.createdAt
             )
             model.updatedAt = record.updatedAt
+            model.programID = record.programID
+            model.plannedMealID = record.plannedMealID
+            model.recipeSnapshotJSON = record.recipeSnapshotJSON
+            model.actualPortions = record.actualPortions
+            model.nutritionKnown = record.nutritionKnown
+            model.knownNutritionFieldsRaw = record.knownNutritionFieldsRaw
+            model.estimationMethod = record.estimationMethod
+            model.isVoided = record.isVoided
+            model.tasteRating = record.tasteRating
+            model.preparationDifficulty = record.preparationDifficulty
+            model.bloatingScore = record.bloatingScore
+            model.feedbackNotes = record.feedbackNotes
             context.insert(model)
             mealIDs.insert(record.id)
             imported += 1
@@ -554,6 +635,67 @@ enum DataExportService {
             imported += 1
         }
 
+        var hydrationIDs = Set(try context.fetch(FetchDescriptor<HydrationEntry>()).map(\.id))
+        for record in backup.hydrationEntries ?? [] {
+            guard !hydrationIDs.contains(record.id) else { skipped += 1; continue }
+            guard (1...5_000).contains(record.milliliters) else {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [
+                    NSLocalizedDescriptionKey: "备份包含无效的饮水记录，已停止导入。"
+                ])
+            }
+            context.insert(HydrationEntry(
+                id: record.id,
+                milliliters: record.milliliters,
+                date: record.date,
+                createdAt: record.createdAt
+            ))
+            hydrationIDs.insert(record.id)
+            imported += 1
+        }
+
+        var jumpRopeIDs = Set(try context.fetch(FetchDescriptor<JumpRopeEntry>()).map(\.id))
+        for record in backup.jumpRopeEntries ?? [] {
+            guard !jumpRopeIDs.contains(record.id) else { skipped += 1; continue }
+            guard (1...100_000).contains(record.count),
+                  record.durationSeconds.map({ (1...86_400).contains($0) }) ?? true else {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [
+                    NSLocalizedDescriptionKey: "备份包含无效的跳绳记录，已停止导入。"
+                ])
+            }
+            context.insert(JumpRopeEntry(
+                id: record.id,
+                count: record.count,
+                durationSeconds: record.durationSeconds,
+                activeDurationSeconds: record.activeDurationSeconds,
+                elapsedDurationSeconds: record.elapsedDurationSeconds,
+                date: record.date,
+                createdAt: record.createdAt
+            ))
+            jumpRopeIDs.insert(record.id)
+            imported += 1
+        }
+
+        var sedentaryIDs = Set(try context.fetch(FetchDescriptor<SedentarySession>()).map(\.id))
+        for record in backup.sedentarySessions ?? [] {
+            guard !sedentaryIDs.contains(record.id) else { skipped += 1; continue }
+            guard record.endedAt.map({ $0 > record.startedAt }) ?? true else {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [
+                    NSLocalizedDescriptionKey: "备份包含结束时间早于开始时间的久坐记录，已停止导入。"
+                ])
+            }
+            context.insert(SedentarySession(
+                id: record.id,
+                startedAt: record.startedAt,
+                endedAt: record.endedAt,
+                createdAt: record.createdAt
+            ))
+            sedentaryIDs.insert(record.id)
+            imported += 1
+        }
+
+        let fatLossResult = try FatLossBackupService.restore(backup.fatLoss, in: context)
+        imported += fatLossResult.imported
+        skipped += fatLossResult.skipped
         try context.save()
         try ScheduleService.refreshUpcoming(in: context)
         try context.save()
@@ -566,7 +708,7 @@ enum DataExportService {
 
     private static func makeBackup(in context: ModelContext) throws -> XFitBackup {
         XFitBackup(
-            schemaVersion: 9,
+            schemaVersion: 13,
             exportedAt: .now,
             exercises: try context.fetch(FetchDescriptor<Exercise>()).map {
                 ExerciseRecord(
@@ -595,19 +737,19 @@ enum DataExportService {
                 )
             },
             templates: try context.fetch(FetchDescriptor<WorkoutTemplate>()).map {
-                TemplateRecord(id: $0.id, name: $0.name, weekday: $0.weekday, isActive: $0.isActive, createdAt: $0.createdAt, isOneOff: $0.isOneOff, plannedForDate: $0.plannedForDate, focusMuscleGroupsRaw: $0.focusMuscleGroupsRaw)
+                TemplateRecord(id: $0.id, name: $0.name, weekday: $0.weekday, isActive: $0.isActive, createdAt: $0.createdAt, isOneOff: $0.isOneOff, plannedForDate: $0.plannedForDate, focusMuscleGroupsRaw: $0.focusMuscleGroupsRaw, defaultPlanPatternRaw: $0.defaultPlanPatternRaw)
             },
             templateExercises: try context.fetch(FetchDescriptor<TemplateExercise>()).map {
-                TemplateExerciseRecord(id: $0.id, templateID: $0.templateID, exerciseID: $0.exerciseID, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds, plannedSetsJSON: $0.plannedSetsJSON, planPatternRaw: $0.planPatternRaw)
+                TemplateExerciseRecord(id: $0.id, templateID: $0.templateID, exerciseID: $0.exerciseID, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds, plannedSetsJSON: $0.plannedSetsJSON, planPatternRaw: $0.planPatternRaw, patternSourceRaw: $0.patternSourceRaw)
             },
             schedules: try context.fetch(FetchDescriptor<ScheduledWorkout>()).map {
                 ScheduleRecord(id: $0.id, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, statusRaw: $0.statusRaw, createdAt: $0.createdAt, originalPlannedDate: $0.originalPlannedDate, isManuallyScheduled: $0.isManuallyScheduled, skipReason: $0.skipReason, reminderDate: $0.reminderDate, updatedAt: $0.updatedAt)
             },
             sessions: try context.fetch(FetchDescriptor<WorkoutSession>()).map {
-                SessionRecord(id: $0.id, scheduledWorkoutID: $0.scheduledWorkoutID, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, startedAt: $0.startedAt, completedAt: $0.completedAt, statusRaw: $0.statusRaw, notes: $0.notes, restEndDate: $0.restEndDate, restModeRaw: $0.restModeRaw, importIdentifier: $0.importIdentifier)
+                SessionRecord(id: $0.id, scheduledWorkoutID: $0.scheduledWorkoutID, templateID: $0.templateID, templateName: $0.templateName, plannedDate: $0.plannedDate, startedAt: $0.startedAt, completedAt: $0.completedAt, statusRaw: $0.statusRaw, notes: $0.notes, restEndDate: $0.restEndDate, restModeRaw: $0.restModeRaw, importIdentifier: $0.importIdentifier, defaultPlanPatternRaw: $0.defaultPlanPatternRaw)
             },
             sessionExercises: try context.fetch(FetchDescriptor<SessionExercise>()).map {
-                SessionExerciseRecord(id: $0.id, sessionID: $0.sessionID, exerciseID: $0.exerciseID, exerciseName: $0.exerciseName, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds, muscleGroup: $0.muscleGroup, exerciseNotes: $0.exerciseNotes, referenceURL: $0.referenceURL, volumeUnitRaw: $0.volumeUnitRaw, performanceNotes: $0.performanceNotes, feelingRaw: $0.feelingRaw, plannedSetsJSON: $0.plannedSetsJSON, planPatternRaw: $0.planPatternRaw)
+                SessionExerciseRecord(id: $0.id, sessionID: $0.sessionID, exerciseID: $0.exerciseID, exerciseName: $0.exerciseName, order: $0.order, targetSets: $0.targetSets, minReps: $0.minReps, maxReps: $0.maxReps, targetWeight: $0.targetWeight, restSeconds: $0.restSeconds, muscleGroup: $0.muscleGroup, exerciseNotes: $0.exerciseNotes, referenceURL: $0.referenceURL, volumeUnitRaw: $0.volumeUnitRaw, performanceNotes: $0.performanceNotes, feelingRaw: $0.feelingRaw, plannedSetsJSON: $0.plannedSetsJSON, planPatternRaw: $0.planPatternRaw, patternSourceRaw: $0.patternSourceRaw, exerciseStartedAt: $0.exerciseStartedAt, exerciseCompletedAt: $0.exerciseCompletedAt, bodyWeightKgSnapshot: $0.bodyWeightKgSnapshot)
             },
             setLogs: try context.fetch(FetchDescriptor<SetLog>()).map {
                 SetLogRecord(id: $0.id, sessionID: $0.sessionID, sessionExerciseID: $0.sessionExerciseID, exerciseID: $0.exerciseID, setNumber: $0.setNumber, targetWeight: $0.targetWeight, targetReps: $0.targetReps, actualWeight: $0.actualWeight, actualReps: $0.actualReps, rir: $0.rir, isWarmup: $0.isWarmup, isCompleted: $0.isCompleted, startedAt: $0.startedAt, completedAt: $0.completedAt, restStartedAt: $0.restStartedAt, restEndedAt: $0.restEndedAt, restDurationSeconds: $0.restDurationSeconds, targetWeightSideRaw: $0.targetWeightSideRaw, targetRepsSideRaw: $0.targetRepsSideRaw, actualWeightSideRaw: $0.actualWeightSideRaw, actualRepsSideRaw: $0.actualRepsSideRaw)
@@ -616,14 +758,30 @@ enum DataExportService {
                 NutritionTargetRecord(id: $0.id, calories: $0.calories, proteinGrams: $0.proteinGrams, carbsGrams: $0.carbsGrams, fatGrams: $0.fatGrams, updatedAt: $0.updatedAt)
             },
             meals: try context.fetch(FetchDescriptor<MealEntry>()).map {
-                MealRecord(id: $0.id, date: $0.date, mealTypeRaw: $0.mealTypeRaw, name: $0.name, calories: $0.calories, proteinGrams: $0.proteinGrams, carbsGrams: $0.carbsGrams, fatGrams: $0.fatGrams, createdAt: $0.createdAt, updatedAt: $0.updatedAt)
+                MealRecord(id: $0.id, date: $0.date, mealTypeRaw: $0.mealTypeRaw, name: $0.name, calories: $0.calories, proteinGrams: $0.proteinGrams, carbsGrams: $0.carbsGrams, fatGrams: $0.fatGrams, createdAt: $0.createdAt, updatedAt: $0.updatedAt,
+                           programID: $0.programID, plannedMealID: $0.plannedMealID,
+                           recipeSnapshotJSON: $0.recipeSnapshotJSON, actualPortions: $0.actualPortions,
+                           nutritionKnown: $0.nutritionKnown, knownNutritionFieldsRaw: $0.knownNutritionFieldsRaw, estimationMethod: $0.estimationMethod,
+                           isVoided: $0.isVoided, tasteRating: $0.tasteRating,
+                           preparationDifficulty: $0.preparationDifficulty, bloatingScore: $0.bloatingScore,
+                           feedbackNotes: $0.feedbackNotes)
             },
             bodyCheckIns: try context.fetch(FetchDescriptor<DailyBodyCheckIn>()).map {
                 DailyBodyCheckInRecord(id: $0.id, date: $0.date, conditionScore: $0.conditionScore, discomfortNotes: $0.discomfortNotes, bodyMarkersJSON: $0.bodyMarkersJSON, createdAt: $0.createdAt, updatedAt: $0.updatedAt)
             },
             bodyMeasurements: try context.fetch(FetchDescriptor<BodyMeasurement>()).map {
                 BodyMeasurementRecord(id: $0.id, date: $0.date, weightKg: $0.weightKg, bodyFatPercent: $0.bodyFatPercent, waistCm: $0.waistCm, chestCm: $0.chestCm, armCm: $0.armCm, notes: $0.notes, sourceRaw: $0.sourceRaw, createdAt: $0.createdAt, updatedAt: $0.updatedAt)
-            }
+            },
+            hydrationEntries: try context.fetch(FetchDescriptor<HydrationEntry>()).map {
+                HydrationRecord(id: $0.id, milliliters: $0.milliliters, date: $0.date, createdAt: $0.createdAt)
+            },
+            jumpRopeEntries: try context.fetch(FetchDescriptor<JumpRopeEntry>()).map {
+                JumpRopeRecord(id: $0.id, count: $0.count, durationSeconds: $0.durationSeconds, activeDurationSeconds: $0.activeDurationSeconds, elapsedDurationSeconds: $0.elapsedDurationSeconds, date: $0.date, createdAt: $0.createdAt)
+            },
+            sedentarySessions: try context.fetch(FetchDescriptor<SedentarySession>()).map {
+                SedentaryRecord(id: $0.id, startedAt: $0.startedAt, endedAt: $0.endedAt, createdAt: $0.createdAt)
+            },
+            fatLoss: try FatLossBackupService.export(in: context)
         )
     }
 
@@ -645,7 +803,10 @@ enum DataExportService {
             ("NutritionTarget", backup.nutritionTargets.map(\.id)),
             ("MealEntry", backup.meals.map(\.id)),
             ("DailyBodyCheckIn", (backup.bodyCheckIns ?? []).map(\.id)),
-            ("BodyMeasurement", backup.bodyMeasurements.map(\.id))
+            ("BodyMeasurement", backup.bodyMeasurements.map(\.id)),
+            ("HydrationEntry", (backup.hydrationEntries ?? []).map(\.id)),
+            ("JumpRopeEntry", (backup.jumpRopeEntries ?? []).map(\.id)),
+            ("SedentarySession", (backup.sedentarySessions ?? []).map(\.id))
         ]
         guard let duplicateGroup = groups.first(where: { Set($0.1).count != $0.1.count })?.0 else {
             return
@@ -653,6 +814,73 @@ enum DataExportService {
         throw CocoaError(.fileReadCorruptFile, userInfo: [
             NSLocalizedDescriptionKey: "备份包含重复的 \(duplicateGroup) 标识，已停止导入。"
         ])
+    }
+
+    private static func validateWellnessRecords(in backup: XFitBackup) throws {
+        for meal in backup.meals {
+            if let raw = meal.knownNutritionFieldsRaw {
+                let fields = raw.isEmpty ? [] : raw.components(separatedBy: ",")
+                guard Set(fields).count == fields.count,
+                      fields.allSatisfy({ ["calories", "protein", "carbs", "fat"].contains($0) }) else {
+                    throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "备份包含无效的已知营养字段。"])
+                }
+            }
+            guard meal.actualPortions.map({ $0.isFinite && $0 > 0 }) ?? true,
+                  [meal.tasteRating, meal.preparationDifficulty]
+                    .allSatisfy({ $0.map { (1...5).contains($0) } ?? true }),
+                  meal.bloatingScore.map({ (0...3).contains($0) }) ?? true else {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "备份包含无效的餐食份数或反馈评分。"])
+            }
+            if let snapshot = meal.recipeSnapshotJSON {
+                try FatLossBackupService.validateRecipeJSON(snapshot)
+            }
+        }
+        for rope in backup.jumpRopeEntries ?? [] {
+            guard JumpRopeDurationValidation.isValid(active: rope.activeDurationSeconds, elapsed: rope.elapsedDurationSeconds) else {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "备份跳绳有效时长不能超过含休息总时长。"])
+            }
+        }
+    }
+
+    private static func validateProgramReferences(in backup: XFitBackup, context: ModelContext) throws {
+        let referencedMeals = backup.meals.filter { $0.plannedMealID != nil || $0.programID != nil }
+        let links = backup.fatLoss?.workoutLinks ?? []
+        guard !referencedMeals.isEmpty || !links.isEmpty else { return }
+        guard FatLossBackupService.isRegistered(FatLossProgram.self, in: context),
+              FatLossBackupService.isRegistered(PlannedMeal.self, in: context) else {
+            throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "当前数据库不支持此备份的减脂记录。"])
+        }
+        let programIDs = Set((backup.fatLoss?.programs ?? []).map(\.id))
+            .union(try context.fetch(FetchDescriptor<FatLossProgram>()).map(\.id))
+        let planPairs = (backup.fatLoss?.plannedMeals ?? []).map { ($0.id, $0.programID) }
+            + (try context.fetch(FetchDescriptor<PlannedMeal>())).map { ($0.id, $0.programID) }
+        let plans = Dictionary(planPairs, uniquingKeysWith: { first, _ in first })
+        let existingMeals = try context.fetch(FetchDescriptor<MealEntry>())
+        var activePlanIDs = Set<UUID>()
+        for meal in referencedMeals {
+            if let programID = meal.programID, !programIDs.contains(programID) {
+                throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "实际餐食引用的减脂周期不存在。"])
+            }
+            if let plannedMealID = meal.plannedMealID {
+                guard let owningProgram = plans[plannedMealID], meal.programID == owningProgram else {
+                    throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "实际餐食引用的餐单不存在或属于其他周期。"])
+                }
+                if meal.isVoided != true {
+                    guard activePlanIDs.insert(plannedMealID).inserted else {
+                        throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "同一餐单存在重复的有效实际餐食。"])
+                    }
+                    if !existingMeals.contains(where: { $0.id == meal.id }),
+                       existingMeals.contains(where: { $0.isActiveMeal && $0.plannedMealID == plannedMealID }) {
+                        throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "备份实际餐食与现有记录冲突。"])
+                    }
+                }
+            }
+        }
+        let scheduleIDs = Set(backup.schedules.map(\.id))
+            .union(try context.fetch(FetchDescriptor<ScheduledWorkout>()).map(\.id))
+        guard links.allSatisfy({ scheduleIDs.contains($0.scheduledWorkoutID) }) else {
+            throw CocoaError(.fileReadCorruptFile, userInfo: [NSLocalizedDescriptionKey: "减脂训练引用的日程不存在。"])
+        }
     }
 
     private static func validateRestIntervals(in backup: XFitBackup) throws {

@@ -14,37 +14,20 @@ struct HistoricalWorkoutImportView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(
-                    eyebrow: "HISTORY SYNC",
-                    title: "批量同步训练记录"
-                )
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Label("适合过去几周的训练记录", systemImage: "calendar.badge.plus")
-                        .font(.headline.bold())
-                        .foregroundStyle(.white)
-                    Text("我可以把你的截图、表格或其他 App 导出整理成这个 CSV。导入时按动作名称匹配现有动作；缺失动作会创建为自定义动作。")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                    Text("同一个 session_id 再次导入会跳过，不会产生重复训练。")
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
-                }
-                .cardSurface()
-
-                SectionHeader(title: "CSV 必需字段")
-                Text("session_id, date, workout, exercise, set, weight_kg, reps")
-                    .font(.caption.monospaced())
-                    .foregroundStyle(.white)
-                    .textSelection(.enabled)
-                    .cardSurface()
-
-                SectionHeader(title: "可选字段")
-                Text("duration_minutes, workout_notes, muscle_group, equipment, rir, set_started_at, rest_seconds, exercise_notes")
-                    .font(.caption.monospaced())
+                Text("从 CSV 导入已有训练记录，先查看预览，再确认保存。")
+                    .font(.subheadline)
                     .foregroundStyle(AppTheme.secondaryText)
-                    .textSelection(.enabled)
-                    .cardSurface()
+
+                Button {
+                    showImporter = true
+                } label: {
+                    Label(
+                        pendingData == nil ? "选择历史 CSV" : "重新选择 CSV",
+                        systemImage: "doc.badge.plus"
+                    )
+                    .neonButtonStyle()
+                }
+                .accessibilityIdentifier(pendingData == nil ? "选择历史 CSV" : "重新选择 CSV")
 
                 if let preview {
                     VStack(alignment: .leading, spacing: 12) {
@@ -67,27 +50,36 @@ struct HistoricalWorkoutImportView: View {
                         Button {
                             importPendingData()
                         } label: {
-                            Label("确认同步记录", systemImage: "square.and.arrow.down.fill")
+                            Label("确认导入记录", systemImage: "square.and.arrow.down.fill")
                                 .neonButtonStyle()
                         }
+                        .accessibilityIdentifier("确认同步记录")
                     }
                     .cardSurface()
                 }
 
-                Button {
-                    showImporter = true
-                } label: {
-                    Label(
-                        pendingData == nil ? "选择历史 CSV" : "重新选择 CSV",
-                        systemImage: "doc.badge.plus"
-                    )
-                    .font(.headline.bold())
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 14))
-                    .overlay(RoundedRectangle(cornerRadius: 14).stroke(AppTheme.accent.opacity(0.45), lineWidth: 1))
+                DisclosureGroup("CSV 格式与导入规则") {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("按动作名称匹配现有动作；缺失动作会创建为自定义动作。同一 session_id 再次导入会自动跳过。")
+                            .font(.caption)
+                            .foregroundStyle(AppTheme.secondaryText)
+                        Text("必需字段")
+                            .font(.subheadline.bold())
+                        Text("session_id, date, workout, exercise, set, weight_kg, reps")
+                            .font(.caption.monospaced())
+                            .textSelection(.enabled)
+                        Text("可选字段")
+                            .font(.subheadline.bold())
+                        Text("duration_minutes, workout_notes, muscle_group, equipment, rir, set_started_at, rest_seconds, exercise_notes")
+                            .font(.caption.monospaced())
+                            .foregroundStyle(AppTheme.secondaryText)
+                            .textSelection(.enabled)
+                    }
+                    .padding(.top, 12)
                 }
+                .font(.subheadline.bold())
+                .tint(AppTheme.accent)
+                .cardSurface()
 
                 NavigationLink(destination: HistoricalWorkoutEntryView()) {
                     HStack {
@@ -98,17 +90,19 @@ struct HistoricalWorkoutImportView: View {
                     }
                     .font(.subheadline.bold())
                     .foregroundStyle(.white)
+                    .frame(minHeight: 44)
                     .cardSurface(padding: 14, cornerRadius: 14)
                 }
                 .buttonStyle(.plain)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 30)
         }
         .screenBackground()
-        .navigationTitle("历史同步")
+        .navigationTitle("导入历史训练")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .fileImporter(
             isPresented: $showImporter,
             allowedContentTypes: [.commaSeparatedText, .plainText],
@@ -116,7 +110,7 @@ struct HistoricalWorkoutImportView: View {
         ) { result in
             handleSelection(result)
         }
-        .alert("同步完成", isPresented: Binding(
+        .alert("导入完成", isPresented: Binding(
             get: { resultMessage != nil },
             set: { if !$0 { resultMessage = nil } }
         )) {
@@ -124,7 +118,7 @@ struct HistoricalWorkoutImportView: View {
         } message: {
             Text(resultMessage ?? "")
         }
-        .alert("无法同步", isPresented: Binding(
+        .alert("无法导入", isPresented: Binding(
             get: { errorMessage != nil },
             set: { if !$0 { errorMessage = nil } }
         )) {
@@ -165,7 +159,7 @@ struct HistoricalWorkoutImportView: View {
         guard let pendingData else { return }
         do {
             let summary = try HistoricalWorkoutCSVService.importCSV(pendingData, into: modelContext)
-            resultMessage = "已同步 \(summary.importedSessions) 场训练、\(summary.importedSets) 个完成组；新建 \(summary.createdExercises) 个动作，跳过 \(summary.skippedSessions) 场重复记录。"
+            resultMessage = "已导入 \(summary.importedSessions) 场训练、\(summary.importedSets) 个完成组；新建 \(summary.createdExercises) 个动作，跳过 \(summary.skippedSessions) 场重复记录。"
             self.pendingData = nil
             preview = nil
         } catch {

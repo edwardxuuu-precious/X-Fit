@@ -28,7 +28,18 @@ struct FitnessAppApp: App {
             NutritionTarget.self,
             MealEntry.self,
             DailyBodyCheckIn.self,
-            BodyMeasurement.self
+            BodyMeasurement.self,
+            HydrationEntry.self,
+            JumpRopeEntry.self,
+            SedentarySession.self,
+            FatLossProgram.self,
+            ProgramTargetRevision.self,
+            RecipeVersion.self,
+            PlannedMeal.self,
+            ProgramDailyLog.self,
+            ProgramHealthRecord.self,
+            ProgramWeeklyReview.self,
+            ProgramWorkoutLink.self
         ])
         let configuration: ModelConfiguration
         if CloudSyncRuntime.usesPersistentUITestStore {

@@ -122,9 +122,11 @@ struct ExerciseEditorView: View {
                         }
                     }
                     .accessibilityIdentifier("volume-unit-picker")
-                    Text("个：直接记录数量；米：每趟距离 × 趟数；kg：重量 × 次数；自重：只记录完成次数。")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    DisclosureGroup("如何选择训练量单位") {
+                        Text("个：直接记录数量；秒：每组时长；米：每趟距离 × 趟数；kg：重量 × 次数；自重：体重 × 次数。")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     Picker("默认休息", selection: $restSeconds) {
                         ForEach([30, 45, 60, 90, 120, 150, 180, 240, 300], id: \.self) { seconds in
                             Text("\(seconds) 秒").tag(seconds)
@@ -152,6 +154,18 @@ struct ExerciseEditorView: View {
                 } footer: {
                     Text("可保存你学习这个动作时使用的视频或文章链接。")
                 }
+            }
+            .scrollContentBackground(.hidden)
+            .screenBackground()
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("完成") { KeyboardDismissal.dismiss() }
+                }
+            }
+            .scrollDismissesKeyboard(.immediately)
+            .dismissKeyboardWhenScrolling {
+                KeyboardDismissal.dismiss()
             }
             .navigationTitle(exercise == nil ? "新建动作" : "编辑动作")
             .navigationBarTitleDisplayMode(.inline)

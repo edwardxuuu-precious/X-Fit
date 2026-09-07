@@ -1,0 +1,419 @@
+{
+  "latestCounts": {
+    "passed": 86,
+    "skipped": 7
+  },
+  "history": [
+    {
+      "log": "artifacts/stage-validation/20260906-editorial/N06.log",
+      "counts": {
+        "passed": 76,
+        "failed": 10,
+        "skipped": 7
+      }
+    },
+    {
+      "log": "outputs/stage-validation/20260906-editorial/supplement.log",
+      "counts": {
+        "failed": 3,
+        "passed": 15
+      }
+    },
+    {
+      "log": "outputs/stage-validation/20260906-editorial/supplement-final.log",
+      "counts": {
+        "passed": 12
+      }
+    }
+  ],
+  "tests": {
+    "FitnessAppUITests.FatLossUITests testHomeKeepsFourTabsAndGoalWeightEntry": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FatLossUITests testMealActualFeedbackPartialNutritionPrepAndReviewFlow": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.FatLossUITests testMedicalTargetsStayUnconfirmedAfterCreation": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FatLossUITests testProgramCreationRequiresExplicitMealImport": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FatLossUITests testReplacingUnrecordedMealKeepsPlanHistory": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorCanDismissKeyboardAndKeepSaveReachable": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorPersistsBodyweightVolumeUnit": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorPersistsMeterVolumeUnit": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorPersistsSecondVolumeUnit": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorPersistsSelectedMuscleGroup": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorPreservesCustomMuscleGroup": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorSystemMenuSelectAllAndPasteUpdatesField": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActionEditorTextSelectionDragKeepsKeyboardFocused": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActiveWorkoutAcceptsThreeDecimalsAndCompactsCompletedSet": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActiveWorkoutCanCreateMissingExerciseInlineWithThreeSets": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActiveWorkoutTopMenuRemovesZeroCompletedExerciseAndPersistsAfterRelaunch": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testActiveWorkoutUsesExplicitRIRChoiceAndOneActionLevelSideControl": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testAdaptiveDailyBuilderShowsRecommendations": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testCountdownRestDeliversOneBackgroundNotification": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testCountdownRestEndPresentsActionableAlert": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBodyCheckInCreatesBothMarkerTypesAndCancellationIsSafe": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBodyCheckInRemainsUsableInDarkModeAndAccessibilityText": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderCanCreateMissingExerciseInline": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderCoreControlsRemainReachableAtAccessibilityXXXL": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderDraftUnlocksMusclesExercisesThenReview": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderEditsSetsDirectlyWithoutPatternOptions": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderInvalidURLCanBeCorrectedAndSavedWithoutKeyboardBlocking": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderNewExerciseCancellationReturnsToPickerWithoutMutation": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderPickerCancellationPreservesDraftMenuAndParameters": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderScrollsWhenSwipeStartsOnExerciseCard": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderSearchesAndAddsCrossMuscleExercise": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDailyBuilderShowsSummaryFirstExpandsOneExerciseAndReordersFromHandle": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testDeviceTemplateWritebackAfterFinishAndPersist": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testEquipmentPhotoRecognitionShowsMachineMusclesAndAddsConfirmedExercise": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testExerciseLibraryFindsChineseExerciseByEnglishAliasAndShowsEquipmentMuscleGroup": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testExerciseLibrarySearchesSquatAliasAndSupportsEditDeleteRestore": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testExercisePickerDismissesKeyboardAndEditsBuiltInDefinitionWithoutSelecting": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testExercisePickerRepeatedStressPreservesMenuAndAvoidsDuplicates": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testExistingDailyPlanReplanningStartsAtMusclesAndPreservesCurrentPlan": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testFreestyleDoesNotDeliverCountdownNotification": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testFreestyleRestCanBeAbandonedForLaterBackfill": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testFreestyleRestEndsWhenNextSetStarts": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testFreestyleRestSurvivesTerminationAndPersistentRelaunch": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testFreestyleRestUsesElapsedTimeAfterBackgrounding": {
+      "status": "skipped",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHistoricalEditingDoesNotOfferLegacyRestInput": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHistoricalWorkoutEntryIsReachableFromProfile": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHistoricalWorkoutImportIsReachableFromProfile": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeActiveSessionSurvivesPersistentRelaunchWithoutDuplication": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeCompletedPlanOffersRecordEditingWithoutStartButton": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeEmptyStateOffersPlanAndHistoricalEntry": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeIsAnActionSurfaceWithoutDuplicateDashboards": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeMenuUsesSlashTitleAndReadyStatusIcon": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomePlanCanBeOpenedForEditing": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomePlanFieldEditPersistsAcrossPersistentRelaunch": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomePrimaryActionRemainsReachableAtAccessibilityXXXL": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeQuickWeightEntryProgressivelyRevealsFieldsAndDismissesKeyboard": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeShowsOnlyTheLatestCompletedWorkout": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeSingleCompletedWorkoutShowsOneRecentEntry": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testHomeWithManyCompletedWorkoutsStillShowsOneRecentEntry": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testInProgressWorkoutUsesOneReplanEntryAndPreservesCurrentPlan": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testIsometricHistoryDisplaysAndEditsSecondsWithoutWeight": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testIsometricWorkoutRecordsOneSecondsFieldAndCompletedSummary": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testPerSetPlanSideModesAndLiveSetDeltaWithoutPatternControls": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testProfileGearOpensSettingsAndData": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testShareDraftAcceptsPastedRednoteTextAsReferenceURL": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testShareDraftDeferralSuppressesTheSameDraftUntilANewShareArrives": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testShareDraftEditorCancellationKeepsDraftAvailable": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testShareDraftSaveFailureKeepsDraftAvailable": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testShareDraftSuccessfulSaveClearsDraft": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testSpecialTemplateEditorExposesMuscleMultiselectAndExerciseReordering": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testSpecialTemplatesAreManualOnlyAndRemainAvailableToSchedule": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testStartWorkoutAndCompleteFirstSet": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testStatsBodySegmentShowsTrendDirectly": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testStatsVolumeTrendSwitchesFromOverallToExerciseHistory": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testTerminologyAcceptAndResetDecisionFlow": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testTerminologyDecisionsPersistAcrossRelaunchAndPreserveHistoricalSnapshots": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testTerminologyReviewIsReachableAndExplainsNoHistoryRewrite": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testTerminologyUnresolvedCandidateCannotBeAccepted": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testToolsAgentRequiresConfirmationBeforeWritingWater": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testToolsTabShowsConversationFirstAgentAndCompactQuickTools": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testTrainingOverviewOpensHistoryScheduleAndQuickSettings": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testUITestShareDraftDoesNotLeakIntoProductionStartup": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testWorkoutFeelingIsRequestedBeforeCompletedExerciseCollapsesAndPersists": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testWorkoutFeelingIsVisibleInCompletedHistory": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.FitnessAppUITests testWorkoutHistoryShowsDetailsAndReturnsWithoutNavigationError": {
+      "status": "passed",
+      "evidence": "artifacts/stage-validation/20260906-editorial/N06.log"
+    },
+    "FitnessAppUITests.RedesignUITests testCoreFoodActualAndPrep": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testCoreGoalReviewAndMuscles": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testCoreMuscleSelection": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testCoreTrainingAndResume": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testCycleImportAndExportRemainReachable": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testFullBodyEntryCanSaveWaistOnlyCancelAndEditSameRecord": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testLargeTypePrimaryActionsRemainReachable": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    },
+    "FitnessAppUITests.RedesignUITests testLargeTypeTrainingDistributionCanScrollToExplanation": {
+      "status": "passed",
+      "evidence": "outputs/stage-validation/20260906-editorial/supplement-final.log"
+    }
+  },
+  "unit": {
+    "passed": 248,
+    "evidence": "artifacts/stage-validation/20260906-editorial/N05.log"
+  },
+  "backend": {
+    "passed": 6,
+    "evidence": "artifacts/stage-validation/20260906-editorial/N03.log"
+  },
+  "device": "NOT_RUN",
+  "human": "BLOCKED_HUMAN",
+  "finalRelease": {
+    "status": "PASS",
+    "evidence": "outputs/stage-validation/20260906-editorial/final-release-build.log"
+  },
+  "localStatus": "PASS",
+  "stageStatus": "PARTIAL"
+}

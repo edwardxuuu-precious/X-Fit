@@ -30,37 +30,42 @@ struct PlanView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(
-                    eyebrow: "TRAINING WORKSPACE",
-                    title: "训练"
-                )
-
-                progressCard
-
-                SectionHeader(title: "训练记录", actionTitle: "查看全部")
-                NavigationLink(destination: HistoryView()) {
-                    historyEntryCard
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("训练记录入口")
-
-                SectionHeader(title: "接下来训练计划", actionTitle: "编排日程")
+            LazyVStack(alignment: .leading, spacing: 22) {
                 NavigationLink(destination: ScheduleView()) {
                     upcomingPlanCard
                 }
                 .buttonStyle(.plain)
                 .accessibilityIdentifier("训练计划入口")
 
-                SectionHeader(title: "快捷设置")
-                quickSettings
+                VStack(alignment: .leading, spacing: 10) {
+                    SectionHeader(title: "计划与动作")
+                    quickSettings
+                }
+
+                VStack(alignment: .leading, spacing: 10) {
+                    SectionHeader(title: "最近训练", actionTitle: "查看全部")
+                    NavigationLink(destination: HistoryView()) {
+                        historyEntryCard
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("训练记录入口")
+                }
+
+                DisclosureGroup("本周进度") {
+                    progressCard
+                        .padding(.top, 12)
+                }
+                .font(.subheadline)
+                .tint(AppTheme.accent)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
         .screenBackground()
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationTitle("训练管理")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
     }
 
     private var progressCard: some View {
@@ -84,7 +89,7 @@ struct PlanView: View {
                 Image(systemName: "chart.bar.fill")
                     .font(.headline)
                     .foregroundStyle(AppTheme.accent)
-                    .frame(width: 38, height: 38)
+                    .frame(width: 44, height: 44)
                     .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 11))
             }
 
@@ -104,7 +109,7 @@ struct PlanView: View {
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
             } else {
-                Text("本周暂无训练计划，可在下方快速编排。")
+                Text("本周暂无训练计划，可从“今日编排”安排训练。")
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
             }
@@ -155,28 +160,42 @@ struct PlanView: View {
     }
 
     private var upcomingPlanCard: some View {
-        Group {
+        VStack(alignment: .leading, spacing: 18) {
+            HStack {
+                Label("下一次训练", systemImage: "calendar")
+                    .font(.caption.weight(.bold)).foregroundStyle(AppTheme.accent)
+                Spacer()
+                Image(systemName: "arrow.up.right").font(.subheadline.weight(.semibold))
+                    .foregroundStyle(AppTheme.accent)
+            }
             if let schedule = nextSchedule {
                 let items = templateExercises.filter { $0.templateID == schedule.templateID }
                 let totalSets = items.reduce(0) { $0 + $1.targetSets }
-
-                entryCard(
-                    icon: "calendar.badge.clock",
-                    eyebrow: briefDate(schedule.plannedDate),
-                    title: schedule.templateName,
-                    detail: "\(items.count) 个动作 · \(totalSets) 个工作组 · 点按调整日期或计划",
-                    empty: false
-                )
+                VStack(alignment: .leading, spacing: 7) {
+                    Text(schedule.templateName)
+                        .font(.title2.weight(.bold)).foregroundStyle(.white)
+                    Text(briefDate(schedule.plannedDate))
+                        .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                }
+                HStack {
+                    Text("\(items.count) 个动作 · \(totalSets) 个工作组")
+                        .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    Spacer(minLength: 8)
+                    Text("查看日程").font(.caption.weight(.semibold)).foregroundStyle(AppTheme.accent)
+                }
             } else {
-                entryCard(
-                    icon: "calendar.badge.plus",
-                    eyebrow: "接下来",
-                    title: "还没有后续计划",
-                    detail: "点按进入日程并安排下一次训练",
-                    empty: true
-                )
+                VStack(alignment: .leading, spacing: 7) {
+                    Text("安排下一次训练").font(.title2.weight(.bold)).foregroundStyle(.white)
+                    Text("选择日期，放入你的训练计划")
+                        .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                }
+                Text("打开日程").font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.accent)
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 12))
+        .contentShape(Rectangle())
     }
 
     private func entryCard(
@@ -224,7 +243,7 @@ struct PlanView: View {
     }
 
     private var quickSettings: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+        VStack(spacing: 0) {
             NavigationLink(destination: DailyWorkoutBuilderView()) {
                 quickSettingCard(
                     icon: "wand.and.stars",
@@ -234,15 +253,17 @@ struct PlanView: View {
             }
             .accessibilityLabel("今日编排")
             .accessibilityIdentifier("今日编排入口")
+            Divider().overlay(AppTheme.line).padding(.leading, 54)
             NavigationLink(destination: TrainingSetupView(initialMode: 1)) {
                 quickSettingCard(
                     icon: "list.bullet.clipboard",
-                    title: "每周模板",
-                    detail: "自动生成日程"
+                    title: "专项模板",
+                    detail: "默认方案可编辑"
                 )
             }
-            .accessibilityLabel("每周模板")
-            .accessibilityIdentifier("每周模板入口")
+            .accessibilityLabel("专项模板")
+            .accessibilityIdentifier("专项模板入口")
+            Divider().overlay(AppTheme.line).padding(.leading, 54)
             NavigationLink(destination: TrainingSetupView(initialMode: 2)) {
                 quickSettingCard(
                     icon: "dumbbell.fill",
@@ -253,27 +274,25 @@ struct PlanView: View {
             .accessibilityLabel("动作库")
             .accessibilityIdentifier("动作库入口")
         }
+        .cardSurface(padding: 0)
         .buttonStyle(.plain)
     }
 
     private func quickSettingCard(icon: String, title: String, detail: String) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+        HStack(spacing: 14) {
             Image(systemName: icon)
-                .font(.headline.bold())
-                .foregroundStyle(AppTheme.accent)
-            Text(title)
-                .font(.subheadline.bold())
-                .foregroundStyle(.white)
-                .lineLimit(1)
-                .minimumScaleFactor(0.8)
-            Text(detail)
-                .font(.caption2)
-                .foregroundStyle(AppTheme.secondaryText)
-                .lineLimit(2)
+                .font(.subheadline).foregroundStyle(AppTheme.secondaryText).frame(width: 22)
+            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.white)
+            Spacer(minLength: 8)
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
         }
-        .frame(maxWidth: .infinity, minHeight: 112, alignment: .topLeading)
-        .cardSurface(padding: 12, cornerRadius: 16)
+        .padding(.horizontal, 16).padding(.vertical, 15)
+        .frame(maxWidth: .infinity, minHeight: 54, alignment: .leading)
+        .contentShape(Rectangle())
+        .accessibilityHint(detail)
     }
+
 }
 
 private struct TrainingSetupView: View {
@@ -286,7 +305,7 @@ private struct TrainingSetupView: View {
     @Query private var sessionExercises: [SessionExercise]
     @Query private var setLogs: [SetLog]
 
-    @State private var showEditor = false
+    @State private var showNewTemplateEditor = false
     @State private var editingTemplate: WorkoutTemplate?
     @State private var pendingDelete: WorkoutTemplate?
     @State private var selectedMode = 0
@@ -305,11 +324,7 @@ private struct TrainingSetupView: View {
     private var sortedTemplates: [WorkoutTemplate] {
         templates
             .filter { !$0.isOneOff }
-            .sorted {
-            let left = WeekdayName.orderedCalendarValues.firstIndex(of: $0.weekday) ?? 99
-            let right = WeekdayName.orderedCalendarValues.firstIndex(of: $1.weekday) ?? 99
-            return left == right ? $0.createdAt < $1.createdAt : left < right
-        }
+            .sorted { $0.createdAt == $1.createdAt ? $0.name < $1.name : $0.createdAt < $1.createdAt }
     }
 
     private var librarySourceExercises: [Exercise] {
@@ -346,16 +361,47 @@ private struct TrainingSetupView: View {
                 let matchesMinor = selectedMinorMuscleGroup == "全部"
                     || category.minorGroup == selectedMinorMuscleGroup
                 return matchesMajor && matchesMinor
-            }
+        }
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            return muscleMatches.sorted { $0.name.localizedCompare($1.name) == .orderedAscending }
+            return muscleMatches.sorted { lhs, rhs in
+                let lhsKey = ExerciseCatalogService.pinyinSortKey(for: lhs.name)
+                let rhsKey = ExerciseCatalogService.pinyinSortKey(for: rhs.name)
+                if lhsKey != rhsKey { return lhsKey < rhsKey }
+                return lhs.id.uuidString < rhs.id.uuidString
+            }
         }
         return ExerciseCatalogService.search(muscleMatches, query: searchText)
     }
 
+    private var groupedFilteredExercises: [(id: String, equipment: String, muscleGroup: String, items: [Exercise])] {
+        Dictionary(grouping: filteredExercises) { exercise in
+            let equipment = exercise.equipment.isEmpty ? "未分类器械" : exercise.equipment
+            let muscleGroup = exercise.muscleGroup.isEmpty ? "未分类肌群" : exercise.muscleGroup
+            return "\(equipment)␟\(muscleGroup)"
+        }
+        .map { key, items in
+            let parts = key.split(separator: "␟", omittingEmptySubsequences: false)
+            return (
+                id: key,
+                equipment: parts.first.map(String.init) ?? "未分类器械",
+                muscleGroup: parts.dropFirst().first.map(String.init) ?? "未分类肌群",
+                items: items
+            )
+        }
+        .sorted { lhs, rhs in
+            let lhsEquipment = ExerciseCatalogService.pinyinSortKey(for: lhs.equipment)
+            let rhsEquipment = ExerciseCatalogService.pinyinSortKey(for: rhs.equipment)
+            if lhsEquipment != rhsEquipment { return lhsEquipment < rhsEquipment }
+            let lhsMuscle = ExerciseCatalogService.pinyinSortKey(for: lhs.muscleGroup)
+            let rhsMuscle = ExerciseCatalogService.pinyinSortKey(for: rhs.muscleGroup)
+            if lhsMuscle != rhsMuscle { return lhsMuscle < rhsMuscle }
+            return lhs.id < rhs.id
+        }
+    }
+
     private var setupTitle: String {
         switch selectedMode {
-        case 1: return "每周模板"
+        case 1: return "专项模板"
         case 2: return "动作库"
         default: return "今日编排"
         }
@@ -363,33 +409,15 @@ private struct TrainingSetupView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            ScreenHeader(
-                eyebrow: "QUICK SETTINGS",
-                title: setupTitle,
-                trailingSystemImage: selectedMode == 0 ? nil : "plus",
-                trailingAccessibilityLabel: selectedMode == 1 ? "新建每周模板" : "新建动作",
-                trailingAction: {
-                    if selectedMode == 1 {
-                        editingTemplate = nil
-                        showEditor = true
-                    } else if selectedMode == 2 {
-                        editingExercise = nil
-                        showNewExerciseEditor = true
-                    }
-                }
-            )
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-
             modePicker
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 20)
 
             if selectedMode == 1 {
-                Text("设置一次，每周自动生成训练日程")
+                Text("模板由你手动安排，不会自动生成日程")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(AppTheme.secondaryText)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20)
             }
 
             if selectedMode == 0 {
@@ -398,12 +426,7 @@ private struct TrainingSetupView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack(alignment: .leading, spacing: 18) {
                         if selectedMode == 1 {
-                            if let featured = sortedTemplates.first {
-                                featuredWorkout(featured)
-                            }
-                            weekOverview
-
-                            SectionHeader(title: "我的每周模板", actionTitle: "\(sortedTemplates.count) 个")
+                            SectionHeader(title: "我的专项模板", actionTitle: "\(sortedTemplates.count) 个")
                             ForEach(sortedTemplates) { template in
                                 templateCard(template)
                                     .contextMenu {
@@ -423,16 +446,41 @@ private struct TrainingSetupView: View {
                             exerciseLibrary
                         }
                     }
-                    .padding(.horizontal, 16)
+                    .padding(.horizontal, 20)
                     .padding(.bottom, 26)
                 }
             }
         }
         .screenBackground()
+        .navigationTitle(setupTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
-        .sheet(isPresented: $showEditor) {
-            TemplateEditorView(template: editingTemplate)
+        .toolbar {
+            if selectedMode != 0 {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        if selectedMode == 1 { showNewTemplateEditor = true }
+                        else { editingExercise = nil; showNewExerciseEditor = true }
+                    } label: {
+                        Label(selectedMode == 1 ? "新建专项模板" : "新建动作", systemImage: "plus")
+                            .frame(minWidth: 44, minHeight: 44)
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showNewTemplateEditor) {
+            TemplateEditorView(
+                template: nil,
+                storedItems: templateExercises
+            )
+                .preferredColorScheme(.dark)
+                .tint(AppTheme.accent)
+        }
+        .sheet(item: $editingTemplate) { template in
+            TemplateEditorView(
+                template: template,
+                storedItems: templateExercises
+            )
                 .preferredColorScheme(.dark)
                 .tint(AppTheme.accent)
         }
@@ -478,7 +526,7 @@ private struct TrainingSetupView: View {
     private var modePicker: some View {
         HStack(spacing: 4) {
             modeButton("今日编排", value: 0)
-            modeButton("每周模板", value: 1)
+            modeButton("专项模板", value: 1)
             modeButton("动作库", value: 2)
         }
         .padding(4)
@@ -496,44 +544,9 @@ private struct TrainingSetupView: View {
                 .font(.subheadline.bold())
                 .foregroundStyle(selectedMode == value ? .black : AppTheme.secondaryText)
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 9)
+                .frame(minHeight: 44)
                 .background(selectedMode == value ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 10))
         }
-    }
-
-    private func featuredWorkout(_ template: WorkoutTemplate) -> some View {
-        let items = templateExercises.filter { $0.templateID == template.id }
-        let totalSets = items.reduce(0) { $0 + $1.targetSets }
-
-        return ZStack(alignment: .bottomLeading) {
-            HeroWorkoutImage()
-                .frame(height: 225)
-                .clipped()
-            LinearGradient(colors: [.clear, .black.opacity(0.96)], startPoint: .top, endPoint: .bottom)
-
-            VStack(alignment: .leading, spacing: 10) {
-                Text("FEATURED WORKOUT")
-                    .font(.caption2.weight(.black))
-                    .tracking(1.2)
-                    .foregroundStyle(AppTheme.accent)
-                Text(template.name)
-                    .font(.title2.bold())
-                    .foregroundStyle(.white)
-                Text("\(items.count) 个动作 · \(totalSets) 个工作组 · 约 \(max(30, totalSets * 3)) 分钟")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.62))
-
-                Button {
-                    edit(template)
-                } label: {
-                    Label("查看训练计划", systemImage: "arrow.right")
-                        .neonButtonStyle()
-                }
-            }
-            .padding(17)
-        }
-        .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(AppTheme.line, lineWidth: 1))
     }
 
     private var weekOverview: some View {
@@ -586,49 +599,23 @@ private struct TrainingSetupView: View {
         return Button {
             edit(template)
         } label: {
-            VStack(alignment: .leading, spacing: 13) {
-                HStack(alignment: .top) {
-                    Image(systemName: templateIcon(template))
-                        .font(.headline.bold())
-                        .foregroundStyle(AppTheme.accent)
-                        .frame(width: 44, height: 44)
-                        .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 13))
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(WeekdayName.short(template.weekday))
-                            .font(.caption2.bold())
-                            .foregroundStyle(AppTheme.accent)
-                        Text(template.name)
-                            .font(.headline.bold())
-                            .foregroundStyle(.white)
-                    }
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.secondaryText)
+            HStack(spacing: 14) {
+                Image(systemName: templateIcon(template))
+                    .font(.title3).foregroundStyle(AppTheme.accent)
+                    .frame(width: 40, height: 44)
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(template.name)
+                        .font(.headline).foregroundStyle(.white)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text("\(items.count) 个动作 · \(items.reduce(0) { $0 + $1.targetSets }) 个工作组")
+                        .font(.caption).foregroundStyle(AppTheme.secondaryText)
                 }
-
-                Divider().overlay(AppTheme.line)
-
-                ForEach(items.prefix(4)) { item in
-                    HStack {
-                        Text(exerciseName(item.exerciseID))
-                            .foregroundStyle(.white)
-                            .lineLimit(1)
-                        Spacer()
-                        Text("\(item.targetSets) × \(item.minReps)–\(item.maxReps) · \(TrainingFormatters.weight(item.targetWeight))kg")
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(AppTheme.secondaryText)
-                    }
-                }
-
-                if items.count > 4 {
-                    Text("另有 \(items.count - 4) 个动作")
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
-                }
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
             }
-            .cardSurface()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .cardSurface(padding: 16, cornerRadius: 12)
         }
         .buttonStyle(.plain)
     }
@@ -687,8 +674,14 @@ private struct TrainingSetupView: View {
             }
 
             LazyVStack(spacing: 10) {
-                ForEach(filteredExercises) { exercise in
-                    exerciseRow(exercise)
+                ForEach(groupedFilteredExercises, id: \.id) { group in
+                    SectionHeader(
+                        title: "\(group.equipment) · \(group.muscleGroup)",
+                        actionTitle: "\(group.items.count) 个"
+                    )
+                    ForEach(group.items) { exercise in
+                        exerciseRow(exercise)
+                    }
                 }
             }
         }
@@ -827,7 +820,6 @@ private struct TrainingSetupView: View {
 
     private func edit(_ template: WorkoutTemplate) {
         editingTemplate = template
-        showEditor = true
     }
 
     private func setArchived(_ exercise: Exercise, archived: Bool) {
@@ -862,10 +854,7 @@ private struct ExerciseDraft: Identifiable {
     let id: UUID
     var storedItemID: UUID?
     var exerciseID: UUID
-    var targetSets: Int
-    var minReps: Int
-    var maxReps: Int
-    var targetWeight: Double
+    var plannedSets: [WorkoutSetPlan]
     var restSeconds: Int
 }
 
@@ -873,21 +862,28 @@ struct TemplateEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Exercise.createdAt) private var exercises: [Exercise]
-    @Query private var storedItems: [TemplateExercise]
 
     let template: WorkoutTemplate?
 
     @State private var name: String
-    @State private var weekday: Int
-    @State private var isActive: Bool
-    @State private var drafts: [ExerciseDraft] = []
+    @State private var selectedMuscleGroups: Set<String>
+    @State private var storedItems: [TemplateExercise]
+    @State private var drafts: [ExerciseDraft]
+    @State private var isLoadingStoredItems: Bool
     @State private var errorMessage: String?
 
-    init(template: WorkoutTemplate?) {
+    init(template: WorkoutTemplate?, storedItems: [TemplateExercise]) {
         self.template = template
         _name = State(initialValue: template?.name ?? "新训练计划")
-        _weekday = State(initialValue: template?.weekday ?? Date.now.weekdayNumber)
-        _isActive = State(initialValue: template?.isActive ?? true)
+        _selectedMuscleGroups = State(initialValue: Set(template?.focusMuscleGroups ?? []))
+        let initialItems = template.map { template in
+            storedItems
+                .filter { $0.templateID == template.id }
+                .sorted { $0.order < $1.order }
+        } ?? []
+        _storedItems = State(initialValue: initialItems)
+        _drafts = State(initialValue: Self.makeDrafts(from: initialItems))
+        _isLoadingStoredItems = State(initialValue: template != nil)
     }
 
     var body: some View {
@@ -895,16 +891,30 @@ struct TemplateEditorView: View {
             Form {
                 Section("基本信息") {
                     TextField("计划名称", text: $name)
-                    Picker("训练日", selection: $weekday) {
-                        ForEach(WeekdayName.orderedCalendarValues, id: \.self) { day in
-                            Text(WeekdayName.short(day)).tag(day)
+                    Menu {
+                        ForEach(availableMuscleGroups, id: \.self) { muscleGroup in
+                            Button {
+                                toggleMuscleGroup(muscleGroup)
+                            } label: {
+                                Label(
+                                    muscleGroup,
+                                    systemImage: selectedMuscleGroups.contains(muscleGroup) ? "checkmark.circle.fill" : "circle"
+                                )
+                            }
+                        }
+                    } label: {
+                        LabeledContent("目标肌群") {
+                            Text(selectedMuscleGroups.isEmpty ? "未选择" : sortedSelectedMuscleGroups.joined(separator: "、"))
+                                .lineLimit(1)
                         }
                     }
-                    Toggle("每周自动生成日程", isOn: $isActive)
+                    .accessibilityIdentifier("专项模板目标肌群")
                 }
 
                 Section {
-                    if drafts.isEmpty {
+                    if isLoadingStoredItems && drafts.isEmpty {
+                        ProgressView("正在加载动作…")
+                    } else if drafts.isEmpty {
                         Text("还没有动作，请从动作库添加。")
                             .foregroundStyle(.secondary)
                     }
@@ -918,11 +928,18 @@ struct TemplateEditorView: View {
                     .onDelete { offsets in
                         drafts.remove(atOffsets: offsets)
                     }
+                    .onMove { source, destination in
+                        drafts.move(fromOffsets: source, toOffset: destination)
+                    }
 
                     Menu {
-                        ForEach(availableExercises) { exercise in
-                            Button(exercise.name) {
-                                add(exercise)
+                        ForEach(groupedAvailableExercises, id: \.id) { group in
+                            Section("\(group.equipment) · \(group.muscleGroup)") {
+                                ForEach(group.items) { exercise in
+                                    Button(exercise.name) {
+                                        add(exercise)
+                                    }
+                                }
                             }
                         }
                     } label: {
@@ -932,22 +949,34 @@ struct TemplateEditorView: View {
                 } header: {
                     Text("动作与目标")
                 } footer: {
-                    Text("重量和次数是下次开始训练时的默认值；历史记录会保留当时的独立快照。")
+                    Text("完成专项训练后，已有动作会沿用本次完成的工作组、次数与重量；历史记录仍保留当时的独立快照。")
                 }
             }
-            .navigationTitle(template == nil ? "新建计划" : "编辑计划")
+            .scrollContentBackground(.hidden)
+            .screenBackground()
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("完成") { KeyboardDismissal.dismiss() }
+                }
+            }
+            .navigationTitle(template == nil ? "新建专项模板" : "编辑专项模板")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("取消") { dismiss() }
                 }
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItemGroup(placement: .confirmationAction) {
+                    EditButton()
                     Button("保存") { save() }
                         .fontWeight(.semibold)
                         .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || drafts.isEmpty)
                 }
             }
-            .onAppear(perform: loadDrafts)
+            .task(id: template?.id) {
+                loadStoredItems()
+            }
             .alert("保存失败", isPresented: Binding(
                 get: { errorMessage != nil },
                 set: { if !$0 { errorMessage = nil } }
@@ -959,29 +988,99 @@ struct TemplateEditorView: View {
         }
     }
 
-    private var availableExercises: [Exercise] {
-        exercises.filter { exercise in
-            !exercise.isArchived && !drafts.contains { $0.exerciseID == exercise.id }
+    private static func makeDrafts(from items: [TemplateExercise]) -> [ExerciseDraft] {
+        items.map {
+            ExerciseDraft(
+                id: UUID(),
+                storedItemID: $0.id,
+                exerciseID: $0.exerciseID,
+                plannedSets: $0.plannedSets,
+                restSeconds: $0.restSeconds
+            )
         }
     }
 
-    private func loadDrafts() {
-        guard drafts.isEmpty, let template else { return }
-        drafts = storedItems
-            .filter { $0.templateID == template.id }
-            .sorted { $0.order < $1.order }
-            .map {
-                ExerciseDraft(
-                    id: UUID(),
-                    storedItemID: $0.id,
-                    exerciseID: $0.exerciseID,
-                    targetSets: $0.targetSets,
-                    minReps: $0.minReps,
-                    maxReps: $0.maxReps,
-                    targetWeight: $0.targetWeight,
-                    restSeconds: $0.restSeconds
-                )
+    private func loadStoredItems() {
+        guard let template else {
+            isLoadingStoredItems = false
+            return
+        }
+
+        let templateID = template.id
+        let descriptor = FetchDescriptor<TemplateExercise>(
+            predicate: #Predicate { $0.templateID == templateID },
+            sortBy: [SortDescriptor(\.order)]
+        )
+        do {
+            let fetchedItems = try modelContext.fetch(descriptor)
+            storedItems = fetchedItems
+            drafts = Self.makeDrafts(from: fetchedItems)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+        isLoadingStoredItems = false
+    }
+
+    private var availableExercises: [Exercise] {
+        exercises
+            .filter { exercise in
+                !exercise.isArchived && !drafts.contains { $0.exerciseID == exercise.id }
             }
+            .sorted { lhs, rhs in
+                let lhsKey = ExerciseCatalogService.pinyinSortKey(for: lhs.name)
+                let rhsKey = ExerciseCatalogService.pinyinSortKey(for: rhs.name)
+                if lhsKey != rhsKey { return lhsKey < rhsKey }
+                return lhs.id.uuidString < rhs.id.uuidString
+            }
+    }
+
+    private var availableMuscleGroups: [String] {
+        let groups = Set(exercises.filter { !$0.isArchived }.map(\.muscleGroup).filter { !$0.isEmpty })
+            .union(selectedMuscleGroups)
+        let preferred = ["胸部", "背部", "肩部", "手臂", "腿部", "臀部", "小腿", "核心"]
+        let ordered = preferred.filter(groups.contains)
+        let remaining = groups.subtracting(ordered).sorted {
+            ExerciseCatalogService.pinyinSortKey(for: $0) < ExerciseCatalogService.pinyinSortKey(for: $1)
+        }
+        return ordered + remaining
+    }
+
+    private var sortedSelectedMuscleGroups: [String] {
+        availableMuscleGroups.filter(selectedMuscleGroups.contains)
+    }
+
+    private func toggleMuscleGroup(_ muscleGroup: String) {
+        if selectedMuscleGroups.contains(muscleGroup) {
+            selectedMuscleGroups.remove(muscleGroup)
+        } else {
+            selectedMuscleGroups.insert(muscleGroup)
+        }
+    }
+
+    private var groupedAvailableExercises: [(id: String, equipment: String, muscleGroup: String, items: [Exercise])] {
+        Dictionary(grouping: availableExercises) { exercise in
+            let equipment = exercise.equipment.isEmpty ? "未分类器械" : exercise.equipment
+            let muscleGroup = exercise.muscleGroup.isEmpty ? "未分类肌群" : exercise.muscleGroup
+            return "\(equipment)␟\(muscleGroup)"
+        }
+        .map { key, items in
+            let parts = key.split(separator: "␟", omittingEmptySubsequences: false)
+            return (
+                id: key,
+                equipment: parts.first.map(String.init) ?? "未分类器械",
+                muscleGroup: parts.dropFirst().first.map(String.init) ?? "未分类肌群",
+                items: items
+            )
+        }
+        .sorted { lhs, rhs in
+            let lhsEquipment = ExerciseCatalogService.pinyinSortKey(for: lhs.equipment)
+            let rhsEquipment = ExerciseCatalogService.pinyinSortKey(for: rhs.equipment)
+            if lhsEquipment != rhsEquipment { return lhsEquipment < rhsEquipment }
+            let lhsMuscle = ExerciseCatalogService.pinyinSortKey(for: lhs.muscleGroup)
+            let rhsMuscle = ExerciseCatalogService.pinyinSortKey(for: rhs.muscleGroup)
+            if lhsMuscle != rhsMuscle { return lhsMuscle < rhsMuscle }
+            return lhs.id < rhs.id
+        }
     }
 
     private func add(_ exercise: Exercise) {
@@ -990,10 +1089,12 @@ struct TemplateEditorView: View {
                 id: UUID(),
                 storedItemID: nil,
                 exerciseID: exercise.id,
-                targetSets: 3,
-                minReps: 8,
-                maxReps: 12,
-                targetWeight: 10,
+                plannedSets: WorkoutSetPlan.preset(
+                    .fixed,
+                    count: 3,
+                    baseWeight: exercise.volumeUnit.recordsNumericLoad ? 10 : 0,
+                    baseReps: 8
+                ),
                 restSeconds: exercise.defaultRestSeconds
             )
         )
@@ -1004,13 +1105,14 @@ struct TemplateEditorView: View {
         if let template {
             savedTemplate = template
             template.name = name.trimmingCharacters(in: .whitespacesAndNewlines)
-            template.weekday = weekday
-            template.isActive = isActive
+            template.isActive = false
+            template.focusMuscleGroups = sortedSelectedMuscleGroups
         } else {
             let newTemplate = WorkoutTemplate(
                 name: name.trimmingCharacters(in: .whitespacesAndNewlines),
-                weekday: weekday,
-                isActive: isActive
+                weekday: Date.now.weekdayNumber,
+                isActive: false,
+                focusMuscleGroups: sortedSelectedMuscleGroups
             )
             modelContext.insert(newTemplate)
             savedTemplate = newTemplate
@@ -1030,11 +1132,12 @@ struct TemplateEditorView: View {
                         templateID: savedTemplate.id,
                         exerciseID: draft.exerciseID,
                         order: index,
-                        targetSets: draft.targetSets,
-                        minReps: draft.minReps,
-                        maxReps: draft.maxReps,
-                        targetWeight: draft.targetWeight,
-                        restSeconds: draft.restSeconds
+                        targetSets: draft.plannedSets.count,
+                        minReps: draft.plannedSets.map(\.reps).min() ?? 1,
+                        maxReps: draft.plannedSets.map(\.reps).max() ?? 1,
+                        targetWeight: draft.plannedSets.first?.weight ?? 0,
+                        restSeconds: draft.restSeconds,
+                        plannedSets: draft.plannedSets
                     )
                 )
             }
@@ -1052,10 +1155,7 @@ struct TemplateEditorView: View {
     private func apply(_ draft: ExerciseDraft, order: Int, to item: TemplateExercise) {
         item.exerciseID = draft.exerciseID
         item.order = order
-        item.targetSets = draft.targetSets
-        item.minReps = draft.minReps
-        item.maxReps = max(draft.minReps, draft.maxReps)
-        item.targetWeight = max(0, draft.targetWeight)
+        item.plannedSets = draft.plannedSets
         item.restSeconds = draft.restSeconds
     }
 }
@@ -1102,6 +1202,9 @@ private struct LegacyExerciseEditorView: View {
                         .lineLimit(3...6)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .screenBackground()
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle(exercise == nil ? "新建动作" : "编辑动作")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -1199,45 +1302,10 @@ private struct DraftExerciseEditor: View {
                     .foregroundStyle(.tertiary)
             }
 
-            Stepper("工作组：\(draft.targetSets)", value: $draft.targetSets, in: 1...10)
+            Stepper("工作组：\(draft.plannedSets.count)", value: setCountBinding, in: 1...12)
 
-            HStack {
-                Text(exercise?.volumeUnit == .count ? "数量（个）" : exercise?.volumeUnit.repetitionTitle ?? "次数")
-                Spacer()
-                TextField("最低", value: $draft.minReps, format: .number)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 44)
-                Text("–")
-                TextField("最高", value: $draft.maxReps, format: .number)
-                    .keyboardType(.numberPad)
-                    .multilineTextAlignment(.trailing)
-                    .frame(width: 44)
-            }
-
-            if exercise?.volumeUnit.recordsNumericLoad == true {
-                HStack {
-                    Text("目标\(exercise?.volumeUnit.inputTitle ?? "重量")")
-                    Spacer()
-                    TextField(
-                        exercise?.volumeUnit.symbol ?? "kg",
-                        value: $draft.targetWeight,
-                        format: .number.precision(.fractionLength(0...3))
-                    )
-                        .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.trailing)
-                        .frame(width: 80)
-                    Text(exercise?.volumeUnit.symbol ?? "kg")
-                        .foregroundStyle(.secondary)
-                }
-            } else if exercise?.volumeUnit == .bodyweight {
-                HStack {
-                    Text("目标负重")
-                    Spacer()
-                    Text("自重")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(AppTheme.accent)
-                }
+            ForEach(draft.plannedSets.indices, id: \.self) { index in
+                setRow(index)
             }
 
             Picker("组间休息", selection: $draft.restSeconds) {
@@ -1247,5 +1315,70 @@ private struct DraftExerciseEditor: View {
             }
         }
         .padding(.vertical, 5)
+    }
+
+    @ViewBuilder
+    private func setRow(_ index: Int) -> some View {
+        let plan = Binding<WorkoutSetPlan> {
+            draft.plannedSets[index]
+        } set: { draft.plannedSets[index] = $0 }
+
+        HStack(spacing: 10) {
+            Text("\(index + 1)")
+                .font(.caption.bold().monospacedDigit())
+                .frame(width: 20)
+
+            if exercise?.volumeUnit.recordsNumericLoad == true {
+                TextField(
+                    exercise?.volumeUnit.symbol ?? "kg",
+                    value: plan.weight,
+                    format: .number.precision(.fractionLength(0...3))
+                )
+                .keyboardType(.decimalPad)
+                .multilineTextAlignment(.center)
+                .textFieldStyle(.roundedBorder)
+                .frame(minHeight: 44)
+            } else if exercise?.volumeUnit == .bodyweight {
+                Text("自重")
+                    .font(.caption.bold())
+                    .foregroundStyle(AppTheme.accent)
+                    .frame(maxWidth: .infinity)
+            }
+
+            TextField(
+                exercise?.volumeUnit.recordsSingleAmount == true
+                    ? exercise?.volumeUnit.inputTitle ?? "数量"
+                    : exercise?.volumeUnit.repetitionTitle ?? "次数",
+                value: plan.reps,
+                format: .number
+            )
+            .keyboardType(.numberPad)
+            .multilineTextAlignment(.center)
+            .textFieldStyle(.roundedBorder)
+            .frame(minHeight: 44)
+        }
+    }
+
+    private var setCountBinding: Binding<Int> {
+        Binding {
+            draft.plannedSets.count
+        } set: { requested in
+            let count = min(max(1, requested), 12)
+            if count > draft.plannedSets.count {
+                let seed = draft.plannedSets.last ?? WorkoutSetPlan(weight: 0, reps: 8)
+                for _ in draft.plannedSets.count..<count {
+                    draft.plannedSets.append(
+                        WorkoutSetPlan(
+                            weight: seed.weight,
+                            reps: seed.reps,
+                            weightSide: seed.weightSide,
+                            repsSide: seed.repsSide
+                        )
+                    )
+                }
+            } else if count < draft.plannedSets.count {
+                draft.plannedSets.removeLast(draft.plannedSets.count - count)
+            }
+        }
     }
 }

@@ -1,0 +1,26 @@
+{
+  "scope": "All seven downloaded backup points: first pre/post install, retry pre/post install/post tests, post supplement, final Release",
+  "finding": "Across all seven snapshots all 1257 existing UUIDs preserved. Initial 14 entities expand to 22 with eight empty new entities. Only one archived strict squat Exercise ZUPDATEDAT changed across startup stages; all other common business fields and UUID references unchanged. Post-tests → post-supplement has zero business changes.",
+  "affected_id": "08d277e0ac9d4b7296ff31b90eba38aa",
+  "changed_fields": [
+    "ZUPDATEDAT"
+  ],
+  "classification": "existing startup catalog migration timestamp refresh; not evidence of record loss",
+  "source_evidence": [
+    {
+      "path": "FitnessApp/Services/ExerciseCatalogService.swift",
+      "sha256": "4ff2e5e75ceed0679d450c6cc3c580a57a72a04fa015f6001dba260ff741dbe6",
+      "lines": "237-282"
+    },
+    {
+      "path": "FitnessApp/Services/SeedDataService.swift",
+      "sha256": "62f90b5071a2b6172103e4c1603213eea8e2e7d4c0d5c000f7c14446e9edd95b",
+      "lines": "23-30"
+    }
+  ],
+  "mechanism": "consolidateConfirmedSquatDuplicate selects strict squat duplicates, including already archived entries; unconditionally sets archived=true and updatedAt=.now on every startup.",
+  "limit": "Static code explains the observed change; no trace of the specific call was captured. Do not treat all future UPDATEDAT changes as approved.",
+  "new_schema": "8 new empty fat-loss entity tables; schema additions from candidate version, no prior rows overwritten.",
+  "reviewed_status": "PASS_WITH_EXPLAINED_TIMESTAMP_CHANGE",
+  "reviewed_status_boundary": "Data conservation evidence only; not stage GO or human acceptance."
+}

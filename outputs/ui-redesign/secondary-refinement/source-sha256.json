@@ -1,0 +1,10 @@
+{
+  "FitnessApp/Features/FatLoss/FatLossMealsView.swift": "72a173614c2859053b6922d014957f96579f0ca7395cbcdc2b21384d57e40092",
+  "FitnessApp/Features/FatLoss/FatLossRecordViews.swift": "05e17a82c79c23915f97b2ad23005af3175fedaed766c9da791d83c4650428b5",
+  "FitnessApp/Features/Profile/ProfileView.swift": "0a046293e507ff0efa3348f512bf805860ea7576567e3ea675c765543be68e5f",
+  "FitnessApp/Features/Settings/AppSettingsView.swift": "3a95370f948beebb41761320ee8e1d4f8de138cfe103a0b488824948cc55c10d",
+  "FitnessApp/Features/Plan/PlanView.swift": "05287d0cc06e6c25c6510d6213da679b02082202a8476d8e8494c8e0c9f1cf44",
+  "FitnessApp/Features/History/HistoryView.swift": "f5795dae9fdc3c82c4d00705f0cb9118816a45a804bb7c1086e986dd5da1bcc4",
+  "FitnessAppUITests/RedesignUITests.swift": "223c5b4a4161f5d01e60750c5058aaf3e53b3df83519fce534dafffe75c90bc6",
+  "FitnessAppUITests/FitnessAppUITests.swift": "030de96c7062dfa5f72152ac99535c971082dd94d6d89ed1d41b54f85d96f3c6"
+}

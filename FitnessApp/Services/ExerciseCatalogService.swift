@@ -48,7 +48,7 @@ enum ExerciseCatalogService {
         query: String,
         excludedExerciseIDs: Set<UUID> = []
     ) -> [Exercise] {
-        let normalizedQuery = normalizedSearchText(query)
+        let normalizedQuery = normalizedSearchToken(query)
 
         return exercises
             .filter { exercise in
@@ -58,6 +58,7 @@ enum ExerciseCatalogService {
                 // by search so the picker can restore the original catalog item.
                 guard !normalizedQuery.isEmpty else { return !exercise.isArchived }
 
+                let terminologyCandidate = ExerciseTerminologyService.candidate(for: exercise.name)
                 let searchableText = ([
                     exercise.name,
                     searchAliases(for: exercise.name).joined(separator: " "),
@@ -68,8 +69,13 @@ enum ExerciseCatalogService {
                     exercise.equipment,
                     exercise.notes,
                     exercise.referenceURL
-                ] + EquipmentCatalogService.searchTerms(for: exercise.equipment))
-                    .map(normalizedSearchText)
+                ] + EquipmentCatalogService.searchTerms(for: exercise.equipment) + [
+                    terminologyCandidate?.rawNames.joined(separator: " ") ?? "",
+                    terminologyCandidate?.standardNameZH ?? "",
+                    terminologyCandidate?.standardNameEN ?? "",
+                    terminologyCandidate?.canonicalID ?? ""
+                ])
+                    .map(normalizedSearchToken)
                     .joined(separator: " ")
 
                 return searchableText.contains(normalizedQuery)
@@ -78,8 +84,25 @@ enum ExerciseCatalogService {
                 if lhs.isArchived != rhs.isArchived {
                     return !lhs.isArchived
                 }
-                return lhs.name.localizedStandardCompare(rhs.name) == .orderedAscending
+                let lhsPinyin = pinyinSortKey(for: lhs.name)
+                let rhsPinyin = pinyinSortKey(for: rhs.name)
+                if lhsPinyin != rhsPinyin {
+                    return lhsPinyin < rhsPinyin
+                }
+
+                let lhsName = normalizedSearchText(lhs.name)
+                let rhsName = normalizedSearchText(rhs.name)
+                if lhsName != rhsName {
+                    return lhsName < rhsName
+                }
+                return lhs.id.uuidString < rhs.id.uuidString
             }
+    }
+
+    static func pinyinSortKey(for value: String) -> String {
+        let latin = value.applyingTransform(.toLatin, reverse: false) ?? value
+        let withoutTones = latin.applyingTransform(.stripDiacritics, reverse: false) ?? latin
+        return normalizedSearchToken(withoutTones)
     }
 
     static func exactNameMatch(
@@ -113,7 +136,6 @@ enum ExerciseCatalogService {
         let cleanMuscleGroup = muscleGroup.trimmingCharacters(in: .whitespacesAndNewlines)
         let cleanEquipment = equipment.trimmingCharacters(in: .whitespacesAndNewlines)
         let cleanNotes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
-        let cleanReferenceURL = referenceURL.trimmingCharacters(in: .whitespacesAndNewlines)
 
         guard !cleanName.isEmpty else { throw ExerciseCatalogError.missingName }
         guard !cleanMuscleGroup.isEmpty else { throw ExerciseCatalogError.missingMuscleGroup }
@@ -121,7 +143,7 @@ enum ExerciseCatalogService {
         guard cleanNotes.count <= 40 || cleanNotes == exercise?.notes else {
             throw ExerciseCatalogError.notesTooLong
         }
-        guard isValidReferenceURL(cleanReferenceURL) else {
+        guard let cleanReferenceURL = normalizedReferenceURL(from: referenceURL) else {
             throw ExerciseCatalogError.invalidReferenceURL
         }
 
@@ -260,6 +282,109 @@ enum ExerciseCatalogService {
         }
     }
 
+    struct ConfirmedAliasGroup {
+        let canonicalID: String
+        let primaryName: String
+        let aliases: [String]
+    }
+
+    static let confirmedAliasGroups: [ConfirmedAliasGroup] = [
+        .init(canonicalID: "cable_triceps_pushdown", primaryName: "绳索下压", aliases: ["绳索下压", "三头下压"]),
+        .init(canonicalID: "machine_incline_chest_press", primaryName: "器械上斜卧推", aliases: ["器械上斜卧推", "坐姿上斜推胸机"]),
+        .init(
+            canonicalID: "machine_decline_chest_press",
+            primaryName: "器械下斜卧推",
+            aliases: ["器械下斜卧推", "坐姿下斜推胸机", "declined bench press", "MTS 下斜卧推"]
+        ),
+        .init(canonicalID: "seated_dumbbell_shoulder_press", primaryName: "坐姿哑铃肩推", aliases: ["坐姿哑铃肩推", "坐姿推举", "坐姿肩推"]),
+        .init(canonicalID: "standing_cable_chest_fly", primaryName: "站姿绳索夹胸", aliases: ["站姿绳索夹胸", "绳索夹胸"]),
+        .init(canonicalID: "landmine_zercher_squat", primaryName: "地雷杆泽奇蹲", aliases: ["地雷杆泽奇蹲", "地雷杠泽奇蹲"]),
+        .init(canonicalID: "landmine_rotation", primaryName: "地雷杆转体", aliases: ["地雷杆转体", "地雷杆转向"]),
+        .init(canonicalID: "barbell_conventional_deadlift", primaryName: "传统硬拉", aliases: ["传统硬拉", "硬拉"]),
+        .init(
+            canonicalID: "machine_shoulder_press",
+            primaryName: "器械肩推",
+            aliases: ["器械肩推", "shoulder press", "side press", "三角肌训练机"]
+        ),
+        .init(canonicalID: "machine_pec_deck_fly", primaryName: "坐姿飞鸟", aliases: ["坐姿飞鸟", "fly"]),
+        .init(canonicalID: "machine_reverse_fly", primaryName: "器械反向飞鸟", aliases: ["器械反向飞鸟", "Reverse Fly", "rear dealt"]),
+        .init(canonicalID: "barbell_hip_thrust", primaryName: "杠铃臀推", aliases: ["杠铃臀推", "臀推", "顶髋"]),
+        .init(canonicalID: "barbell_thruster", primaryName: "杠铃火箭推", aliases: ["杠铃火箭推", "火箭推", "半蹲上推"]),
+        .init(canonicalID: "machine_triceps_press", primaryName: "三头下压机", aliases: ["三头下压机", "seated dip"]),
+        .init(canonicalID: "dumbbell_side_lunge", primaryName: "哑铃侧弓步", aliases: ["哑铃侧弓步", "哑铃侧边蹲"])
+    ]
+
+    private static let confirmedRenames: [(from: String, to: String)] = [
+        (from: "地雷杠侧边蹲", to: "地雷杆侧边蹲"),
+        (from: "壶铃饶颈侧拉", to: "壶铃绕颈侧拉")
+    ]
+
+    private static let confirmedArchiveNames: Set<String> = [
+        "真机分享动作 20260823",
+        "真机菜单动作 20260823",
+        "真机训练中动作 20260823"
+    ]
+
+    /// Rewires future plan references only. Completed session snapshots keep their original
+    /// names and exercise identifiers as immutable history.
+    static func consolidateConfirmedAliases(in modelContext: ModelContext) throws {
+        let activeSessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
+            .contains { $0.status == .inProgress }
+        guard !activeSessions else { return }
+
+        let exercises = try modelContext.fetch(FetchDescriptor<Exercise>())
+        let templateItems = try modelContext.fetch(FetchDescriptor<TemplateExercise>())
+
+        for group in confirmedAliasGroups {
+            let aliasKeys = Set(group.aliases.map(normalizedName))
+            let matches = exercises.filter {
+                $0.terminologyCanonicalID == group.canonicalID
+                    || aliasKeys.contains(normalizedName($0.name))
+            }
+            guard !matches.isEmpty else { continue }
+            let primary = matches.first { normalizedName($0.name) == normalizedName(group.primaryName) && !$0.isArchived }
+                ?? matches.first { !$0.isArchived }
+                ?? matches[0]
+            primary.name = group.primaryName
+            primary.isArchived = false
+            primary.terminologyCanonicalID = group.canonicalID
+            primary.terminologyDecision = .accepted
+            primary.updatedAt = .now
+
+            let duplicateIDs = Set(matches.filter { $0.id != primary.id }.map(\.id))
+            for item in templateItems where duplicateIDs.contains(item.exerciseID) {
+                let alreadyHasPrimary = templateItems.contains {
+                    $0.id != item.id && $0.templateID == item.templateID && $0.exerciseID == primary.id
+                }
+                if alreadyHasPrimary {
+                    modelContext.delete(item)
+                } else {
+                    item.exerciseID = primary.id
+                }
+            }
+            for duplicate in matches where duplicate.id != primary.id {
+                duplicate.isArchived = true
+                duplicate.terminologyCanonicalID = group.canonicalID
+                duplicate.terminologyDecision = .accepted
+                duplicate.updatedAt = .now
+            }
+        }
+
+        for rename in confirmedRenames {
+            let sourceKey = normalizedName(rename.from)
+            for exercise in exercises where normalizedName(exercise.name) == sourceKey {
+                exercise.name = rename.to
+                exercise.updatedAt = .now
+            }
+        }
+
+        let archiveKeys = Set(confirmedArchiveNames.map(normalizedName))
+        for exercise in exercises where archiveKeys.contains(normalizedName(exercise.name)) {
+            exercise.isArchived = true
+            exercise.updatedAt = .now
+        }
+    }
+
     private static func apply(
         name: String,
         muscleGroup: String,
@@ -295,8 +420,20 @@ enum ExerciseCatalogService {
     }
 
     private static func searchAliases(for name: String) -> [String] {
-        canonicalName(name) == normalizedName("深蹲") ? ["深蹲", "严格深蹲"] : []
+        let normalized = canonicalName(name)
+        if normalized == normalizedName("深蹲") { return ["深蹲", "严格深蹲"] }
+        return confirmedAliasesByNormalizedName[normalized] ?? []
     }
+
+    private static let confirmedAliasesByNormalizedName: [String: [String]] = {
+        var index: [String: [String]] = [:]
+        for group in confirmedAliasGroups {
+            for alias in group.aliases {
+                index[normalizedName(alias)] = group.aliases
+            }
+        }
+        return index
+    }()
 
     private static func normalizedSearchText(_ value: String) -> String {
         value
@@ -305,6 +442,12 @@ enum ExerciseCatalogService {
                 options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive],
                 locale: .current
             )
+    }
+
+    private static func normalizedSearchToken(_ value: String) -> String {
+        normalizedSearchText(value).filter { character in
+            !character.isWhitespace && character != "-" && character != "_"
+        }
     }
 
     private static func isValidReferenceURL(_ value: String) -> Bool {
@@ -317,6 +460,29 @@ enum ExerciseCatalogService {
             return false
         }
         return true
+    }
+
+    private static func normalizedReferenceURL(from value: String) -> String? {
+        let trimmedValue = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedValue.isEmpty else { return "" }
+        if isValidReferenceURL(trimmedValue) {
+            return trimmedValue
+        }
+
+        guard let detector = try? NSDataDetector(
+            types: NSTextCheckingResult.CheckingType.link.rawValue
+        ) else {
+            return nil
+        }
+        let fullRange = NSRange(trimmedValue.startIndex..., in: trimmedValue)
+        for match in detector.matches(in: trimmedValue, options: [], range: fullRange) {
+            guard let range = Range(match.range, in: trimmedValue) else { continue }
+            let candidate = String(trimmedValue[range])
+            if isValidReferenceURL(candidate) {
+                return candidate
+            }
+        }
+        return nil
     }
 
     static func semanticallyCompatible(

@@ -15,6 +15,7 @@ private func formattedVolumeTotals(
 }
 
 struct HistoryView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
     @Query private var setLogs: [SetLog]
     @Query private var sessionExercises: [SessionExercise]
@@ -29,23 +30,31 @@ struct HistoryView: View {
                 ContentUnavailableView(
                     "还没有完成的训练",
                     systemImage: "clock.arrow.circlepath",
-                    description: Text("从“今日”开始一次训练，完成后会自动保存在这里。")
+                    description: Text("从“训练”开始记录，完成后会保存在这里；也可以补录过去的训练。")
                 )
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 12) {
+                    LazyVStack(alignment: .leading, spacing: 0) {
+                        HStack {
+                            Text("完成记录").font(.title2.weight(.bold))
+                            Spacer()
+                            Text("\(completedSessions.count) 次")
+                                .font(.subheadline.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
+                        }.padding(.bottom, 18)
                         ForEach(completedSessions) { session in
                             NavigationLink(destination: WorkoutDetailView(sessionID: session.id)) {
                                 historyCard(session)
                             }
                             .buttonStyle(.plain)
+                            Divider().overlay(AppTheme.line)
                         }
                     }
-                    .padding()
+                    .padding(20)
                 }
                 .background(AppTheme.background)
             }
         }
+        .screenBackground()
         .navigationTitle("训练历史")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -53,10 +62,13 @@ struct HistoryView: View {
             ToolbarItemGroup(placement: .topBarTrailing) {
                 NavigationLink(destination: HistoricalWorkoutEntryView()) {
                     Label("补录", systemImage: "plus")
+                        .frame(minWidth: 44, minHeight: 44)
                 }
                 NavigationLink(destination: HistoricalWorkoutImportView()) {
-                    Label("批量同步", systemImage: "square.and.arrow.down")
+                    Label("导入历史训练", systemImage: "square.and.arrow.down")
+                        .frame(minWidth: 44, minHeight: 44)
                 }
+                .accessibilityIdentifier("批量同步")
             }
         }
     }
@@ -66,42 +78,50 @@ struct HistoryView: View {
             $0.sessionID == session.id && $0.isCompleted && !$0.isWarmup
         }
         let exerciseCount = sessionExercises.filter { $0.sessionID == session.id }.count
-        let snapshots = sessionExercises.filter { $0.sessionID == session.id }
 
-        return VStack(alignment: .leading, spacing: 14) {
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(session.startedAt, format: .dateTime.month().day().weekday(.wide))
-                        .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
-                    Text(session.templateName)
-                        .font(.title3.bold())
-                        .foregroundStyle(.primary)
+        return HStack(alignment: .top, spacing: 16) {
+            VStack(alignment: .leading, spacing: 3) {
+                Text(session.startedAt, format: .dateTime.day())
+                    .font(.system(.title, design: .rounded).weight(.semibold).monospacedDigit())
+                    .foregroundStyle(AppTheme.accent)
+                Text(session.startedAt, format: .dateTime.year().month())
+                    .font(.caption2).foregroundStyle(AppTheme.secondaryText)
+            }
+            .frame(minWidth: 52, alignment: .leading)
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text(session.templateName)
+                    .font(.headline).foregroundStyle(.white)
+                    .fixedSize(horizontal: false, vertical: true)
+                if dynamicTypeSize.isAccessibilitySize {
+                    VStack(alignment: .leading, spacing: 5) {
+                        Text("\(exerciseCount) 动作 · \(logs.count) 工作组")
+                        durationLabel(session)
+                    }
+                    .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                } else {
+                    HStack(spacing: 10) {
+                        Text("\(exerciseCount) 动作 · \(logs.count) 工作组")
+                        Spacer(minLength: 0)
+                        durationLabel(session)
+                    }
+                    .font(.caption).foregroundStyle(AppTheme.secondaryText)
                 }
-                Spacer()
-                Image(systemName: "chevron.right")
-                    .font(.caption.bold())
-                    .foregroundStyle(.tertiary)
-            }
-
-            HStack(spacing: 18) {
-                Label("\(exerciseCount) 动作", systemImage: "list.bullet")
-                Label("\(logs.count) 组", systemImage: "checkmark.circle")
-                Label(
-                    formattedVolumeTotals(logs: logs, snapshots: snapshots),
-                    systemImage: "scalemass"
-                )
-            }
-            .font(.caption)
-            .foregroundStyle(.secondary)
-
-            if let completedAt = session.completedAt {
-                Text("\(session.startedAt, format: .dateTime.hour().minute()) – \(completedAt, format: .dateTime.hour().minute()) · \(TrainingFormatters.duration(from: session.startedAt, to: completedAt))")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }
+            }.frame(maxWidth: .infinity, alignment: .leading)
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
+                .padding(.top, 6)
         }
-        .cardSurface()
+        .padding(.vertical, 18)
+        .contentShape(Rectangle())
+    }
+
+    @ViewBuilder
+    private func durationLabel(_ session: WorkoutSession) -> some View {
+        if let completedAt = session.completedAt {
+            Text(TrainingFormatters.duration(from: session.startedAt, to: completedAt))
+                .monospacedDigit()
+        }
     }
 }
 
@@ -162,7 +182,7 @@ struct WorkoutDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .cardSurface()
                     }
-                    .padding()
+                    .padding(20)
                 }
                 .background(AppTheme.background)
                 .navigationTitle(session.templateName)
@@ -192,7 +212,6 @@ struct WorkoutDetailView: View {
 
     private func summary(_ session: WorkoutSession) -> some View {
         let volumeText = formattedVolumeTotals(logs: logs, snapshots: exercises)
-        let recordedRests = logs.compactMap(\.restDurationSeconds)
         let duration = session.completedAt.map {
             TrainingFormatters.duration(from: session.startedAt, to: $0)
         } ?? "进行中"
@@ -206,7 +225,6 @@ struct WorkoutDetailView: View {
                 miniMetric("\(logs.count)", label: "完成组数")
                 miniMetric(volumeText, label: "训练量（按单位分开）")
                 miniMetric(duration, label: "训练时长")
-                miniMetric("\(recordedRests.count) 段", label: "已记录组间休息")
             }
         }
         .cardSurface()
@@ -269,20 +287,24 @@ struct WorkoutDetailView: View {
                     }
 
                     HStack(spacing: 10) {
+                        let volumeWeight = exercise.volumeUnit == .bodyweight
+                            ? exercise.bodyWeightKgSnapshot
+                            : log.actualWeight
                         Text(
-                            "组训练量 \(Int(exercise.volumeUnit.volume(weight: log.actualWeight, reps: log.actualReps))) \(exercise.volumeUnit.symbol)"
+                            exercise.volumeUnit.volume(weight: volumeWeight, reps: log.actualReps)
+                                .map { "组训练量 \(Int($0)) \(exercise.volumeUnit.symbol)" }
+                                ?? "组训练量 暂无体重"
                         )
-                        if let restDurationSeconds = log.restDurationSeconds {
-                            Label(
-                                "组后休息 \(TrainingFormatters.clock(restDurationSeconds))",
-                                systemImage: "timer"
-                            )
-                        }
                     }
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(.secondary)
                 }
                 .font(.subheadline)
+            }
+            if let durationSeconds = exercise.durationSeconds {
+                Label("动作总时长 \(TrainingFormatters.clock(durationSeconds))", systemImage: "clock")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
 
             VStack(alignment: .leading, spacing: 4) {
@@ -315,12 +337,16 @@ struct WorkoutDetailView: View {
         switch unit {
         case .count:
             return "\(log.actualReps) 个"
+        case .second:
+            return "\(log.actualReps) 秒"
         case .meter:
             return "\(TrainingFormatters.weight(log.actualWeight)) 米 × \(log.actualReps) 趟"
         case .kilogram:
             return "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps)"
         case .bodyweight:
-            return "自重 × \(log.actualReps) 次"
+            return log.actualWeight > 0
+                ? "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps) 次"
+                : "暂无体重 × \(log.actualReps) 次"
         }
     }
 
@@ -489,7 +515,16 @@ struct HistoricalWorkoutEditView: View {
             } header: {
                 Text("动作、完成组与动作备注")
             } footer: {
-                Text("修改训练量后会按动作单位自动重算；组后休息可按秒补录，最后一组没有后续训练时可留空。")
+                Text("修改训练量后会按动作单位自动重算。")
+            }
+        }
+        .scrollContentBackground(.hidden)
+        .screenBackground()
+        .scrollDismissesKeyboard(.interactively)
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                Spacer()
+                Button("完成") { KeyboardDismissal.dismiss() }
             }
         }
         .navigationTitle("编辑历史训练")
@@ -586,14 +621,6 @@ struct HistoricalWorkoutEditView: View {
             errorMessage = "每个动作至少需要保留一个完成组。"
             return
         }
-        if let error = exerciseDrafts
-            .flatMap(\.sets)
-            .compactMap({ $0.restValidation.errorMessage })
-            .first {
-            errorMessage = error
-            return
-        }
-
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else {
             errorMessage = "请填写训练名称。"
@@ -671,8 +698,7 @@ struct HistoricalWorkoutEditView: View {
                         actualReps: max(1, setDraft.reps),
                         rir: setDraft.rir,
                         isCompleted: true,
-                        completedAt: startedAt.addingTimeInterval(TimeInterval((index + 1) * 60)),
-                        restDurationSeconds: setDraft.restValidation.seconds
+                        completedAt: startedAt.addingTimeInterval(TimeInterval((index + 1) * 60))
                     )
                     modelContext.insert(log)
                 }
@@ -683,12 +709,6 @@ struct HistoricalWorkoutEditView: View {
                 log.actualReps = max(1, setDraft.reps)
                 log.rir = setDraft.rir
                 log.isCompleted = true
-                let normalizedRest = setDraft.restValidation.seconds
-                if log.restDurationSeconds != normalizedRest {
-                    log.restStartedAt = nil
-                    log.restEndedAt = nil
-                }
-                log.restDurationSeconds = normalizedRest
                 log.completedAt = log.completedAt ?? startedAt.addingTimeInterval(
                     TimeInterval((index + 1) * 60)
                 )
@@ -722,7 +742,9 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                 Spacer()
                 Button(role: .destructive, action: onDelete) {
                     Image(systemName: "trash")
+                        .frame(width: 44, height: 44)
                 }
+                .accessibilityLabel("删除动作")
                 .disabled(!canDelete)
             }
 
@@ -745,8 +767,9 @@ private struct HistoricalWorkoutEditExerciseCard: View {
 
             HStack {
                 Text("组").frame(width: 24)
-                if draft.volumeUnit == .count {
-                    Text("数量 个").frame(maxWidth: .infinity)
+                if draft.volumeUnit.recordsSingleAmount {
+                    Text("\(draft.volumeUnit.inputTitle) \(draft.volumeUnit.symbol)")
+                        .frame(maxWidth: .infinity)
                 } else if draft.volumeUnit == .bodyweight {
                     Text("负重").frame(maxWidth: .infinity)
                     Text("次数").frame(maxWidth: .infinity)
@@ -775,6 +798,7 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                             .keyboardType(.decimalPad)
                             .multilineTextAlignment(.center)
                             .textFieldStyle(.roundedBorder)
+                            .frame(minHeight: 44)
                         } else if draft.volumeUnit == .bodyweight {
                             Text("自重")
                                 .font(.caption.bold())
@@ -783,13 +807,19 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                         }
 
                         TextField(
-                            draft.volumeUnit == .count ? "数量" : draft.volumeUnit.repetitionTitle,
+                            draft.volumeUnit.recordsSingleAmount
+                                ? draft.volumeUnit.inputTitle
+                                : draft.volumeUnit.repetitionTitle,
                             value: $draft.sets[index].reps,
                             format: .number
                         )
                         .keyboardType(.numberPad)
                         .multilineTextAlignment(.center)
                         .textFieldStyle(.roundedBorder)
+                        .frame(minHeight: 44)
+                        .accessibilityIdentifier(
+                            "历史编辑-\(draft.exerciseName)-第\(index + 1)组-\(draft.volumeUnit.inputTitle)"
+                        )
 
                         Menu {
                             Button("不记录") { draft.sets[index].rir = nil }
@@ -799,33 +829,11 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                         } label: {
                             Text(draft.sets[index].rir.map(String.init) ?? "–")
                                 .font(.subheadline.monospacedDigit())
-                                .frame(width: 54)
+                                .frame(width: 54, height: 44)
                         }
+                        .accessibilityLabel("设置余力 RIR")
                     }
 
-                    HStack {
-                        Label("组后休息", systemImage: "timer")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        TextField("未记录", text: restDurationBinding(at: index))
-                            .keyboardType(.numberPad)
-                            .multilineTextAlignment(.trailing)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 88)
-                            .accessibilityLabel("第 \(index + 1) 组休息秒数")
-                            .accessibilityIdentifier("历史编辑第 \(index + 1) 组休息秒数")
-                        Text("秒")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                    if let message = draft.sets[index].restValidation.errorMessage {
-                        Text(message)
-                            .font(.caption2)
-                            .foregroundStyle(.red)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .accessibilityIdentifier("第 \(index + 1) 组休息秒数错误")
-                    }
                 }
             }
         }
@@ -850,7 +858,4 @@ private struct HistoricalWorkoutEditExerciseCard: View {
         }
     }
 
-    private func restDurationBinding(at index: Int) -> Binding<String> {
-        $draft.sets[index].restDurationText
-    }
 }

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X-Fit 目标页参考与方向确认</title>
+  <style>
+    :root { --bg:#080a09; --panel:#111410; --panel2:#171b16; --line:#2a3027; --text:#f2f3e9; --muted:#9ca394; --lime:#c4fa46; --orange:#ff7138; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--text); background:radial-gradient(circle at 76% 0%,#1e271d 0,transparent 30%),var(--bg); font:15px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC",sans-serif; }
+    main { width:min(1420px,calc(100% - 48px)); margin:0 auto; padding:52px 0 80px; }
+    .eyebrow { color:var(--lime); font-size:11px; font-weight:800; letter-spacing:2.4px; text-transform:uppercase; }
+    h1 { max-width:800px; margin:10px 0 10px; font-size:clamp(28px,4vw,52px); line-height:1.05; letter-spacing:-1.8px; }
+    .lede { max-width:760px; color:var(--muted); font-size:16px; }
+    h2 { margin:58px 0 18px; font-size:20px; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .reference { min-height:440px; overflow:hidden; border:1px solid var(--line); border-radius:22px; background:var(--panel); }
+    .reference figure { height:250px; margin:0; background:#050605; overflow:hidden; }
+    .reference img { width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
+    .reference:nth-child(2) img { object-fit:contain; background:#f1f1f1; }
+    .copy { padding:18px; }
+    .copy h3 { margin:4px 0 8px; font-size:17px; }
+    .copy p { margin:0 0 12px; color:var(--muted); font-size:13px; }
+    a { color:var(--text); text-decoration-color:#657052; text-underline-offset:4px; }
+    .tag { display:inline-block; margin:8px 5px 0 0; padding:5px 9px; border:1px solid #3a4433; border-radius:999px; color:#cad1c3; font-size:11px; }
+    .compare { display:grid; grid-template-columns:310px 1fr; gap:24px; align-items:start; }
+    .current { padding:14px; border:1px solid var(--line); border-radius:24px; background:var(--panel); }
+    .current img { width:100%; border-radius:15px; display:block; }
+    .diagnosis { padding:26px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+    .diagnosis strong { color:var(--lime); }
+    .diagnosis ul { margin:14px 0 0; padding-left:18px; color:var(--muted); }
+    .directions { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .direction { position:relative; min-height:650px; padding:20px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(145deg,var(--panel2),#0c0e0c); }
+    .direction.recommended { border-color:#617d28; box-shadow:0 0 0 1px #9acb2e22 inset; }
+    .choice { display:flex; justify-content:space-between; align-items:center; }
+    .letter { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--lime); color:#10120d; font-weight:900; }
+    .badge { padding:5px 9px; border-radius:999px; color:var(--lime); background:#27331d; font-size:11px; font-weight:700; }
+    .direction h3 { margin:18px 0 6px; font-size:20px; }
+    .direction > p { min-height:68px; margin:0 0 18px; color:var(--muted); font-size:13px; }
+    .phone { width:260px; height:435px; margin:0 auto; overflow:hidden; border:1px solid #3b4237; border-radius:34px; background:#070907; box-shadow:0 18px 45px #0009; }
+    .screen { height:100%; padding:22px 16px; background:linear-gradient(160deg,#131711,#070907 55%); }
+    .phone-head { display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#aab0a3; }
+    .phone-title { margin:8px 0 13px; font-size:20px; font-weight:750; }
+    .hero { padding:15px; border:1px solid #2d3529; border-radius:17px; background:#151a13; }
+    .row { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+    .metric { margin:5px 0; font-size:29px; line-height:1; font-weight:730; letter-spacing:-1px; }
+    .small { color:#9aa091; font-size:10px; }
+    .lime { color:var(--lime); }
+    .chart { position:relative; height:104px; margin:14px -3px 4px; overflow:hidden; }
+    .chart::before,.chart::after { content:""; position:absolute; left:0; right:0; height:1px; background:#30362d; }
+    .chart::before { top:28%; } .chart::after { top:72%; }
+    .band { position:absolute; inset:24px 0 22px; background:linear-gradient(180deg,#a6d9362b,#718d2520); clip-path:polygon(0 24%,100% 0,100% 76%,0 100%); }
+    .line { position:absolute; inset:0; }
+    .line svg { width:100%; height:100%; overflow:visible; }
+    .actions { display:grid; grid-template-columns:1.2fr 1fr; gap:8px; margin-top:12px; }
+    .button { padding:11px 8px; text-align:center; border-radius:10px; background:var(--lime); color:#0b0d09; font-size:11px; font-weight:800; }
+    .button.secondary { background:#20251e; color:#e8eadf; }
+    .tiles { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+    .tile { min-height:65px; padding:10px; border:1px solid #292f26; border-radius:13px; background:#10130f; }
+    .tile b { display:block; margin-top:7px; font-size:16px; }
+    .arc { position:relative; height:118px; margin:2px 0 3px; overflow:hidden; }
+    .arc-ring { position:absolute; left:50%; top:12px; width:168px; height:168px; transform:translateX(-50%); border:16px solid #293022; border-right-color:var(--lime); border-top-color:var(--lime); border-radius:50%; rotate:-45deg; }
+    .arc-copy { position:absolute; inset:47px 0 auto; text-align:center; }
+    .bars { display:flex; align-items:end; gap:8px; height:105px; margin-top:12px; }
+    .bars i { flex:1; border-radius:5px 5px 1px 1px; background:#31382d; }
+    .bars i:nth-child(4),.bars i:nth-child(5){ background:var(--lime); }
+    .poster { position:relative; height:175px; padding:16px; overflow:hidden; border-radius:17px; background:#c4fa46; color:#0a0c08; }
+    .poster::after { content:"13"; position:absolute; right:-8px; bottom:-42px; color:#111a0714; font-size:150px; line-height:1; font-weight:900; }
+    .poster .metric { margin-top:38px; font-size:31px; }
+    .note { margin-top:22px; padding:18px; border-left:3px solid var(--lime); background:#11150f; color:#c8ccbf; }
+    .note b { color:var(--text); }
+    .foot { margin-top:36px; color:#7f8678; font-size:12px; }
+    @media (max-width:1000px){ .grid,.directions{grid-template-columns:1fr 1fr}.compare{grid-template-columns:260px 1fr} }
+    @media (max-width:700px){ main{width:min(100% - 28px,520px);padding-top:30px}.grid,.directions,.compare{grid-template-columns:1fr}.current{max-width:310px}.direction>p{min-height:auto} }
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">X-Fit · Goal page reference review</div>
+  <h1>目标页先建立视觉语言，再进入正式重构</h1>
+  <p class="lede">筛选标准是：真实产品的数据逻辑、强而克制的视觉焦点、正常字号下仍有层级。下方只提取设计方法，不复制品牌外观。</p>
+
+  <h2>当前页为何显得粗糙</h2>
+  <div class="compare">
+    <div class="current"><img src="current-goal.png" alt="当前 X-Fit 目标页真机截图"></div>
+    <div class="diagnosis">
+      <strong>功能全部摊开，缺少一个能把目标讲清楚的视觉主体。</strong>
+      <ul>
+        <li>目标、当前均重、覆盖率与趋势分散，用户要逐行拼出结论。</li>
+        <li>整宽绿色按钮抢走了图表与目标本身的视觉重心。</li>
+        <li>折线图沿用默认坐标样式，和训练、饮食页的品牌语言不一致。</li>
+        <li>腰围、医学状态与训练执行继续使用菜单行，页面后半段像设置页。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>四个有效参考</h2>
+  <section class="grid">
+    <article class="reference">
+      <figure><img src="https://otegsqwqycxxjehewzxi.supabase.co/storage/v1/object/public/published-media/76e35685-6ce7-4ae6-b49d-d67b2685de1f/media/54b7a76dfba11f0141293389ec4ecf56f008397350a55d25882af96ee6bfd3f2_2e6db374.webp" alt="Gentler Streak Activity Path"></figure>
+      <div class="copy"><div class="eyebrow">真实产品</div><h3>Gentler Streak</h3><p>一个核心图形加一句解释，用户先知道“现在怎样”，再看详细记录。</p><a href="https://docs.gentler.app/understanding-your-activity-path/interpret-the-activity-path">查看官方说明</a><div><span class="tag">主视觉</span><span class="tag">图表即结论</span></div></div>
+    </article>
+    <article class="reference">
+      <figure><img src="https://staticfiles.gleap.io/ghelparticle/2QA74VLIcL8SKVV74VETRnSWkT7wM7uMnoGzK0ajINFoRj1xDR6ZR7sPD1zp68DcXmdctqIG6Lh.png" alt="MacroFactor Goal Progress"></figure>
+      <div class="copy"><div class="eyebrow">真实产品</div><h3>MacroFactor</h3><p>把称重事实、趋势解释和目标进展分开，数据不足时不会用漂亮图形制造确定性。</p><a href="https://help.macrofactorapp.com/dashboard/consistency/">查看官方说明</a><div><span class="tag">目标逻辑</span><span class="tag">数据可信度</span></div></div>
+    </article>
+    <article class="reference">
+      <figure><img src="https://www.hevyapp.com/wp-content/uploads/image-4-1-768x785.png" alt="Hevy Progress Chart"></figure>
+      <div class="copy"><div class="eyebrow">真实产品</div><h3>Hevy</h3><p>摘要、历史与具体指标逐层展开；主页面不塞入所有训练统计。</p><a href="https://www.hevyapp.com/">查看产品页面</a><div><span class="tag">训练关联</span><span class="tag">按需下钻</span></div></div>
+    </article>
+    <article class="reference">
+      <figure><img src="https://cdn.dribbble.com/userupload/7261459/file/original-6c3edfdfe6c4d1f97add23e5361c6c0d.png?resize=1504x1128&amp;vertical=center" alt="Dark data visualization UI kit"></figure>
+      <div class="copy"><div class="eyebrow">概念作品</div><h3>Data Visualization UI Kit</h3><p>借鉴紧凑模块、细线和克制的高亮比例；不采用发光、大渐变和无意义环图。</p><a href="https://dribbble.com/shots/21546584-Data-visualization-app-UI-kit-v-1-2">查看原作品</a><div><span class="tag">深色质感</span><span class="tag">模块节奏</span></div></div>
+    </article>
+  </section>
+
+  <h2>转译成 X-Fit 的三个方向</h2>
+  <section class="directions">
+    <article class="direction recommended">
+      <div class="choice"><span class="letter">A</span><span class="badge">推荐</span></div>
+      <h3>目标轨迹</h3>
+      <p>Gentler Streak 的视觉焦点 + MacroFactor 的数据边界。最符合“13 周减脂”这个单一主目标。</p>
+      <div class="phone"><div class="screen">
+        <div class="phone-head"><span>X-FIT / 目标</span><span>第 1 / 13 周</span></div><div class="phone-title">减脂周期</div>
+        <div class="hero"><div class="row"><div><div class="small">最近 7 日均重</div><div class="metric">85.3 <span class="small">kg</span></div></div><div class="small lime">记录 7/7</div></div>
+          <div class="chart"><div class="band"></div><div class="line"><svg viewBox="0 0 220 100"><polyline fill="none" stroke="#f3f4ea" stroke-width="2" points="0,36 35,42 70,31 105,49 140,45 180,62 220,57"/><polyline fill="none" stroke="#c4fa46" stroke-width="1.5" stroke-dasharray="4 5" points="0,30 220,70"/></svg></div></div>
+          <div class="row"><span class="small">本周变化 −0.4 kg</span><span class="small">目标 77.5</span></div>
+        </div>
+        <div class="actions"><div class="button">记录体重</div><div class="button secondary">本周复盘</div></div>
+        <div class="tiles"><div class="tile"><span class="small">训练执行</span><b>3 / 3</b></div><div class="tile"><span class="small">腰围</span><b>未记录</b></div><div class="tile"><span class="small">步数</span><b>4,280</b></div><div class="tile"><span class="small">今日体感</span><b>良好</b></div></div>
+      </div></div>
+    </article>
+
+    <article class="direction">
+      <div class="choice"><span class="letter">B</span><span class="badge">更运动</span></div>
+      <h3>竞技仪表</h3>
+      <p>WHOOP / 深色数据面板式表达。更强烈、更像运动设备，但目标故事略弱。</p>
+      <div class="phone"><div class="screen">
+        <div class="phone-head"><span>13 WEEK CUT</span><span>06 SEP</span></div><div class="phone-title">本周状态</div>
+        <div class="hero"><div class="arc"><div class="arc-ring"></div><div class="arc-copy"><div class="small">目标进度</div><div class="metric">1 / 13</div></div></div><div class="row"><span class="small">当前 85.3</span><span class="small lime">目标 77.5 kg</span></div></div>
+        <div class="tiles"><div class="tile"><span class="small">体重趋势</span><b>−0.4</b></div><div class="tile"><span class="small">覆盖率</span><b>7 / 7</b></div><div class="tile"><span class="small">力量训练</span><b>3 次</b></div><div class="tile"><span class="small">腰围</span><b>—</b></div></div>
+        <div class="actions"><div class="button">记录体重</div><div class="button secondary">查看复盘</div></div>
+      </div></div>
+    </article>
+
+    <article class="direction">
+      <div class="choice"><span class="letter">C</span><span class="badge">更风格化</span></div>
+      <h3>编辑海报</h3>
+      <p>延续训练页的 editorial 语言，用大色块和非对称版式；辨识度最高，但数据密度最低。</p>
+      <div class="phone"><div class="screen">
+        <div class="phone-head"><span>X-FIT / PROGRESS</span><span>•••</span></div><div class="phone-title">目标</div>
+        <div class="poster"><div class="small" style="color:#24300d">13 周减脂 · 第 1 周</div><div class="metric">85.3 → 77.5</div><div class="small" style="color:#24300d">06 SEP — 06 DEC</div></div>
+        <div class="hero" style="margin-top:10px"><div class="row"><span class="small">最近 7 日</span><span class="small lime">记录 7 / 7</span></div><div class="bars"><i style="height:65%"></i><i style="height:54%"></i><i style="height:70%"></i><i style="height:48%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:31%"></i></div></div>
+        <div class="actions"><div class="button">记录体重</div><div class="button secondary">复盘</div></div>
+      </div></div>
+    </article>
+  </section>
+
+  <div class="note"><b>建议选择 A。</b> 它能在正常字号下做出明确的视觉中心，同时完整保留“七日均重、覆盖率、目标参照和数据不足不判断”的产品规则。B 更像设备仪表，C 更像品牌海报。</div>
+  <p class="foot">所有数值仅为隔离演示。参考图版权归原作者或产品所有；本页用于内部方向评审。</p>
+</main>
+</body>
+</html>

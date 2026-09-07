@@ -20,7 +20,10 @@ enum SeedDataService {
             context.insert(NutritionTarget())
         }
 
+        try WeightedExerciseIdentityMigration.applyConfirmedCorrections(in: context)
         try ExerciseCatalogService.consolidateConfirmedSquatDuplicate(in: context)
+        try ExerciseCatalogService.consolidateConfirmedAliases(in: context)
+        try BodyweightVolumeMigration.applyConfirmedAllowlist(in: context)
         try ExerciseTerminologyService.stageCatalogCandidates(in: context)
         normalizeImportedWorkoutNames(in: context)
         try ScheduleService.refreshUpcoming(in: context)
@@ -61,9 +64,9 @@ enum SeedDataService {
         exercises.forEach(context.insert)
 
         let todayWeekday = Date.now.weekdayNumber
-        let push = WorkoutTemplate(name: "推 · 胸肩三头", weekday: todayWeekday)
-        let pull = WorkoutTemplate(name: "拉 · 背部二头", weekday: Date.now.addingDays(2).weekdayNumber)
-        let legs = WorkoutTemplate(name: "腿 · 下肢力量", weekday: Date.now.addingDays(4).weekdayNumber)
+        let push = WorkoutTemplate(name: "推 · 胸肩三头", weekday: todayWeekday, isActive: false)
+        let pull = WorkoutTemplate(name: "拉 · 背部二头", weekday: Date.now.addingDays(2).weekdayNumber, isActive: false)
+        let legs = WorkoutTemplate(name: "腿 · 下肢力量", weekday: Date.now.addingDays(4).weekdayNumber, isActive: false)
         [push, pull, legs].forEach(context.insert)
 
         add(push, exercises: [

@@ -22,9 +22,9 @@ struct RootView: View {
 
     init() {
         let appearance = UITabBarAppearance()
-        appearance.configureWithTransparentBackground()
-        appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-        appearance.backgroundColor = UIColor(red: 0.018, green: 0.022, blue: 0.025, alpha: 0.82)
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundEffect = nil
+        appearance.backgroundColor = UIColor(red: 0.047, green: 0.055, blue: 0.059, alpha: 1)
         appearance.shadowColor = .clear
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
@@ -41,36 +41,17 @@ struct RootView: View {
                     .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 } else {
                     TabView {
-                        NavigationStack {
-                            TodayView()
-                        }
-                        .tabItem {
-                            Label("首页", systemImage: "house.fill")
-                        }
-
-                        NavigationStack {
-                            PlanView()
-                        }
-                        .tabItem {
-                            Label("训练", systemImage: "dumbbell.fill")
-                        }
-
-                        NavigationStack {
-                            StatsView()
-                        }
-                        .tabItem {
-                            Label("进度", systemImage: "chart.bar.fill")
-                        }
-
-                        NavigationStack {
-                            ProfileView()
-                        }
-                        .tabItem {
-                            Label("我的", systemImage: "person.fill")
-                        }
+                        NavigationStack { TodayView() }
+                            .tabItem { Label("训练", systemImage: "dumbbell.fill") }
+                        NavigationStack { NutritionHomeView() }
+                            .tabItem { Label("饮食", systemImage: "fork.knife") }
+                        NavigationStack { GoalHomeView() }
+                            .tabItem { Label("目标", systemImage: "scope") }
+                        NavigationStack { ProfileView() }
+                            .tabItem { Label("我的", systemImage: "person.fill") }
                     }
                     .tint(AppTheme.accent)
-                    .toolbarBackground(.ultraThinMaterial, for: .tabBar)
+                    .toolbarBackground(AppTheme.background, for: .tabBar)
                     .toolbarBackground(.visible, for: .tabBar)
                     .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 }
@@ -183,6 +164,7 @@ struct RootView: View {
             do {
                 #if DEBUG
                 try prepareUITestShareDraftFixtureIfRequested()
+                prepareUITestPasteboardFixtureIfRequested()
                 if CommandLine.arguments.contains("--ui-testing-reset-rest-notifications") {
                     await resetRestNotificationsForTesting()
                 }
@@ -196,12 +178,15 @@ struct RootView: View {
                     allowInitialSeed: CloudSyncRuntime.allowsInitialSeed
                 )
                 #if DEBUG
+                try prepareUITestManualScheduleIfNeeded()
                 try prepareUITestTerminologyFixtureIfRequested()
                 try prepareUITestShortRestFixtureIfRequested()
                 try prepareUITestBodyFeedbackFixtureIfRequested()
                 try prepareUITestHistoryFixtureIfRequested()
+                try prepareUITestIsometricSecondsFixtureIfRequested()
                 try prepareUITestProgressFixtureIfRequested()
                 try prepareUITestHomeFixtureIfRequested()
+                try prepareRedesignPreviewIfRequested()
                 #endif
                 do {
                     launchImportMessage = try importDeviceHistoryMergeIfRequested()
@@ -233,6 +218,7 @@ struct RootView: View {
                         )
                     }
                 }
+                try await BodyweightVolumeMigration.backfillMissingSnapshotsFromHealth(in: modelContext)
                 if CloudSyncRuntime.shouldSyncWorkoutReminders() {
                     let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
                     await NotificationService.syncWorkoutReminders(schedules)
@@ -262,6 +248,13 @@ struct RootView: View {
                   editingShareDraft == nil else { return }
             loadPendingShareDraft()
         }
+    }
+
+    private func prepareUITestPasteboardFixtureIfRequested() {
+        guard CommandLine.arguments.contains("--ui-testing"),
+              let value = ProcessInfo.processInfo.environment["XFIT_UI_TEST_PASTEBOARD"]
+        else { return }
+        UIPasteboard.general.string = value
     }
 
     private func loadPendingShareDraft() {
@@ -348,6 +341,35 @@ struct RootView: View {
     }
 
     #if DEBUG
+    @MainActor
+    private func prepareUITestManualScheduleIfNeeded() throws {
+        guard CommandLine.arguments.contains("--ui-testing") else { return }
+        let today = Date.now.startOfDay
+        let sessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
+        guard !sessions.contains(where: { $0.status == .inProgress }) else { return }
+        let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
+        guard !schedules.contains(where: { $0.plannedDate.isSameDay(as: today) }) else { return }
+        let templates = try modelContext.fetch(FetchDescriptor<WorkoutTemplate>())
+        guard let template = templates.first(where: { $0.name == "推 · 胸肩三头" })
+            ?? templates.first(where: { !$0.isOneOff }) else { return }
+        _ = try ScheduleService.addManual(template: template, on: today, in: modelContext)
+    }
+
+    @MainActor
+    private func prepareRedesignPreviewIfRequested() throws {
+        guard CloudSyncRuntime.isTesting,
+              !CloudSyncRuntime.usesPersistentUITestStore,
+              CommandLine.arguments.contains("--ui-redesign-preview") else { return }
+        let program = try FatLossService.createProgram(in: modelContext)
+        _ = try FatLossService.importMeals(program: program, from: .now, in: modelContext)
+        for offset in 0..<7 {
+            modelContext.insert(BodyMeasurement(date: Date.now.startOfDay.addingDays(-offset),
+                weightKg: 85 + Double(offset) * 0.1, waistCm: offset == 0 ? 96 : nil,
+                notes: "仅交互原型演示，不是真实测量"))
+        }
+        try modelContext.save()
+    }
+
     private func prepareUITestShareDraftFixtureIfRequested() throws {
         let arguments = ProcessInfo.processInfo.arguments
         guard arguments.contains("--ui-testing") else { return }
@@ -488,6 +510,26 @@ struct RootView: View {
                 name: "传统硬拉",
                 muscleGroup: "腿部",
                 equipment: "自重",
+                isBuiltIn: false
+            )
+            modelContext.insert(exercise)
+            exercises.append(exercise)
+        }
+        if !exercises.contains(where: { $0.name == "MTS 下斜卧推" }) {
+            let exercise = Exercise(
+                name: "MTS 下斜卧推",
+                muscleGroup: "胸部",
+                equipment: "器械",
+                isBuiltIn: false
+            )
+            modelContext.insert(exercise)
+            exercises.append(exercise)
+        }
+        if !exercises.contains(where: { $0.name == "MTS 划船" }) {
+            let exercise = Exercise(
+                name: "MTS 划船",
+                muscleGroup: "背部",
+                equipment: "MTS 器械",
                 isBuiltIn: false
             )
             modelContext.insert(exercise)
@@ -690,6 +732,114 @@ struct RootView: View {
     }
 
     @MainActor
+    private func prepareUITestIsometricSecondsFixtureIfRequested() throws {
+        guard CommandLine.arguments.contains("--ui-testing-isometric-seconds") else { return }
+
+        let exercises = try modelContext.fetch(FetchDescriptor<Exercise>())
+        let exercise: Exercise
+        if let existing = exercises.first(where: { $0.name == "UI 等长平板支撑" }) {
+            existing.volumeUnit = .second
+            exercise = existing
+        } else {
+            exercise = Exercise(
+                name: "UI 等长平板支撑",
+                muscleGroup: "核心",
+                equipment: "自重",
+                isBuiltIn: false,
+                notes: "按组记录保持秒数",
+                volumeUnit: .second
+            )
+            modelContext.insert(exercise)
+        }
+
+        let sessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
+        if !sessions.contains(where: { $0.importIdentifier == "ui-test-isometric-active" }) {
+            let activeSession = WorkoutSession(
+                templateName: "等长训练进行中",
+                plannedDate: .now,
+                startedAt: .now,
+                status: .inProgress,
+                importIdentifier: "ui-test-isometric-active"
+            )
+            let activeSnapshot = SessionExercise(
+                sessionID: activeSession.id,
+                exerciseID: exercise.id,
+                exerciseName: exercise.name,
+                order: 0,
+                targetSets: 2,
+                minReps: 30,
+                maxReps: 45,
+                targetWeight: 0,
+                restSeconds: 60,
+                muscleGroup: exercise.muscleGroup,
+                exerciseNotes: exercise.notes,
+                volumeUnit: .second
+            )
+            modelContext.insert(activeSession)
+            modelContext.insert(activeSnapshot)
+            for (index, seconds) in [45, 30].enumerated() {
+                modelContext.insert(SetLog(
+                    sessionID: activeSession.id,
+                    sessionExerciseID: activeSnapshot.id,
+                    exerciseID: exercise.id,
+                    setNumber: index + 1,
+                    targetWeight: 0,
+                    targetReps: seconds,
+                    actualWeight: 0,
+                    actualReps: seconds
+                ))
+            }
+        }
+
+        if !sessions.contains(where: { $0.importIdentifier == "ui-test-isometric-history" }) {
+            let completedAt = Date.now.addingTimeInterval(-3_600)
+            let startedAt = completedAt.addingTimeInterval(-600)
+            let historySession = WorkoutSession(
+                templateName: "等长训练历史验证",
+                plannedDate: startedAt,
+                startedAt: startedAt,
+                completedAt: completedAt,
+                status: .completed,
+                notes: "秒数历史应与 kg 分开",
+                importIdentifier: "ui-test-isometric-history"
+            )
+            let historySnapshot = SessionExercise(
+                sessionID: historySession.id,
+                exerciseID: exercise.id,
+                exerciseName: exercise.name,
+                order: 0,
+                targetSets: 2,
+                minReps: 30,
+                maxReps: 45,
+                targetWeight: 0,
+                restSeconds: 60,
+                muscleGroup: exercise.muscleGroup,
+                exerciseNotes: exercise.notes,
+                volumeUnit: .second
+            )
+            modelContext.insert(historySession)
+            modelContext.insert(historySnapshot)
+            for (index, seconds) in [45, 30].enumerated() {
+                modelContext.insert(SetLog(
+                    sessionID: historySession.id,
+                    sessionExerciseID: historySnapshot.id,
+                    exerciseID: exercise.id,
+                    setNumber: index + 1,
+                    targetWeight: 0,
+                    targetReps: seconds,
+                    actualWeight: 0,
+                    actualReps: seconds,
+                    rir: 2,
+                    isCompleted: true,
+                    completedAt: completedAt
+                ))
+            }
+        }
+
+        try modelContext.save()
+    }
+
+    @MainActor
     private func prepareUITestProgressFixtureIfRequested() throws {
         guard CommandLine.arguments.contains("--ui-testing-progress") else { return }
 
@@ -721,8 +871,11 @@ struct RootView: View {
         ]
 
         for (index, fixture) in fixtures.enumerated() {
-            let startedAt = calendar.date(bySettingHour: 10, minute: 0, second: 0, of: fixture.1)
+            let baseStartedAt = calendar.date(bySettingHour: 10, minute: 0, second: 0, of: fixture.1)
                 ?? fixture.1
+            let startedAt = fixture.0 == "本周拉训练"
+                ? baseStartedAt.addingTimeInterval(2 * 3_600)
+                : baseStartedAt
             let completedAt = startedAt.addingTimeInterval(Double(fixture.2 * 60))
             let session = WorkoutSession(
                 templateName: fixture.0,
@@ -767,6 +920,18 @@ struct RootView: View {
             }
         }
 
+        for offset in 0..<8 {
+            guard let date = calendar.date(byAdding: .day, value: offset - 7, to: today) else { continue }
+            modelContext.insert(
+                BodyMeasurement(
+                    date: calendar.date(bySettingHour: 7, minute: 30, second: 0, of: date) ?? date,
+                    weightKg: 83.4 + Double(offset) * 0.1,
+                    source: offset == 2 ? .healthKit : .manual,
+                    createdAt: date
+                )
+            )
+        }
+
         try modelContext.save()
     }
 
@@ -777,7 +942,8 @@ struct RootView: View {
         let wantsSingle = arguments.contains("--ui-testing-home-single-volume")
         let wantsSeven = arguments.contains("--ui-testing-home-seven-volumes")
         let wantsCompleted = arguments.contains("--ui-testing-home-completed")
-        guard wantsEmpty || wantsSingle || wantsSeven || wantsCompleted else { return }
+        let wantsMenuStatus = arguments.contains("--ui-testing-home-menu-status")
+        guard wantsEmpty || wantsSingle || wantsSeven || wantsCompleted || wantsMenuStatus else { return }
 
         try modelContext.fetch(FetchDescriptor<SetLog>()).forEach(modelContext.delete)
         try modelContext.fetch(FetchDescriptor<SessionExercise>()).forEach(modelContext.delete)
@@ -788,6 +954,14 @@ struct RootView: View {
             try modelContext.fetch(FetchDescriptor<ScheduledWorkout>()).forEach(modelContext.delete)
             try modelContext.save()
             return
+        }
+
+        if wantsMenuStatus {
+            let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
+            schedules.first(where: {
+                $0.plannedDate.isSameDay(as: .now) && $0.status == .planned
+            })?.templateName = "核心 + 腿部 · 当天菜单"
+            try modelContext.save()
         }
 
         if wantsCompleted {

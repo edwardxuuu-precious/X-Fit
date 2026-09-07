@@ -78,6 +78,7 @@ enum HistoricalWorkoutService {
         guard !isDuplicate else { throw HistoricalWorkoutServiceError.duplicateRecord }
 
         let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        let measurements = try context.fetch(FetchDescriptor<BodyMeasurement>())
         let exerciseByID = Dictionary(uniqueKeysWithValues: exercises.map { ($0.id, $0) })
         guard input.exercises.allSatisfy({ exerciseByID[$0.exerciseID] != nil }) else {
             throw HistoricalWorkoutServiceError.missingExercise
@@ -99,6 +100,13 @@ enum HistoricalWorkoutService {
             guard let exercise = exerciseByID[item.exerciseID] else { continue }
             let reps = item.sets.map(\.reps)
             let weight = item.sets.map(\.weight).max() ?? 0
+            let bodyWeightKg = exercise.volumeUnit == .bodyweight
+                ? BodyWeightSnapshotResolver.resolve(
+                    for: input.startedAt,
+                    measurements: measurements,
+                    currentHealthWeightKg: nil
+                )
+                : nil
             let snapshot = SessionExercise(
                 sessionID: session.id,
                 exerciseID: exercise.id,
@@ -113,7 +121,8 @@ enum HistoricalWorkoutService {
                 exerciseNotes: exercise.notes,
                 referenceURL: exercise.referenceURL,
                 volumeUnit: exercise.volumeUnit,
-                performanceNotes: item.performanceNotes.trimmingCharacters(in: .whitespacesAndNewlines)
+                performanceNotes: item.performanceNotes.trimmingCharacters(in: .whitespacesAndNewlines),
+                bodyWeightKgSnapshot: bodyWeightKg
             )
             context.insert(snapshot)
 
@@ -126,13 +135,14 @@ enum HistoricalWorkoutService {
                         setNumber: setIndex + 1,
                         targetWeight: max(0, set.weight),
                         targetReps: max(1, set.reps),
-                        actualWeight: max(0, set.weight),
+                        actualWeight: exercise.volumeUnit == .bodyweight
+                            ? (bodyWeightKg ?? 0)
+                            : max(0, set.weight),
                         actualReps: max(1, set.reps),
                         rir: set.rir,
                         isCompleted: true,
                         startedAt: set.startedAt,
-                        completedAt: input.startedAt.addingTimeInterval(TimeInterval((setIndex + 1) * 60)),
-                        restDurationSeconds: set.restDurationSeconds
+                        completedAt: input.startedAt.addingTimeInterval(TimeInterval((setIndex + 1) * 60))
                     )
                 )
             }

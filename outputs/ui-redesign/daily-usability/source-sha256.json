@@ -1,0 +1,11 @@
+{
+  "FitnessApp/Features/Workout/ActiveWorkoutView.swift": "90837bd193554893f70eef212acf13305e2c8dedc8b1a3ba8d075ceafe839968",
+  "FitnessApp/Features/Redesign/GoalHomeView.swift": "1c36cfc9619e1df196a2c8a689bc5411ffc657ea6cf4e6329b09317057ef1ce1",
+  "FitnessApp/Features/FatLoss/FatLossMealsView.swift": "be67190c096c700d6e300cb8e95d2e9ef925e4c8b169ecce63e154919e753c0c",
+  "FitnessApp/Features/FatLoss/PrepPresentation.swift": "2558e4e63f8127917c3dc72ab9ff3e33211268af2e89cc2d317f3c35931d2956",
+  "FitnessApp/Services/FatLossService.swift": "efbc8ec6383e600b2ff64d30f1f20f90611639711e4f49f4d4692a3d89295124",
+  "FitnessAppTests/PrepPresentationTests.swift": "26126262455deef055d25c36bd41f1b1ddea367a56811c72b23854f389277e97",
+  "FitnessAppTests/GoalProgressPresentationTests.swift": "535430485d44ba18b9d408b1b241db9f679887673a2be0096f4f2b55ffe3b12e",
+  "FitnessAppUITests/RedesignUITests.swift": "81575819487df9e071c8649d757a989f3acdb806ca9795166a9ce5845db29e4c",
+  "FitnessApp.xcodeproj/project.pbxproj": "d3872640a135a742149c38b81c302430dba444ace7e70349f450dfef6609f741"
+}

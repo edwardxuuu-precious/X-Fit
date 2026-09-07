@@ -63,7 +63,7 @@ struct ExerciseTerminologyReviewView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: "CONTROLLED GLOSSARY", title: "动作名称审核")
+                ScreenHeader(eyebrow: nil, title: "动作名称审核")
 
                 boundaryCard
                 summaryGrid
@@ -96,12 +96,13 @@ struct ExerciseTerminologyReviewView: View {
                     }
                 }
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
         .screenBackground()
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .searchable(text: $searchText, prompt: "搜索中文、英文、肌群或器械")
         .task {
             do {
@@ -275,19 +276,20 @@ private struct ExerciseTerminologyDetailView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: "HUMAN REVIEW", title: exercise.name)
+                ScreenHeader(eyebrow: nil, title: exercise.name)
 
                 rawIdentityCard
                 candidateCard
                 impactCard
                 actionCard
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
         .screenBackground()
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .confirmationDialog(
             confirmationTitle,
             isPresented: Binding(
@@ -404,14 +406,18 @@ private struct ExerciseTerminologyDetailView: View {
                 .opacity(hasAcceptableCandidate ? 1 : 0.55)
                 .accessibilityIdentifier("terminology-accept-button")
 
-                Button("保留当前名称，不采用候选") {
+                Button {
                     pendingAction = .rejected
+                } label: {
+                    Text("保留当前名称，不采用候选")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(AppTheme.orange)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity, minHeight: AppTheme.minimumTouchTarget)
+                        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
+                        .contentShape(Rectangle())
                 }
-                .font(.subheadline.bold())
-                .foregroundStyle(AppTheme.orange)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
+                .buttonStyle(.plain)
                 .accessibilityIdentifier("terminology-reject-button")
             } else {
                 HStack {
@@ -425,12 +431,16 @@ private struct ExerciseTerminologyDetailView: View {
                             .foregroundStyle(AppTheme.secondaryText)
                     }
                 }
-                Button("撤销审核决定") { showResetConfirmation = true }
-                    .font(.subheadline.bold())
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
+                Button { showResetConfirmation = true } label: {
+                    Text("撤销审核决定")
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: .infinity, minHeight: AppTheme.minimumTouchTarget)
+                        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
+                        .contentShape(Rectangle())
+                }
+                    .buttonStyle(.plain)
                     .accessibilityIdentifier("terminology-reset-button")
             }
         }

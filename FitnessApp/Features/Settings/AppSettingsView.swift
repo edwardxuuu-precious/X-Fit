@@ -4,6 +4,17 @@ import UniformTypeIdentifiers
 import UserNotifications
 
 struct AppSettingsView: View {
+    enum Mode: String, CaseIterable {
+        case preferences = "偏好"
+        case data = "数据"
+    }
+
+    @State private var selectedMode: Mode
+
+    init(initialMode: Mode = .preferences) {
+        _selectedMode = State(initialValue: initialMode)
+    }
+
     @Environment(\.modelContext) private var modelContext
     @Query private var schedules: [ScheduledWorkout]
     @Query private var bodyMeasurements: [BodyMeasurement]
@@ -44,39 +55,44 @@ struct AppSettingsView: View {
     }
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: "X-FIT CONTROL", title: "设置与数据")
-
-                SectionHeader(title: "训练提醒")
-                reminderCard
-
-                SectionHeader(title: "Apple 健康")
-                healthCard
-
-                SectionHeader(title: "动作标准化")
-                terminologyCard
-
-                SectionHeader(title: "数据所有权")
-                dataCard
-
-                SectionHeader(title: "关于")
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(appVersionText)
-                        .font(.headline.bold())
-                        .foregroundStyle(.white)
-                    Text(dataStorageDescription)
-                        .font(.caption)
-                        .foregroundStyle(AppTheme.secondaryText)
+        VStack(spacing: 0) {
+            modeSelector
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+                .padding(.bottom, 16)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 22) {
+                    if selectedMode == .preferences {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("按你的节奏").font(.title2.weight(.bold))
+                            Text("提醒、连接与训练偏好")
+                                .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                        }
+                        reminderCard
+                        healthCard
+                        terminologyCard
+                    } else {
+                        dataCard
+                    }
+                    DisclosureGroup("关于 X-Fit") {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(appVersionText).font(.subheadline.weight(.semibold))
+                            Text(dataStorageDescription)
+                                .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                        }.frame(maxWidth: .infinity, alignment: .leading).padding(.top, 10)
+                    }
+                    .font(.subheadline).tint(AppTheme.secondaryText)
+                    .padding(.vertical, 6)
                 }
-                .cardSurface()
+                .padding(.horizontal, 20)
+                .padding(.bottom, 28)
             }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 28)
+            .id(selectedMode)
         }
         .screenBackground()
+        .navigationTitle("设置与数据")
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.visible, for: .navigationBar)
         .task {
             await refreshNotificationStatus()
             healthStatus = healthKitEnabled ? "已授权；完成训练后写入 Apple 健康" : "未启用"
@@ -116,6 +132,25 @@ struct AppSettingsView: View {
         } message: {
             Text(errorMessage ?? "未知错误")
         }
+    }
+
+    private var modeSelector: some View {
+        HStack(spacing: 4) {
+            ForEach(Mode.allCases, id: \.self) { mode in
+                Button {
+                    selectedMode = mode
+                } label: {
+                    Text(mode.rawValue)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(selectedMode == mode ? Color.black : AppTheme.secondaryText)
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(selectedMode == mode ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 9))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("设置-\(mode.rawValue)")
+                .accessibilityAddTraits(selectedMode == mode ? .isSelected : [])
+            }
+        }.padding(4).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 12))
     }
 
     private var appVersionText: String {
@@ -158,73 +193,89 @@ struct AppSettingsView: View {
     private var healthCard: some View {
         VStack(alignment: .leading, spacing: 14) {
             settingsLabel("Apple 健康", detail: healthStatus, icon: "heart.fill")
-            HStack {
-                Button(healthKitEnabled ? "重新授权" : "连接 Apple 健康") {
-                    connectHealthKit()
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(AppTheme.accent)
-                .foregroundStyle(.black)
-
-                if healthKitEnabled {
-                    Button("导入最新身体数据") {
-                        importHealthBodyData()
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(AppTheme.accent)
-                }
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 10) { healthActions }
+                VStack(alignment: .leading, spacing: 10) { healthActions }
             }
-            Text("只写入已完成的传统力量训练；不会伪造心率或消耗热量。身体数据仅在你主动点击时读取。")
-                .font(.caption2)
-                .foregroundStyle(AppTheme.secondaryText)
+            DisclosureGroup("连接后会使用哪些数据") {
+                Text("只写入已完成的传统力量训练；不会伪造心率或消耗热量。身体数据仅在你主动点击时读取。")
+                    .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    .padding(.top, 8)
+            }
+            .font(.caption).tint(AppTheme.secondaryText)
+            .accessibilityIdentifier("设置-健康数据说明")
+        }.cardSurface()
+    }
+
+    @ViewBuilder
+    private var healthActions: some View {
+        Button(healthKitEnabled ? "重新授权" : "连接 Apple 健康") { connectHealthKit() }
+            .buttonStyle(.bordered).tint(AppTheme.accent).frame(minHeight: 44)
+        if healthKitEnabled {
+            Button("导入最新身体数据") { importHealthBodyData() }
+                .buttonStyle(.bordered).tint(AppTheme.accent).frame(minHeight: 44)
         }
-        .cardSurface()
     }
 
     private var dataCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Button {
-                prepareBackup()
-            } label: {
-                settingsLabel("生成完整 JSON 备份", detail: "用于恢复全部本地数据", icon: "externaldrive.fill.badge.plus")
-            }
-            .buttonStyle(.plain)
-
-            if let backupURL {
-                ShareLink(item: backupURL) {
-                    Label("分享最新备份", systemImage: "square.and.arrow.up")
-                        .font(.subheadline.bold())
-                        .foregroundStyle(AppTheme.accent)
+        VStack(alignment: .leading, spacing: 22) {
+            VStack(alignment: .leading, spacing: 14) {
+                HStack(alignment: .top) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("随时带走记录").font(.title2.weight(.bold))
+                        Text("完整备份，留住每次进步")
+                            .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                    }
+                    Spacer(minLength: 8)
+                    Image(systemName: "externaldrive")
+                        .font(.system(size: 30, weight: .light)).foregroundStyle(AppTheme.accent)
+                        .accessibilityHidden(true)
                 }
-            }
-
-            Divider().overlay(AppTheme.line)
-
-            Button {
-                prepareCSV()
-            } label: {
-                settingsLabel("生成训练 CSV", detail: "逐组重量、次数和 RIR", icon: "tablecells.fill")
-            }
-            .buttonStyle(.plain)
-
-            if let csvURL {
-                ShareLink(item: csvURL) {
-                    Label("分享最新 CSV", systemImage: "square.and.arrow.up")
-                        .font(.subheadline.bold())
-                        .foregroundStyle(AppTheme.accent)
+                Button { prepareBackup() } label: {
+                    Label("生成完整 JSON 备份", systemImage: "arrow.up.doc")
+                        .frame(maxWidth: .infinity)
                 }
-            }
+                .neonButtonStyle()
+                .accessibilityIdentifier("设置-生成备份")
+                if let backupURL {
+                    ShareLink(item: backupURL) {
+                        Label("分享最新备份", systemImage: "square.and.arrow.up")
+                            .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
+                    }.tint(AppTheme.accent)
+                }
+            }.padding(.vertical, 4)
 
-            Divider().overlay(AppTheme.line)
+            VStack(spacing: 0) {
+                Button { showImporter = true } label: {
+                    settingsAction("导入 JSON 备份", detail: "预检后补入缺失记录", icon: "arrow.down.doc")
+                }.accessibilityIdentifier("设置-导入备份")
+                Divider().overlay(AppTheme.line).padding(.leading, 64)
+                Button { prepareCSV() } label: {
+                    settingsAction("生成训练 CSV", detail: "导出逐组重量、次数与 RIR", icon: "tablecells")
+                }.accessibilityIdentifier("设置-生成训练CSV")
+                if let csvURL {
+                    ShareLink(item: csvURL) {
+                        Label("分享最新 CSV", systemImage: "square.and.arrow.up")
+                            .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
+                    }.tint(AppTheme.accent).padding(.bottom, 8)
+                }
+            }.buttonStyle(.plain).cardSurface(padding: 0)
 
-            Button {
-                showImporter = true
-            } label: {
-                settingsLabel("导入 JSON 备份", detail: "先预检，再导入缺失记录", icon: "square.and.arrow.down.fill")
+            DisclosureGroup("备份与恢复说明") {
+                Text("完整 JSON 用于恢复本地数据；训练 CSV 用于查看逐组记录。导入前会先预检，相同 UUID 的现有记录会跳过。")
+                    .font(.caption).foregroundStyle(AppTheme.secondaryText).padding(.top, 8)
             }
-            .buttonStyle(.plain)
+            .font(.subheadline).tint(AppTheme.secondaryText)
+            .accessibilityIdentifier("设置-备份说明")
         }
-        .cardSurface()
+    }
+
+    private func settingsAction(_ title: String, detail: String, icon: String) -> some View {
+        HStack(spacing: 12) {
+            settingsLabel(title, detail: detail, icon: icon)
+            Image(systemName: "chevron.right")
+                .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
+        }.padding(16).frame(minHeight: 64).contentShape(Rectangle())
     }
 
     private var terminologyCard: some View {

@@ -2,13 +2,19 @@ import SwiftUI
 import UIKit
 
 enum AppTheme {
-    static let accent = Color(red: 0.62, green: 0.91, blue: 0.02)
-    static let accentSoft = Color(red: 0.45, green: 0.70, blue: 0.00)
-    static let background = Color(red: 0.018, green: 0.022, blue: 0.025)
-    static let surface = Color(red: 0.055, green: 0.067, blue: 0.073)
-    static let elevatedSurface = Color(red: 0.075, green: 0.090, blue: 0.098)
+    static let pageMargin: CGFloat = 20
+    static let minimumTouchTarget: CGFloat = 44
+    static let sectionSpacing: CGFloat = 24
+    static let pageTitle = Font.title2.bold()
+    static let metricValue = Font.title.bold().monospacedDigit()
+
+    static let accent = Color(red: 0.77, green: 0.98, blue: 0.275)
+    static let accentSoft = Color(red: 0.57, green: 0.75, blue: 0.20)
+    static let background = Color(red: 0.047, green: 0.051, blue: 0.043)
+    static let surface = Color(red: 0.083, green: 0.090, blue: 0.075)
+    static let elevatedSurface = Color(red: 0.126, green: 0.137, blue: 0.114)
     static let line = Color.white.opacity(0.075)
-    static let secondaryText = Color.white.opacity(0.56)
+    static let secondaryText = Color(red: 0.67, green: 0.69, blue: 0.63)
     static let tabBar = Color(red: 0.025, green: 0.031, blue: 0.034)
     static let posterBackground = Color(red: 0.035, green: 0.043, blue: 0.045)
     static let posterWarmWhite = Color(red: 0.96, green: 0.96, blue: 0.92)
@@ -61,71 +67,34 @@ enum AppTheme {
 
 struct CardSurface: ViewModifier {
     var padding: CGFloat = 16
-    var cornerRadius: CGFloat = 18
+    var cornerRadius: CGFloat = 12
 
     func body(content: Content) -> some View {
         content
             .padding(padding)
             .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .stroke(AppTheme.line, lineWidth: 1)
-            }
+
     }
 }
 
 struct FloatingGlassSurface: ViewModifier {
     let cornerRadius: CGFloat
-
-    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
-
-    @ViewBuilder
     func body(content: Content) -> some View {
-        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-
-        if reduceTransparency {
-            content
-                .background(AppTheme.elevatedSurface, in: shape)
-                .shadow(color: .black.opacity(0.66), radius: 30, y: 20)
-        } else if #available(iOS 26.0, *) {
-            content
-                .glassEffect(.regular, in: shape)
-                .shadow(color: .black.opacity(0.72), radius: 34, y: 24)
-                .shadow(color: AppTheme.accent.opacity(0.075), radius: 44, y: 18)
-        } else {
-            content
-                .background {
-                    ZStack {
-                        shape.fill(.thinMaterial)
-                        shape.fill(Color.black.opacity(0.06))
-                    }
-                }
-                .shadow(color: .black.opacity(0.68), radius: 32, y: 22)
-                .shadow(color: AppTheme.accent.opacity(0.065), radius: 40, y: 16)
-        }
+        content.background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
 
 extension View {
-    func cardSurface(padding: CGFloat = 16, cornerRadius: CGFloat = 18) -> some View {
+    func cardSurface(padding: CGFloat = 16, cornerRadius: CGFloat = 12) -> some View {
         modifier(CardSurface(padding: padding, cornerRadius: cornerRadius))
     }
 
     func screenBackground() -> some View {
-        background(AppTheme.screenGradient.ignoresSafeArea())
+        background(AppTheme.background.ignoresSafeArea())
     }
 
     func homeScreenBackground() -> some View {
-        background {
-            ZStack {
-                AppTheme.background
-                AppTheme.homeBackgroundGradient
-                AppTheme.homeAmbientGlow
-                AppTheme.homeAccentGlow
-                AppTheme.homeCoolGlow
-            }
-            .ignoresSafeArea()
-        }
+        background(AppTheme.background.ignoresSafeArea())
     }
 
     func floatingGlassSurface(cornerRadius: CGFloat) -> some View {
@@ -135,9 +104,51 @@ extension View {
     func neonButtonStyle() -> some View {
         font(.subheadline.bold())
             .foregroundStyle(.black)
-            .padding(.vertical, 13)
+            .padding(.vertical, 15)
             .frame(maxWidth: .infinity)
-            .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 13, style: .continuous))
+            .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+    }
+}
+
+@MainActor
+enum KeyboardDismissal {
+    static func dismiss() {
+        UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap(\.windows)
+            .forEach { $0.endEditing(true) }
+
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
+    }
+}
+
+private struct DismissKeyboardOnScrollPhaseModifier: ViewModifier {
+    let action: () -> Void
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if #available(iOS 18.0, *) {
+            content.onScrollPhaseChange { _, newPhase in
+                if newPhase == .tracking || newPhase == .interacting {
+                    action()
+                }
+            }
+        } else {
+            content
+        }
+    }
+}
+
+extension View {
+    /// Uses the real scroll phase so keyboard dismissal still fires when a
+    /// SwiftUI drag gesture is consumed by the scroll view itself.
+    func dismissKeyboardWhenScrolling(perform action: @escaping () -> Void) -> some View {
+        modifier(DismissKeyboardOnScrollPhaseModifier(action: action))
     }
 }
 
@@ -198,6 +209,18 @@ struct StableNumericTextField: UIViewRepresentable {
         field.textColor = .label
         field.tintColor = UIColor(AppTheme.accent)
         field.keyboardType = keyboardType
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        toolbar.items = [
+            UIBarButtonItem(systemItem: .flexibleSpace),
+            UIBarButtonItem(
+                title: "完成",
+                style: .done,
+                target: context.coordinator,
+                action: #selector(Coordinator.dismissKeyboard)
+            )
+        ]
+        field.inputAccessoryView = toolbar
         field.text = formattedValue
         return field
     }
@@ -267,6 +290,10 @@ struct StableNumericTextField: UIViewRepresentable {
             parent.commit(field.text ?? "")
         }
 
+        @objc func dismissKeyboard() {
+            KeyboardDismissal.dismiss()
+        }
+
         func textFieldDidBeginEditing(_ field: UITextField) {
             DispatchQueue.main.async {
                 field.selectAll(nil)
@@ -309,8 +336,8 @@ struct ScreenHeader: View {
                         .foregroundStyle(AppTheme.secondaryText)
                 }
                 Text(title)
-                    .font(.system(size: 30, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
+                    .font(AppTheme.pageTitle)
+                    .foregroundStyle(AppTheme.posterWarmWhite)
             }
 
             Spacer()
@@ -320,7 +347,7 @@ struct ScreenHeader: View {
                     Image(systemName: trailingSystemImage)
                         .font(.subheadline.bold())
                         .foregroundStyle(.white)
-                        .frame(width: 42, height: 42)
+                        .frame(width: 44, height: 44)
                         .background(AppTheme.elevatedSurface, in: Circle())
                         .overlay(Circle().stroke(AppTheme.line, lineWidth: 1))
                 }

@@ -71,11 +71,25 @@ final class HealthKitService {
         )
     }
 
-    private func latestSample(for type: HKQuantityType) async throws -> HKQuantitySample? {
+    func weightKg(onOrBefore date: Date) async throws -> Double? {
+        let weightType = HKObjectType.quantityType(forIdentifier: .bodyMass)!
+        let predicate = HKQuery.predicateForSamples(
+            withStart: nil,
+            end: date,
+            options: .strictEndDate
+        )
+        return try await latestSample(for: weightType, predicate: predicate)?
+            .quantity.doubleValue(for: .gramUnit(with: .kilo))
+    }
+
+    private func latestSample(
+        for type: HKQuantityType,
+        predicate: NSPredicate? = nil
+    ) async throws -> HKQuantitySample? {
         try await withCheckedThrowingContinuation { continuation in
             let query = HKSampleQuery(
                 sampleType: type,
-                predicate: nil,
+                predicate: predicate,
                 limit: 1,
                 sortDescriptors: [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]
             ) { _, samples, error in

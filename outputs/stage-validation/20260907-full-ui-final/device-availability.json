@@ -1,0 +1,173 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "list",
+      "devices",
+      "--timeout",
+      "15",
+      "--json-output",
+      "outputs/stage-validation/20260907-full-ui-final/device-availability.json"
+    ],
+    "commandType" : "devicectl.list.devices",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.33"
+  },
+  "result" : {
+    "devices" : [
+      {
+        "capabilities" : [
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.tags",
+            "name" : "Modify Tags"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.default.user.credentials",
+            "name" : "Modify credentials for default users for a device"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.unpairdevice",
+            "name" : "Unpair Device"
+          }
+        ],
+        "connectionProperties" : {
+          "authenticationType" : "manualPairing",
+          "isMobileDeviceOnly" : false,
+          "lastConnectionDate" : "2026-09-04T16:23:00.000Z",
+          "pairingState" : "paired",
+          "potentialHostnames" : [
+            "Edward-iPhone.coredevice.local",
+            "DC2912E0-36B3-5555-B66D-09C1A1DD12AD.coredevice.local",
+            "00008150-001E49912122401C.coredevice.local"
+          ],
+          "tunnelState" : "unavailable"
+        },
+        "deviceProperties" : {
+          "bootedFromSnapshot" : true,
+          "bootedSnapshotName" : "com.apple.os.update-F74D64F1AB8DDA339E6FC2F9CDC26EA88F05643D92BC4F6B640DAA47FA05E625",
+          "ddiServicesAvailable" : false,
+          "developerModeStatus" : "enabled",
+          "hasInternalOSBuild" : false,
+          "name" : "Edward_iPhone",
+          "osBuildUpdate" : "23G83",
+          "osVersionNumber" : "26.6.1",
+          "rootFileSystemIsWritable" : false,
+          "supportsCheckedAllocations" : true
+        },
+        "hardwareProperties" : {
+          "cpuType" : {
+            "name" : "arm64e",
+            "subType" : 2,
+            "type" : 16777228
+          },
+          "deviceType" : "iPhone",
+          "ecid" : 8525136976298012,
+          "hardwareModel" : "V57AP",
+          "internalStorageCapacity" : 256000000000,
+          "isProductionFused" : true,
+          "marketingName" : "iPhone 17",
+          "platform" : "iOS",
+          "productType" : "iPhone18,3",
+          "reality" : "physical",
+          "serialNumber" : "HCD20Y0X6H",
+          "supportedCPUTypes" : [
+            {
+              "name" : "arm64e",
+              "subType" : 2,
+              "type" : 16777228
+            },
+            {
+              "name" : "arm64",
+              "subType" : 0,
+              "type" : 16777228
+            }
+          ],
+          "supportedDeviceFamilies" : [
+            1
+          ],
+          "thinningProductType" : "iPhone18,3",
+          "udid" : "00008150-001E49912122401C"
+        },
+        "identifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+        "tags" : [
+
+        ],
+        "visibilityClass" : "default"
+      },
+      {
+        "capabilities" : [
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.acquireusageassertion",
+            "name" : "Acquire Usage Assertion"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.connectdevice",
+            "name" : "Connect to Device"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.tags",
+            "name" : "Modify Tags"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.default.user.credentials",
+            "name" : "Modify credentials for default users for a device"
+          },
+          {
+            "featureIdentifier" : "com.apple.coredevice.feature.unpairdevice",
+            "name" : "Unpair Device"
+          }
+        ],
+        "connectionProperties" : {
+          "authenticationType" : "manualPairing",
+          "isMobileDeviceOnly" : false,
+          "lastConnectionDate" : "2026-08-21T02:55:00.000Z",
+          "pairingState" : "paired",
+          "potentialHostnames" : [
+            "JiaruideAppleWatch.coredevice.local",
+            "B39F0995-C3FE-558F-8AFA-A59836AD08BD.coredevice.local",
+            "00008310-0004CC223420E01E.coredevice.local"
+          ],
+          "transportType" : "localNetwork",
+          "tunnelState" : "disconnected",
+          "tunnelTransportProtocol" : "tcp"
+        },
+        "deviceProperties" : {
+          "ddiServicesAvailable" : false,
+          "developerModeStatus" : "disabled",
+          "hasInternalOSBuild" : false,
+          "name" : "Jiarui的Apple Watch",
+          "osBuildUpdate" : "23T570",
+          "osVersionNumber" : "26.5",
+          "screenViewingURL" : "devices://device/open?id=B39F0995-C3FE-558F-8AFA-A59836AD08BD"
+        },
+        "hardwareProperties" : {
+          "cpuType" : {
+            "name" : "arm64e",
+            "subType" : -2147483646,
+            "type" : 16777228
+          },
+          "deviceType" : "appleWatch",
+          "ecid" : 1350347182366750,
+          "hardwareModel" : "N227bAP",
+          "isProductionFused" : true,
+          "marketingName" : "Apple Watch Series 11",
+          "platform" : "watchOS",
+          "productType" : "Watch7,18",
+          "reality" : "physical",
+          "serialNumber" : "F6YW9L7P71",
+          "thinningProductType" : "Watch7,18",
+          "udid" : "00008310-0004CC223420E01E"
+        },
+        "identifier" : "B39F0995-C3FE-558F-8AFA-A59836AD08BD",
+        "tags" : [
+
+        ],
+        "visibilityClass" : "default"
+      }
+    ]
+  }
+}

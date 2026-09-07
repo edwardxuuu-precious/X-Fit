@@ -1,0 +1,686 @@
+{
+  "scope": "downloaded backup copies only; no device access",
+  "script_sha256": "737052da624bc3f4b866f79694f41f23136dca29573453fc2216c9bc99d30ee8",
+  "snapshots": [
+    {
+      "label": "pre-smoke",
+      "source": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260907-human-assisted-smoke/device-data/pre-smoke/default.store",
+      "integrity_check": [
+        "ok"
+      ],
+      "source_files_unchanged": true,
+      "entity_count": 22,
+      "total_rows": 1257
+    },
+    {
+      "label": "post-smoke",
+      "source": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20260907-human-assisted-smoke/device-data/post-smoke/default.store",
+      "integrity_check": [
+        "ok"
+      ],
+      "source_files_unchanged": true,
+      "entity_count": 22,
+      "total_rows": 1257
+    }
+  ],
+  "comparisons": [
+    {
+      "before": "pre-smoke",
+      "after": "post-smoke",
+      "new_tables": [],
+      "missing_tables": [],
+      "tables": {
+        "ZBODYMEASUREMENT": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZARMCM",
+            "ZBODYFATPERCENT",
+            "ZCHESTCM",
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZID",
+            "ZNOTES",
+            "ZSOURCERAW",
+            "ZUPDATEDAT",
+            "ZWAISTCM",
+            "ZWEIGHTKG"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZDAILYBODYCHECKIN": {
+          "before_count": 5,
+          "after_count": 5,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 5,
+          "common_business_columns": [
+            "ZBODYMARKERSJSON",
+            "ZCONDITIONSCORE",
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZDISCOMFORTNOTES",
+            "ZID",
+            "ZUPDATEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "7fbe50f40b59aa3196a7024804836017e19ae64a19d77856c878a1408c19b89f",
+              "after_sha256": "7fbe50f40b59aa3196a7024804836017e19ae64a19d77856c878a1408c19b89f"
+            }
+          }
+        },
+        "ZEXERCISE": {
+          "before_count": 92,
+          "after_count": 92,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 92,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZDEFAULTRESTSECONDS",
+            "ZEQUIPMENT",
+            "ZID",
+            "ZISARCHIVED",
+            "ZISBUILTIN",
+            "ZMUSCLEGROUP",
+            "ZNAME",
+            "ZNOTES",
+            "ZREFERENCEURL",
+            "ZTERMINOLOGYCANONICALID",
+            "ZTERMINOLOGYCATALOGVERSION",
+            "ZTERMINOLOGYCONFIDENCERAW",
+            "ZTERMINOLOGYDECISIONRAW",
+            "ZTERMINOLOGYMERGEGROUP",
+            "ZTERMINOLOGYREVIEWEDAT",
+            "ZTERMINOLOGYREVIEWNOTE",
+            "ZTERMINOLOGYREVIEWSTATUSRAW",
+            "ZTERMINOLOGYSTANDARDNAMEEN",
+            "ZTERMINOLOGYSTANDARDNAMEZH",
+            "ZUPDATEDAT",
+            "ZVOLUMEUNITRAW"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [
+            {
+              "id": "08d277e0ac9d4b7296ff31b90eba38aa",
+              "fields": {
+                "ZUPDATEDAT": {
+                  "before": 810446128.910328,
+                  "after": 810454953.118406
+                }
+              }
+            }
+          ],
+          "internal_metadata_changed_records": 8,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "14d340a3d8b9685a4930c5670ea4243c752e76e2339db1b04a3655e597bd25b6",
+              "after_sha256": "14d340a3d8b9685a4930c5670ea4243c752e76e2339db1b04a3655e597bd25b6"
+            }
+          }
+        },
+        "ZFATLOSSPROGRAM": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZENDDATE",
+            "ZID",
+            "ZREPORTEDSTARTWEIGHTKG",
+            "ZSTARTDATE",
+            "ZSTATUSRAW",
+            "ZTARGETWEIGHTKG",
+            "ZTIMEZONEIDENTIFIER",
+            "ZTITLE"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZHYDRATIONENTRY": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZID",
+            "ZMILLILITERS"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZJUMPROPEENTRY": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZACTIVEDURATIONSECONDS",
+            "ZCOUNT",
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZDURATIONSECONDS",
+            "ZELAPSEDDURATIONSECONDS",
+            "ZID"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZMEALENTRY": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZACTUALPORTIONS",
+            "ZBLOATINGSCORE",
+            "ZCALORIES",
+            "ZCARBSGRAMS",
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZESTIMATIONMETHOD",
+            "ZFATGRAMS",
+            "ZFEEDBACKNOTES",
+            "ZID",
+            "ZISVOIDED",
+            "ZKNOWNNUTRITIONFIELDSRAW",
+            "ZMEALTYPERAW",
+            "ZNAME",
+            "ZNUTRITIONKNOWN",
+            "ZPLANNEDMEALID",
+            "ZPREPARATIONDIFFICULTY",
+            "ZPROGRAMID",
+            "ZPROTEINGRAMS",
+            "ZRECIPESNAPSHOTJSON",
+            "ZTASTERATING",
+            "ZUPDATEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZNUTRITIONTARGET": {
+          "before_count": 1,
+          "after_count": 1,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 1,
+          "common_business_columns": [
+            "ZCALORIES",
+            "ZCARBSGRAMS",
+            "ZFATGRAMS",
+            "ZID",
+            "ZPROTEINGRAMS",
+            "ZUPDATEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "8c13956de9fb38cb70d07f78052c546ca65b999c8ef87e37d4dccce3a18d681b",
+              "after_sha256": "8c13956de9fb38cb70d07f78052c546ca65b999c8ef87e37d4dccce3a18d681b"
+            }
+          }
+        },
+        "ZPLANNEDMEAL": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCHANGEREASON",
+            "ZCREATEDAT",
+            "ZDATE",
+            "ZID",
+            "ZISCURRENT",
+            "ZMEALTYPERAW",
+            "ZPREVIOUSPLANID",
+            "ZPROGRAMID",
+            "ZRECIPEID",
+            "ZRECIPESNAPSHOTJSON",
+            "ZSTATUSRAW"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZPROGRAMDAILYLOG": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZBLOATINGSCORE",
+            "ZDATE",
+            "ZEXPLICITLYNOWORKOUT",
+            "ZID",
+            "ZNOTES",
+            "ZPROGRAMID",
+            "ZSLEEPHOURS",
+            "ZSTEPS",
+            "ZUPDATEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZPROGRAMHEALTHRECORD": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZID",
+            "ZMEASUREDAT",
+            "ZMETRIC",
+            "ZNOTES",
+            "ZPROGRAMID",
+            "ZSOURCE",
+            "ZUNIT",
+            "ZVALUE"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZPROGRAMTARGETREVISION": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCALORIES",
+            "ZCARBSGRAMS",
+            "ZCREATEDAT",
+            "ZEFFECTIVEDATE",
+            "ZFATGRAMS",
+            "ZID",
+            "ZISNUTRITIONCONFIRMED",
+            "ZPROGRAMID",
+            "ZPROTEINGRAMS",
+            "ZREASON",
+            "ZSOURCENOTE",
+            "ZSTEPS",
+            "ZTARGETWEIGHTKG"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZPROGRAMWEEKLYREVIEW": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZID",
+            "ZNEXTACTION",
+            "ZNOTES",
+            "ZPREVIOUSREVIEWID",
+            "ZPROGRAMID",
+            "ZSNAPSHOTJSON",
+            "ZWEEKEND",
+            "ZWEEKSTART"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZPROGRAMWORKOUTLINK": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZID",
+            "ZORIGINALDATE",
+            "ZPROGRAMID",
+            "ZSCHEDULEDWORKOUTID",
+            "ZTEMPLATECODE"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZRECIPEVERSION": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCATALOGKEY",
+            "ZCREATEDAT",
+            "ZDRAFTJSON",
+            "ZID",
+            "ZVERSION"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZSCHEDULEDWORKOUT": {
+          "before_count": 23,
+          "after_count": 23,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 23,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZID",
+            "ZISMANUALLYSCHEDULED",
+            "ZORIGINALPLANNEDDATE",
+            "ZPLANNEDDATE",
+            "ZREMINDERDATE",
+            "ZSKIPREASON",
+            "ZSTATUSRAW",
+            "ZTEMPLATEID",
+            "ZTEMPLATENAME",
+            "ZUPDATEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "98fb2cfdba8666c8e28a1d66bb785d4e90f056190f0c5a9faf2e060dd71aabe7",
+              "after_sha256": "98fb2cfdba8666c8e28a1d66bb785d4e90f056190f0c5a9faf2e060dd71aabe7"
+            },
+            "ZTEMPLATEID": {
+              "before_sha256": "048ee911895ebe12cec34e91b4f53c01cd6df68ed82a9a784684ce763424dd97",
+              "after_sha256": "048ee911895ebe12cec34e91b4f53c01cd6df68ed82a9a784684ce763424dd97"
+            }
+          }
+        },
+        "ZSEDENTARYSESSION": {
+          "before_count": 0,
+          "after_count": 0,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 0,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZENDEDAT",
+            "ZID",
+            "ZSTARTEDAT"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {}
+        },
+        "ZSESSIONEXERCISE": {
+          "before_count": 203,
+          "after_count": 203,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 203,
+          "common_business_columns": [
+            "ZBODYWEIGHTKGSNAPSHOT",
+            "ZEXERCISECOMPLETEDAT",
+            "ZEXERCISEID",
+            "ZEXERCISENAME",
+            "ZEXERCISENOTES",
+            "ZEXERCISESTARTEDAT",
+            "ZFEELINGRAW",
+            "ZID",
+            "ZMAXREPS",
+            "ZMINREPS",
+            "ZMUSCLEGROUP",
+            "ZORDER",
+            "ZPATTERNSOURCERAW",
+            "ZPERFORMANCENOTES",
+            "ZPLANNEDSETSJSON",
+            "ZPLANPATTERNRAW",
+            "ZREFERENCEURL",
+            "ZRESTSECONDS",
+            "ZSESSIONID",
+            "ZTARGETSETS",
+            "ZTARGETWEIGHT",
+            "ZVOLUMEUNITRAW"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 12,
+          "uuid_column_multisets": {
+            "ZEXERCISEID": {
+              "before_sha256": "d8ff70d6c9642f7079c168b67e20cb95fc3466b3d7a0ce9ddb19849f05307465",
+              "after_sha256": "d8ff70d6c9642f7079c168b67e20cb95fc3466b3d7a0ce9ddb19849f05307465"
+            },
+            "ZID": {
+              "before_sha256": "0ff7e720f78086fddd43bac0e705c7f13154f74d8788494a179ab503478ce33f",
+              "after_sha256": "0ff7e720f78086fddd43bac0e705c7f13154f74d8788494a179ab503478ce33f"
+            },
+            "ZSESSIONID": {
+              "before_sha256": "78790c6ace17a11add78e54b50ef007e67f0f456262e8eb53fedbee943b8f88f",
+              "after_sha256": "78790c6ace17a11add78e54b50ef007e67f0f456262e8eb53fedbee943b8f88f"
+            }
+          }
+        },
+        "ZSETLOG": {
+          "before_count": 837,
+          "after_count": 837,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 837,
+          "common_business_columns": [
+            "ZACTUALREPS",
+            "ZACTUALREPSSIDERAW",
+            "ZACTUALWEIGHT",
+            "ZACTUALWEIGHTSIDERAW",
+            "ZCOMPLETEDAT",
+            "ZEXERCISEID",
+            "ZID",
+            "ZISCOMPLETED",
+            "ZISWARMUP",
+            "ZRESTDURATIONSECONDS",
+            "ZRESTENDEDAT",
+            "ZRESTSTARTEDAT",
+            "ZRIR",
+            "ZSESSIONEXERCISEID",
+            "ZSESSIONID",
+            "ZSETNUMBER",
+            "ZSTARTEDAT",
+            "ZTARGETREPS",
+            "ZTARGETREPSSIDERAW",
+            "ZTARGETWEIGHT",
+            "ZTARGETWEIGHTSIDERAW"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 50,
+          "uuid_column_multisets": {
+            "ZEXERCISEID": {
+              "before_sha256": "4a1a53c5bf92c71d183551ffb08eff3f257d456277914c401d91d7a075937af1",
+              "after_sha256": "4a1a53c5bf92c71d183551ffb08eff3f257d456277914c401d91d7a075937af1"
+            },
+            "ZID": {
+              "before_sha256": "d19304090bbd2c781c496b58679f0b197258c5348568b0002096e4287538dc9f",
+              "after_sha256": "d19304090bbd2c781c496b58679f0b197258c5348568b0002096e4287538dc9f"
+            },
+            "ZSESSIONEXERCISEID": {
+              "before_sha256": "bde1f1696f282088693fae9c7f3aabbf13c6888e2f8c28a11ebe993210e6d763",
+              "after_sha256": "bde1f1696f282088693fae9c7f3aabbf13c6888e2f8c28a11ebe993210e6d763"
+            },
+            "ZSESSIONID": {
+              "before_sha256": "908f1447f2f373e68ff32d26c169a6694959701311984190985fb050b6b2fc42",
+              "after_sha256": "908f1447f2f373e68ff32d26c169a6694959701311984190985fb050b6b2fc42"
+            }
+          }
+        },
+        "ZTEMPLATEEXERCISE": {
+          "before_count": 50,
+          "after_count": 50,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 50,
+          "common_business_columns": [
+            "ZEXERCISEID",
+            "ZID",
+            "ZMAXREPS",
+            "ZMINREPS",
+            "ZORDER",
+            "ZPATTERNSOURCERAW",
+            "ZPLANNEDSETSJSON",
+            "ZPLANPATTERNRAW",
+            "ZRESTSECONDS",
+            "ZTARGETSETS",
+            "ZTARGETWEIGHT",
+            "ZTEMPLATEID"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 0,
+          "uuid_column_multisets": {
+            "ZEXERCISEID": {
+              "before_sha256": "69f08f9b822c8f1fc21653bc1218587172aa59894a0ed59b08ad27d8ae43d1ad",
+              "after_sha256": "69f08f9b822c8f1fc21653bc1218587172aa59894a0ed59b08ad27d8ae43d1ad"
+            },
+            "ZID": {
+              "before_sha256": "28861ca462e9d601be297be40aa995a04c9cdf0da6dfe7392444693cc73abe9d",
+              "after_sha256": "28861ca462e9d601be297be40aa995a04c9cdf0da6dfe7392444693cc73abe9d"
+            },
+            "ZTEMPLATEID": {
+              "before_sha256": "003769347c2d1fbf390fc8e0fbd2eece40fecf6ee6eccd443594e3d3e73eb83f",
+              "after_sha256": "003769347c2d1fbf390fc8e0fbd2eece40fecf6ee6eccd443594e3d3e73eb83f"
+            }
+          }
+        },
+        "ZWORKOUTSESSION": {
+          "before_count": 36,
+          "after_count": 36,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 36,
+          "common_business_columns": [
+            "ZCOMPLETEDAT",
+            "ZDEFAULTPLANPATTERNRAW",
+            "ZID",
+            "ZIMPORTIDENTIFIER",
+            "ZNOTES",
+            "ZPLANNEDDATE",
+            "ZRESTENDDATE",
+            "ZRESTMODERAW",
+            "ZSCHEDULEDWORKOUTID",
+            "ZSTARTEDAT",
+            "ZSTATUSRAW",
+            "ZTEMPLATEID",
+            "ZTEMPLATENAME"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 28,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "7014f7a41841b70a24ae6212b457b598f14334e1475b94d156998233ecf5855c",
+              "after_sha256": "7014f7a41841b70a24ae6212b457b598f14334e1475b94d156998233ecf5855c"
+            },
+            "ZSCHEDULEDWORKOUTID": {
+              "before_sha256": "6972b901411200a51a7fdd961cc3f4cf6ebb03aceac8d90a41641d602633f7ee",
+              "after_sha256": "6972b901411200a51a7fdd961cc3f4cf6ebb03aceac8d90a41641d602633f7ee"
+            },
+            "ZTEMPLATEID": {
+              "before_sha256": "c478020b3fb5598dc1b068df8c6e1ce306847e7e2257e3deb55e2764506dcd62",
+              "after_sha256": "c478020b3fb5598dc1b068df8c6e1ce306847e7e2257e3deb55e2764506dcd62"
+            }
+          }
+        },
+        "ZWORKOUTTEMPLATE": {
+          "before_count": 10,
+          "after_count": 10,
+          "removed_ids": [],
+          "added_ids": [],
+          "common_ids": 10,
+          "common_business_columns": [
+            "ZCREATEDAT",
+            "ZDEFAULTPLANPATTERNRAW",
+            "ZFOCUSMUSCLEGROUPSRAW",
+            "ZID",
+            "ZISACTIVE",
+            "ZISONEOFF",
+            "ZNAME",
+            "ZPLANNEDFORDATE",
+            "ZWEEKDAY"
+          ],
+          "added_columns": [],
+          "removed_columns": [],
+          "business_changed_records": [],
+          "internal_metadata_changed_records": 3,
+          "uuid_column_multisets": {
+            "ZID": {
+              "before_sha256": "cd282612ea643ab9e38bbfd2cfad3e1656261fa3c5e80dcc34a56fc7c96cabde",
+              "after_sha256": "cd282612ea643ab9e38bbfd2cfad3e1656261fa3c5e80dcc34a56fc7c96cabde"
+            }
+          }
+        }
+      },
+      "removed_ids_count": 0,
+      "added_ids_count": 0,
+      "business_changed_records_count": 1,
+      "status": "REQUIRES_CHANGE_REVIEW",
+      "interpretation": "Schema additions are reported separately. A business change is not proof of corruption or an approved migration; source-based attribution is required. Empty new tables contain no historical records to compare."
+    }
+  ]
+}
