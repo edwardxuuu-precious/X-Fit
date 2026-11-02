@@ -1,0 +1,42 @@
+{
+  "status": "SUPERSEDED_SIMULATION_ONLY_NOT_APPROVED",
+  "candidate": "上肢周胸肩背腹综合候选.md",
+  "candidateSHA256": "def0b750ca9813f124d0e7585017c304df250113552832774e6f6b5614d23656",
+  "phoneSnapshot": "2026-10-29 约18:20 +0800",
+  "userConfirmed": "上肢周结构及综合课2胸2背3肩1腹例外；完整动作、组次和重量建议尚待确认",
+  "phoneWritesThisRevision": 0,
+  "simulatorTest": "testCombinedUpperWeekRevisionOnPhoneCopy",
+  "simulatorEvidence": "/private/tmp/xfit-combined-upper-revision-sim-20261029-r2.xcresult",
+  "simulatedResult": "PASS",
+  "simulationChecks": [
+    "三天分别绑定既有日程与摘要",
+    "旧日程标记为被替代，原确认包保留",
+    "新计划独立回读动作和逐组内容",
+    "同包再次预览新增0",
+    "不新增实际训练或组记录",
+    "偏好版本数量不变"
+  ],
+  "counts": {
+    "2026-11-02": {
+      "exercises": 8,
+      "plannedSets": 25,
+      "estimatedSeconds": 5380
+    },
+    "2026-11-04": {
+      "exercises": 7,
+      "plannedSets": 22,
+      "estimatedSeconds": 5260
+    },
+    "2026-11-06": {
+      "exercises": 8,
+      "plannedSets": 26,
+      "estimatedSeconds": 5330
+    }
+  },
+  "limits": [
+    "手机复制数据模拟时出现Persistence-1629至Persistence-1526版本兼容告警，不能替代真机验证",
+    "Barbell Row采用手机现有英文动作身份，周教练旧规则尚不能识别其自动角色；独立单日包验证通过，不宣称自动生成通过",
+    "本人确认后必须重新核对手机日程及实际训练，并做真实预览与独立回读"
+  ],
+  "supersededReason": "Owner requested four work sets and ascending pyramid; the previous simulated packet is not approved."
+}

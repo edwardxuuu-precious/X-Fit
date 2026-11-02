@@ -1,0 +1,53 @@
+{
+  "status": "PHONE_UPDATED_DATA_PRESERVED",
+  "requirement": "REQ-20261020-075831",
+  "phone": {
+    "name": "Edward_iPhone",
+    "os": "iOS26.6.2",
+    "transport": "localNetwork",
+    "version": "0.5.0",
+    "build": "21",
+    "normal_startup": "PASS"
+  },
+  "source": "same 152 frozen inputs as the user-accepted simulator preview",
+  "signed_release": "PASS",
+  "overlay_installation": "PASS",
+  "data": {
+    "model_tables": 25,
+    "records_before": 2253,
+    "records_after": 2253,
+    "all_original_fields_pk_uuid_and_relations_unchanged": true,
+    "new_fields_remain_nil_on_history": true,
+    "recent_coach_feedback_records_preserved": 1,
+    "phone_business_data_edits": 0,
+    "backup": "artifacts/stage-validation/20261020-home-summary-phone-preview/device-data/pre-install"
+  },
+  "runtime_binding": {
+    "status": "PASS",
+    "bundle_id": "com.edward.FitnessApp",
+    "version": "0.5.0",
+    "build": "21",
+    "installed_url": "file:///private/var/containers/Bundle/Application/2819E18F-E1F0-4EDA-95CE-4F52EFE8A120/FitnessApp.app/",
+    "running_pid": 27268,
+    "running_executable": "file:///private/var/containers/Bundle/Application/2819E18F-E1F0-4EDA-95CE-4F52EFE8A120/FitnessApp.app/FitnessApp",
+    "install_readback_and_live_process_paths_match": true,
+    "launch_arguments": [],
+    "app_activated_when_started": true,
+    "simulator_refresh": "artifacts/simulator-real-data/20261020-093747/result.json"
+  },
+  "main_simulator": {
+    "snapshot": "20261020-093747",
+    "records": 2253,
+    "normal_launch": true,
+    "cloud_sync_enabled": false
+  },
+  "simulator_visual_acceptance": "user accepted",
+  "phone_human_acceptance": "pending",
+  "full_device_xctest": "NOT_RUN",
+  "stage_decision": "PARTIAL",
+  "evidence": [
+    "data-conservation.json",
+    "summary.md",
+    "device-delivery-binding.json"
+  ]
+}

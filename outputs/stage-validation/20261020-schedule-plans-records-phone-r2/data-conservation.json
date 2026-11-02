@@ -1,0 +1,694 @@
+{
+  "requirement": "REQ-20261020-165614",
+  "status": "PASS",
+  "version": "0.5.0",
+  "build": "24",
+  "source": {
+    "root": "/Users/edward/Documents/Fitness App",
+    "frozen": "/tmp/xfit-schedule-phone-20261020-1834",
+    "requirement": "REQ-20261020-165614",
+    "version": "0.5.0",
+    "build": "24",
+    "phone_baseline_version": "0.5.0",
+    "phone_baseline_build": "23",
+    "files": [
+      {
+        "path": "FitnessApp/App/FitnessAppApp.swift",
+        "sha256": "72d20f467787813cac68f652b6e5821faf4364c42c13874496c96f2af6f656b6"
+      },
+      {
+        "path": "FitnessApp/App/RootView.swift",
+        "sha256": "4b1c273b2b7ad557c92dc9909a858fadc308333314a117b7e94b2532f697ec10"
+      },
+      {
+        "path": "FitnessApp/CloudSync.entitlements",
+        "sha256": "5c8e9c9d1e533cc17d05a4cdfb0e2a6831fc6e9397c43a26509408860fc96fa4"
+      },
+      {
+        "path": "FitnessApp/Features/Body/BodyMeasurementsView.swift",
+        "sha256": "fd358e2a0b60edbe930515d6d8cb37df3d9b501cbadf2fbc2ed0f2d133b4e96a"
+      },
+      {
+        "path": "FitnessApp/Features/DailyPlan/DailyWorkoutBuilderView.swift",
+        "sha256": "60e53ddfc71d47e551b57aab01d40ff9817705af0126f332d775852326c018f7"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/ConfirmedTrainingPlanImportSheet.swift",
+        "sha256": "97c5c35a429cdc1b35043b5cf2eb5ca715eeaba8dc9ecbd1204d35906f99be8d"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossComponents.swift",
+        "sha256": "3d06651e23c0f7b488ea1565a6aa63cb256a728b3d38507f2c8c08e357a69d09"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossIntroductionView.swift",
+        "sha256": "4340bafee080d2bb2805c1e135378a388d17237ce0c6e0ae4e52de64879cf665"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossMealsView.swift",
+        "sha256": "fd46187c546f9c65af891534deadd7febe5ebaf2c96784a726aaefbf5b9ef8af"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossRecordViews.swift",
+        "sha256": "51880e45771556db1d7f67655e91ac70ff152061fec0175e9221bd325b0d47e6"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossTrainingView.swift",
+        "sha256": "b34d14764597cbe800dc78ccfa7b04b9955bd1f38dc49a75c301e0b5bbbcc10d"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/FatLossViews.swift",
+        "sha256": "3bae8e285909cb8913c9b0cf505c9ee1888492c6c85c0d6f6a3dd0336445cfb0"
+      },
+      {
+        "path": "FitnessApp/Features/FatLoss/PrepPresentation.swift",
+        "sha256": "2558e4e63f8127917c3dc72ab9ff3e33211268af2e89cc2d317f3c35931d2956"
+      },
+      {
+        "path": "FitnessApp/Features/History/HistoricalWorkoutEntryView.swift",
+        "sha256": "4a3a277174d84fe9a10d29f94bf10339b3c16cd664ff154df0f08d1a2a03812c"
+      },
+      {
+        "path": "FitnessApp/Features/History/HistoricalWorkoutImportView.swift",
+        "sha256": "514a7cf9c60a05cc1af3df884192d548d156bba499f29c07e3db04e830edc35f"
+      },
+      {
+        "path": "FitnessApp/Features/History/HistoryView.swift",
+        "sha256": "3bafde5f561692b5bb9c596c834c4971a6db76336f2134851efb765028127d50"
+      },
+      {
+        "path": "FitnessApp/Features/Nutrition/NutritionView.swift",
+        "sha256": "5851b75413fdc694daacfc46cf026f240b8a339f1ea538beb6e6b32e6a2c0ed4"
+      },
+      {
+        "path": "FitnessApp/Features/Plan/PlanView.swift",
+        "sha256": "439c5ced53f3369a58977fc3e151e847db3d71c0aa9aefd2e52a8c84ecac93a7"
+      },
+      {
+        "path": "FitnessApp/Features/Profile/ProfileView.swift",
+        "sha256": "673ceed7d2c0f4e167b364b80d81fbd01c7d402ae557e078b9884c9989fb0e2c"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/CardioWorkoutViews.swift",
+        "sha256": "55a6d8efc30a42ef1b571285c091a4d22c68f75d91aaaa22255754962090f314"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/EditorialHomeViews.swift",
+        "sha256": "3fb3c1784168450d34af1820bf42301bf9464b97ce6d7babbef960a53ae7b07c"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/GoalHomeView.swift",
+        "sha256": "6639a797e293efe2028dc39e4ede28465fa3c6b0b9c234a8a6defc0c1417fa9f"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealAssessmentCard.swift",
+        "sha256": "9692ce9b8e1349b90934959c7fdbea7be7efdffc4455a9fa8acf6f5241c574ed"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealCameraCapture.swift",
+        "sha256": "3acd10d1c3a538240976f1b8d7c4ed2656707e179bf5dc5841c6e0fad78aa78c"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealPhotoComposer.swift",
+        "sha256": "87dae9f0360f25055b8571a5c38c8b12625739cd35f7183099e6fc8c5c2d3df7"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealPhotoDetailView.swift",
+        "sha256": "3dec55414670826ba279840d798f6ba0ae604b7ad1c5016aed65a1ca26488e10"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealPhotoPresentation.swift",
+        "sha256": "b6c477a94299850e25043aed6ab618e9954fa7d83b645d5f64e1b349521a542a"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/MealWeekReviewView.swift",
+        "sha256": "cb833fdfefd430e15ba24650752e9756473a17b7a68cbc76edabc4f1d8af8b66"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/NutritionHomeView.swift",
+        "sha256": "64b9a88a1f5c26928f0a45ae9fa6558e4f3699efea1026d263db530d07dcec54"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/ProgramDataExportView.swift",
+        "sha256": "bc7af553e83def625d567a2112afb5b309423cf5e3e6a6ed1e8121d39b22634a"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/TrainingCoachViews.swift",
+        "sha256": "5a5306f17cca1985bc65546d6067aa06b0362c21f19d31942a1d27ddb31f264a"
+      },
+      {
+        "path": "FitnessApp/Features/Redesign/TrainingDateMenuView.swift",
+        "sha256": "71f1e4c88213b2e7e4e508ef568d405f5d11a4b1b75ffae97feb30ed528c5034"
+      },
+      {
+        "path": "FitnessApp/Features/Schedule/ScheduleView.swift",
+        "sha256": "f2c2c73172cc304a904883bb87daf53415fd5d5e3298ec16480114cbb491d8f1"
+      },
+      {
+        "path": "FitnessApp/Features/Settings/AppSettingsView.swift",
+        "sha256": "726e68c2e4f61e75da14c6d098478aea90aa22722a62d48d409c197dc766daaf"
+      },
+      {
+        "path": "FitnessApp/Features/Settings/ExerciseTerminologyReviewView.swift",
+        "sha256": "569541dc847a6541a1eaab0658057eb689bdd3746a3d094e5c7586e188b218e1"
+      },
+      {
+        "path": "FitnessApp/Features/Stats/StatsView.swift",
+        "sha256": "63c3b33cb85ad7d43c9d1c10e64ebe0afc3a42f08aa6aeb9d1ed86b86119a8ec"
+      },
+      {
+        "path": "FitnessApp/Features/Today/TodayView.swift",
+        "sha256": "bf6203c277e4c68bc6ffa134e32e9aaaf68fae32ea1baf5e41d3ce0ab2a54713"
+      },
+      {
+        "path": "FitnessApp/Features/Workout/ActiveWorkoutView.swift",
+        "sha256": "c7e1a8b8c95cc37e5d30f3600d3b317695e1230173c9bc69871297b69d5702cf"
+      },
+      {
+        "path": "FitnessApp/FitnessApp.entitlements",
+        "sha256": "442840a317cb56b3748039a2430a5ee73d60adf7ae547e9c519c4097b04d9369"
+      },
+      {
+        "path": "FitnessApp/Info.plist",
+        "sha256": "dd86b6e6732a70ca43df68f0208799a302715a16f8d7890cd98f07ed9ed96287"
+      },
+      {
+        "path": "FitnessApp/Models/FatLossModels.swift",
+        "sha256": "49ef0ded41e42049c1be31e996c6a74df9d7d32e9621ccd20b03984d87e8230f"
+      },
+      {
+        "path": "FitnessApp/Models/MealPhotoModels.swift",
+        "sha256": "6cd2c82d6feeb81b9f5f7991a0df506faf8d4a87844ed48f69ebb5a98093c552"
+      },
+      {
+        "path": "FitnessApp/Models/TrainingCoachModels.swift",
+        "sha256": "98dbef12b7ac22550a2f1904670aec09d57427769c048e02cbcb7f1d3cc342a5"
+      },
+      {
+        "path": "FitnessApp/Models/TrainingMetrics.swift",
+        "sha256": "90008e467ba2f740ce0c01236a08615813f0ac2b1a05fbb00c4e7d538398d546"
+      },
+      {
+        "path": "FitnessApp/Models/TrainingModels.swift",
+        "sha256": "866bdcce47e0dbe330dc24a100aaae06cd9c96dccdcaf5b367328c56d90f7004"
+      },
+      {
+        "path": "FitnessApp/Models/TrainingPreferenceModels.swift",
+        "sha256": "ba274705ab7d0a58ee28d929262b6560410429591d1d37f8378ebd7acddc5cf1"
+      },
+      {
+        "path": "FitnessApp/Models/WellnessModels.swift",
+        "sha256": "4cb0a55e87f688f5b3e6bdabccedbcc69d7d4881b01ffce33ab8e0912aab56a4"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/AccentColor.colorset/Contents.json",
+        "sha256": "2d16a97955ccde18ed75739b472193ce0f64946a1f66b5afe28fe06df382f276"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/AppIcon.appiconset/Contents.json",
+        "sha256": "a77b0e13d195128169f3b487d305f5807bc19989bdf244e1f767dc435635ebef"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/AppIcon.appiconset/app-icon-bold-x-v5.png",
+        "sha256": "f5f4067fec73b244bd2ff40f3713c3f4ea32e85be5e63f4fe4a9d307afd17e9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/BrandMark.imageset/Contents.json",
+        "sha256": "7f00d59ff6b29e152df34387e7c32d41b0d50e2fc4dc6951891f54d99259c6f3"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/BrandMark.imageset/brand-mark-bold-x-v5.png",
+        "sha256": "f5f4067fec73b244bd2ff40f3713c3f4ea32e85be5e63f4fe4a9d307afd17e9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/Contents.json",
+        "sha256": "6248561bf2784c2488a1d948159a69fd8a6c9d06206c408a1c35b202d3c26c0a"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialBreakfast.imageset/Contents.json",
+        "sha256": "9a320c7c52ad04f45e7a610720352969a3d936f2255a5143b1d15d6fc2a3eb9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialBreakfast.imageset/editorial-v1.png",
+        "sha256": "562cdc8d931b5f10cbcf98201a28274b49cf359c2aff1ecddee4adccedd0e79b"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialDinner.imageset/Contents.json",
+        "sha256": "9a320c7c52ad04f45e7a610720352969a3d936f2255a5143b1d15d6fc2a3eb9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialDinner.imageset/editorial-v1.png",
+        "sha256": "01f0460bb0a5c2d91cbe437bcfa6ebcd53ac69429e7151a0010a0dddb6715eff"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialLunch.imageset/Contents.json",
+        "sha256": "9a320c7c52ad04f45e7a610720352969a3d936f2255a5143b1d15d6fc2a3eb9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialLunch.imageset/editorial-v1.png",
+        "sha256": "01c45a820b99e649063f3a7751be3c970d54e554f783adbae7ba2ffde7b000e6"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialTraining.imageset/Contents.json",
+        "sha256": "a9fa0994b019355bfd1b1e1d4773de6446a9bd9950522519fadf478714728ae0"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/EditorialTraining.imageset/editorial-approved-v3.jpg",
+        "sha256": "578695782daa87cc55509dd51c1f734ab9febc83eed38d77b016ced1926f8ea8"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/Logo.imageset/Contents.json",
+        "sha256": "07738f29dab46c4800aa9219acd2efe360fa74805686b182417f976683463da8"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/Logo.imageset/logo-bold-x-v5.png",
+        "sha256": "f5f4067fec73b244bd2ff40f3713c3f4ea32e85be5e63f4fe4a9d307afd17e9e"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/MuscleMapBase.imageset/Contents.json",
+        "sha256": "2b98aed6eae171d145c84d976810533797fd681237ae3814d5cbfe4ba147545a"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/MuscleMapBase.imageset/muscle-map-base-v1.png",
+        "sha256": "b22972fce7abb764ea22b30f371df4632035da99f761502803185a5944b621a1"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHero.imageset/Contents.json",
+        "sha256": "01dcb65966d155fcccf9fba8ee67a2584bbfd7e001d0a4215b0337db51e34c46"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHero.imageset/workout-hero.png",
+        "sha256": "9ef952d665017e9f6a9d584fb06635c01a24c7257531d4a3da4f196b4ef6fa8d"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroCore.imageset/Contents.json",
+        "sha256": "22288c73c0d3936d369e23ce2fe9f5960c7bbc3b92ca45e745f6e02431b2c836"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroCore.imageset/workout-hero-core.jpg",
+        "sha256": "c70c30fa29084a86771d340a8c05c5cfec5de6637b119fde92991e6a13ff8927"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroLegs.imageset/Contents.json",
+        "sha256": "db6538761c460cebd913cf67dd529f84c3988e1c25a2fe07f47e2756cd78abc2"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroLegs.imageset/workout-hero-legs.jpg",
+        "sha256": "578695782daa87cc55509dd51c1f734ab9febc83eed38d77b016ced1926f8ea8"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroPull.imageset/Contents.json",
+        "sha256": "ca938250c05aa3248aa03101a37cc3ac31b48963867bfa62780df8b456c4fe72"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroPull.imageset/workout-hero-pull.jpg",
+        "sha256": "d9e96269d07cd1576d6b61fa6bd2a1324fdf6a067f44be260372a0a82c0db584"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroPush.imageset/Contents.json",
+        "sha256": "8ee5140569c1a9a84c06c11962d1d3fc44fe091de65e24948262989b57b0f357"
+      },
+      {
+        "path": "FitnessApp/Resources/Assets.xcassets/WorkoutHeroPush.imageset/workout-hero-push.jpg",
+        "sha256": "ce0c0172ad7dd7824eb7a07249dc065732a2a86a8899b24b0741212c8ba72487"
+      },
+      {
+        "path": "FitnessApp/Services/CardioWorkoutService.swift",
+        "sha256": "83bd253988002c55ff9c4a9a0b3ea005080469cf6948c0bbe8e65f6bf3a1cf67"
+      },
+      {
+        "path": "FitnessApp/Services/CloudSyncRuntime.swift",
+        "sha256": "a214844d51bc3999d20e967f1518e6b9f0f24a0c7d69cea7119e8afa83a2eacf"
+      },
+      {
+        "path": "FitnessApp/Services/ConfirmedDailyTrainingPlanService.swift",
+        "sha256": "d2a8255ebf5b2ea13b10608dd155a603acbb06063490bb41cb26c3d6934fbeef"
+      },
+      {
+        "path": "FitnessApp/Services/ConfirmedTrainingPlanService.swift",
+        "sha256": "2e3f38081179bfa076d5e12601a89ce2ef50aba06dbf6ff559b609bea6813bf3"
+      },
+      {
+        "path": "FitnessApp/Services/ConfirmedTrainingPlanUITestFixture.swift",
+        "sha256": "b166d51f530ae7c07e6a5c67c4b3e3adfe7297054ad0412c982d2b9963e6874d"
+      },
+      {
+        "path": "FitnessApp/Services/DailyPlanService.swift",
+        "sha256": "2ca8fb702f44b7af6f140df0226997dd565975a76fb7813687b813d3c3ce60e0"
+      },
+      {
+        "path": "FitnessApp/Services/DataExportService.swift",
+        "sha256": "a07ba2c4c85a6ebadadddc0735f6f32c02dba7df7d81bb6940d309173b0b8794"
+      },
+      {
+        "path": "FitnessApp/Services/DeviceHistoryMergeService.swift",
+        "sha256": "72a6ebac8d8e36cb766e4b0bb5284d64bc0e8d607367c2016c356d7f80cd3807"
+      },
+      {
+        "path": "FitnessApp/Services/EquipmentRecognitionService.swift",
+        "sha256": "b6c8623072d4ffacae388fff9e3b5a88d03feaf4a3193c1eb2381a33996ecea1"
+      },
+      {
+        "path": "FitnessApp/Services/ExerciseCatalogService.swift",
+        "sha256": "e5746731b266c7687d305e4fb265138c902fc1fd82ecafc197f70c0967dc1887"
+      },
+      {
+        "path": "FitnessApp/Services/ExerciseShareDraftInbox.swift",
+        "sha256": "e9974888cedb1233276cb17d03af61b703e2d16af3afd24ec8fe3f8cefeca58e"
+      },
+      {
+        "path": "FitnessApp/Services/ExerciseTerminologyService.swift",
+        "sha256": "12aeb2c85ab7e08ca582f6d48e2d652fc64a9a6ee6f3e18856df1346ad9541fc"
+      },
+      {
+        "path": "FitnessApp/Services/FatLossBackup.swift",
+        "sha256": "aa729aa3c81876bad0a5f3ce8c8bb605ee34f69ef4fb70730f78a5cc4e87ff11"
+      },
+      {
+        "path": "FitnessApp/Services/FatLossCatalog.swift",
+        "sha256": "cb087aa77dc084d1a2a0f45633405516ae6c0ce9140db937b731fa87d79c0a44"
+      },
+      {
+        "path": "FitnessApp/Services/FatLossService.swift",
+        "sha256": "dd272657902c90a89775c520d0b5c0a5bf9d033e9d1dc79f031b7e94fcaebd3a"
+      },
+      {
+        "path": "FitnessApp/Services/HealthKitService.swift",
+        "sha256": "1b525a433960c3dec981be5f528aab019600172a3d46ccb54855890b893c5f5c"
+      },
+      {
+        "path": "FitnessApp/Services/HistoricalWorkoutCSVService.swift",
+        "sha256": "b16c44efe5cddbd5e7aac8bbacfd3136219c934ca389a10cff703fd998d5d1dc"
+      },
+      {
+        "path": "FitnessApp/Services/HistoricalWorkoutService.swift",
+        "sha256": "1ad08ea31b7e13c3d5aa4e08e3a67d77a138d6a9d48846e6823f5b894adc4855"
+      },
+      {
+        "path": "FitnessApp/Services/MealExchangeService.swift",
+        "sha256": "1c847c3c2c45f7c834f709cd631427b86d3be4a9f686a8f969c89e4315cd8559"
+      },
+      {
+        "path": "FitnessApp/Services/MealPhotoService.swift",
+        "sha256": "7ad73a682610bf83674325c6513a00d252ce5c1bfa0d5b9ddee100137e5de354"
+      },
+      {
+        "path": "FitnessApp/Services/MealReviewService.swift",
+        "sha256": "fe777f8f73de313c45e83a3d77ce692deb1bd18fb1fe42f4e8e51d37d8963995"
+      },
+      {
+        "path": "FitnessApp/Services/MuscleCoverageService.swift",
+        "sha256": "18b0f9fd3c90e02c1f77d24450c1cb59624fccac66ddefb37caf7c8ee3d9b471"
+      },
+      {
+        "path": "FitnessApp/Services/NotificationService.swift",
+        "sha256": "3686b2dfdfafea714b9d835fc54636de8218c9b0d94114abeeb24e3cc1f0e5f1"
+      },
+      {
+        "path": "FitnessApp/Services/ScheduleService.swift",
+        "sha256": "dbb35004801e58556202d6b9e1c5973d868fa2b2a0c0b481ce3d83cb62308479"
+      },
+      {
+        "path": "FitnessApp/Services/SeedDataService.swift",
+        "sha256": "7f2abc9b72d35cf697653173a883625c198fd28f5a67f566857510e3f03ce111"
+      },
+      {
+        "path": "FitnessApp/Services/TrainingCoachService.swift",
+        "sha256": "e2f049c1e2176ed851b7905993234abdc970d02275d95aa8122bd0392f65c621"
+      },
+      {
+        "path": "FitnessApp/Services/TrainingCoachUITestFixture.swift",
+        "sha256": "cbc8e75efb9a0abd68a10e98a117f8f4cf1c85eda765e4290d19d32c74e27d22"
+      },
+      {
+        "path": "FitnessApp/Services/TrainingDateMenuService.swift",
+        "sha256": "0f4b845e5268bb4f13ea4b4203a4d94ad3475e67551059fc8aeb25a362df5f07"
+      },
+      {
+        "path": "FitnessApp/Services/WellnessAgentService.swift",
+        "sha256": "a5aa971b3c08ad69e9c110c5a55778cfd5d7175e7f131491a2b8e06846ecfd88"
+      },
+      {
+        "path": "FitnessApp/Services/WorkoutRecommendationService.swift",
+        "sha256": "1dd1705d24ab75e38e83323925ed5925b0abf8a94b74e234aaf609d15b467778"
+      },
+      {
+        "path": "FitnessApp/Services/WorkoutService.swift",
+        "sha256": "fe56daca5e2cd3926f8f2b647349626cb7a17fe7c69eb11ec58bf50d38651dc2"
+      },
+      {
+        "path": "FitnessApp/Shared/AppTheme.swift",
+        "sha256": "c039ad816b79dc74f6ac5821289c87aed6bb2ce8ca6d41989a695353dfa8a357"
+      },
+      {
+        "path": "FitnessApp/Shared/Date+Training.swift",
+        "sha256": "f690c9c65e9471b64340ece97ac107ce0fc0dee298ce7fc8f8d8af456ad26ee4"
+      },
+      {
+        "path": "FitnessApp/Shared/EquipmentRecognitionSheet.swift",
+        "sha256": "4a72b30ed23d4b07cd575354d00af86dbfe538d7a0445daa0fe1ba5cf6ede4f2"
+      },
+      {
+        "path": "FitnessApp/Shared/ExerciseEditorView.swift",
+        "sha256": "2d60265585719ad6ca2c31a5466d983000aa41cf7f21d02b29bf15e675361344"
+      },
+      {
+        "path": "FitnessApp/Shared/ExercisePickerSheet.swift",
+        "sha256": "9c2ce1abf71890cc934a877cded326c811ad523801e64ddf3814feac4125d437"
+      },
+      {
+        "path": "FitnessApp/Shared/ExerciseSetupSheet.swift",
+        "sha256": "db47ee5e3b300e9b702f06b177afa893f02cc174b4c259cd4ad4735112195cb9"
+      },
+      {
+        "path": "FitnessApp/Shared/ExerciseShareDraft.swift",
+        "sha256": "4e1e337e5d373202a570e79328a07e0fdcf3066fc603c1d451eafc3f018767d4"
+      },
+      {
+        "path": "FitnessApp/Shared/MuscleSelectionView.swift",
+        "sha256": "e16b645b2c0c181ccc91ebb53f9bc09a087ec4b530afe216ac80a4382247a47d"
+      },
+      {
+        "path": "FitnessApp/Shared/TrainingDateSelection.swift",
+        "sha256": "28b9d03a37b7febb8eef11161fcef06454ec85b46c31dcd77a41ea2e74e45d3a"
+      },
+      {
+        "path": "FitnessApp/Shared/TrainingDayFeedback.swift",
+        "sha256": "a4c05f6ae619ebf1b79add3020d198b675b9e89f37bf3d2722e2e73c5154d5bd"
+      },
+      {
+        "path": "FitnessApp/Shared/TrainingSchedulePresentation.swift",
+        "sha256": "a39c1228c5f76ea60fe2ae2c8050c4b454f0dc067197915d9dc1b5b3dd781f9d"
+      },
+      {
+        "path": "FitnessApp/Shared/WorkoutCompletionFeedback.swift",
+        "sha256": "0154db3487b16046f60eb21863973df3182c3fb2b8a877accbc3c888d1c18d6b"
+      },
+      {
+        "path": "FitnessApp/Shared/WorkoutCompletionPresentation.swift",
+        "sha256": "1f8ae09fdb24c845228c3e8636f12410d6800258db09d86a6caeb27ac02a4d70"
+      },
+      {
+        "path": "FitnessAppTests/AdaptivePlanningTests.swift",
+        "sha256": "489806ae23b46db2add7c66ec5869d39c5ecb0aab831d475f5d83950a41ec00f"
+      },
+      {
+        "path": "FitnessAppTests/ConfirmedTrainingPlanTests.swift",
+        "sha256": "6cabc9247f6c81f01e2c0ca0287a38ae55e68d966047a2397a78d6f6d76e40aa"
+      },
+      {
+        "path": "FitnessAppTests/EquipmentRecognitionTests.swift",
+        "sha256": "dbd91b49549cf8815c2328d3b7b1cf95a1e35beadc5b2e2f721e5bc72e1da71e"
+      },
+      {
+        "path": "FitnessAppTests/ExerciseCaptureRobustnessTests.swift",
+        "sha256": "e6077c2a0c77fe5480d27e418e273da70c08aed888379cb85dfbe7f9f8b74a53"
+      },
+      {
+        "path": "FitnessAppTests/ExerciseTerminologyTests.swift",
+        "sha256": "f0e0f89cae994efb39bb196cf2809ec3d974563bf036f78cd894d246bfdff989"
+      },
+      {
+        "path": "FitnessAppTests/FatLossBackupTests.swift",
+        "sha256": "95db6c3db36f81e09fb5190780bf4cf61049fef9a9d91e7a5116a2208523ab14"
+      },
+      {
+        "path": "FitnessAppTests/FatLossCatalogTests.swift",
+        "sha256": "259cae57e1b2ed4870d8a0fde90ecf12f08d9936af24932767aecfdb8e15390e"
+      },
+      {
+        "path": "FitnessAppTests/FatLossServiceTests.swift",
+        "sha256": "e005a4d3b1123896e72daa2c75998c3b25d9ae003b3c9b1fe6bd771a6f3a276a"
+      },
+      {
+        "path": "FitnessAppTests/GoalProgressPresentationTests.swift",
+        "sha256": "535430485d44ba18b9d408b1b241db9f679887673a2be0096f4f2b55ffe3b12e"
+      },
+      {
+        "path": "FitnessAppTests/HealthKitServiceTests.swift",
+        "sha256": "653589bef605935b2d08ba30b04827275bfc270e71e9162605c2c19cfe191c84"
+      },
+      {
+        "path": "FitnessAppTests/MealExchangeServiceTests.swift",
+        "sha256": "ce8a546f6e33bda0468b2c0124ee9152dd5ab3ff6bef8b11b673d17bce97c9e2"
+      },
+      {
+        "path": "FitnessAppTests/MealPhotoBackupTests.swift",
+        "sha256": "77cb6c47cdb9ba4822fe4e2485f39b023403b3f7268a7e3c6c60eee2ecfb2668"
+      },
+      {
+        "path": "FitnessAppTests/MealPhotoServiceTests.swift",
+        "sha256": "187407309917ed6c9562934cc5b9f0366ee6358145f3f7f2bf91cc1221414390"
+      },
+      {
+        "path": "FitnessAppTests/MuscleCoverageTests.swift",
+        "sha256": "3eb95474c41d340bf8361d47b2988459831fb05932162198adbab9bb0e35e872"
+      },
+      {
+        "path": "FitnessAppTests/PrepPresentationTests.swift",
+        "sha256": "26126262455deef055d25c36bd41f1b1ddea367a56811c72b23854f389277e97"
+      },
+      {
+        "path": "FitnessAppTests/ScheduleAndDataTests.swift",
+        "sha256": "3bb35984210ad9602ac92b80aef01ecac67cd5e5b9ba891738c02f2b8dfdc6a5"
+      },
+      {
+        "path": "FitnessAppTests/TrainingCoachTests.swift",
+        "sha256": "69163f0d99bc9a8fe8c4c632c1e7823a81b87a47447cb5ab7ea032f2df0a5d15"
+      },
+      {
+        "path": "FitnessAppTests/TrainingDateMenuTests.swift",
+        "sha256": "a4ac2d347b73480e6f8e0fc0951162f40c3e86c1e0c8ba7cdc34cd747d6413cd"
+      },
+      {
+        "path": "FitnessAppTests/TrainingFeedbackTests.swift",
+        "sha256": "48f408ef45adb55442c6a5a0d39983a449815c6d01c75c8651711c57118802d0"
+      },
+      {
+        "path": "FitnessAppTests/TrainingMetricsTests.swift",
+        "sha256": "124036f48559f82fc98d13b295bf5a99c19d05a5dda62256826d96299c63bfaf"
+      },
+      {
+        "path": "FitnessAppTests/WellnessAgentTests.swift",
+        "sha256": "3521666c48822ddb9b1f7e974b62707d6d9965e571c58148cda0058ff848bb55"
+      },
+      {
+        "path": "FitnessAppUITests/FatLossUITests.swift",
+        "sha256": "2e1bc5b33600d89c2e72f329950793c25307067e288c60bc6c7862bc6599158d"
+      },
+      {
+        "path": "FitnessAppUITests/FitnessAppUITests.swift",
+        "sha256": "f881f5b432a24f85a157b487d8a833ad5761c7715fb61ecab3318f9cb1427a48"
+      },
+      {
+        "path": "FitnessAppUITests/MealPhotoUITests.swift",
+        "sha256": "b8beca8bcb896d8117d5d9cf71f4144c5586ba7fbbd7aca304a1b0ce785d00ec"
+      },
+      {
+        "path": "FitnessAppUITests/RedesignUITests.swift",
+        "sha256": "a0750f3d65ef19d1d1991b96b2696c5882f414e86b8a31977c41cdf39b75e0eb"
+      },
+      {
+        "path": "FitnessAppUITests/TrainingCoachUITests.swift",
+        "sha256": "c640991bd1a139eddc2ccc007b03a7ca4ae5d8949b167790e3e509b517d41cc8"
+      },
+      {
+        "path": "FitnessAppUITests/TrainingDateMenuUITests.swift",
+        "sha256": "f2bd54cc4b765f1cf19bfef797b9139440ffd93a96acfec0dcc83beb05e9edb1"
+      },
+      {
+        "path": "FitnessAppUITests/TrainingExperienceUITests.swift",
+        "sha256": "944e8e9de6ee759d5ad6a918eb8a074051d482a7b0805d09ec099eb7ef637a7f"
+      },
+      {
+        "path": "XFitShareExtension/Info.plist",
+        "sha256": "b5f6bbab1880aa4fd681316578bb8ec2bf28f5574f1bb6811f536b459395bccf"
+      },
+      {
+        "path": "XFitShareExtension/ShareViewController.swift",
+        "sha256": "477b27d8bfc31b6b4e81e3d03727c1c89e514207e6dff636462642400d544259"
+      },
+      {
+        "path": "XFitShareExtension/XFitShareExtension.entitlements",
+        "sha256": "90199a6be36ec93456df7daede8d06136ac84782b167f741c8db18f3928164cc"
+      },
+      {
+        "path": "FitnessApp.xcodeproj/project.pbxproj",
+        "sha256": "503af1b3e8eb0739213229992a1d6f894b33be294c7716b6b3440443579bb1c4"
+      },
+      {
+        "path": "FitnessApp.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+        "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+      },
+      {
+        "path": "FitnessApp.xcodeproj/xcshareddata/xcschemes/FitnessApp.xcscheme",
+        "sha256": "7995d888381c6a266c2cc62935606b84840ce590708f25eb145a79fccfa65228"
+      }
+    ],
+    "only_change_from_locally_verified_candidate": "project.pbxproj CURRENT_PROJECT_VERSION 23 to 24",
+    "phone23_manifest": "outputs/stage-validation/20261020-workout-qa-polish-phone-r3/data-conservation.json"
+  },
+  "frozen_inputs_verified": 153,
+  "root_drift_excluded_from_candidate": [],
+  "candidate": "/tmp/xfit-schedule-phone-device-derived-20261020-1842-r2/Build/Products/Release-iphoneos/FitnessApp.app",
+  "strict_signature": "PASS",
+  "app_group": "group.com.edward.FitnessApp",
+  "cloud_sync_enabled": false,
+  "candidate_executable_sha256": "a52cf5a4877132c7a15a5230e9628dfaabc15f495504099c39a55142180da753",
+  "candidate_assets_sha256": "b9aadf2af5a060f6df9117116f97f0aa1b01f70dca9984c7ccd3eec5643f4fee",
+  "normal_launch_arguments": [],
+  "phone_process_id": 29774,
+  "normal_process_running_at_independent_readback": true,
+  "process_receipt": "device-process-readback.json",
+  "model_tables": 25,
+  "records_before": 2262,
+  "records_after": 2262,
+  "counts": {
+    "ZBODYMEASUREMENT": 22,
+    "ZDAILYBODYCHECKIN": 5,
+    "ZEXERCISE": 181,
+    "ZFATLOSSPROGRAM": 1,
+    "ZHYDRATIONENTRY": 0,
+    "ZJUMPROPEENTRY": 2,
+    "ZMEALENTRY": 33,
+    "ZNUTRITIONTARGET": 1,
+    "ZPLANNEDMEAL": 0,
+    "ZPROGRAMDAILYLOG": 0,
+    "ZPROGRAMHEALTHRECORD": 3,
+    "ZPROGRAMTARGETREVISION": 1,
+    "ZPROGRAMWEEKLYREVIEW": 0,
+    "ZPROGRAMWORKOUTLINK": 21,
+    "ZRECIPEVERSION": 18,
+    "ZSCHEDULEDWORKOUT": 57,
+    "ZSEDENTARYSESSION": 0,
+    "ZSESSIONEXERCISE": 321,
+    "ZSETLOG": 1269,
+    "ZTEMPLATEEXERCISE": 219,
+    "ZTRAININGCOACHRECORD": 1,
+    "ZTRAININGPREFERENCEREVISION": 5,
+    "ZTRAININGPROGRAMREVISION": 5,
+    "ZWORKOUTSESSION": 53,
+    "ZWORKOUTTEMPLATE": 44
+  },
+  "all_original_business_columns_pk_uuid_and_relations_unchanged": true,
+  "resource_files_in_compared_scopes": 0,
+  "resource_scopes_unchanged": true,
+  "device_gates": {
+    "D00": "PASS",
+    "D01": "PASS",
+    "D02": "PASS",
+    "D03": "PASS",
+    "D04": "PASS",
+    "D05": "PASS",
+    "D06A": "PASS",
+    "D06B": "PASS",
+    "D06C": "PASS",
+    "D07": "NOT_RUN",
+    "D09": "BLOCKED_HUMAN"
+  },
+  "phone_business_data_edits": 0,
+  "simulator_data_uploaded_to_phone": false,
+  "device_xctest": "NOT_RUN",
+  "human_phone_acceptance": "pending",
+  "stage_decision": "PARTIAL"
+}

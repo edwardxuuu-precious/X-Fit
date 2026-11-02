@@ -1,0 +1,28 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "lockState",
+      "--device",
+      "00008150-001E49912122401C",
+      "--timeout",
+      "20",
+      "--json-output",
+      "outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/device-preview-2026-11-02-20261030a/launch-lock-state.json"
+    ],
+    "commandType" : "devicectl.device.info.lockState",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 5,
+    "outcome" : "success",
+    "version" : "651.13.5"
+  },
+  "result" : {
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "passcodeRequired" : false,
+    "unlockedSinceBoot" : true
+  }
+}

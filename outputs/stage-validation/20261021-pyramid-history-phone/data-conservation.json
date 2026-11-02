@@ -1,0 +1,156 @@
+{
+  "requirement": "REQ-20261021-103533",
+  "status": "PASS",
+  "checked_at": "2026-10-21T11:42:34.726629+08:00",
+  "version": "0.5.0",
+  "build": "26",
+  "before_tables": 25,
+  "before_records": 2385,
+  "after_records": 2399,
+  "table_counts": {
+    "ZBODYMEASUREMENT": {
+      "before": 22,
+      "after": 22
+    },
+    "ZDAILYBODYCHECKIN": {
+      "before": 5,
+      "after": 5
+    },
+    "ZEXERCISE": {
+      "before": 189,
+      "after": 202
+    },
+    "ZFATLOSSPROGRAM": {
+      "before": 1,
+      "after": 1
+    },
+    "ZHYDRATIONENTRY": {
+      "before": 0,
+      "after": 0
+    },
+    "ZJUMPROPEENTRY": {
+      "before": 2,
+      "after": 2
+    },
+    "ZMEALENTRY": {
+      "before": 33,
+      "after": 33
+    },
+    "ZNUTRITIONTARGET": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPLANNEDMEAL": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMDAILYLOG": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMHEALTHRECORD": {
+      "before": 3,
+      "after": 3
+    },
+    "ZPROGRAMTARGETREVISION": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPROGRAMWEEKLYREVIEW": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMWORKOUTLINK": {
+      "before": 21,
+      "after": 21
+    },
+    "ZRECIPEVERSION": {
+      "before": 18,
+      "after": 18
+    },
+    "ZSCHEDULEDWORKOUT": {
+      "before": 60,
+      "after": 60
+    },
+    "ZSEDENTARYSESSION": {
+      "before": 0,
+      "after": 0
+    },
+    "ZSESSIONEXERCISE": {
+      "before": 341,
+      "after": 341
+    },
+    "ZSETLOG": {
+      "before": 1343,
+      "after": 1343
+    },
+    "ZTEMPLATEEXERCISE": {
+      "before": 231,
+      "after": 231
+    },
+    "ZTRAININGCOACHRECORD": {
+      "before": 1,
+      "after": 1
+    },
+    "ZTRAININGPREFERENCEREVISION": {
+      "before": 5,
+      "after": 6
+    },
+    "ZTRAININGPROGRAMREVISION": {
+      "before": 5,
+      "after": 5
+    },
+    "ZWORKOUTSESSION": {
+      "before": 56,
+      "after": 56
+    },
+    "ZWORKOUTTEMPLATE": {
+      "before": 47,
+      "after": 47
+    }
+  },
+  "changed_original_records": [],
+  "removed_original_records": [],
+  "new_records": {
+    "ZEXERCISE": 13,
+    "ZTRAININGPREFERENCEREVISION": 1
+  },
+  "new_exercise_names": [
+    "最伟大拉伸",
+    "杠铃片过头侧屈（单边）",
+    "垫高绳索站姿侧屈",
+    "开合跳",
+    "跑步机坡度走",
+    "杠铃片铰链曲髋转体（单边）",
+    "杠铃片过头提膝行进",
+    "站姿绳索下拉",
+    "侧平板支撑",
+    "站姿绳索划船",
+    "绳索跪姿卷腹",
+    "杠铃片交替曲髋绕颈（单边）",
+    "平板支撑"
+  ],
+  "new_preference_codes": [
+    "TP-20261021-06"
+  ],
+  "resource_files_before": 0,
+  "resource_changes": [],
+  "non_database_files_before": 4,
+  "non_database_file_changes": [],
+  "hash_exclusions": [
+    "Core Data Z_ENT",
+    "Core Data Z_OPT"
+  ],
+  "included": [
+    "Z_PK",
+    "ZID",
+    "all original business fields, nulls, relation IDs and snapshot JSON"
+  ],
+  "before_backup": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261021-pyramid-history-phone/device-data/pre-install",
+  "after_backup": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261021-pyramid-history-phone/device-data/post-install",
+  "no_uninstall": true,
+  "no_container_clear": true,
+  "no_simulator_database_uploaded": true,
+  "phone_xctest": "NOT_RUN",
+  "human_acceptance": "BLOCKED_HUMAN"
+}

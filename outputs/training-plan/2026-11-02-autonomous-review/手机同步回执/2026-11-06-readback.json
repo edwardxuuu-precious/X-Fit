@@ -1,0 +1,1185 @@
+{
+  "packet" : {
+    "confirmationReference" : "2026-10-29本人回复“同步更新进手机”；确认所展示11\/2–11\/8三力量两有氧完整版本；审阅正文SHA-256 1b6bb4e8d932c5cb759042cd0a5d0e077d771076e0dbac59f6066d62f209d3b4",
+    "confirmedAt" : "2026-10-29T09:43:01Z",
+    "exercises" : [
+      {
+        "catalogExerciseID" : "62B7E172-C76F-4502-8643-87249F7199E3",
+        "catalogName" : "器械上斜卧推",
+        "displayName" : "器械上斜卧推",
+        "equipment" : "器械",
+        "loadGuidance" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。",
+        "notes" : "水平推；准备组另计。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "EEF68DBE-6C3B-45D1-98C4-942E64078F2E",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "97D06DEF-A25B-43A2-92C0-6F562AA620D1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "57E59633-6966-402A-B6AA-24E9E0A9078F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DBAD653C-D6A6-404C-B8E1-ACD71D7DA131",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "270D5AE7-50F8-41ED-8A7E-8AE62576A607",
+        "catalogName" : "杠铃卧推",
+        "displayName" : "杠铃卧推",
+        "equipment" : "杠铃",
+        "loadGuidance" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。",
+        "notes" : "水平推；准备组另计。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CBB94C37-F1BF-4DBB-B3EB-DC635E28CFB2",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D83AA421-6156-4EEF-80DC-ABAD1150ADBA",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "778AA380-4D67-4EC7-BBE4-D13148D99C72",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "2FFA02FD-85F0-4938-A9C9-59A3561C241E",
+        "catalogName" : "坐姿飞鸟",
+        "displayName" : "坐姿飞鸟",
+        "equipment" : "器械",
+        "loadGuidance" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。",
+        "notes" : "胸内收；准备组另计。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "3308709C-DA5C-47D3-BC34-F3F2DA39BAB7",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "52F8CBFB-986D-483B-9AA0-12804F06E263",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E6F1846A-A133-436A-9ED3-23A2002F1BFE",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "8DE3EE03-A5A3-4767-954B-333D4BD17332",
+        "catalogName" : "站姿绳索夹胸",
+        "displayName" : "站姿绳索夹胸",
+        "equipment" : "龙门架",
+        "loadGuidance" : "未有可比负重，需现场热身校准。",
+        "notes" : "本地人工候选，待本人审阅。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CA916241-DF47-449F-AAB9-0739A06EA8BC",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "78CEB6B5-4504-4053-8206-7A007A28401E",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "7A0AAD3C-D8F8-4758-A75F-6D1602DF6AFD",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "7BA6E768-A39E-4320-9940-D3F0C9D16A42",
+        "catalogName" : "坐姿哑铃肩推",
+        "displayName" : "坐姿哑铃肩推",
+        "equipment" : "哑铃",
+        "loadGuidance" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。",
+        "notes" : "垂直推；准备组另计。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "0D9644F2-EAA2-4F96-A6F9-F41DD6FDF197",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E43DD6A9-A9B4-47EE-B216-088D7D0456AC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "98C505C4-593F-475B-8EE1-7C6268DB93C5",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "785412EA-AC6A-4910-9942-8C3B2E380CB8",
+        "catalogName" : "坐姿哑铃侧平举",
+        "displayName" : "坐姿哑铃侧平举",
+        "equipment" : "哑铃",
+        "loadGuidance" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。",
+        "notes" : "肩外展；准备组另计。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D9BF5D5B-08A6-4029-9BEC-78D5C4694514",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E6CE5785-E47D-4AF2-B6D5-D323A64B33D6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "86B71380-6D43-4554-B0AC-1CC32B0B5F76",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "67518BD0-1C2E-464C-8753-EB48E62581DB",
+        "catalogName" : "绳索反向飞鸟",
+        "displayName" : "绳索反向飞鸟",
+        "equipment" : "龙门架",
+        "loadGuidance" : "未有可比负重，需现场热身校准。",
+        "notes" : "本地人工候选，待本人审阅。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E9A3D6BC-5BF5-42B9-B5F0-257890F8416D",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "821E44EB-7809-49E7-B234-96296BF2AF95",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "2D64895D-2A25-4DC0-B90C-42D38291A0F3",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "9BB12534-10A3-435D-BE9A-10A70ED0616F",
+        "catalogName" : "器械坐姿侧平举",
+        "displayName" : "器械坐姿侧平举",
+        "equipment" : "器械",
+        "loadGuidance" : "未有可比负重，需现场热身校准。",
+        "notes" : "本地人工候选，待本人审阅。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "1716A759-66AE-4422-A49C-8621C3D1D073",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "56F4EBE9-688B-4719-BB62-DE9FFA183564",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "78F82DC9-5569-42FE-8D23-35E61CDE78E5",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      }
+    ],
+    "guidance" : "仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+    "id" : "2063B651-BA01-5FE5-A538-9F152ACFCE30",
+    "localDay" : "2026-11-06",
+    "preferenceRevisionCode" : "TP-20261021-06",
+    "sourceMarkdown" : "# 11月2日–8日：三次力量、两次有氧候选\n\n**状态：本人已确认同步此版；基于手机快照生成并在隔离副本调整，尚未保存为手机新草案，也未写入正式日程。** 手机原第1版是四次力量的旧草案，不是本版。本人于 2026-10-29 回复“同步更新进手机”；已展示并获确认的正文版本 SHA-256 为 `1b6bb4e8d932c5cb759042cd0a5d0e077d771076e0dbac59f6066d62f209d3b4`。\n\n- 本人明确本次按三次力量、两次有氧安排；候选为一次跳绳、一次单车／椭圆机。五个工作日各一课，周末休息。此处只处理所选七日，不推断长期偏好已改变。\n- 手机活动库于 2026-10-29 16:33 只读快照；25 类、2,694 条现存记录与 15:35 手机草案回读逐字段一致。16:48 再次只读回核，所有记录仍一致，未新增手机草案或正式日程。10月27日的跳绳 8 组、1,550 次属于上一周，不计入本周目标；其训练时间及用时未知。\n- 编排使用 `METHOD-20261029-12`、App 偏好 `TP-20261021-06` 和补充规则 `STRENGTH-CORE-PREF-20261029-01`。隔离测试从真实手机副本生成候选，未创建日程、实际训练或手机记录。\n- 自动候选的胸肩日未覆盖完整肩束，因此在本地替换／补充动作并重新校验；不是手机已自动生成的完整版本。\n\n下面组数为工作组，热身不计。所有力量动作均为每组 8–10 次；重量均因同设备、侧别或逐组证据不足而**留空，需热身校准**，不得把数据占位当作 0 kg。单侧动作的次数口径尚未明确是每侧还是合计，执行前需核对。自动选出的动作首组目标 RIR 2–3、后续组 1–2；标为“本地补充”的三个动作各组目标 RIR 2–3。疼痛、动作失稳或连续表现下降时停止受影响动作并重新评估。\n\n## 11月2日 周一：背与侧腹\n\n完整预计约 87 分钟，含热身、休息、换器械和缓冲。\n\n| 动作 | 工作组 | 组间休息 |\n|---|---:|---:|\n| 坐姿划船，主项 | 4 | 180秒 |\n| 高位下拉 | 3 | 180秒 |\n| 单臂哑铃划船 | 3 | 180秒 |\n| 直臂下压 | 3 | 90秒 |\n| 地雷杆转体 | 3 | 90秒 |\n| 垫高绳索站姿侧屈 | 3 | 90秒 |\n\n## 11月3日 周二：跳绳\n\n完整约 30 分钟：热身 5 分钟；10 轮，每轮跳 45 秒、轻松步行 45 秒；缓和约 10 分钟。以可说短句为上限，足踝或膝不适时停止。实际跳绳次数未知，不换算成目标次数。\n\n## 11月4日 周三：腿与侧腹\n\n完整预计约 87 分钟，含热身、休息、换器械和缓冲。\n\n| 动作 | 工作组 | 组间休息 |\n|---|---:|---:|\n| 传统硬拉，主项 | 4 | 180秒 |\n| 哑铃侧弓步 | 3 | 90秒 |\n| 地雷杆泽奇蹲 | 3 | 180秒 |\n| 保加利亚分腿蹲 | 3 | 90秒 |\n| 站姿水平伐木 | 3 | 90秒 |\n| 杠铃片过头侧屈（单边） | 3 | 90秒 |\n\n## 11月5日 周四：单车／椭圆机\n\nZone 2 约 30 分钟；可按 5 分钟轻松热身、20 分钟稳定主段、5 分钟缓和执行。选择手机动作库中的“轻松单车／椭圆机”，阻力现场确认；保持能说完整句子的轻松强度。该 5＋20＋5 分配是本次审阅候选，自动草案原字段只给出总时长 30 分钟。\n\n## 11月6日 周五：胸与肩\n\n完整预计 **约 89分40秒**，已接近 90 分钟上限；实际可能不同。为了保留四个胸部动作、四个肩部动作和主项工作组，将自动版杠铃卧推休息从 180 秒调整为 120 秒；如果恢复不够，不强迫压缩休息或牺牲动作质量，应暂停并重新调整计划。\n\n| 动作 | 工作组 | 组间休息 | 作用 |\n|---|---:|---:|---|\n| 器械上斜卧推，胸部主项 | 4 | 180秒 | 卧推主项 |\n| 杠铃卧推 | 3 | 120秒 | 胸部推举 |\n| 坐姿飞鸟 | 3 | 90秒 | 胸部夹胸 |\n| 站姿绳索夹胸 | 3 | 90秒 | 胸部夹胸；本地补充 |\n| 坐姿哑铃肩推 | 3 | 180秒 | 肩前束为主 |\n| 坐姿哑铃侧平举 | 3 | 90秒 | 肩中束 |\n| 绳索反向飞鸟 | 3 | 90秒 | 肩后束；本地补充 |\n| 器械坐姿侧平举 | 3 | 90秒 | 肩中束；本地补充 |\n\n## 11月7日 周六、11月8日 周日\n\n休息。\n\n## 核对与待确认\n\n- 三次力量、两次有氧；胸、背、腿各有四个主肌动作，指定卧推、划船、硬拉主项各四个计划工作组。胸肩同课另有四个不同肩部动作，覆盖前、中、后束。\n- 四个腹部动作均为侧腹或旋转候选；未单列腹直肌动作，负重需现场校准，不推断设备档位。\n- 本人表示近期没有需要调整的疼痛、受伤或明显疲劳；这是聊天反馈，未写入 App 恢复记录。睡眠及次晨恢复仍未知。\n- 隔离副本按原 App 规则重验，工作日和周末安排无计划缺额、每日无自动阻断；胸肩的四个肩部动作及三束覆盖另作人工核对。胸肩估时贴近上限，是本次审阅的主要取舍。\n- 本人已确认本版同步。仍需解决手机草案生成与输入问题，并在写入前重新核对相同版本；若手机数据发生变化，先重新读取并展示差异。\n",
+    "sourceSHA256" : "c344b928b6a5f0d10dbeb5f7513884e125cec6c3a801c5eeb78d63fd2ea36694",
+    "timeZoneIdentifier" : "Asia\/Shanghai",
+    "title" : "胸＋肩力量",
+    "version" : 1
+  },
+  "packetSHA256" : "d321fedfe17b22dc8b2afa3be0223763baab141e7953ad2787e05f8ee7bd16f6",
+  "schedule" : {
+    "code" : "2063B651-BA01-5FE5-A538-9F152ACFCE30",
+    "exercises" : [
+      {
+        "equipment" : "器械",
+        "exerciseID" : "62B7E172-C76F-4502-8643-87249F7199E3",
+        "exerciseName" : "器械上斜卧推",
+        "exerciseNotes" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。\n水平推；准备组另计。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "D8E09A12-D922-48E3-AA5B-C1B8E47BD421",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "胸部",
+        "order" : 0,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "EEF68DBE-6C3B-45D1-98C4-942E64078F2E",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "97D06DEF-A25B-43A2-92C0-6F562AA620D1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "57E59633-6966-402A-B6AA-24E9E0A9078F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DBAD653C-D6A6-404C-B8E1-ACD71D7DA131",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "重主项",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 180,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "杠铃",
+        "exerciseID" : "270D5AE7-50F8-41ED-8A7E-8AE62576A607",
+        "exerciseName" : "杠铃卧推",
+        "exerciseNotes" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。\n水平推；准备组另计。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "9A2C7ADF-613D-4ED3-AC35-CD740340D9C3",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "胸部",
+        "order" : 1,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CBB94C37-F1BF-4DBB-B3EB-DC635E28CFB2",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D83AA421-6156-4EEF-80DC-ABAD1150ADBA",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "778AA380-4D67-4EC7-BBE4-D13148D99C72",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 120,
+              "restUpperSeconds" : 120,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 120,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "器械",
+        "exerciseID" : "2FFA02FD-85F0-4938-A9C9-59A3561C241E",
+        "exerciseName" : "坐姿飞鸟",
+        "exerciseNotes" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。\n胸内收；准备组另计。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "83110A25-B575-4011-9355-2EC2262DCD7A",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "胸部",
+        "order" : 2,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "3308709C-DA5C-47D3-BC34-F3F2DA39BAB7",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "52F8CBFB-986D-483B-9AA0-12804F06E263",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E6F1846A-A133-436A-9ED3-23A2002F1BFE",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "龙门架",
+        "exerciseID" : "8DE3EE03-A5A3-4767-954B-333D4BD17332",
+        "exerciseName" : "站姿绳索夹胸",
+        "exerciseNotes" : "未有可比负重，需现场热身校准。\n本地人工候选，待本人审阅。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "D07D6060-2369-43EC-8488-DF68F7044C1A",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "胸部",
+        "order" : 3,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CA916241-DF47-449F-AAB9-0739A06EA8BC",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "78CEB6B5-4504-4053-8206-7A007A28401E",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "7A0AAD3C-D8F8-4758-A75F-6D1602DF6AFD",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "哑铃",
+        "exerciseID" : "7BA6E768-A39E-4320-9940-D3F0C9D16A42",
+        "exerciseName" : "坐姿哑铃肩推",
+        "exerciseNotes" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。\n垂直推；准备组另计。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "A941E6B1-321E-48AC-80AF-5D29B1958AB9",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "肩部",
+        "order" : 4,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "0D9644F2-EAA2-4F96-A6F9-F41DD6FDF197",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E43DD6A9-A9B4-47EE-B216-088D7D0456AC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "98C505C4-593F-475B-8EE1-7C6268DB93C5",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "中等辅助",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 180,
+              "restUpperSeconds" : 180,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 180,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "哑铃",
+        "exerciseID" : "785412EA-AC6A-4910-9942-8C3B2E380CB8",
+        "exerciseName" : "坐姿哑铃侧平举",
+        "exerciseNotes" : "重量留空；同设备、计量、侧别或完整逐组证据不足，按当天热身校准。\n肩外展；准备组另计。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "8D08D9CB-EFA5-44FD-A09C-12FB0D1E8D4F",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "肩部",
+        "order" : 5,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D9BF5D5B-08A6-4029-9BEC-78D5C4694514",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E6CE5785-E47D-4AF2-B6D5-D323A64B33D6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "86B71380-6D43-4554-B0AC-1CC32B0B5F76",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "龙门架",
+        "exerciseID" : "67518BD0-1C2E-464C-8753-EB48E62581DB",
+        "exerciseName" : "绳索反向飞鸟",
+        "exerciseNotes" : "未有可比负重，需现场热身校准。\n本地人工候选，待本人审阅。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "A36ADEB0-73C8-47DB-B8D9-4E70020D0E33",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "肩部",
+        "order" : 6,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "E9A3D6BC-5BF5-42B9-B5F0-257890F8416D",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "821E44EB-7809-49E7-B234-96296BF2AF95",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "2D64895D-2A25-4DC0-B90C-42D38291A0F3",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "器械",
+        "exerciseID" : "9BB12534-10A3-435D-BE9A-10A70ED0616F",
+        "exerciseName" : "器械坐姿侧平举",
+        "exerciseNotes" : "未有可比负重，需现场热身校准。\n本地人工候选，待本人审阅。\n仅2026-11-02至2026-11-08本周生效，三次力量和两次有氧，周末休息；不改变长期偏好。重量留空按当天热身校准；疼痛、动作失稳或连续表现下降时停止受影响动作。单侧次数口径待核。\n完整估时约90分钟；包含热身、组间休息、转场与缓冲。 杠铃卧推组间120秒；恢复不足时不强迫压缩休息或牺牲动作质量。",
+        "id" : "85B9BACB-793D-4A5D-AD0E-FE8EDB37E297",
+        "maxReps" : 10,
+        "minReps" : 8,
+        "muscleGroup" : "肩部",
+        "order" : 7,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "1716A759-66AE-4422-A49C-8621C3D1D073",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "56F4EBE9-688B-4719-BB62-DE9FFA183564",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "78F82DC9-5569-42FE-8D23-35E61CDE78E5",
+            "prescription" : {
+              "effortCue" : "热身校准；出现不适或动作失稳时停止",
+              "label" : "轻负荷正式任务",
+              "repsLower" : 8,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 3,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      }
+    ],
+    "id" : "2063B651-BA01-5FE5-A538-9F152ACFCE30",
+    "localDay" : "2026-11-06",
+    "plannedDate" : "2026-11-06T04:00:00Z",
+    "templateID" : "9BC8790B-9BD7-4D71-A7E8-BB481DCD70A3",
+    "timeZoneIdentifier" : "Asia\/Shanghai",
+    "title" : "胸＋肩力量"
+  }
+}

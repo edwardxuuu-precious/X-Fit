@@ -1,0 +1,398 @@
+{
+  "version": 1,
+  "packageID": "notes-20261023-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-23-oct23-notes-workout",
+      "date": "2026-10-23",
+      "name": "Oct 23 - Chest Back Shoulders Core",
+      "startTimeKnown": false,
+      "durationMinutes": null,
+      "notes": "Owner-confirmed Apple Notes Oct 23; original per-set values and order. Load in kg except bw; Smith/barbell loads are plates per side excluding bar. Missing RIR, repetitions side, warmup classification and real times remain unknown. Draft metadata needs fresh phone validation.",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "Smith Bench Press",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg plates per side, excluding bar; bar mass unknown. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Assisted Pull-up",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "count",
+          "notes": "Source: Apple Notes Oct 23. ASSISTANCE kg, not added load. Count-only statistics. Set assistance sequence: 50.0 kg x 15, 46.88 kg x 15, 43.75 kg x 15, 40.63 kg x 15, 37.5 kg x 15, 34.38 kg x 15. Do not use as added-weight tonnage or kg progression. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 50.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 46.88,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 43.75,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40.63,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 37.5,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 34.38,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Barbell Row",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg plates per side, excluding bar; bar mass unknown. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 22.5,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 27.5,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Push up",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "count",
+          "notes": "Source: Apple Notes Oct 23. bw x 10 for all five sets; no body mass inferred. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Cable Fly",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg per hand/side. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Pulley Low Row",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 35.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 42.5,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 60.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Side Pull",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg per hand/side. Owner confirmed dumbbell lateral raise. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 2.5,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 7.5,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 2.5,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "杠铃片胸前转体",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Reverse Fly",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg per hand/side. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 5.0,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 8.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 8.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Smith shoulder press",
+          "muscleGroup": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "equipment": "PENDING_FRESH_DEVICE_IDENTITY_CHECK",
+          "volumeUnit": "kilogram",
+          "notes": "Source: Apple Notes Oct 23. kg plates per side, excluding bar; bar mass unknown. Repetitions side, RIR, warmup classification and actual set times unknown.",
+          "sets": [
+            {
+              "weight": 40.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 55.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": []
+}

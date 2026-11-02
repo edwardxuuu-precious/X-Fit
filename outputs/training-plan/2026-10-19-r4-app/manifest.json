@@ -1,0 +1,58 @@
+{
+  "planCode": "UPPER-20261019-R4",
+  "status": "APPLIED_AND_INDEPENDENTLY_READ_BACK_VERIFIED",
+  "confirmedAt": "2026-10-20T07:53:26+08:00",
+  "confirmationReference": "REQ-20261020-075150；本人确认R4，更新skill和相关文档，并把周三、周五计划同步到App；周一38/38保持不变，未知RIR留空，完成状态由本人训练时确认。",
+  "requirement": "docs/requirements/2026-10-20/075150_upper-week-r4-coach-sync.md",
+  "source": "outputs/training-plan/2026-10-19-upper-week-r4.md",
+  "sourceSHA256": "4283d291f764c64f2a59e0c3277138f13d8fd057ac92a49ed6de66941221df91",
+  "files": [
+    {
+      "localDay": "2026-10-21",
+      "id": "41d61d2f-22eb-50ae-87ec-04e554bdfb92",
+      "file": "outputs/training-plan/2026-10-19-r4-app/2026-10-21.json",
+      "title": "背＋二头",
+      "sets": 17,
+      "exercises": 5,
+      "transportSHA256": "9831a4e4a4b53116deae81f8188d4333fd46f848d5902bd723e3adc93f740067",
+      "replacement": {
+        "scheduleID": "f18b7b28-e012-516a-bf92-2892db2ac06d",
+        "packetSHA256": "afcbe61c7d5336042da5b10d204f3a5428f49f11434e96c4e3f6c17ccdfda80b"
+      },
+      "applyNewScheduleCount": 1,
+      "packetCanonicalSHA256": "d85fc3ab3f45cff1ca57f127af18733270740f6dea40398120ee3b799cea1536",
+      "repeatNewScheduleCount": 0,
+      "readbackFile": "outputs/training-plan/2026-10-19-r4-app/2026-10-21-readback.json",
+      "readback": "PASS"
+    },
+    {
+      "localDay": "2026-10-23",
+      "id": "637d2222-14b9-563c-8d5a-17eafda82a6f",
+      "file": "outputs/training-plan/2026-10-19-r4-app/2026-10-23.json",
+      "title": "肩＋三头",
+      "sets": 16,
+      "exercises": 5,
+      "transportSHA256": "9f7e4d05a44aff01f82a3c4ac1b281c43e39829b2618f40aba7031cbdf9ed5c2",
+      "replacement": {
+        "scheduleID": "c8a8cc35-eede-5807-b9c0-c80479e53067",
+        "packetSHA256": "8e664879a1a1d5c97f2b5641827ae1b8eab238864266175302156e99fd20179d"
+      },
+      "applyNewScheduleCount": 1,
+      "packetCanonicalSHA256": "dfa0d0eea0c317e0db374705a986a227792b1dd780695c1ba937197d4e74302e",
+      "repeatNewScheduleCount": 0,
+      "readbackFile": "outputs/training-plan/2026-10-19-r4-app/2026-10-23-readback.json",
+      "readback": "PASS"
+    }
+  ],
+  "sets": 33,
+  "actualSessionsCreated": 0,
+  "actualRIRPrefilled": false,
+  "completedAutomatically": false,
+  "verifiedAt": "2026-10-20T07:57:00.784133+08:00",
+  "verification": "outputs/training-plan/2026-10-19-r4-app/verification.json",
+  "deviceWritten": true,
+  "allOriginalWorkoutRecordsPreserved": true,
+  "unknownActualRIRPreserved": true,
+  "cardioAndPreferencesUnchanged": true,
+  "humanTrainingOutcome": "NOT_YET_OBSERVED"
+}

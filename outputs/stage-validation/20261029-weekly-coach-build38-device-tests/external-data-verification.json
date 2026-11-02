@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "summaries": {
+    "app-preferences": {
+      "before": 25,
+      "after": 31,
+      "missing": 0,
+      "changed": 0
+    },
+    "group-preferences": {
+      "before": 1,
+      "after": 1,
+      "missing": 0,
+      "changed": 0
+    },
+    "app-support": {
+      "before": 3,
+      "after": 3,
+      "missing": 0,
+      "changed": 0
+    },
+    "documents": {
+      "before": 474,
+      "after": 474,
+      "missing": 0,
+      "changed_size_or_mtime": 0
+    }
+  },
+  "issues": []
+}

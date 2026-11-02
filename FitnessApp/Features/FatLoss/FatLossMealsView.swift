@@ -23,46 +23,55 @@ struct FatLossMealsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 17) {
+                SprintPageHeader(title: "餐单", icon: "fork.knife")
                 DatePicker("查看日期", selection: $date, in: program.startDate...FatLossCalendar.adding(-1, to: program.endDate), displayedComponents: .date)
-                    .datePickerStyle(.compact).tint(AppTheme.accent)
+                    .datePickerStyle(.compact).tint(AppTheme.ink)
                 HStack {
-                    Button("14 天餐单预览") { showsPreview = true }.buttonStyle(.bordered)
+                    Button { showsPreview = true } label: {
+                        Label("14 天餐单", systemImage: "calendar")
+                    }.buttonStyle(SprintSecondaryButtonStyle())
                     Spacer()
-                    Button { showsPrep = true } label: { Label(FatLossCalendar.sameDay(date, .now) ? "明日备餐" : "次日备餐", systemImage: "basket") }.buttonStyle(.bordered)
+                    Button { showsPrep = true } label: { Label(FatLossCalendar.sameDay(date, .now) ? "明日备餐" : "次日备餐", systemImage: "basket") }.buttonStyle(SprintSecondaryButtonStyle())
                         .disabled(FatLossCalendar.adding(1, to: date) >= program.endDate)
                 }
 
                 if selected.isEmpty {
                     ContentUnavailableView("当天尚未导入餐单", systemImage: "fork.knife", description: Text("查看 14 天轮换方案后，可导入选定日期开始的餐单。"))
                     Button("预览并导入餐单") { showsPreview = true }
-                        .buttonStyle(.borderedProminent).accessibilityIdentifier("预览导入餐单")
+                        .buttonStyle(SprintPrimaryButtonStyle()).accessibilityIdentifier("预览导入餐单")
                 }
                 ForEach(selected) { meal in
                     NavigationLink(destination: FatLossMealDetailView(meal: meal)) {
-                        VStack(alignment: .leading, spacing: 12) {
-                            HStack {
-                                Label(meal.mealType.title, systemImage: meal.mealType.systemImage)
-                                    .font(.caption.bold()).foregroundStyle(AppTheme.accent)
-                                Spacer()
-                                Text(actuals.contains { $0.plannedMealID == meal.id && $0.isActiveMeal } ? "已记录实吃" : (meal.statusRaw == "skipped" ? "明确未吃" : "计划"))
-                                    .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                        HStack(spacing: 14) {
+                            SprintIcon(systemName: meal.mealType.systemImage, size: 48, prominent: true)
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack {
+                                    Text(meal.mealType.title)
+                                        .font(.caption.bold()).foregroundStyle(AppTheme.ink)
+                                    Spacer()
+                                    Text(actuals.contains { $0.plannedMealID == meal.id && $0.isActiveMeal } ? "已记录实吃" : (meal.statusRaw == "skipped" ? "明确未吃" : "计划"))
+                                        .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                                }
+                                Text(meal.title).font(.headline).foregroundStyle(AppTheme.ink)
                             }
-                            Text(meal.title).font(.title3.bold()).foregroundStyle(.white)
-                        }.padding(.vertical, 12)
+                            Image(systemName: "chevron.right").font(.caption).foregroundStyle(AppTheme.secondaryText)
+                        }.cardSurface(padding: 14)
                     }.buttonStyle(.plain).accessibilityIdentifier("计划餐-\(meal.mealType.title)")
                 }
-                NavigationLink("查看所有饮食记录 / 记录加餐", destination: NutritionView(initialDate: date))
-                    .font(.subheadline.bold()).foregroundStyle(AppTheme.accent)
-                NavigationLink("小红书博主与备餐来源", destination: FatLossRecipeSourcesView())
-                    .font(.subheadline.bold()).foregroundStyle(AppTheme.accent)
-                if let notice { Text(notice).font(.caption).foregroundStyle(AppTheme.accent) }
+                NavigationLink(destination: NutritionView(initialDate: date)) {
+                    FatLossNavigationRow(title: "饮食记录 / 加餐", icon: "clock.arrow.circlepath")
+                }.buttonStyle(.plain)
+                NavigationLink(destination: FatLossRecipeSourcesView()) {
+                    FatLossNavigationRow(title: "食谱来源", icon: "link")
+                }.buttonStyle(.plain)
+                if let notice { Text(notice).font(.caption).foregroundStyle(AppTheme.ink) }
             }.padding(20)
-        }.screenBackground().fatLossCalendar().navigationTitle("餐单与备餐").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.sprintPage().fatLossCalendar().navigationTitle("餐单与备餐").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .sheet(isPresented: $showsPreview) {
-                NavigationStack { FatLossMenuPreview(program: program, startDate: date) }.preferredColorScheme(.dark)
+                NavigationStack { FatLossMenuPreview(program: program, startDate: date) }.sprintPage()
             }
             .sheet(isPresented: $showsPrep) {
-                NavigationStack { FatLossPrepView(program: program, date: min(FatLossCalendar.adding(1, to: date), FatLossCalendar.adding(-1, to: program.endDate))) }.preferredColorScheme(.dark)
+                NavigationStack { FatLossPrepView(program: program, date: min(FatLossCalendar.adding(1, to: date), FatLossCalendar.adding(-1, to: program.endDate))) }.sprintPage()
             }
             .fatLossError($errorMessage)
     }
@@ -72,17 +81,18 @@ struct FatLossRecipeSourcesView: View {
     var body: some View {
         List {
             Section {
-                Text("家常菜草案；博主用于口味参考，非原配方。")
+                Label("家常菜草案", systemImage: "book.closed").font(.headline)
+                Text("博主用于口味参考，非原配方。")
                     .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
             }
-            Section("已找到作者自述") {
+            Section(header: SprintSectionHeading(title: "已找到作者自述", icon: "person.crop.circle")) {
                 sourceRows(FatLossCatalog.sources.filter { $0.title.contains("曼食慢语") })
             }
-            Section("待核验候选") { sourceRows(FatLossCatalog.creatorCandidates) }
-            Section("储存与复热依据") {
+            Section(header: SprintSectionHeading(title: "待核验候选", icon: "questionmark.circle")) { sourceRows(FatLossCatalog.creatorCandidates) }
+            Section(header: SprintSectionHeading(title: "储存与复热依据", icon: "refrigerator")) {
                 sourceRows(FatLossCatalog.sources.filter { !$0.title.contains("曼食慢语") })
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().navigationTitle("博主与来源").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().navigationTitle("博主与来源").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
     }
     private func sourceRows(_ sources: [RecipeSource]) -> some View {
         ForEach(Array(sources.enumerated()), id: \.offset) { _, source in
@@ -118,7 +128,7 @@ struct FatLossMenuPreview: View {
                             if let recipe = FatLossCatalog.recipe(dayIndex: FatLossCalendar.distance(program.startDate, day), mealType: type) {
                                 NavigationLink(destination: FatLossRecipeView(recipe: recipe)) {
                                     VStack(alignment: .leading, spacing: 5) {
-                                        Text(type.title).font(.caption).foregroundStyle(AppTheme.accent)
+                                        Text(type.title).font(.caption).foregroundStyle(AppTheme.ink)
                                         Text(recipe.title)
                                     }
                                 }
@@ -127,7 +137,7 @@ struct FatLossMenuPreview: View {
                     }
                 }
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().navigationTitle("14 天餐单预览")
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().navigationTitle("14 天餐单预览")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
@@ -146,25 +156,21 @@ struct FatLossRecipeView: View {
     @Environment(\.dynamicTypeSize) private var typeSize
     @State private var showsSteps = false
     let recipe: RecipeDraft
-    private var asset: String {
-        recipe.key.hasPrefix("breakfast") ? "EditorialBreakfast" : recipe.key.hasPrefix("lunch") ? "EditorialLunch" : "EditorialDinner"
-    }
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
-                Image(asset).resizable().scaledToFill().frame(height: 164).clipped()
-                    .overlay(alignment: .bottomTrailing) {
-                        Text("餐食示意").font(.caption2).padding(7).background(.black.opacity(0.6), in: Capsule()).padding(12)
-                    }.clipShape(RoundedRectangle(cornerRadius: 20)).accessibilityHidden(true)
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(recipe.title).font(.title2.bold()).foregroundStyle(AppTheme.posterWarmWhite)
-                        .fixedSize(horizontal: false, vertical: true)
-                    Text("\(recipe.cookingMinutes) 分钟 · 原配方 \(recipe.portions.formatted()) 份")
-                        .font(.subheadline.weight(.medium)).foregroundStyle(AppTheme.accent)
-                        .accessibilityIdentifier("食谱-原配方份数")
-                    if recipe.ingredients.contains(where: \.isMedicalPortionPending) {
-                        Label("个人份量待确认", systemImage: "info.circle")
-                            .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                HStack(alignment: .top, spacing: 16) {
+                    SprintIcon(systemName: "frying.pan", size: 64, prominent: true)
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(recipe.title).font(.title2.bold()).foregroundStyle(AppTheme.ink)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Text("\(recipe.cookingMinutes) 分钟 · 原配方 \(recipe.portions.formatted()) 份")
+                            .font(.subheadline.weight(.medium)).foregroundStyle(AppTheme.ink)
+                            .accessibilityIdentifier("食谱-原配方份数")
+                        if recipe.ingredients.contains(where: \.isMedicalPortionPending) {
+                            Label("个人份量待确认", systemImage: "info.circle")
+                                .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                        }
                     }
                 }
                 let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(spacing: 4)) : AnyLayout(HStackLayout(spacing: 4))
@@ -198,7 +204,7 @@ struct FatLossRecipeView: View {
                     }
                 }
             }.padding(20)
-        }.screenBackground().fatLossCalendar().navigationTitle("食谱详情")
+        }.sprintPage().fatLossCalendar().navigationTitle("食谱详情")
             .navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Button { showsSteps.toggle() } label: {
@@ -211,14 +217,14 @@ struct FatLossRecipeView: View {
     private func recipeTab(_ title: String, steps: Bool) -> some View {
         Button { showsSteps = steps } label: {
             Text(title).font(.subheadline.bold()).frame(maxWidth: .infinity, minHeight: 48)
-                .foregroundStyle(showsSteps == steps ? AppTheme.background : AppTheme.secondaryText)
+                .foregroundStyle(showsSteps == steps ? AppTheme.ink : AppTheme.secondaryText)
                 .background(showsSteps == steps ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 12))
         }.buttonStyle(.plain).accessibilityIdentifier(steps ? "食谱-做法" : "食谱-食材")
             .accessibilityAddTraits(showsSteps == steps ? .isSelected : [])
     }
     private var ingredientsContent: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("整批用量").font(.headline)
+            SprintSectionHeading(title: "整批用量", icon: "carrot")
             Text("以下为原配方，备餐时按每餐 1 份折算。")
                 .font(.caption).foregroundStyle(AppTheme.secondaryText)
             VStack(spacing: 0) {
@@ -232,7 +238,7 @@ struct FatLossRecipeView: View {
                     } label: {
                         let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6)) : AnyLayout(HStackLayout(spacing: 12))
                         layout {
-                            Text(ingredient.name).foregroundStyle(AppTheme.posterWarmWhite)
+                            Text(ingredient.name).foregroundStyle(AppTheme.ink)
                             if !typeSize.isAccessibilitySize { Spacer(minLength: 0) }
                             Text(ingredient.isMedicalPortionPending ? "待确认" : ingredient.referenceGrams.map { "≈ \($0.formatted()) g" } ?? "量具用量")
                                 .font(.subheadline.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
@@ -251,8 +257,8 @@ struct FatLossRecipeView: View {
             ForEach(Array(recipe.steps.enumerated()), id: \.offset) { index, step in
                 HStack(alignment: .top, spacing: 16) {
                     Text(String(format: "%02d", index + 1)).font(.title3.bold().monospacedDigit())
-                        .foregroundStyle(AppTheme.accent)
-                    Text(step).font(.body).foregroundStyle(AppTheme.posterWarmWhite)
+                        .foregroundStyle(AppTheme.ink)
+                    Text(step).font(.body).foregroundStyle(AppTheme.ink)
                         .fixedSize(horizontal: false, vertical: true)
                 }.accessibilityIdentifier("食谱-步骤-\(index + 1)")
             }
@@ -294,7 +300,7 @@ struct FatLossPrepView: View {
                     menuContent
                 }
             }.padding(20)
-        }.screenBackground().fatLossCalendar()
+        }.sprintPage().fatLossCalendar()
             .navigationTitle(FatLossCalendar.sameDay(date, FatLossCalendar.adding(1, to: .now)) ? "明日备餐" : "次日备餐")
             .navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .safeAreaInset(edge: .bottom, spacing: 0) {
@@ -325,17 +331,14 @@ struct FatLossPrepView: View {
     }
     private var heading: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(FatLossCalendar.label(date)).font(.caption.monospacedDigit())
-                .foregroundStyle(AppTheme.secondaryText)
-            Text(showsShopping ? "照单采购" : "餐盒计划")
-                .font(AppTheme.pageTitle)
+            SprintPageHeader(title: showsShopping ? "采购" : "备餐", icon: showsShopping ? "basket" : "takeoutbag.and.cup.and.straw", subtitle: FatLossCalendar.label(date))
             Text("1 人 · \(meals.count) 餐 · 每餐 1 份")
                 .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 .accessibilityIdentifier("备餐-份数摘要")
             if !items(.pending).isEmpty {
                 Button { showsPortionDetails = true } label: {
                     Label("\(items(.pending).count) 项用量待确认", systemImage: "info.circle")
-                        .font(.caption.weight(.medium)).foregroundStyle(AppTheme.accent)
+                        .font(.caption.weight(.medium)).foregroundStyle(AppTheme.ink)
                         .frame(minHeight: 44)
                 }.accessibilityIdentifier("备餐-首屏用量说明")
             }
@@ -344,8 +347,8 @@ struct FatLossPrepView: View {
     private var pageSwitch: some View {
         let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(spacing: 4)) : AnyLayout(HStackLayout(spacing: 4))
         return layout {
-            pageButton("菜单与分装", icon: "takeoutbag.and.cup.and.straw", shopping: false)
-            pageButton("采购清单", icon: "basket", shopping: true)
+            pageButton("分装", icon: "takeoutbag.and.cup.and.straw", shopping: false)
+            pageButton("采购", icon: "basket", shopping: true)
         }.padding(4).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 16))
     }
     private func pageButton(_ title: String, icon: String, shopping: Bool) -> some View {
@@ -353,7 +356,7 @@ struct FatLossPrepView: View {
             Label(title, systemImage: icon)
                 .font(.subheadline.weight(.semibold))
                 .frame(maxWidth: .infinity, minHeight: 48)
-                .foregroundStyle(showsShopping == shopping ? AppTheme.background : AppTheme.secondaryText)
+                .foregroundStyle(showsShopping == shopping ? AppTheme.ink : AppTheme.secondaryText)
                 .background(showsShopping == shopping ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 12))
         }.buttonStyle(.plain)
             .accessibilityIdentifier(shopping ? "备餐-采购页" : "备餐-菜单页")
@@ -379,26 +382,21 @@ struct FatLossPrepView: View {
                 }
             } label: {
                 Label("保存与复热", systemImage: "refrigerator")
-                    .font(.subheadline).foregroundStyle(.white).frame(minHeight: 44)
+                    .font(.subheadline).foregroundStyle(AppTheme.ink).frame(minHeight: 44)
             }.tint(AppTheme.secondaryText).accessibilityIdentifier("备餐-保存与复热")
         }
     }
     private func mealCard(_ meal: PlannedMeal) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            if typeSize.isAccessibilitySize {
-                mealPhoto(meal).frame(height: 170).clipped()
-                mealDescription(meal).padding(18)
-            } else {
-                HStack(spacing: 0) {
-                    mealDescription(meal).padding(18).frame(maxWidth: .infinity, alignment: .leading)
-                    mealPhoto(meal).frame(width: 132, height: 138).clipped()
-                }
-            }
+            HStack(alignment: .top, spacing: 14) {
+                mealPhoto(meal)
+                mealDescription(meal).frame(maxWidth: .infinity, alignment: .leading)
+            }.padding(18)
             HStack(spacing: 8) {
                 Image(systemName: "takeoutbag.and.cup.and.straw")
                 Text("装入\(meal.mealType.title)餐盒")
                 Spacer(minLength: 0)
-                Text("1 份").fontWeight(.bold).foregroundStyle(AppTheme.accent)
+                Text("1 份").fontWeight(.bold).foregroundStyle(AppTheme.ink)
                 Image(systemName: "arrow.up.right").foregroundStyle(AppTheme.secondaryText)
             }.font(.caption).foregroundStyle(AppTheme.secondaryText)
                 .padding(.horizontal, 18).padding(.vertical, 13)
@@ -409,8 +407,8 @@ struct FatLossPrepView: View {
     private func mealDescription(_ meal: PlannedMeal) -> some View {
         let parts = meal.title.components(separatedBy: "＋")
         return VStack(alignment: .leading, spacing: 10) {
-            Text(meal.mealType.title).font(.caption.weight(.bold)).foregroundStyle(AppTheme.accent)
-            Text(parts.first ?? meal.title).font(.title3.weight(.bold)).foregroundStyle(AppTheme.posterWarmWhite)
+            Text(meal.mealType.title).font(.caption.weight(.bold)).foregroundStyle(AppTheme.ink)
+            Text(parts.first ?? meal.title).font(.title3.weight(.bold)).foregroundStyle(AppTheme.ink)
                 .fixedSize(horizontal: false, vertical: true)
             if parts.count > 1 {
                 Text(parts.dropFirst().joined(separator: " · "))
@@ -420,23 +418,16 @@ struct FatLossPrepView: View {
         }
     }
     private func mealPhoto(_ meal: PlannedMeal) -> some View {
-        // These reusable illustrations represent a meal type, not a photo of the selected recipe.
-        GeometryReader { geometry in
-            Image(meal.mealType == .lunch ? "EditorialLunch" : "EditorialDinner")
-                .resizable().scaledToFill().frame(width: geometry.size.width, height: geometry.size.height)
-                .clipped().overlay(alignment: .bottomTrailing) {
-                    Text("餐食示意").font(.system(size: 10)).foregroundStyle(.white.opacity(0.85))
-                        .padding(5).background(.black.opacity(0.55), in: Capsule()).padding(8)
-                }
-        }.accessibilityHidden(true)
+        SprintIcon(systemName: meal.mealType.systemImage, size: 56, prominent: true)
+            .accessibilityHidden(true)
     }
     private var portionNotice: some View {
         Button { showsPortionDetails = true } label: {
             HStack(alignment: .center, spacing: 12) {
-                Image(systemName: "info.circle").font(.title3).foregroundStyle(AppTheme.accent)
+                Image(systemName: "info.circle").font(.title3).foregroundStyle(AppTheme.ink)
                 VStack(alignment: .leading, spacing: 4) {
                     Text(items(.pending).isEmpty ? "用量为参考，尚未称重" : "\(items(.pending).count) 项食材用量待确认")
-                        .font(.subheadline.weight(.medium)).foregroundStyle(AppTheme.posterWarmWhite)
+                        .font(.subheadline.weight(.medium)).foregroundStyle(AppTheme.ink)
                     Text(items(.pending).isEmpty ? "查看份数与用量说明" : items(.pending).map(\.name).joined(separator: " · "))
                         .font(.caption).foregroundStyle(AppTheme.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
@@ -452,7 +443,7 @@ struct FatLossPrepView: View {
                 HStack {
                     Text("需要购买").font(.title3.bold())
                     Spacer()
-                    Text("\(items(.purchase).count) 项").font(.caption.bold()).foregroundStyle(AppTheme.accent)
+                    Text("\(items(.purchase).count) 项").font(.caption.bold()).foregroundStyle(AppTheme.ink)
                 }
                 Text("已合并 \(meals.count) 餐 · 克重为未称重参考")
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
@@ -475,9 +466,9 @@ struct FatLossPrepView: View {
             ForEach(items(group)) { item in ingredientRow(item) }
         } label: {
             HStack(alignment: .top, spacing: 12) {
-                Image(systemName: icon).font(.title3).foregroundStyle(AppTheme.accent).frame(width: 24)
+                Image(systemName: icon).font(.title3).foregroundStyle(AppTheme.ink).frame(width: 24)
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(group.rawValue).font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.posterWarmWhite)
+                    Text(group.rawValue).font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.ink)
                         .fixedSize(horizontal: false, vertical: true)
                     Text(subtitle).font(.caption).foregroundStyle(AppTheme.secondaryText)
                 }
@@ -500,13 +491,13 @@ struct FatLossPrepView: View {
             let layout = typeSize.isAccessibilitySize ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6)) : AnyLayout(HStackLayout(spacing: 12))
             layout {
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(item.name).font(.body.weight(.medium)).foregroundStyle(AppTheme.posterWarmWhite)
+                    Text(item.name).font(.body.weight(.medium)).foregroundStyle(AppTheme.ink)
                     Text("用于 \(item.portions) 餐").font(.caption).foregroundStyle(AppTheme.secondaryText)
                 }
                 if !typeSize.isAccessibilitySize { Spacer(minLength: 0) }
                 Text(item.isMedicalPortionPending ? "待确认" : item.referenceGrams.map { "≈ \($0.formatted(.number.precision(.fractionLength(0...1)))) g" } ?? "待折算")
                     .font(.subheadline.weight(.semibold)).monospacedDigit()
-                    .foregroundStyle(item.referenceGrams != nil && !item.isMedicalPortionPending ? AppTheme.posterWarmWhite : AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .accessibilityLabel(PrepPresentation.amountSummary(item))
                     .accessibilityIdentifier("备餐用量-\(item.name)")
             }.frame(minHeight: 44, alignment: .leading).padding(.vertical, 10)
@@ -516,20 +507,20 @@ struct FatLossPrepView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Text("个人份量待确认").font(.title2.bold())
+                    SprintPageHeader(title: "份量待确认", icon: "scalemass")
                     Text("肉蛋奶豆等用量需结合医生建议确认，再据此采购和分装。")
                         .foregroundStyle(AppTheme.secondaryText)
                     ForEach(items(.pending)) { item in ingredientRow(item) }
                     NavigationLink("查看目标与健康资料", destination: FatLossTargetsView(program: program))
-                        .frame(minHeight: 44).foregroundStyle(AppTheme.accent)
+                        .frame(minHeight: 44).foregroundStyle(AppTheme.ink)
                     Divider()
                     Text("每餐准备 1 份").font(.headline)
                     Text("原配方为 2 份时，这一餐只用一半。已知克重为未称重参考，不是个性化摄入目标；个人主食份量仍待整体菜单确认。")
                         .foregroundStyle(AppTheme.secondaryText)
                 }.padding(20)
-            }.screenBackground().navigationTitle("份量说明").navigationBarTitleDisplayMode(.inline)
+            }.sprintPage().navigationTitle("份量说明").navigationBarTitleDisplayMode(.inline)
                 .toolbar { ToolbarItem(placement: .confirmationAction) { Button("关闭") { showsPortionDetails = false } } }
-        }.tint(AppTheme.accent)
+        }.tint(AppTheme.ink)
     }
 }
 
@@ -557,13 +548,19 @@ struct FatLossMealDetailView: View {
     var body: some View {
         Form {
             Section {
+                Label(meal.mealType.title, systemImage: meal.mealType.systemImage)
+                    .font(.caption.weight(.semibold)).foregroundStyle(AppTheme.secondaryText)
                 Text(meal.title).font(.title2.bold())
+                Text(actual != nil ? "实吃已记录" : (meal.statusRaw == "skipped" ? "明确未吃" : "计划 · 尚未记录实吃"))
+                    .font(.caption.weight(.semibold)).foregroundStyle(AppTheme.ink)
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+                    .background(AppTheme.accent.opacity(0.55), in: Capsule())
                 if let recipe = meal.recipe {
                     NavigationLink("查看完整食谱", destination: FatLossRecipeView(recipe: recipe))
                     Text(recipe.householdPortion).font(.caption)
                 }
             }
-            Section("实际吃了多少") {
+            Section(header: SprintSectionHeading(title: "本人实吃", icon: "fork.knife")) {
                 Stepper("\(portions.formatted()) 份", value: $portions, in: 0.25...10, step: 0.25)
                 Text("1 份 = 食谱中的一人份")
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
@@ -615,7 +612,7 @@ struct FatLossMealDetailView: View {
                 }
             }
             if actual == nil && meal.isCurrent {
-                Section("更换计划菜式") {
+                Section(header: SprintSectionHeading(title: "更换计划菜式", icon: "arrow.triangle.2.circlepath")) {
                     Picker("替换为", selection: $replacementID) {
                         Text("选择菜式").tag(nil as UUID?)
                         ForEach(recipes) { recipe in Text(recipe.title).tag(recipe.id as UUID?) }
@@ -629,7 +626,7 @@ struct FatLossMealDetailView: View {
                 }
             }
             if !previousPlans.isEmpty {
-                Section("这餐的计划历史") {
+                Section(header: SprintSectionHeading(title: "计划历史", icon: "clock.arrow.circlepath")) {
                     ForEach(previousPlans) { previous in
                         VStack(alignment: .leading, spacing: 5) {
                             Text(previous.title).font(.headline)
@@ -643,7 +640,7 @@ struct FatLossMealDetailView: View {
                     }
                 }
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput().navigationTitle("餐食与反馈").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput().navigationTitle("餐食与反馈").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .onAppear(perform: load)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("关闭") { dismiss() }.frame(minHeight: 44) }

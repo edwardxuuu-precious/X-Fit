@@ -1,0 +1,80 @@
+{
+  "requirement": "REQ-20261020-075831",
+  "status": "PASS",
+  "candidate": "/tmp/xfit-home-summary-phone-derived-20261020/Build/Products/Release-iphoneos/FitnessApp.app",
+  "frozen_source_inputs": 152,
+  "approved_source_inputs_unchanged": true,
+  "version": "0.5.0",
+  "build": "21",
+  "candidate_executable_sha256": "57285dd8f169af628a61c0043cac86453c61a4f61b49c3ca9bc9fe16ddecbbb7",
+  "candidate_assets_sha256": "b9aadf2af5a060f6df9117116f97f0aa1b01f70dca9984c7ccd3eec5643f4fee",
+  "strict_signature": "PASS",
+  "app_group": "group.com.edward.FitnessApp",
+  "cloud_sync_enabled": false,
+  "normal_launch_arguments": [],
+  "model_tables": 25,
+  "records_before": 2253,
+  "records_after": 2253,
+  "counts": {
+    "ZBODYMEASUREMENT": 22,
+    "ZDAILYBODYCHECKIN": 5,
+    "ZEXERCISE": 181,
+    "ZFATLOSSPROGRAM": 1,
+    "ZHYDRATIONENTRY": 0,
+    "ZJUMPROPEENTRY": 2,
+    "ZMEALENTRY": 33,
+    "ZNUTRITIONTARGET": 1,
+    "ZPLANNEDMEAL": 0,
+    "ZPROGRAMDAILYLOG": 0,
+    "ZPROGRAMHEALTHRECORD": 3,
+    "ZPROGRAMTARGETREVISION": 1,
+    "ZPROGRAMWEEKLYREVIEW": 0,
+    "ZPROGRAMWORKOUTLINK": 21,
+    "ZRECIPEVERSION": 18,
+    "ZSCHEDULEDWORKOUT": 56,
+    "ZSEDENTARYSESSION": 0,
+    "ZSESSIONEXERCISE": 319,
+    "ZSETLOG": 1267,
+    "ZTEMPLATEEXERCISE": 218,
+    "ZTRAININGCOACHRECORD": 1,
+    "ZTRAININGPREFERENCEREVISION": 5,
+    "ZTRAININGPROGRAMREVISION": 5,
+    "ZWORKOUTSESSION": 51,
+    "ZWORKOUTTEMPLATE": 43
+  },
+  "all_original_business_columns_pk_uuid_and_relations_unchanged": true,
+  "allowed_schema_additions": {
+    "ZJUMPROPEENTRY": [
+      "ZSCHEDULEDWORKOUTID"
+    ],
+    "ZSCHEDULEDWORKOUT": [
+      "ZJUMPROPEPLANJSON"
+    ]
+  },
+  "new_fields_remain_nil_on_history": true,
+  "resource_files_in_compared_scopes": 0,
+  "resource_scopes_unchanged": true,
+  "device_gates": {
+    "D00": "PASS",
+    "D01": "PASS",
+    "D02": "PASS",
+    "D03": "PASS",
+    "D04": "PASS",
+    "D05": "PASS",
+    "D06A": "PASS",
+    "D06B": "PASS",
+    "D06C": "PASS",
+    "D07": "NOT_RUN",
+    "D09": "BLOCKED_HUMAN"
+  },
+  "receipts": [
+    "device-install.json",
+    "device-launch.json",
+    "device-app-readback.json"
+  ],
+  "phone_business_data_edits": 0,
+  "simulator_data_uploaded_to_phone": false,
+  "device_xctest": "NOT_RUN",
+  "human_phone_acceptance": "pending",
+  "stage_decision": "PARTIAL"
+}

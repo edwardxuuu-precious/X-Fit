@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "channel": "xfit-dedicated-internal-connection",
+  "api_version": "2026-03-11",
+  "workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "workspace_name": "Edward's Notion",
+  "keychain_service": "com.xfit.notion-access",
+  "keychain_account": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "archive_state": "docs/training/notion-sync-state.json",
+  "archive_records": "docs/training/archive-records.json",
+  "framework_blueprint": "docs/operations/notion-blueprint.json",
+  "private_parent_page_id": "3f74c857-b834-8004-8a2d-ca7863ccfc2b",
+  "writes_enabled": false,
+  "requirement": "docs/requirements/2026-10-04/195337_notion-independent-access.md"
+}

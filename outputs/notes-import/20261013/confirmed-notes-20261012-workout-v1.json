@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "packageID": "notes-20261012-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-12-oct12-notes-workout",
+      "date": "2026-10-12",
+      "name": "颈前深蹲",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「Oct 12」。按原名与原始组次补录；未记训练时间、时长、RIR及多数动作器械；单双侧口径未注明，不推断。Notes 中列出的组均已勾选。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "颈前深蹲",
+          "muscleGroup": "腿部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "动作库中存在同名条目；记录名称原样保留。单双侧/重量口径未知。",
+          "sets": [
+            {"weight": 10, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 15, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 25, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 6, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 15, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "保加利亚深蹲",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；与动作库近似名称不自动合并；肌群、器械、单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 15, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 17.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 22.5, "reps": 6, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 17.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "转体火箭推",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "弓步提膝推举",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "单腿推举",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；具体动作/器械及单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "哑铃上摇",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；原名虽含哑铃但未将其解释为动作库分类；肌群及单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "前平举深蹲",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "sets": [
+            {"weight": 5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "Seated Leg Extension/Technogym",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "按 Notes 原名保存；原文提及 Technogym，但具体设备/阻力单位及单双侧口径未确认。",
+          "sets": [
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 40, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 45, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "靠墙胫骨前肌提拉",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "bodyweight",
+          "notes": "按 Notes 原名保存；自重×10，共 3 组；肌群/分类未与近似动作自动合并。",
+          "sets": [
+            {"weight": 0, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 0, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 0, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": [],
+  "jumpRopeEntries": [],
+  "voidMealIDs": [],
+  "staleSession": null
+}

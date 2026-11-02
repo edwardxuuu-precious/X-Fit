@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "packageID": "notes-20261026-volume-feedback-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-26-notes-p362",
+      "date": "2026-10-26",
+      "name": "Oct 26 · 下肢（Notes实际）",
+      "startTimeKnown": false,
+      "durationMinutes": null,
+      "scheduleTemplateCode": null,
+      "notes": "Notes原31条及本人澄清；本人报告约80分钟，作为反馈保留，不伪造午夜开始/结束。热身/工作性质、逐组真实时间和未确认侧别保持未知。深蹲/腿举/腿弯举末条练后估计RIR约3/2/3，单列备注，不补为原始组RIR；原Notes和原四动作处方保留。",
+      "exercises": [
+        {
+          "name": "深蹲",
+          "muscleGroup": "腿部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：Squat；来源行ID：598c58c7-e344-5396-b6b2-1213b9ccc0e2,a78f1be7-b464-5898-a5ba-6fe2d5796ecc,e45b01d4-36a4-50d2-bb09-6f56f7a54267,a4ed3cd2-1b6a-594d-8b2f-0d500f6a97c2,c835ebe1-0d17-554d-97c0-a178282d2a07。每侧负重；未知杆重不加算，具体杆/器械变式未进一步展开。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。本人练后估计末条RIR约3，仅作后补反馈，不填成原始组RIR。",
+          "sets": [
+            {
+              "weight": 25.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "保加利亚单腿蹲",
+          "muscleGroup": "腿部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：保加利亚单腿蹲；来源行ID：abc5c87b-459b-5e47-9e80-52e221ed6d00,3ad55013-78ea-5f93-92e7-f6078a8000b3,d1a8321a-d0cc-56c6-9b53-a582c6370f2d,4a141be1-7fe6-5813-807b-9ec0d4c0de6c,856ebe81-62c8-5d3a-bf26-68782aa93972。一只哑铃单侧持重，记录该只哑铃kg，不乘二；支撑/持重相对工作腿及次数侧别未新确认。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 22.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 22.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "坐姿腿弯举",
+          "muscleGroup": "腿部",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：坐姿腿弯举；来源行ID：5b9d367c-6cf9-59c8-a028-1698088a4e6a,765e00a0-1788-59e7-9853-2a8f7a7c3aff,6bcf9268-e4e7-5656-9637-f72bd689ff04,c77d5dc3-9f38-5f47-9d78-a24c560e11da。与之前同一台机器，记录显示kg；物理侧别未确认。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。本人练后估计末条RIR约3，仅作后补反馈，不填成原始组RIR。",
+          "sets": [
+            {
+              "weight": 40.0,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 55.0,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "腿举",
+          "muscleGroup": "腿部",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：Leg press；来源行ID：dc7eecd2-6b12-591d-b0f6-84fe1696372c,adeef7f0-e1fe-5409-9b8f-796319962997,26679127-d838-5b52-bacc-e455c34be603,e842bb2e-9578-550f-839e-a6050561d77c。与10/17同一台机器，每侧片重kg，不加未知空载阻力。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。本人练后估计末条RIR约2，仅作后补反馈，不填成原始组RIR。",
+          "sets": [
+            {
+              "weight": 75.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 90.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 100.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 110.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Hip and glute machine",
+          "muscleGroup": "臀部",
+          "equipment": "器械侧抬腿机",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：Hip and glute machine；来源行ID：e84154c6-53c7-5d00-9263-e1780095bc57,d4ff050f-fe3e-5ef3-b9a6-ae11e5569063,1d068bec-fc4d-595a-a0cb-bf1563b29937,af3af1a0-7e1f-5e1f-8526-744165d4976e。本人称类似Lateral Leg Raises的器械负重动作，按器械侧抬腿/髋外展理解，不是臀推。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。",
+          "sets": [
+            {
+              "weight": 61.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 61.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 61.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 61.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Abductor machine",
+          "muscleGroup": "腿部",
+          "equipment": "髋内收器械",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：Abductor machine；来源行ID：53de6b72-c059-591f-a653-e067936e5f77,8e6fdb42-f108-55f9-877e-dd39cf765620,8f179f7f-27ec-5b33-88e2-58303a6c468b,8de0824d-6f4b-5dd6-a609-fe2d80e28c02。原名保留，但本人明确实际向内夹，为髋内收；不能按原英文猜外展。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。",
+          "sets": [
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "斯密斯单腿提踵",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes名：斯密斯单腿提踵；来源行ID：496227b4-ccbc-53e4-9224-a995bcca70f1,00914cf2-fa4c-5f3c-816f-8be309ce260a,fc66376a-6212-5647-b30a-aacdb3de2b55,6290a6dd-ee4e-51cb-9f6e-4b9a5b100b42,414d5d14-73bf-53a0-b506-62b92721edbb。kg已确认；每侧片重/总加片仍未确认，不从其他Smith动作扩展。31条热身/工作性质未标，真实开始/结束/休息未知；次数侧别未知不补猜。",
+          "sets": [
+            {
+              "weight": 15.0,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 20.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": [],
+  "jumpRopeEntries": []
+}

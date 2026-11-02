@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "local packet/approved plan consistency; catalog checked against 10:35 read-only copy, fresh device preview pending",
+  "days": [
+    {
+      "day": "2026-10-22",
+      "exercises": 1,
+      "sets": 1,
+      "catalogIdentityMatched": true,
+      "actualNotMarkedCompleted": true
+    },
+    {
+      "day": "2026-10-23",
+      "exercises": 5,
+      "sets": 16,
+      "catalogIdentityMatched": true,
+      "actualNotMarkedCompleted": true
+    }
+  ]
+}

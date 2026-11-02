@@ -1,0 +1,54 @@
+{
+  "reviewPath": "/Users/edward/Documents/Fitness App/outputs/training-plan/2026-11-02-autonomous-review/上肢周重点动作递减组审阅版.md",
+  "reviewSHA256": "ebb971dba69317ddd930ddb5003c9ddf2434a3e447f32c8ead5ebe72933e2014",
+  "approval": "本人回复：好的",
+  "approvalRecordedAt": "2026-10-29T15:01:07Z",
+  "state": "APPLIED_READBACK_VERIFIED",
+  "days": [
+    {
+      "day": "2026-11-02",
+      "packetID": "C565F75B-5DF6-52AA-B5E9-2C5CE33C5DC3",
+      "packetFile": "2026-11-02-packet.json",
+      "packetFileSHA256": "512d87adf28f4210e3c91a2ef8302e6da0d623a806006810c51d03db7beb2a0e",
+      "oldID": "82716FCA-00D6-51EF-A477-64B388523FC6",
+      "oldPacketSHA256": "ca77adc97f6401aaeab2e2a5950440b9127f49b017095f56400d52545a2653c5",
+      "exerciseCount": 8,
+      "plannedSets": 32
+    },
+    {
+      "day": "2026-11-04",
+      "packetID": "B5BD7C0C-C4B3-596A-A174-E018E0324B6D",
+      "packetFile": "2026-11-04-packet.json",
+      "packetFileSHA256": "501c2eda8520b6ae97406d8c282172022399aefb80251a02b282033250ddf94e",
+      "oldID": "12DD18F4-4513-5391-87BD-3B5AA023E942",
+      "oldPacketSHA256": "9c04b6e8807539f40374fdc7dc1e5773b9ecd8c408092818ed2f36a96fb4a7be",
+      "exerciseCount": 7,
+      "plannedSets": 28
+    },
+    {
+      "day": "2026-11-06",
+      "packetID": "0DD88D81-CBD9-5D0A-9B73-7F9B10EDA173",
+      "packetFile": "2026-11-06-packet.json",
+      "packetFileSHA256": "39aab574126a36c45eb5cddf40a8b08053d4eff982f9613ab1441e03513b3ac0",
+      "oldID": "2063B651-BA01-5FE5-A538-9F152ACFCE30",
+      "oldPacketSHA256": "d321fedfe17b22dc8b2afa3be0223763baab141e7953ad2787e05f8ee7bd16f6",
+      "exerciseCount": 8,
+      "plannedSets": 32
+    }
+  ],
+  "localSimulation": "simulator-check.json",
+  "deviceLastCheck": {
+    "timeLocal": "2026-10-30T11:52:33.104961+08:00",
+    "result": "三日应用和独立回读通过；写前写后业务数据核对通过",
+    "phonePreviewExecuted": true,
+    "phoneApplyExecuted": true,
+    "phoneReadbackExecuted": true
+  },
+  "deviceVerification": "device-verification-20261030.json",
+  "mainSimulatorRefresh": {
+    "status": "PASS",
+    "result": "outputs/simulator-real-data/20261030-115246/result.json",
+    "sourcePhoneSnapshot": "2026-10-30 11:51 +0800",
+    "phoneWrites": 0
+  }
+}

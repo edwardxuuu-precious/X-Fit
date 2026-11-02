@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "requirement": "REQ-20261020-110641",
+  "device": "Edward_iPhone",
+  "device_udid": "00008150-001E49912122401C",
+  "before_records": 2259,
+  "after_records": 2262,
+  "added_rows": {
+    "ZSESSIONEXERCISE": 1,
+    "ZSETLOG": 1,
+    "ZWORKOUTSESSION": 1
+  },
+  "changed_original_rows": [
+    {
+      "table": "ZSCHEDULEDWORKOUT",
+      "id": "772c59378448503ca7623d2b8d3f904c",
+      "fields": [
+        "ZUPDATEDAT",
+        "ZSTATUSRAW"
+      ]
+    }
+  ],
+  "all_other_original_fields_ids_relationships_preserved": true,
+  "activity": "固定单车",
+  "local_day": "2026-10-20",
+  "actual_seconds": 2100,
+  "actual_minutes": 35,
+  "machine_level": 10,
+  "source": "本人报告并确认；正常原生表单保存",
+  "clock_times_known": false,
+  "actual_weight_is_blank": true,
+  "rir": null,
+  "session_id": "2ffb29179d3a42349ce7ed5dc1593bab",
+  "exercise_id": "e20089f2b1a44696a28998f619490fe9",
+  "set_id": "bf803a1c071f4654bbbcdc3e9e443a9f",
+  "schedule_id": "772c59378448503ca7623d2b8d3f904c",
+  "phone_snapshot": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261020-cardio-home-phone-preview/phone-after-actual/phone-application-support",
+  "simulator_data_uploaded_to_phone": false,
+  "resources_in_compared_scopes_unchanged": true,
+  "resource_files_in_compared_scopes": 0
+}

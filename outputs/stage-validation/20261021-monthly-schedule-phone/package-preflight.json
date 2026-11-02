@@ -1,0 +1,40 @@
+{
+  "requirement": "REQ-20261020-222819",
+  "status": "PASS",
+  "scope": "local signed package preflight; device delivery follows unified script",
+  "frozen_inputs": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261021-monthly-schedule-phone/frozen-inputs.json",
+  "frozen_input_count": 153,
+  "changed_from_phone24": [
+    "FitnessApp/Features/Schedule/ScheduleView.swift",
+    "FitnessApp/Shared/TrainingDayFeedback.swift",
+    "FitnessApp/Shared/TrainingSchedulePresentation.swift",
+    "FitnessAppTests/TrainingFeedbackTests.swift",
+    "FitnessAppUITests/RedesignUITests.swift",
+    "FitnessApp.xcodeproj/project.pbxproj"
+  ],
+  "models_services_app_entry_unchanged": 40,
+  "packages": [
+    {
+      "bundle": "com.edward.FitnessApp",
+      "version": "0.5.0",
+      "build": "25",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "phone_in_profile": true
+    },
+    {
+      "bundle": "com.edward.FitnessApp.XFitShareExtension",
+      "version": "0.5.0",
+      "build": "25",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "phone_in_profile": true
+    }
+  ],
+  "cloud_sync_enabled": false,
+  "candidate": "/tmp/xfit-monthly-phone-222819-build25-derived/Build/Products/Release-iphoneos/FitnessApp.app",
+  "executable_sha256": "f07fcabc4ee9e15d538bb3ec422fc3d60266173056ee3431379ae04e85a3169a",
+  "git_branch": "main",
+  "remote": "origin git@github.com:edwardxuuu-precious/X-Fit.git",
+  "ahead_behind": "0/0; current delivery does not push"
+}

@@ -63,7 +63,12 @@ struct ExerciseEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("动作信息") {
+                Section {
+                    SprintPageHeader(title: exercise == nil ? "新建动作" : "编辑动作", icon: "dumbbell")
+                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                        .listRowBackground(Color.clear)
+                }
+                Section {
                     TextField("动作名称", text: $name)
                         .textInputAutocapitalization(.never)
                     Picker("目标肌群", selection: $muscleGroupChoice) {
@@ -132,6 +137,8 @@ struct ExerciseEditorView: View {
                             Text("\(seconds) 秒").tag(seconds)
                         }
                     }
+                } header: {
+                    SprintSectionHeading(title: "动作信息", icon: "dumbbell")
                 }
 
                 Section {
@@ -140,23 +147,23 @@ struct ExerciseEditorView: View {
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled()
 
-                    TextField("最多 40 字，只写最重要的动作提醒", text: $notes, axis: .vertical)
+                    TextField("动作提醒（最多 40 字）", text: $notes, axis: .vertical)
                         .lineLimit(1...2)
                     HStack {
-                        Text("训练时会放在动作名称下方。")
+                        Text("显示在训练动作下方")
                         Spacer()
                         Text("\(notes.count)/40")
                             .foregroundStyle(notes.count > 40 ? .red : .secondary)
                     }
                     .font(.caption2)
                 } header: {
-                    Text("学习资料")
+                    SprintSectionHeading(title: "资料与提醒", icon: "link")
                 } footer: {
                     Text("可保存你学习这个动作时使用的视频或文章链接。")
                 }
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()

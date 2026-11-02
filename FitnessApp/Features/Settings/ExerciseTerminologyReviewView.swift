@@ -63,7 +63,7 @@ struct ExerciseTerminologyReviewView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: nil, title: "动作名称审核")
+                SprintPageHeader(title: "动作名称", icon: "character.book.closed")
 
                 boundaryCard
                 summaryGrid
@@ -81,7 +81,7 @@ struct ExerciseTerminologyReviewView: View {
                         systemImage: "checkmark.seal",
                         description: Text(searchText.isEmpty ? "可以切换到“全部”查看动作库。" : "请尝试其他中英文名称。")
                     )
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 } else {
                     LazyVStack(spacing: 10) {
                         ForEach(visibleExercises) { exercise in
@@ -100,7 +100,8 @@ struct ExerciseTerminologyReviewView: View {
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
-        .screenBackground()
+        .sprintPage()
+        .navigationTitle("动作名称审核")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .searchable(text: $searchText, prompt: "搜索中文、英文、肌群或器械")
@@ -123,19 +124,16 @@ struct ExerciseTerminologyReviewView: View {
 
     private var boundaryCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("本地候选库已启用", systemImage: "checkmark.shield.fill")
+            Label("逐项审核后生效", systemImage: "checkmark.shield")
                 .font(.headline.bold())
-                .foregroundStyle(.white)
-            Text("接受候选只会批准 canonical 身份与中英文显示名，不会改写已完成训练的原始名称，也不会直接合并动作 UUID、PR 或上次重量。")
-                .font(.caption)
-                .foregroundStyle(AppTheme.secondaryText)
-            HStack(spacing: 8) {
-                Label("AI API 未连接", systemImage: "network.slash")
-                Text("·")
-                Text("DeepSeek 需通过 HTTPS 代理接入")
-            }
-            .font(.caption2.weight(.semibold))
-            .foregroundStyle(AppTheme.orange)
+                .foregroundStyle(AppTheme.ink)
+            DisclosureGroup("审核规则与连接") {
+                Text("接受候选只会批准 canonical 身份与中英文显示名，不会改写已完成训练的原始名称，也不会直接合并动作 UUID、PR 或上次重量。")
+                    .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                Label("AI API 未连接 · DeepSeek 需通过 HTTPS 代理接入", systemImage: "network.slash")
+                    .font(.caption2.weight(.semibold)).foregroundStyle(AppTheme.orange)
+                    .padding(.top, 8)
+            }.font(.caption).tint(AppTheme.ink)
         }
         .cardSurface()
     }
@@ -154,26 +152,22 @@ struct ExerciseTerminologyReviewView: View {
         }.count
 
         return LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
-            MetricCard(title: "待审核动作", value: "\(pending)", detail: "逐项人工确认", systemImage: "checklist")
+            MetricCard(title: "待审核", value: "\(pending)", detail: "逐项确认", systemImage: "checklist")
             MetricCard(title: "未唯一解析", value: "\(unresolved)", detail: "需照片或器械信息", systemImage: "questionmark.diamond.fill", tint: AppTheme.orange)
-            MetricCard(title: "已接受候选", value: "\(accepted)", detail: "历史原名仍保留", systemImage: "checkmark.seal.fill")
+            MetricCard(title: "已接受", value: "\(accepted)", detail: "历史原名保留", systemImage: "checkmark.seal.fill")
             MetricCard(title: "涉及完成组", value: "\(impactedSets)", detail: "确认前不合并趋势", systemImage: "clock.arrow.circlepath", tint: AppTheme.purple)
         }
     }
 
     private func terminologyRow(_ exercise: Exercise) -> some View {
         HStack(alignment: .top, spacing: 12) {
-            Image(systemName: statusIcon(exercise))
-                .font(.subheadline.bold())
-                .foregroundStyle(statusColor(exercise))
-                .frame(width: 38, height: 38)
-                .background(statusColor(exercise).opacity(0.12), in: RoundedRectangle(cornerRadius: 11))
+            SprintIcon(systemName: statusIcon(exercise), size: 38)
 
             VStack(alignment: .leading, spacing: 5) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(exercise.name)
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Spacer()
                     Text(exercise.terminologyDecision.title)
                         .font(.caption2.bold())
@@ -182,7 +176,7 @@ struct ExerciseTerminologyReviewView: View {
                 if let standardZH = exercise.terminologyStandardNameZH, standardZH != exercise.name {
                     Text("候选：\(standardZH)")
                         .font(.caption)
-                        .foregroundStyle(.white.opacity(0.82))
+                        .foregroundStyle(AppTheme.ink.opacity(0.82))
                 }
                 if let standardEN = exercise.terminologyStandardNameEN, !standardEN.isEmpty {
                     Text(standardEN)
@@ -219,14 +213,14 @@ struct ExerciseTerminologyReviewView: View {
 
     private func statusColor(_ exercise: Exercise) -> Color {
         switch exercise.terminologyDecision {
-        case .accepted: return AppTheme.accent
+        case .accepted: return AppTheme.ink
         case .rejected: return AppTheme.secondaryText
         case .pending:
             switch exercise.terminologyReviewStatus {
             case .unresolved: return AppTheme.orange
             case .mergeReview: return AppTheme.purple
-            case .variantReview: return .yellow
-            case .approvalReady, nil: return AppTheme.accent
+            case .variantReview: return AppTheme.orange
+            case .approvalReady, nil: return AppTheme.ink
             }
         }
     }
@@ -276,7 +270,7 @@ private struct ExerciseTerminologyDetailView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: nil, title: exercise.name)
+                SprintPageHeader(title: exercise.name, icon: "dumbbell")
 
                 rawIdentityCard
                 candidateCard
@@ -287,7 +281,7 @@ private struct ExerciseTerminologyDetailView: View {
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
-        .screenBackground()
+        .sprintPage()
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .confirmationDialog(
@@ -333,9 +327,9 @@ private struct ExerciseTerminologyDetailView: View {
 
     private var rawIdentityCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("当前原始记录", systemImage: "lock.shield.fill")
+            Label("原始记录", systemImage: "lock.shield")
                 .font(.headline.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             detailRow("名称", exercise.name)
             detailRow("肌群", exercise.muscleGroup)
             detailRow("器械", exercise.equipment)
@@ -349,13 +343,13 @@ private struct ExerciseTerminologyDetailView: View {
     private var candidateCard: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Label("标准名称候选", systemImage: "character.book.closed.fill")
+                Label("名称候选", systemImage: "character.book.closed")
                     .font(.headline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Spacer()
                 Text(exercise.terminologyConfidence.map { "\($0.title)置信度" } ?? "未评级")
                     .font(.caption2.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
             detailRow("中文", exercise.terminologyStandardNameZH ?? "尚无候选")
             detailRow("英文", exercise.terminologyStandardNameEN.orPlaceholder)
@@ -374,7 +368,7 @@ private struct ExerciseTerminologyDetailView: View {
         VStack(alignment: .leading, spacing: 10) {
             Label("历史影响", systemImage: "clock.arrow.circlepath")
                 .font(.headline.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             detailRow("当前完成组", "\(completedSetCount)")
                 .accessibilityElement(children: .combine)
                 .accessibilityIdentifier("terminology-completed-set-row")
@@ -397,7 +391,7 @@ private struct ExerciseTerminologyDetailView: View {
                     pendingAction = .accepted
                 } label: {
                     Text(hasAcceptableCandidate
-                        ? (mergePeers.isEmpty ? "接受标准名称候选" : "确认同一动作并接受候选")
+                        ? (mergePeers.isEmpty ? "接受候选" : "接受同组候选")
                         : "信息不足，暂不可接受")
                         .neonButtonStyle()
                 }
@@ -409,7 +403,7 @@ private struct ExerciseTerminologyDetailView: View {
                 Button {
                     pendingAction = .rejected
                 } label: {
-                    Text("保留当前名称，不采用候选")
+                    Text("保留当前名称")
                         .font(.subheadline.bold())
                         .foregroundStyle(AppTheme.orange)
                         .padding(.vertical, 12)
@@ -423,7 +417,7 @@ private struct ExerciseTerminologyDetailView: View {
                 HStack {
                     Label(exercise.terminologyDecision.title, systemImage: exercise.terminologyDecision == .accepted ? "checkmark.seal.fill" : "equal.circle.fill")
                         .font(.headline.bold())
-                        .foregroundStyle(exercise.terminologyDecision == .accepted ? AppTheme.accent : AppTheme.secondaryText)
+                        .foregroundStyle(exercise.terminologyDecision == .accepted ? AppTheme.ink : AppTheme.secondaryText)
                     Spacer()
                     if let date = exercise.terminologyReviewedAt {
                         Text(date.formatted(date: .abbreviated, time: .shortened))
@@ -434,7 +428,7 @@ private struct ExerciseTerminologyDetailView: View {
                 Button { showResetConfirmation = true } label: {
                     Text("撤销审核决定")
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                         .padding(.vertical, 12)
                         .frame(maxWidth: .infinity, minHeight: AppTheme.minimumTouchTarget)
                         .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
@@ -500,7 +494,7 @@ private struct ExerciseTerminologyDetailView: View {
                 .frame(width: 76, alignment: .leading)
             Text(value)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
                 .textSelection(.enabled)
             Spacer(minLength: 0)
         }

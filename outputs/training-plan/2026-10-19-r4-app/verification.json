@@ -1,0 +1,72 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-20T07:57:00.784133+08:00",
+  "device": "Edward_iPhone",
+  "transport": "wireless",
+  "tables": 25,
+  "recordsBefore": 2238,
+  "recordsAfter": 2252,
+  "additions": {
+    "ZSCHEDULEDWORKOUT": 2,
+    "ZTEMPLATEEXERCISE": 10,
+    "ZWORKOUTTEMPLATE": 2
+  },
+  "removed": 0,
+  "changedExistingRows": {
+    "f18b7b28-e012-516a-bf92-2892db2ac06d": [
+      "ZUPDATEDAT",
+      "ZSKIPREASON",
+      "ZSTATUSRAW"
+    ],
+    "c8a8cc35-eede-5807-b9c0-c80479e53067": [
+      "ZUPDATEDAT",
+      "ZSKIPREASON",
+      "ZSTATUSRAW"
+    ]
+  },
+  "allOtherExistingBusinessFieldsPreserved": true,
+  "historicalSessionsAndSetsUnchanged": true,
+  "monday": {
+    "sessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+    "status": "completed",
+    "exerciseCount": 9,
+    "completedSets": 38,
+    "totalSets": 38,
+    "unknownActualRIR": 38,
+    "originalIDsAndBusinessValuesPreserved": true,
+    "completedAt": null
+  },
+  "newSchedules": [
+    {
+      "id": "41d61d2f-22eb-50ae-87ec-04e554bdfb92",
+      "localDay": "2026-10-21",
+      "title": "背＋二头",
+      "status": "planned",
+      "exercises": 5,
+      "sets": 17,
+      "actualSessions": 0
+    },
+    {
+      "id": "637d2222-14b9-563c-8d5a-17eafda82a6f",
+      "localDay": "2026-10-23",
+      "title": "肩＋三头",
+      "status": "planned",
+      "exercises": 5,
+      "sets": 16,
+      "actualSessions": 0
+    }
+  ],
+  "actualSessionsCreated": 0,
+  "actualSetLogsCreated": 0,
+  "photoAssetsCompared": 0,
+  "photoAssetsPreserved": null,
+  "cardioAndPreferencesUnchanged": true,
+  "databaseIntegrity": "ok",
+  "humanTrainingOutcome": "NOT_YET_OBSERVED",
+  "photoAssetVerification": {
+    "status": "NOT_RUN",
+    "scope": "App Group Library/Application Support",
+    "matchedFiles": 0,
+    "limitation": "本轮未对照片文件作逐个前后核验；已核对25表全部原有业务字段。导入包只含训练计划，不含照片。"
+  }
+}

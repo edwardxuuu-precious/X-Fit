@@ -24,8 +24,33 @@ enum SeedDataService {
         try ExerciseCatalogService.consolidateConfirmedSquatDuplicate(in: context)
         try ExerciseCatalogService.consolidateConfirmedAliases(in: context)
         try BodyweightVolumeMigration.applyConfirmedAllowlist(in: context)
+        // A cloud-restore placeholder must remain empty when initial seeding is
+        // disabled. Supplements extend an existing catalog; they cannot seed one.
+        if hasExercises {
+            _ = try ExerciseCatalogService.ensureNotesCatalogSupplement(in: context)
+        }
         try ExerciseTerminologyService.stageCatalogCandidates(in: context)
         normalizeImportedWorkoutNames(in: context)
+        if TrainingPreferenceService.isRegistered(in: context) {
+            _ = try TrainingPreferenceService.ensureConfirmedProfile(in: context)
+            _ = try TrainingPreferenceService.ensurePyramidPreference(in: context)
+            #if DEBUG
+            if !CloudSyncRuntime.isUITesting || CommandLine.arguments.contains("--ui-testing-coach-week-alternating") {
+                _ = try TrainingPreferenceService.ensureAlternatingPreference(in: context)
+            }
+            #else
+            _ = try TrainingPreferenceService.ensureAlternatingPreference(in: context)
+            #endif
+            if context.container.schema.entities.contains(where: {
+                $0.name == String(describing: FatLossProgram.self)
+            }), let program = try FatLossService.activeProgram(in: context) {
+                _ = try TrainingPreferenceService.ensureProgramRevision(
+                    programID: program.id,
+                    effectiveDate: program.startDate,
+                    in: context
+                )
+            }
+        }
         try ScheduleService.refreshUpcoming(in: context)
         try context.save()
     }

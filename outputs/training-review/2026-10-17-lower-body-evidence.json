@@ -1,0 +1,2359 @@
+{
+  "evidenceID": "REVIEW-20261017-LOWER-E01",
+  "capturedAt": "2026-10-17T16:37:49.252030+08:00",
+  "source": {
+    "temporaryReadOnlyCopy": "/tmp/xfit-review-20261017-actual-read/default.store",
+    "storeSHA256": "979ed0fd829a6ef03b38ad9dd4fa13e5920c0f19b0bf0c28db9605093cf8fed1",
+    "quickCheck": "ok",
+    "transportOutcome": "success"
+  },
+  "methodVersion": "METHOD-20261017-04",
+  "preferenceRevision": "TP-20260928-05",
+  "localSetPreference": "SET-PREF-20261016-01",
+  "target": {
+    "id": "1f9f09b8-3191-41a0-9a4c-db13cdfdf711",
+    "scheduleID": "5178318b-cf87-5870-873e-da05f99d4c7c",
+    "localDay": "2026-10-17",
+    "timeZone": "Asia/Shanghai",
+    "name": "下肢综合 · 已确认P5 · 20组",
+    "status": "completed",
+    "startTimeKnownRaw": 1,
+    "startedAt": "2026-10-17T13:11:19.627917+08:00",
+    "completedAt": "2026-10-17T15:13:12.021033+08:00",
+    "notes": "",
+    "exercises": [
+      {
+        "snapshotID": "3865ac8a-0b58-403c-bd92-2083578a51e6",
+        "catalogExerciseID": "5f2651a1-c333-4fc9-997b-22a507733072",
+        "name": "高翻",
+        "equipment": "杠铃",
+        "volumeUnitRaw": "kilogram",
+        "feeling": "hard",
+        "performanceNotes": "",
+        "targetSets": 4,
+        "plannedSets": [
+          {
+            "weightSide": "single",
+            "weight": 15,
+            "prescription": {
+              "effortCue": "快拉稳接，每次重设；降速/失稳则下调或停止",
+              "repsLower": 3,
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "label": "技术组 · 每侧片重15kg，不含杆",
+              "repsUpper": 3
+            },
+            "repsSide": "bilateral",
+            "id": "CDAA84BA-C9ED-5C0D-BAA0-B207047C7ECE",
+            "actualDefaultPolicyRaw": "blank",
+            "reps": 3
+          },
+          {
+            "weightSide": "single",
+            "weight": 15,
+            "prescription": {
+              "effortCue": "快拉稳接，每次重设；降速/失稳则下调或停止",
+              "repsLower": 3,
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "label": "技术组 · 每侧片重15kg，不含杆",
+              "repsUpper": 3
+            },
+            "repsSide": "bilateral",
+            "id": "61EB8B8C-8B56-5938-B026-6B62C2DB332E",
+            "actualDefaultPolicyRaw": "blank",
+            "reps": 3
+          },
+          {
+            "actualDefaultPolicyRaw": "blank",
+            "reps": 3,
+            "weightSide": "single",
+            "weight": 15,
+            "id": "D13323B3-21A9-5425-B99B-1849A7A29E7C",
+            "prescription": {
+              "effortCue": "快拉稳接，每次重设；降速/失稳则下调或停止",
+              "repsLower": 3,
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "label": "技术组 · 每侧片重15kg，不含杆",
+              "repsUpper": 3
+            },
+            "repsSide": "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw": "blank",
+            "reps": 3,
+            "weightSide": "single",
+            "weight": 15,
+            "id": "61DECAC2-0946-5151-8669-4025AAC338BA",
+            "prescription": {
+              "effortCue": "快拉稳接，每次重设；降速/失稳则下调或停止",
+              "repsLower": 3,
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "label": "技术组 · 每侧片重15kg，不含杆",
+              "repsUpper": 3
+            },
+            "repsSide": "bilateral"
+          }
+        ],
+        "sets": [
+          {
+            "id": "188dfcc6-42a4-4235-830c-79b06bfaef35",
+            "setNumber": 1,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 10.0,
+            "actualReps": 12,
+            "actualWeightSide": "single",
+            "actualRepsSide": "bilateral",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T13:50:43.612467+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "edb0834c-debb-4f0b-9f8a-78e9d51bcaf9",
+            "setNumber": 2,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 15.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "bilateral",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:00:04.209880+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "924010dd-83f1-4bd7-8add-7441047d25d6",
+            "setNumber": 3,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 20.0,
+            "actualReps": 8,
+            "actualWeightSide": "single",
+            "actualRepsSide": "bilateral",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:00:04.641901+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "b1808825-3f42-42e4-a154-a8feced80075",
+            "setNumber": 4,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 25.0,
+            "actualReps": 6,
+            "actualWeightSide": "single",
+            "actualRepsSide": "bilateral",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:17:48.592058+08:00",
+            "restDurationSeconds": null
+          }
+        ]
+      },
+      {
+        "snapshotID": "2a8ff151-9278-4d58-86f5-c06068adf0cc",
+        "catalogExerciseID": "906a3e8d-e6ff-4ad1-8bfc-e33b4f471675",
+        "name": "腿举",
+        "equipment": "器械",
+        "volumeUnitRaw": "kilogram",
+        "feeling": "good",
+        "performanceNotes": "",
+        "targetSets": 4,
+        "plannedSets": [
+          {
+            "prescription": {
+              "label": "主组 · 每侧片重90kg，不含空载",
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "rirLower": 3,
+              "repsLower": 8,
+              "repsUpper": 10,
+              "effortCue": "同机同执行/幅度",
+              "rirUpper": 3
+            },
+            "actualDefaultPolicyRaw": "blank",
+            "repsSide": "unknown",
+            "reps": 8,
+            "id": "D7616FCF-D872-578C-AD85-C1D9BB078F38",
+            "weight": 90,
+            "weightSide": "single"
+          },
+          {
+            "prescription": {
+              "label": "回退组 · 每侧片重80kg，不含空载",
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "rirLower": 2,
+              "repsLower": 10,
+              "repsUpper": 12,
+              "effortCue": "同机同执行/幅度",
+              "rirUpper": 3
+            },
+            "actualDefaultPolicyRaw": "blank",
+            "repsSide": "unknown",
+            "reps": 10,
+            "id": "D6545FC6-285C-512A-B386-C5985EA54D98",
+            "weight": 80,
+            "weightSide": "single"
+          },
+          {
+            "prescription": {
+              "label": "回退组 · 每侧片重80kg，不含空载",
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "rirLower": 2,
+              "repsLower": 10,
+              "repsUpper": 12,
+              "effortCue": "同机同执行/幅度",
+              "rirUpper": 3
+            },
+            "actualDefaultPolicyRaw": "blank",
+            "repsSide": "unknown",
+            "reps": 10,
+            "id": "5E9BE501-8FAE-5B04-8E5F-05FC8BCA79B1",
+            "weight": 80,
+            "weightSide": "single"
+          },
+          {
+            "prescription": {
+              "label": "回退组 · 每侧片重80kg，不含空载",
+              "restLowerSeconds": 120,
+              "restUpperSeconds": 180,
+              "rirLower": 2,
+              "repsLower": 10,
+              "repsUpper": 12,
+              "effortCue": "最后一组必要时每侧75kg",
+              "rirUpper": 3
+            },
+            "actualDefaultPolicyRaw": "blank",
+            "repsSide": "unknown",
+            "reps": 10,
+            "id": "B97BF951-A077-58F1-9E84-E12929DF0D03",
+            "weight": 80,
+            "weightSide": "single"
+          }
+        ],
+        "sets": [
+          {
+            "id": "84f03efc-863a-43a1-8c46-a57fdbab5299",
+            "setNumber": 1,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 75.0,
+            "actualReps": 14,
+            "actualWeightSide": "single",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:19:22.493720+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "c66b7bdb-298e-4a52-be4c-8052d58eeccd",
+            "setNumber": 2,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 85.0,
+            "actualReps": 12,
+            "actualWeightSide": "single",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:37:18.980337+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "d9e7a658-2647-406b-8039-9c2e6f36c5ce",
+            "setNumber": 3,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 95.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:37:20.593941+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "adec167e-693b-45e1-9b83-8607c83b1f81",
+            "setNumber": 4,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 105.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T14:37:22.247592+08:00",
+            "restDurationSeconds": null
+          }
+        ]
+      },
+      {
+        "snapshotID": "9038b3ad-7ff8-408b-b355-9c13a1ab0033",
+        "catalogExerciseID": "746282a2-ca0d-4dad-8589-205559567d22",
+        "name": "反向箭步蹲",
+        "equipment": "哑铃",
+        "volumeUnitRaw": "kilogram",
+        "feeling": "hard",
+        "performanceNotes": "",
+        "targetSets": 3,
+        "plannedSets": [
+          {
+            "repsSide": "single",
+            "id": "1BC9D3AE-0542-534B-B947-F509E235FF5C",
+            "weight": 15,
+            "weightSide": "single",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 90,
+              "rirLower": 3,
+              "rirUpper": 3,
+              "label": "工作组 · 一只15kg哑铃，每侧",
+              "repsLower": 8,
+              "restUpperSeconds": 120,
+              "repsUpper": 10,
+              "effortCue": "左右完成后休息；保持平衡/幅度"
+            },
+            "reps": 8
+          },
+          {
+            "repsSide": "single",
+            "id": "A191923E-25E8-5CEF-A073-60F68287F771",
+            "weight": 15,
+            "weightSide": "single",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 90,
+              "rirLower": 3,
+              "rirUpper": 3,
+              "label": "工作组 · 一只15kg哑铃，每侧",
+              "repsLower": 8,
+              "restUpperSeconds": 120,
+              "repsUpper": 10,
+              "effortCue": "左右完成后休息；保持平衡/幅度"
+            },
+            "reps": 8
+          },
+          {
+            "repsSide": "single",
+            "id": "DD075955-4CE5-5AC8-B976-C6FB8E372D7D",
+            "weight": 15,
+            "weightSide": "single",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 90,
+              "rirLower": 3,
+              "rirUpper": 3,
+              "label": "工作组 · 一只15kg哑铃，每侧",
+              "repsLower": 8,
+              "restUpperSeconds": 120,
+              "repsUpper": 10,
+              "effortCue": "左右完成后休息；保持平衡/幅度"
+            },
+            "reps": 8
+          }
+        ],
+        "sets": [
+          {
+            "id": "7302c3e6-c850-4a66-bc14-c1c2cb7e258e",
+            "setNumber": 1,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 30.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:05:05.531875+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "fc5711d4-37c5-45b3-84dd-67073cebdbaa",
+            "setNumber": 2,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 30.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:12:50.373796+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "079f2eb2-15da-4eb3-b815-8c425841a1f2",
+            "setNumber": 3,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 30.0,
+            "actualReps": 10,
+            "actualWeightSide": "single",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:12:50.774495+08:00",
+            "restDurationSeconds": null
+          }
+        ]
+      },
+      {
+        "snapshotID": "02efab0f-3eb5-450d-873e-edad57386619",
+        "catalogExerciseID": "bed023f2-c4d6-4b0b-82d8-6a163644ab4e",
+        "name": "坐姿腿弯举",
+        "equipment": "器械",
+        "volumeUnitRaw": "kilogram",
+        "feeling": "good",
+        "performanceNotes": "",
+        "targetSets": 3,
+        "plannedSets": [
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 10,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "D09B1248-41E4-5F78-B64E-EBF2052B1BFD",
+            "repsSide": "unknown",
+            "prescription": {
+              "rirLower": 3,
+              "repsUpper": 15,
+              "rirUpper": 3,
+              "restLowerSeconds": 90,
+              "repsLower": 10,
+              "label": "工作组 · 本机显示20起（单位未确认）",
+              "effortCue": "后两组20–25邻近档校准；换机重测",
+              "restUpperSeconds": 90
+            }
+          },
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 10,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "583D37B7-D363-5177-A81F-3C8DCCF24E4A",
+            "repsSide": "unknown",
+            "prescription": {
+              "rirLower": 3,
+              "repsUpper": 15,
+              "rirUpper": 3,
+              "restLowerSeconds": 90,
+              "repsLower": 10,
+              "label": "工作组 · 本机显示20起（单位未确认）",
+              "effortCue": "后两组20–25邻近档校准；换机重测",
+              "restUpperSeconds": 90
+            }
+          },
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 10,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "C7503F73-A9AA-5749-AE16-42B67EFB86AF",
+            "repsSide": "unknown",
+            "prescription": {
+              "rirLower": 3,
+              "repsUpper": 15,
+              "rirUpper": 3,
+              "restLowerSeconds": 90,
+              "repsLower": 10,
+              "label": "工作组 · 本机显示20起（单位未确认）",
+              "effortCue": "后两组20–25邻近档校准；换机重测",
+              "restUpperSeconds": 90
+            }
+          }
+        ],
+        "sets": [
+          {
+            "id": "8f4504e5-f167-49da-aa8e-b24d7c8f5c06",
+            "setNumber": 1,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 20.0,
+            "actualReps": 12,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:00:54.941924+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "2188c110-e746-4063-9a99-801ea29fad6b",
+            "setNumber": 2,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 25.0,
+            "actualReps": 12,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:00:55.408977+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "ce2198e4-b52a-4dcc-baf3-711bcc787085",
+            "setNumber": 3,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 30.0,
+            "actualReps": 10,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:00:55.825221+08:00",
+            "restDurationSeconds": null
+          }
+        ]
+      },
+      {
+        "snapshotID": "d6ad611f-7c4b-49ea-a012-0cf3515ea407",
+        "catalogExerciseID": "d4e29910-1279-4168-9874-d320084ea21e",
+        "name": "腿屈伸",
+        "equipment": "器械",
+        "volumeUnitRaw": "kilogram",
+        "feeling": "good",
+        "performanceNotes": "",
+        "targetSets": 3,
+        "plannedSets": [
+          {
+            "repsSide": "unknown",
+            "id": "5CE823D5-0E9B-5790-B828-C714C004DB71",
+            "weight": 0,
+            "weightSide": "unknown",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 75,
+              "rirLower": 2,
+              "rirUpper": 3,
+              "label": "工作组 · 本机显示35起（单位未确认）",
+              "repsLower": 12,
+              "restUpperSeconds": 90,
+              "repsUpper": 15,
+              "effortCue": "后两组35–40邻近档校准；换机重测"
+            },
+            "reps": 12
+          },
+          {
+            "repsSide": "unknown",
+            "id": "8F79443D-73E7-552A-93ED-43FC19847410",
+            "weight": 0,
+            "weightSide": "unknown",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 75,
+              "rirLower": 2,
+              "rirUpper": 3,
+              "label": "工作组 · 本机显示35起（单位未确认）",
+              "repsLower": 12,
+              "restUpperSeconds": 90,
+              "repsUpper": 15,
+              "effortCue": "后两组35–40邻近档校准；换机重测"
+            },
+            "reps": 12
+          },
+          {
+            "repsSide": "unknown",
+            "id": "0FF898F5-AA20-5C4E-BE22-A8596B0F92D0",
+            "weight": 0,
+            "weightSide": "unknown",
+            "actualDefaultPolicyRaw": "blank",
+            "prescription": {
+              "restLowerSeconds": 75,
+              "rirLower": 2,
+              "rirUpper": 3,
+              "label": "工作组 · 本机显示35起（单位未确认）",
+              "repsLower": 12,
+              "restUpperSeconds": 90,
+              "repsUpper": 15,
+              "effortCue": "后两组35–40邻近档校准；换机重测"
+            },
+            "reps": 12
+          }
+        ],
+        "sets": [
+          {
+            "id": "f81ccc09-9f0e-4931-a64f-c61dc15d6362",
+            "setNumber": 1,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 40.0,
+            "actualReps": 14,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:01:07.686999+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "e3360e1f-0108-4d03-9928-ec3050d01932",
+            "setNumber": 2,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 45.0,
+            "actualReps": 12,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:01:08.039023+08:00",
+            "restDurationSeconds": null
+          },
+          {
+            "id": "04577458-fcd4-4d9f-91f0-f9014fafaea4",
+            "setNumber": 3,
+            "completed": true,
+            "warmupRaw": false,
+            "actualWeight": 50.0,
+            "actualReps": 10,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "unknown",
+            "RIR": null,
+            "actualEntrySource": "manual",
+            "actualWeightIsBlank": 0,
+            "completedAt": "2026-10-17T15:01:08.389464+08:00",
+            "restDurationSeconds": null
+          }
+        ]
+      },
+      {
+        "snapshotID": "15690fbc-ee6c-4b2a-8ad9-556990f23e0c",
+        "catalogExerciseID": "abcd6a23-4009-491a-a1d4-cedf7066c873",
+        "name": "死虫式",
+        "equipment": "自重",
+        "volumeUnitRaw": "count",
+        "feeling": null,
+        "performanceNotes": "",
+        "targetSets": 3,
+        "plannedSets": [
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 6,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "D9EC972E-87A7-5509-9D76-2AE5ED419869",
+            "repsSide": "single",
+            "prescription": {
+              "restUpperSeconds": 60,
+              "effortCue": "腰背/骨盆稳定，失控前结束",
+              "repsUpper": 10,
+              "restLowerSeconds": 60,
+              "label": "核心 · 自重，每侧",
+              "repsLower": 6
+            }
+          },
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 6,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "BC720A9D-2DC4-5EF1-9C59-DA14E1CE5613",
+            "repsSide": "single",
+            "prescription": {
+              "restUpperSeconds": 60,
+              "effortCue": "腰背/骨盆稳定，失控前结束",
+              "repsUpper": 10,
+              "restLowerSeconds": 60,
+              "label": "核心 · 自重，每侧",
+              "repsLower": 6
+            }
+          },
+          {
+            "weight": 0,
+            "weightSide": "unknown",
+            "reps": 6,
+            "actualDefaultPolicyRaw": "blank",
+            "id": "F3529446-210B-5EEC-88F8-F772995923E5",
+            "repsSide": "single",
+            "prescription": {
+              "restUpperSeconds": 60,
+              "effortCue": "腰背/骨盆稳定，失控前结束",
+              "repsUpper": 10,
+              "restLowerSeconds": 60,
+              "label": "核心 · 自重，每侧",
+              "repsLower": 6
+            }
+          }
+        ],
+        "sets": [
+          {
+            "id": "3b093370-5e39-41dd-9074-93e5580a9a82",
+            "setNumber": 1,
+            "completed": false,
+            "warmupRaw": false,
+            "actualWeight": 0.0,
+            "actualReps": 0,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "blank",
+            "actualWeightIsBlank": 1,
+            "completedAt": null,
+            "restDurationSeconds": null
+          },
+          {
+            "id": "ab861432-9015-4649-9b35-993c7f6ffa28",
+            "setNumber": 2,
+            "completed": false,
+            "warmupRaw": false,
+            "actualWeight": 0.0,
+            "actualReps": 0,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "blank",
+            "actualWeightIsBlank": 1,
+            "completedAt": null,
+            "restDurationSeconds": null
+          },
+          {
+            "id": "5d0c9bc6-7fb9-43f5-8c99-7fb34d0b790b",
+            "setNumber": 3,
+            "completed": false,
+            "warmupRaw": false,
+            "actualWeight": 0.0,
+            "actualReps": 0,
+            "actualWeightSide": "unknown",
+            "actualRepsSide": "single",
+            "RIR": null,
+            "actualEntrySource": "blank",
+            "actualWeightIsBlank": 1,
+            "completedAt": null,
+            "restDurationSeconds": null
+          }
+        ]
+      }
+    ]
+  },
+  "recentCompletedSessions": [
+    {
+      "id": "5ce18525-b9ef-461d-9b3a-1e244b520420",
+      "scheduleID": null,
+      "localDay": "2026-10-12",
+      "timeZone": "Asia/Shanghai",
+      "name": "颈前深蹲",
+      "status": "completed",
+      "startTimeKnownRaw": 0,
+      "startedAt": "2026-10-12T00:00:00+08:00",
+      "completedAt": null,
+      "notes": "来源：Apple Notes「Oct 12」。按原名与原始组次补录；未记训练时间、时长、RIR及多数动作器械；单双侧口径未注明，不推断。Notes 中列出的组均已勾选。",
+      "exercises": [
+        {
+          "snapshotID": "f334d4c3-51ef-48ca-b783-16b18d04557e",
+          "catalogExerciseID": "58423f6e-00b5-4c82-aa6c-664ba58c0077",
+          "name": "颈前深蹲",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "动作库中存在同名条目；记录名称原样保留。单双侧/重量口径未知。",
+          "targetSets": 6,
+          "plannedSets": [
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "6E996854-1394-4FAC-A9B0-68EC019B870A",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "95512274-2FA7-40C4-8C28-CB3EA44268BA",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "9E5538FE-BC1E-45FF-A21E-1D94606682DE",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "9D1A4A9A-9FC0-4C5E-9AE6-87C9EFB73DA3",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "EF7AA8C8-107E-48BF-A8F7-13A5EE207DEC",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30,
+              "reps": 6,
+              "id": "0ABC2E08-67B8-4082-B4A6-A6EFC3BB6B41",
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "ec8f84be-102e-4389-aa77-d79133675a42",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 10.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "694dd3f0-5e1b-4538-acd3-be6f578e07b2",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 15.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "f1ef9c0e-950f-4ed5-9654-39a1d7d23d71",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "bd86d71c-9b9b-4862-8d8d-eee7a587e117",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "09756d7f-2ed3-4442-8b33-56a69884e3cc",
+              "setNumber": 5,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 30.0,
+              "actualReps": 6,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "2b4819a3-a5b6-48ea-929a-8d40ad02eaf3",
+              "setNumber": 6,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 15.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "da39fb44-4453-4ec0-a721-227ef42000ed",
+          "catalogExerciseID": "1537f70d-a56f-4d1b-87be-5a4732b58ff6",
+          "name": "保加利亚深蹲",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；与动作库近似名称不自动合并；肌群、器械、单双侧/重量口径未确认。",
+          "targetSets": 5,
+          "plannedSets": [
+            {
+              "id": "CB749A30-22DE-48AE-A023-69211F40E4C2",
+              "weightSide": "bilateral",
+              "weight": 22.5,
+              "reps": 6,
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "349A6F7B-409E-4C3F-B5DA-F7975C1E8037",
+              "weightSide": "bilateral",
+              "weight": 22.5,
+              "reps": 6,
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "58F06B67-ACF2-43C8-BD21-08850AE586D9",
+              "weightSide": "bilateral",
+              "weight": 22.5,
+              "reps": 6,
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "E86334B1-5A12-4822-80DA-DFBFD06DB713",
+              "weightSide": "bilateral",
+              "weight": 22.5,
+              "reps": 6,
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "DF5CF596-D7AF-4578-A597-9829E47B041B",
+              "weightSide": "bilateral",
+              "weight": 22.5,
+              "reps": 6,
+              "repsSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "7b2643db-496d-4601-a521-ce4ce6adde79",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 15.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "7b63be54-2d67-46d2-a7e4-631b3dabd39c",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 17.5,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "d64dce6b-8ab7-44fb-9684-5deb0830b3a3",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "f9162deb-9018-43d6-81ad-a4214a1d0f49",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 22.5,
+              "actualReps": 6,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "057acd02-8781-42bb-a42b-2600f2a5aa77",
+              "setNumber": 5,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 17.5,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "328212d8-c81f-4e67-b01c-68df466cd146",
+          "catalogExerciseID": "ce264ce5-4550-4cd8-bf89-9fb59b2a9fb8",
+          "name": "转体火箭推",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "targetSets": 2,
+          "plannedSets": [
+            {
+              "id": "1635959E-4995-4669-935D-71CC2DC89CF8",
+              "weight": 12.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "7E48A200-2959-489D-94AF-361D8250BD31",
+              "weight": 12.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "304186f2-c697-400e-ad48-05e285fa411d",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 10.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "a4b3fc58-7bb3-47b8-9b62-50f6e4ecd20b",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 12.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "43f59631-f4a3-429d-9f9b-4f8732505256",
+          "catalogExerciseID": "d8cad651-cdff-409d-be24-b6083b82f0d5",
+          "name": "弓步提膝推举",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "targetSets": 2,
+          "plannedSets": [
+            {
+              "weight": 12.5,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "20EFB7CF-19B3-4AE9-8595-1DB5B7B5975D",
+              "weightSide": "bilateral"
+            },
+            {
+              "weight": 12.5,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "9D125AB6-79F2-4041-879C-FBD6B4754B38",
+              "weightSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "9942761f-b6f4-4757-a3ab-2551e47a5afa",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 10.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "6989f51a-3491-4805-8cca-0c79af7ed60c",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 12.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "31f9a00d-5df8-4c80-8759-d2303bf5d9a8",
+          "catalogExerciseID": "1e4cdedf-268c-4095-ae38-bd0897036124",
+          "name": "单腿推举",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；具体动作/器械及单双侧/重量口径未确认。",
+          "targetSets": 2,
+          "plannedSets": [
+            {
+              "id": "D67E692F-4851-49A5-9E50-33D124F5EAFD",
+              "weight": 12.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "E3A7D592-1FC9-4250-946E-EFF082A676A8",
+              "weight": 12.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "b55bbc7b-e6d7-4122-b02b-fda86bf4e55f",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 10.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "771ac6a6-0fa5-4484-aad8-78a67494e194",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 12.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "2df5791c-007c-4a41-a837-e28716909eec",
+          "catalogExerciseID": "d3ecdf2d-9bef-4573-aa4c-350b906dd845",
+          "name": "哑铃上摇",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；原名虽含哑铃但未将其解释为动作库分类；肌群及单双侧/重量口径未确认。",
+          "targetSets": 2,
+          "plannedSets": [
+            {
+              "weight": 12.5,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "8A9FF934-B084-4314-B7E4-C8E0B5A3D8F1",
+              "weightSide": "bilateral"
+            },
+            {
+              "weight": 12.5,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "32D0A9F8-0E1B-4FB8-8D6B-928505E5A3A8",
+              "weightSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "7143f9b2-a881-4cd6-ad33-ea41bb9d92e5",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 10.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "82d94a40-1b68-48d7-9653-fb5b6e2de81b",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 12.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "9aa5d9f4-d446-4260-a993-f2b5b2a593ab",
+          "catalogExerciseID": "16728907-7b07-4967-9a8d-e5734eb41532",
+          "name": "前平举深蹲",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；肌群、器械及单双侧/重量口径未确认。",
+          "targetSets": 2,
+          "plannedSets": [
+            {
+              "id": "3E235472-CCC9-42EE-8C28-7A5F8AC61B9B",
+              "weight": 7.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "id": "6969C35F-4AEC-4EEA-BE8B-A6E88172BCFE",
+              "weight": 7.5,
+              "reps": 8,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "673e5faa-3579-4e4a-ba0b-b1d4c90c2717",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 5.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "ec2218c5-a280-481c-b0db-43510146df2f",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 7.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "390dcf82-e986-46a2-8b8e-cc997a3bbad7",
+          "catalogExerciseID": "a76c1f88-d931-4116-9d48-a5cebcb3f678",
+          "name": "Seated Leg Extension/Technogym",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；原文提及 Technogym，但具体设备/阻力单位及单双侧口径未确认。",
+          "targetSets": 4,
+          "plannedSets": [
+            {
+              "weight": 45,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "B5E65946-7CF2-4AD2-A111-54EF5A7F5782",
+              "weightSide": "bilateral"
+            },
+            {
+              "weight": 45,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "3758034B-EFDD-4462-8C21-DEF71F5672AA",
+              "weightSide": "bilateral"
+            },
+            {
+              "weight": 45,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "35B66979-4C75-45A4-BF81-9436649B2920",
+              "weightSide": "bilateral"
+            },
+            {
+              "weight": 45,
+              "reps": 8,
+              "repsSide": "bilateral",
+              "id": "DFA6A943-AD6E-4398-9622-76FBDB9B2819",
+              "weightSide": "bilateral"
+            }
+          ],
+          "sets": [
+            {
+              "id": "9913cd28-313b-40c6-b08f-826159d532ff",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 35.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "fa9a9d45-3949-4e4e-af24-f5f3dd97f523",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 40.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "ef9736a7-56e0-4970-99b5-07bb59eb3bea",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 45.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "607853af-4f53-407a-9beb-0fabd2391bcd",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 35.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "64f37a18-817c-4762-abb3-235a2ef8a920",
+          "catalogExerciseID": "5760cba4-93c5-445c-996d-6433b284ecdf",
+          "name": "靠墙胫骨前肌提拉",
+          "equipment": null,
+          "volumeUnitRaw": "bodyweight",
+          "feeling": null,
+          "performanceNotes": "按 Notes 原名保存；自重×10，共 3 组；肌群/分类未与近似动作自动合并。",
+          "targetSets": 3,
+          "plannedSets": [
+            {
+              "weightSide": "bilateral",
+              "weight": 0,
+              "repsSide": "bilateral",
+              "id": "DF5AC625-5EDE-45CD-9B2D-DD422F03E6CB",
+              "reps": 10
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 0,
+              "repsSide": "bilateral",
+              "id": "5BC7DD15-ADDA-47A2-83B1-8F8406B4EA23",
+              "reps": 10
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 0,
+              "repsSide": "bilateral",
+              "id": "C02C8C44-351D-4F5E-8B1F-F127B585AB1A",
+              "reps": 10
+            }
+          ],
+          "sets": [
+            {
+              "id": "88abd049-e81c-4789-974f-1340c16922a3",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 87.4,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "73dcf646-e3a2-4355-8f45-e161f0fe1d86",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 87.4,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "e5e42bb8-270e-4bbe-9f9b-a93eed5754b6",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 87.4,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "09c39720-6835-4e17-bd35-70b2099e17bd",
+      "scheduleID": null,
+      "localDay": "2026-10-15",
+      "timeZone": "Asia/Shanghai",
+      "name": "Oct 15 · 下肢后侧",
+      "status": "completed",
+      "startTimeKnownRaw": 0,
+      "startedAt": "2026-10-15T00:00:00+08:00",
+      "completedAt": null,
+      "notes": "来源：Apple Notes「Oct 15」（原始标题）；本人明确要求同步昨天实际训练，最后澄清6个动作均以kg记录。原始名称/数字/次序保留；RDL与硬拉两个连续标题合并显示为RDL / 硬拉，不自动映射动作库别名。开始时刻、时长、RIR及单双侧口径未记录；热身/工作性质未知，导入行不能全部认定为有效工作组。提踵第二条20×5按原文保留。",
+      "exercises": [
+        {
+          "snapshotID": "e545af0b-89ce-4ef3-947b-3252fddb0bed",
+          "catalogExerciseID": "de549771-e9bb-40c6-b975-c2c32d62bfbf",
+          "name": "RDL / 硬拉",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "targetSets": 5,
+          "plannedSets": [
+            {
+              "weightSide": "bilateral",
+              "weight": 55,
+              "id": "28B62FA1-2526-4435-AB0B-D9262B9817AE",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 55,
+              "id": "722BE8CF-3C75-4518-81E1-6276682283D6",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 55,
+              "id": "BC75594A-3B35-4CA1-8D5F-9F280C55E348",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 55,
+              "id": "0BF4F741-3102-4B72-B130-3D7DFFB114C0",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 55,
+              "id": "132366BC-F8BB-43E6-82D5-9D9F284B3803",
+              "repsSide": "bilateral",
+              "reps": 6
+            }
+          ],
+          "sets": [
+            {
+              "id": "b6be75b8-5656-44fc-a6aa-f9461f6194ec",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "57867846-79db-4526-a526-7b78e5ed8ae9",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 35.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "50b2a37b-2e02-41c0-9246-553fdc35c915",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 45.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "8e5e151f-c1ce-490c-aeb3-38b77124acbd",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 55.0,
+              "actualReps": 6,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "6be1ef24-3f0c-47c9-843d-2a162785abf4",
+              "setNumber": 5,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 35.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "7cfd52da-ce72-4b97-a251-99f30f56eb03",
+          "catalogExerciseID": "e00c9518-fc57-4543-b390-10b577b034a5",
+          "name": "器械臀推",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 原文说明为器械臀推，具体品牌/设置未记录。",
+          "targetSets": 5,
+          "plannedSets": [
+            {
+              "weightSide": "bilateral",
+              "id": "EDBCF689-720D-4EDB-B7C5-84AC2A163FAC",
+              "repsSide": "bilateral",
+              "weight": 72.5,
+              "reps": 8
+            },
+            {
+              "weightSide": "bilateral",
+              "id": "F5150C40-3A25-42BF-B589-3ABBA7DFE2BC",
+              "repsSide": "bilateral",
+              "weight": 72.5,
+              "reps": 8
+            },
+            {
+              "weightSide": "bilateral",
+              "id": "F9F6BE08-E875-43AA-AE04-3043ED392EFD",
+              "repsSide": "bilateral",
+              "weight": 72.5,
+              "reps": 8
+            },
+            {
+              "weightSide": "bilateral",
+              "id": "1224FC14-73D2-438E-9CE7-3BB25DFF778B",
+              "repsSide": "bilateral",
+              "weight": 72.5,
+              "reps": 8
+            },
+            {
+              "weightSide": "bilateral",
+              "id": "854F9BBD-978C-44A3-9015-E842E91A8CCD",
+              "repsSide": "bilateral",
+              "weight": 72.5,
+              "reps": 8
+            }
+          ],
+          "sets": [
+            {
+              "id": "6ccdeb67-588b-4ef8-a967-ce2782aeaa0a",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 50.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "725a38d8-9795-47e1-adfe-8cbe1bb421f2",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 57.5,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "9f2685b9-be2a-4398-8929-e092b9eefba9",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 65.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "8f7c7932-80d6-4210-8306-0cc184f2c822",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 72.5,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "6d9df929-8b49-4f42-ad2a-fd0ec4f0f0f0",
+              "setNumber": 5,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 57.5,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "cb0036e6-270e-4a42-9a79-683ebe09a88f",
+          "catalogExerciseID": "94e86c02-21fc-40a7-bd87-8f5d33b8908f",
+          "name": "双腿钟摆深蹲",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "targetSets": 4,
+          "plannedSets": [
+            {
+              "weightSide": "bilateral",
+              "weight": 70,
+              "id": "7F8C4A8F-EA50-47CB-B2F6-DB6088CE9518",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 70,
+              "id": "4F17B0FE-50D5-4B58-A823-10540ED92897",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 70,
+              "id": "E6231346-FCC2-4F4D-872F-1474A603661F",
+              "repsSide": "bilateral",
+              "reps": 6
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 70,
+              "id": "C0DA69FC-86A4-487F-881D-313853B5D19F",
+              "repsSide": "bilateral",
+              "reps": 6
+            }
+          ],
+          "sets": [
+            {
+              "id": "6a852163-9ace-4c7b-a745-4ed2c9d1fc39",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 40.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "3814a609-488f-453f-976e-7d2cd340d827",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 50.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "ba52f86c-c596-416e-a6dd-b894c2eb52a2",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 60.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "21bd51b2-a33a-42d5-a40e-4659ee13ae19",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 70.0,
+              "actualReps": 6,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "384b3632-e368-4a21-9cd3-837a4f24504c",
+          "catalogExerciseID": "62b46047-bce1-45f0-b53e-73a58771c9f9",
+          "name": "Leg Curl",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "targetSets": 4,
+          "plannedSets": [
+            {
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "327FC8E5-E5F3-43AD-B4AC-7C13032D8DE4",
+              "weight": 35
+            },
+            {
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "C3F55DC1-8A89-4B8F-AFBB-1B163F820C77",
+              "weight": 35
+            },
+            {
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "72DCC3E1-2F58-4AB3-B27E-8B3A6ABA1537",
+              "weight": 35
+            },
+            {
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "CBAEA70B-8DD7-42AA-9C1A-FA00E811CEA2",
+              "weight": 35
+            }
+          ],
+          "sets": [
+            {
+              "id": "1acf83b3-131a-4e06-98ac-57fc1929e23c",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 12,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "c604e5c2-625a-45ae-9ecb-8e6265970c80",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 10,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "8e3f8169-318e-425f-b6df-cd6a9109f0d3",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 30.0,
+              "actualReps": 8,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "a49e69d0-f7a5-4077-b157-e119606273d1",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 35.0,
+              "actualReps": 6,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "c768d1ef-71ab-4e19-8bc2-217a3c3c2c4f",
+          "catalogExerciseID": "ce2f1127-f67e-4149-bc2a-2fb5e3deb600",
+          "name": "摇壶铃",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "targetSets": 4,
+          "plannedSets": [
+            {
+              "weightSide": "bilateral",
+              "weight": 20,
+              "id": "B54F5F32-156B-4EB5-AD65-76969F6B8329",
+              "repsSide": "bilateral",
+              "reps": 15
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 20,
+              "id": "8892914C-A598-4C35-B3ED-ABBCE49217FD",
+              "repsSide": "bilateral",
+              "reps": 15
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 20,
+              "id": "64DD87EC-D882-459E-A551-2467DA5524DC",
+              "repsSide": "bilateral",
+              "reps": 15
+            },
+            {
+              "weightSide": "bilateral",
+              "weight": 20,
+              "id": "4D42C199-23E0-4A81-8BA2-A3D0DE318331",
+              "repsSide": "bilateral",
+              "reps": 15
+            }
+          ],
+          "sets": [
+            {
+              "id": "ea912a52-b226-4ccf-b65f-8d80a42f16bc",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 16.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "cce1f59f-6365-4197-b696-f20a762a862d",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 18.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "9c00f3f3-e01f-4256-b89e-64e619aa6b93",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "62d30f8b-7b9e-4c17-af29-093eb251b927",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        },
+        {
+          "snapshotID": "f328d267-63e9-4b33-a361-aa2485246f0f",
+          "catalogExerciseID": "778d1b94-a59e-4eaf-9a26-063e2490c9df",
+          "name": "斯密斯单腿提踵",
+          "equipment": null,
+          "volumeUnitRaw": "kilogram",
+          "feeling": null,
+          "performanceNotes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "targetSets": 5,
+          "plannedSets": [
+            {
+              "reps": 5,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "F35CC4BC-6304-4E38-8B92-CD26E7B525ED",
+              "weight": 25
+            },
+            {
+              "reps": 5,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "B892F6B4-80B8-4307-AD3F-0E77D3571793",
+              "weight": 25
+            },
+            {
+              "reps": 5,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "75705806-7D86-4544-A8CD-43C26112A255",
+              "weight": 25
+            },
+            {
+              "reps": 5,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "136BE166-F77B-42FC-B619-C4DB6FB64193",
+              "weight": 25
+            },
+            {
+              "reps": 5,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "id": "7A8888E8-3E2C-49D2-A649-8492549715E2",
+              "weight": 25
+            }
+          ],
+          "sets": [
+            {
+              "id": "745a6893-c7db-4f2b-9c34-75cc57d314a6",
+              "setNumber": 1,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "e452c4cb-ced7-4121-809f-508a821b6ff0",
+              "setNumber": 2,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 20.0,
+              "actualReps": 5,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "f34511cb-3193-4ced-96db-3009696c259e",
+              "setNumber": 3,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "41992d4a-fec8-4240-b198-e0e229b67d62",
+              "setNumber": 4,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            },
+            {
+              "id": "ef47ab38-c65d-4ae1-9299-5a7aea7b065d",
+              "setNumber": 5,
+              "completed": true,
+              "warmupRaw": false,
+              "actualWeight": 25.0,
+              "actualReps": 15,
+              "actualWeightSide": "unknown",
+              "actualRepsSide": "unknown",
+              "RIR": null,
+              "actualEntrySource": null,
+              "actualWeightIsBlank": null,
+              "completedAt": null,
+              "restDurationSeconds": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "recentSchedules": [
+    {
+      "id": "026ddd0f-2262-4610-a09d-65ac3bb79bad",
+      "localDay": "2026-10-12",
+      "title": "A 胸部＋三头 · 恢复周",
+      "status": "skipped",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "4db77456-dc86-43a0-ae97-99c3ad0e54e5",
+      "localDay": "2026-10-15",
+      "title": "C 腿臀＋核心 · 恢复周",
+      "status": "planned",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "1bed6c01-f80e-45d5-9fba-af88355a156c",
+      "localDay": "2026-10-16",
+      "title": "D 肩部＋手臂 · 恢复周",
+      "status": "planned",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "a081eafa-310c-4992-8153-9e110a72fc03",
+      "localDay": "2026-10-13",
+      "title": "轻松跳绳 2",
+      "status": "planned",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "b0fa162f-7484-4cfb-bc97-44a8b10a21f5",
+      "localDay": "2026-10-13",
+      "title": "B 背部＋二头 · 恢复周",
+      "status": "planned",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "b36f2f70-32ce-44db-9076-0b891aa6be10",
+      "localDay": "2026-10-14",
+      "title": "轻松单车／椭圆机",
+      "status": "planned",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "da26ab00-2d59-4361-849a-878075292e07",
+      "localDay": "2026-10-12",
+      "title": "轻松跳绳 1",
+      "status": "skipped",
+      "linkedSessionIDs": []
+    },
+    {
+      "id": "5178318b-cf87-5870-873e-da05f99d4c7c",
+      "localDay": "2026-10-17",
+      "title": "下肢综合 · 已确认P5 · 20组",
+      "status": "completed",
+      "linkedSessionIDs": [
+        "1f9f09b8-3191-41a0-9a4c-db13cdfdf711"
+      ]
+    }
+  ],
+  "recoveryInApp": {
+    "recentDailyBodyCheckIns": 0,
+    "recentProgramDailyLogs": 0,
+    "nextMorningFeedback": "not_yet_occurred"
+  },
+  "ropeEvidence": {
+    "ownerReport": "10/13 completed 1500; 10/18 planned 1500",
+    "appRecentEntryCount": 0,
+    "absenceDoesNotMeanNotPerformed": true
+  },
+  "summary": {
+    "plannedSlots": 20,
+    "completedRecordedSets": 17,
+    "RIRRecorded": 0,
+    "missingSlots": "dead bug 3; owner confirmed not performed in F01",
+    "technicalMovementRecordedReps": 36,
+    "technicalMovementPlannedReps": 12,
+    "sessionWallClockSeconds": 7312.393115997314,
+    "wallClockIsNotVerifiedActiveTrainingTime": true,
+    "technicalMovementWarmupExcludedByOwner": true,
+    "deadBugOwnerConfirmedNotPerformed": true,
+    "RIRReportedInChatForCompletedSets": 2,
+    "nextMorningRecovery": "not_yet_occurred"
+  },
+  "appWritesPerformed": 0,
+  "confirmation": "review and adjustment suggestions only; no next plan imported",
+  "ownerFeedback": [
+    {
+      "id": "REVIEW-20261017-F01",
+      "source": "direct owner reply in this conversation",
+      "reportedLocalDay": "2026-10-17",
+      "appliesToSessionID": "1f9f09b8-3191-41a0-9a4c-db13cdfdf711",
+      "reverseLunge": {
+        "snapshotID": "9038b3ad-7ff8-408b-b355-9c13a1ab0033",
+        "oneDumbbellKg": 30,
+        "support": "other hand on support",
+        "noInferenceAboutHoldingSideRelativeToWorkingLeg": true
+      },
+      "powerClean": {
+        "snapshotID": "3865ac8a-0b58-403c-bd92-2083578a51e6",
+        "recordedFourSetsExcludeWarmup": true,
+        "warmupReported": "empty bar and 5 kg plates per side; exact warmup sets/reps not specified",
+        "lastSetQuality": "stable but somewhat difficult",
+        "qualitySource": "owner report, no measured velocity"
+      },
+      "deadBug": {
+        "snapshotID": "15690fbc-ee6c-4b2a-8ad9-556990f23e0c",
+        "performed": false,
+        "reason": null
+      },
+      "currentDiscomfort": "none reported",
+      "legPressLastSet": {
+        "snapshotID": "2a8ff151-9278-4d58-86f5-c06068adf0cc",
+        "setNumber": 4,
+        "weightPerSideKg": 105,
+        "reps": 10,
+        "ownerReportedRIRLowerBound": 5,
+        "exactRIR": null
+      },
+      "sleepOriginalText": "做完睡眠有质量不好",
+      "sleepTimingAtInitialReply": "unclear; clarified by F02"
+    },
+    {
+      "id": "REVIEW-20261017-F02",
+      "source": "direct owner follow-up in this conversation",
+      "reportedLocalDay": "2026-10-17",
+      "appliesToSessionID": "1f9f09b8-3191-41a0-9a4c-db13cdfdf711",
+      "sleep": {
+        "period": "night before this training",
+        "quality": "poor",
+        "durationHours": null,
+        "notEvidenceOfPostWorkoutSleepDisturbance": true
+      },
+      "interruptions": {
+        "present": true,
+        "reason": "replying to messages",
+        "durationMinutes": null
+      },
+      "legExtensionLastSet": {
+        "snapshotID": "d6ad611f-7c4b-49ea-a012-0cf3515ea407",
+        "setNumber": 3,
+        "recordedMachineValue": 50,
+        "reps": 10,
+        "ownerReportedRIRRange": [
+          3,
+          5
+        ]
+      },
+      "nextMorningRecovery": "not_yet_occurred"
+    }
+  ],
+  "ownerFeedbackRecordedAt": "2026-10-17T16:49:55.459725+08:00"
+}

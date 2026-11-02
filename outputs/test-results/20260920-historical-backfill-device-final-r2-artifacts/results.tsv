@@ -1,0 +1,15 @@
+D00	PASS	真机在线与开发服务预检	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D00.log
+D01	PASS	pre-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D01.log
+D02	PASS	pre-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D02.log
+D03	PASS	真机签名 Release 构建	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D03.log
+D04	PASS	签名、entitlements 与版本回读	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D04.log
+D05	PASS	真机覆盖安装、启动与版本回读（不卸载、不清容器）	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D05.log
+D06A	PASS	post-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D06A.log
+D06B	PASS	post-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D06B.log
+D06C	PASS	安装前后核心记录不减少	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D06C.log
+D07A	FAIL	真机全量单元测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D07A.log (exit=65)
+D07B	FAIL	真机全量 UI 测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D07B.log (exit=65)
+D08A	PASS	post-tests	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D08A.log
+D08B	PASS	post-tests	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D08B.log
+D08C	PASS	安装前到测试后核心记录不减少	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-final-r2-artifacts/D08C.log
+D09	BLOCKED_HUMAN	真机人工体验与系统权限清单	/Users/edward/Documents/Fitness App/outputs/stage-validation/20260920-historical-backfill-device-final-r2/真机人工测试清单.md

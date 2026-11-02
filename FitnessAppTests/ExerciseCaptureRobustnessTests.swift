@@ -5,9 +5,37 @@ import XCTest
 
 @MainActor
 final class ExerciseCaptureRobustnessTests: XCTestCase {
+    func testSearchDraftKeepsIMECompositionAndCoalescesOnlyCommittedText() {
+        var input = ExerciseSearchInputState(initialQuery: "")
+        input.receive("xia", isComposing: true, at: 0)
+        XCTAssertNil(input.publishIfReady(at: 1))
+        XCTAssertNil(input.publishIfReady(at: 1, force: true))
+        input.receive("下压", isComposing: false, at: 1)
+        XCTAssertNil(input.publishIfReady(at: 1.299))
+        XCTAssertEqual(input.publishIfReady(at: 1.301), "下压")
+        XCTAssertNil(input.publishIfReady(at: 2))
+        input.receive("下压机", isComposing: false, at: 2)
+        XCTAssertEqual(input.publishIfReady(at: 2, force: true), "下压机")
+        input.receive("", isComposing: false, at: 3)
+        XCTAssertEqual(input.publishIfReady(at: 3.301), "")
+    }
+
+    private var savedWorkoutReminderSetting: Any?
+
     override func setUp() {
         super.setUp()
+        savedWorkoutReminderSetting = UserDefaults.standard.object(forKey: NotificationService.workoutEnabledKey)
         UserDefaults.standard.set(false, forKey: NotificationService.workoutEnabledKey)
+    }
+
+    override func tearDown() {
+        if let savedWorkoutReminderSetting {
+            UserDefaults.standard.set(savedWorkoutReminderSetting, forKey: NotificationService.workoutEnabledKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: NotificationService.workoutEnabledKey)
+        }
+        savedWorkoutReminderSetting = nil
+        super.tearDown()
     }
 
     func testCatalogRequiredFieldsAndURLProtocolMatrixAreAtomic() throws {
@@ -642,26 +670,52 @@ final class ExerciseCaptureRobustnessTests: XCTestCase {
             referenceURL: "https://example.com/cuban",
             volumeUnit: .kilogram
         )
-        let oldSessionID = UUID()
-        let previous = SetLog(
-            sessionID: oldSessionID,
-            sessionExerciseID: UUID(),
-            exerciseID: exercise.id,
-            setNumber: 1,
-            targetWeight: 8,
-            targetReps: 12,
-            actualWeight: 10,
-            actualReps: 9,
-            isCompleted: true,
-            completedAt: Date.now.addingTimeInterval(-3_600)
+        let previousDate = Date.now.addingTimeInterval(-3_600)
+        let previousSession = WorkoutSession(
+            templateName: "上次肩部",
+            plannedDate: previousDate,
+            startedAt: previousDate.addingTimeInterval(-1_800),
+            completedAt: previousDate,
+            status: .completed
         )
+        let previousSnapshot = SessionExercise(
+            sessionID: previousSession.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 3,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 8,
+            restSeconds: 75,
+            volumeUnit: .kilogram,
+            equipmentSnapshot: "哑铃"
+        )
+        let previousLogs = (1...3).map { index in
+            SetLog(
+                sessionID: previousSession.id,
+                sessionExerciseID: previousSnapshot.id,
+                exerciseID: exercise.id,
+                setNumber: index,
+                targetWeight: 8,
+                targetReps: 12,
+                actualWeight: 10,
+                actualReps: 9,
+                isCompleted: true,
+                completedAt: previousDate,
+                actualWeightSide: .bilateral,
+                actualRepsSide: .bilateral
+            )
+        }
         let current = WorkoutSession(
             templateName: "肩部",
             plannedDate: .now,
             status: .inProgress
         )
         context.insert(exercise)
-        context.insert(previous)
+        context.insert(previousSession)
+        context.insert(previousSnapshot)
+        for log in previousLogs { context.insert(log) }
         context.insert(current)
         try context.save()
 
@@ -685,6 +739,32 @@ final class ExerciseCaptureRobustnessTests: XCTestCase {
         XCTAssertEqual(snapshot.exerciseNotes, "肘部抬高")
         XCTAssertEqual(snapshot.referenceURL, "https://example.com/cuban")
         XCTAssertEqual(snapshot.volumeUnit, .kilogram)
+    }
+
+    func testActiveWorkoutDoesNotPrefillFromOrphanCompletedSet() throws {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let exercise = Exercise(name: "古巴推举", muscleGroup: "肩部", equipment: "哑铃", defaultRestSeconds: 75)
+        let orphan = SetLog(
+            sessionID: UUID(), sessionExerciseID: UUID(), exerciseID: exercise.id, setNumber: 1,
+            targetWeight: 8, targetReps: 12, actualWeight: 10, actualReps: 9,
+            isCompleted: true, completedAt: Date.now.addingTimeInterval(-3_600),
+            actualWeightSide: .bilateral, actualRepsSide: .bilateral
+        )
+        let current = WorkoutSession(templateName: "肩部", plannedDate: .now)
+        context.insert(exercise); context.insert(orphan); context.insert(current)
+        try context.save()
+
+        let snapshot = try WorkoutService.addExercise(exercise, to: current, in: context)
+        let logs = try context.fetch(FetchDescriptor<SetLog>())
+            .filter { $0.sessionExerciseID == snapshot.id }
+            .sorted { $0.setNumber < $1.setNumber }
+        XCTAssertEqual(logs.map(\.actualWeight), [0, 0, 0])
+        XCTAssertEqual(logs.map(\.actualReps), [8, 8, 8])
+        XCTAssertTrue(logs.allSatisfy { !$0.isCompleted && $0.sourceHistorySetID == nil })
+        XCTAssertEqual(orphan.actualWeight, 10)
+        XCTAssertEqual(orphan.actualReps, 9)
+        XCTAssertTrue(orphan.isCompleted)
     }
 
     func testShareDraftNormalizationNameSuggestionAndEmptyState() {

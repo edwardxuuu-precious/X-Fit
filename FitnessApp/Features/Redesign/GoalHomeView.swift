@@ -32,8 +32,11 @@ struct GoalHomeView: View {
     private var program: FatLossProgram? { programs.first { $0.statusRaw == "active" } }
     private var today: Date { FatLossCalendar.day(.now) }
     private var weekStart: Date { FatLossCalendar.adding(-6, to: today) }
+    // Body check-ins use the device-local day in their existing save/upsert contract.
+    // Keep that boundary separate from the program's fixed calendar.
+    private var bodyCheckInToday: Date { Date.now.startOfDay }
     private var todayCheckIn: DailyBodyCheckIn? {
-        bodyCheckIns.filter { FatLossCalendar.sameDay($0.date, today) }
+        bodyCheckIns.filter { $0.date.isSameDay(as: bodyCheckInToday) }
             .max { $0.updatedAt < $1.updatedAt }
     }
     private var feelingSummary: String {
@@ -108,40 +111,32 @@ struct GoalHomeView: View {
             .padding(.top, 16)
             .padding(.bottom, 28)
         }
-        .screenBackground()
+        .sprintPage()
         .fatLossCalendar()
-        .toolbar(.hidden, for: .navigationBar)
+        .navigationTitle("目标与周期").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
         .sheet(isPresented: $showsWeight) {
-            QuickBodyWeightEntryView().preferredColorScheme(.dark)
+            QuickBodyWeightEntryView().sprintPage()
         }
         .sheet(isPresented: $showsFeeling) {
             NavigationStack {
-                DailyBodyCheckInEditor(checkIn: todayCheckIn, date: today)
+                DailyBodyCheckInEditor(checkIn: todayCheckIn, date: bodyCheckInToday)
             }
-            .preferredColorScheme(.dark)
+            .sprintPage()
         }
         .fatLossError($errorMessage)
     }
 
     private var header: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("X-FIT / PROGRESS")
-                    .font(.caption2.weight(.heavy))
-                    .tracking(2)
-                    .foregroundStyle(AppTheme.secondaryText)
-                Text("目标")
-                    .font(AppTheme.pageTitle)
-                    .foregroundStyle(AppTheme.posterWarmWhite)
-            }
+            SprintPageHeader(title: "目标与周期", icon: "scope")
             Spacer()
             if let program {
                 NavigationLink(destination: FatLossTargetsView(program: program)) {
                     Image(systemName: "slider.horizontal.3")
                         .font(.title3)
                         .frame(width: 44, height: 44)
-                        .foregroundStyle(.white)
-                        .background(Color.white.opacity(0.045), in: Circle())
+                        .foregroundStyle(AppTheme.ink)
+                        .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 14))
                 }
                 .accessibilityLabel("目标与健康档案")
                 .accessibilityIdentifier("目标与健康档案")
@@ -181,10 +176,11 @@ struct GoalHomeView: View {
         let points = weights.filter { $0.date >= weekStart }
         return VStack(alignment: .leading, spacing: 18) {
             HStack(alignment: .top, spacing: 12) {
+                SprintIcon(systemName: "scope", size: 52, prominent: true)
                 VStack(alignment: .leading, spacing: 5) {
                     Text(program.title)
                         .font(.headline.weight(.bold))
-                        .foregroundStyle(AppTheme.posterWarmWhite)
+                        .foregroundStyle(AppTheme.ink)
                     Text("\(FatLossCalendar.label(program.startDate)) — \(FatLossCalendar.label(program.endDate))")
                         .font(.caption.monospacedDigit())
                         .foregroundStyle(AppTheme.secondaryText)
@@ -192,7 +188,7 @@ struct GoalHomeView: View {
                 Spacer(minLength: 8)
                 Text(phase(program))
                     .font(.caption.weight(.bold))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 7)
                     .background(AppTheme.accent.opacity(0.11), in: Capsule())
@@ -200,7 +196,7 @@ struct GoalHomeView: View {
 
             HStack(alignment: .bottom, spacing: 12) {
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("最近 7 日均重")
+                    Text("7 日均重")
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(AppTheme.secondaryText)
                     HStack(alignment: .firstTextBaseline, spacing: 5) {
@@ -208,7 +204,7 @@ struct GoalHomeView: View {
                             .font(.system(size: currentWeightNumberSize, weight: .semibold, design: .rounded).monospacedDigit())
                             .minimumScaleFactor(0.55)
                             .lineLimit(1)
-                            .foregroundStyle(AppTheme.posterWarmWhite)
+                            .foregroundStyle(AppTheme.ink)
                         Text("kg")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(AppTheme.secondaryText)
@@ -225,13 +221,13 @@ struct GoalHomeView: View {
                         .foregroundStyle(AppTheme.secondaryText)
                     Text(target.map { String(format: "%.1f kg", $0) } ?? "待设定")
                         .font(.headline.monospacedDigit())
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                     Text("记录 \(average.recordedDays)/7 天")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(AppTheme.posterWarmWhite)
+                        .foregroundStyle(AppTheme.ink)
                         .padding(.horizontal, 9)
                         .padding(.vertical, 6)
-                        .background(Color.white.opacity(0.055), in: Capsule())
+                        .background(AppTheme.elevatedSurface, in: Capsule())
                         .accessibilityIdentifier("目标-称重覆盖率")
                         .accessibilityValue("\(average.recordedDays)/7 天")
                 }
@@ -245,7 +241,7 @@ struct GoalHomeView: View {
                     .foregroundStyle(changeColor)
                 Text(changeText)
                     .font(.subheadline.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(AppTheme.posterWarmWhite)
+                    .foregroundStyle(AppTheme.ink)
                     .accessibilityIdentifier(averageChange == nil ? "目标-变化数据不足" : "目标-均重变化")
                 Spacer(minLength: 0)
             }
@@ -257,20 +253,18 @@ struct GoalHomeView: View {
                 Button { showsWeight = true } label: {
                     Label("记录体重", systemImage: "plus")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(.black)
                         .frame(maxWidth: .infinity, minHeight: 48)
-                        .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
                         .contentShape(Rectangle())
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(SprintPrimaryButtonStyle())
                 .accessibilityIdentifier("目标-记录体重")
 
                 NavigationLink(destination: FatLossReviewView(program: program)) {
                     Label("本周复盘", systemImage: "arrow.up.right")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(AppTheme.posterWarmWhite)
+                        .foregroundStyle(AppTheme.ink)
                         .frame(maxWidth: .infinity, minHeight: 48)
-                        .background(Color.white.opacity(0.055), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 11, style: .continuous))
                         .overlay {
                             RoundedRectangle(cornerRadius: 11, style: .continuous)
                                 .stroke(AppTheme.line, lineWidth: 1)
@@ -284,13 +278,7 @@ struct GoalHomeView: View {
         .padding(18)
         .background {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: [AppTheme.elevatedSurface, AppTheme.surface.opacity(0.96)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                .fill(AppTheme.surface)
         }
         .overlay(alignment: .topLeading) {
             Capsule()
@@ -300,7 +288,7 @@ struct GoalHomeView: View {
         }
         .overlay {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(Color.white.opacity(0.065), lineWidth: 1)
+                .stroke(AppTheme.line, lineWidth: 1)
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("目标-主目标")
@@ -317,7 +305,7 @@ struct GoalHomeView: View {
                     .foregroundStyle(AppTheme.secondaryText)
             }
             .frame(maxWidth: .infinity, minHeight: 126)
-            .background(Color.black.opacity(0.13), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
             .accessibilityIdentifier("目标-七日均重")
         } else {
             let values = points.map(\.weightKg)
@@ -337,10 +325,10 @@ struct GoalHomeView: View {
                         )
                     )
                 LineMark(x: .value("日期", point.date), y: .value("实测体重", point.weightKg))
-                    .foregroundStyle(AppTheme.posterWarmWhite)
+                    .foregroundStyle(AppTheme.ink)
                     .lineStyle(StrokeStyle(lineWidth: 2.25, lineCap: .round, lineJoin: .round))
                 PointMark(x: .value("日期", point.date), y: .value("实测体重", point.weightKg))
-                    .foregroundStyle(point.date == points.last?.date ? AppTheme.accent : AppTheme.posterWarmWhite.opacity(0.62))
+                    .foregroundStyle(point.date == points.last?.date ? AppTheme.accent : AppTheme.ink.opacity(0.62))
                     .symbolSize(point.date == points.last?.date ? 42 : 16)
             }
             .chartYScale(domain: lower...upper)
@@ -353,9 +341,9 @@ struct GoalHomeView: View {
             }
             .chartYAxis(.hidden)
             .chartPlotStyle { plot in
-                plot.background(Color.black.opacity(0.10))
+                plot.background(AppTheme.elevatedSurface)
             }
-            .frame(height: 142)
+            .frame(height: 142).sprintChart()
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .accessibilityLabel("近7个自然日实测体重")
             .accessibilityIdentifier("目标-七日均重")
@@ -367,7 +355,7 @@ struct GoalHomeView: View {
             metricRow(
                 NavigationLink(destination: StatsView()) {
                     GoalMetricTile(
-                        title: "训练执行",
+                        title: "训练",
                         value: "\(recentWorkouts.count) 次",
                         detail: trainingDetail,
                         icon: "bolt.fill",
@@ -380,9 +368,9 @@ struct GoalHomeView: View {
                     GoalMetricTile(
                         title: "腰围",
                         value: recentWaist?.waistCm.map { String(format: "%.1f cm", $0) } ?? "未记录",
-                        detail: recentWaist.map { FatLossCalendar.label($0.date) } ?? "建立身体基线",
+                        detail: recentWaist.map { FatLossCalendar.label($0.date) } ?? "待记录",
                         icon: "ruler",
-                        tint: AppTheme.posterWarmWhite
+                        tint: AppTheme.ink
                     )
                 }
                 .buttonStyle(.plain)
@@ -395,7 +383,7 @@ struct GoalHomeView: View {
                         value: dailyLogValue,
                         detail: dailyLogDetail,
                         icon: "moon.zzz.fill",
-                        tint: AppTheme.posterWarmWhite
+                        tint: AppTheme.ink
                     )
                 }
                 .buttonStyle(.plain)
@@ -434,7 +422,7 @@ struct GoalHomeView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(targetRevision(program)?.isNutritionConfirmed == true ? "营养目标已确认" : "营养目标待确认")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(AppTheme.posterWarmWhite)
+                        .foregroundStyle(AppTheme.ink)
                     Text(targetRevision(program)?.isNutritionConfirmed == true ? "查看当前目标版本" : "医学参数未知，不计算剩余额度")
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
@@ -542,9 +530,7 @@ private struct GoalMetricTile: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Image(systemName: icon)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(tint)
+                SprintIcon(systemName: icon, size: 40)
                 Spacer(minLength: 8)
                 Image(systemName: "arrow.up.right")
                     .font(.caption2.weight(.bold))
@@ -555,7 +541,7 @@ private struct GoalMetricTile: View {
                 .foregroundStyle(AppTheme.secondaryText)
             Text(value)
                 .font(.title3.weight(.bold).monospacedDigit())
-                .foregroundStyle(AppTheme.posterWarmWhite)
+                .foregroundStyle(AppTheme.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.65)
             Text(detail)
@@ -582,19 +568,11 @@ private struct GoalWideLink: View {
 
     var body: some View {
         HStack(spacing: 14) {
-            Image(systemName: icon)
-                .font(.title3.weight(.medium))
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 42, height: 42)
-                .background(AppTheme.accent.opacity(0.10), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            SprintIcon(systemName: icon, size: 48, prominent: true)
             VStack(alignment: .leading, spacing: 4) {
-                Text(eyebrow.uppercased())
-                    .font(.caption2.weight(.bold))
-                    .tracking(0.8)
-                    .foregroundStyle(AppTheme.secondaryText)
                 Text(title)
                     .font(.headline)
-                    .foregroundStyle(AppTheme.posterWarmWhite)
+                    .foregroundStyle(AppTheme.ink)
                 Text(detail)
                     .font(.caption)
                     .foregroundStyle(AppTheme.secondaryText)

@@ -112,14 +112,14 @@ struct ExerciseTerminologyAPIClient {
 }
 
 enum ExerciseTerminologyService {
-    static let catalogVersion = "xfit-terminology-2026-08-03-v1"
+    static let catalogVersion = "xfit-terminology-2026-09-27-v2"
 
     static let catalog: [ExerciseTerminologyCandidate] = [
         candidate(["MTS 下斜卧推"], "hammer_strength_mts_iso_lateral_decline_press", "Hammer Strength MTS Iso-Lateral 下斜推胸", "Hammer Strength MTS Iso-Lateral Decline Press", .approvalReady, .high, note: "品牌和系列不可丢失。"),
         candidate(["MTS 划船"], "hammer_strength_mts_iso_lateral_row", "Hammer Strength MTS Iso-Lateral 划船", "Hammer Strength MTS Iso-Lateral Row", .approvalReady, .high, note: "不能仅凭名称改成 High Row。"),
         candidate(["V 型深蹲"], "machine_v_squat", "V 型深蹲机", "V-Squat Machine", .approvalReady, .high, note: "与哈克深蹲、钟摆深蹲分开。"),
         candidate(["三头下压", "绳索下压"], "cable_triceps_pushdown", "绳索三头肌下压", "Cable Triceps Pushdown", .mergeReview, .high, mergeGroup: "merge_cable_triceps_pushdown", note: "需确认把手附件与重量口径一致；确认前不共享 PR。"),
-        candidate(["三头下压机"], "machine_triceps_press_unverified", "器械三头肌下压（待确认）", "Machine Triceps Press (Unverified)", .unresolved, .low, note: "可能是坐姿臂屈伸机、双杠下压机或固定轨迹下压机。"),
+        candidate(["三头下压机", "seated dip", "坐姿器械臂屈伸"], "machine_triceps_press", "坐姿器械臂屈伸", "Seated Dip", .approvalReady, .high, note: "用户确认的坐姿器械臂屈伸；旧名称保留为别名，与绳索三头下压分开。"),
         candidate(["三角肌训练机"], "machine_deltoid_unverified", "三角肌训练机（待确认）", "Deltoid Machine (Unverified)", .unresolved, .low, note: "可能是侧平举机、反向蝴蝶机或肩推机。"),
         candidate(["上斜卧推"], "incline_barbell_bench_press", "上斜杠铃卧推", "Incline Barbell Bench Press", .approvalReady, .high),
         candidate(["上斜哑铃卧推"], "incline_dumbbell_bench_press", "上斜哑铃卧推", "Incline Dumbbell Bench Press", .approvalReady, .high, note: "长凳角度宜另存属性。"),

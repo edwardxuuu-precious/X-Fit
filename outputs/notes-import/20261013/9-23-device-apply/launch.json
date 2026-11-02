@@ -1,0 +1,60 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "process",
+      "launch",
+      "--timeout",
+      "45",
+      "--json-output",
+      "outputs/notes-import/20261013/9-23-device-apply/launch.json",
+      "--device",
+      "00008150-001E49912122401C",
+      "--terminate-existing",
+      "com.edward.FitnessApp",
+      "--meal-exchange-request=meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json"
+    ],
+    "commandType" : "devicectl.device.process.launch",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 5,
+    "outcome" : "success",
+    "version" : "642.16"
+  },
+  "result" : {
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "launchOptions" : {
+      "activatedWhenStarted" : true,
+      "arguments" : [
+        "--meal-exchange-request=meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json"
+      ],
+      "environmentVariables" : {
+        "TERM" : "dumb"
+      },
+      "platformSpecificOptions" : {
+
+      },
+      "startStopped" : false,
+      "terminateExistingInstances" : true,
+      "user" : {
+        "active" : true
+      }
+    },
+    "process" : {
+      "auditToken" : [
+        4294967295,
+        501,
+        501,
+        501,
+        501,
+        127,
+        0,
+        266375
+      ],
+      "executable" : "file:///private/var/containers/Bundle/Application/B9A99DB1-425C-4329-BA2D-7C783A9E55BE/FitnessApp.app/FitnessApp",
+      "processIdentifier" : 127
+    }
+  }
+}

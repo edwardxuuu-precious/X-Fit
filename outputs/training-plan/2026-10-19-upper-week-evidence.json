@@ -1,0 +1,2343 @@
+{
+  "evidenceID": "UPPER-20261019-E01",
+  "capturedAt": "2026-10-17T18:02:06.678692+08:00",
+  "source": {
+    "readOnlyDeviceCopy": "/tmp/xfit-upper-week-20261019-read/default.store",
+    "storeSHA256": "979ed0fd829a6ef03b38ad9dd4fa13e5920c0f19b0bf0c28db9605093cf8fed1",
+    "quickCheck": "ok",
+    "scope": "training and related recovery only"
+  },
+  "preference": {
+    "code": "TP-20260928-05",
+    "effectiveAt": "2026-09-28T00:00:00+08:00",
+    "snapshot": {
+      "sessionMinutesLower": 60,
+      "zone2Minutes": 30,
+      "preferredLocations": [
+        "商业健身房",
+        "家中"
+      ],
+      "constraints": [
+        "每次只聚焦 1 个主肌群与 1 个辅助肌群，不采用全身混合训练",
+        "工作日完成全部核心力量训练；周末默认休息，短有氧仅在本人主动选择时安排",
+        "胸部单次 14–16 个有效组、背部单次 16–18 个有效组；肩臂专门日 24–28 个有效组",
+        "复合动作主组保留 1–2 RIR，随后完成 2–3 个减重组；孤立动作最后一组可到 0–1 RIR",
+        "热身和递增组不计入有效容量；连续两个动作表现下降超过约 10% 或训练达到 90 分钟时停止追加孤立组",
+        "早晨只有咖啡和电解质饮料时，首个主项按上次工作重量下调 5%–10%，保留 3–4 RIR",
+        "不跑步；跳绳出现足踝或膝部不适时改为低冲击有氧",
+        "Notes 重量口径尚未明确，不把其中数字自动换算为公斤、总重、单边、单只或一对",
+        "肌酐偏高且医生要求控制肉量；训练编排不得推导高蛋白或营养处方"
+      ],
+      "extraVolumeMuscleGroups": [
+        "肩部",
+        "手臂"
+      ],
+      "zone2SessionsPerWeek": 1,
+      "maxFocusAreasPerSession": 2,
+      "splitStyle": "bodyPartSplit",
+      "revisionCode": "TP-20260928-05",
+      "jumpRopeSessionsPerWeek": 2,
+      "preferredTrainingTime": "早晨",
+      "strengthDaysPerWeek": 4,
+      "foundationalMuscleGroups": [
+        "胸部",
+        "背部",
+        "腿部",
+        "臀部"
+      ],
+      "sessionMinutesUpper": 90,
+      "avoidsRunning": true
+    }
+  },
+  "localSetPreference": "SET-PREF-20261016-01",
+  "methodVersion": "METHOD-20261017-04",
+  "recentCompletedSessions": [
+    {
+      "id": "5ce18525-b9ef-461d-9b3a-1e244b520420",
+      "day": "2026-10-12T00:00:00+08:00",
+      "title": "颈前深蹲",
+      "completedRows": 28
+    },
+    {
+      "id": "09c39720-6835-4e17-bd35-70b2099e17bd",
+      "day": "2026-10-15T00:00:00+08:00",
+      "title": "Oct 15 · 下肢后侧",
+      "completedRows": 27
+    },
+    {
+      "id": "1f9f09b8-3191-41a0-9a4c-db13cdfdf711",
+      "day": "2026-10-17T00:00:00+08:00",
+      "title": "下肢综合 · 已确认P5 · 20组",
+      "completedRows": 17
+    }
+  ],
+  "upperCompletedHistory": [
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "3ec6f976-2a3c-44de-830f-6bc7de2bdb85",
+      "exerciseID": "c3416bb2-3263-4530-84a0-5b186cb34d62",
+      "name": "Bench press",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes未注明器械及侧别。",
+      "notes": "原Notes未注明器械及侧别。",
+      "sets": [
+        {
+          "id": "3a6a8123-a439-4563-98be-6052103a9da8",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "418d5b9d-7863-406a-b128-6b1512be108a",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "d55489da-1508-482a-9ad8-1199d2b6e0a2",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "c05f5663-1be0-419f-b326-c7184339a27f",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "60f31a2b-f26f-4d73-8f74-71deb7d9eb43",
+          "number": 5,
+          "weight": 40.0,
+          "reps": 6,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "03654e92-84cf-4753-bf83-be73a7fc37f2",
+          "number": 6,
+          "weight": 20.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "7c12b0ec-f9fb-41d4-9d93-53acf4f2c7ab",
+      "exerciseID": "87c20684-f42e-4b45-a593-eb6938a83970",
+      "name": "Inclined Bench Press",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes未注明器械及侧别。",
+      "notes": "原Notes未注明器械及侧别。",
+      "sets": [
+        {
+          "id": "59379af8-8308-44b5-98b4-5da11f16ed74",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "6c231ce7-8091-4ed3-afd2-832502dd1a5c",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "dbd2d7f3-e7f1-45c5-a055-c5383382c6da",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "d3d35009-9775-40a2-bffb-e992cd6c2581",
+          "number": 4,
+          "weight": 20.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "8cb0855a-b385-4af3-a88f-13e2d09014bb",
+      "exerciseID": "a91fdc88-7a54-4bd4-b88f-cddb75b9a97d",
+      "name": "MTS machine declined bench press",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes注明MTS machine；组次及器械负荷口径按原文，不推断单双侧。",
+      "notes": "原Notes注明MTS machine；组次及器械负荷口径按原文，不推断单双侧。",
+      "sets": [
+        {
+          "id": "2b9b5cac-c808-460b-87a7-c544f52324b3",
+          "number": 1,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "ce95ea03-7a62-4a42-84fa-b47cfd8971a3",
+          "number": 2,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "08a8b6b2-5c12-485d-bda6-3169c45c20cb",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "990faf7b-281d-4096-abca-c740871fb9a9",
+          "number": 4,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "c5ddafbe-8677-4a8c-b3b2-681d531e5ce9",
+      "exerciseID": "92e3cd02-1ba5-485b-97b2-7b72062bad49",
+      "name": "seated dip",
+      "muscle": "手臂",
+      "unit": "kilogram",
+      "performanceNotes": "沿用现有历史动作条目的原名及器械类别；Notes未注明侧别。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "5128c8a4-dd69-4e48-ab3e-0b922ed00cf4",
+          "number": 1,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "469e6185-682c-44a1-9f97-79a47c8c440d",
+          "number": 2,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "530971fc-2e01-42a3-8bb9-c62ae8e05b40",
+          "number": 3,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "89869a4e-9ced-4fdf-9113-716d510e5af6",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "2ca484ea-d362-4c2f-9420-98f71f6494f1",
+      "exerciseID": "c44d568a-491f-40f7-9724-59777773cf6b",
+      "name": "seated fly",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes未明确器械及侧别。",
+      "notes": "原Notes未明确器械及侧别。",
+      "sets": [
+        {
+          "id": "d565ce29-92ff-4771-a036-4fe5937dc7d5",
+          "number": 1,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "6652e75f-c6ee-4c9f-b162-e8727f7b96e1",
+          "number": 2,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "874ba680-69c7-4503-a030-6a0dc889dc41",
+          "number": 3,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "61bc23f9-791b-483e-b3ca-01f800b7d9a6",
+          "number": 4,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "81574d31-8833-45ec-9a3b-98d9df28717d",
+      "exerciseID": "2caeede2-c25b-453b-9565-f89e59224b96",
+      "name": "Cable 中束平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes注明Cable；单双侧口径未记录。",
+      "notes": "原Notes注明Cable；单双侧口径未记录。",
+      "sets": [
+        {
+          "id": "5d4ccb20-d153-4854-9406-1561ab85e076",
+          "number": 1,
+          "weight": 5.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "27b63d51-7d20-4848-acf1-e71fd4953943",
+          "number": 2,
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "00831748-47a7-434c-a043-92053a35873f",
+          "number": 3,
+          "weight": 5.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "8637b15b-ee83-4f44-baeb-f36106113374",
+          "number": 4,
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "18d28a81-a0f5-4c37-9001-50d62589270e",
+          "number": 5,
+          "weight": 2.5,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "7bf2c5b1-f3ba-4504-9157-19834687ee27",
+      "exerciseID": "10184913-892f-4544-96ad-e400ac2fe5be",
+      "name": "cable 前束平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "原Notes注明cable；单双侧口径未记录。",
+      "notes": "原Notes注明cable；单双侧口径未记录。",
+      "sets": [
+        {
+          "id": "a0731d5a-eb72-40e7-b321-02ebb2fc1074",
+          "number": 1,
+          "weight": 2.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "b9c81889-9a16-4d02-a4af-27ce91abdfc2",
+          "number": 2,
+          "weight": 5.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "79168408-91af-41b5-987c-6c02834af9f8",
+          "number": 3,
+          "weight": 7.5,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "92322831-bc24-49d8-a441-6f195ff35b7a",
+          "number": 4,
+          "weight": 5.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "1f957a38-675b-48bb-aadc-26bd36454c8f",
+          "number": 5,
+          "weight": 2.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "3d7d65e2-aa89-44f6-b769-04b3909cf49c",
+      "plannedDate": "2026-09-23T00:00:00+08:00",
+      "snapshotID": "c4bf879f-7c6f-419c-ae11-733c65af27e1",
+      "exerciseID": "a4d214db-f767-43c7-a520-9a8b869ae6e6",
+      "name": "cable 后束下拉",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "按Notes名称原样保留；原文未注明单双侧或具体器械型号。",
+      "notes": "按Notes名称原样保留；原文未注明单双侧或具体器械型号。",
+      "sets": [
+        {
+          "id": "acd0eccd-c541-4a8f-b2a3-e39c5347609c",
+          "number": 1,
+          "weight": 2.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "22c21df6-22bb-4adc-8830-da6942a745f1",
+          "number": 2,
+          "weight": 5.0,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "b6d246ee-2489-4054-8759-354e4dd297e6",
+          "number": 3,
+          "weight": 7.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "22397f0a-6ac9-4a7c-8f61-4d43ec1725ae",
+          "number": 4,
+          "weight": 7.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        },
+        {
+          "id": "70ae3d81-cd62-444c-8669-b6bcd7f81c80",
+          "number": 5,
+          "weight": 7.5,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "d8608f79-ac9f-4c17-ad97-971900425344",
+      "exerciseID": "63b78b46-bec4-4710-8590-66a0e22c963d",
+      "name": "上斜哑铃卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "低上斜。首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "18f5459b-5f4d-4e18-b62d-789210503b3a",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "3d524087-88eb-4972-bd3a-37123ca18a3b",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "009e6ac0-9351-4b11-99bc-a87d312210c8",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "ea187d6c-3f56-4904-817b-aaa907140480",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "97cd26c9-57ef-43d4-a998-4d51bedc604e",
+      "exerciseID": "12a303d7-282c-45cb-b892-8b4025d6c097",
+      "name": "器械推胸",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "坐姿推胸。首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "9ee979f7-ec3d-4a11-a472-20a40325119c",
+          "number": 1,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "5c507a81-13a1-4b20-ad08-e5f7b05f6a85",
+          "number": 2,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "5dfb1e92-b581-4b90-b497-2ae04a836026",
+          "number": 3,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "775a3a9a-b337-4729-a638-8d87ad7cae51",
+          "number": 4,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "8590e885-6e9f-4580-8e7e-05386138af0c",
+      "exerciseID": "902e0160-cb02-4d16-867e-ec9def995eae",
+      "name": "器械下斜卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "",
+      "sets": [
+        {
+          "id": "a8b4b307-6204-4b9d-9ca0-e17b4cc9ac17",
+          "number": 1,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "472ef82b-b56e-441a-af38-a273d8a5af3f",
+          "number": 2,
+          "weight": 27.5,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "4351c81c-412f-41d6-b874-e68b61fb1790",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "3c947d82-5e4e-4482-8f29-f8bb01f65143",
+          "number": 4,
+          "weight": 32.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "84815dc4-2a34-4304-aed0-bb34137a5acf",
+      "exerciseID": "adc52101-7055-49ec-a867-7d4beee94492",
+      "name": "蝴蝶机夹胸",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "26b86a80-927a-44fd-b246-3fd073bb4bd1",
+          "number": 1,
+          "weight": 11.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "8babb7e7-7d50-4eea-bbcf-65df9aefc157",
+          "number": 2,
+          "weight": 11.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "eb875d5b-fdbd-41f0-b42c-876d31d714e1",
+          "number": 3,
+          "weight": 8.75,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "216ba2bd-f0f6-4e16-b13b-e51e18140a88",
+          "number": 4,
+          "weight": 8.75,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "6c54bee2-40dd-4b74-a635-7323ebd64fe8",
+      "exerciseID": "6e5744ec-d08f-4316-b3b9-dc4b36e179c9",
+      "name": "哑铃反向飞鸟",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "Notes: dumbbell reverse fly；重量按单只保存。",
+      "sets": [
+        {
+          "id": "096afbfb-06fc-418b-8f01-39d753ea567e",
+          "number": 1,
+          "weight": 7.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "eca402e3-b889-4768-b805-2ac05eb70da4",
+          "number": 2,
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "5dfd81c5-8d70-488d-bc87-566cd5099ded",
+          "number": 3,
+          "weight": 12.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "f234dc3d-5eeb-478a-ad4d-b22d316f618c",
+          "number": 4,
+          "weight": 7.5,
+          "reps": 15,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "491b51d0-e922-4562-9fd6-b7ee478f71d9",
+      "exerciseID": "3063d520-06b1-4408-9eed-5d3297cc8a76",
+      "name": "器械肩推",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "不冲大重量。首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "2fe85753-5be2-48a3-8485-5ad9dd8f6909",
+          "number": 1,
+          "weight": 45.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "b4b91faa-97d0-45e5-b0f7-a6d37c07393f",
+          "number": 2,
+          "weight": 50.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "e896b2f8-7e1c-4b3e-b63a-2d5133701710",
+          "number": 3,
+          "weight": 55.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "4a4cc831-c5f2-4c48-b71a-c7beac106add",
+          "number": 4,
+          "weight": 60.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "a507acd6-e282-4163-8cfe-c0718a5ad1a7",
+      "exerciseID": "fb7c64d1-b80d-44df-834d-fbcb7b5f9f30",
+      "name": "绳索侧平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "可换器械侧平举；绳索每侧完成。首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "cc5cdfce-9562-473b-81ca-bc02a642a7f8",
+          "number": 1,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "b55c071c-1b9a-4f30-8a7d-c8eff47c6434",
+          "number": 2,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "85896a51-cb16-48ea-8ec6-ac0fa02d02b6",
+          "number": 3,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "df3a9c7b-21ee-4821-a6b2-96bc40d45f61",
+          "number": 4,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "ec7f724a-ae51-4c74-b94b-ea9d88034c8b",
+      "exerciseID": "bd28555c-efc5-49a6-b267-5bf091c103fc",
+      "name": "绳索下压",
+      "muscle": "手臂",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "三头仅2组，不额外加双杠或窄握卧推。首个工作组 RIR 3，其余 RIR 2–3；重量待当天热身确定，疼痛时停止，不做力竭。\n60–75分钟，15个工作组。先轻松热身5–8分钟，再做首个推／拉递增热身，热身不计工作组。首个工作组 RIR 3，其余 RIR 2–3；复合休息2–3分钟，孤立和核心60–90秒。左肘疼痛、逐组加重或代偿时停止动作；弯举下压可直接省去，不补组。训练后或次晨加重，下次取消直接手臂训练，并减少或暂停诱发不适的推拉。明显无力、麻木、肿热、活动受限时先评估。旅途疲劳或供能不足时减量或休息。",
+      "sets": [
+        {
+          "id": "48d1c69e-8e72-4fa7-ba4b-4bea192262ce",
+          "number": 1,
+          "weight": 15.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "3b526d26-1471-4194-b2c1-3036cb634f76",
+          "number": 2,
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "32f77af1-9ea4-4f53-99ee-7028cf4a2e63",
+          "number": 3,
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "2daa88d1-7d77-438b-befd-9a1b24192393",
+          "number": 4,
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "8009846c-3dff-4bc0-8b58-d4a2e40d05b3",
+      "plannedDate": "2026-09-21T00:00:00+08:00",
+      "snapshotID": "2d1980ea-4e64-460a-a441-767d3bb65c3e",
+      "exerciseID": "92e3cd02-1ba5-485b-97b2-7b72062bad49",
+      "name": "seated dip",
+      "muscle": "手臂",
+      "unit": "kilogram",
+      "performanceNotes": "",
+      "notes": "",
+      "sets": [
+        {
+          "id": "15eee41c-dba0-4f50-9c67-dbc1fa5c5d98",
+          "number": 1,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "f9301550-b859-4754-b70a-0a150a800b53",
+          "number": 2,
+          "weight": 45.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "5327544b-ab51-472c-9e91-0c1433730247",
+          "number": 3,
+          "weight": 45.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        },
+        {
+          "id": "45c36569-e7c6-4fbc-9eef-e0504801d307",
+          "number": 4,
+          "weight": 45.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "single",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "0a8c909e-fac3-432c-b08f-609a2e26a83c",
+      "plannedDate": "2026-09-12T00:00:00+08:00",
+      "snapshotID": "6cfb9c5d-e916-489f-898c-bbc468f67048",
+      "exerciseID": "634f2176-1479-4058-b436-3efe90dfed0a",
+      "name": "双滑轮高位下拉",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字 21.25；单边/总配重口径未确认。",
+      "notes": "Notes: dual pulley pulldown；重量按单边保存。",
+      "sets": [
+        {
+          "id": "5beb6496-f6e1-47f9-8cd7-a28fdc910727",
+          "number": 1,
+          "weight": 21.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "6c6635f6-19c3-4740-8846-fd0d01f2c94a",
+          "number": 2,
+          "weight": 21.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "4fdb31b1-22cb-4cc6-9f1f-bb26569d5c39",
+          "number": 3,
+          "weight": 21.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "6f980df1-18f0-4c9c-9cd0-1da115ca30f5",
+          "number": 4,
+          "weight": 21.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "9d3b40eb-2010-459f-832b-73d281f6e543",
+      "exerciseID": "f44fae99-8b86-4ae9-8ad9-f26c60b0b2b3",
+      "name": "站姿杠铃肩推",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；单双侧/总重口径未确认。",
+      "notes": "Notes 原始数字；单双侧/总重口径未确认。",
+      "sets": [
+        {
+          "id": "c49a201b-bc33-4695-a515-ea60f825a2cb",
+          "number": 1,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "4786f380-7736-4797-ba9f-cc6d2749eb52",
+          "number": 2,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "2aac9f5c-abe8-40eb-81a1-f6618ea0de15",
+          "number": 3,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "b1c2eae5-2917-4e64-bcc0-a91f1026109a",
+          "number": 4,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "69d9e338-db86-4f3b-bce0-fd8ae0bee4f8",
+          "number": 5,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "39a971a5-4cd2-4de1-b48b-3d8f6d426fa0",
+      "exerciseID": "ce84178f-7cd1-4036-b9e0-b278ae19e71b",
+      "name": "MTS 坐姿肩推",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "sets": [
+        {
+          "id": "a381c274-9388-489f-b4d2-857069add5fe",
+          "number": 1,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "a7354100-ed14-42e7-a93d-e52beb1ae3e1",
+          "number": 2,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "b51f9c02-e9c7-490f-bc7f-67e801f0ebb0",
+          "number": 3,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "fdb94474-5f36-4664-9741-8ca4a2d2e870",
+          "number": 4,
+          "weight": 45.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "56e0d15f-b7e0-4f91-9a44-52fcd41f13a7",
+      "exerciseID": "5d749dd6-3353-4e6a-bcd8-2d071dc3bb23",
+      "name": "哑铃站姿侧平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；单只/一对口径未确认。",
+      "notes": "Notes 原始数字；单只/一对口径未确认。",
+      "sets": [
+        {
+          "id": "045c3ac6-9d58-4d90-ab9f-83477029ee49",
+          "number": 1,
+          "weight": 5.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "7d82f2e2-681f-4b5c-87ae-c41ef61cfb7d",
+          "number": 2,
+          "weight": 7.5,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "ca0c538e-5818-4ff1-9415-5015665d530d",
+          "number": 3,
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "3caa4475-5c19-493e-8f03-dd152e223b84",
+          "number": 4,
+          "weight": 12.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "98de614c-729d-4d29-8c21-e1abf2c95817",
+          "number": 5,
+          "weight": 7.5,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "43d8e10b-b59a-4374-8a24-ebc62126699f",
+          "number": 6,
+          "weight": 5.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "6e0b2866-26d0-4eac-84b5-c347da4d9e2b",
+      "exerciseID": "9bb12534-10a3-435d-be9a-10a70ed0616f",
+      "name": "器械坐姿侧平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "sets": [
+        {
+          "id": "d5cf9f4a-9cbf-42e3-9d50-e62965c6c557",
+          "number": 1,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "7248f037-8e52-4b12-bf4f-6bb91d7dc26b",
+          "number": 2,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "fe6a851e-0a9b-4623-8162-5a809022aa02",
+          "number": 3,
+          "weight": 45.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "c3a2acc9-926f-46a9-9025-c4288bc84116",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "7529d294-0799-4104-a098-c7f6a3413bf9",
+      "exerciseID": "96a9eb0f-2a26-4eff-8fcd-0241b9cc37a8",
+      "name": "哑铃站姿反向飞鸟",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "本人确认站姿反向飞鸟使用哑铃；原始数字的单只/一对口径未确认。",
+      "notes": "本人确认站姿反向飞鸟使用哑铃；原始数字的单只/一对口径未确认。",
+      "sets": [
+        {
+          "id": "dff5e8bf-37d5-4593-b100-fe0f506f3b0a",
+          "number": 1,
+          "weight": 5.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "812027b4-1a72-44a9-af70-d8df5ddd5fa4",
+          "number": 2,
+          "weight": 7.5,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "2db9c57e-4740-4dde-9526-af96579d5367",
+          "number": 3,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "ef7c38b2-facc-43ad-94bc-e3ec7bec2f58",
+          "number": 4,
+          "weight": 12.5,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "3d1bbd58-bf1a-4cc9-bdb1-fad44d44d41f",
+          "number": 5,
+          "weight": 7.5,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "15525b7e-1402-4b56-afb3-41884b394da2",
+      "exerciseID": "60607190-12c3-4612-a8d4-24c0ca363586",
+      "name": "器械坐姿反向飞鸟",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "第二组经本人确认为 10 次；Notes 原始重量口径未确认。",
+      "notes": "第二组经本人确认为 10 次；Notes 原始重量口径未确认。",
+      "sets": [
+        {
+          "id": "ff21cfe8-d301-446e-9048-677495d76196",
+          "number": 1,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "16540193-ab97-4d7f-bd72-b763a93c0f1a",
+          "number": 2,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "d8303f64-0920-42fa-b8fd-1c6f1fdab209",
+          "number": 3,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "86930c5d-2409-4ad8-ba3b-3f7cd6f56225",
+          "number": 4,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "6af1173a-a381-4f8b-9653-e520f4f61c62",
+      "exerciseID": "7560be2b-e477-426e-86fc-cd309b2efc2c",
+      "name": "MTS 卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+      "sets": [
+        {
+          "id": "d80d7bfd-d6eb-40d6-a571-9476bace1a92",
+          "number": 1,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "5d2fb014-f472-4a3a-bea3-acc5083a8788",
+          "number": 2,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "d35f1f1e-0de1-4e61-aeea-a405619d3f43",
+          "number": 3,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "cd315210-bbc5-424e-bf77-8498d1e04439",
+          "number": 4,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "d158aed9-031e-4ede-ae9c-f7669ce4e66a",
+      "plannedDate": "2026-09-11T00:00:00+08:00",
+      "snapshotID": "6f0dc005-2fd1-41e6-875c-1be7c638912b",
+      "exerciseID": "90b84a9d-9432-42dd-b9a2-235c41e08ee3",
+      "name": "绳索夹胸",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes 原始数字；单边/总配重口径未确认。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "f390b728-e325-449f-89c3-b17f7a4f62e7",
+          "number": 1,
+          "weight": 11.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "29085dae-9639-423d-aa6e-88b9aeae6479",
+          "number": 2,
+          "weight": 11.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "6f3deb48-7eb8-4726-b1e3-33d1924cd494",
+          "number": 3,
+          "weight": 11.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "f6254d38-8359-4078-982f-d5872f887102",
+      "plannedDate": "2026-09-09T00:00:00+08:00",
+      "snapshotID": "362b045c-99b0-4235-a869-14381d7e6403",
+      "exerciseID": "5b956969-98d7-48f3-9ab5-a92cb46f1e04",
+      "name": "杠铃划船",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: Barbell row；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "c86f1a26-3e53-4f58-970d-4c63e00b6dfa",
+          "number": 1,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "74204081-0122-4551-89b1-3f157ce7d591",
+          "number": 2,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "3a38ea50-0db8-4334-a919-0c9760ed6508",
+          "number": 3,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "b7a9498f-dc0c-4152-b790-ca4510c704cf",
+          "number": 4,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "661fe006-b8c7-43bc-b96b-ef1a37b3b50d",
+          "number": 5,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "f6254d38-8359-4078-982f-d5872f887102",
+      "plannedDate": "2026-09-09T00:00:00+08:00",
+      "snapshotID": "4c24e4a2-f1ab-4100-b732-bb6dfc7fa67f",
+      "exerciseID": "65704f9b-e3c3-4ea8-a368-e9c85d19f70e",
+      "name": "宽握 T 杠划船",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: T-bar row wide grip；重量按整机/总挂片保存。",
+      "notes": "Notes: T-bar row wide grip；重量按整机/总挂片保存。",
+      "sets": [
+        {
+          "id": "76c937d5-9bc4-4b75-9731-6461bc88601e",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "4a7cac95-ae87-4680-ac10-dd687edf3659",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "8420b7b9-51e9-4bdc-8b9b-9a7d2645860b",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "7750d059-a234-4f08-b0ea-9c0f6782e6cb",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "f6254d38-8359-4078-982f-d5872f887102",
+      "plannedDate": "2026-09-09T00:00:00+08:00",
+      "snapshotID": "cc4d4f5d-8967-4141-b028-41cda7aa2e12",
+      "exerciseID": "4dd4c8ba-e507-4d5e-9bf9-bd9ef1524b8a",
+      "name": "MTS 划船",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: Iso-lateral row；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "575a99b2-75dd-4509-8312-4156cd63740d",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "5976187c-aba3-4632-aed8-312d50c1f788",
+          "number": 2,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "7f6a3dd9-4b31-44d2-aa0c-94641f1cdc4b",
+          "number": 3,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "16873d25-b0d4-4723-91ec-dda40c61af42",
+          "number": 4,
+          "weight": 50.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "f6254d38-8359-4078-982f-d5872f887102",
+      "plannedDate": "2026-09-09T00:00:00+08:00",
+      "snapshotID": "02023d41-c1d2-45b6-80ab-68ef75a461e2",
+      "exerciseID": "634f2176-1479-4058-b436-3efe90dfed0a",
+      "name": "双滑轮高位下拉",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: dual pulley pulldown；重量按单边保存。",
+      "notes": "Notes: dual pulley pulldown；重量按单边保存。",
+      "sets": [
+        {
+          "id": "19dc56f8-5bb7-4828-8e8a-188e619e8fd2",
+          "number": 1,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "f4fdae78-4025-4c6c-98c4-ff932e989d12",
+          "number": 2,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "323c5227-65e2-4c8b-8c1f-fd394c53c030",
+          "number": 3,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "0ab32eb0-860a-4843-8fb9-7a1a7e6ddb14",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "f6254d38-8359-4078-982f-d5872f887102",
+      "plannedDate": "2026-09-09T00:00:00+08:00",
+      "snapshotID": "2f4a8d5a-6f00-452a-ba1b-aa2b34e99c7b",
+      "exerciseID": "e80688b3-3640-4bab-9042-ec439ba9d690",
+      "name": "双滑轮低位划船",
+      "muscle": "背部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: dual pulley low row；重量按单边保存。",
+      "notes": "Notes: dual pulley low row；重量按单边保存。",
+      "sets": [
+        {
+          "id": "29472368-a43f-4910-b184-f0c0a2b3d5f3",
+          "number": 1,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "a06d2280-4392-4906-8b7f-9141919e29dc",
+          "number": 2,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "ed89b230-f039-4636-b976-5233e1c63f33",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "d0e3f1ef-ec79-440e-8d84-f725f65b5ffd",
+          "number": 4,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "c27196aa-cf27-4e96-a3c0-33996a197159",
+      "exerciseID": "270d5ae7-50f8-41ed-8a7e-8ae62576a607",
+      "name": "杠铃卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: Bench press；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "67100a87-18ea-46f8-9e80-85deaf8ae139",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "80517d29-2d5f-4d5d-9e78-e35cc4d9ba9f",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "e034c4db-01cd-453f-998e-dbc67bb6237d",
+          "number": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "766ccfaf-b432-46f5-a6e5-0e7bb348006b",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "45b076f6-5067-4e5e-b716-62650a0a37c1",
+          "number": 5,
+          "weight": 40.0,
+          "reps": 6,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "18cd67d7-e4c8-42bf-81b7-daf72b144c0d",
+      "exerciseID": "a9c027f7-35d5-42a3-a5f8-b5cbe7eecf80",
+      "name": "上斜卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: inclined bench press；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "45723a11-2469-4973-8500-78a11d482627",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "225514e4-d325-4c2d-8730-2aae23d24d95",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "8cf7d780-f96c-49ba-8b58-a627b9db521c",
+          "number": 3,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "e490aa6e-12cd-4786-9cb9-62860a0413ac",
+          "number": 4,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "8f5f5383-33ed-4d35-8738-1bff06df877a",
+      "exerciseID": "b97e40e5-a135-4a5f-a4b4-088ec05f8829",
+      "name": "MTS 下斜卧推",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: mts decline bench press；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "10ed7490-422d-4a73-9cdf-599e235820da",
+          "number": 1,
+          "weight": 20.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "3672c2d3-8d29-463d-b313-c33b7b702202",
+          "number": 2,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "fe4316d9-9b60-48d7-9408-de6c900da7b7",
+          "number": 3,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "91b9ccb0-5a5d-40ec-9da4-ce99c1447acd",
+          "number": 4,
+          "weight": 25.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "aaeace9b-a885-4f8f-abf4-75b2a819dd21",
+      "exerciseID": "8de3ee03-a5a3-4767-954b-333d4bd17332",
+      "name": "站姿绳索夹胸",
+      "muscle": "胸部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: cable fly；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "ea4a909a-aa42-4c44-bd12-0f01f93cebab",
+          "number": 1,
+          "weight": 8.75,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "bb9de92e-2116-435d-8202-790676c361d3",
+          "number": 2,
+          "weight": 11.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "e7f7ba54-6372-47ce-bc61-09d086067754",
+          "number": 3,
+          "weight": 11.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "4794278d-3e29-41b7-80c5-0e276add567b",
+          "number": 4,
+          "weight": 11.25,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "c1f85559-1a98-4a96-bdae-570f2c9ba943",
+      "exerciseID": "5ef86df6-9f82-45d8-8592-2dd4fb9bb8a1",
+      "name": "三头下压机",
+      "muscle": "手臂",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: dip press；重量按整机/总挂片保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "e55f86b3-942b-428d-aaf9-0347edba469d",
+          "number": 1,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "f73fb173-da4e-45cb-8b36-a37c3caece64",
+          "number": 2,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "917f1d81-97d7-4b54-9a0a-fd36285e7191",
+          "number": 3,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "96fbd0ce-4145-4ac0-8610-35b156a66b90",
+          "number": 4,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "ef83edaf-84a8-490c-9245-189a3da82562",
+      "exerciseID": "e82568cd-70f2-44de-9c55-702e30434d18",
+      "name": "史密斯肩推",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: sm shoulder press；重量按单边保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "ee74fc21-2348-434f-abd8-93c7fac710d2",
+          "number": 1,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "4ef50e51-3d04-4854-93a1-dfed0f24197f",
+          "number": 2,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "12874377-266c-4f5f-9660-0dc34b52108f",
+          "number": 3,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "b11d5fa8-c5a2-4a00-b865-e1178baa14b3",
+          "number": 4,
+          "weight": 15.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "acf32bc8-2fdb-40cc-a01f-b6328c0fa35f",
+      "exerciseID": "96ceeea6-01ff-49cf-8b5c-4db411207b19",
+      "name": "哑铃侧平举",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: dumbbell side raise；重量按单只保存。",
+      "notes": "",
+      "sets": [
+        {
+          "id": "2f3a116e-0fab-4c18-84d6-75d3e47979a8",
+          "number": 1,
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "2095d46e-4333-447c-9566-4713d2729806",
+          "number": 2,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "826c7203-3007-442d-9132-0fe121937482",
+          "number": 3,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "8680e530-83dc-41ce-ba0d-4712f89b95e3",
+          "number": 4,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    },
+    {
+      "sessionID": "27daac57-b3a3-41e6-a08d-d8617e369896",
+      "plannedDate": "2026-09-08T00:00:00+08:00",
+      "snapshotID": "9f1c41f2-0ae3-4416-bcd7-1e123fdd870d",
+      "exerciseID": "6e5744ec-d08f-4316-b3b9-dc4b36e179c9",
+      "name": "哑铃反向飞鸟",
+      "muscle": "肩部",
+      "unit": "kilogram",
+      "performanceNotes": "Notes: dumbbell reverse fly；重量按单只保存。",
+      "notes": "Notes: dumbbell reverse fly；重量按单只保存。",
+      "sets": [
+        {
+          "id": "85c32709-9921-4a4a-8d39-5fdbb4d8725f",
+          "number": 1,
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "fbca597e-f8ea-44e2-ba9d-a7a1717dae0b",
+          "number": 2,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "2333764b-34fc-4b73-95b9-e1db05ed14fc",
+          "number": 3,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        },
+        {
+          "id": "a9a4c1f9-84d0-45c6-b55c-bf433162215b",
+          "number": 4,
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral",
+          "warmup": 0
+        }
+      ]
+    }
+  ],
+  "bodyCheckIns": [
+    {
+      "day": "2026-09-02T00:00:00+08:00",
+      "condition": 3,
+      "discomfort": ""
+    },
+    {
+      "day": "2026-08-29T00:00:00+08:00",
+      "condition": 3,
+      "discomfort": "下腰部疲劳"
+    },
+    {
+      "day": "2026-08-26T00:00:00+08:00",
+      "condition": 3,
+      "discomfort": "右边膝盖有点酸，左边网球肘"
+    },
+    {
+      "day": "2026-08-24T00:00:00+08:00",
+      "condition": 4,
+      "discomfort": ""
+    },
+    {
+      "day": "2026-08-22T00:00:00+08:00",
+      "condition": 2,
+      "discomfort": "昨晚睡太晚，身体感觉僵硬"
+    }
+  ],
+  "ownerConfirmedNotes": {
+    "confirmedOn": "2026-10-10",
+    "confirmationEvidence": "outputs/training-plan/2026-10-12-recovery-review-r1.md#2",
+    "dates": [
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-08"
+    ],
+    "sourceDirectory": "artifacts/project-loop/20261009-remaining-closeout/notes",
+    "limits": "Unit, side, real RIR, warmup/work classification and exact apparatus partly unknown; not imported by this task"
+  },
+  "targetSchedulesFound": 0,
+  "writesToApp": 5,
+  "notionWrites": 0,
+  "deviceAppReadback": {
+    "name": "X-Fit",
+    "bundleID": "com.edward.FitnessApp",
+    "version": "0.5.0",
+    "build": "19",
+    "readMethod": "devicectl device info apps, current task"
+  },
+  "verification": {
+    "scope": "static date, set arithmetic, source and no-write consistency",
+    "status": "PASS",
+    "strengthSessions": 3,
+    "strengthWorkSets": [
+      20,
+      22,
+      24
+    ],
+    "totalWorkSets": 66,
+    "cardioMainMinutes": [
+      35,
+      40
+    ],
+    "ownerAcceptance": "confirmed_R1",
+    "appApplication": "PASS"
+  },
+  "ownerContextConfirmation": {
+    "date": "2026-10-17",
+    "source": "用户对本轮器械及肘肩状态问题的直接回复",
+    "answer": "仍在常用健身房，当前无新增不适",
+    "scope": [
+      "下周训练场地",
+      "当前左肘和肩无新增不适"
+    ],
+    "fullPlanConfirmed": false,
+    "appWriteAuthorizedByThisReply": false
+  },
+  "fullPlanConfirmation": {
+    "date": "2026-10-17",
+    "quote": "确认，按R1同步App。",
+    "scope": "UPPER-20261019-R1完整版本及五日程App同步",
+    "requirementsPath": "docs/requirements/2026-10-17/211202_upper-week-r1-app-sync.md"
+  },
+  "application": {
+    "status": "PASS",
+    "completedAt": "2026-10-17T21:34:31+08:00",
+    "packetManifest": "outputs/training-plan/2026-10-19-r1-app/manifest.json",
+    "finalVerification": "artifacts/training-sync/20261019-upper-r1/final-verification.json",
+    "newSchedules": 5,
+    "deviceVersion": "0.5.0(19)",
+    "repeatNewSchedules": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "oldBusinessTablesPreserved": 24,
+    "actualTrainingCreated": false,
+    "normalLaunch": "PASS"
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "version": 1,
+  "packageID": "notes-20261021-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-21-oct21-notes-workout",
+      "date": "2026-10-21",
+      "name": "Oct 21 · 背部＋核心＋二头",
+      "startTimeKnown": false,
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「Oct 21」，原记录最后修改2026-10-21 08:45:33 +0800；本人2026-10-21明确确认全部kg并同步手机，按Notes实际替代当天R5。保留动作原名、数字和顺序；不把近似名称自动合并到已有动作。单双侧口径、RIR、真实开始/结束时刻、时长、组间休息、热身/工作性质未记录，均不推断。34组为来源记录行，不据此断言34个有效工作组。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "Dual Pulley Low Row",
+          "muscleGroup": "背部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 25,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "杠铃片胸前转体",
+          "muscleGroup": "核心",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 10,
+              "reps": 20,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Dual Pulley Pulldown",
+          "muscleGroup": "背部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 25,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "站姿抬腿侧弯",
+          "muscleGroup": "核心",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 10,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "T bar row",
+          "muscleGroup": "背部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 30,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "weighted leg raise",
+          "muscleGroup": "核心",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "绳索直臂下压",
+          "muscleGroup": "背部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 21.25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 28.75,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 32.5,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Cable arm curl",
+          "muscleGroup": "手臂",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 21」。本人确认kg；原名原数字保留，具体器械/单双侧/次数侧/RIR/热身性质未知。",
+          "sets": [
+            {
+              "weight": 10,
+              "reps": 20,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 12.5,
+              "reps": 20,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15,
+              "reps": 20,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 15,
+              "reps": 20,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": []
+}

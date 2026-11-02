@@ -1,0 +1,2908 @@
+{
+  "schema_version": 1,
+  "requirement": "REQ-20261021-103533",
+  "checked_at": "2026-10-21T10:45:38.163986+08:00",
+  "scope": "Apple Notes 健身/健身计划全部子目录，June 2026至Oct 2026；只读完整正文块，排除日期/剂量/反馈后核对动作标签。",
+  "exclusions": [
+    "健身/减重计划内体重和餐食2条非训练笔记",
+    "日期、休息、训练阶段标题、剂量行、训练反馈和参考链接不作为动作"
+  ],
+  "limits": [
+    "目录补齐不证明实际训练已导入或历史口径已确认",
+    "笔记修改时间不是训练发生时间；仅标题/目录能够支持的日期保留原文",
+    "全部未确认英文译名仅作搜索候选，绝不参与canonical或UUID合并",
+    "手机目录对照来自今天10:20持久化快照，不是本轮实时手机读取"
+  ],
+  "note_count": 22,
+  "unique_raw_action_labels": 216,
+  "classification_counts": {
+    "身份待核": 129,
+    "已有动作": 59,
+    "确认别名": 12,
+    "缺失清晰": 16
+  },
+  "supplement_definitions": [
+    {
+      "id": "E2A9B2AC-B8C0-50D0-8431-F6076AE100DC",
+      "name": "杠铃片胸前转体",
+      "muscle_group": "核心",
+      "equipment": "杠铃片",
+      "unit": "kilogram"
+    },
+    {
+      "id": "127E006F-F93E-5BD0-AD26-BE083009E305",
+      "name": "杠铃片过头提膝行进",
+      "muscle_group": "核心",
+      "equipment": "杠铃片",
+      "unit": "kilogram"
+    },
+    {
+      "id": "22A76B09-D7F7-59E4-B23A-406B7F0ECC4D",
+      "name": "垫高绳索站姿侧屈",
+      "muscle_group": "核心",
+      "equipment": "龙门架",
+      "unit": "kilogram"
+    },
+    {
+      "id": "5C52DA81-1416-5684-A5A0-0D45AE4E6980",
+      "name": "杠铃片交替曲髋绕颈（单边）",
+      "muscle_group": "核心",
+      "equipment": "杠铃片",
+      "unit": "kilogram"
+    },
+    {
+      "id": "6E4B410E-45A2-5FC3-BDC8-0FD0717846A8",
+      "name": "杠铃片铰链曲髋转体（单边）",
+      "muscle_group": "核心",
+      "equipment": "杠铃片",
+      "unit": "kilogram"
+    },
+    {
+      "id": "E2E25B0E-FF79-5645-A14B-C2786E494305",
+      "name": "杠铃片过头侧屈（单边）",
+      "muscle_group": "核心",
+      "equipment": "杠铃片",
+      "unit": "kilogram"
+    },
+    {
+      "id": "7A1D53AE-AB5E-5575-95F2-68272D574DDB",
+      "name": "站姿绳索划船",
+      "muscle_group": "背部",
+      "equipment": "龙门架",
+      "unit": "kilogram"
+    },
+    {
+      "id": "46EE66C4-50FA-5DD0-9020-CF6FFD9F2EDA",
+      "name": "站姿绳索下拉",
+      "muscle_group": "背部",
+      "equipment": "龙门架",
+      "unit": "kilogram"
+    },
+    {
+      "id": "87270BEA-2C8B-5B64-B02E-C1C01759A0A9",
+      "name": "绳索跪姿卷腹",
+      "muscle_group": "核心",
+      "equipment": "龙门架",
+      "unit": "kilogram"
+    },
+    {
+      "id": "747E76E2-2ABC-532A-A68F-9DA6448CC547",
+      "name": "平板支撑",
+      "muscle_group": "核心",
+      "equipment": "自重",
+      "unit": "second"
+    },
+    {
+      "id": "A5C2FC39-AF50-5B53-881D-F57155843020",
+      "name": "侧平板支撑",
+      "muscle_group": "核心",
+      "equipment": "自重",
+      "unit": "second"
+    },
+    {
+      "id": "BBEDB20F-F74D-5F69-BD79-34B1E49EB1CE",
+      "name": "开合跳",
+      "muscle_group": "全身",
+      "equipment": "自重",
+      "unit": "count"
+    },
+    {
+      "id": "F16408B6-8C53-581D-AA5E-D461E5381A42",
+      "name": "跑步机坡度走",
+      "muscle_group": "心肺",
+      "equipment": "跑步机",
+      "unit": "second"
+    },
+    {
+      "id": "7BF38382-DB2C-5564-BD4C-843F642AF0A8",
+      "name": "最伟大拉伸",
+      "muscle_group": "全身",
+      "equipment": "自重",
+      "unit": "count"
+    }
+  ],
+  "notes": [
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+      "path": "/健身/健身计划/August 2026/Aug 10",
+      "title": "Week of Aug 10",
+      "modified_at_source": "Monday, August 17, 2026 at 2:29:14 PM",
+      "action_labels_reviewed": 17
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+      "path": "/健身/健身计划/August 2026/Aug 17",
+      "title": "Week of Aug 17",
+      "modified_at_source": "Saturday, August 22, 2026 at 8:59:21 AM",
+      "action_labels_reviewed": 22
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271",
+      "path": "/健身/健身计划/August 2026/Aug 3",
+      "title": "Week of Aug 3",
+      "modified_at_source": "Friday, August 21, 2026 at 1:54:58 PM",
+      "action_labels_reviewed": 24
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292",
+      "path": "/健身/健身计划/August 2026/Aug 31",
+      "title": "Week of Aug 31",
+      "modified_at_source": "Friday, September 4, 2026 at 10:08:12 AM",
+      "action_labels_reviewed": 5
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+      "path": "/健身/健身计划/July 2026/July 13",
+      "title": "week of 7-13",
+      "modified_at_source": "Friday, July 17, 2026 at 5:30:59 PM",
+      "action_labels_reviewed": 22
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+      "path": "/健身/健身计划/July 2026/July 20",
+      "title": "week of july 20",
+      "modified_at_source": "Friday, July 24, 2026 at 9:35:14 AM",
+      "action_labels_reviewed": 18
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+      "path": "/健身/健身计划/July 2026/July 27",
+      "title": "week of july 27",
+      "modified_at_source": "Thursday, July 30, 2026 at 9:13:54 AM",
+      "action_labels_reviewed": 25
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186",
+      "path": "/健身/健身计划/July 2026/July 6",
+      "title": "week of 7-6",
+      "modified_at_source": "Thursday, July 23, 2026 at 11:55:50 AM",
+      "action_labels_reviewed": 12
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142",
+      "path": "/健身/健身计划/June 2026/June 29",
+      "title": "Week of 6-29",
+      "modified_at_source": "Tuesday, July 7, 2026 at 10:01:03 AM",
+      "action_labels_reviewed": 27
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354",
+      "path": "/健身/健身计划/Oct 2026/Oct 12",
+      "title": "Oct 15",
+      "modified_at_source": "Friday, October 16, 2026 at 8:48:06 PM",
+      "action_labels_reviewed": 6
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353",
+      "path": "/健身/健身计划/Oct 2026/Oct 12",
+      "title": "Oct 12",
+      "modified_at_source": "Monday, October 12, 2026 at 8:58:32 AM",
+      "action_labels_reviewed": 9
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360",
+      "path": "/健身/健身计划/Oct 2026/Oct 19",
+      "title": "Oct 21",
+      "modified_at_source": "Wednesday, October 21, 2026 at 8:45:33 AM",
+      "action_labels_reviewed": 8
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359",
+      "path": "/健身/健身计划/Oct 2026/Oct 19",
+      "title": "Oct 19",
+      "modified_at_source": "Monday, October 19, 2026 at 4:05:20 PM",
+      "action_labels_reviewed": 9
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p351",
+      "path": "/健身/健身计划/Oct 2026/Oct 5",
+      "title": "New Note",
+      "modified_at_source": "Monday, October 12, 2026 at 7:51:33 AM",
+      "action_labels_reviewed": 0
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350",
+      "path": "/健身/健身计划/Oct 2026/Oct 5",
+      "title": "Oct 10",
+      "modified_at_source": "Monday, October 12, 2026 at 7:43:07 AM",
+      "action_labels_reviewed": 6
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+      "path": "/健身/健身计划/Oct 2026/Oct 5",
+      "title": "Oct 8 Thursday",
+      "modified_at_source": "Thursday, October 8, 2026 at 8:10:57 AM",
+      "action_labels_reviewed": 8
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348",
+      "path": "/健身/健身计划/Oct 2026/Oct 5",
+      "title": "Oct 5 Monday",
+      "modified_at_source": "Wednesday, October 7, 2026 at 8:30:08 PM",
+      "action_labels_reviewed": 7
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342",
+      "path": "/健身/健身计划/Oct 2026/Oct 5",
+      "title": "Oct 6 Tuesday",
+      "modified_at_source": "Tuesday, October 6, 2026 at 8:48:59 AM",
+      "action_labels_reviewed": 8
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302",
+      "path": "/健身/健身计划/Sep 2026/Sep 14",
+      "title": "Week of Sep 14",
+      "modified_at_source": "Monday, September 14, 2026 at 8:36:20 AM",
+      "action_labels_reviewed": 12
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339",
+      "path": "/健身/健身计划/Sep 2026/Sep 21",
+      "title": "Wednesday",
+      "modified_at_source": "Wednesday, September 23, 2026 at 10:18:35 AM",
+      "action_labels_reviewed": 8
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324",
+      "path": "/健身/健身计划/Sep 2026/Sep 21",
+      "title": "Tuesday - Back and Abs",
+      "modified_at_source": "Tuesday, September 22, 2026 at 6:12:09 PM",
+      "action_labels_reviewed": 9
+    },
+    {
+      "note_id": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296",
+      "path": "/健身/健身计划/Sep 2026/Sep 7",
+      "title": "Week of Sep 7",
+      "modified_at_source": "Saturday, September 12, 2026 at 8:51:47 AM",
+      "action_labels_reviewed": 31
+    }
+  ],
+  "actions": [
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "步行"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "walking for 6km",
+      "action_label": "walking",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Inclined Bench Press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "inclined bench press",
+      "action_label": "inclined bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Bench press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "bench press",
+      "action_label": "bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "器械下斜卧推"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "declined bench press",
+      "action_label": "declined bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "坐姿器械臂屈伸"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "seated dip",
+      "action_label": "seated dip",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "坐姿飞鸟"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "fly",
+      "action_label": "fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "器械肩推"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "shoulder press",
+      "action_label": "shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "器械肩推"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "side press",
+      "action_label": "side press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "器械反向飞鸟"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "rear dealt",
+      "action_label": "rear dealt",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "仰卧起坐"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "sit up",
+      "action_label": "sit up",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "举腿"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "leg raise",
+      "action_label": "leg raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "杠铃片侧边挤压"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "杠铃片侧边挤压",
+      "action_label": "杠铃片侧边挤压",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable torso rotate",
+      "action_label": "cable torso rotate",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "地雷杆转体"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "地雷杆转向",
+      "action_label": "地雷杆转向",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "pull down",
+      "action_label": "pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "behind neck pull down",
+      "action_label": "behind neck pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "tight grip pull down",
+      "action_label": "tight grip pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p272"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "跳绳"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "jump rope 1600",
+      "action_label": "jump rope",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "颈前深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "颈前深蹲",
+      "action_label": "颈前深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "罗马尼亚硬拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "RDL",
+      "action_label": "RDL",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "保加利亚单腿蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "保加利亚单腿蹲",
+      "action_label": "保加利亚单腿蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "哑铃侧弓步"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "哑铃侧边蹲",
+      "action_label": "哑铃侧边蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "地雷杆转体"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "地雷杆转体",
+      "action_label": "地雷杆转体",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "地雷杆三关节伸展"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "地雷杆三关节伸展",
+      "action_label": "地雷杆三关节伸展",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "壶铃饶颈侧拉",
+      "action_label": "壶铃饶颈侧拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "保加利亚横向踮脚跳"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "保加利亚横向踮脚跳",
+      "action_label": "保加利亚横向踮脚跳",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "臀桥壶铃侧旋"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "臀桥壶铃侧旋",
+      "action_label": "臀桥壶铃侧旋",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "高翻"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "高翻",
+      "action_label": "高翻",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "腿举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Leg Press",
+      "action_label": "Leg Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Leg Curl"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Leg curl",
+      "action_label": "Leg curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "跳绳",
+        "跳绳"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "跳绳 1500",
+      "action_label": "跳绳",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "CDL",
+      "action_label": "CDL",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "深蹲"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Squat",
+      "action_label": "Squat",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "哑铃侧蹲",
+      "action_label": "哑铃侧蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "地雷杆泽其蹲",
+      "action_label": "地雷杆泽其蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable torso twist",
+      "action_label": "cable torso twist",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "跳箱"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "跳箱",
+      "action_label": "跳箱",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p284"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "开合跳"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "开合跳",
+      "action_label": "开合跳",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "乌龙盘杠",
+      "action_label": "乌龙盘杠",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "最伟大拉伸"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "最伟大拉伸",
+      "action_label": "最伟大拉伸",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "哑铃侧弓步"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "哑铃侧弓步",
+      "action_label": "哑铃侧弓步",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "地雷杆泽奇蹲"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "地雷杠泽奇蹲",
+      "action_label": "地雷杠泽奇蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "地雷杆后弓步蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "地雷杆后弓步蹲",
+      "action_label": "地雷杆后弓步蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "跳绳",
+        "跳绳"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "跳绳 1600个",
+      "action_label": "跳绳",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "深蹲",
+      "action_label": "深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "传统硬拉"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "硬拉",
+      "action_label": "硬拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "杠铃臀推"
+      ],
+      "reason": "复用代码中现有已确认别名组。",
+      "source_action": "顶髋",
+      "action_label": "顶髋",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "杠铃单腿RDL"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "杠铃单腿RDL，一边各三组",
+      "action_label": "杠铃单腿RDL",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "地雷杠侧边蹲",
+      "action_label": "地雷杠侧边蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "地雷杆深蹲爆推"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "地雷杆深蹲爆推",
+      "action_label": "地雷杆深蹲爆推",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "蜘蛛跳"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "蜘蛛跳",
+      "action_label": "蜘蛛跳",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p271"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "罗马尼亚硬拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "rdl",
+      "action_label": "rdl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "hip",
+      "action_label": "hip",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "单腿钟摆press",
+      "action_label": "单腿钟摆press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p292"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable fly",
+      "action_label": "cable fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "press down",
+      "action_label": "press down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索侧平举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable side pull",
+      "action_label": "cable side pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable rear pull",
+      "action_label": "cable rear pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "mixed plank",
+      "action_label": "mixed plank",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable abs pull down",
+      "action_label": "cable abs pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable torso pull",
+      "action_label": "cable torso pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "lat pull down",
+      "action_label": "lat pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "behind neck lat pull",
+      "action_label": "behind neck lat pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "seated shoulder press",
+      "action_label": "seated shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "rocket push",
+      "action_label": "rocket push",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "delts machine",
+      "action_label": "delts machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "rear delts cable pull",
+      "action_label": "rear delts cable pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "upper rear back pull",
+      "action_label": "upper rear back pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "seated bench press",
+      "action_label": "seated bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "seated inclined bench press",
+      "action_label": "seated inclined bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p205",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "深蹲"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "squat",
+      "action_label": "squat",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "deadlift",
+      "action_label": "deadlift",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "腿举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "leg press",
+      "action_label": "leg press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Leg Curl"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "leg curl",
+      "action_label": "leg curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "pendulum press single leg",
+      "action_label": "pendulum press single leg",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "calf raise",
+      "action_label": "calf raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "hip thrust",
+      "action_label": "hip thrust",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "腿弯举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "hamstring curl",
+      "action_label": "hamstring curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "深蹲"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "strict form squat",
+      "action_label": "strict form squat",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "strict form RDL",
+      "action_label": "strict form RDL",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "v-squat",
+      "action_label": "v-squat",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p215"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "seated fly"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "seated fly",
+      "action_label": "seated fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "standing fly",
+      "action_label": "standing fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable rear delt pull",
+      "action_label": "cable rear delt pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "引体向上"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "pullup",
+      "action_label": "pullup",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "杠铃划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "barbell row",
+      "action_label": "barbell row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "low row",
+      "action_label": "low row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "MTS row",
+      "action_label": "MTS row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "front pull down",
+      "action_label": "front pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "standing hip thrust",
+      "action_label": "standing hip thrust",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "standing shoulder press",
+      "action_label": "standing shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "哑铃侧平举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dumbbell side raise",
+      "action_label": "dumbbell side raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "seated side raise",
+      "action_label": "seated side raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "upper back",
+      "action_label": "upper back",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "seated declined bench press",
+      "action_label": "seated declined bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p223"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "pendulum squat",
+      "action_label": "pendulum squat",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "跑步机坡度走"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "inclined walking",
+      "action_label": "inclined walking",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dumbbell walking lounge",
+      "action_label": "dumbbell walking lounge",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p186"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "史密斯卧推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Bench press smith machine",
+      "action_label": "Bench press smith machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "史密斯上斜卧推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Inclined bench press smith machine",
+      "action_label": "Inclined bench press smith machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Declined bench press mts machine",
+      "action_label": "Declined bench press mts machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "press down machine",
+      "action_label": "press down machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索侧平举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable side fly",
+      "action_label": "cable side fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable reverse fly",
+      "action_label": "cable reverse fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "shoulder press machine technogym",
+      "action_label": "shoulder press machine technogym",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "跑步机坡度走"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "Treadmill Incline Walk",
+      "action_label": "Treadmill Incline Walk",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "平板支撑"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "Plank hold",
+      "action_label": "Plank hold",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "侧平板支撑"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "Side plank hold",
+      "action_label": "Side plank hold",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable torso rotary",
+      "action_label": "cable torso rotary",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable torso pull down",
+      "action_label": "cable torso pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "cable lat pull down",
+      "action_label": "cable lat pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "behind neck lat pull down",
+      "action_label": "behind neck lat pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "close grip lat pull down",
+      "action_label": "close grip lat pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "smith shoulder press",
+      "action_label": "smith shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Shoulder press machine",
+      "action_label": "Shoulder press machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "delts",
+      "action_label": "delts",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "lat pull machine",
+      "action_label": "lat pull machine",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "史密斯卧推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "bench press smith",
+      "action_label": "bench press smith",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p142"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "RDL 硬拉",
+      "action_label": "RDL 硬拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "器械臀推"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "器械臀推",
+      "action_label": "器械臀推",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "双腿钟摆深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "双腿钟摆深蹲",
+      "action_label": "双腿钟摆深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Leg Curl"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Leg Curl",
+      "action_label": "Leg Curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "摇壶铃"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "摇壶铃",
+      "action_label": "摇壶铃",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "斯密斯单腿提踵"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "斯密斯单腿提踵",
+      "action_label": "斯密斯单腿提踵",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p354"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "颈前深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "颈前深蹲✅",
+      "action_label": "颈前深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "保加利亚深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "保加利亚深蹲",
+      "action_label": "保加利亚深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "转体火箭推"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "转体火箭推",
+      "action_label": "转体火箭推",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "弓步提膝推举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "弓步提膝推举",
+      "action_label": "弓步提膝推举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "单腿推举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "单腿推举",
+      "action_label": "单腿推举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "哑铃上摇"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "哑铃上摇",
+      "action_label": "哑铃上摇",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "前平举深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "前平举深蹲",
+      "action_label": "前平举深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Seated Leg Extension/Technogym"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Seated Leg Extension/Technogym",
+      "action_label": "Seated Leg Extension/Technogym",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "靠墙胫骨前肌提拉"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "靠墙胫骨前肌提拉",
+      "action_label": "靠墙胫骨前肌提拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p353",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮低位划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dual Pulley Low Row",
+      "action_label": "Dual Pulley Low Row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片胸前转体"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "杠铃片胸前转体",
+      "action_label": "杠铃片胸前转体",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮高位下拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dual Pulley Pulldown",
+      "action_label": "Dual Pulley Pulldown",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "minimum_clarification": "是否持重、持重器械和左右次数口径。",
+      "source_action": "站姿抬腿侧弯",
+      "action_label": "站姿抬腿侧弯",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "minimum_clarification": "胸托/站姿、握法与器械型号；不把通用T-bar原名合并到胸托或宽握记录。",
+      "source_action": "T bar row",
+      "action_label": "T bar row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "weighted leg raise",
+      "action_label": "weighted leg raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "直臂下压"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "绳索直臂下压",
+      "action_label": "绳索直臂下压",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索弯举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable arm curl",
+      "action_label": "Cable arm curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "史密斯卧推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Smith Bench Press",
+      "action_label": "Smith Bench Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "史密斯上斜卧推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Smith Inclined Bench Press",
+      "action_label": "Smith Inclined Bench Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "MTS器械下斜推胸"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "MTS Declined Bench Press",
+      "action_label": "MTS Declined Bench Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359"
+      ]
+    },
+    {
+      "classification": "确认别名",
+      "targets": [
+        "坐姿器械臂屈伸"
+      ],
+      "reason": "现有已确认别名组；保持原UUID和旧历史，不创建第二身份。",
+      "source_action": "Seated Dip",
+      "action_label": "Seated Dip",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable Fly",
+      "action_label": "Cable Fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索下压"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "三头绳索下压",
+      "action_label": "三头绳索下压",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Cable shoulder Side pull"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Cable shoulder Side pull",
+      "action_label": "Cable shoulder Side pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Cable shoulder Front pull"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Cable shoulder Front pull",
+      "action_label": "Cable shoulder Front pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Cable shoulder reverse pull"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Cable shoulder reverse pull",
+      "action_label": "Cable shoulder reverse pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p359"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "杠铃划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Barbell Row",
+      "action_label": "Barbell Row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "站姿绳索划船"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "Standing Cable row",
+      "action_label": "Standing Cable row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "站姿绳索下拉"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "站姿绳索下拉",
+      "action_label": "站姿绳索下拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "器械坐姿下拉",
+      "action_label": "器械坐姿下拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "绳索跪姿卷腹"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "绳索跪姿卷腹",
+      "action_label": "绳索跪姿卷腹",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Weighted Leg Raise",
+      "action_label": "Weighted Leg Raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p350"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable Forward Pull",
+      "action_label": "Cable Forward Pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索侧平举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable Side Pull",
+      "action_label": "Cable Side Pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable Reverse Pull",
+      "action_label": "Cable Reverse Pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "MTS machine declined bench press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "MTS Machine Declined Bench Press",
+      "action_label": "MTS Machine Declined Bench Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p349",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p348"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "minimum_clarification": "胸托/站姿、握法与器械型号；不把通用T-bar原名合并到胸托或宽握记录。",
+      "source_action": "T-Bar Row",
+      "action_label": "T-Bar Row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片过头提膝行进"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "杠铃片过头提膝行进",
+      "action_label": "杠铃片过头提膝行进",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮高位下拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dual Pulley Lat Pull down",
+      "action_label": "Dual Pulley Lat Pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "曲髋单手龙门架绳索后拉",
+      "action_label": "曲髋单手龙门架绳索后拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "垫高绳索站姿侧屈"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "垫高绳索站姿侧屈",
+      "action_label": "垫高绳索站姿侧屈",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮低位划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dual Pulley Seated Row",
+      "action_label": "Dual Pulley Seated Row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dumbbell hanged Leg Raise",
+      "action_label": "Dumbbell hanged Leg Raise",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p342"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "单车或椭圆机",
+      "action_label": "单车或椭圆机",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "自重深蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "自重深蹲",
+      "action_label": "自重深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "前后向箭步重心转移"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "前后向箭步重心转移",
+      "action_label": "前后向箭步重心转移",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "膝触墙踝背屈"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "膝触墙踝背屈",
+      "action_label": "膝触墙踝背屈",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "脚踝主动环绕 CAR"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "脚踝主动环绕 CAR",
+      "action_label": "脚踝主动环绕 CAR",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "前蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "前蹲",
+      "action_label": "前蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "钟摆深蹲或哈克深蹲",
+      "action_label": "钟摆深蹲或哈克深蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "保加利亚分腿蹲"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "保加利亚分腿蹲",
+      "action_label": "保加利亚分腿蹲",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "腿屈伸"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "器械腿屈伸",
+      "action_label": "器械腿屈伸",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "坐姿比目鱼肌等长"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "坐姿负重比目鱼肌等长保持",
+      "action_label": "坐姿负重比目鱼肌等长保持",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "农夫走"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "农夫走",
+      "action_label": "农夫走",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p302"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Bench press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Bench press",
+      "action_label": "Bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339",
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Inclined Bench Press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Inclined Bench Press",
+      "action_label": "Inclined Bench Press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "MTS machine declined bench press"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "MTS machine declined bench press",
+      "action_label": "MTS machine declined bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "Cable 中束平举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "Cable 中束平举",
+      "action_label": "Cable 中束平举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "cable 前束平举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "cable 前束平举",
+      "action_label": "cable 前束平举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "cable 后束下拉"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "cable 后束下拉",
+      "action_label": "cable 后束下拉",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p339"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮高位下拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dual pulley pull down Yes",
+      "action_label": "dual pulley pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "close grip pull down",
+      "action_label": "close grip pull down",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "minimum_clarification": "胸托/站姿、握法与器械型号；不把通用T-bar原名合并到胸托或宽握记录。",
+      "source_action": "T-bar row",
+      "action_label": "T-bar row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮低位划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Dual pulley low row",
+      "action_label": "Dual pulley low row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片交替曲髋绕颈（单边）"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "杠铃片交替曲髋绕颈（单边）",
+      "action_label": "杠铃片交替曲髋绕颈（单边）",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片铰链曲髋转体（单边）"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "杠铃片铰链曲髋转体（单边）",
+      "action_label": "杠铃片铰链曲髋转体（单边）",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片过头侧屈（单边）"
+      ],
+      "reason": "原名已明确动作和器械；只补独立目录，不导入Notes组数/重量/完成。",
+      "source_action": "杠铃片过头侧屈（单边）",
+      "action_label": "杠铃片过头侧屈（单边）",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "缺失清晰",
+      "targets": [
+        "杠铃片胸前转体"
+      ],
+      "reason": "原名的明确英文译名或侧别限定；追加独立目录，搜索可达；不追认历史身份或侧别。",
+      "source_action": "杠铃片胸前转体(单边）",
+      "action_label": "杠铃片胸前转体(单边）",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "绳索弯举"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Cable bicep curl",
+      "action_label": "Cable bicep curl",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p324"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "mts decline bench press",
+      "action_label": "mts decline bench press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dip press",
+      "action_label": "dip press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "sm shoulder press",
+      "action_label": "sm shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "哑铃反向飞鸟"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dumbbell reverse fly",
+      "action_label": "dumbbell reverse fly",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "杠铃划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Barbell row",
+      "action_label": "Barbell row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "minimum_clarification": "胸托/站姿、握法与器械型号；不把通用T-bar原名合并到胸托或宽握记录。",
+      "source_action": "T-bar row wide grip",
+      "action_label": "T-bar row wide grip",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Iso-lateral row",
+      "action_label": "Iso-lateral row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮高位下拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dual pulley pulldown",
+      "action_label": "dual pulley pulldown",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮低位划船"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dual pulley low row",
+      "action_label": "dual pulley low row",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "绳索伸展转体"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "绳索伸展转体",
+      "action_label": "绳索伸展转体",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "绳索转体",
+      "action_label": "绳索转体",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "站姿杠铃肩推"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "standing barbell shoulder press",
+      "action_label": "standing barbell shoulder press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "MTS 坐姿肩推"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "MTS 坐姿肩推",
+      "action_label": "MTS 坐姿肩推",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "哑铃站姿侧平举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "哑铃站姿侧平举",
+      "action_label": "哑铃站姿侧平举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "器械坐姿侧平举"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "器械坐姿侧平举",
+      "action_label": "器械坐姿侧平举",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "站姿反向飞鸟",
+      "action_label": "站姿反向飞鸟",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "器械坐姿反向飞鸟"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "器械坐姿反向飞鸟",
+      "action_label": "器械坐姿反向飞鸟",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "已有动作",
+      "targets": [
+        "MTS 卧推"
+      ],
+      "reason": "当前保存的手机快照有原名条目；已有字段和归档状态不改。",
+      "source_action": "MTS 卧推",
+      "action_label": "MTS 卧推",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "绳索飞鸟",
+      "action_label": "绳索飞鸟",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "Back extension",
+      "action_label": "Back extension",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "pallof press",
+      "action_label": "pallof press",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "standing horizontal chop",
+      "action_label": "standing horizontal chop",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    },
+    {
+      "classification": "身份待核",
+      "targets": [],
+      "search_candidates": [
+        "双滑轮高位下拉"
+      ],
+      "reason": "原名未足以确定变式/器械/计重，或只有未经身份确认的搜索译名；不合并、不新增近似身份。",
+      "source_action": "dual pulley lat pull",
+      "action_label": "dual pulley lat pull",
+      "source_note_ids": [
+        "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p296"
+      ]
+    }
+  ]
+}

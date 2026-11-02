@@ -1,0 +1,1265 @@
+{
+  "packet" : {
+    "confirmationReference" : "本人在本次对话回复‘好的’，确认完整审阅版及备注记录方式。",
+    "confirmedAt" : "2026-10-29T15:01:07Z",
+    "exercises" : [
+      {
+        "catalogExerciseID" : "C79CFAC1-F36F-48B4-9414-CFD5DDBA36F5",
+        "catalogName" : "Dual Pulley Low Row",
+        "displayName" : "双滑轮低位划船，背部主项",
+        "equipment" : "未记录",
+        "loadGuidance" : "重量口径：同机及侧别待核。首组校准为W，后续每组加5kg；实际输入留空。",
+        "notes" : "W＋5 kg。10\/21 同名原记录数值为 25、30、35、40，分别对应 14、12、10、8 次；当场设置与侧别未完整记录，仅同机同口径时参考。\n第4组后立即降约20%–25%或邻近档，接续约6–10次至技术力竭。若末组为该机显示40kg，30kg为条件候选。先核原机、单位及侧别；延伸段实际重量、次数写动作备注。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "6BB543FF-6946-50E3-9589-ABD276125A49",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DDCBE047-450D-5BC2-A25B-EA65156536A1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "394CBEA7-6A04-5452-B40A-2A7B83CD1C19",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋10kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "BAE06421-839A-5A25-9ED4-A3F504BC5256",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。 本组后尽快降重接续6–10次，细节见动作备注。",
+              "label" : "W＋15kg，现场校准；本组后条件递减",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "D500EAB2-975C-490E-8D9E-748ACC80005A",
+        "catalogName" : "Dual Pulley Pulldown",
+        "displayName" : "双滑轮高位下拉，背阔肌",
+        "equipment" : "未记录",
+        "loadGuidance" : "重量口径：同机及侧别待核。首组校准为W，后续每组加5kg；实际输入留空。",
+        "notes" : "W＋5 kg。10\/21 同名原记录数值同样为 25、30、35、40 对应 14、12、10、8 次；单位显示、设置与侧别须现场核对。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "AF9323FE-1EA3-534D-96D8-EBE7053187D3",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "5B8059D6-1E67-5D38-8CAE-558534BE557F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "4A4CEB41-F36B-539C-A711-CDB04792B366",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋10kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "851F67AD-9D71-535B-BEA0-5A9221F138E8",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋15kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "C49D988B-D665-4CD8-B7A2-7F317577A59C",
+        "catalogName" : "Barbell Row",
+        "displayName" : "杠铃划船，背部辅助复合",
+        "equipment" : "杠铃",
+        "loadGuidance" : "重量口径：每侧片重，不含杆；条件目标 12.5、17.5、22.5、27.5 kg。同器械、同口径并热身合适时参考；实际输入留空。",
+        "notes" : "为遵循每侧加 5 kg 且以旧末组为界，可先试每侧片重 12.5、17.5、22.5、27.5 kg。10\/23 实际为每侧 20×14、22.5×12、25×10、27.5×8；本候选首组比旧首组轻，可能不足以成为工作组，需在前两项后的状态下校准。若从 20 起步，末组会到每侧 35 kg，超过旧 27.5×8 的记录。杆重未知。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "59A4AA90-1D33-555C-AE2E-B9F496B7C1D1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 12.5kg，每侧片重，不含杆",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "bilateral",
+            "weight" : 12.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CF53572C-C9DC-5C7E-B432-545EAEC4F48A",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 17.5kg，每侧片重，不含杆",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "bilateral",
+            "weight" : 17.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "C77B1DC9-9580-5AFD-B458-A1FEEB5B9ABA",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 22.5kg，每侧片重，不含杆",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "bilateral",
+            "weight" : 22.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "574373B7-2DC8-5A21-BED3-434831150271",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 27.5kg，每侧片重，不含杆",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "bilateral",
+            "weight" : 27.5,
+            "weightSide" : "single"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "C7A8C101-5D38-4D2D-8BBF-3A7995E37815",
+        "catalogName" : "绳索直臂下压",
+        "displayName" : "绳索直臂下压，背部孤立",
+        "equipment" : "未记录",
+        "loadGuidance" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。",
+        "notes" : "W＋2.5 kg。10\/21 原记录 21.25、25、28.75、32.5 均为 12 次；同机可从原数字 25 附近校准，但原设置及侧别未完整记录。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "836C1674-6202-510C-80D0-B44E22FE9FE7",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "AEEF81EE-8BC4-5665-AC30-EE4403488DD6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "924757F2-5CD3-5F68-A7F4-DF06BB64EDA6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DBF5D954-65A8-5E69-936E-BF30A8A87FF0",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "335CAF55-9728-409F-8ED8-C274969E04DD",
+        "catalogName" : "杠铃片胸前转体",
+        "displayName" : "杠铃片胸前转体，腹部旋转",
+        "equipment" : "未记录",
+        "loadGuidance" : "重量口径：双手持片总重；条件目标 10、12.5、15、17.5 kg。同器械、同口径并热身合适时参考；实际输入留空。",
+        "notes" : "双手持片候选 10、12.5、15、17.5 kg，持稳且可配片时使用。10\/23 为 10×16；10\/21 有 15×16 的记录，历史次数侧别未知。本周每组左右交替总次数为 14、12、10、8，即每侧 7、6、5、4 次。 左右交替总次数14、12、10、8；每侧分别7、6、5、4次。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "07BE27F7-2803-529D-9112-EFF5149F808F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 10kg，双手持片总重",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "bilateral",
+            "weight" : 10,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "66DC865F-DB97-5BCB-9F3C-3837B75B306D",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 12.5kg，双手持片总重",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "bilateral",
+            "weight" : 12.5,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "75E6C311-2FD6-5A92-B35F-A590010BE90B",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 15kg，双手持片总重",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "bilateral",
+            "weight" : 15,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "84025893-5E3F-5A40-8843-9560F41160CC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 17.5kg，双手持片总重",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "bilateral",
+            "weight" : 17.5,
+            "weightSide" : "bilateral"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "22A76B09-D7F7-59E4-B23A-406B7F0ECC4D",
+        "catalogName" : "垫高绳索站姿侧屈",
+        "displayName" : "垫高绳索站姿侧屈，侧腹",
+        "equipment" : "龙门架",
+        "loadGuidance" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。",
+        "notes" : "W＋2.5 kg；没有同动作已完成记录，以原器械低疲劳试重。每侧各做 14、12、10、8 次，左右完成算 1 组。 每侧均为14、12、10、8次，左右完成计1组。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "EB435F46-984D-5295-A0BA-CAAD8ED4ADD5",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "F6E0975C-3FE3-5837-9AE7-ACD3631654AC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "432F760C-046A-59CC-AC5C-011A18D009D8",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DC931F1E-263F-51DE-A762-6DFC573147F4",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "catalogExerciseID" : "195BA3AF-2C3E-43B2-84F5-89849FDA1009",
+        "catalogName" : "站姿水平伐木",
+        "displayName" : "站姿水平伐木，侧腹与旋转",
+        "equipment" : "龙门架",
+        "loadGuidance" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。",
+        "notes" : "W＋2.5 kg。9\/12 同名记录 12.5×10，设置和次数侧别未知，仅作同机试重线索。每侧各做 14、12、10、8 次，左右完成算 1 组。 每侧均为14、12、10、8次，左右完成计1组。",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "79C1CFC6-9E85-5EAA-B1F5-1630F366C4AE",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "F7951884-20E0-5A0C-8258-C292666C9764",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D1834AAD-618F-50E0-B982-1435A3116624",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "9A81BA56-013A-5A44-997F-96CA9534DE35",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "volumeUnit" : "kilogram"
+      }
+    ],
+    "guidance" : "本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+    "id" : "B5BD7C0C-C4B3-596A-A174-E018E0324B6D",
+    "localDay" : "2026-11-04",
+    "preferenceRevisionCode" : "TP-20261021-06",
+    "replacement" : {
+      "packetSHA256" : "9c04b6e8807539f40374fdc7dc1e5773b9ecd8c408092818ed2f36a96fb4a7be",
+      "scheduleID" : "12DD18F4-4513-5391-87BD-3B5AA023E942"
+    },
+    "sourceMarkdown" : "# 本人确认的训练计划\n\n本人在本次对话回复“好的”，确认下列完整审阅版及递减段通过动作备注记录的方式。原文中的待确认措辞保留为审阅时状态。审阅正文 SHA-256：ebb971dba69317ddd930ddb5003c9ddf2434a3e447f32c8ead5ebe72933e2014。本确认记录创建时间：2026-10-29T15:01:07Z。\n\n# 11 月 2 日至 8 日上肢侧重周：重点动作递减／力竭候选\n\n**状态：完整修订候选，待本人审阅确认；未写入手机。** 本版加入本人澄清的同动作降重继续做，并取代上一份尚未确认的候选供审阅。 本次只调整所选一周。三次力量分别为胸＋肩、背＋腹、胸背肩综合；周二跳绳，周四单车或椭圆机，周末休息。周五综合课按本人同意的例外安排 2 个胸、2 个背、3 个肩和 1 个腹部动作。\n\n本稿依据 2026-10-29 18:41 的手机 App Group 只读快照、App 偏好 `TP-20261021-06`、项目方法 `METHOD-20261029-12`、`STRENGTH-CORE-PREF-20261029-01` 及本轮本人补充。10\/26 和 10\/28 各有一场下肢实际；11\/2 至 11\/8 在该快照中均尚未开始训练。10\/29 重新读取手机时超时，写入前须刷新并核查目标日程与近期实际。\n\n## 本周统一执行方式\n\n- 每个力量或腹部动作均为 **4 个计划工作组**，目标次数依次为 **14、12、10、8**。周一和周三的指定主项在第 4 组后额外接 1 段降重继续做，作为第 4 组的延伸，重量和次数独立记录；它是新增训练量，不是热身。周五指定主项的第 4 组以 8 次为目标，做到技术力竭时实际次数可能多于或少于 8 次。每次先一般热身约 5 至 8 分钟，首个推／拉动作做低疲劳递增热身，热身不计工作组。\n- 主要复合动作按其记重口径每组增加 5 kg；夹胸、侧平举、反向飞鸟、直臂下压及腹部动作按其记重口径每组增加 2.5 kg。标为 W 的动作，先通过同器械热身确定可完成首组的负重，再分别按 W、W＋步长、W＋2 倍步长、W＋3 倍步长执行。设备没有对应档位时使用能控制的相邻档，并如实记录。\n- 史密斯或杠铃注明“每侧片重”的动作，两侧各加 5 kg 时，新增片重合计为 10 kg；杆重未知，不计算在记录数字内。哑铃数字按每只；机器只有在同机、同设置、显示单位和侧别核对后才能沿用旧数值。历史 RIR 或热身性质未记录时仍为未知。\n- 非指定的普通工作组：主项首组目标约留 2 至 3 次余力，后续约留 1 至 2 次；辅助与腹部以约留 2 至 3 次为校准起点。指定递减段或力竭组以动作规范下的技术力竭为终点，即判断下一次无法保持完整、可控动作时结束，不追求杠铃卡住或强迫次数。若首组明显太轻，不把热身冒充工作组；动作不稳、疼痛或异常疲劳时降低重量、延长休息或停止，不强行按步长加重。\n- 为保留每次 90 分钟上限，复合动作休息仍为 80 至 90 秒，其他动作计划为 50 秒；如恢复不够则延长休息并调整后续内容。估时按上一版模型计入一般准备、专项准备、休息、单侧换边和换器械；每段递减额外预留换片／换档及重新就位 30 至 45 秒、继续执行 40 秒。换片预算不是建议刻意休息，实际应安全地尽快接续；无法快速接续时按下方方案调整。模型约 88 至 89 分钟，器械等待、换片或延长休息仍可能超过 90 分钟。到 90 分钟停止继续增加孤立组，未完成的项目如实记录。\n\n## 三次重点动作怎样安排\n\n- **周一胸＋肩：史密斯卧推递减。** 按同机条件候选每侧片重 25×14、30×12、35×10、40×8 做 4 组。第 4 组接近力竭、完成并安全锁住器械后，尽快对称减至每侧 30 kg，继续做约 6 至 10 次，以动作规范下的技术力竭结束。事先准备好片重并确认能安全快速换片；若换片拖得很久，就不算本次要求的即时递减，改用下述同课器械替代。降重是第 4 组的延伸，额外记录该段实际重量和次数。10\/19 同名旧记录有 40 后回到 30 的序列，历史侧别及间歇未知，不能当作过去已做过递减组。\n- **周三背＋腹：双滑轮低位划船递减。** 前 4 组按 14、12、10、8 次、逐组加 5 kg。第 4 组后就近减档约 20% 至 25%，接续约 6 至 10 次至技术力竭；例如末组为该机器显示 40 kg 时，30 kg 可作条件候选。10\/21 原始 25、30、35、40 数值的器械设置和侧别未完整记录，必须先核对同机与计重，不能把例子直接当成已确认目标。\n- **周五综合：史密斯卧推力竭组。** 前 3 组 14、12、10 次；在安全限位或保护可靠时，第 4 组以 8 次为目标，采用当天能稳定控制的重量，做到下一次无法保持规范时停止。实际次数可能不是恰好 8 次，不额外接递减段。周一表现、周三训练及届时恢复决定是否能沿用 40 kg 每侧的候选；不强行追旧数字。\n\n两个递减段各是 4 个主项工作组之外的 1 段连续负重，不把它们隐藏成零容量。周一若史密斯无法安全快速换片，先按常规完成该动作 4 组，再将本课唯一的递减段移到器械上斜卧推第 4 组：安全快速调低至约末组的 75% 至 85% 或邻近可用档，接续约 6 至 10 次。若两种设备都无法快速减重且史密斯安全限位和保护可靠，则改史密斯第 4 组技术力竭；若安全限位或保护不可靠，则保留约 1 至 2 次余力并跳过递减段。应在训练前先判断可用器械与保护，不同时做两种强化。疼痛、动作失稳或状态异常时停止受影响动作。该替代和实际次数如实记录。\n\n## 11 月 2 日，周一：胸＋肩\n\n8 个动作，32 个工作组。胸、肩各 4 个不同动作；肩推、侧平举和反向飞鸟覆盖肩前、中、后束。模型估时约 **88 分钟**，已包括 1 段递减换片与继续执行。\n\n| 顺序 | 动作和任务 | 组间休息 | 首组与递增参考 |\n|---|---|---:|---|\n| 1 | 史密斯卧推，胸部主项 | 90 秒 | 同机条件候选为每侧片重 **25、30、35、40 kg**。10\/23 本人实际记录正是这四组对应 14、12、10、8 次；不含杆，旧 RIR 和热身性质未知。 |\n| 2 | 器械上斜卧推，上胸推举 | 90 秒 | W＋5 kg。7\/27 同名动作记录 25×12，但机器设置和侧别未记；同机可用原数字 25 附近试重，确认单位与 14 次努力后定 W。 |\n| 3 | 坐姿飞鸟，胸部夹胸 | 50 秒 | W＋2.5 kg。7\/27 同名记录 25×12、35×12 等，设置及侧别未知；同机先以原数字 25 附近校准。 |\n| 4 | 站姿绳索夹胸，胸部夹胸 | 50 秒 | 同机可从每侧 **7.5、10、12.5、15 kg** 作为试行候选。10\/19 每侧记录 10×12、12.5×10；15×8 高于当时记录，不预设一定可完成，按热身和动作质量调整。 |\n| 5 | 史密斯肩推，肩前束 | 90 秒 | 同机条件候选为每侧片重 **40、45、50、55 kg**。这是 10\/23 本人明确确认口径的记录，不含杆；原余力和组性质未知，须同机同设置且热身支持。 |\n| 6 | 坐姿哑铃侧平举，肩中束 | 50 秒 | W＋2.5 kg／只。可先以每只 2.5 kg 作低疲劳试重；若四组为 2.5、5、7.5、10 kg，末组 10 kg 高于 10\/23 另一站姿变式的最高记录 7.5×12，不当作已验证能力。7\/30 坐姿记录较早且侧别未知。 |\n| 7 | 绳索反向飞鸟，肩后束 | 50 秒 | W＋2.5 kg／侧。8\/27 同名记录每侧 6.25×10，实际 RIR 为 2、1、1、1；机器设置待核，按当前动作与设备校准。 |\n| 8 | 器械坐姿侧平举，肩中束 | 50 秒 | 同机、计重和档位一致时，可从原记录数字 **35、37.5、40、42.5** 校准。9\/11 为 35×12、40×10、45×8、35×12，侧别与 RIR 未知；数字不是已核定的总重。 |\n\n## 11 月 3 日，周二：跳绳\n\n保留手机现有安排：热身 5 分钟；10 轮，每轮跳 45 秒、轻松步行 45 秒；缓和约 10 分钟。有效跳跃 7.5 分钟，总计约 30 分钟。以能说短句为上限，足踝或膝不适时停止；目标次数未知，不换算。\n\n## 11 月 4 日，周三：背＋腹\n\n7 个动作，28 个工作组。背部 4 个不同动作，前三项划船／下拉均为 4 组；腹部 3 个动作照顾侧腹与旋转。模型估时约 **89 分钟**，已包括 1 段递减换档与继续执行。\n\n| 顺序 | 动作和任务 | 组间休息 | 首组与递增参考 |\n|---|---|---:|---|\n| 1 | 双滑轮低位划船，背部主项 | 80 秒 | W＋5 kg。10\/21 同名原记录数值为 **25、30、35、40**，分别对应 14、12、10、8 次；当场设置与侧别未完整记录，仅同机同口径时参考。 |\n| 2 | 双滑轮高位下拉，背阔肌 | 80 秒 | W＋5 kg。10\/21 同名原记录数值同样为 **25、30、35、40** 对应 14、12、10、8 次；单位显示、设置与侧别须现场核对。 |\n| 3 | 杠铃划船，背部辅助复合 | 90 秒 | 为遵循每侧加 5 kg 且以旧末组为界，可先试每侧片重 **12.5、17.5、22.5、27.5 kg**。10\/23 实际为每侧 20×14、22.5×12、25×10、27.5×8；本候选首组比旧首组轻，可能不足以成为工作组，需在前两项后的状态下校准。若从 20 起步，末组会到每侧 35 kg，超过旧 27.5×8 的记录。杆重未知。 |\n| 4 | 绳索直臂下压，背部孤立 | 50 秒 | W＋2.5 kg。10\/21 原记录 21.25、25、28.75、32.5 均为 12 次；同机可从原数字 25 附近校准，但原设置及侧别未完整记录。 |\n| 5 | 杠铃片胸前转体，腹部旋转 | 50 秒 | 双手持片候选 **10、12.5、15、17.5 kg**，持稳且可配片时使用。10\/23 为 10×16；10\/21 有 15×16 的记录，历史次数侧别未知。本周每组左右交替总次数为 14、12、10、8，即每侧 7、6、5、4 次。 |\n| 6 | 垫高绳索站姿侧屈，侧腹 | 50 秒 | W＋2.5 kg；没有同动作已完成记录，以原器械低疲劳试重。每侧各做 14、12、10、8 次，左右完成算 1 组。 |\n| 7 | 站姿水平伐木，侧腹与旋转 | 50 秒 | W＋2.5 kg。9\/12 同名记录 12.5×10，设置和次数侧别未知，仅作同机试重线索。每侧各做 14、12、10、8 次，左右完成算 1 组。 |\n\n相比前一版，把地雷杆转体换成本人做过的杠铃片胸前转体，以便在 4 组条件下保留背部和腹部动作。它的历史次数侧别仍保持未知。\n\n## 11 月 5 日，周四：单车或椭圆机\n\n保留手机现有单车／椭圆机有氧日程：轻松热身 5 分钟、稳定主段 20 分钟、缓和 5 分钟，合计约 30 分钟。阻力现场校准，保持可以说完整句子的轻松强度；未经个人测试不声称已精确测定生理 Zone 2。\n\n## 11 月 6 日，周五：胸背肩综合＋腹\n\n8 个动作，32 个工作组。胸 2、背 2、肩 3、腹 1；卧推与划船各 4 组，肩部覆盖前、中、后束。模型估时约 **88 分钟**，第 4 组实际次数和用时仍需现场记录。周一和周三的实际表现与恢复尚未发生，本日先参考其真实结果，不把下面的历史条件值当成必须达到的重量。\n\n| 顺序 | 动作和任务 | 组间休息 | 首组与递增参考 |\n|---|---|---:|---|\n| 1 | 史密斯卧推，胸部主项 | 80 秒 | 每侧片重参考周一实际；条件合适时参考 25、30、35、40 kg，逐组加 5 kg。 |\n| 2 | 坐姿飞鸟，胸部夹胸 | 50 秒 | 参考周一同机实际，W＋2.5 kg。 |\n| 3 | 双滑轮低位划船，背部主项 | 80 秒 | 参考周三同机实际，W＋5 kg；10\/21 原数字 25、30、35、40 的侧别待核。 |\n| 4 | 双滑轮高位下拉，背阔肌 | 80 秒 | 参考周三同机实际，W＋5 kg；同样核对机器与计重口径。 |\n| 5 | 史密斯肩推，肩前束 | 80 秒 | 参考周一实际；同机同设置且状态合适时才参考历史每侧片重 40、45、50、55 kg，逐组加 5 kg。 |\n| 6 | 坐姿哑铃侧平举，肩中束 | 50 秒 | 参考周一实际，每只 W＋2.5 kg。 |\n| 7 | 绳索反向飞鸟，肩后束 | 50 秒 | 参考周一同机实际，每侧 W＋2.5 kg。 |\n| 8 | 负重仰卧起坐，腹部 | 50 秒 | W＋2.5 kg。9\/12 同名有 10×12 的较早记录，姿态、负重设置和 RIR 不完整；同姿态、能稳定持重时可从 10 kg 附近校准。 |\n\n## 11 月 7 日与 8 日，周六、周日\n\n休息。本周不安排周末训练或同日分课。\n\n## 计划核对及写入边界\n\n- 本周为 3 次力量、2 次有氧。腹部为周三 3 个不同动作加周五 1 个，共 4 个；其中侧屈、伐木与转体优先照顾侧腹或旋转。\n- 双滑轮及若干机器历史口径未核，W 不等于零重量。计划确认后仅将有依据的数值保存为计划目标，未定重量的增重规则与校准说明需保留；实际重量和实际次数保持空白。\n- 当前 App 有逐组目标、标签和动作备注，但缺少与第 4 组结构化关联的递减段。可以将降重步骤写入计划标签与动作说明，并在训练的动作备注里记录延伸段实际重量和次数；如果用“加一组”记录，界面会显示额外一组，不能冒称已自动识别为递减段。实际重量和实际次数保持空白，手机上是否清晰显示仍需真机核对。\n- 上一版手机日程为周一背、周三腿、周五胸肩，不能代表本候选。本人确认本完整版本后，须重读手机，核对原日程尚未开始，分别预览三项替换，再写入并独立回读；周二、周四有氧保留，已完成训练和旧处方不覆盖。\n- 现有 App 自动周教练仍未实现上／下肢周轮换，也不接受本次 50 秒孤立动作和 80 至 90 秒复合动作的计划休息。当前自动复盘还可能把刻意安排的 0 至 1 RIR 判成需要降重，需人工结合本次力竭目标判断。本稿为人工候选，不等于自动引擎已更新。上一版四组结构做过隔离副本测试；本版新增递减段、50 秒休息和力竭组尚未在手机验证。本人本轮对组型的澄清尚未追加为长期偏好版本。\n\n递减组可以节省时间，但可能增加当次疲劳。2026 年递减组系统综述显示，长期力量和肌肥大结果与传统训练大体相近；具体到本人，仍需观察同口径表现、实际用时及次日恢复。[递减组系统综述](https:\/\/pubmed.ncbi.nlm.nih.gov\/41920484\/)。一项针对有训练经验者的研究中，1 至 2 RIR 与力竭的股四头肌增长相近，力竭产生更高的急性疲劳；不能把它直接等同于本人的卧推效果。[Refalo 等，2024](https:\/\/pubmed.ncbi.nlm.nih.gov\/38393985\/)。\n",
+    "sourceSHA256" : "7c98c7309f72f31c58bfb1c5c75602f42076153b6f62a3c3d41417cc49acccaf",
+    "timeZoneIdentifier" : "Asia\/Shanghai",
+    "title" : "背＋腹力量 · 递减",
+    "version" : 1
+  },
+  "packetSHA256" : "91b570ec48044d1c0c7374fe2d1cb9edd305a41b61e885c5750c30eb5bc549b1",
+  "schedule" : {
+    "code" : "B5BD7C0C-C4B3-596A-A174-E018E0324B6D",
+    "exercises" : [
+      {
+        "equipment" : "未记录",
+        "exerciseID" : "C79CFAC1-F36F-48B4-9414-CFD5DDBA36F5",
+        "exerciseName" : "双滑轮低位划船，背部主项",
+        "exerciseNotes" : "重量口径：同机及侧别待核。首组校准为W，后续每组加5kg；实际输入留空。\nW＋5 kg。10\/21 同名原记录数值为 25、30、35、40，分别对应 14、12、10、8 次；当场设置与侧别未完整记录，仅同机同口径时参考。\n第4组后立即降约20%–25%或邻近档，接续约6–10次至技术力竭。若末组为该机显示40kg，30kg为条件候选。先核原机、单位及侧别；延伸段实际重量、次数写动作备注。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "19B9DC44-CD2B-4E32-9F7B-4F32D91BD232",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "背部",
+        "order" : 0,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "6BB543FF-6946-50E3-9589-ABD276125A49",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DDCBE047-450D-5BC2-A25B-EA65156536A1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "394CBEA7-6A04-5452-B40A-2A7B83CD1C19",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋10kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "BAE06421-839A-5A25-9ED4-A3F504BC5256",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。 本组后尽快降重接续6–10次，细节见动作备注。",
+              "label" : "W＋15kg，现场校准；本组后条件递减",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 1,
+              "rirUpper" : 2
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 80,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "未记录",
+        "exerciseID" : "D500EAB2-975C-490E-8D9E-748ACC80005A",
+        "exerciseName" : "双滑轮高位下拉，背阔肌",
+        "exerciseNotes" : "重量口径：同机及侧别待核。首组校准为W，后续每组加5kg；实际输入留空。\nW＋5 kg。10\/21 同名原记录数值同样为 25、30、35、40 对应 14、12、10、8 次；单位显示、设置与侧别须现场核对。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "24401D96-D945-4F22-B405-97C91600D6BA",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "背部",
+        "order" : 1,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "AF9323FE-1EA3-534D-96D8-EBE7053187D3",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "5B8059D6-1E67-5D38-8CAE-558534BE557F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "4A4CEB41-F36B-539C-A711-CDB04792B366",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋10kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "851F67AD-9D71-535B-BEA0-5A9221F138E8",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋15kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 80,
+              "restUpperSeconds" : 80,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 80,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "杠铃",
+        "exerciseID" : "C49D988B-D665-4CD8-B7A2-7F317577A59C",
+        "exerciseName" : "杠铃划船，背部辅助复合",
+        "exerciseNotes" : "重量口径：每侧片重，不含杆；条件目标 12.5、17.5、22.5、27.5 kg。同器械、同口径并热身合适时参考；实际输入留空。\n为遵循每侧加 5 kg 且以旧末组为界，可先试每侧片重 12.5、17.5、22.5、27.5 kg。10\/23 实际为每侧 20×14、22.5×12、25×10、27.5×8；本候选首组比旧首组轻，可能不足以成为工作组，需在前两项后的状态下校准。若从 20 起步，末组会到每侧 35 kg，超过旧 27.5×8 的记录。杆重未知。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "3B14ED14-D564-40C0-9844-4898F0F1BC16",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "背部",
+        "order" : 2,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "59A4AA90-1D33-555C-AE2E-B9F496B7C1D1",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 12.5kg，每侧片重，不含杆",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "bilateral",
+            "weight" : 12.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "CF53572C-C9DC-5C7E-B432-545EAEC4F48A",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 17.5kg，每侧片重，不含杆",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "bilateral",
+            "weight" : 17.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "C77B1DC9-9580-5AFD-B458-A1FEEB5B9ABA",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 22.5kg，每侧片重，不含杆",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "bilateral",
+            "weight" : 22.5,
+            "weightSide" : "single"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "574373B7-2DC8-5A21-BED3-434831150271",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 27.5kg，每侧片重，不含杆",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 90,
+              "restUpperSeconds" : 90,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "bilateral",
+            "weight" : 27.5,
+            "weightSide" : "single"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 90,
+        "targetSets" : 4,
+        "targetWeight" : 12.5,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "未记录",
+        "exerciseID" : "C7A8C101-5D38-4D2D-8BBF-3A7995E37815",
+        "exerciseName" : "绳索直臂下压，背部孤立",
+        "exerciseNotes" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。\nW＋2.5 kg。10\/21 原记录 21.25、25、28.75、32.5 均为 12 次；同机可从原数字 25 附近校准，但原设置及侧别未完整记录。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "18A301BF-7894-46E9-BE86-C4E738B33031",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "背部",
+        "order" : 3,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "836C1674-6202-510C-80D0-B44E22FE9FE7",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "AEEF81EE-8BC4-5665-AC30-EE4403488DD6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "924757F2-5CD3-5F68-A7F4-DF06BB64EDA6",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DBF5D954-65A8-5E69-936E-BF30A8A87FF0",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "unknown",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 50,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "未记录",
+        "exerciseID" : "335CAF55-9728-409F-8ED8-C274969E04DD",
+        "exerciseName" : "杠铃片胸前转体，腹部旋转",
+        "exerciseNotes" : "重量口径：双手持片总重；条件目标 10、12.5、15、17.5 kg。同器械、同口径并热身合适时参考；实际输入留空。\n双手持片候选 10、12.5、15、17.5 kg，持稳且可配片时使用。10\/23 为 10×16；10\/21 有 15×16 的记录，历史次数侧别未知。本周每组左右交替总次数为 14、12、10、8，即每侧 7、6、5、4 次。 左右交替总次数14、12、10、8；每侧分别7、6、5、4次。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "E28A0C51-2560-4CF1-8313-C1F1314EF461",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "核心",
+        "order" : 4,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "07BE27F7-2803-529D-9112-EFF5149F808F",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 10kg，双手持片总重",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "bilateral",
+            "weight" : 10,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "66DC865F-DB97-5BCB-9F3C-3837B75B306D",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 12.5kg，双手持片总重",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "bilateral",
+            "weight" : 12.5,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "75E6C311-2FD6-5A92-B35F-A590010BE90B",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 15kg，双手持片总重",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "bilateral",
+            "weight" : 15,
+            "weightSide" : "bilateral"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "84025893-5E3F-5A40-8843-9560F41160CC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "条件 17.5kg，双手持片总重",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "bilateral",
+            "weight" : 17.5,
+            "weightSide" : "bilateral"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 50,
+        "targetSets" : 4,
+        "targetWeight" : 10,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "龙门架",
+        "exerciseID" : "22A76B09-D7F7-59E4-B23A-406B7F0ECC4D",
+        "exerciseName" : "垫高绳索站姿侧屈，侧腹",
+        "exerciseNotes" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。\nW＋2.5 kg；没有同动作已完成记录，以原器械低疲劳试重。每侧各做 14、12、10、8 次，左右完成算 1 组。 每侧均为14、12、10、8次，左右完成计1组。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "B8CF85B0-8AE5-4F5E-8B77-FF933D3F7122",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "核心",
+        "order" : 5,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "EB435F46-984D-5295-A0BA-CAAD8ED4ADD5",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "F6E0975C-3FE3-5837-9AE7-ACD3631654AC",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "432F760C-046A-59CC-AC5C-011A18D009D8",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "DC931F1E-263F-51DE-A762-6DFC573147F4",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 50,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      },
+      {
+        "equipment" : "龙门架",
+        "exerciseID" : "195BA3AF-2C3E-43B2-84F5-89849FDA1009",
+        "exerciseName" : "站姿水平伐木，侧腹与旋转",
+        "exerciseNotes" : "重量口径：同机及侧别待核。首组校准为W，后续每组加2.5kg；实际输入留空。\nW＋2.5 kg。9\/12 同名记录 12.5×10，设置和次数侧别未知，仅作同机试重线索。每侧各做 14、12、10、8 次，左右完成算 1 组。 每侧均为14、12、10、8次，左右完成计1组。\n本人确认本周三次力量、两次有氧；热身另计。四组14\/12\/10\/8，主项逐组加5kg，小肌群加2.5kg；目标90分钟。第4组递减或力竭按各动作备注执行，额外递减段实际重量和次数记动作备注。疼痛、动作不稳或异常疲劳时调整或停止。",
+        "id" : "EE8CE5D5-4C4C-4DF7-B156-D15C12B9F656",
+        "maxReps" : 14,
+        "minReps" : 8,
+        "muscleGroup" : "核心",
+        "order" : 6,
+        "patternSource" : "exerciseOverride",
+        "planPattern" : "pyramidUp",
+        "plannedSets" : [
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "79C1CFC6-9E85-5EAA-B1F5-1630F366C4AE",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "首组W，现场校准",
+              "repsLower" : 14,
+              "repsUpper" : 14,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 14,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "F7951884-20E0-5A0C-8258-C292666C9764",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋2.5kg，现场校准",
+              "repsLower" : 12,
+              "repsUpper" : 12,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 12,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "D1834AAD-618F-50E0-B982-1435A3116624",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋5kg，现场校准",
+              "repsLower" : 10,
+              "repsUpper" : 10,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 10,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          },
+          {
+            "actualDefaultPolicyRaw" : "blank",
+            "id" : "9A81BA56-013A-5A44-997F-96CA9534DE35",
+            "prescription" : {
+              "effortCue" : "热身校准；疼痛、动作失稳或异常疲劳时停止或调整。",
+              "label" : "W＋7.5kg，现场校准",
+              "repsLower" : 8,
+              "repsUpper" : 8,
+              "restLowerSeconds" : 50,
+              "restUpperSeconds" : 50,
+              "rirLower" : 2,
+              "rirUpper" : 3
+            },
+            "reps" : 8,
+            "repsSide" : "single",
+            "weight" : 0,
+            "weightSide" : "unknown"
+          }
+        ],
+        "referenceURL" : "",
+        "restSeconds" : 50,
+        "targetSets" : 4,
+        "targetWeight" : 0,
+        "volumeUnit" : "kilogram"
+      }
+    ],
+    "id" : "B5BD7C0C-C4B3-596A-A174-E018E0324B6D",
+    "localDay" : "2026-11-04",
+    "plannedDate" : "2026-11-04T04:00:00Z",
+    "templateID" : "F5D0DBA2-9A52-44BD-BF57-AB22D4EC1B1C",
+    "timeZoneIdentifier" : "Asia\/Shanghai",
+    "title" : "背＋腹力量 · 递减"
+  }
+}

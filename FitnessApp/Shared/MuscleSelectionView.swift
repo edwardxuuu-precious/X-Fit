@@ -31,8 +31,8 @@ struct MuscleSelectionView: View {
                             Text(group)
                             Image(systemName: selectedGroups.contains(group) ? "checkmark.circle.fill" : "circle").font(.caption)
                         }.font(.subheadline.weight(.medium)).frame(maxWidth: .infinity, minHeight: 44)
-                            .foregroundStyle(selectedGroups.contains(group) ? AppTheme.accent : .primary)
-                            .background(selectedGroups.contains(group) ? AppTheme.accent.opacity(0.08) : Color.clear, in: Capsule())
+                            .foregroundStyle(AppTheme.ink)
+                            .background(selectedGroups.contains(group) ? AppTheme.accent : AppTheme.elevatedSurface, in: Capsule())
                             .overlay { Capsule().stroke(selectedGroups.contains(group) ? AppTheme.accent : AppTheme.secondaryText.opacity(0.35), lineWidth: 1) }
                     }.buttonStyle(.plain).accessibilityValue(selectedGroups.contains(group) ? "已选择" : "未选择")
                 }
@@ -72,11 +72,7 @@ struct MuscleCoverageView: View {
     var body: some View {
         ScrollView {
         VStack(alignment: .leading, spacing: 16) {
-            HStack {
-                Text("实际训练分布").font(.headline)
-                Spacer()
-                Text("近 7 天").font(.caption).foregroundStyle(AppTheme.secondaryText)
-            }
+            SprintPageHeader(title: "肌群分布", icon: "figure.stand", subtitle: "近 7 天 · 实际完成组")
             Picker("身体视角", selection: $side) {
                 Text("正面").tag(BodyMapViewSide.front); Text("背面").tag(BodyMapViewSide.back)
             }.pickerStyle(.segmented)
@@ -91,7 +87,7 @@ struct MuscleCoverageView: View {
                         Text(value.group).font(.subheadline)
                         Spacer()
                         Text("\(value.completedSets) 组").font(.subheadline.monospacedDigit())
-                            .foregroundStyle(value.completedSets > 0 ? AppTheme.accent : AppTheme.secondaryText)
+                            .foregroundStyle(value.completedSets > 0 ? AppTheme.ink : AppTheme.secondaryText)
                     }
                 }
             }
@@ -101,7 +97,7 @@ struct MuscleCoverageView: View {
         .padding(20)
         .accessibilityElement(children: .contain)
         }
-        .background(AppTheme.background)
+        .sprintPage()
         .navigationTitle("实际训练分布")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -169,7 +165,7 @@ private struct TrainingMuscleFigure: View {
             .accessibilityIdentifier("training-region-\(region.id)")
     }
     private func fill(_ group: String) -> Color {
-        if selected.contains(group) { return Color(red: 0.43, green: 0.61, blue: 0.15) }
+        if selected.contains(group) { return AppTheme.accent }
         if let count = counts[group], count > 0 {
             return AppTheme.accent.opacity(0.24 + 0.4 * Double(count) / Double(max(1, counts.values.max() ?? 1)))
         }

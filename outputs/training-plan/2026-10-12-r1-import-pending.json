@@ -1,0 +1,1795 @@
+{
+  "version": 1,
+  "programID": "101E5307-B26F-42B6-9FAB-5EAED2EF5D8D",
+  "startLocalDay": "2026-10-12",
+  "endLocalDay": "2026-10-18",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "confirmedAt": "2026-10-10T08:03:42Z",
+  "confirmationReference": "REQ-20261010-160518",
+  "sourceMarkdown": "# X-Fit：恢复训练复盘与下一轮编排提案 R1\n\n- 提案 ID：`CUT-RESTORE-20261012-R1`。\n- 形成日期：2026-10-10；状态：**待本人确认，未写入手机或 Notion**。\n- 建议适用范围：2026-10-12 至 2026-10-18，仅一轮；未确认前不生效，到期不自动续排。\n- 基础偏好：`TP-20260928-05`；来源为项目偏好档案及10/10已取得的手机备份。此处重新解析已有副本，不是本轮重新读取在线手机。\n- 关联任务：`XFO-T7`；需求：[REQ-20261009-214811](../../docs/requirements/2026-10-09/214811_remaining-stage-closeout.md)。\n- 本文为完整提案及证据正文。本人反馈和原实际资料的索引维护在[案例B](../../docs/operations/案例与复盘.md)；未修改已确认偏好或任何历史组。\n\n## 1. 本次要解决什么\n\n目的：恢复旅行后的正常四日部位分化，把胸背主项、明确工作组和可检查的努力程度重新建立起来；满足集中训练和泵感偏好，不靠不明性质的组次总数决定加重或加组。\n\n使用场景：商业健身房晨练；知道先做什么、哪些算热身、工作组应该做到什么程度、肘部出现反应时怎么停。确认后才核对App支持的编排/排期入口并应用；不用直接修改活动数据库或伪造旅行周导入包。\n\n结论上限：这是有当前实际和本人恢复反馈支持的可审阅训练提案，不是已经验证的训练收益、医学诊断或公斤数处方。本轮不设置营养目标，不改变用药，不推导蛋白/肉类摄入。\n\n## 2. 已确认事实和仍未知的内容\n\n| 信息 | 当前状态与来源 | 对决定的影响 |\n|---|---|---|\n| 10/5、10/6、10/8 Notes | 10/9读取全文；10/10本人确认三天均实际完成 | 可用于恢复期复盘，不再当作尚未执行的计划 |\n| 旅行中超过一周未训练/未称重 | 10/9本人报告；精确起止未知 | 不推算缺失体重，不默认已经回到此前耐受量 |\n| 左肘 | 10/10本人报告明显改善；原“号很多”按“好很多”理解 | 不延用9/27无不适，也不记录成完全无痛或医学许可 |\n| 当前长期偏好 | 手机10/10副本保存TP-20260928-05，9/28生效；本轮重新解析确认 | 恢复四日、工作日优先、保留胸背腿臀；旅行连续三天/不重腿已到期 |\n| 历史重量单位、单双侧、RIR、热身/工作划分、动作实际顺序 | Notes未明确；绳索Forward/Side/Reverse等动作身份也未完全确认 | 原数字保留，不换算kg、吨位或精确加重；不要求追忆未记过的RIR |\n\n| Notes | 实际完成的动作条目 | 组次行数 | 能支持的比较 |\n|---|---:|---:|---|\n| [10/5](../../artifacts/project-loop/20261009-remaining-closeout/notes/oct5-monday.html) | 7 | 29 | 三种推胸、夹胸与三种绳索条目；不能把29行全部视为有效工作组 |\n| [10/6](../../artifacts/project-loop/20261009-remaining-closeout/notes/oct6-tuesday.html) | 8 | 33 | 拉背与核心相关条目，已有实际训练；同样不能推算33个有效组 |\n| [10/8](../../artifacts/project-loop/20261009-remaining-closeout/notes/oct8-thursday.html) | 8 | 43 | 原文先列绳索再列卧推、dip和夹胸；记录顺序不证明实际顺序或预疲劳因果 |\n\n因此：不能确诊“刺激不足”的根因，也不能从平板记录35-8与30-8认定力量退步。动作顺序、器械设置、努力程度、热身划分和恢复都可能改变比较。新的提案优先把这些可控条件明确，而不是统一恢复到26–28组或追赶旧重量。\n\n## 3. 规则冲突、决定与取舍\n\n手机基础偏好明确要求胸部单次14–16个有效组、背部16–18个有效组、肩臂专门日24–28个有效组；复合主项通常1–2 RIR、孤立末组可0–1 RIR。项目偏好正文没有逐项列出这三个容量区间，不能只读其摘要就忽略手机已确认规则。\n\n| 本提案的选择 | 与基础规则关系 | 理由与取舍 | 生效门/未来改判 |\n|---|---|---|---|\n| 胸14组、背16组，直接手臂另列 | 保留原容量下限，不给dip辅助胸重复计完整组 | 保留集中训练；较高单次容量可能增加后段疲劳，需要动作/用时停止条件 | 只是提案，不把完整计划量当必须硬撑的配额 |\n| 肩臂日20组，暂不做力竭/递减/重握力收尾 | **拟议临时例外**：低于原24–28组，所有工作组目标2–3 RIR，主项首个顶组约3 RIR | 左肘只是改善，历史努力程度和耐受未明确；牺牲一次更高容量/力竭泵感，换取可比较且更保守的恢复输入 | 仅本人确认本版本后适用这一轮；不修改长期偏好，不自动恢复或续排下一轮 |\n| 主项在前，肩/手臂孤立在后 | 明确新计划顺序，不改写过去实际 | 先保证主项表现和比较条件；不声称该顺序必然带来更大增肌 | 后续若另有优先部位，重新展示安排，不默默换顺序 |\n| 所有计划重量留空，热身决定 | 与原口径保护一致；明确不自动套历史草稿 | 暂时没有精确公斤处方，避免错误单位/侧别和旧负重被当建议 | 补录历史时另核单位/侧别/动作，不阻断本次动作和努力目标提案 |\n\n重要反向依据：IUSCA共识建议高单次容量可考虑分散至更多次刺激，提出约10组/肌群/次的实务建议，且承认具体上限未被明确量化。本次胸14/背16**是结合已确认集中分化偏好的选择，不是该论文推荐的通用最优量**。如果后段输出或肘部恢复不佳，先减后段组；未来可提出分散频率方案，不能因此直接改成未经确认的全身训练。[IUSCA原论文，频率与休息章节](https://journal.iusca.org/index.php/Journal/article/download/81/140)\n\n## 4. 建议的一轮排布\n\n| 日程 | 内容 | 计划工作组 | 建议时长 |\n|---|---|---:|---|\n| 10/12 周一 | A 胸部＋三头 | 18：胸14＋三头4 | 75–90分钟 |\n| 10/13 周二 | B 背部＋二头 | 20：背16＋二头4 | 75–90分钟 |\n| 10/14 周三 | 轻松单车/椭圆机；不做力量 | 0 | 稳定有氧20–30分钟 |\n| 10/15 周四 | C 腿臀＋核心 | 20：下肢16＋核心4 | 75–90分钟 |\n| 10/16 周五 | D 肩部＋手臂 | 20：肩12＋二头4＋三头4 | 70–85分钟 |\n| 10/17–18 周末 | 家庭、休息、轻松步行 | 不强制补课 | 不设任务时长 |\n\n日期仅是**待确认训练排期**，不是项目任务的工期或承诺。只有在日常活动及对应动作热身不诱发关节疼痛、恢复允许时执行负重课；任何动作诱发疼痛就停该动作，不以本表证明可安全训练。若本周日程不合适，确认前改排，保留不连续三天力量及周末不强制补课。\n\n## 5. 全部动作、强度与休息\n\n口径：以下均为**计划工作组**，不是对旧Notes有效容量的判定；热身另记、不计入总数。单侧3组表示左右各做3轮，按计划记3组并保留次数每侧口径，不在总数中翻成6。实际录入需分别明确重量侧和次数侧。\n\n每课先5–8分钟轻松活动；首个主项逐级做2–4组低疲劳热身，次数逐步减少，不做到力竭。后续换角度/器械需要时再做1–2个轻热身组。完成热身不等于完成工作组，所有重量字段明确留空。\n\n### A：胸部＋三头，18组\n\n| 顺序 | 动作 | 工作组×次数 | RIR目标 | 休息 |\n|---|---|---|---|---|\n| A1 | 史密斯平板卧推 | 1×8–10顶组＋3×10–12回退组 | 顶组3；回退2–3 | 180秒 |\n| A2 | 史密斯上斜卧推 | 4×8–12 | 2–3 | 150–180秒 |\n| A3 | MTS器械下斜推胸 | 3×10–15 | 2–3 | 120–150秒 |\n| A4 | 绳索夹胸 | 3×12–20 | 2–3 | 75–90秒 |\n| A5 | 坐姿器械臂屈伸 / Seated Dip | 2×10–15 | 2–3 | 120秒 |\n| A6 | 绳索三头下压 | 2×12–20 | 2–3 | 75–90秒 |\n\n保留Notes里已使用的推胸形式，但不预填35、30或40等旧数字。Dip作为三头主导动作计2组，胸辅助不额外加进胸14组；握法和幅度以不诱发不适为前提，不锁肘硬顶。不增加额外前平举或第四种卧推。\n\n### B：背部＋二头，20组\n\n| 顺序 | 动作 | 工作组×次数 | RIR目标 | 休息 |\n|---|---|---|---|---|\n| B1 | 胸托T-Bar划船 | 1×8–10顶组＋3×10–12回退组 | 顶组3；回退2–3 | 150–180秒 |\n| B2 | 双滑轮高位下拉，舒适握法 | 4×8–12 | 2–3 | 150秒 |\n| B3 | 单臂绳索划船，向髋方向 | 3×每侧10–15 | 2–3 | 左右完成一轮后90–120秒 |\n| B4 | 双滑轮坐姿划船 | 3×10–15 | 2–3 | 120秒 |\n| B5 | 绳索直臂下压 | 2×12–20 | 2–3 | 75–90秒 |\n| B6 | 绳索弯举，舒适握法 | 4×10–15 | 2–3 | 75–90秒 |\n\n核心不在多个拉背动作之间穿插，移至C课；这是新顺序，不宣称Notes实际也这样执行。中立握可尝试但不保证肘部无痛；不加反握引体、重杠铃划船或握力力竭收尾。\n\n### C：腿臀＋核心，20组\n\n| 顺序 | 动作 | 工作组×次数 | RIR目标 | 休息 |\n|---|---|---|---|---|\n| C1 | 哈克深蹲 | 4×8–10 | 3 | 180秒 |\n| C2 | 保加利亚分腿蹲 | 3×每侧8–10 | 2–3 | 左右完成一轮后120–150秒 |\n| C3 | 器械臀推 | 3×8–12 | 2–3 | 120–150秒 |\n| C4 | 坐姿腿弯举 | 3×10–15 | 2–3 | 90秒 |\n| C5 | 器械腿屈伸 | 3×12–15 | 2–3 | 75–90秒 |\n| C6 | 仰卧反向卷腹 | 2×10–15 | 保留约2–3次规范动作 | 60–75秒 |\n| C7 | 死虫式 | 2×每侧6–10 | 保留动作控制，不做到腰背代偿 | 60秒 |\n\n恢复腿臀基础，不延用旅行“不重腿”例外；本轮不排高次数硬拉或腰背主导的RDL，不用悬垂负重举腿增加握力负担。核心以动作质量作停止标准，不把憋气或腰背代偿算成正常RIR。\n\n### D：肩部＋手臂，20组（需确认的临时容量例外）\n\n| 顺序 | 动作 | 工作组×次数 | RIR目标 | 休息 |\n|---|---|---|---|---|\n| D1 | 器械肩推 | 4×8–12 | 3 | 150秒 |\n| D2 | 器械侧平举 | 4×12–20 | 2–3 | 75–90秒 |\n| D3 | 反向蝴蝶机 | 4×12–20 | 2–3 | 75–90秒 |\n| D4 | 绳索弯举，舒适握法 | 4×10–15 | 2–3 | 75–90秒 |\n| D5 | 绳索三头下压 | 4×12–20 | 2–3 | 75–90秒 |\n\n本轮不添加另一个重推举、过顶三头或强迫次数；泵感来自选到目标努力程度的中高次数工作组，不以极短休息、借力或力竭证明强度。\n\n### 有氧\n\n- 周三单车/椭圆机：轻松热身约5分钟，再做20–30分钟能说完整句子的稳定活动；不需要用力拉推椭圆机把手。不是新的心率区间处方。\n- 保留长期每周两次跳绳的结构，候选安排在A/B日以外的独立时段或A/B日晚间；不紧接力量强行完成。首轮每次8轮45秒轻跳/45秒步行休息，含休息12分钟，主观强度约RPE5–6，不冲刺、不做双摇。\n- 握绳/转腕、足踝或膝部不适时不跳，改轻松步行或低冲击单车并按实际记录替代；不把替代有氧记成完成跳绳，不把跳绳算背部力量。疲劳明显可以省去，不在周末硬补。\n\n## 6. 器械替代与停止规则\n\n所有替代保持**同一动作位**的组数/次数/强度目标，不在原动作后再追加；换器械后重新按热身定重，不跨器械换算。\n\n| 动作位/缺设备 | 替代 |\n|---|---|\n| 史密斯平板/上斜 | 相应角度器械推胸；如果只有一种舒适推胸，减少重复动作而非同机凑满全部角度 |\n| MTS下斜 | 舒适的坐姿推胸；已用同一机完成其他推胸则可省去此位，不额外堆组 |\n| 绳索夹胸 | 蝴蝶机夹胸 |\n| Seated Dip不舒适 | 相同2组绳索下压；下压也不舒适则省去，不补组 |\n| 胸托T-Bar没有 | 胸托划船器械；不能据旧Notes判断T-Bar一定有胸托 |\n| 双滑轮下拉/坐姿划船 | 相应普通高位下拉/坐姿划船，原数字不迁移 |\n| 哈克深蹲 | 腿举；不能把哈克历史重量当腿举重量 |\n| 器械臀推 | 舒适且熟悉的杠铃臀推；不熟悉则先低负荷学习或省去，不硬排 |\n| 侧平举机/反向蝴蝶机 | 绳索侧平举/胸托轻哑铃反向飞鸟 |\n| 肩推、弯举或下压诱发肘部不适 | 停止相应动作；舒适握法不是安全保证，不连续尝试多种替代硬凑总数 |\n\n- 任一新发关节疼痛、逐组加重或需要动作代偿时停止该动作；当日安排可少做，省去组如实记录。\n- 训练后或次晨左肘较训练前更不舒服，下一次先取消直接手臂训练，减少或暂停诱发不适的推拉动作。即使有泵感也不继续冲容量。\n- 旧规则的“连续两个动作表现下降约10%”只在同器械/设置/口径且有可比参考时使用；本轮若没有参考，以明显低于目标次数、动作失控或恢复反应作减少/停止条件，不制造假百分比。到90分钟停止追加孤立组，不压缩必要休息来凑量。\n- 头晕、恶心、明显乏力时停止训练。疼痛持续数周仍存在或反复，应安排合格医疗/物理治疗评估；严重疼痛伴活动困难、麻木，或肿热伴发热应及时就医。本提案不诊断肘部原因。[NHS肘臂疼痛就医指引](https://www.nhs.uk/symptoms/elbow-and-arm-pain/)\n\n## 7. 重量、进阶与最小反馈\n\n- 所有新计划负重明确留空。当天热身后选能落在目标次数并保留所列RIR的重量；主项回退组按当天顶组调整，直到能在10–12次范围保留2–3RIR，不指定未知公斤数或通用减重百分比。\n- 回退组不是每组都逐级加重的热身；它们是顶组后另记的工作组，不重复制热身行。\n- 保留长期双进阶规则：在同动作/器械/单位/侧别下，连续两次全部组达到次数上限且动作稳定、恢复正常，再考虑最小一档加重。未达下限或已接近力竭则不加重。当前三篇Notes没有RIR，不用于宣布满足进阶条件。\n- 晨练只有咖啡/电解质的既有规则仍保留：只有存在兼容且口径明确的上次工作重量时，才可参考5%–10%下调；否则直接按热身和3–4RIR选重，不对未知Notes数字做百分比计算。\n- 从下一次开始只补会改变决定的少量信息：工作组/热身标签、主项顶组及每动作末组RIR、重量与次数各自侧别/单位，以及训练中/次晨肘部“无不适、与基线相同、更明显”反馈。无需重填已有Notes、补猜旧RIR。\n- 一轮结束比较：主项是否达到目标次数和努力程度；后段是否明显掉表现；用时是否超90分钟；肘部是否加重；本人刺激感。RIR已达目标且恢复允许、仍有持续不足时再提出有限容量变更；未达努力目标先调动作质量/负重，不同时自动加重加组。\n- 肩臂日20组、2–3RIR及较轻跳绳只绑定这一轮。之后维持、减少或恢复原更高容量都要依据新反馈再展示决定，不自动续排，也不永久改TP-20260928-05。\n\n## 8. 方法、证据与确认出口\n\n本提案采用“确认实际→固定可比条件→目标次数与RIR→恢复反馈→再决定容量”的个人训练观察。三篇Notes不能证明任何方案的因果效果；具体动作和组数是结合本人偏好作出的建议，不是某教练原版课表或医疗康复计划。\n\n- ACSM于2026-03-17发布的官方更新说明：训练应结合个人目标、安全和坚持程度；力竭或复杂周期并不普遍保证更好结果。只读取该说明的核心结论；全文PMC本轮遇访问验证，未把未读全文当证据。适用对象为健康成人，**不能据此证明当前左肘适合高负荷**。[ACSM官方说明](https://acsm.org/resistance-training-guidelines-update-2026/)\n- IUSCA 2021共识：本轮读取官方PDF的Volume/Frequency/Rest和Table1相关段落；作为经验训练者的容量/休息参考，复合2–3分钟、孤立60–90秒。关于分散较高单次容量的反向建议已在第3节处理，不将其包装为本次14/16组的支持证明；未见本页修订声明，不能声称这是2026最新共识。[IUSCA原文](https://journal.iusca.org/index.php/Journal/article/download/81/140)\n- NHS肘臂疼痛指引：读取完整症状/就医正文；页面最后审核2024-01-26、下次计划2027-01-26。本轮用于就医边界，不用于诊断或确定负重。[NHS原文](https://www.nhs.uk/symptoms/elbow-and-arm-pain/)\n- 手机证据：[10/10副本及守恒结果](../../artifacts/project-loop/20261010-mirror-input.iOroDN/input-readback.json)；重新只读解析`after/default.store`的TP-20260928-05，revision5、effectiveAt为9/28。没有本轮新增手机读写、历史补录或Notion上传。\n\n待本人确认的是**这份完整版本、10/12–18排期，以及肩臂20组/非力竭的一轮临时例外**。确认后先核手机当前日程/版本/进行中保护及真实支持入口；没有合格接口时报告具体缺口，不直改SQLite，也不承诺已经安装计划。10/5、10/6、10/8历史训练补录另核动作身份、单位及侧别；实际完成确认不等于许可把未知字段填成默认值。\n\n本轮交付：实际复盘及完整待确认方案可用；未完成：具体计划确认、App应用/回读和训练效果。T3、真实餐食周评估、原真机自动化与客观输入性能仍沿原门，不因本提案完成而关闭。\n",
+  "sourceSHA256": "d4cafc5eb8bb1c54007d99b402817e1dc99b48f70ca88c524251bec4fdc0e491",
+  "snapshot": {
+    "code": "CUT-RESTORE-20261012-R1",
+    "title": "恢复周 · 四日部位分化",
+    "preferenceRevisionCode": "TP-20260928-05",
+    "strengthWorkouts": [
+      {
+        "code": "CUT-RESTORE-20261012-A",
+        "title": "A 胸部＋三头 · 恢复周",
+        "weekday": 2,
+        "guidance": "先5–8分钟轻松活动；首个主项2–4组低疲劳递增热身，热身不计工作组。新发关节疼痛、逐组加重或代偿时停止相应动作；可省组，不补足配额。到90分钟停止追加孤立组。训练后或次晨左肘更不舒服，下一次取消直接手臂训练，并减少或暂停诱发不适的推拉动作。胸14组＋三头4组；Dip胸部辅助不重复计完整胸组；不做额外前平举或第四种卧推。",
+        "exercises": [
+          {
+            "name": "史密斯平板卧推",
+            "catalogName": "史密斯卧推",
+            "catalogExerciseID": "5E1CEC70-A19C-4DA8-ABF1-75C41E489943",
+            "muscleGroup": "胸部",
+            "equipment": "史密斯机",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 180,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；先1个顶组，再3个回退工作组；按当天顶组和RIR定回退重量，不指定公斤数或减重百分比。缺史密斯时相应角度器械推胸；只有一种舒适推胸则减少重复。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000001",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "顶组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000002",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000003",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000004",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "史密斯上斜卧推",
+            "catalogName": "史密斯上斜卧推",
+            "catalogExerciseID": "E914D0E3-85B1-405B-842B-17C8113C9CA3",
+            "muscleGroup": "胸部",
+            "equipment": "史密斯机",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 150,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；缺史密斯时相应角度器械推胸；只有一种舒适推胸则减少重复，不同机凑全部角度。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000005",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000006",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000007",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000008",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "MTS器械下斜推胸",
+            "catalogName": "MTS器械下斜推胸",
+            "catalogExerciseID": null,
+            "muscleGroup": "胸部",
+            "equipment": "MTS下斜推胸机",
+            "sets": 3,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 120,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无MTS时舒适的坐姿推胸；已在其他动作使用同机则可省此位，不额外堆组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000009",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000010",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000011",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索夹胸",
+            "catalogName": "站姿绳索夹胸",
+            "catalogExerciseID": "8DE3EE03-A5A3-4767-954B-333D4BD17332",
+            "muscleGroup": "胸部",
+            "equipment": "龙门架",
+            "sets": 3,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无绳索时蝴蝶机夹胸，同一动作位替换，不追加。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000012",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000013",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000014",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "坐姿器械臂屈伸 / Seated Dip",
+            "catalogName": "坐姿器械臂屈伸",
+            "catalogExerciseID": "5EF86DF6-9F82-45D8-8592-2DD4FB9BB8A1",
+            "muscleGroup": "手臂",
+            "equipment": "器械",
+            "sets": 2,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 120,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；肱三头肌主导，胸辅助不重复计组；不锁肘硬顶。不舒适则同2组绳索下压；下压也不适就省去，不补组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000015",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000016",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索三头下压",
+            "catalogName": "绳索下压",
+            "catalogExerciseID": "BD28555C-EFC5-49A6-B267-5BF091C103FC",
+            "muscleGroup": "手臂",
+            "equipment": "龙门架",
+            "sets": 2,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；舒适握法不是安全保证；肘部不适则停止，不连续尝试多种替代凑组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000017",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000018",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "CUT-RESTORE-20261012-B",
+        "title": "B 背部＋二头 · 恢复周",
+        "weekday": 3,
+        "guidance": "先5–8分钟轻松活动；首个主项2–4组低疲劳递增热身，热身不计工作组。新发关节疼痛、逐组加重或代偿时停止相应动作；可省组，不补足配额。到90分钟停止追加孤立组。训练后或次晨左肘更不舒服，下一次取消直接手臂训练，并减少或暂停诱发不适的推拉动作。背16组＋二头4组；核心移至C课，不穿插于多个拉背动作之间。",
+        "exercises": [
+          {
+            "name": "胸托T-Bar划船",
+            "catalogName": "胸托T-Bar划船",
+            "catalogExerciseID": null,
+            "muscleGroup": "背部",
+            "equipment": "胸托T-Bar划船机",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 150,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；先1个顶组，再3个回退工作组。没有胸托T-Bar时胸托划船器械，不把旧宽握T-Bar当作已确认胸托。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000019",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "顶组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000020",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000021",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000022",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "回退组",
+                  "repsLower": 10,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 180,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "双滑轮高位下拉，舒适握法",
+            "catalogName": "双滑轮高位下拉",
+            "catalogExerciseID": "634F2176-1479-4058-B436-3EFE90DFED0A",
+            "muscleGroup": "背部",
+            "equipment": "双滑轮器械",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 150,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无双滑轮时普通高位下拉，原重量不迁移。中立握可尝试但不保证肘部无痛。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000023",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000024",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000025",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000026",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "单臂绳索划船，向髋方向",
+            "catalogName": "单臂绳索划船至髋",
+            "catalogExerciseID": "E4AF4741-65C2-4B1B-8A4A-3618D0969EA6",
+            "muscleGroup": "背部",
+            "equipment": "龙门架",
+            "sets": 3,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 90,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": true,
+            "note": "重量留空；左右完成一轮后休息90–120秒；左右各3轮，记3组，不翻成6组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000027",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000028",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000029",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "双滑轮坐姿划船",
+            "catalogName": "双滑轮低位划船",
+            "catalogExerciseID": "E80688B3-3640-4BAB-9042-EC439BA9D690",
+            "muscleGroup": "背部",
+            "equipment": "双滑轮器械",
+            "sets": 3,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 120,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无双滑轮时普通坐姿划船，原重量不迁移。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000030",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000031",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000032",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 120,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索直臂下压",
+            "catalogName": "直臂下压",
+            "catalogExerciseID": "2BA64B34-714E-4CFA-BD37-990E75696B4E",
+            "muscleGroup": "背部",
+            "equipment": "龙门架",
+            "sets": 2,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；不增加反握引体、重杠铃划船或握力力竭收尾。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000033",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000034",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索弯举，舒适握法",
+            "catalogName": "绳索弯举",
+            "catalogExerciseID": "5C90B598-3E9D-41DB-A698-598FFD10CFC9",
+            "muscleGroup": "手臂",
+            "equipment": "龙门架",
+            "sets": 4,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；肘部不适则停止，省去不补组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000035",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000036",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000037",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000038",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "CUT-RESTORE-20261012-C",
+        "title": "C 腿臀＋核心 · 恢复周",
+        "weekday": 5,
+        "guidance": "先5–8分钟轻松活动；首个主项2–4组低疲劳递增热身，热身不计工作组。新发关节疼痛、逐组加重或代偿时停止相应动作；可省组，不补足配额。到90分钟停止追加孤立组。训练后或次晨左肘更不舒服，下一次取消直接手臂训练，并减少或暂停诱发不适的推拉动作。下肢16组＋核心4组；不延用旅行不重腿例外，不排高次数硬拉或腰背主导RDL，不用悬垂負重举腿。",
+        "exercises": [
+          {
+            "name": "哈克深蹲",
+            "catalogName": "哈克深蹲",
+            "catalogExerciseID": null,
+            "muscleGroup": "腿部",
+            "equipment": "哈克深蹲机",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 10,
+            "restSeconds": 180,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无哈克时腿举，不能跨器械迁移重量。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000039",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000040",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000041",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000042",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 180,
+                  "restUpperSeconds": 180,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "保加利亚分腿蹲",
+            "catalogName": "保加利亚分腿蹲",
+            "catalogExerciseID": "64236F01-C07D-4F19-8909-02EA60EBF99B",
+            "muscleGroup": "腿部",
+            "equipment": "哑铃",
+            "sets": 3,
+            "repsLower": 8,
+            "repsUpper": 10,
+            "restSeconds": 120,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": true,
+            "note": "重量留空；左右完成一轮后休息120–150秒；左右各3轮，记3组。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000043",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000044",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000045",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "器械臀推",
+            "catalogName": "器械臀推",
+            "catalogExerciseID": null,
+            "muscleGroup": "臀部",
+            "equipment": "器械臀推机",
+            "sets": 3,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 120,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无器械时舒适且熟悉的杠铃臀推；不熟悉则低负荷学习或省去，不硬排。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000046",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000047",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000048",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 120,
+                  "restUpperSeconds": 150,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "坐姿腿弯举",
+            "catalogName": "坐姿腿弯举",
+            "catalogExerciseID": "BED023F2-C4D6-4B0B-82D8-6A163644AB4E",
+            "muscleGroup": "腿部",
+            "equipment": "器械",
+            "sets": 3,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 90,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；动作稳定，不以代偿凑次数。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000049",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000050",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000051",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 90,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "器械腿屈伸",
+            "catalogName": "腿屈伸",
+            "catalogExerciseID": "D4E29910-1279-4168-9874-D320084EA21E",
+            "muscleGroup": "腿部",
+            "equipment": "器械",
+            "sets": 3,
+            "repsLower": 12,
+            "repsUpper": 15,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；动作稳定，不以代偿凑次数。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000052",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000053",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000054",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "仰卧反向卷腹",
+            "catalogName": "仰卧反向卷腹",
+            "catalogExerciseID": "FFCC3333-ECEF-48F3-9900-2283D7ED64D9",
+            "muscleGroup": "核心",
+            "equipment": "自重",
+            "sets": 2,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 60,
+            "volumeUnitRaw": "count",
+            "unilateral": false,
+            "note": "重量留空；核心以动作质量作停止标准，不把憋气或腰背代偿算成正常RIR。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000055",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 60,
+                  "restUpperSeconds": 75,
+                  "effortCue": "保留约2–3次规范动作"
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000056",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 60,
+                  "restUpperSeconds": 75,
+                  "effortCue": "保留约2–3次规范动作"
+                }
+              }
+            ]
+          },
+          {
+            "name": "死虫式",
+            "catalogName": "死虫式",
+            "catalogExerciseID": "ABCD6A23-4009-491A-A1D4-CEDF7066C873",
+            "muscleGroup": "核心",
+            "equipment": "自重",
+            "sets": 2,
+            "repsLower": 6,
+            "repsUpper": 10,
+            "restSeconds": 60,
+            "volumeUnitRaw": "count",
+            "unilateral": true,
+            "note": "重量留空；每侧6–10次；核心以动作质量作停止标准。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000057",
+                "weight": 0,
+                "reps": 6,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 6,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 60,
+                  "restUpperSeconds": 60,
+                  "effortCue": "保留动作控制，不做到腰背代偿"
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000058",
+                "weight": 0,
+                "reps": 6,
+                "weightSide": "unknown",
+                "repsSide": "single",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 6,
+                  "repsUpper": 10,
+                  "restLowerSeconds": 60,
+                  "restUpperSeconds": 60,
+                  "effortCue": "保留动作控制，不做到腰背代偿"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "CUT-RESTORE-20261012-D",
+        "title": "D 肩部＋手臂 · 恢复周",
+        "weekday": 6,
+        "guidance": "先5–8分钟轻松活动；首个主项2–4组低疲劳递增热身，热身不计工作组。新发关节疼痛、逐组加重或代偿时停止相应动作；可省组，不补足配额。到90分钟停止追加孤立组。训练后或次晨左肘更不舒服，下一次取消直接手臂训练，并减少或暂停诱发不适的推拉动作。本轮临时20组：肩12＋二头4＋三头4。非力竭，取消递减组和重握力收尾；不永久更改肩臂24–28组长期偏好。",
+        "exercises": [
+          {
+            "name": "器械肩推",
+            "catalogName": "器械肩推",
+            "catalogExerciseID": "3063D520-06B1-4408-9EED-5D3297CC8A76",
+            "muscleGroup": "肩部",
+            "equipment": "器械",
+            "sets": 4,
+            "repsLower": 8,
+            "repsUpper": 12,
+            "restSeconds": 150,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；不加另一重推举；肘部不适则停止。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000059",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000060",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000061",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000062",
+                "weight": 0,
+                "reps": 8,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 8,
+                  "repsUpper": 12,
+                  "restLowerSeconds": 150,
+                  "restUpperSeconds": 150,
+                  "rirLower": 3,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "器械侧平举",
+            "catalogName": "器械坐姿侧平举",
+            "catalogExerciseID": "9BB12534-10A3-435D-BE9A-10A70ED0616F",
+            "muscleGroup": "肩部",
+            "equipment": "器械",
+            "sets": 4,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无侧平举机时绳索侧平举，同一动作位替代。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000063",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000064",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000065",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000066",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "反向蝴蝶机",
+            "catalogName": "反向蝴蝶机",
+            "catalogExerciseID": "FE385368-CC8C-49A5-A4A5-C65978C5B6B8",
+            "muscleGroup": "肩部",
+            "equipment": "器械",
+            "sets": 4,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；无反向蝴蝶机时胸托轻哑铃反向飞鸟，同一动作位替代。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000067",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000068",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000069",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000070",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索弯举，舒适握法",
+            "catalogName": "绳索弯举",
+            "catalogExerciseID": "5C90B598-3E9D-41DB-A698-598FFD10CFC9",
+            "muscleGroup": "手臂",
+            "equipment": "龙门架",
+            "sets": 4,
+            "repsLower": 10,
+            "repsUpper": 15,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；肘部不适则停止；不强迫次数或力竭。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000071",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000072",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000073",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000074",
+                "weight": 0,
+                "reps": 10,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 10,
+                  "repsUpper": 15,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          },
+          {
+            "name": "绳索三头下压",
+            "catalogName": "绳索下压",
+            "catalogExerciseID": "BD28555C-EFC5-49A6-B267-5BF091C103FC",
+            "muscleGroup": "手臂",
+            "equipment": "龙门架",
+            "sets": 4,
+            "repsLower": 12,
+            "repsUpper": 20,
+            "restSeconds": 75,
+            "volumeUnitRaw": "kilogram",
+            "unilateral": false,
+            "note": "重量留空；肘部不适则停止；不加过顶三头或强迫次数。",
+            "plannedSets": [
+              {
+                "id": "129bf899-d102-4d00-a000-000000000075",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000076",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000077",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              },
+              {
+                "id": "129bf899-d102-4d00-a000-000000000078",
+                "weight": 0,
+                "reps": 12,
+                "weightSide": "unknown",
+                "repsSide": "unknown",
+                "actualDefaultPolicyRaw": "blank",
+                "prescription": {
+                  "label": "工作组",
+                  "repsLower": 12,
+                  "repsUpper": 20,
+                  "restLowerSeconds": 75,
+                  "restUpperSeconds": 90,
+                  "rirLower": 2,
+                  "rirUpper": 3
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cardioWorkouts": [
+      {
+        "code": "CUT-RESTORE-20261012-CYCLE",
+        "title": "轻松单车／椭圆机",
+        "weekday": 4,
+        "timing": "周三独立恢复活动；不做力量",
+        "activeSeconds": 1200,
+        "activeSecondsUpper": 1800,
+        "catalogExerciseID": "B14AEC6E-5425-444A-A00E-82DFE44C54EA",
+        "intervals": "先轻松热身约5分钟，再稳定20–30分钟",
+        "guidance": "能说完整句子，不用力拉推椭圆机把手；不是新心率区间处方。疲劳明显可休息。"
+      },
+      {
+        "code": "CUT-RESTORE-20261012-ROPE1",
+        "title": "轻松跳绳 1",
+        "weekday": 2,
+        "timing": "A/B日晚间独立时段，不紧接力量；疲劳明显可省去",
+        "activeSeconds": 360,
+        "activeSecondsUpper": 360,
+        "elapsedSeconds": 720,
+        "catalogExerciseID": "0CF14BFA-29C7-4154-9BC4-74FB4AD3F1EB",
+        "intervals": "8轮45秒轻跳／45秒步行休息；有效跳绳6分钟，含休息12分钟",
+        "guidance": "RPE5–6，不冲刺、不做双摇。握绳/转腕、足踝或膝部不适不跳，改步行或低冲击单车，按实际记录替代，不把替代算完成跳绳，不在周末硬补。"
+      },
+      {
+        "code": "CUT-RESTORE-20261012-ROPE2",
+        "title": "轻松跳绳 2",
+        "weekday": 3,
+        "timing": "A/B日晚间独立时段，不紧接力量；疲劳明显可省去",
+        "activeSeconds": 360,
+        "activeSecondsUpper": 360,
+        "elapsedSeconds": 720,
+        "catalogExerciseID": "0CF14BFA-29C7-4154-9BC4-74FB4AD3F1EB",
+        "intervals": "8轮45秒轻跳／45秒步行休息；有效跳绳6分钟，含休息12分钟",
+        "guidance": "RPE5–6，不冲刺、不做双摇。握绳/转腕、足踝或膝部不适不跳，改步行或低冲击单车，按实际记录替代，不把替代算完成跳绳，不在周末硬补。"
+      }
+    ],
+    "progressionRule": "- 所有新计划负重明确留空。当天热身后选能落在目标次数并保留所列RIR的重量；主项回退组按当天顶组调整，直到能在10–12次范围保留2–3RIR，不指定未知公斤数或通用减重百分比。\n- 回退组不是每组都逐级加重的热身；它们是顶组后另记的工作组，不重复制热身行。\n- 保留长期双进阶规则：在同动作/器械/单位/侧别下，连续两次全部组达到次数上限且动作稳定、恢复正常，再考虑最小一档加重。未达下限或已接近力竭则不加重。当前三篇Notes没有RIR，不用于宣布满足进阶条件。\n- 晨练只有咖啡/电解质的既有规则仍保留：只有存在兼容且口径明确的上次工作重量时，才可参考5%–10%下调；否则直接按热身和3–4RIR选重，不对未知Notes数字做百分比计算。\n- 从下一次开始只补会改变决定的少量信息：工作组/热身标签、主项顶组及每动作末组RIR、重量与次数各自侧别/单位，以及训练中/次晨肘部“无不适、与基线相同、更明显”反馈。无需重填已有Notes、补猜旧RIR。\n- 一轮结束比较：主项是否达到目标次数和努力程度；后段是否明显掉表现；用时是否超90分钟；肘部是否加重；本人刺激感。RIR已达目标且恢复允许、仍有持续不足时再提出有限容量变更；未达努力目标先调动作质量/负重，不同时自动加重加组。\n- 肩臂日20组、2–3RIR及较轻跳绳只绑定这一轮。之后维持、减少或恢复原更高容量都要依据新反馈再展示决定，不自动续排，也不永久改TP-20260928-05。",
+    "lowEnergyRule": "晨练只有咖啡/电解质：只有兼容且口径明确的上次工作重量可参考5%–10%下调；否则按热身和3–4RIR定重，不对未知Notes数做百分比计算。头晕、恶心、明显乏力就停止；恢复不足可减量，不压缩必要休息凑量。本轮不力竭、不做递减或重握力收尾；日常活动和热身诱发关节疼痛则不执行相应负重动作。仅本轮10/12–18，不自动续排。"
+  }
+}

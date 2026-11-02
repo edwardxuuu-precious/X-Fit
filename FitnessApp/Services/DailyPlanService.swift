@@ -180,6 +180,81 @@ enum DailyPlanServiceError: LocalizedError {
 
 @MainActor
 enum DailyPlanService {
+    /// An explicit UUID edits one occurrence. Templates are copied so shared and
+    /// historical assets, other same-day projects and imported source packets survive.
+    static func update(scheduleID: UUID, muscleGroups: [String], defaultPlanPattern: SetPlanPattern = .fixed,
+                       exercises inputs: [DailyPlanExerciseInput], in context: ModelContext,
+                       commit: (ModelContext) throws -> Void = { try $0.save() }) throws -> ScheduledWorkout {
+        guard !context.hasChanges else { throw ScheduleServiceError.unsavedChanges }
+        let groups = muscleGroups.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+        guard !groups.isEmpty else { throw DailyPlanServiceError.emptyMuscleGroups }
+        guard !inputs.isEmpty else { throw DailyPlanServiceError.emptyExercises }
+        guard Set(inputs.map(\.exerciseID)).count == inputs.count else { throw DailyPlanServiceError.duplicateExercise }
+        let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+        guard let schedule = schedules.first(where: { $0.id == scheduleID }) else { throw DailyPlanServiceError.immutableExistingPlan }
+        try ScheduleService.validateUnstarted(schedule, in: context)
+        let links = try context.fetch(FetchDescriptor<ProgramWorkoutLink>())
+        let revisions = try context.fetch(FetchDescriptor<TrainingProgramRevision>())
+        guard CardioWorkoutPresentation.plan(schedule) == nil,
+              !TrainingDateMenuService.cardioScheduleIDs(schedules: schedules, links: links, revisions: revisions).contains(schedule.id) else {
+            throw DailyPlanServiceError.immutableExistingPlan
+        }
+        let catalog = try context.fetch(FetchDescriptor<Exercise>())
+        let byID = Dictionary(uniqueKeysWithValues: catalog.map { ($0.id, $0) })
+        for input in inputs {
+            guard let exercise = byID[input.exerciseID] else { throw DailyPlanServiceError.missingExercise }
+            guard !exercise.isArchived else { throw DailyPlanServiceError.archivedExercise }
+            guard !input.plannedSets.isEmpty else { throw DailyPlanServiceError.emptyExercises }
+        }
+        let capture = try ConfirmedTrainingPlanService.captureScheduleAdjustment(schedule, in: context)
+        let before = ScheduleManagementState(schedule)
+        let previousSources = capture.weekly.map { ($0.revision, $0.revision.snapshotJSON) }
+        let oldTemplate = try context.fetch(FetchDescriptor<WorkoutTemplate>()).first { $0.id == schedule.templateID }
+        let oldSnapshots = Dictionary(uniqueKeysWithValues: schedule.planSnapshot.map { ($0.exerciseID, $0) })
+        let autosave = context.autosaveEnabled; context.autosaveEnabled = false
+        defer { context.autosaveEnabled = autosave }
+        do {
+            let template = WorkoutTemplate(name: schedule.templateName, weekday: schedule.plannedDate.weekdayNumber,
+                isActive: false, isOneOff: true, plannedForDate: schedule.plannedDate,
+                focusMuscleGroups: groups, defaultPlanPattern: defaultPlanPattern)
+            template.trainingPreferenceSnapshotJSON = oldTemplate?.trainingPreferenceSnapshotJSON
+            context.insert(template)
+            var frozen: [ScheduledWorkoutExerciseSnapshot] = []
+            for (order, input) in inputs.enumerated() {
+                guard let exercise = byID[input.exerciseID], let first = input.plannedSets.first else {
+                    throw DailyPlanServiceError.missingExercise
+                }
+                let previous = oldSnapshots[exercise.id]
+                let lower = input.plannedSets.map { $0.prescription?.repsLower ?? $0.reps }.min() ?? first.reps
+                let upper = input.plannedSets.map { $0.prescription?.repsUpper ?? $0.reps }.max() ?? first.reps
+                let item = TemplateExercise(templateID: template.id, exerciseID: exercise.id, order: order,
+                    targetSets: input.plannedSets.count, minReps: lower, maxReps: upper,
+                    targetWeight: first.weight, restSeconds: input.restSeconds, plannedSets: input.plannedSets,
+                    planPattern: input.planPattern, patternSource: input.patternSource)
+                context.insert(item)
+                frozen.append(ScheduledWorkoutExerciseSnapshot(id: item.id, exerciseID: exercise.id,
+                    exerciseName: previous?.exerciseName ?? exercise.name, muscleGroup: previous?.muscleGroup ?? exercise.muscleGroup,
+                    equipment: previous?.equipment ?? exercise.equipment, exerciseNotes: previous?.exerciseNotes ?? exercise.notes,
+                    referenceURL: previous?.referenceURL ?? exercise.referenceURL, volumeUnit: previous?.volumeUnit ?? exercise.volumeUnit,
+                    order: order, targetSets: input.plannedSets.count, minReps: lower, maxReps: upper,
+                    targetWeight: first.weight, restSeconds: input.restSeconds, plannedSets: input.plannedSets,
+                    planPattern: input.planPattern, patternSource: input.patternSource))
+            }
+            schedule.templateID = template.id
+            schedule.planSnapshot = frozen
+            schedule.updatedAt = .now
+            try ConfirmedTrainingPlanService.appendScheduleAdjustment(schedule, capture: capture, kind: "edit")
+            _ = try ConfirmedTrainingPlanService.captureScheduleAdjustment(schedule, in: context)
+            try commit(context)
+            return schedule
+        } catch {
+            before.restore(schedule)
+            for (revision, json) in previousSources { revision.snapshotJSON = json }
+            context.rollback()
+            throw error
+        }
+    }
+
     static func create(
         on date: Date,
         muscleGroups: [String],
@@ -201,6 +276,8 @@ enum DailyPlanService {
             throw DailyPlanServiceError.duplicateExercise
         }
 
+        // Read the effective preference before any schedule mutation; historical plans keep their snapshot.
+        let preferenceJSON = try TrainingPreferenceService.current(in: context, on: FatLossCalendar.day(date))?.snapshotJSON
         // Validate the entire draft before deleting or skipping any existing plan.
         let catalog = try context.fetch(FetchDescriptor<Exercise>())
         let exerciseByID = Dictionary(uniqueKeysWithValues: catalog.map { ($0.id, $0) })
@@ -219,8 +296,14 @@ enum DailyPlanService {
         let templateItems = try context.fetch(FetchDescriptor<TemplateExercise>())
         let templateByID = Dictionary(uniqueKeysWithValues: templates.map { ($0.id, $0) })
 
+        // Editing a strength menu must preserve the other training projects of this day.
+        let cardioIDs = TrainingDateMenuService.cardioScheduleIDs(schedules: schedules,
+            links: try context.fetch(FetchDescriptor<ProgramWorkoutLink>()),
+            revisions: try context.fetch(FetchDescriptor<TrainingProgramRevision>()))
+
         let existingOneOffs = schedules.filter {
             $0.plannedDate.isSameDay(as: targetDate)
+                && !cardioIDs.contains($0.id)
                 && templateByID[$0.templateID]?.isOneOff == true
         }
         guard existingOneOffs.allSatisfy({ $0.status == .planned || $0.status == .skipped }) else {
@@ -240,6 +323,7 @@ enum DailyPlanService {
 
         if replaceExistingPlans {
             for schedule in schedules where schedule.plannedDate.isSameDay(as: targetDate)
+                    && !cardioIDs.contains(schedule.id)
                     && schedule.status == .planned
                     && !existingOneOffs.contains(where: { $0.id == schedule.id }) {
                 schedule.status = .skipped
@@ -258,6 +342,7 @@ enum DailyPlanService {
             focusMuscleGroups: normalizedGroups,
             defaultPlanPattern: defaultPlanPattern
         )
+        template.trainingPreferenceSnapshotJSON = preferenceJSON
         context.insert(template)
 
         for (index, item) in exercises.enumerated() {
@@ -288,6 +373,7 @@ enum DailyPlanService {
             isManuallyScheduled: true
         )
         context.insert(schedule)
+        try ScheduleService.freezePlanSnapshot(for: schedule, in: context)
         try context.save()
 
         let refreshedSchedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())

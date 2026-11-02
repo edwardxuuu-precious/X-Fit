@@ -1,0 +1,15 @@
+{
+  "status": "BLOCKED_ENV",
+  "checked_at": "2026-10-19T17:10:23.900445+08:00",
+  "requirement": "REQ-20261019-154708",
+  "candidate_build_and_signature": "PASS",
+  "device": "Edward_iPhone",
+  "connection": "unavailable",
+  "ddi_services_available": false,
+  "independent_xcdevice_available": false,
+  "backup": "NOT_RUN",
+  "overwrite_install": "NOT_RUN",
+  "phone_business_data_write_attempted": false,
+  "next_condition": "Phone wireless discovery restored, then fresh online/unlock gate before backup and installation",
+  "candidate": "artifacts/stage-validation/20261019-home-title-phone-preview/verified-candidate.json"
+}

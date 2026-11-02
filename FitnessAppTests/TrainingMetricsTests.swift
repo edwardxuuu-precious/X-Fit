@@ -1,6 +1,137 @@
 import XCTest
 @testable import FitnessApp
 
+@MainActor
+final class TrainingExperienceTests: XCTestCase {
+    func testSavedPlanTargetsPreserveFiveUnitsSidesAndUnknownWeight() {
+        let set = WorkoutSetPlan(weight: 25, reps: 8, weightSide: .single, repsSide: .unknown)
+        XCTAssertEqual(SavedPlanDisplay.target(set, unit: .kilogram), "25 kg（单边） · 8 次（未注明）")
+        XCTAssertEqual(SavedPlanDisplay.target(set, unit: .bodyweight), "自重 · 8 次（未注明）")
+        XCTAssertEqual(SavedPlanDisplay.target(set, unit: .meter), "25 米 × 8 趟")
+        XCTAssertEqual(SavedPlanDisplay.target(set, unit: .second), "8 秒")
+        XCTAssertEqual(SavedPlanDisplay.target(set, unit: .count), "8 个（未注明）")
+        let unknown = WorkoutSetPlan(weight: 0, reps: 6, weightSide: .unknown, repsSide: .unknown, actualDefaultPolicy: .blank)
+        XCTAssertEqual(SavedPlanDisplay.target(unknown, unit: .kilogram), "重量待校准 · 6 次（未注明）")
+    }
+
+    func testSavedPlanSummaryUsesOnlySavedSetsAndKeepsFullPrescription() {
+        let prescription = WorkoutSetPrescription(label: "条件 25kg，每侧片重，不含杆；本组后条件递减", repsLower: 6, repsUpper: 10,
+            rirLower: 1, rirUpper: 2, restLowerSeconds: 60, restUpperSeconds: 90,
+            effortCue: "不能安全换片时跳过；延伸段记录在备注")
+        var item = ScheduledWorkoutExerciseSnapshot(exerciseID: UUID(), exerciseName: "原动作，保存限定", muscleGroup: "胸部",
+            equipment: "器械", exerciseNotes: "原始完整备注", referenceURL: "", volumeUnit: .kilogram, order: 0,
+            targetSets: 4, minReps: 99, maxReps: 99, targetWeight: 999, restSeconds: 30,
+            plannedSets: [.init(weight: 25, reps: 14, prescription: prescription), .init(weight: 20, reps: 8, prescription: prescription)],
+            planPattern: .fixed, patternSource: .exerciseOverride)
+        XCTAssertEqual(SavedPlanDisplay.repetitionSummary(item), "14→8次")
+        XCTAssertEqual(SavedPlanDisplay.commonRest(item), "60–90秒")
+        XCTAssertEqual(SavedPlanDisplay.rir(prescription), "RIR 1–2")
+        XCTAssertEqual(item.plannedSets.first?.prescription?.summary,
+            "条件 25kg，每侧片重，不含杆；本组后条件递减 · 6–10 · RIR 1–2 · 不能安全换片时跳过；延伸段记录在备注 · 休息 60–90 秒")
+        item.plannedSets = []
+        XCTAssertEqual(SavedPlanDisplay.repetitionSummary(item), "目标未保存")
+        XCTAssertEqual(SavedPlanDisplay.missingSets(item), "已保存 4 组，逐组目标未保存")
+        XCTAssertNil(SavedPlanDisplay.commonRest(item))
+        XCTAssertEqual(item.exerciseNotes, "原始完整备注")
+    }
+
+    func testExerciseArtworkStayWithExactIdentityThroughReorderingAndDuplicates() {
+        let approved: [(String, String)] = [
+            ("8C2B39A3-8F47-413E-BC5F-93EC3CB313DA", "史密斯卧推，胸部主项"),
+            ("62B7E172-C76F-4502-8643-87249F7199E3", "器械上斜卧推，上胸推举"),
+            ("2FFA02FD-85F0-4938-A9C9-59A3561C241E", "坐姿飞鸟，胸部夹胸"),
+            ("8DE3EE03-A5A3-4767-954B-333D4BD17332", "站姿绳索夹胸，胸部夹胸"),
+            ("57E855E6-E0AB-46FB-AE88-AED4ABF9144B", "史密斯肩推，肩前束"),
+            ("785412EA-AC6A-4910-9942-8C3B2E380CB8", "坐姿哑铃侧平举，肩中束"),
+            ("67518BD0-1C2E-464C-8753-EB48E62581DB", "绳索反向飞鸟，肩后束"),
+            ("9BB12534-10A3-435D-BE9A-10A70ED0616F", "器械坐姿侧平举，肩中束")
+        ]
+        let reordered = [7, 0, 4, 0, 6, 1, 5, 3, 2]
+        for index in reordered {
+            let (id, name) = approved[index]
+            let identity = UUID(uuidString: id)!
+            XCTAssertEqual(ExerciseArtwork.tile(exerciseID: identity, name: name), index)
+            XCTAssertNil(ExerciseArtwork.tile(exerciseID: identity, name: name + "已改名"))
+            XCTAssertNil(ExerciseArtwork.tile(exerciseID: UUID(), name: name))
+            let image = ExerciseArtwork.image(tile: index)
+            XCTAssertNotNil(image, "图示必须随包离线可用")
+            XCTAssertEqual(image?.cgImage?.width, index % 4 % 2 == 0 ? 443 : 444)
+            XCTAssertEqual(image?.cgImage?.height, index < 4 ? 443 : 444)
+        }
+        let rects = (0..<8).map { ExerciseArtwork.tileRect(tile: $0, width: 1774, height: 887) }
+        XCTAssertEqual(rects.map { $0.width * $0.height }.reduce(0, +), 1774 * 887)
+        for a in 0..<8 {
+            for b in (a + 1)..<8 { XCTAssertFalse(rects[a].intersects(rects[b]), "图格不得重叠") }
+        }
+    }
+
+    func testArtworkMatchesVerifiedSessionAliasesWithoutMergingIdentities() {
+        let aliases: [(String, String)] = [
+            ("8C2B39A3-8F47-413E-BC5F-93EC3CB313DA", "Smith Bench Press"),
+            ("62B7E172-C76F-4502-8643-87249F7199E3", "器械上斜卧推"),
+            ("2FFA02FD-85F0-4938-A9C9-59A3561C241E", "坐姿飞鸟"),
+            ("8DE3EE03-A5A3-4767-954B-333D4BD17332", "站姿绳索夹胸"),
+            ("57E855E6-E0AB-46FB-AE88-AED4ABF9144B", "Smith shoulder press"),
+            ("785412EA-AC6A-4910-9942-8C3B2E380CB8", "坐姿哑铃侧平举"),
+            ("67518BD0-1C2E-464C-8753-EB48E62581DB", "绳索反向飞鸟"),
+            ("9BB12534-10A3-435D-BE9A-10A70ED0616F", "器械坐姿侧平举"),
+        ]
+        for (tile, alias) in aliases.enumerated() {
+            let identity = UUID(uuidString: alias.0)!
+            XCTAssertEqual(ExerciseArtwork.tile(exerciseID: identity, name: alias.1), tile)
+            XCTAssertNil(ExerciseArtwork.tile(exerciseID: identity, name: alias.1 + "其他动作"))
+            XCTAssertNil(ExerciseArtwork.tile(exerciseID: UUID(), name: alias.1))
+            let otherIdentity = UUID(uuidString: aliases[(tile + 1) % aliases.count].0)!
+            XCTAssertNil(ExerciseArtwork.tile(exerciseID: otherIdentity, name: alias.1))
+        }
+    }
+
+    func testWeekShiftPreservesLocalWeekdayAcrossYearAndDST() {
+        let zone = TimeZone(identifier: "America/New_York")!
+        let state = TrainingDateSelection(now: TrainingLocalDate.date("2026-12-30", timeZone: zone)!, timeZone: zone)
+        state.shiftWeek(by: 1)
+        XCTAssertEqual(state.selectedLocalDay, "2027-01-06")
+        state.shiftWeek(by: -1)
+        XCTAssertEqual(state.selectedLocalDay, "2026-12-30")
+        state.select(localDay: "2026-03-04")
+        state.shiftWeek(by: 1)
+        XCTAssertEqual(state.selectedLocalDay, "2026-03-11")
+        state.refresh(now: state.today, timeZone: zone, reason: .returnFromDetail)
+        XCTAssertEqual(state.selectedLocalDay, "2026-03-11")
+    }
+
+    func testWeekSwipeRequiresPredominantlyHorizontalDistance() {
+        XCTAssertEqual(TrainingDateSelection.weekSwipeDirection(horizontal: -70, vertical: 10), 1)
+        XCTAssertEqual(TrainingDateSelection.weekSwipeDirection(horizontal: 70, vertical: 10), -1)
+        XCTAssertNil(TrainingDateSelection.weekSwipeDirection(horizontal: 30, vertical: 0))
+        XCTAssertNil(TrainingDateSelection.weekSwipeDirection(horizontal: 70, vertical: 80))
+    }
+
+    func testLocalTodayRefreshKeepsHistoricalReturnAndProtectedInputButResetsOnForeground() {
+        let shanghai = TimeZone(identifier: "Asia/Shanghai")!
+        let sydney = TimeZone(identifier: "Australia/Sydney")!
+        let beforeMidnight = ISO8601DateFormatter().date(from: "2026-09-26T13:55:00Z")!
+        let afterMidnight = ISO8601DateFormatter().date(from: "2026-09-26T14:05:00Z")!
+        let state = TrainingDateSelection(now: beforeMidnight, timeZone: sydney)
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-26")
+        state.select(localDay: "2026-09-21")
+        let originalScroll = state.scrollRevision
+        state.refresh(now: beforeMidnight, timeZone: sydney, reason: .returnFromDetail)
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-21")
+        XCTAssertEqual(state.scrollRevision, originalScroll)
+        state.refresh(now: afterMidnight, timeZone: sydney, reason: .dayOrTimeZoneChanged, isEditing: true)
+        XCTAssertEqual(state.todayLocalDay, "2026-09-27")
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-21")
+        state.refresh(now: afterMidnight, timeZone: sydney, reason: .foreground, hasActiveSession: true)
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-21")
+        state.refresh(now: afterMidnight, timeZone: sydney, reason: .foreground)
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-27")
+        XCTAssertGreaterThan(state.scrollRevision, originalScroll)
+        state.refresh(now: afterMidnight, timeZone: shanghai, reason: .dayOrTimeZoneChanged)
+        XCTAssertEqual(state.selectedLocalDay, "2026-09-26")
+    }
+}
+
 final class TrainingMetricsTests: XCTestCase {
     private var calendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)

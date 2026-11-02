@@ -1,0 +1,61 @@
+{
+  "planCode": "UPPER-20261019-R6",
+  "status": "APPLIED_AND_INDEPENDENTLY_READ_BACK_VERIFIED",
+  "confirmedAt": "2026-10-21T11:23:01+08:00",
+  "requirement": "docs/requirements/2026-10-21/112301_remaining-week-phone-sync.md",
+  "source": "outputs/training-plan/2026-10-21-remaining-week-r6.md",
+  "sourceSHA256": "725129933394a62dcd5168f5865bcbca26b278281b080cbae5c31863a25e31db",
+  "methodVersion": "METHOD-20261020-06",
+  "preferenceRevisionCode": "TP-20260928-05",
+  "confirmationReference": "REQ-20261021-112301；本人明确确认按已审阅的周四有氧和周五肩三头完整方案同步手机，今天已完成训练保持不变；只追加修订10/22、10/23，保留全部原实际。",
+  "deviceWritten": true,
+  "actualSessionsCreated": 0,
+  "todayAndHistoricalActuals": "PASS_ALL_ORIGINAL_BUSINESS_FIELDS_UNCHANGED",
+  "files": [
+    {
+      "localDay": "2026-10-22",
+      "id": "32c46ff1-a90c-55de-bec8-cb1b72e9c266",
+      "file": "outputs/training-plan/2026-10-21-r6-app/2026-10-22.json",
+      "transportSHA256": "6df4e5f7b1be7e2958232bee159be7f3ba249e56bfaac30f252007affc91beea",
+      "replacement": {
+        "scheduleID": "FA0496B2-EB40-5978-9B3D-CBB7DD647AE4",
+        "packetSHA256": "56e16347a4266e6670314ac471189bd18e2ae72be2ba3e83e10e99381873a248"
+      },
+      "exercises": 1,
+      "sets": 1,
+      "applyNewScheduleCount": 1,
+      "packetCanonicalSHA256": "f06e3695fbee8b5b3a036c26cf5c3da8c5c61679926a42e3544e4dbeffe3bad2",
+      "repeatNewScheduleCount": 0,
+      "readbackFile": "artifacts/training-sync/20261021-r6/2026-10-22/readback/result/daily-training-readback.json",
+      "readback": "PASS"
+    },
+    {
+      "localDay": "2026-10-23",
+      "id": "93f581fb-c0c1-5ee5-a87f-be2cb95829bf",
+      "file": "outputs/training-plan/2026-10-21-r6-app/2026-10-23.json",
+      "transportSHA256": "7af00ffd6dedcdaa6b621df7618c3f6ddd76e30f4c33a1bffea380eaa5a42449",
+      "replacement": {
+        "scheduleID": "637D2222-14B9-563C-8D5A-17EAFDA82A6F",
+        "packetSHA256": "dfa0d0eea0c317e0db374705a986a227792b1dd780695c1ba937197d4e74302e"
+      },
+      "exercises": 5,
+      "sets": 16,
+      "applyNewScheduleCount": 1,
+      "packetCanonicalSHA256": "4329c4cdcb7abcb0efa98ab1edc75892d33f1c652fea473c11e9d32d8d92d320",
+      "repeatNewScheduleCount": 0,
+      "readbackFile": "artifacts/training-sync/20261021-r6/2026-10-23/readback/result/daily-training-readback.json",
+      "readback": "PASS"
+    }
+  ],
+  "deviceRequestsSent": 8,
+  "verifiedAt": "2026-10-21T11:38:56.057858+08:00",
+  "localVerification": "outputs/training-plan/2026-10-21-r6-app/local-verification.json",
+  "deviceGate": {
+    "status": "PASS",
+    "passcodeRequired": false,
+    "newReadOnlyBaselineCaptured": true
+  },
+  "verification": "outputs/training-plan/2026-10-21-r6-app/verification.json",
+  "actualSetLogsCreated": 0,
+  "humanTrainingOutcome": "NOT_YET_OBSERVED"
+}

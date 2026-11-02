@@ -1,0 +1,1126 @@
+[
+  {
+    "sourceID": "0017",
+    "aliases": [
+      "Assisted Pull-up"
+    ],
+    "candidateAliases": [],
+    "reason": "原英文名与辅助引体机一致，仅作来源文本检索别名；已有辅助kg原值、count单位及不计负重吨位的规则不变，不把辅助重量视为外加重量。"
+  },
+  {
+    "sourceID": "0025",
+    "aliases": [
+      "杠铃卧推"
+    ],
+    "candidateAliases": [
+      "Bench press"
+    ],
+    "reason": "杠铃卧推的名称及器械明确；Bench press 原记录器械未记录，不能据常见叫法确认杠铃。"
+  },
+  {
+    "sourceID": "0027",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃划船",
+      "Barbell Row"
+    ],
+    "reason": "来源是正握俯身杠铃划船；原记录未确认握法、躯干姿势及支撑方式。现有术语候选 barbell_bent_over_row 仅保留原审核状态。"
+  },
+  {
+    "sourceID": "0032",
+    "aliases": [
+      "传统硬拉"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作已接受 barbell_conventional_deadlift，器械杠铃；来源描述地面起始的传统站距硬拉。只关联参考文本，不更改accepted canonical或历史重量口径。"
+  },
+  {
+    "sourceID": "0042",
+    "aliases": [
+      "前蹲",
+      "颈前深蹲"
+    ],
+    "candidateAliases": [],
+    "reason": "原名明确杠铃前蹲且器械为杠铃；来源为肩前架杠下蹲，不与后蹲、泽奇蹲合并。"
+  },
+  {
+    "sourceID": "0043",
+    "aliases": [],
+    "candidateAliases": [
+      "深蹲"
+    ],
+    "reason": "当前术语服务把深蹲标为variantReview，仍待确认前后蹲、高低杠及深度；来源明确背杠全蹲，不以暂存canonical代替确认。"
+  },
+  {
+    "sourceID": "0047",
+    "aliases": [
+      "上斜卧推"
+    ],
+    "candidateAliases": [
+      "Inclined Bench Press"
+    ],
+    "reason": "中文动作器械已明确为杠铃，术语候选为上斜杠铃卧推；英文原记录器械未知，仅作候选。倾角与负重口径不由该别名补写。"
+  },
+  {
+    "sourceID": "0085",
+    "aliases": [
+      "罗马尼亚硬拉"
+    ],
+    "candidateAliases": [
+      "RDL / 硬拉"
+    ],
+    "reason": "中文动作器械为杠铃，术语名称明确杠铃RDL；RDL / 硬拉含并列叫法且器械未知，不能自动认定杠铃RDL。"
+  },
+  {
+    "sourceID": "1756",
+    "aliases": [
+      "杠铃单腿RDL"
+    ],
+    "candidateAliases": [],
+    "reason": "来源步骤明确单腿支撑、另一腿后伸、髋铰链及支撑膝微屈，支持杠铃单腿RDL词义；不改历史记录或计量口径。"
+  },
+  {
+    "sourceID": "3305",
+    "aliases": [
+      "杠铃火箭推"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作已接受barbell_thruster，来源为杠铃前蹲接过顶推举；仅参考关联，不覆盖已接受身份。"
+  },
+  {
+    "sourceID": "1456",
+    "aliases": [],
+    "candidateAliases": [
+      "站姿杠铃肩推"
+    ],
+    "reason": "来源限定窄握站姿肩推，原名没有确认握距；不能把通用站姿肩推当作窄握。"
+  },
+  {
+    "sourceID": "1457",
+    "aliases": [],
+    "candidateAliases": [
+      "站姿杠铃肩推"
+    ],
+    "reason": "来源限定宽握站姿肩推，原名没有确认握距；与窄握来源分别保留。"
+  },
+  {
+    "sourceID": "0979",
+    "aliases": [],
+    "candidateAliases": [
+      "弹力带抗旋转推"
+    ],
+    "reason": "来源为水平帕洛夫推，原名未指明水平或垂直上举；来源1015的垂直版本又与步骤冲突，不能自动选择。"
+  },
+  {
+    "sourceID": "0175",
+    "aliases": [
+      "绳索跪姿卷腹"
+    ],
+    "candidateAliases": [
+      "绳索卷腹"
+    ],
+    "reason": "前者明确跪姿及绳索；通用绳索卷腹的原术语说明仍待区分跪姿、站姿。"
+  },
+  {
+    "sourceID": "0178",
+    "aliases": [
+      "绳索侧平举",
+      "Cable 中束平举"
+    ],
+    "candidateAliases": [
+      "Cable shoulder Side pull"
+    ],
+    "reason": "绳索侧平举与Cable中束平举有明确名称及绳索器械；Side pull的原始英文并非标准唯一名称，未取得本人像Dumbbell Side Pull那样的词义确认。单双侧和记录单位不由检索别名决定。"
+  },
+  {
+    "sourceID": "0180",
+    "aliases": [],
+    "candidateAliases": [
+      "Pulley Low Row",
+      "Dual Pulley Low Row",
+      "双滑轮低位划船",
+      "坐姿划船"
+    ],
+    "reason": "来源为低位坐姿绳索划船；Pulley/Dual Pulley原记录未确认坐姿、握把及机器设置，双滑轮也不能假定与单滑轮负荷相同；坐姿划船的现有术语仍需确认绳索或固定轨迹。"
+  },
+  {
+    "sourceID": "0194",
+    "aliases": [],
+    "candidateAliases": [
+      "绳索过顶臂屈伸"
+    ],
+    "reason": "来源限定绳把，原名未确认把手附件；同类动作也有直杆及不同滑轮高度，不自动复用。"
+  },
+  {
+    "sourceID": "0201",
+    "aliases": [
+      "绳索下压"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作已接受cable_triceps_pushdown，来源名称为cable pushdown，支持肱三头肌下压词义检索；现有把手、负重及PR保护不变。"
+  },
+  {
+    "sourceID": "0200",
+    "aliases": [],
+    "candidateAliases": [
+      "绳索下压"
+    ],
+    "reason": "来源明确绳把，已有通用绳索下压未凭本映射补成绳把。"
+  },
+  {
+    "sourceID": "0205",
+    "aliases": [],
+    "candidateAliases": [
+      "颈后下拉",
+      "绳索颈后下拉（待核对）",
+      "绳索下拉（rear 含义待核对）"
+    ],
+    "reason": "rear含义未由源步骤明确，步骤为胸前终点；既有颈后下拉身份保持，仅候选对照，不自动合并。"
+  },
+  {
+    "sourceID": "0222",
+    "aliases": [],
+    "candidateAliases": [
+      "垫高绳索站姿侧屈"
+    ],
+    "reason": "来源站姿绳索侧屈未说明垫高支撑，原动作额外的垫高差异需要保留。"
+  },
+  {
+    "sourceID": "0226",
+    "aliases": [],
+    "candidateAliases": [
+      "绳索卷腹"
+    ],
+    "reason": "来源为站姿卷腹，原记录未确认站或跪；与跪姿来源并列候选。"
+  },
+  {
+    "sourceID": "0227",
+    "aliases": [
+      "站姿绳索夹胸"
+    ],
+    "candidateAliases": [
+      "Cable Fly"
+    ],
+    "reason": "原中文动作已接受standing_cable_chest_fly，明确站姿及绳索；今日Cable Fly未确认站卧姿势及滑轮高度，只作候选，不把单侧kg口径推广给其他记录。"
+  },
+  {
+    "sourceID": "0188",
+    "aliases": [],
+    "candidateAliases": [
+      "Cable Fly"
+    ],
+    "reason": "来源为中位绳索飞鸟，今日Cable Fly未注明滑轮高度；与其他角度来源分别保留。"
+  },
+  {
+    "sourceID": "0232",
+    "aliases": [],
+    "candidateAliases": [
+      "站姿绳索下拉"
+    ],
+    "reason": "来源为绳把站姿下拉，但步骤未明确直臂或屈肘；已有原名也未确认附件及肘部轨迹。"
+  },
+  {
+    "sourceID": "0234",
+    "aliases": [],
+    "candidateAliases": [
+      "站姿绳索划船"
+    ],
+    "reason": "来源明确V形把，原记录没有把手附件；不以V形把来源覆盖通用站姿划船。"
+  },
+  {
+    "sourceID": "0238",
+    "aliases": [
+      "直臂下压",
+      "绳索直臂下压"
+    ],
+    "candidateAliases": [],
+    "reason": "直臂下压的原器械为龙门架，绳索直臂下压原名也明确绳索，来源名称及直臂向大腿下拉轨迹一致；附件与计重仍保留各记录。"
+  },
+  {
+    "sourceID": "0237",
+    "aliases": [],
+    "candidateAliases": [
+      "直臂下压",
+      "绳索直臂下压"
+    ],
+    "reason": "来源额外限定绳把，原名未确认附件；不能据直臂下压词义自动选绳把版本。"
+  },
+  {
+    "sourceID": "0243",
+    "aliases": [],
+    "candidateAliases": [
+      "绳索躯干旋转",
+      "绳索伸展转体",
+      "站姿水平伐木"
+    ],
+    "reason": "来源描述水平转体，原术语仍需确认水平或斜向轨迹；伸展/伐木名称还涉及手臂及髋部参与，不能只凭核心转体归并。"
+  },
+  {
+    "sourceID": "0245",
+    "aliases": [],
+    "candidateAliases": [
+      "窄握下拉"
+    ],
+    "reason": "来源明确反握，但原窄握下拉尚未确认正握、反握或V把中立握。"
+  },
+  {
+    "sourceID": "2616",
+    "aliases": [],
+    "candidateAliases": [
+      "窄握下拉",
+      "中立握高位下拉"
+    ],
+    "reason": "来源限定V把，但步骤写overhand正握，且原名未确认具体把手；握法与附件均需核对，不把中立握直接等同V把。"
+  },
+  {
+    "sourceID": "0276",
+    "aliases": [
+      "死虫式"
+    ],
+    "candidateAliases": [],
+    "reason": "原名、自重器械及来源的仰卧对侧手腿交替伸展一致；不修改实际组数或次数侧别。"
+  },
+  {
+    "sourceID": "0292",
+    "aliases": [],
+    "candidateAliases": [
+      "单臂哑铃划船"
+    ],
+    "reason": "来源明确无凳支撑的站姿俯身单臂划船，原名未确认俯身角度或凳上支撑。"
+  },
+  {
+    "sourceID": "0294",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃弯举"
+    ],
+    "reason": "来源步骤为站姿双臂掌心向前弯举；已有术语说明同步、交替及握法仍应另存，不能将通用名称直接确定为此变式。"
+  },
+  {
+    "sourceID": "0313",
+    "aliases": [],
+    "candidateAliases": [
+      "锤式弯举"
+    ],
+    "reason": "原动作器械为哑铃，但来源标题是锤式而步骤要求将掌心转向前，握法冲突；只作待核对候选。"
+  },
+  {
+    "sourceID": "0314",
+    "aliases": [
+      "上斜哑铃卧推"
+    ],
+    "candidateAliases": [],
+    "reason": "原名明确上斜、哑铃及卧推，与来源标题及步骤相符；来源示例45度不补写为用户实际倾角。"
+  },
+  {
+    "sourceID": "0315",
+    "aliases": [],
+    "candidateAliases": [
+      "上斜哑铃弯举"
+    ],
+    "reason": "来源为上斜凳坐姿双臂弯举；原记录未确认上臂自由悬垂或凳上支撑，且来源0318有相近名称但支撑描述不同。"
+  },
+  {
+    "sourceID": "0318",
+    "aliases": [],
+    "candidateAliases": [
+      "上斜哑铃弯举"
+    ],
+    "reason": "来源要求上臂放在上斜凳上，不能仅凭上斜弯举名称确定是此支撑变式；与0315分别保留。"
+  },
+  {
+    "sourceID": "0327",
+    "aliases": [
+      "上斜凳胸托哑铃划船"
+    ],
+    "candidateAliases": [
+      "胸托划船"
+    ],
+    "reason": "来源明确上斜凳、胸部支撑、双哑铃划船；通用胸托划船的器械记录为器械或哑铃，尚不唯一。"
+  },
+  {
+    "sourceID": "0334",
+    "aliases": [
+      "哑铃侧平举",
+      "哑铃站姿侧平举",
+      "Dumbbell Side Pull"
+    ],
+    "candidateAliases": [],
+    "reason": "来源为dumbbell lateral raise，中文名称及哑铃器械一致；本人已明确Dumbbell Side Pull就是哑铃侧平举，故可作词义别名。仍保留三个既有UUID、姿势信息和单只kg口径，不合并身份或PR。"
+  },
+  {
+    "sourceID": "0378",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃反向飞鸟",
+      "Dumbbell Reverse Fly",
+      "哑铃站姿反向飞鸟"
+    ],
+    "reason": "来源为站姿俯身后飞鸟，与0380/0383有相近名称但来源ID各自独立；原动作未确认具体握法、俯身支撑及这些来源是否为同一变式。"
+  },
+  {
+    "sourceID": "0380",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃反向飞鸟",
+      "Dumbbell Reverse Fly",
+      "哑铃站姿反向飞鸟"
+    ],
+    "reason": "来源明确俯身后束侧平举，原反向飞鸟记录未确认握法、躯干及支撑；不将相近的0378/0383自动去重。"
+  },
+  {
+    "sourceID": "0383",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃反向飞鸟",
+      "Dumbbell Reverse Fly",
+      "哑铃站姿反向飞鸟"
+    ],
+    "reason": "即使英文名称相同，来源步骤明确站姿俯身，今日原记录只确认单只kg、未确认姿势；仅展示候选，保留旧身份与所有实际。"
+  },
+  {
+    "sourceID": "0381",
+    "aliases": [],
+    "candidateAliases": [
+      "反向箭步蹲"
+    ],
+    "reason": "原动作器械明确哑铃，来源明确双哑铃后撤弓步；名称词义相符，不覆盖每侧次数与重量口径。"
+  },
+  {
+    "sourceID": "0396",
+    "aliases": [
+      "坐姿哑铃侧平举"
+    ],
+    "candidateAliases": [],
+    "reason": "已有名称明确坐姿及哑铃，与来源相符；不与站姿侧平举合并历史。"
+  },
+  {
+    "sourceID": "0395",
+    "aliases": [],
+    "candidateAliases": [
+      "坐姿哑铃侧平举"
+    ],
+    "reason": "来源为版本2，与0396同名近似但按来源ID独立，用户没有确认使用版本2，不自动选此条。"
+  },
+  {
+    "sourceID": "0405",
+    "aliases": [
+      "坐姿哑铃肩推"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作已接受seated_dumbbell_shoulder_press，明确坐姿哑铃推举；不由来源示例推断实际握距或改写记录。"
+  },
+  {
+    "sourceID": "0410",
+    "aliases": [
+      "保加利亚分腿蹲",
+      "保加利亚单腿蹲"
+    ],
+    "candidateAliases": [
+      "保加利亚深蹲"
+    ],
+    "reason": "来源步骤明确后脚放在身后凳上、双哑铃负重，支持前两项已注明哑铃的保加利亚分腿蹲词义；保加利亚深蹲原器械未知，仅作候选。"
+  },
+  {
+    "sourceID": "0426",
+    "aliases": [
+      "站姿哑铃肩推"
+    ],
+    "candidateAliases": [],
+    "reason": "原名明确站姿及哑铃，来源为双哑铃站姿过顶推举；与坐姿版本分开，不更改PR或历史单位。"
+  },
+  {
+    "sourceID": "0472",
+    "aliases": [
+      "悬垂举腿"
+    ],
+    "candidateAliases": [
+      "举腿"
+    ],
+    "reason": "悬垂举腿原名及自重器械与来源一致；通用举腿的现有术语仍需确认悬垂、仰卧或双杠支撑，不能自动选悬垂。"
+  },
+  {
+    "sourceID": "0475",
+    "aliases": [],
+    "candidateAliases": [
+      "悬垂举腿",
+      "举腿"
+    ],
+    "reason": "来源额外明确直腿；原通用名称没有确认膝部角度，且0472是独立近似来源，不按同名逻辑合并。"
+  },
+  {
+    "sourceID": "0620",
+    "aliases": [],
+    "candidateAliases": [
+      "举腿"
+    ],
+    "reason": "来源限定平凳仰卧举腿，原举腿没有确认支撑位置；只作姿势选择候选。"
+  },
+  {
+    "sourceID": "0826",
+    "aliases": [],
+    "candidateAliases": [
+      "举腿"
+    ],
+    "reason": "来源为双杠支撑直腿抬举，原举腿没有确认支撑位置与膝部角度。"
+  },
+  {
+    "sourceID": "0549",
+    "aliases": [],
+    "candidateAliases": [
+      "摇壶铃"
+    ],
+    "reason": "来源为壶铃摆荡，原动作虽有壶铃俗称但器械、摆动高度及变式未确认；不把俗称自动确定为标准摆荡。"
+  },
+  {
+    "sourceID": "0562",
+    "aliases": [],
+    "candidateAliases": [
+      "地雷杆转体",
+      "地雷管转体"
+    ],
+    "reason": "来源指定landmine 180及髋侧至对肩轨迹，已有accepted landmine_rotation仍保留；原记录未确认180度及轨迹，不能借通用转体名称替换身份。"
+  },
+  {
+    "sourceID": "0576",
+    "aliases": [],
+    "candidateAliases": [
+      "器械推胸",
+      "坐姿推胸机",
+      "杠杆器械坐姿推胸（来源 0576）",
+      "lever chest press"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0577",
+    "aliases": [],
+    "candidateAliases": [
+      "器械推胸",
+      "坐姿推胸机",
+      "杠杆器械坐姿推胸（来源 0577）",
+      "lever chest press"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0584",
+    "aliases": [],
+    "candidateAliases": [
+      "器械坐姿侧平举"
+    ],
+    "reason": "来源是杠杆式侧平举机，原名仅确认器械坐姿侧平举，机器具体支撑及轨迹尚未核对。"
+  },
+  {
+    "sourceID": "0585",
+    "aliases": [],
+    "candidateAliases": [
+      "腿屈伸"
+    ],
+    "reason": "来源明确杠杆式腿屈伸机，原记录器械只写器械；不能据此推定品牌、阻力系统或负重比例。"
+  },
+  {
+    "sourceID": "0586",
+    "aliases": [],
+    "candidateAliases": [
+      "腿弯举",
+      "Leg Curl"
+    ],
+    "reason": "来源明确俯卧杠杆机腿弯举，而原腿弯举术语仍待区分坐姿、俯卧或站姿；英文原器械也未记录。"
+  },
+  {
+    "sourceID": "0599",
+    "aliases": [],
+    "candidateAliases": [
+      "坐姿腿弯举",
+      "腿弯举",
+      "Leg Curl"
+    ],
+    "reason": "来源明确坐姿杠杆式腿弯举；坐姿原名未确认具体阻力系统，另外两名也未确认姿势，均保留候选。"
+  },
+  {
+    "sourceID": "0596",
+    "aliases": [],
+    "candidateAliases": [
+      "坐姿飞鸟",
+      "蝴蝶机夹胸",
+      "seated fly"
+    ],
+    "reason": "来源明确杠杆式坐姿飞鸟；既有坐姿飞鸟的accepted machine_pec_deck_fly保留，不推定同一机型、接触方式和配重；英文原记录器械未知。"
+  },
+  {
+    "sourceID": "0601",
+    "aliases": [],
+    "candidateAliases": [
+      "反向蝴蝶机",
+      "器械反向飞鸟",
+      "器械坐姿反向飞鸟"
+    ],
+    "reason": "来源明确坐姿杠杆式对握反向飞鸟，原记录未确认对握及机器轨迹，已有accepted machine_reverse_fly保持不变。"
+  },
+  {
+    "sourceID": "0602",
+    "aliases": [],
+    "candidateAliases": [
+      "反向蝴蝶机",
+      "器械反向飞鸟",
+      "器械坐姿反向飞鸟"
+    ],
+    "reason": "来源明确坐姿杠杆式正握反向飞鸟，原记录未确认正握或具体机器；与对握来源分别保留。"
+  },
+  {
+    "sourceID": "0603",
+    "aliases": [],
+    "candidateAliases": [
+      "器械肩推"
+    ],
+    "reason": "来源是杠杆式坐姿肩推，原accepted machine_shoulder_press只确认通用器械身份，不足以指定杠杆系统和该来源握法。MTS名称不加入通用别名。"
+  },
+  {
+    "sourceID": "0605",
+    "aliases": [],
+    "candidateAliases": [
+      "站姿提踵"
+    ],
+    "reason": "来源明确肩垫杠杆式站姿提踵，原记录虽然是器械但未确认肩垫和阻力系统；不把等长提踵混入动态版本。"
+  },
+  {
+    "sourceID": "0606",
+    "aliases": [],
+    "candidateAliases": [
+      "胸托T-Bar划船",
+      "宽握 T 杠划船",
+      "T bar row"
+    ],
+    "reason": "来源步骤为坐姿、胸垫支撑的杠杆T杠划船；用户已有胸托T-Bar的专属机器身份需保留，未确认其坐姿及轨迹。另两名也未确认支撑与机器设置。"
+  },
+  {
+    "sourceID": "0648",
+    "aliases": [],
+    "candidateAliases": [
+      "高翻"
+    ],
+    "reason": "当前术语服务把高翻标为variantReview，仍需确认地面/悬垂起始和接杠高度；来源虽从地面起始却未明确power接杠深度，不能自动接受。"
+  },
+  {
+    "sourceID": "0652",
+    "aliases": [],
+    "candidateAliases": [
+      "引体向上"
+    ],
+    "reason": "来源明确正握，原引体向上术语仍需确认握向、握距与负重；两条既有同名记录不合并。"
+  },
+  {
+    "sourceID": "0651",
+    "aliases": [],
+    "candidateAliases": [
+      "引体向上"
+    ],
+    "reason": "来源明确对握，而原引体向上没有确认握向；与正握、反握候选并列，不改变原UUID。"
+  },
+  {
+    "sourceID": "1326",
+    "aliases": [],
+    "candidateAliases": [
+      "引体向上"
+    ],
+    "reason": "来源明确反握chin-up，原引体向上没有确认握向；不能将反握当作默认。"
+  },
+  {
+    "sourceID": "0662",
+    "aliases": [
+      "Push up"
+    ],
+    "candidateAliases": [],
+    "reason": "今日原记录明确自重俯卧撑及count单位，与来源标准俯卧撑名称一致；不补体重、不改实际组数及次数。"
+  },
+  {
+    "sourceID": "0735",
+    "aliases": [],
+    "candidateAliases": [
+      "仰卧起坐"
+    ],
+    "reason": "来源为版本2且步骤只抬至45度，原仰卧起坐未确认幅度或版本，不能据通用名称自动归为该版本。"
+  },
+  {
+    "sourceID": "0743",
+    "aliases": [],
+    "candidateAliases": [
+      "哈克深蹲"
+    ],
+    "reason": "来源明确雪橇滑道式哈克深蹲，用户原名只确认哈克机；不与V蹲、钟摆或史密斯哈克归并，具体机型待核对。"
+  },
+  {
+    "sourceID": "0739",
+    "aliases": [],
+    "candidateAliases": [
+      "腿举"
+    ],
+    "reason": "来源明确45度雪橇式腿举，原术语仍需确认45度、水平、坐姿、垂直及单双腿，不能补猜角度。"
+  },
+  {
+    "sourceID": "0748",
+    "aliases": [
+      "史密斯卧推",
+      "Smith Bench Press"
+    ],
+    "candidateAliases": [],
+    "reason": "原名明确史密斯卧推，与来源平板卧推词义一致；今日每侧片重不含杆的记录保持原样，不按上游说明换算总重。"
+  },
+  {
+    "sourceID": "0757",
+    "aliases": [
+      "史密斯上斜卧推"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作名明确史密斯机和上斜卧推，与来源相符；来源30至45度范围不变成用户实际设置。"
+  },
+  {
+    "sourceID": "0766",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯肩推",
+      "Smith shoulder press"
+    ],
+    "reason": "来源涉及座位调整，原记录及现有术语均未确认坐姿或站姿，今日原始英文也只确认每侧片重不含杆；仅作候选。"
+  },
+  {
+    "sourceID": "0765",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯肩推",
+      "Smith shoulder press"
+    ],
+    "reason": "来源明确坐姿，原记录未确认坐站姿势，不从常见机器使用方式推定。"
+  },
+  {
+    "sourceID": "0774",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯肩推",
+      "Smith shoulder press"
+    ],
+    "reason": "来源明确站姿，原记录未确认坐站姿势；与坐姿来源分别展示候选。"
+  },
+  {
+    "sourceID": "0818",
+    "aliases": [],
+    "candidateAliases": [
+      "双滑轮高位下拉",
+      "Dual Pulley Pulldown",
+      "中立握高位下拉"
+    ],
+    "reason": "来源是双把手对握下拉，但步骤又写正握；双把手不等于已确认双滑轮机构，原Notes机器设置未知，不归并为某一附件和负重系统。"
+  },
+  {
+    "sourceID": "0872",
+    "aliases": [
+      "仰卧反向卷腹"
+    ],
+    "candidateAliases": [],
+    "reason": "来源步骤为仰卧屈膝并卷起骨盆，原动作明确仰卧反向卷腹及自重；不补猜热身性质、RIR或有效组。"
+  },
+  {
+    "sourceID": "1299",
+    "aliases": [],
+    "candidateAliases": [
+      "器械上斜卧推"
+    ],
+    "reason": "来源是杠杆式上斜推胸，现有accepted machine_incline_chest_press保留；原记录未确认杠杆/配重系统和该来源轨迹，不把MTS或其他品牌吸入。"
+  },
+  {
+    "sourceID": "1300",
+    "aliases": [],
+    "candidateAliases": [
+      "器械下斜卧推"
+    ],
+    "reason": "来源是杠杆式下斜推胸，现有accepted machine_decline_chest_press保留；原记录未确认杠杆系统，MTS下斜机仍为独立身份。"
+  },
+  {
+    "sourceID": "1350",
+    "aliases": [],
+    "candidateAliases": [
+      "坐姿划船"
+    ],
+    "reason": "来源为胸垫支撑杠杆式坐姿划船，原术语仍需确认绳索、片载或固定轨迹；不能凭坐姿两字指定此机型。"
+  },
+  {
+    "sourceID": "1368",
+    "aliases": [],
+    "candidateAliases": [
+      "脚踝主动环绕 CAR"
+    ],
+    "reason": "来源步骤为坐地抬腿踝绕环，原CAR没有确认坐姿或完整控制关节环绕要求；保留为活动度候选。"
+  },
+  {
+    "sourceID": "1451",
+    "aliases": [],
+    "candidateAliases": [
+      "坐姿器械臂屈伸"
+    ],
+    "reason": "原动作已接受machine_triceps_press，但来源杠杆坐姿dip步骤却写降低整个身体；设备动作方式未核对，不能覆盖已确认器械身份。"
+  },
+  {
+    "sourceID": "2133",
+    "aliases": [
+      "农夫走"
+    ],
+    "candidateAliases": [],
+    "reason": "原动作器械为哑铃，来源明确双手各持哑铃行走，名称和器械相符；原meter单位及备注中的每只重量不改。"
+  },
+  {
+    "sourceID": "2141",
+    "aliases": [],
+    "candidateAliases": [
+      "椭圆机长间歇",
+      "椭圆机间歇"
+    ],
+    "reason": "来源描述椭圆机稳态行走，原记录明确间歇训练协议；可作器械参考候选，但不把间歇改成稳态或改写时长。"
+  },
+  {
+    "sourceID": "2612",
+    "aliases": [
+      "跳绳"
+    ],
+    "candidateAliases": [],
+    "reason": "来源名称及绳索器械与原跳绳一致；现有两条同名记录分别用count及second，映射仅用于检索，不合并单位、UUID或统计。"
+  },
+  {
+    "sourceID": "3224",
+    "aliases": [
+      "开合跳"
+    ],
+    "candidateAliases": [],
+    "reason": "来源步骤明确标准双腿开合并双臂上举，原动作自重开合跳相符；male只是上游示范版本标签，不推断用户性别或合并其他变式。"
+  },
+  {
+    "sourceID": "3666",
+    "aliases": [
+      "跑步机坡度走"
+    ],
+    "candidateAliases": [],
+    "reason": "来源标题及步骤明确上坡跑步机行走，原动作也是跑步机坡度走；上游equipment误列为leverage machine需保留来源事实并注意筛选，不据此改写原动作器械或速度坡度。"
+  },
+  {
+    "sourceID": "1604",
+    "aliases": [
+      "最伟大拉伸"
+    ],
+    "candidateAliases": [],
+    "reason": "原名与world greatest stretch词义一致，器械均自重；只作参考名称，原活动度安排不改变。"
+  },
+  {
+    "sourceID": "0376",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃侧平举",
+      "哑铃站姿侧平举",
+      "Dumbbell Side Pull"
+    ],
+    "reason": "完整源步骤明确站姿侧平举；历史未进一步确认姿势/源ID，均为候选，不批准身份或共享PR。"
+  },
+  {
+    "sourceID": "0118",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃划船",
+      "Barbell Row"
+    ],
+    "reason": "来源标题反握与步骤正握冲突；原记录握法未确认，只作相邻变式候选。"
+  },
+  {
+    "sourceID": "1317",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃划船",
+      "Barbell Row"
+    ],
+    "reason": "反握上斜凳版本的掌向与支撑有源疑点，原记录未证相同姿势，仅候选。"
+  },
+  {
+    "sourceID": "1393",
+    "aliases": [],
+    "candidateAliases": [
+      "斯密斯单腿提踵"
+    ],
+    "reason": "来源横杆承点、单腿与地面/高台设置未明，保留本人原名和每侧计重，只作候选。"
+  },
+  {
+    "sourceID": "0473",
+    "aliases": [],
+    "candidateAliases": [
+      "悬垂屈体",
+      "悬垂屈体举腿",
+      "hanging pike"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0977",
+    "aliases": [],
+    "candidateAliases": [
+      "弹力带前侧平举（待核对）",
+      "弹力带前举（Front Lateral Raise，待核对）"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "1367",
+    "aliases": [],
+    "candidateAliases": [
+      "宽握颈后引体向上",
+      "宽握后侧引体向上（Rear，待核对）"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "1371",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃坐姿提踵",
+      "杠铃坐姿提踵（来源 1371）",
+      "barbell seated calf raise"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0670",
+    "aliases": [],
+    "candidateAliases": [
+      "颈后引体向上",
+      "后侧引体向上（Rear，待核对）"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0325",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃上斜抬举（Incline Raise，待核对）",
+      "哑铃上斜凳过头推举（轨迹待核对）"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0088",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃坐姿提踵",
+      "杠铃坐姿提踵（来源 0088）",
+      "barbell seated calf raise"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0638",
+    "aliases": [],
+    "candidateAliases": [
+      "单臂反握引体向上",
+      "手腕自辅助单臂反握引体向上（待核对）",
+      "握腕辅助单臂反握引体向上",
+      "one arm chin-up"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "1362",
+    "aliases": [],
+    "candidateAliases": [
+      "狮身人面式（Sphinx）",
+      "俯卧前臂支撑抬胸（髋位待核对）"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0656",
+    "aliases": [],
+    "candidateAliases": [
+      "健身球俯卧撑",
+      "健身球俯卧撑（手撑球，来源0656）",
+      "push-up (on stability ball)"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "3665",
+    "aliases": [],
+    "candidateAliases": [
+      "Power Point平板支撑",
+      "平板支撑上下转换（Power Point）",
+      "power point plank"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "2142",
+    "aliases": [],
+    "candidateAliases": [
+      "滑雪测功仪",
+      "坐姿滑雪测功仪",
+      "ski ergometer"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0807",
+    "aliases": [],
+    "candidateAliases": [
+      "悬吊反向卷腹",
+      "单杠悬垂反向卷腹",
+      "suspended reverse crunch"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0655",
+    "aliases": [],
+    "candidateAliases": [
+      "健身球俯卧撑",
+      "健身球俯卧撑（手撑球，来源0655）",
+      "push-up (on stability ball)"
+    ],
+    "reason": "本地名称/变式说明已外部交叉核实或收窄；本人具体方式和来源身份未经批准，仅候选发现，不共享PR、不修改原记录。"
+  },
+  {
+    "sourceID": "0063",
+    "aliases": [],
+    "candidateAliases": [
+      "杠铃窄站距深蹲（待核对）",
+      "杠铃窄站距深蹲",
+      "barbell narrow stance squat"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "0384",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃反握牧师凳弯举"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "0451",
+    "aliases": [],
+    "candidateAliases": [
+      "EZ曲杆反握弯举"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "0572",
+    "aliases": [],
+    "candidateAliases": [
+      "杠杆器械辅助反握引体向上"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "0746",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯背后耸肩"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "0760",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯腿举",
+      "smith leg press"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "1355",
+    "aliases": [],
+    "candidateAliases": [
+      "单臂抵墙动作（One Arm Against Wall）"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "1431",
+    "aliases": [],
+    "candidateAliases": [
+      "站垫辅助反握引体向上（待核对）"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "1680",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃站姿单臂弯举（倚上斜凳）"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "2300",
+    "aliases": [],
+    "candidateAliases": [
+      "屈膝反向划船",
+      "inverted row bent knees"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "3287",
+    "aliases": [],
+    "candidateAliases": [
+      "肘撑臂屈伸（Elbow Dips，待核对）"
+    ],
+    "reason": "本轮核对仅提供候选检索，不自动批准个人动作身份。"
+  },
+  {
+    "sourceID": "3418",
+    "aliases": [],
+    "candidateAliases": [
+      "L式引体向上",
+      "l-pull-up"
+    ],
+    "reason": "新增独立定义佐证只用于候选检索，不确认个人L位执行、身份或PR。"
+  },
+  {
+    "sourceID": "1396",
+    "aliases": [],
+    "candidateAliases": [
+      "史密斯站姿提踵",
+      "史密斯提踵",
+      "史密斯抬脚尖",
+      "smith toe raise"
+    ],
+    "reason": "固定步骤明确站姿前掌垫高抬跟；Toe raise多义的本地纠正仅供目录说明和候选检索。新旧中文及英文均为candidate，不能凭名称/器械自动认定个人身份或共享PR。"
+  },
+  {
+    "sourceID": "1415",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃坐姿单臂腕弯举（中立含义待核）",
+      "哑铃坐姿单臂中立握腕弯举",
+      "dumbbell one arm seated neutral wrist curl"
+    ],
+    "reason": "本轮仅纠正neutral wrist被直接译作中立握的过度确定解释，保留源标题含义未知。新/旧中文和英文均只作候选检索，不批准个人身份或共享PR。"
+  },
+  {
+    "sourceID": "0365",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃凳上腕弯举（关节待核）",
+      "哑铃凳上中立握腕弯举",
+      "dumbbell over bench neutral wrist curl"
+    ],
+    "reason": "去掉Neutral Wrist被确定译成中立握的本地过度解释；新旧名与英文仅候选检索，运动关节未清标，不批准个人身份。"
+  },
+  {
+    "sourceID": "0366",
+    "aliases": [],
+    "candidateAliases": [
+      "哑铃凳上单臂腕弯举（关节待核）",
+      "哑铃凳上单臂中立握腕弯举",
+      "dumbbell over bench one arm neutral wrist curl"
+    ],
+    "reason": "去掉Neutral Wrist被确定译成中立握的本地过度解释；新旧名与英文仅候选检索，运动关节未清标，不批准个人身份。"
+  }
+]

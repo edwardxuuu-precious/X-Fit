@@ -1,0 +1,93 @@
+{
+  "planCode": "UPPER-20261019-R5",
+  "status": "APPLIED_AND_INDEPENDENTLY_READ_BACK_VERIFIED",
+  "confirmedAt": "2026-10-20T22:52:39+08:00",
+  "confirmationReference": "REQ-20261020-225239；本人明确胸背腿正常训练至少4动作，在审阅完整R5、skill差异及替换范围后要求“然后同步到手机上去”；仅以R5替代10/21未开始R4，重量/次数为可编辑建议，真实RIR及完成由本人训练时填写。",
+  "requirement": "docs/requirements/2026-10-20/225239_r5-four-exercises-phone-sync.md",
+  "source": "outputs/training-plan/2026-10-20-upper-week-r5.md",
+  "sourceSHA256": "c97e78db54736f6dc5762a0de873651bf8023872c3093ee1875a9ab551d93ee1",
+  "methodVersion": "METHOD-20261020-06",
+  "localPreferenceVersion": "EXERCISE-PREF-20261020-01",
+  "files": [
+    {
+      "localDay": "2026-10-21",
+      "id": "705a3157-22f9-5d08-90b8-39c0e2088ea8",
+      "file": "outputs/training-plan/2026-10-20-r5-app/2026-10-21.json",
+      "title": "背＋二头",
+      "exercises": 6,
+      "sets": 20,
+      "backExercises": 4,
+      "backSets": 14,
+      "bicepsSets": 6,
+      "replacement": {
+        "scheduleID": "41d61d2f-22eb-50ae-87ec-04e554bdfb92",
+        "packetSHA256": "d85fc3ab3f45cff1ca57f127af18733270740f6dea40398120ee3b799cea1536"
+      },
+      "transportSHA256": "f92d4e209dceeb228c9d61158ab56d7e8f7a246d8d7b3ae7c1f01446f7d46bc3",
+      "applyNewScheduleCount": 1,
+      "repeatNewScheduleCount": 0,
+      "packetCanonicalSHA256": "a68f8a1d6a9ce7797a1374b3e307a95fd8e6ee134050a1c3c5954d64e4658289",
+      "readbackFile": "artifacts/training-sync/20261020-r5/readback/result/daily-training-readback.json",
+      "readback": "PASS"
+    }
+  ],
+  "deviceWritten": true,
+  "actualSessionsCreated": 0,
+  "actualRIRPrefilled": false,
+  "completedAutomatically": false,
+  "humanTrainingOutcome": "NOT_YET_OBSERVED",
+  "phoneLockObserved": {
+    "passcodeRequired": false,
+    "unlockedSinceBoot": true,
+    "scope": "Immediately before apply; before-apply-lock.json"
+  },
+  "nextAction": "Owner performs today training and provides actual effort/quality/recovery; no further plan write required.",
+  "localVerification": {
+    "sourceMatchesApprovedPlan": true,
+    "sixExercisesTwentySets": true,
+    "backExercises": 4,
+    "backSets": 14,
+    "bicepsSets": 6,
+    "originalFiveExercisePrescriptionsUnchanged": true,
+    "newTBarSets": 3,
+    "catalogIdentityMatches_20261020_0937_snapshot": true,
+    "legacyUnitFallbackVerified": "TrainingModels.swift:420-422; nil raw uses kilogram",
+    "legacyCatalogIDs": [
+      "0f843f55-d5d8-417a-b884-13d133d4cd27"
+    ],
+    "currentDeviceDataVerified": true,
+    "actualCompletionOrRIRCreated": false,
+    "activeSkillFormat": "PASS",
+    "catalogIdentityMatchesCurrentPhone": true
+  },
+  "priorConnectionFailure": {
+    "observedAt": "2026-10-20T23:55:40.160603+08:00",
+    "ownerReportedUnlocked": true,
+    "lockStateVerifiedAfterUnlock": false,
+    "lockQueryTimeoutsSeconds": [
+      20,
+      45
+    ],
+    "pairingState": "paired",
+    "transportType": "localNetwork",
+    "deviceState": "disconnected",
+    "deviceDetailsResult": "partial cached information only",
+    "connectionError": "Network.NWError 54 - Connection reset by peer",
+    "hostIOSDDIUsable": true,
+    "importRequestsSent": 0,
+    "phoneCopiesStarted": 0
+  },
+  "verifiedAt": "2026-10-21T06:47:27.592975+08:00",
+  "verification": "outputs/training-plan/2026-10-20-r5-app/verification.json",
+  "currentDeviceConnection": {
+    "verifiedAt": "2026-10-21T06:47:27.592975+08:00",
+    "transportType": "localNetwork",
+    "state": "connected",
+    "lockStateBeforeApply": "unlocked",
+    "recovery": "User-owned Mac CoreDeviceService restarted after checking no active device/build operations; pairing unchanged."
+  },
+  "priorPhoneLockObservation": {
+    "passcodeRequired": true,
+    "unlockedSinceBoot": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "requirement": "REQ-20261023-112357",
+  "phone_baseline": "0.5.0(28)",
+  "version": "0.5.0",
+  "build": "30",
+  "normal_launch_arguments": [],
+  "phone_process_id": 13658,
+  "normal_process_running_at_independent_readback": true,
+  "installed_candidate_url": "file:///private/var/containers/Bundle/Application/A13F2DD0-AC64-4871-B15A-DA06E0A7C0FA/FitnessApp.app/",
+  "device_gates": {
+    "D00": "PASS",
+    "D01": "PASS",
+    "D02": "PASS",
+    "D03": "PASS",
+    "D04": "PASS",
+    "D05": "PASS",
+    "D06A": "PASS",
+    "D06B": "PASS",
+    "D06C": "PASS",
+    "D07": "NOT_RUN",
+    "D09": "BLOCKED_HUMAN"
+  },
+  "cloud_sync_enabled": false,
+  "full_stage_go": false
+}

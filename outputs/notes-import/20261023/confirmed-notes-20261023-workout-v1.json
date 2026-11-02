@@ -1,0 +1,402 @@
+{
+  "version": 1,
+  "packageID": "notes-20261023-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-23-oct23-notes-workout",
+      "date": "2026-10-23",
+      "name": "Oct 23 · 胸背肩＋核心（Notes实际）",
+      "startTimeKnown": false,
+      "durationMinutes": null,
+      "notes": "本人2026-10-23确认已完成并以Notes Oct 23作为当天菜单和实际。来源最后修改2026-10-23 09:08:48 +0800。10动作48条按原名/顺序/数字保存；全部数字kg，自重bw保留。史密斯/杠铃每侧片重不含杆；哑铃及夹胸单侧；辅助引体是辅助kg并按次数统计。真实RIR、热身性质、次数侧别、开始/结束、时长与组间休息未知。原R6和未完成16条草稿保留为被替代/丢弃，不计入本场完成率。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "Smith Bench Press",
+          "muscleGroup": "胸部",
+          "equipment": "史密斯机",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Smith Bench Press；本人确认kg，每侧片重，不含杆；杆重未知，不计算含杆总重。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Assisted Pull-up",
+          "muscleGroup": "背部",
+          "equipment": "辅助引体机",
+          "volumeUnit": "count",
+          "notes": "辅助引体：数字是辅助重量，不是外加负重。按次数统计，不计入负重吨位或kg加重建议。逐组辅助kg×次数：50×15、46.88×15、43.75×15、40.63×15、37.5×15、34.38×15。原始辅助值同时保留在组记录；次数侧别、RIR、热身性质与真实组时间未知。",
+          "sets": [
+            {
+              "weight": 50.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 46.88,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 43.75,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 40.63,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 37.5,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 34.38,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Barbell Row",
+          "muscleGroup": "背部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Barbell Row；本人确认kg，每侧片重，不含杆；杆重未知，不计算含杆总重。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 22.5,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 27.5,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Push up",
+          "muscleGroup": "胸部",
+          "equipment": "自重",
+          "volumeUnit": "count",
+          "notes": "来源Notes Push up，原文bw-10共5组；自重俯卧撑，只记次数，不猜补体重或实际阻力。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Cable Fly",
+          "muscleGroup": "胸部",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Cable Fly；本人确认kg，单只/单侧记录。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Pulley Low Row",
+          "muscleGroup": "背部",
+          "equipment": "滑轮器械",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Pulley Low Row；本人确认kg，保留原始数字；重量/次数侧别、机器具体设置、RIR、热身性质与真实时间未知，不从其他动作推断。",
+          "sets": [
+            {
+              "weight": 35.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 42.5,
+              "reps": 14,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 60.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Side Pull",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes原名Dumbbell Side Pull；本人确认是哑铃侧平举，数字为单只kg；原始名称/逐组数值保留，不自动合并动作身份。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 2.5,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 7.5,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 2.5,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "杠铃片胸前转体",
+          "muscleGroup": "核心",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes 杠铃片胸前转体；本人确认kg，保留原始数字；重量/次数侧别、机器具体设置、RIR、热身性质与真实时间未知，不从其他动作推断。",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 16,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Dumbbell Reverse Fly",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Dumbbell Reverse Fly；本人确认kg，单只/单侧记录。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 5.0,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 8.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 10.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 8.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 5.0,
+              "reps": 20,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Smith shoulder press",
+          "muscleGroup": "肩部",
+          "equipment": "史密斯机",
+          "volumeUnit": "kilogram",
+          "notes": "来源Notes Smith shoulder press；本人确认kg，每侧片重，不含杆；杆重未知，不计算含杆总重。次数侧别、RIR、热身性质与真实时间未知。",
+          "sets": [
+            {
+              "weight": 40.0,
+              "reps": 14,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 55.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": [],
+  "staleSession": {
+    "templateName": "肩＋三头",
+    "plannedDate": "2026-10-23"
+  }
+}

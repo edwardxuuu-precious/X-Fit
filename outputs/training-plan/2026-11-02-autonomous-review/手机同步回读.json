@@ -1,0 +1,185 @@
+{
+  "state": "APPLIED_PHONE_READBACK_VERIFIED",
+  "verifiedAtLocal": "2026-10-29T18:11:48+08:00",
+  "week": "2026-11-02/2026-11-08",
+  "ownerConfirmation": "2026-10-29 同步更新进手机；已展示的三力量两有氧候选",
+  "reviewedSourceSHA256": "1b6bb4e8d932c5cb759042cd0a5d0e077d771076e0dbac59f6066d62f209d3b4",
+  "mode": "四个单日确认包及一个原生跳绳日程分别写入，非整周教练单次事务",
+  "dailyReceipts": [
+    {
+      "day": "2026-11-02",
+      "packetId": "82716fca-00d6-51ef-a477-64b388523fc6",
+      "packetSHA256": "ca77adc97f6401aaeab2e2a5950440b9127f49b017095f56400d52545a2653c5",
+      "exerciseCount": 6,
+      "plannedSetCount": 19,
+      "applyAdded": 1,
+      "repeatPreviewAdded": 0,
+      "conflicts": 0,
+      "independentReadbackMatched": true,
+      "receipts": {
+        "apply": {
+          "path": "手机同步回执/2026-11-02-apply.json",
+          "sha256": "a1555f185f07fcbb63eaeb58df967eb7832bfebf8dba65a8d83afb597a3bc953"
+        },
+        "readback": {
+          "path": "手机同步回执/2026-11-02-readback.json",
+          "sha256": "4f4f262245b87aeb4deb0890fa64603c98f427934175c6888718277e8cb87e1a"
+        },
+        "repeat-preview": {
+          "path": "手机同步回执/2026-11-02-repeat-preview.json",
+          "sha256": "706171371caa50d49ead6d234bbf5575b0e2c74b1cf6146bba9e1c844ce02eb8"
+        }
+      }
+    },
+    {
+      "day": "2026-11-04",
+      "packetId": "12dd18f4-4513-5391-87bd-3b5aa023e942",
+      "packetSHA256": "9c04b6e8807539f40374fdc7dc1e5773b9ecd8c408092818ed2f36a96fb4a7be",
+      "exerciseCount": 6,
+      "plannedSetCount": 19,
+      "applyAdded": 1,
+      "repeatPreviewAdded": 0,
+      "conflicts": 0,
+      "independentReadbackMatched": true,
+      "receipts": {
+        "apply": {
+          "path": "手机同步回执/2026-11-04-apply.json",
+          "sha256": "8d17beddc8c7ffe23e5ea954d7de07f88466030e0cc476ebed4360f5768fbf29"
+        },
+        "readback": {
+          "path": "手机同步回执/2026-11-04-readback.json",
+          "sha256": "093733315f05b54536be8b993035ce19a74ca5ca23811350a71bd0ec23de9bfd"
+        },
+        "repeat-preview": {
+          "path": "手机同步回执/2026-11-04-repeat-preview.json",
+          "sha256": "78913b3b394e1e46628bc8053e4af92cc59984abde10713b69d453f234e98be8"
+        }
+      }
+    },
+    {
+      "day": "2026-11-05",
+      "packetId": "db2d60ec-a35f-5119-a3c0-bd1f489af2f6",
+      "packetSHA256": "f06353617c7c7c149478efe367a662737d23276eb3f832e8b15fd483484927e9",
+      "exerciseCount": 1,
+      "plannedSetCount": 1,
+      "applyAdded": 1,
+      "repeatPreviewAdded": 0,
+      "conflicts": 0,
+      "independentReadbackMatched": true,
+      "receipts": {
+        "apply": {
+          "path": "手机同步回执/2026-11-05-apply.json",
+          "sha256": "b5b0d0119c4a3d6efe9de1487554350eddc366b22b7a94ce37d62fcceaade788"
+        },
+        "readback": {
+          "path": "手机同步回执/2026-11-05-readback.json",
+          "sha256": "4077c96503e1c45c2a03f63e2a7e23431ffad399d0ea3221f0943232e8ac1ec1"
+        },
+        "repeat-preview": {
+          "path": "手机同步回执/2026-11-05-repeat-preview.json",
+          "sha256": "ab700ab2eb631786592a25e4d95bccb39b32996abc943bf620a5925428b58fce"
+        }
+      }
+    },
+    {
+      "day": "2026-11-06",
+      "packetId": "2063b651-ba01-5fe5-a538-9f152acfce30",
+      "packetSHA256": "d321fedfe17b22dc8b2afa3be0223763baab141e7953ad2787e05f8ee7bd16f6",
+      "exerciseCount": 8,
+      "plannedSetCount": 25,
+      "applyAdded": 1,
+      "repeatPreviewAdded": 0,
+      "conflicts": 0,
+      "independentReadbackMatched": true,
+      "receipts": {
+        "apply": {
+          "path": "手机同步回执/2026-11-06-apply.json",
+          "sha256": "2b384e356ad7437ee8242e3419cf4f591c7aaeef9f647adb9a1a28364d3ab7d8"
+        },
+        "readback": {
+          "path": "手机同步回执/2026-11-06-readback.json",
+          "sha256": "69d917e7bda8736285769111ad6d51bfc4a8bf0a7bfd1552e034b17c8eb32364"
+        },
+        "repeat-preview": {
+          "path": "手机同步回执/2026-11-06-repeat-preview.json",
+          "sha256": "7ca6d5aac933bb6b3a875289cb1f66465556bf08a26211b746bde9d5404b1bd5"
+        }
+      }
+    }
+  ],
+  "rope": {
+    "date": "2026-11-03",
+    "scheduleId": "6935dac4-563b-40ad-a3fa-de549bd45c13",
+    "activeSeconds": 450,
+    "elapsedSeconds": 1800,
+    "targetCount": null,
+    "notesLanguage": "en",
+    "notes": "Warm up 5 min 10 rounds jump 45 sec walk 45 sec cool down 10 min keep pace so you can speak short sentences stop for any ankle or knee discomfort count unknown do not estimate",
+    "verification": "手机原生页面及写后活动库只读快照；该日一条日程"
+  },
+  "finalWeek": [
+    {
+      "date": "2026-11-02",
+      "name": "背力量",
+      "status": "planned",
+      "scheduleId": "82716fca-00d6-51ef-a477-64b388523fc6"
+    },
+    {
+      "date": "2026-11-03",
+      "name": "跳绳",
+      "status": "planned",
+      "scheduleId": "6935dac4-563b-40ad-a3fa-de549bd45c13"
+    },
+    {
+      "date": "2026-11-04",
+      "name": "腿力量",
+      "status": "planned",
+      "scheduleId": "12dd18f4-4513-5391-87bd-3b5aa023e942"
+    },
+    {
+      "date": "2026-11-05",
+      "name": "单车／椭圆机 · Zone 2",
+      "status": "planned",
+      "scheduleId": "db2d60ec-a35f-5119-a3c0-bd1f489af2f6"
+    },
+    {
+      "date": "2026-11-06",
+      "name": "胸＋肩力量",
+      "status": "planned",
+      "scheduleId": "2063b651-ba01-5fe5-a538-9f152acfce30"
+    }
+  ],
+  "conservation": {
+    "tables": 25,
+    "modelRowCounts": {
+      "group-support": 2694,
+      "after-four": 2723,
+      "after-final": 2725
+    },
+    "addedRows": {
+      "ZSCHEDULEDWORKOUT": 5,
+      "ZTEMPLATEEXERCISE": 21,
+      "ZWORKOUTTEMPLATE": 5
+    },
+    "preexistingRowsRemoved": 0,
+    "preexistingBusinessFieldsChanged": 0,
+    "coreDataVersionOnlyFieldsChanged": {
+      "ZEXERCISE": 8,
+      "ZSCHEDULEDWORKOUT": 2,
+      "ZSESSIONEXERCISE": 12,
+      "ZSETLOG": 50,
+      "ZWORKOUTSESSION": 39,
+      "ZWORKOUTTEMPLATE": 4
+    },
+    "actualSessionsOrSetsAdded": 0,
+    "preferenceRevisionsAdded": 0,
+    "snapshotIntegrity": "ok",
+    "baseline": "2026-10-29 17:41 手机 App Group 活动库快照",
+    "finalSnapshot": "2026-10-29 18:10 跳绳备注调整后的手机 App Group 活动库快照"
+  },
+  "limitations": [
+    "跳绳备注以英文保存，中文内容见候选审阅稿；原因是镜像中文输入受限。",
+    "手机未保存新的整周教练草案，也未通过整周教练一次事务写入。",
+    "计划不代表实际训练；人工体验、完整 UI 与训练效果未验收。"
+  ]
+}

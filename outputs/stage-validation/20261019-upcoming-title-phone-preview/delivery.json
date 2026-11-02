@@ -1,0 +1,35 @@
+{
+  "status": "PHONE_PREVIEW_INSTALLED",
+  "verified_at": "2026-10-19T19:05:18.995153+08:00",
+  "requirement": "REQ-20261019-173107",
+  "device": "Edward_iPhone",
+  "version": "0.5.0",
+  "build": "21",
+  "overwrite_install": "PASS",
+  "normal_launch": "PASS",
+  "running_process_readback": "PASS",
+  "approved_preview_source_match": "PASS",
+  "matching_source_files": 147,
+  "installation_evidence_origin": "artifacts/stage-validation/20261019-workout-table-device",
+  "own_second_install_performed": false,
+  "data": {
+    "tables": 25,
+    "records_before": 2205,
+    "records_after": 2205,
+    "all_original_business_fields_and_relationships_equal": true,
+    "comparison_excludes": [
+      "Z_ENT",
+      "Z_OPT"
+    ],
+    "external_resources_equal": true,
+    "original_upcoming_names_preserved": [
+      "固定单车 · 稳定有氧35分钟 · R1",
+      "背部＋二头 · R2建议预填 · 22组"
+    ],
+    "backup": "artifacts/stage-validation/20261019-workout-table-device/device-data/pre-install"
+  },
+  "full_device_xctest": "NOT_RUN",
+  "human_phone_acceptance": "BLOCKED_HUMAN",
+  "stage_go": false,
+  "scope": "Accepted upcoming-title preview delivered by the already running matching installer; this task performed source, signature, live app/process and complete original-field readback verification"
+}

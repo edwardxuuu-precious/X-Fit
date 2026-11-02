@@ -1,0 +1,22 @@
+{
+  "status": "PASS_LOCAL_ONLY",
+  "dateBound": false,
+  "deviceRequestSent": false,
+  "exerciseCount": 6,
+  "uniqueSetIDs": 20,
+  "plannedSetPositions": 20,
+  "technicalSets": 4,
+  "legWorkSets": 13,
+  "coreSets": 3,
+  "allActualDefaultsBlank": true,
+  "originalRestAndEffortQualifiersPreserved": true,
+  "sourceCandidateSHA256": "3210c0186977562bf82fb3d0ed797e6e09249c38e4d7d068e007374e53040f51",
+  "preparedSHA256": "61412621a49b65c972e16ce62f50b001a31dffa7cb1ff58eda675475a431041b",
+  "review": "Independent read-only review: 6 personal IDs, numeric loads/reps/RIR/rest, order, side unknowns and plan patterns match; omitted rest/optional effort qualifiers restored and asserted.",
+  "remaining": [
+    "Owner explicit training date",
+    "Wireless readiness, fresh phone backup and App-generated preview",
+    "Apply/readback/idempotence/history conservation",
+    "One-way main preview refresh after successful phone import"
+  ]
+}

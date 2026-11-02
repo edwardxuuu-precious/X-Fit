@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "data_source_id": "09fd5db5-21f6-4d39-869d-e3ad0b2f444e",
+  "database_id": "6d6b5fb7-de5c-446a-a503-8b6462833486",
+  "database_url": "https://app.notion.com/p/6d6b5fb7de5c446aa5038b6462833486",
+  "private_sidebar_verified_at": "2026-09-27T01:12:58.881Z",
+  "native_append_bindings": {
+    "XFT-PLAN-CUT-RESTORE-20261012-R1": {
+      "page_id": "3f54c857-b834-8018-95b5-c6d19b0f2f8a",
+      "version": "CUT-RESTORE-20261012-R1",
+      "source_sha256": "d4cafc5eb8bb1c54007d99b402817e1dc99b48f70ca88c524251bec4fdc0e491",
+      "verification": "native UI full authored body after reload; not a byte copy or managed-hash sync snapshot",
+      "sync_eligible": false,
+      "evidence": "artifacts/project-loop/20261011-local-ready/notion-native-readback.json"
+    }
+  },
+  "bindings": {
+    "XFT-GUIDE-1": {
+      "page_id": "3e84c857-b834-810d-945e-ebb164ca90aa",
+      "version": "1.0",
+      "local_hash": "b5ad64086fba1a1d56849aa19846a25dcaf23d98d68250070cff9cfe95bf0b35",
+      "remote_hash": "b5ad64086fba1a1d56849aa19846a25dcaf23d98d68250070cff9cfe95bf0b35"
+    },
+    "XFT-PREF-LONGTERM-20260927": {
+      "page_id": "3e84c857-b834-819c-88ac-f8130f74763c",
+      "version": "archive-20260927-r1",
+      "local_hash": "0d4f73c63143adb95d9ed869f29bd0cbb24d701ef525bdcf41863f128b156bb4",
+      "remote_hash": "0d4f73c63143adb95d9ed869f29bd0cbb24d701ef525bdcf41863f128b156bb4"
+    },
+    "XFT-PLAN-CUT-UPPER-TRAVEL-20260921-R1": {
+      "page_id": "3e84c857-b834-815d-b00f-c9577c6461f9",
+      "version": "CUT-UPPER-TRAVEL-20260921-R1",
+      "local_hash": "d6ea744d8a216a8cfd6810418e405ef9e6bd8320375862f960970fba493a7725",
+      "remote_hash": "d6ea744d8a216a8cfd6810418e405ef9e6bd8320375862f960970fba493a7725"
+    },
+    "XFT-RECORDING-20260927": {
+      "page_id": "3e84c857-b834-812c-a866-cf9423f67725",
+      "version": "recording-20260927-r1",
+      "local_hash": "1052e239778b2ed031c3ec92621801732a4c47a878e44b9b93dfdded30c31df9",
+      "remote_hash": "1052e239778b2ed031c3ec92621801732a4c47a878e44b9b93dfdded30c31df9"
+    },
+    "XFT-FEEDBACK-20260927": {
+      "page_id": "3e84c857-b834-81bf-91f4-d58206ec9dfc",
+      "version": "feedback-20260927-r1",
+      "local_hash": "45ceecbdeb01bd606d6acc461ab31fa6f7526cf98e69ed73f571877870c8963b",
+      "remote_hash": "45ceecbdeb01bd606d6acc461ab31fa6f7526cf98e69ed73f571877870c8963b"
+    },
+    "XFT-EXERCISE-machine_triceps_press": {
+      "page_id": "3e84c857-b834-81f2-a931-c73e03dab561",
+      "version": "catalog-20260927-r1",
+      "local_hash": "e4b17fca783fcdadf75822a8c92f569c6c45f8e6f6316732eacea564a56ddcbd",
+      "remote_hash": "e4b17fca783fcdadf75822a8c92f569c6c45f8e6f6316732eacea564a56ddcbd"
+    },
+    "XFT-SKILL-xfit-training-coach": {
+      "page_id": "3e84c857-b834-81e6-b331-fedc838ac177",
+      "version": "1.0",
+      "local_hash": "769253a7477268ecec29c9c97d3a785d3dfb5001563f53e25a482f9d8dc57957",
+      "remote_hash": "769253a7477268ecec29c9c97d3a785d3dfb5001563f53e25a482f9d8dc57957"
+    },
+    "XFT-SKILL-xfit-training-coach-v1.1": {
+      "page_id": "3e84c857-b834-817e-aec8-e0dab1cfed51",
+      "version": "1.1",
+      "local_hash": "4870d214d343ba9c007c39e3884ba75709975537dd501873593237477cafc0a6",
+      "remote_hash": "4870d214d343ba9c007c39e3884ba75709975537dd501873593237477cafc0a6"
+    }
+  }
+}

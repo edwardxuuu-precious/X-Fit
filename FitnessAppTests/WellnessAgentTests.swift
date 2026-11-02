@@ -4,6 +4,20 @@ import XCTest
 
 @MainActor
 final class WellnessAgentTests: XCTestCase {
+    func testUnknownJumpCountIsNotSentAsZeroInOptionalAgentContext() throws {
+        let payload = WellnessAgentRemoteRequest(messages: [], context: WellnessAgentContext(
+            localTimeISO: "2026-10-12T07:00:00+08:00", waterMilliliters: 0,
+            jumpRopeCount: nil, sedentaryMinutes: 0))
+        let request = try RemoteWellnessAgentGateway.makeRequest(
+            endpoint: URL(string: "https://api.x-fit.example/v1/wellness/agent")!, payload: payload)
+        let body = try XCTUnwrap(request.httpBody)
+        let json = try XCTUnwrap(JSONSerialization.jsonObject(with: body) as? [String: Any])
+        let context = try XCTUnwrap(json["context"] as? [String: Any])
+        let today = try XCTUnwrap(context["today"] as? [String: Any])
+        XCTAssertNil(today["jumpRopeCount"])
+        XCTAssertNil(today["apiKey"])
+    }
+
     func testRemoteRequestContainsNoProviderCredentialAndOnlyMinimalContext() throws {
         let messages = (0..<10).map { index in
             WellnessAgentMessage(role: index.isMultiple(of: 2) ? .user : .assistant, content: "message-\(index)")

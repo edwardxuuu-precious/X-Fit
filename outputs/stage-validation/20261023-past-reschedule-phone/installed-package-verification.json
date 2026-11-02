@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "requirement": "REQ-20261023-112357",
+  "version": "0.5.0",
+  "build": "30",
+  "phone_baseline": "0.5.0(28)",
+  "frozen_inputs_verified": 127,
+  "frozen_manifest_sha256": "14c767ef02a996997afae18b3d7c27d3ed8d93879bdebeabd3013647f4b27bd0",
+  "production_changes": [
+    "FitnessApp/Features/Redesign/EditorialHomeViews.swift",
+    "FitnessApp/Features/Schedule/ScheduleView.swift"
+  ],
+  "only_configuration_change": "isolated build number 28 to 30",
+  "packages": [
+    {
+      "bundle": "com.edward.FitnessApp",
+      "version": "0.5.0",
+      "build": "30",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "team": "664DT5VC99",
+      "phone_in_profile": true,
+      "profile_uuid": "761fe5b8-a547-4dd7-9b11-10dfa70b0980",
+      "profile_expiration_utc": "2026-10-28T03:52:10+00:00",
+      "executable_sha256": "d5bdcf6c0889e05faa09f9f33d6c1dfb16bc98bce7c302eec106a967756a478f"
+    },
+    {
+      "bundle": "com.edward.FitnessApp.XFitShareExtension",
+      "version": "0.5.0",
+      "build": "30",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "team": "664DT5VC99",
+      "phone_in_profile": true,
+      "profile_uuid": "0cf8b535-a0b9-40c6-a0a5-2fc8622b26e2",
+      "profile_expiration_utc": "2026-10-28T03:52:07+00:00",
+      "executable_sha256": "2f2e0f041b19b92109e0e3e0d2994d54517e6bd26d6d180f61b4aa21a12c21e7"
+    }
+  ],
+  "cloud_sync_enabled": false,
+  "configuration": "Release",
+  "signed_release_log": "/Users/edward/Documents/Fitness App/outputs/stage-validation/20261023-past-reschedule-phone/package-build.log",
+  "candidate": "/tmp/xfit-past-reschedule-phone-build30-derived/Build/Products/Release-iphoneos/FitnessApp.app",
+  "checked_at": "2026-10-23T06:52:02.563857+00:00",
+  "full_stage_go": false
+}

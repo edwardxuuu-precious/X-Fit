@@ -7,7 +7,7 @@ struct NutritionPreviewCard: View {
     @Query private var targets: [NutritionTarget]
 
     private var todayMeals: [MealEntry] {
-        meals.filter { $0.isActiveMeal && FatLossCalendar.sameDay($0.date, .now) }
+        meals.filter { $0.isActiveMeal && $0.stableLocalDay == MealLocalDay.string(for: .now) }
     }
 
     private var calories: Int {
@@ -22,23 +22,20 @@ struct NutritionPreviewCard: View {
     var body: some View {
         NavigationLink(destination: NutritionView()) {
             HStack(spacing: 18) {
-                NeonProgressRing(
-                    progress: displayTarget.calories.map { Double(calories) / Double(max(1, $0)) } ?? 0,
-                    value: todayMeals.isEmpty ? "—" : (todayMeals.contains(where: \.isCalorieKnown) ? "\(calories)" : "未知"),
-                    detail: displayTarget.calories.map { "/ \($0) kcal" } ?? "目标待确认"
-                )
+                SprintIcon(systemName: "fork.knife", size: 48, prominent: true)
                 VStack(alignment: .leading, spacing: 7) {
                     Text("今日营养")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text(todayMeals.isEmpty ? "还没有记录餐食" : (hasUnknownNutrition ? "部分记录 · 含营养未知餐食" : "已记录 \(calories) kcal"))
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
-                    Label("打开营养记录", systemImage: "arrow.right")
+                    Text(displayTarget.calories.map { "目标 \($0) kcal" } ?? "目标待确认")
                         .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                 }
                 Spacer()
+                Image(systemName: "arrow.up.right").foregroundStyle(AppTheme.ink)
             }
             .cardSurface()
         }
@@ -52,23 +49,24 @@ struct NutritionView: View {
     @Query(sort: \MealEntry.date, order: .reverse) private var meals: [MealEntry]
     @Query private var targets: [NutritionTarget]
 
-    @State private(set) var selectedDate = FatLossCalendar.day(.now)
+    @State private(set) var selectedDate = Date.now
     @State private var showMealEditor = false
     @State private var editingMeal: MealEntry?
     @State private var showTargetEditor = false
     @State private var errorMessage: String?
 
     init(initialDate: Date = .now) {
-        _selectedDate = State(initialValue: FatLossCalendar.day(initialDate))
+        _selectedDate = State(initialValue: initialDate)
     }
 
     private var target: NutritionTarget? { targets.first }
     private var displayTarget: NutritionDisplayTarget {
-        NutritionDisplayTarget.resolve(on: selectedDate, legacy: target, in: modelContext)
+        let targetDay = MealLocalDay.date(MealLocalDay.string(for: selectedDate), timeZone: MealLocalDay.legacyTimeZone) ?? selectedDate
+        return NutritionDisplayTarget.resolve(on: targetDay, legacy: target, in: modelContext)
     }
     private var hasUnknownNutrition: Bool { selectedMeals.contains { !$0.isNutritionKnown } }
     private var selectedMeals: [MealEntry] {
-        meals.filter { $0.isActiveMeal && FatLossCalendar.sameDay($0.date, selectedDate) }
+        meals.filter { $0.isActiveMeal && $0.stableLocalDay == MealLocalDay.string(for: selectedDate) }
     }
     private var calories: Int { selectedMeals.filter(\.isCalorieKnown).reduce(0) { $0 + $1.calories } }
     private var protein: Int { selectedMeals.filter(\.isProteinKnown).reduce(0) { $0 + $1.proteinGrams } }
@@ -78,6 +76,7 @@ struct NutritionView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
+                SprintPageHeader(title: "饮食记录", icon: "fork.knife")
                 dateSelector
                 calorieCard
                 if hasUnknownNutrition {
@@ -86,14 +85,14 @@ struct NutritionView: View {
                 }
 
                 HStack {
-                    SectionHeader(title: "餐食", actionTitle: "\(selectedMeals.count) 条")
+                    SprintSectionHeading(title: "餐食 · \(selectedMeals.count)", icon: "list.bullet")
                     Spacer()
                     if displayTarget.isProgram {
-                        Text("目标在减脂计划中管理")
+                        Text("周期目标")
                             .font(.caption).foregroundStyle(AppTheme.secondaryText)
                     } else {
                         Button("调整目标") { showTargetEditor = true }
-                            .frame(minHeight: 44).font(.caption.bold()).foregroundStyle(AppTheme.accent)
+                            .frame(minHeight: 44).font(.caption.bold()).foregroundStyle(AppTheme.ink)
                     }
                 }
 
@@ -115,7 +114,7 @@ struct NutritionView: View {
             .padding(.top, 12)
             .padding(.bottom, 26)
         }
-        .screenBackground().fatLossCalendar()
+        .sprintPage().environment(\.calendar, Calendar.current).environment(\.timeZone, TimeZone.current)
         .navigationTitle("饮食记录")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -125,19 +124,19 @@ struct NutritionView: View {
                     editingMeal = nil
                     showMealEditor = true
                 } label: { Image(systemName: "plus").frame(width: 44, height: 44) }
-                    .disabled(FatLossCalendar.day(selectedDate) > FatLossCalendar.day(.now))
+                    .disabled(MealLocalDay.string(for: selectedDate) > MealLocalDay.string(for: .now))
                     .accessibilityLabel("记录餐食")
             }
         }
         .sheet(isPresented: $showMealEditor) {
             MealEditorView(meal: editingMeal, date: selectedDate)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .sheet(isPresented: $showTargetEditor) {
             NutritionTargetEditorView(target: target)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .alert("操作失败", isPresented: Binding(
             get: { errorMessage != nil },
@@ -151,23 +150,26 @@ struct NutritionView: View {
 
     private var dateSelector: some View {
         HStack {
-            Button { selectedDate = FatLossCalendar.adding(-1, to: selectedDate) } label: {
+            Button { selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) ?? selectedDate } label: {
                 Image(systemName: "chevron.left").frame(width: 44, height: 44)
             }.accessibilityLabel("前一天")
             DatePicker("日期", selection: $selectedDate, displayedComponents: .date)
                 .labelsHidden().frame(maxWidth: .infinity, minHeight: 44)
-            Button { selectedDate = FatLossCalendar.adding(1, to: selectedDate) } label: {
+            Button { selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? selectedDate } label: {
                 Image(systemName: "chevron.right").frame(width: 44, height: 44)
             }.accessibilityLabel("后一天")
-        }.foregroundStyle(.white)
+        }.foregroundStyle(AppTheme.ink)
     }
 
     private var calorieCard: some View {
         VStack(alignment: .leading, spacing: 18) {
-            HStack(alignment: .firstTextBaseline) {
-                Text(selectedMeals.isEmpty ? "—" : (selectedMeals.contains(where: \.isCalorieKnown) ? "\(calories)" : "未知"))
-                    .font(AppTheme.metricValue).foregroundStyle(.white)
-                Text("kcal 已记录").font(.caption).foregroundStyle(AppTheme.secondaryText)
+            HStack(spacing: 16) {
+                SprintIcon(systemName: "flame", size: 48, prominent: true)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(selectedMeals.isEmpty ? "—" : (selectedMeals.contains(where: \.isCalorieKnown) ? "\(calories)" : "未知"))
+                        .font(AppTheme.metricValue).foregroundStyle(AppTheme.ink)
+                    Text("kcal 已记录").font(.caption).foregroundStyle(AppTheme.secondaryText)
+                }
                 Spacer()
             }
             Text(displayTarget.calories.map { "目标 \($0) kcal" } ?? "目标待确认")
@@ -175,7 +177,7 @@ struct NutritionView: View {
             macroRow(name: "蛋白质", value: selectedMeals.contains(where: \.isProteinKnown) ? protein : nil, target: displayTarget.protein, tint: AppTheme.secondaryText)
             macroRow(name: "碳水", value: selectedMeals.contains(where: \.isCarbsKnown) ? carbs : nil, target: displayTarget.carbs, tint: AppTheme.secondaryText)
             macroRow(name: "脂肪", value: selectedMeals.contains(where: \.isFatKnown) ? fat : nil, target: displayTarget.fat, tint: AppTheme.secondaryText)
-        }.padding(.vertical, 8)
+        }.cardSurface(padding: 18)
     }
 
     private func macroRow(name: String, value: Int?, target: Int?, tint: Color) -> some View {
@@ -187,7 +189,7 @@ struct NutritionView: View {
                     .foregroundStyle(AppTheme.secondaryText)
                 Text((value.map { "\($0)g" } ?? "未知") + (target.map { " / \($0)g" } ?? " · 目标待确认"))
                     .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
             }
         }
     }
@@ -198,15 +200,11 @@ struct NutritionView: View {
             showMealEditor = true
         } label: {
             HStack(spacing: 13) {
-                Image(systemName: meal.mealType.systemImage)
-                    .font(.headline.bold())
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 48, height: 48)
-                    .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 13))
+                SprintIcon(systemName: meal.mealType.systemImage, size: 42)
                 VStack(alignment: .leading, spacing: 3) {
                     Text(meal.name)
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text("\(meal.mealType.title) · 蛋白 \(meal.isProteinKnown ? "\(meal.proteinGrams)g" : "未知") · 碳水 \(meal.isCarbsKnown ? "\(meal.carbsGrams)g" : "未知") · 脂肪 \(meal.isFatKnown ? "\(meal.fatGrams)g" : "未知")")
                         .font(.caption2)
                         .foregroundStyle(AppTheme.secondaryText)
@@ -215,9 +213,9 @@ struct NutritionView: View {
                 Spacer()
                 Text(meal.isCalorieKnown ? "\(meal.calories) kcal" : "未知")
                     .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
             }
-            .padding(.vertical, 12).frame(minHeight: 52)
+            .frame(minHeight: 52).cardSurface(padding: 14)
         }
         .buttonStyle(.plain)
         .contextMenu {
@@ -253,7 +251,7 @@ struct MealEditorView: View {
 
     init(meal: MealEntry?, date: Date, initialMealType: MealType = .breakfast) {
         self.meal = meal
-        self.date = meal?.date ?? FatLossCalendar.day(date)
+        self.date = meal?.date ?? date
         _name = State(initialValue: meal?.name ?? "")
         _mealType = State(initialValue: meal?.mealType ?? initialMealType)
         _calories = State(initialValue: meal.flatMap { $0.isCalorieKnown ? String($0.calories) : nil } ?? "")
@@ -265,26 +263,30 @@ struct MealEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("餐食") {
+                Section {
                     TextField("名称", text: $name)
                     Picker("餐次", selection: $mealType) {
                         ForEach(MealType.allCases) { type in
                             Text(type.title).tag(type)
                         }
                     }
-                    Text(date, format: .dateTime.year().month().day())
+                    Text(meal?.stableLocalDay ?? MealLocalDay.string(for: date))
                         .foregroundStyle(.secondary)
+                } header: {
+                    SprintSectionHeading(title: "餐食", icon: "fork.knife")
                 }
-                Section("营养") {
+                Section {
                     numberField("热量", value: $calories, unit: "kcal")
                     numberField("蛋白质", value: $protein, unit: "g")
                     numberField("碳水", value: $carbs, unit: "g")
                     numberField("脂肪", value: $fat, unit: "g")
                     Text("知道哪项填哪项；未知留空，实际为零请填写 0。")
                         .font(.caption).foregroundStyle(.secondary)
+                } header: {
+                    SprintSectionHeading(title: "营养 · 选填", icon: "chart.bar")
                 }
             }
-            .scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput()
+            .scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput()
             .navigationTitle(meal == nil ? "记录餐食" : "编辑餐食")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -321,7 +323,7 @@ struct MealEditorView: View {
     }
 
     private func save() {
-        guard FatLossCalendar.day(date) <= FatLossCalendar.day(.now) else {
+        guard (meal?.stableLocalDay ?? MealLocalDay.string(for: date)) <= MealLocalDay.string(for: .now) else {
             errorMessage = "未来日期只能安排餐单，吃完后再记录实际。"
             return
         }
@@ -330,7 +332,12 @@ struct MealEditorView: View {
             let values = try MealNutritionInput(calories: calories, protein: protein, carbs: carbs, fat: fat)
             let entry = meal ?? MealEntry(date: date, mealType: mealType, name: cleanName,
                                          calories: 0, proteinGrams: 0, carbsGrams: 0, fatGrams: 0)
-            if meal == nil { modelContext.insert(entry) }
+            if meal == nil {
+                entry.recordedLocalDay = MealLocalDay.string(for: date)
+                entry.captureTimeZoneIdentifier = TimeZone.current.identifier
+                entry.recordedTimeKnown = false
+                modelContext.insert(entry)
+            }
             entry.name = cleanName
             entry.mealType = mealType
             values.apply(to: entry)
@@ -423,12 +430,16 @@ private struct NutritionTargetEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Stepper("热量：\(calories) kcal", value: $calories, in: 800...6000, step: 50)
-                Stepper("蛋白质：\(protein) g", value: $protein, in: 0...500, step: 5)
-                Stepper("碳水：\(carbs) g", value: $carbs, in: 0...800, step: 5)
-                Stepper("脂肪：\(fat) g", value: $fat, in: 0...300, step: 5)
+                Section {
+                    Stepper("热量：\(calories) kcal", value: $calories, in: 800...6000, step: 50)
+                    Stepper("蛋白质：\(protein) g", value: $protein, in: 0...500, step: 5)
+                    Stepper("碳水：\(carbs) g", value: $carbs, in: 0...800, step: 5)
+                    Stepper("脂肪：\(fat) g", value: $fat, in: 0...300, step: 5)
+                } header: {
+                    SprintSectionHeading(title: "每日目标", icon: "scope")
+                }
             }
-            .scrollContentBackground(.hidden).screenBackground().fatLossCalendar()
+            .scrollContentBackground(.hidden).sprintPage().fatLossCalendar()
             .navigationTitle("每日营养目标")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

@@ -1,0 +1,93 @@
+{
+  "local_delivery": "PASS",
+  "device_install": "NOT_RUN",
+  "human_acceptance": "BLOCKED_HUMAN",
+  "environment": "Xcode 27.2 / iOS Simulator 26.5",
+  "source_root": "/Users/edward/Documents/Fitness App",
+  "source_sha256": {
+    "FitnessApp/App/FitnessAppApp.swift": "ac659ec12543f3c86436959edacbb180941243076002deb4bb9ca8a7e2c8e920",
+    "FitnessApp/Shared/WorkoutCompletionPresentation.swift": "5de685f64d7872ca91ff4599caf5746a08e6ff08cbb8d5ff6fd6ee1d84a3782f",
+    "FitnessApp/Features/Workout/ActiveWorkoutView.swift": "d503f8d107bb65952efd1988337c1b2a7f51964e729896b532ba70176631621a",
+    "FitnessAppUITests/TrainingExperienceUITests.swift": "e1528f8fd423e2f66fae9d1403f8d525c2ac6622c71089d38c3dc50c2826640f",
+    "FitnessApp/Shared/WorkoutCompletionFeedback.swift": "0154db3487b16046f60eb21863973df3182c3fb2b8a877accbc3c888d1c18d6b"
+  },
+  "tested_source_copy_equal": true,
+  "runs": {
+    "initial": {
+      "result": "Failed",
+      "passed": 36,
+      "failed": 1,
+      "skipped": 0,
+      "bundle": "/tmp/xfit-completion-glass-20261102/verification-r1.xcresult",
+      "failures": [
+        {
+          "failureText": "XCTAssertTrue failed",
+          "targetName": "FitnessAppUITests",
+          "testIdentifier": 37,
+          "testIdentifierString": "TrainingExperienceUITests/testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt()",
+          "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/TrainingExperienceUITests/testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt",
+          "testName": "testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt()"
+        }
+      ]
+    },
+    "final_pro": {
+      "result": "Passed",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "bundle": "/tmp/xfit-completion-glass-20261102/verification-r4.xcresult",
+      "failures": []
+    },
+    "small_initial": {
+      "result": "Failed",
+      "passed": 1,
+      "failed": 1,
+      "skipped": 0,
+      "bundle": "/tmp/xfit-completion-glass-20261102/small-screen.xcresult",
+      "failures": [
+        {
+          "failureText": "XCTAssertTrue failed",
+          "targetName": "FitnessAppUITests",
+          "testIdentifier": 2,
+          "testIdentifierString": "TrainingExperienceUITests/testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt()",
+          "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/TrainingExperienceUITests/testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt",
+          "testName": "testFinishingPartialWorkoutShowsSavedActualSummaryAndCanCloseIt()"
+        }
+      ]
+    },
+    "small_normal_recheck": {
+      "result": "Passed",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "bundle": "/tmp/xfit-completion-glass-20261102/small-screen-normal-recheck.xcresult",
+      "failures": []
+    }
+  },
+  "notes": [
+    "36 pre-existing TrainingFeedbackTests passed in initial run; eligibility/model and the receiveSavedCompletion extension were unchanged by later presentation fixes.",
+    "Initial UI found stretched glass background; corrected intrinsic sizing.",
+    "The Documents build read stalled in NSFileCoordinator; it was cancelled before tests and source-equivalent files were staged outside Documents.",
+    "The initial modal accessibility group reported full-window bounds. Visible controls and unmodified runtime screenshots verify actual centered card layout instead.",
+    "The first small-screen ordinary run failed before reaching completion at the set-completion precondition; an isolated unchanged recheck passed. Root cause remains unconfirmed.",
+    "Native Simulator UI surface was unavailable. Reduce-motion/transparency code guards were inspected; system-toggle runtime acceptance and older-OS material runtime remain unexecuted."
+  ],
+  "media": {
+    "video": "completion-fireworks.mp4",
+    "gif": "completion-fireworks.gif",
+    "still": "completion-popup.png",
+    "peak": "completion-fireworks-peak.png",
+    "origin": "/tmp/xfit-completion-glass-20261102/actual-runtime-r4.mp4",
+    "trim_seconds": [
+      35.5,
+      42.0
+    ],
+    "speed_changed": false,
+    "fixture": "Isolated in-memory UI test: 1 completed working set, not phone data."
+  },
+  "unused_worktree": {
+    "operation_id": "4153248d-532f-4693-a53e-5c91901b861d",
+    "status": "pending host checkout, last observed 68%; never used for implementation",
+    "cleanup": "Archive via host worktree tool after creation completes."
+  }
+}

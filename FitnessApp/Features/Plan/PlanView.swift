@@ -7,6 +7,7 @@ struct PlanView: View {
     @Query private var sessionExercises: [SessionExercise]
     @Query private var setLogs: [SetLog]
     @Query private var templateExercises: [TemplateExercise]
+    @Query(sort: \FatLossProgram.createdAt, order: .reverse) private var programs: [FatLossProgram]
 
     private var progressSummary: TrainingProgressSummary {
         TrainingMetrics.progressSummary(
@@ -31,6 +32,7 @@ struct PlanView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 22) {
+                SprintPageHeader(title: "计划与动作", icon: "dumbbell")
                 NavigationLink(destination: ScheduleView()) {
                     upcomingPlanCard
                 }
@@ -38,12 +40,12 @@ struct PlanView: View {
                 .accessibilityIdentifier("训练计划入口")
 
                 VStack(alignment: .leading, spacing: 10) {
-                    SectionHeader(title: "计划与动作")
+                    SprintSectionHeading(title: "训练管理", icon: "square.grid.2x2")
                     quickSettings
                 }
 
                 VStack(alignment: .leading, spacing: 10) {
-                    SectionHeader(title: "最近训练", actionTitle: "查看全部")
+                    SprintSectionHeading(title: "最近训练", icon: "clock.arrow.circlepath")
                     NavigationLink(destination: HistoryView()) {
                         historyEntryCard
                     }
@@ -56,13 +58,13 @@ struct PlanView: View {
                         .padding(.top, 12)
                 }
                 .font(.subheadline)
-                .tint(AppTheme.accent)
+                .tint(AppTheme.ink)
             }
             .padding(.horizontal, 20)
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
-        .screenBackground()
+        .sprintPage()
         .navigationTitle("训练管理")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -80,7 +82,7 @@ struct PlanView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("本周进度")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text("完成记录与工作组的简要汇总")
                         .font(.caption2)
                         .foregroundStyle(AppTheme.secondaryText)
@@ -88,7 +90,7 @@ struct PlanView: View {
                 Spacer()
                 Image(systemName: "chart.bar.fill")
                     .font(.headline)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .frame(width: 44, height: 44)
                     .background(AppTheme.accent.opacity(0.12), in: RoundedRectangle(cornerRadius: 11))
             }
@@ -103,13 +105,13 @@ struct PlanView: View {
                 ProgressView(
                     value: Double(completedSchedules) / Double(weekSchedules.count)
                 )
-                .tint(AppTheme.accent)
+                .tint(AppTheme.ink)
                 .accessibilityLabel("本周计划完成进度")
                 Text("日程完成 \(completedSchedules)/\(weekSchedules.count) · 容量包含本周全部完成记录")
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
             } else {
-                Text("本周暂无训练计划，可从“今日编排”安排训练。")
+                Text("本周暂无安排，可从“今日编排”添加。")
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
             }
@@ -122,7 +124,7 @@ struct PlanView: View {
         VStack(alignment: .leading, spacing: 3) {
             Text(value)
                 .font(.headline.bold().monospacedDigit())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
                 .lineLimit(1)
                 .minimumScaleFactor(0.72)
             Text(label)
@@ -161,19 +163,20 @@ struct PlanView: View {
 
     private var upcomingPlanCard: some View {
         VStack(alignment: .leading, spacing: 18) {
+            SprintIcon(systemName: "calendar", size: 48, prominent: true)
             HStack {
                 Label("下一次训练", systemImage: "calendar")
-                    .font(.caption.weight(.bold)).foregroundStyle(AppTheme.accent)
+                    .font(.caption.weight(.bold)).foregroundStyle(AppTheme.ink)
                 Spacer()
                 Image(systemName: "arrow.up.right").font(.subheadline.weight(.semibold))
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
             if let schedule = nextSchedule {
                 let items = templateExercises.filter { $0.templateID == schedule.templateID }
                 let totalSets = items.reduce(0) { $0 + $1.targetSets }
                 VStack(alignment: .leading, spacing: 7) {
                     Text(schedule.templateName)
-                        .font(.title2.weight(.bold)).foregroundStyle(.white)
+                        .font(.title2.weight(.bold)).foregroundStyle(AppTheme.ink)
                     Text(briefDate(schedule.plannedDate))
                         .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 }
@@ -181,15 +184,15 @@ struct PlanView: View {
                     Text("\(items.count) 个动作 · \(totalSets) 个工作组")
                         .font(.caption).foregroundStyle(AppTheme.secondaryText)
                     Spacer(minLength: 8)
-                    Text("查看日程").font(.caption.weight(.semibold)).foregroundStyle(AppTheme.accent)
+                    Text("查看日程").font(.caption.weight(.semibold)).foregroundStyle(AppTheme.ink)
                 }
             } else {
                 VStack(alignment: .leading, spacing: 7) {
-                    Text("安排下一次训练").font(.title2.weight(.bold)).foregroundStyle(.white)
+                    Text("安排下一次训练").font(.title2.weight(.bold)).foregroundStyle(AppTheme.ink)
                     Text("选择日期，放入你的训练计划")
                         .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 }
-                Text("打开日程").font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.accent)
+                Text("打开日程").font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.ink)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -208,7 +211,7 @@ struct PlanView: View {
         HStack(spacing: 14) {
             Image(systemName: icon)
                 .font(.title3.bold())
-                .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.accent)
+                .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.ink)
                 .frame(width: 48, height: 48)
                 .background(
                     (empty ? AppTheme.elevatedSurface : AppTheme.accent.opacity(0.12)),
@@ -218,10 +221,10 @@ struct PlanView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(eyebrow)
                     .font(.caption2.bold())
-                    .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.accent)
+                    .foregroundStyle(empty ? AppTheme.secondaryText : AppTheme.ink)
                 Text(title)
                     .font(.headline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                     .lineLimit(1)
                 Text(detail)
                     .font(.caption)
@@ -244,6 +247,18 @@ struct PlanView: View {
 
     private var quickSettings: some View {
         VStack(spacing: 0) {
+            if let program = programs.first(where: { $0.statusRaw == "active" }) {
+                NavigationLink(destination: FatLossTrainingView(program: program)) {
+                    quickSettingCard(
+                        icon: "calendar.badge.plus",
+                        title: "训练编排与导入",
+                        detail: "先预览，再确认加入日程"
+                    )
+                }
+                .accessibilityLabel("训练编排与导入")
+                .accessibilityIdentifier("训练管理-训练编排导入")
+                Divider().overlay(AppTheme.line).padding(.leading, 54)
+            }
             NavigationLink(destination: DailyWorkoutBuilderView()) {
                 quickSettingCard(
                     icon: "wand.and.stars",
@@ -282,7 +297,7 @@ struct PlanView: View {
         HStack(spacing: 14) {
             Image(systemName: icon)
                 .font(.subheadline).foregroundStyle(AppTheme.secondaryText).frame(width: 22)
-            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.white)
+            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.ink)
             Spacer(minLength: 8)
             Image(systemName: "chevron.right")
                 .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
@@ -332,8 +347,8 @@ private struct TrainingSetupView: View {
     }
 
     private var libraryCategories: [ExerciseMuscleCategory] {
-        librarySourceExercises.map {
-            ExerciseMuscleTaxonomy.category(name: $0.name, muscleGroup: $0.muscleGroup)
+        librarySourceExercises.flatMap {
+            ExerciseMuscleTaxonomy.filterCategories(name: $0.name, muscleGroup: $0.muscleGroup)
         }
     }
 
@@ -352,15 +367,14 @@ private struct TrainingSetupView: View {
     private var filteredExercises: [Exercise] {
         let muscleMatches = librarySourceExercises
             .filter { exercise in
-                let category = ExerciseMuscleTaxonomy.category(
+                let categories = ExerciseMuscleTaxonomy.filterCategories(
                     name: exercise.name,
                     muscleGroup: exercise.muscleGroup
                 )
-                let matchesMajor = selectedMajorMuscleGroup == "全部"
-                    || category.majorGroup == selectedMajorMuscleGroup
-                let matchesMinor = selectedMinorMuscleGroup == "全部"
-                    || category.minorGroup == selectedMinorMuscleGroup
-                return matchesMajor && matchesMinor
+                return categories.contains { category in
+                    (selectedMajorMuscleGroup == "全部" || category.majorGroup == selectedMajorMuscleGroup)
+                        && (selectedMinorMuscleGroup == "全部" || category.minorGroup == selectedMinorMuscleGroup)
+                }
         }
         guard !searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             return muscleMatches.sorted { lhs, rhs in
@@ -409,6 +423,8 @@ private struct TrainingSetupView: View {
 
     var body: some View {
         VStack(spacing: 12) {
+            SprintPageHeader(title: setupTitle, icon: selectedMode == 2 ? "dumbbell" : "calendar")
+                .padding(.horizontal, 20)
             modePicker
                 .padding(.horizontal, 20)
 
@@ -451,7 +467,7 @@ private struct TrainingSetupView: View {
                 }
             }
         }
-        .screenBackground()
+        .sprintPage()
         .navigationTitle(setupTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -473,26 +489,26 @@ private struct TrainingSetupView: View {
                 template: nil,
                 storedItems: templateExercises
             )
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .sheet(item: $editingTemplate) { template in
             TemplateEditorView(
                 template: template,
                 storedItems: templateExercises
             )
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .sheet(isPresented: $showNewExerciseEditor) {
             ExerciseEditorView()
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .sheet(item: $editingExercise) { exercise in
             ExerciseEditorView(exercise: exercise)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .sprintPage()
+                .tint(AppTheme.ink)
         }
         .alert("删除这个训练计划？", isPresented: Binding(
             get: { pendingDelete != nil },
@@ -555,7 +571,7 @@ private struct TrainingSetupView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("本周训练")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text("\(templates.filter(\.isActive).count) 个训练日")
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
@@ -563,7 +579,7 @@ private struct TrainingSetupView: View {
                 Spacer()
                 Image(systemName: "calendar.badge.checkmark")
                     .font(.title3)
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
 
             HStack(spacing: 7) {
@@ -601,11 +617,11 @@ private struct TrainingSetupView: View {
         } label: {
             HStack(spacing: 14) {
                 Image(systemName: templateIcon(template))
-                    .font(.title3).foregroundStyle(AppTheme.accent)
+                    .font(.title3).foregroundStyle(AppTheme.ink)
                     .frame(width: 40, height: 44)
                 VStack(alignment: .leading, spacing: 6) {
                     Text(template.name)
-                        .font(.headline).foregroundStyle(.white)
+                        .font(.headline).foregroundStyle(AppTheme.ink)
                         .fixedSize(horizontal: false, vertical: true)
                     Text("\(items.count) 个动作 · \(items.reduce(0) { $0 + $1.targetSets }) 个工作组")
                         .font(.caption).foregroundStyle(AppTheme.secondaryText)
@@ -627,7 +643,7 @@ private struct TrainingSetupView: View {
                     .foregroundStyle(AppTheme.secondaryText)
                 TextField("搜索动作…", text: $searchText)
                     .textInputAutocapitalization(.never)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                     .accessibilityIdentifier("exercise-library-search")
             }
             .padding(.horizontal, 14)
@@ -670,7 +686,7 @@ private struct TrainingSetupView: View {
                     systemImage: showArchivedExercises ? "arrow.uturn.backward" : "archivebox"
                 )
                 .font(.caption.bold())
-                .foregroundStyle(showArchivedExercises ? AppTheme.accent : AppTheme.secondaryText)
+                .foregroundStyle(showArchivedExercises ? AppTheme.ink : AppTheme.secondaryText)
             }
 
             LazyVStack(spacing: 10) {
@@ -727,11 +743,16 @@ private struct TrainingSetupView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(exercise.name)
                     .font(.subheadline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                     .accessibilityIdentifier("exercise-name-\(exercise.name)")
                 Text(latest?.dateText ?? "还没有训练记录")
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
+                if let summary = ExerciseCatalogService.muscleSummary(for: exercise) {
+                    Text(summary)
+                        .font(.caption2)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }
             }
             Spacer()
             if let latest {
@@ -744,10 +765,18 @@ private struct TrainingSetupView: View {
             }
             Menu {
                 if exercise.isArchived {
-                    Button {
-                        setArchived(exercise, archived: false)
-                    } label: {
-                        Label("恢复动作", systemImage: "arrow.uturn.backward")
+                    if let primary = ExerciseCatalogService.mergedPrimary(for: exercise, among: exercises) {
+                        Button {
+                            editingExercise = primary
+                        } label: {
+                            Label("已合并 · 查看主动作", systemImage: "arrow.forward.circle")
+                        }
+                    } else {
+                        Button {
+                            setArchived(exercise, archived: false)
+                        } label: {
+                            Label("恢复动作", systemImage: "arrow.uturn.backward")
+                        }
                     }
                 } else {
                     Button {
@@ -870,6 +899,7 @@ struct TemplateEditorView: View {
     @State private var storedItems: [TemplateExercise]
     @State private var drafts: [ExerciseDraft]
     @State private var isLoadingStoredItems: Bool
+    @State private var showTemplateExercisePicker = false
     @State private var errorMessage: String?
 
     init(template: WorkoutTemplate?, storedItems: [TemplateExercise]) {
@@ -889,7 +919,12 @@ struct TemplateEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("基本信息") {
+                Section {
+                    SprintPageHeader(title: template == nil ? "新建模板" : "编辑模板", icon: "square.stack.3d.up")
+                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                        .listRowBackground(Color.clear)
+                }
+                Section {
                     TextField("计划名称", text: $name)
                     Menu {
                         ForEach(availableMuscleGroups, id: \.self) { muscleGroup in
@@ -909,13 +944,15 @@ struct TemplateEditorView: View {
                         }
                     }
                     .accessibilityIdentifier("专项模板目标肌群")
+                } header: {
+                    SprintSectionHeading(title: "基本信息", icon: "square.and.pencil")
                 }
 
                 Section {
                     if isLoadingStoredItems && drafts.isEmpty {
                         ProgressView("正在加载动作…")
                     } else if drafts.isEmpty {
-                        Text("还没有动作，请从动作库添加。")
+                        Label("从动作库添加动作", systemImage: "plus.circle")
                             .foregroundStyle(.secondary)
                     }
 
@@ -932,19 +969,11 @@ struct TemplateEditorView: View {
                         drafts.move(fromOffsets: source, toOffset: destination)
                     }
 
-                    Menu {
-                        ForEach(groupedAvailableExercises, id: \.id) { group in
-                            Section("\(group.equipment) · \(group.muscleGroup)") {
-                                ForEach(group.items) { exercise in
-                                    Button(exercise.name) {
-                                        add(exercise)
-                                    }
-                                }
-                            }
-                        }
-                    } label: {
+                    Button { showTemplateExercisePicker = true } label: {
                         Label("添加动作", systemImage: "plus.circle.fill")
+                            .frame(minHeight: 44)
                     }
+                    .accessibilityIdentifier("模板添加动作")
                     .disabled(availableExercises.isEmpty)
                 } header: {
                     Text("动作与目标")
@@ -953,7 +982,7 @@ struct TemplateEditorView: View {
                 }
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .scrollDismissesKeyboard(.interactively)
             .toolbar {
                 ToolbarItemGroup(placement: .keyboard) {
@@ -973,6 +1002,14 @@ struct TemplateEditorView: View {
                         .fontWeight(.semibold)
                         .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || drafts.isEmpty)
                 }
+            }
+            .sheet(isPresented: $showTemplateExercisePicker) {
+                ExercisePickerSheet(title: "添加模板动作",
+                    initialMuscleGroup: sortedSelectedMuscleGroups.first ?? "",
+                    excludedExerciseIDs: Set(drafts.map(\.exerciseID))) { exercise in
+                        add(exercise)
+                    }
+                    .sprintPage().tint(AppTheme.ink)
             }
             .task(id: template?.id) {
                 loadStoredItems()
@@ -1186,7 +1223,12 @@ private struct LegacyExerciseEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("动作信息") {
+                Section {
+                    SprintPageHeader(title: exercise == nil ? "新建动作" : "编辑动作", icon: "dumbbell")
+                        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                        .listRowBackground(Color.clear)
+                }
+                Section {
                     TextField("动作名称", text: $name)
                     TextField("目标肌群", text: $muscleGroup)
                     TextField("器械", text: $equipment)
@@ -1195,15 +1237,19 @@ private struct LegacyExerciseEditorView: View {
                             Text("\(seconds) 秒").tag(seconds)
                         }
                     }
+                } header: {
+                    SprintSectionHeading(title: "动作信息", icon: "dumbbell")
                 }
 
-                Section("备注") {
+                Section {
                     TextField("动作要点、器械位置等", text: $notes, axis: .vertical)
                         .lineLimit(3...6)
+                } header: {
+                    SprintSectionHeading(title: "备注", icon: "note.text")
                 }
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .scrollDismissesKeyboard(.interactively)
             .navigationTitle(exercise == nil ? "新建动作" : "编辑动作")
             .navigationBarTitleDisplayMode(.inline)
@@ -1341,7 +1387,7 @@ private struct DraftExerciseEditor: View {
             } else if exercise?.volumeUnit == .bodyweight {
                 Text("自重")
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .frame(maxWidth: .infinity)
             }
 

@@ -1,0 +1,56 @@
+{
+  "raw_payload_retirement": "preserved_tracked_acceptance_and_rollback_material",
+  "original_bundle_path": "/Users/edward/Documents/Fitness App/outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-t5-run6.xcresult",
+  "original_body_fingerprint_sha256": "e60969aa83779408edae3949ee266a6d7a57c1cd8e137199b51e847361e744e1",
+  "summary_read": {
+    "read_exit": 0,
+    "read_error": null,
+    "summary": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "00008150-001E49912122401C",
+            "deviceName": "Edward_iPhone",
+            "modelName": "iPhone 17",
+            "osBuildNumber": "23G71",
+            "osVersion": "26.6",
+            "platform": "iOS"
+          },
+          "expectedFailures": 0,
+          "failedTests": 1,
+          "passedTests": 0,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "FitnessApp · Built with macOS 26.6.2",
+      "expectedFailures": 0,
+      "failedTests": 1,
+      "finishTime": 1788365124.478,
+      "passedTests": 0,
+      "result": "Failed",
+      "skippedTests": 0,
+      "startTime": 1788365080.801,
+      "statistics": [],
+      "testFailures": [
+        {
+          "failureText": "Test crashed with signal kill.",
+          "targetName": "FitnessAppUITests",
+          "testIdentifier": 1,
+          "testIdentifierString": "FitnessAppUITests/testDeviceTemplateWritebackAfterFinishAndPersist()",
+          "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/FitnessAppUITests/testDeviceTemplateWritebackAfterFinishAndPersist",
+          "testName": "testDeviceTemplateWritebackAfterFinishAndPersist()"
+        }
+      ],
+      "title": "Test - FitnessApp",
+      "topInsights": [],
+      "totalTestCount": 1
+    }
+  },
+  "raw_archive_or_restore_available": false,
+  "raw_original_still_present": true
+}

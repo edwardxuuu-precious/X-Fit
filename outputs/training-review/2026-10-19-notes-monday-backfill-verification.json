@@ -1,0 +1,749 @@
+{
+  "status": "PASS_PHONE_COMPLETED_AND_READ_BACK",
+  "targetSessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+  "targetScheduleID": "5185deb9-cfb7-5810-b9ec-e33cfdcac179",
+  "sourceSHA256": "9c3086d1dac7165cb6fc791bf4e83737afced5dce8d5a01a691470afe0786fdd",
+  "sourceExerciseCount": 9,
+  "actualCompletedSets": 38,
+  "existingCompletedSetsPreserved": 4,
+  "additionalCompletedSets": 34,
+  "newSetLogRecords": 25,
+  "retainedUncompletedDraftRows": 7,
+  "unknownRIRAllNil": true,
+  "originalFourAllBusinessFieldsAndIDsUnchanged": true,
+  "allOriginalRecordIDsRetained": true,
+  "otherSessionsAndCatalogRecordsUnchanged": true,
+  "allOtherModelTablesUnchanged": true,
+  "noNewWorkoutSession": true,
+  "databaseIntegrity": "ok",
+  "beforeSnapshot": "artifacts/training-sync/20261019-notes-monday-before",
+  "actualSetsSnapshot": "artifacts/training-sync/20261019-notes-monday-pre-finish-2",
+  "completionApplied": true,
+  "metadataComplete": true,
+  "metadataSavedPartial": null,
+  "counts": {
+    "ZBODYMEASUREMENT": {
+      "before": 22,
+      "after": 22
+    },
+    "ZDAILYBODYCHECKIN": {
+      "before": 5,
+      "after": 5
+    },
+    "ZEXERCISE": {
+      "before": 178,
+      "after": 181
+    },
+    "ZFATLOSSPROGRAM": {
+      "before": 1,
+      "after": 1
+    },
+    "ZHYDRATIONENTRY": {
+      "before": 0,
+      "after": 0
+    },
+    "ZJUMPROPEENTRY": {
+      "before": 2,
+      "after": 2
+    },
+    "ZMEALENTRY": {
+      "before": 33,
+      "after": 33
+    },
+    "ZNUTRITIONTARGET": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPLANNEDMEAL": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMDAILYLOG": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMHEALTHRECORD": {
+      "before": 3,
+      "after": 3
+    },
+    "ZPROGRAMTARGETREVISION": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPROGRAMWEEKLYREVIEW": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMWORKOUTLINK": {
+      "before": 21,
+      "after": 21
+    },
+    "ZRECIPEVERSION": {
+      "before": 18,
+      "after": 18
+    },
+    "ZSCHEDULEDWORKOUT": {
+      "before": 54,
+      "after": 54
+    },
+    "ZSEDENTARYSESSION": {
+      "before": 0,
+      "after": 0
+    },
+    "ZSESSIONEXERCISE": {
+      "before": 316,
+      "after": 321
+    },
+    "ZSETLOG": {
+      "before": 1249,
+      "after": 1274
+    },
+    "ZTEMPLATEEXERCISE": {
+      "before": 208,
+      "after": 208
+    },
+    "ZTRAININGCOACHRECORD": {
+      "before": 0,
+      "after": 0
+    },
+    "ZTRAININGPREFERENCEREVISION": {
+      "before": 5,
+      "after": 5
+    },
+    "ZTRAININGPROGRAMREVISION": {
+      "before": 5,
+      "after": 5
+    },
+    "ZWORKOUTSESSION": {
+      "before": 51,
+      "after": 51
+    },
+    "ZWORKOUTTEMPLATE": {
+      "before": 41,
+      "after": 41
+    }
+  },
+  "changedTables": {
+    "ZEXERCISE": {
+      "addedIDs": [
+        "ac3d466d64fc49b3b311cabbd4f2a6da",
+        "ba327b4155ad49f7bfb2b948135635b2",
+        "c896a8f98ede4351ad7bbf83ea8ff7b1"
+      ],
+      "modifiedIDs": [],
+      "fieldChanges": {}
+    },
+    "ZSCHEDULEDWORKOUT": {
+      "addedIDs": [],
+      "modifiedIDs": [
+        "5185deb9cfb75810b9ece33cfdcac179"
+      ],
+      "fieldChanges": {
+        "5185deb9cfb75810b9ece33cfdcac179": [
+          "ZSTATUSRAW"
+        ]
+      }
+    },
+    "ZSESSIONEXERCISE": {
+      "addedIDs": [
+        "328e14d7f2ff423fad761e62b563cc86",
+        "6c42f2fcf5814776b5f45ebf083f1431",
+        "97381414a3114385922fb1554fc6d3d6",
+        "b6428488064c4ade8e091b57421121a7",
+        "ec86d16905114c728f4cd036ab8e8210"
+      ],
+      "modifiedIDs": [
+        "66c5be9b52604cefb49820980e3c594c",
+        "69cb54b861944e189aec2f7fa48135c5",
+        "6be867c0875042a78fb30547e8eb0c22",
+        "d2973cb6c2754df1be007409c24a0bb5",
+        "e93a850e469e4463b4b75152ed8bf5c6"
+      ],
+      "fieldChanges": {
+        "66c5be9b52604cefb49820980e3c594c": [
+          "ZTARGETSETS",
+          "ZEXERCISECOMPLETEDAT"
+        ],
+        "69cb54b861944e189aec2f7fa48135c5": [
+          "ZTARGETSETS",
+          "ZEXERCISECOMPLETEDAT",
+          "ZEXERCISESTARTEDAT"
+        ],
+        "6be867c0875042a78fb30547e8eb0c22": [
+          "ZTARGETSETS",
+          "ZEXERCISECOMPLETEDAT",
+          "ZEXERCISESTARTEDAT"
+        ],
+        "d2973cb6c2754df1be007409c24a0bb5": [
+          "ZEXERCISESTARTEDAT"
+        ],
+        "e93a850e469e4463b4b75152ed8bf5c6": [
+          "ZTARGETSETS",
+          "ZEXERCISECOMPLETEDAT",
+          "ZEXERCISESTARTEDAT"
+        ]
+      }
+    },
+    "ZSETLOG": {
+      "addedIDs": [
+        "00cd9e363b13409e8f87405e60b97002",
+        "074c4e3b10e94bae9c44d4e319b5124b",
+        "32321974e13949578c9f2d56cb9d5486",
+        "58ab282b22264a1885c7a455b38e8a44",
+        "6652949d0e47464f8fe71ef291a95814",
+        "750f78ddf33345309d330a56dda2e38d",
+        "753deffb39664f64a64971c15e999ed2",
+        "789616092d124b6b8c7024d462256ea3",
+        "8bd0c51801184517aef074b72231c0dc",
+        "92bd02467a234925881973788fcd3418",
+        "a92ae3b4bf59416aa175f3ccfda33b62",
+        "aae5cdaa68e64295b2b785d8fe78e7b3",
+        "ab882aac44a242d38ea7d244f341d9c2",
+        "b0403623607d4f55b3f897f037872253",
+        "b73cb70da1ea4371be02c08c1ddd6c09",
+        "b8dea10928be45f682fa207c4ea9b659",
+        "bb143792ef374f169ab6e8f994308a3d",
+        "c0f31e9ac3b447b897207794ff9c7a44",
+        "d051aba7b51e4b90b7f2b3eb5e158367",
+        "da151bd11e554a458ce4122ef5314e94",
+        "e154ab3190f6465aae61f05627d50703",
+        "e5a74a19507d465c87ce95d0c242c30f",
+        "f8c4c6e55f4e4957bb4558b1706bf388",
+        "fa47f1256fd8432fbdc6b48679aaa8c9",
+        "fb197b90a95d4ab0a2011113f0d1a40e"
+      ],
+      "modifiedIDs": [
+        "02965981a1914c8690e5ef2128802847",
+        "11fc24cd380d4f089abd70bff74cb4eb",
+        "239b81015aaa4dea8712e8959a24e34e",
+        "8ef15c5a13094e3e96b816a97f5b3a4b",
+        "b1f9ebac926b48c8862e0a6ef7b08226",
+        "ccda1161beca4621acf772e0acbe8b22",
+        "dfa1e422967e476b8112e813fa7e4e8f",
+        "ebf9184427994b5987f10f64c55ca10b",
+        "fd6af548f1884bb2897dd1b4af1504b2"
+      ],
+      "fieldChanges": {
+        "02965981a1914c8690e5ef2128802847": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "11fc24cd380d4f089abd70bff74cb4eb": [
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "239b81015aaa4dea8712e8959a24e34e": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "8ef15c5a13094e3e96b816a97f5b3a4b": [
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "b1f9ebac926b48c8862e0a6ef7b08226": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "ccda1161beca4621acf772e0acbe8b22": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "dfa1e422967e476b8112e813fa7e4e8f": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "ebf9184427994b5987f10f64c55ca10b": [
+          "ZACTUALREPS",
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ],
+        "fd6af548f1884bb2897dd1b4af1504b2": [
+          "ZISCOMPLETED",
+          "ZACTUALWEIGHT",
+          "ZCOMPLETEDAT",
+          "ZACTUALENTRYSOURCERAW"
+        ]
+      }
+    },
+    "ZWORKOUTSESSION": {
+      "addedIDs": [],
+      "modifiedIDs": [
+        "0dd77d670967439aa50ac07d0b43cfee"
+      ],
+      "fieldChanges": {
+        "0dd77d670967439aa50ac07d0b43cfee": [
+          "ZCOMPLETEDAT",
+          "ZNOTES",
+          "ZSTATUSRAW"
+        ]
+      }
+    }
+  },
+  "assetsUnchanged": true,
+  "limitations": [
+    "Normal UI couples weight side and reps side for new actions; known per-side weight basis is preserved in notes, new structured side fields remain unknown.",
+    "New set timestamps reflect retrospective data entry, not real workout end or duration.",
+    "Opening the unperformed overhead-extension card set its view-driven exercise start timestamp; its three set logs remain unchanged and uncompleted."
+  ],
+  "blocker": null,
+  "blockerScreenshot": null,
+  "verifiedAt": "2026-10-19T21:58:10+08:00",
+  "finalSnapshot": "artifacts/training-sync/20261019-notes-monday-final",
+  "sessionStatus": "completed",
+  "scheduleStatus": "completed",
+  "sourceMetadata": "Oct19 2026 Notes backfill. Smith flat and incline kg per side plates excluding bar. MTS decline， Dip， Fly and shoulder Side/Front/reverse kg per side. Pushdown original stack kg both sides total. Rep numbers match Notes. New rep SIDE and all RIR are unknown. Warmup/work type， actual rest/end/duration unknown. New timestamps are entry times only， not workout duration. Original4 preserved；7 plan rows unconfirmed.",
+  "completedAtMeaning": "Retrospective completion confirmation time; actual training end and duration unknown",
+  "completedAtAppReferenceSeconds": 814110964.182767,
+  "sourceAndAppSets": [
+    {
+      "sourceName": "Smith Bench Press",
+      "appName": "史密斯卧推",
+      "sessionExerciseID": "66c5be9b-5260-4cef-b498-20980e3c594c",
+      "exerciseID": "5e1cec70-a19c-4da8-abf1-75c41e489943",
+      "sets": [
+        {
+          "setLogID": "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7",
+          "setNumber": 1,
+          "weight": 25.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "d68343aa-8aa0-4567-bfd4-3b9aca1d0472",
+          "setNumber": 2,
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "1c053603-2189-4a2e-a3e8-c96f9b7e6b31",
+          "setNumber": 3,
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "2c5171b4-7215-4122-b4f0-cf8e14945724",
+          "setNumber": 4,
+          "weight": 40.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "750f78dd-f333-4530-9d33-0a56dda2e38d",
+          "setNumber": 5,
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Smith Inclined Bench Press",
+      "appName": "史密斯上斜卧推",
+      "sessionExerciseID": "328e14d7-f2ff-423f-ad76-1e62b563cc86",
+      "exerciseID": "e914d0e3-85b1-405b-842b-17c8113c9ca3",
+      "sets": [
+        {
+          "setLogID": "b0403623-607d-4f55-b3f8-97f037872253",
+          "setNumber": 1,
+          "weight": 20.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "78961609-2d12-4b6b-8c70-24d462256ea3",
+          "setNumber": 2,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "32321974-e139-4957-8c9f-2d56cb9d5486",
+          "setNumber": 3,
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "a92ae3b4-bf59-416a-a175-f3ccfda33b62",
+          "setNumber": 4,
+          "weight": 35.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "58ab282b-2226-4a18-85c7-a455b38e8a44",
+          "setNumber": 5,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "MTS Declined Bench Press",
+      "appName": "MTS器械下斜推胸",
+      "sessionExerciseID": "69cb54b8-6194-4e18-9aec-2f7fa48135c5",
+      "exerciseID": "bd2601d3-a32c-4d29-8c41-cb9152e2533a",
+      "sets": [
+        {
+          "setLogID": "02965981-a191-4c86-90e5-ef2128802847",
+          "setNumber": 1,
+          "weight": 22.5,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "ccda1161-beca-4621-acf7-72e0acbe8b22",
+          "setNumber": 2,
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "fd6af548-f188-4bb2-897d-d1b4af1504b2",
+          "setNumber": 3,
+          "weight": 27.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "d051aba7-b51e-4b90-b7f2-b3eb5e158367",
+          "setNumber": 4,
+          "weight": 30.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Seated Dip",
+      "appName": "坐姿器械臂屈伸",
+      "sessionExerciseID": "b6428488-064c-4ade-8e09-1b57421121a7",
+      "exerciseID": "5ef86df6-9f82-45d8-8592-2dd4fb9bb8a1",
+      "sets": [
+        {
+          "setLogID": "da151bd1-1e55-4a45-8ce4-122ef5314e94",
+          "setNumber": 1,
+          "weight": 30.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "fb197b90-a95d-4ab0-a201-1113f0d1a40e",
+          "setNumber": 2,
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "e5a74a19-507d-465c-87ce-95d0c242c30f",
+          "setNumber": 3,
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "b73cb70d-a1ea-4371-be02-c08c1ddd6c09",
+          "setNumber": 4,
+          "weight": 45.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable Fly",
+      "appName": "站姿绳索夹胸",
+      "sessionExerciseID": "6be867c0-8750-42a7-8fb3-0547e8eb0c22",
+      "exerciseID": "8de3ee03-a5a3-4767-954b-333d4bd17332",
+      "sets": [
+        {
+          "setLogID": "8ef15c5a-1309-4e3e-96b8-16a97f5b3a4b",
+          "setNumber": 1,
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "dfa1e422-967e-476b-8112-e813fa7e4e8f",
+          "setNumber": 2,
+          "weight": 12.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "11fc24cd-380d-4f08-9abd-70bff74cb4eb",
+          "setNumber": 3,
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "fa47f125-6fd8-432f-bdc6-b48679aaa8c9",
+          "setNumber": 4,
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "三头绳索下压",
+      "appName": "绳索下压",
+      "sessionExerciseID": "e93a850e-469e-4463-b4b7-5152ed8bf5c6",
+      "exerciseID": "bd28555c-efc5-49a6-b267-5bf091c103fc",
+      "sets": [
+        {
+          "setLogID": "b1f9ebac-926b-48c8-862e-0a6ef7b08226",
+          "setNumber": 1,
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "239b8101-5aaa-4dea-8712-e8959a24e34e",
+          "setNumber": 2,
+          "weight": 12.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "ebf91844-2799-4b59-87f1-0f64c55ca10b",
+          "setNumber": 3,
+          "weight": 15.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "setLogID": "ab882aac-44a2-42d3-8ea7-d244f341d9c2",
+          "setNumber": 4,
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Side pull",
+      "appName": "Cable shoulder Side pull",
+      "sessionExerciseID": "ec86d169-0511-4c72-8f4c-d036ab8e8210",
+      "exerciseID": "c896a8f9-8ede-4351-ad7b-bf83ea8ff7b1",
+      "sets": [
+        {
+          "setLogID": "aae5cdaa-68e6-4295-b2b7-85d8fe78e7b3",
+          "setNumber": 1,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "753deffb-3966-4f64-a649-71c15e999ed2",
+          "setNumber": 2,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "e154ab31-90f6-465a-ae61-f05627d50703",
+          "setNumber": 3,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "b8dea109-28be-45f6-82fa-207c4ea9b659",
+          "setNumber": 4,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Front pull",
+      "appName": "Cable shoulder Front pull",
+      "sessionExerciseID": "97381414-a311-4385-922f-b1554fc6d3d6",
+      "exerciseID": "ba327b41-55ad-49f7-bfb2-b948135635b2",
+      "sets": [
+        {
+          "setLogID": "6652949d-0e47-464f-8fe7-1ef291a95814",
+          "setNumber": 1,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "074c4e3b-10e9-4bae-9c44-d4e319b5124b",
+          "setNumber": 2,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "00cd9e36-3b13-409e-8f87-405e60b97002",
+          "setNumber": 3,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "92bd0246-7a23-4925-8819-73788fcd3418",
+          "setNumber": 4,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder reverse pull",
+      "appName": "Cable shoulder reverse pull",
+      "sessionExerciseID": "6c42f2fc-f581-4776-b5f4-5ebf083f1431",
+      "exerciseID": "ac3d466d-64fc-49b3-b311-cabbd4f2a6da",
+      "sets": [
+        {
+          "setLogID": "bb143792-ef37-4f16-9ab6-e8f994308a3d",
+          "setNumber": 1,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "8bd0c518-0118-4517-aef0-74b72231c0dc",
+          "setNumber": 2,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "f8c4c6e5-5f4e-4957-bb45-58b1706bf388",
+          "setNumber": 3,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "c0f31e9a-c3b4-47b8-9720-7794ff9c7a44",
+          "setNumber": 4,
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    }
+  ],
+  "allSevenUncompletedDraftRowsUnchanged": true,
+  "phoneBusinessRecordsBefore": 2214,
+  "phoneBusinessRecordsAfter": 2247,
+  "phoneScreenshot": "outputs/training-review/2026-10-19-monday-backfill-completed-phone.png",
+  "mainSimulatorRefresh": {
+    "status": "PASS",
+    "evidence": "outputs/simulator-real-data/20261019-215820/result.json",
+    "source": "/Users/edward/Documents/Fitness App/artifacts/training-sync/20261019-notes-monday-final",
+    "sourceIsFinalPhoneSnapshot": true,
+    "recordsMatched": 2247,
+    "normalLaunch": true,
+    "cloudSyncEnabled": false,
+    "phoneWritesByRefresh": 0
+  },
+  "latestDayPlanReconciliation": "outputs/training-review/2026-10-19-notes-plan-reconciliation-verification.json",
+  "historicalResultNote": "Initial merge retained seven old drafts, then owner explicitly confirmed Notes as day plan and removal of those drafts. Current result is 38/38; see latest reconciliation."
+}

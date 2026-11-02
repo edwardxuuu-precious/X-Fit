@@ -23,6 +23,7 @@ private enum TrainingTrendMode: String, CaseIterable, Identifiable {
 }
 
 struct StatsView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Query private var sessions: [WorkoutSession]
     @Query private var schedules: [ScheduledWorkout]
     @Query private var setLogs: [SetLog]
@@ -81,6 +82,7 @@ struct StatsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
+                SprintPageHeader(title: "训练趋势", icon: "chart.xyaxis.line")
                 segmentControl
                 if selectedSegment == 0 {
                     workoutFrequencyCard
@@ -101,8 +103,8 @@ struct StatsView: View {
             .padding(.top, 12)
             .padding(.bottom, 26)
         }
-        .screenBackground()
-        .navigationTitle("力量与训练趋势")
+        .sprintPage()
+        .navigationTitle("训练趋势")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .environment(\.defaultMinListRowHeight, 52)
@@ -121,10 +123,13 @@ struct StatsView: View {
     }
 
     private var segmentControl: some View {
-        HStack(spacing: 3) {
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6))
+            : AnyLayout(HStackLayout(spacing: 3))
+        return layout {
             segmentButton("概览", value: 0)
             segmentButton("训练", value: 1)
-            segmentButton("身体数据", value: 2)
+            segmentButton("身体", value: 2)
         }
         .padding(4)
         .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 13))
@@ -135,29 +140,32 @@ struct StatsView: View {
         Button {
             selectedSegment = value
         } label: {
-            Text(title)
+            Label(title, systemImage: value == 0 ? "square.grid.2x2" : value == 1 ? "dumbbell" : "figure.arms.open")
                 .font(.caption.bold())
-                .foregroundStyle(selectedSegment == value ? .white : AppTheme.secondaryText)
+                .foregroundStyle(selectedSegment == value ? AppTheme.ink : AppTheme.secondaryText)
                 .frame(maxWidth: .infinity, minHeight: 44)
-                .background(selectedSegment == value ? AppTheme.elevatedSurface : .clear, in: RoundedRectangle(cornerRadius: 10))
+                .background(selectedSegment == value ? AppTheme.accent : .clear, in: RoundedRectangle(cornerRadius: 10))
         }
     }
 
     private var workoutFrequencyCard: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack {
+        let headerLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout())
+        return VStack(alignment: .leading, spacing: 16) {
+            headerLayout {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("近 7 天训练容量")
+                    Label("近 7 天容量", systemImage: "dumbbell")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text("完成 \(recentSessions.count) 次训练")
                         .font(.caption)
                         .foregroundStyle(AppTheme.secondaryText)
                 }
-                Spacer()
+                if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                 Text("近 7 天")
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
 
             Chart(dailyVolumePoints) { point in
@@ -183,21 +191,27 @@ struct StatsView: View {
             .chartPlotStyle { plot in
                 plot.background(Color.clear)
             }
-            .frame(height: 150)
+            .frame(height: 150).sprintChart()
 
             if recentSessions.isEmpty {
-                Text("完成第一次训练后，这里会开始形成你的节奏。")
+                Text("完成训练后显示容量")
                     .font(.caption)
                     .foregroundStyle(AppTheme.secondaryText)
             }
         }
-        .padding(.vertical, 8)
+        .cardSurface()
     }
 
     private var summaryGrid: some View {
-        ViewThatFits(in: .horizontal) {
-            HStack(spacing: 24) { summaryValues }
-            VStack(alignment: .leading, spacing: 16) { summaryValues }
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 16) { summaryValues }
+            } else {
+                ViewThatFits(in: .horizontal) {
+                    HStack(spacing: 24) { summaryValues }
+                    VStack(alignment: .leading, spacing: 16) { summaryValues }
+                }
+            }
         }.padding(.vertical, 8)
     }
 
@@ -207,22 +221,31 @@ struct StatsView: View {
     }
 
     private var goalProgressCard: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Text("到期计划完成率").font(.subheadline).foregroundStyle(AppTheme.secondaryText)
-                Spacer()
-                Text("\(completionRate)%").font(.headline.monospacedDigit()).foregroundStyle(.white)
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout())
+        return VStack(alignment: .leading, spacing: 10) {
+            layout {
+                Label("到期计划", systemImage: "checkmark.circle").font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                if !dynamicTypeSize.isAccessibilitySize { Spacer() }
+                Text("\(completionRate)%").font(.headline.monospacedDigit()).foregroundStyle(AppTheme.ink)
             }
-            ProgressView(value: Double(completionRate), total: 100).tint(AppTheme.accent)
-        }.padding(.vertical, 8)
+            ProgressView(value: Double(completionRate), total: 100).tint(AppTheme.ink)
+        }.cardSurface()
     }
 
     private var volumeTrendCard: some View {
-        VStack(alignment: .leading, spacing: 14) {
+        let selectorLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 6))
+            : AnyLayout(HStackLayout(spacing: 4))
+        let detailLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout(spacing: 8))
+        return VStack(alignment: .leading, spacing: 14) {
             VStack(alignment: .leading, spacing: 3) {
-                Text("训练容量趋势")
+                Label("容量趋势", systemImage: "chart.line.uptrend.xyaxis")
                     .font(.headline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Text(
                     trainingTrendMode == .overall
                         ? "已完成的 kg 动作"
@@ -232,17 +255,17 @@ struct StatsView: View {
                     .foregroundStyle(AppTheme.secondaryText)
             }
 
-            HStack(spacing: 4) {
+            selectorLayout {
                 ForEach(TrainingTrendMode.allCases) { mode in
                     Button {
                         trainingTrendMode = mode
                     } label: {
                         Text(mode.title)
                             .font(.caption.bold())
-                            .foregroundStyle(trainingTrendMode == mode ? .white : AppTheme.secondaryText)
+                            .foregroundStyle(trainingTrendMode == mode ? AppTheme.ink : AppTheme.secondaryText)
                             .frame(maxWidth: .infinity, minHeight: 44)
                             .background(
-                                trainingTrendMode == mode ? AppTheme.surface : .clear,
+                                trainingTrendMode == mode ? AppTheme.accent : .clear,
                                 in: RoundedRectangle(cornerRadius: 9)
                             )
                     }
@@ -262,15 +285,15 @@ struct StatsView: View {
                         }
                     }
                 } label: {
-                    HStack(spacing: 8) {
+                    detailLayout {
                         Text("动作")
                             .foregroundStyle(AppTheme.secondaryText)
                         Text(selectedExerciseTrend?.name ?? "选择动作")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(AppTheme.ink)
                             .fixedSize(horizontal: false, vertical: true)
-                        Spacer()
+                        if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                         Image(systemName: "chevron.down")
-                            .foregroundStyle(AppTheme.accent)
+                            .foregroundStyle(AppTheme.ink)
                     }
                     .font(.caption.bold())
                     .padding(.horizontal, 12)
@@ -286,9 +309,7 @@ struct StatsView: View {
                 HStack {
                     Spacer()
                     VStack(spacing: 9) {
-                        Image(systemName: "chart.line.uptrend.xyaxis")
-                            .font(.title)
-                            .foregroundStyle(AppTheme.accent)
+                        SprintIcon(systemName: "chart.line.uptrend.xyaxis", size: 48)
                         Text(trainingTrendMode == .overall ? "完成训练后显示容量变化" : "这个动作还没有完成组记录")
                             .font(.caption)
                             .foregroundStyle(AppTheme.secondaryText)
@@ -314,14 +335,14 @@ struct StatsView: View {
                         x: .value("日期", point.date),
                         y: .value("训练容量", point.volume)
                     )
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
 
                     PointMark(
                         x: .value("日期", point.date),
                         y: .value("训练容量", point.volume)
                     )
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .symbolSize(42)
                     .accessibilityLabel(
                         "\(point.date.formatted(date: .abbreviated, time: .omitted))，\(Int(point.volume)) \(displayedTrendUnit.symbol)，\(point.completedSets) 个完成组"
@@ -340,12 +361,12 @@ struct StatsView: View {
                         AxisValueLabel().foregroundStyle(AppTheme.secondaryText)
                     }
                 }
-                .frame(height: 180)
+                .frame(height: 180).sprintChart()
                 .accessibilityIdentifier("训练容量趋势图")
 
-                HStack {
+                detailLayout {
                     Text("\(displayedTrendSessionCount) 次训练 · \(displayedTrendCompletedSets) 个完成组")
-                    Spacer()
+                    if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                     Text("累计 \(formattedTrendVolume(displayedTrendTotalVolume, unit: displayedTrendUnit))")
                 }
                 .font(.caption)
@@ -360,7 +381,7 @@ struct StatsView: View {
                 }
             }
         }
-        .padding(.vertical, 8)
+        .cardSurface()
         .accessibilityIdentifier("训练容量趋势卡片")
     }
 

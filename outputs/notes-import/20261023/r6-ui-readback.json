@@ -1,0 +1,19 @@
+{
+  "status": "FAIL_PRODUCT_RULE",
+  "targetSchedule": {
+    "id": "93F581FBC0C15EE5A87FBE2CB95829BF",
+    "ZSTATUSRAW": "planned",
+    "ZSKIPREASON": ""
+  },
+  "guard": "ScheduleService.validateUnstarted rejects any linked WorkoutSession, including discarded with zero completed sets",
+  "source": "FitnessApp/Services/ScheduleService.swift:214",
+  "nativeMessage": "已经开始或完成的训练不能再调整日期。",
+  "failedActionWroteNoBusinessFields": true,
+  "all48ImportedActualsUnchanged": true,
+  "all25TablesAnd2489RecordsMatchPostImport": true,
+  "mainSimulatorStillMatchesFinalPhoneBusinessData": true,
+  "snapshot": "artifacts/training-sync/20261023-notes/phone-ui-readback",
+  "proof": "outputs/notes-import/20261023/R6-skip-guard.png",
+  "proposedRule": "Allow skip/replacement only for discarded linked sessions with zero completed sets; keep all reschedule and completed-data protections",
+  "implementation": "NOT_STARTED; explicit rule conflict requires owner decision"
+}

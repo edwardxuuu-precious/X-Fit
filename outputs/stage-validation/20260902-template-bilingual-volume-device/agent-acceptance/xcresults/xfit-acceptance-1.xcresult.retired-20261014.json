@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "requirement": "REQ-20261014-133439",
+  "original_path": "outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-acceptance-1.xcresult",
+  "original_tree": {
+    "files": 62,
+    "nodes": 63,
+    "logical_bytes": 9308432,
+    "allocated_bytes": 9510912,
+    "tree_sha256": "c498648f4b901006006c66e20694d2aa77b5e432ec929cca196eec0f7ec18c88",
+    "inode": 91707741,
+    "mtime": "2026-09-02T14:51:29.940Z"
+  },
+  "observed_at": "2026-10-14T05:42:07.473Z",
+  "disposition": "original_payload_removed_and_readback_verified",
+  "native_summary": {
+    "devicesAndConfigurations": [
+      {
+        "device": {
+          "architecture": "arm64",
+          "deviceId": "00008150-001E49912122401C",
+          "deviceName": "Edward_iPhone",
+          "modelName": "iPhone 17",
+          "osBuildNumber": "23G71",
+          "osVersion": "26.6",
+          "platform": "iOS"
+        },
+        "expectedFailures": 0,
+        "failedTests": 1,
+        "passedTests": 4,
+        "skippedTests": 0,
+        "testPlanConfiguration": {
+          "configurationId": "1",
+          "configurationName": "Test Scheme Action"
+        }
+      }
+    ],
+    "environmentDescription": "FitnessApp · Built with macOS 26.6.2",
+    "expectedFailures": 0,
+    "failedTests": 1,
+    "finishTime": 1788360011.963,
+    "passedTests": 4,
+    "result": "Failed",
+    "runtimeWarnings": [],
+    "skippedTests": 0,
+    "startTime": 1788359909.659,
+    "statistics": [],
+    "testFailures": [
+      {
+        "failureText": "Failed to not hittable: Button, {{350.7, 494.3}, {23.3, 22.7}}, identifier: 'exercise-menu-深蹲', label: '更多'",
+        "targetName": "FitnessAppUITests",
+        "testIdentifier": 3,
+        "testIdentifierString": "FitnessAppUITests/testExerciseLibrarySearchesSquatAliasAndSupportsEditDeleteRestore()",
+        "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/FitnessAppUITests/testExerciseLibrarySearchesSquatAliasAndSupportsEditDeleteRestore",
+        "testName": "testExerciseLibrarySearchesSquatAliasAndSupportsEditDeleteRestore()"
+      }
+    ],
+    "title": "Test - FitnessApp",
+    "topInsights": [],
+    "totalTestCount": 5
+  },
+  "native_read": {
+    "exit_code": 0,
+    "error": null
+  },
+  "previous_retirement_summary": "outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-acceptance-1.xcresult.retired-summary.json",
+  "historical_reference_files": [],
+  "recoverability": "No full recovery copy is retained for payload retirement; native unreadable/error state is not PASS.",
+  "native_index_observation": {
+    "path": "outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-acceptance-1.xcresult",
+    "original_tree": {
+      "files": 62,
+      "nodes": 63,
+      "logical_bytes": 9308432,
+      "allocated_bytes": 9510912,
+      "tree_sha256": "c498648f4b901006006c66e20694d2aa77b5e432ec929cca196eec0f7ec18c88",
+      "inode": 91707741,
+      "mtime": "2026-09-02T14:51:29.940Z"
+    },
+    "after_native_summary_read": {
+      "files": 62,
+      "nodes": 63,
+      "logical_bytes": 9308432,
+      "allocated_bytes": 9510912,
+      "tree_sha256": "d8a911cb2f9c29e9183fb2aee60d4cfbd78a912b5b5bf44fa65167d4a60f0200",
+      "inode": 91707741,
+      "mtime": "2026-10-14T05:42:07.467Z"
+    },
+    "index_paths": [
+      "outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-acceptance-1.xcresult/database.sqlite3"
+    ],
+    "entire_original_tree_matches_when_excluding_new_indexes": false,
+    "older_existing_index_rebuilt": true,
+    "boundary": "xcresulttool creates/rebuilds root test-result SQLite index; original pre-read fingerprint retained, original non-index files have no refreshed mtime, full preservation is separately enforced for all protected source/business files."
+  },
+  "removed_at": "2026-10-14T05:48:08.328Z",
+  "final_receipt": "outputs/storage-retirement/20261014-project-consolidation.json"
+}

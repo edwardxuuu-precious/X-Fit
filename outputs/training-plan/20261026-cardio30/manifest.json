@@ -1,0 +1,45 @@
+{
+  "status": "APPLIED_READBACK_VERIFIED",
+  "requirement": "REQ-20261026-100249",
+  "sourceSHA256": "b66423183f132a9161d70accbbd137a00d649c36bd83e40c7c3af15f31a962c2",
+  "personalDefault": "COACH-DEFAULT-20261026-02",
+  "cardioPreference": "CARDIO-PREF-20261026-01",
+  "days": [
+    {
+      "day": "2026-10-27",
+      "id": "972172e9-9df6-51aa-a43c-a739550c8822",
+      "file": "2026-10-27.json",
+      "oldScheduleID": "a2bd263d-1696-5125-9d56-f980a331ea3b",
+      "title": "有氧恢复 · 跳绳① · 约30分钟",
+      "rounds": 10,
+      "mainSeconds": 1005,
+      "activeSeconds": 600,
+      "totalRangeSeconds": [
+        1605,
+        1785
+      ],
+      "payloadSHA256": "15b163dd7a25a215cff232eda38a3e236c4e5857e5715ca4f68cb7375a55f24f"
+    },
+    {
+      "day": "2026-10-31",
+      "id": "bba20ba9-d63b-52a7-916b-059058cdcd4a",
+      "file": "2026-10-31.json",
+      "oldScheduleID": "42226988-8c77-5aec-93fa-799a88ef4bdb",
+      "title": "有氧恢复 · 跳绳② · 约30分钟",
+      "rounds": 12,
+      "mainSeconds": 1215,
+      "activeSeconds": 720,
+      "totalRangeSeconds": [
+        1695,
+        1755
+      ],
+      "payloadSHA256": "03c1ba5f5cfc4d65f2cca1808cdb8b6a9c9e2e4880f864e05954f824507a0997"
+    }
+  ],
+  "strengthR2Manifest": "outputs/training-plan/20261026-volume-correction/manifest.json",
+  "phoneSnapshot": "2026-10-26T12:49:27.638008+08:00",
+  "repeatNewSchedules": 0,
+  "verification": "artifacts/training-sync/20261026-cardio30/final-verification.json",
+  "mainSimulatorVerification": "artifacts/simulator-real-data/20261026-125006/result.json",
+  "currentReviewSHA256": "4022bba6c159f8097f4e10f14a57fed25b6e9bc6df721ad3c0cf26e09b5907dd"
+}

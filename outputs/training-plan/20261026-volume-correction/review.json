@@ -1,0 +1,1148 @@
+{
+  "schemaVersion": 1,
+  "preferenceVersion": "SESSION-PREF-20261026-01",
+  "method": "METHOD-20261026-10",
+  "strengthArchive": "STR-20261026-08",
+  "confirmedForPhone": true,
+  "sourceCoverage": "Oct26 Notes 7动作31条＋本人同日计量/动作/末组RIR/80分钟反馈；App新鲜读取今日场次0。原NotesRIR/热身性质仍未知。",
+  "nextFrontBaseline": {
+    "status": "OBSERVED_BASELINE_NOT_SCHEDULED",
+    "source": "notes-oct26-normalized.json",
+    "formalActions": 7,
+    "rawRows": 31,
+    "ownerApproxMinutes": 80,
+    "knownWorkingSets": null,
+    "reason": "今天已完成，保存本人真实菜单作下次前链基线，不以旧凑数候选覆盖今天或自动排下一周。"
+  },
+  "sessions": [
+    {
+      "key": "WED-20261028-NOTES-R2",
+      "localDay": "2026-10-28",
+      "title": "后链6动作",
+      "status": "APPLIED_READBACK_VERIFIED",
+      "generalWarmupSeconds": 480,
+      "bufferSeconds": 480,
+      "exercises": [
+        {
+          "catalogExerciseID": "08f996c2-f996-40fd-b69c-6bdd064ea720",
+          "catalogName": "罗马尼亚硬拉",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "displayName": "罗马尼亚硬拉",
+          "loadGuidance": "重量待热身确定，工作组按含杆总重记录；历史35/45/55口径未知，不自动套用，计划无确定公斤数。",
+          "notes": "本版髋铰链主项4×6—8，重量按含杆总重现场低疲劳校准。旧未知55不套用、0仅无确定负重占位，实际留空。先空杆8→每次总重加约10kg做3次，近工作档改加总重约5kg做2次；首工作档须能完成6—8且达目标余力。后段维持或降最小档；腰背主导/技术失稳/不适就停止，不凑4组。",
+          "plannedSets": [
+            {
+              "id": "b07bddee-ff85-5bb1-b561-1a82a30dfe8b",
+              "weight": 0,
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 6,
+                "repsUpper": 8,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "先空杆8→每次总重加约10kg做3次，近工作档改加总重约5kg做2次；首工作档须能完成6—8且达目标余力。后段维持或降最小档；腰背主导/技术失稳/不适就停止，不凑4组。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "e3ade4e3-a4d4-5687-af4b-a4854659faf1",
+              "weight": 0,
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 6,
+                "repsUpper": 8,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "先空杆8→每次总重加约10kg做3次，近工作档改加总重约5kg做2次；首工作档须能完成6—8且达目标余力。后段维持或降最小档；腰背主导/技术失稳/不适就停止，不凑4组。",
+                "rirLower": 2,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "4e23dfab-becb-529c-9546-ea16c78e2dcc",
+              "weight": 0,
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 6,
+                "repsUpper": 8,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "先空杆8→每次总重加约10kg做3次，近工作档改加总重约5kg做2次；首工作档须能完成6—8且达目标余力。后段维持或降最小档；腰背主导/技术失稳/不适就停止，不凑4组。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "a11da273-6243-53fb-8e60-4371f56dfbde",
+              "weight": 0,
+              "reps": 6,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组4",
+                "repsLower": 6,
+                "repsUpper": 8,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "先空杆8→每次总重加约10kg做3次，近工作档改加总重约5kg做2次；首工作档须能完成6—8且达目标余力。后段维持或降最小档；腰背主导/技术失稳/不适就停止，不凑4组。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "fixed",
+          "category": "resistance",
+          "loadRole": "heavy",
+          "primaryTarget": true,
+          "priority": true,
+          "task": "髋铰链主项，低次数维持控制",
+          "evidenceNote": "10/26没有RDL；旧RDL/硬拉记重侧别未核，不从深蹲推算。旧腰背主导反馈继续适用，不能由今天没有不适视作医疗许可。",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 300,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "e00c9518-fc57-4543-b390-10b577b034a5",
+          "catalogName": "器械臀推",
+          "equipment": "器械臀推机",
+          "volumeUnit": "kilogram",
+          "displayName": "器械臀推",
+          "loadGuidance": "原机/原记重方式一致时采用原记录数值50→57.5→65；总/单侧未知不补猜。",
+          "notes": "原锚点10/15器械臀推50×15、57.5×12、65×10、72.5×8、57.5×12；本人只确认数字kg，侧别/具体设置及热身性质仍未知，不与杠铃臀推合并。\n只有原机/原记重方式核对一致才用本次50、57.5、65候选；数字不自动解释为总重或每侧。热身先较低阻力8次，再接近首组档轻做3次；设置或显示对不上时先独立校准到目标次数/余力，不套旧数字。\n首组余力2—3，后组1—2；50已达到目标余力则维持，不强追后档；休息150—180秒（周五120—150秒）。\n本版明确第四组回退57.5×10—12；不把今天髋外展61当作臀推已校准。",
+          "plannedSets": [
+            {
+              "id": "ea7eecb9-4d93-5eb5-b9bf-8300a91cdd6c",
+              "weight": 50,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 12,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "只在原臀推机/记重方式一致时使用50→57.5→65→57.5候选；首组已达目标则维持，65非必须，后段回退维持次数与控制。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "f3f3abef-4baf-5b11-9091-26523e19c2d1",
+              "weight": 57.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "只在原臀推机/记重方式一致时使用50→57.5→65→57.5候选；首组已达目标则维持，65非必须，后段回退维持次数与控制。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "204a9960-f37f-5fab-ab52-e611000aa82f",
+              "weight": 65,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "只在原臀推机/记重方式一致时使用50→57.5→65→57.5候选；首组已达目标则维持，65非必须，后段回退维持次数与控制。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "c0c823fd-100e-53f5-9589-20cfb2c67ee5",
+              "weight": 57.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组4",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "只在原臀推机/记重方式一致时使用50→57.5→65→57.5候选；首组已达目标则维持，65非必须，后段回退维持次数与控制。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "pyramidUp",
+          "category": "resistance",
+          "loadRole": "moderate",
+          "primaryTarget": true,
+          "priority": true,
+          "task": "真正髋伸主项，与今天侧抬腿机器分开",
+          "evidenceNote": "依据10/15器械臀推原50/57.5/65/72.5记录；计量/设置仍需同机核对。今天61是髋外展，绝不移用为臀推公斤数。",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 210,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "bed023f2-c4d6-4b0b-82d8-6a163644ab4e",
+          "catalogName": "坐姿腿弯举",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "displayName": "同机坐姿腿弯举",
+          "loadGuidance": "本人确认同一台坐姿腿弯举，机器显示kg；原40—55为今日锚点，不再套旧25/30，历史侧别不补猜。",
+          "notes": "10/26同机40×14、45×12、50×10、55×8；本人末条约RIR3，是练后估计，前三条RIR/性质未知。\n同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+          "planPattern": "pyramidUp",
+          "plannedSets": [
+            {
+              "id": "f4aa7323-80f2-59da-b020-081e9a5cf8a3",
+              "weight": 45,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "790b8cb5-15d1-5b6e-b81c-3f2086e90ad6",
+              "weight": 50,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "740b7842-6ba2-5fa0-841b-e6ce8d4a1388",
+              "weight": 55,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "4b57644b-f8b2-5dd7-a634-edbd98d78d31",
+              "weight": 50,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组4",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": true,
+          "priority": false,
+          "task": "屈膝孤立，按今天同机基线选重",
+          "evidenceNote": "10/26同机40×14、45×12、50×10、55×8；本人末条约RIR3，是练后估计，前三条RIR/性质未知。",
+          "timeEstimate": {
+            "setSeconds": 40,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "746282a2-ca0d-4dad-8589-205559567d22",
+          "catalogName": "反向箭步蹲",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "displayName": "扶架单手哑铃反向箭步蹲",
+          "loadGuidance": "单手一只哑铃30kg，另一手扶架；每组左右各完成一轮，不按双哑铃总重解释",
+          "notes": "热身：自重每侧5→单手15每侧4；必要时25每侧2，均低疲劳。\n休息：换侧约20–30秒；双侧完成后90–120秒，呼吸未恢复可延长。\n历史：10/17本人确认单手30kg、另一手扶架，每侧10次×3；实际RIR未记。\n组型：逐动作固定30例外：重复验证已接受的单手扶架结构，避免在同课同时改平衡/持重与加重。\n当日：沿本人熟悉的后撤和支撑做法，不新规定持重同/对侧。达标也先积累同口径记录；若未到8次就技术变差或近力竭，降到邻近可用哑铃，组数不增加。\n负重分布/次数明确；持重相对工作腿的同/对侧未保存，不能用外部双哑铃条目认定身份。\n本次确认后链课：三组均以约2次余力为目标；单手30kg，另一手扶架，左右各一轮计1组，沿熟悉的持重/支撑方式。",
+          "planPattern": "fixed",
+          "plannedSets": [
+            {
+              "id": "80480913-9bcf-5358-8731-b4a47e77bf78",
+              "weight": 30,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "rirLower": 2,
+                "rirUpper": 2,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "沿本人熟悉的后撤和支撑做法，不新规定持重同/对侧。达标也先积累同口径记录；若未到8次就技术变差或近力竭，降到邻近可用哑铃，组数不增加。 负重分布/次数明确；持重相对工作腿的同/对侧未保存，不能用外部双哑铃条目认定身份。"
+              }
+            },
+            {
+              "id": "9ea6e0e1-86a9-5b50-aa12-633d8c40ae44",
+              "weight": 30,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "rirLower": 2,
+                "rirUpper": 2,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "沿本人熟悉的后撤和支撑做法，不新规定持重同/对侧。达标也先积累同口径记录；若未到8次就技术变差或近力竭，降到邻近可用哑铃，组数不增加。 负重分布/次数明确；持重相对工作腿的同/对侧未保存，不能用外部双哑铃条目认定身份。"
+              }
+            },
+            {
+              "id": "81231c12-dbcb-5145-b8a8-fb566089d08a",
+              "weight": 30,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "rirLower": 2,
+                "rirUpper": 2,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "沿本人熟悉的后撤和支撑做法，不新规定持重同/对侧。达标也先积累同口径记录；若未到8次就技术变差或近力竭，降到邻近可用哑铃，组数不增加。 负重分布/次数明确；持重相对工作腿的同/对侧未保存，不能用外部双哑铃条目认定身份。"
+              }
+            }
+          ],
+          "category": "resistance",
+          "loadRole": "moderate",
+          "primaryTarget": true,
+          "priority": false,
+          "task": "单腿稳定/髋膝协作，沿旧已确认扶架变式",
+          "evidenceNote": "10/17本人已确认单手30kg扶架、每侧10×3；10/26保加利亚是另一动作，不把其30自动并为本动作进阶。",
+          "timeEstimate": {
+            "setSeconds": 100,
+            "warmupSeconds": 90,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "0fcd2a94-feb5-4433-abee-50750a249bb4",
+          "proposedCatalogName": "Hip and glute machine",
+          "sourceExerciseName": "Hip and glute machine",
+          "catalogName": "Hip and glute machine",
+          "equipment": "器械侧抬腿机",
+          "muscleGroup": "臀部",
+          "volumeUnit": "kilogram",
+          "displayName": "器械侧抬腿／髋外展",
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": false,
+          "priority": false,
+          "task": "侧向髋外展；今天原机61，不是髋伸/臀推",
+          "evidenceNote": "10/26原名Hip and glute machine，本人确认实际方向与全部kg；显示61为同机锚点，真实RIR及旧热身性质未知。已按本人确认独立登记该机器；外部动作仍仅候选，不借用或合并近似UUID。",
+          "loadGuidance": "沿今天同机/同设置显示61kg，不换算别机；原名与本人方向澄清并存。",
+          "notes": "先低档5—8次熟悉，再接近今日原档做2—3次；只有幅度/控制稳定、次数和目标余力匹配才用原档。到上限仍明显偏轻才下一组加最小可用档；未达下限、代偿或不适降档或结束。",
+          "plannedSets": [
+            {
+              "id": "f406f03f-0d5c-573c-b457-0c9e6b8db7f3",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "086593de-72a9-5d7c-98c5-ce1d42268245",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "0faf8490-a926-56f2-9889-27c52a348c77",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "fixed",
+          "timeEstimate": {
+            "setSeconds": 80,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "fc230b90-0405-492d-bf30-4c391c803578",
+          "proposedCatalogName": "Abductor machine",
+          "sourceExerciseName": "Abductor machine",
+          "catalogName": "Abductor machine",
+          "equipment": "髋内收器械",
+          "muscleGroup": "腿部",
+          "volumeUnit": "kilogram",
+          "displayName": "器械向内夹／髋内收（原Notes名Abductor）",
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": false,
+          "priority": false,
+          "task": "髋内收；依据本人向内夹澄清，原英文留作来源，不用于外展匹配",
+          "evidenceNote": "10/26原名Abductor machine，本人确认实际方向与全部kg；显示25为同机锚点，真实RIR及旧热身性质未知。已按本人确认独立登记该机器；外部动作仍仅候选，不借用或合并近似UUID。",
+          "loadGuidance": "沿今天同机/同设置显示25kg，不换算别机；原名与本人方向澄清并存。",
+          "notes": "先低档5—8次熟悉，再接近今日原档做2—3次；只有幅度/控制稳定、次数和目标余力匹配才用原档。到上限仍明显偏轻才下一组加最小可用档；未达下限、代偿或不适降档或结束。",
+          "plannedSets": [
+            {
+              "id": "6c91a520-d446-51c8-8cc7-7c6d00ede8dc",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "4202d969-f964-5485-a33c-400892fb5eef",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "b1100aa2-61c6-5a6e-94e8-c02709dd71c5",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "fixed",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        }
+      ]
+    },
+    {
+      "key": "FRI-20261030-NOTES-R2",
+      "localDay": "2026-10-30",
+      "title": "综合7动作",
+      "status": "APPLIED_READBACK_VERIFIED",
+      "generalWarmupSeconds": 480,
+      "bufferSeconds": 480,
+      "exercises": [
+        {
+          "catalogExerciseID": "5f2651a1-c333-4fc9-997b-22a507733072",
+          "catalogName": "高翻",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "displayName": "地面杠铃高翻",
+          "loadGuidance": "每侧杠铃片20kg，不含实际杆重；杆重未知不换总重",
+          "notes": "热身：空杆3次→每侧5×3→10×2→15×2；有需要再用更轻档，低疲劳。\n休息：120–180秒。\n10/17正式每侧10×12、15×10、20×8、25×6；本人末组稳定稍难，速度未测。旧复盘支持每侧20×3技术候选。\n当次热身确认快拉稳接才用20；降速、硬拽、追杠或接杠不稳即下调或结束，不追加组；不用RIR或旧高次数证明功率。\n全身轻热身后、四个腿动作前；不在疲劳末段补做。\n已由本人明确选择加入；属于4个技术组，不计腿部4动作或常规肌肥大工作组。",
+          "planPattern": "fixed",
+          "plannedSets": [
+            {
+              "id": "396dd2f7-09b3-5265-879a-72a9ae54df08",
+              "weight": 20,
+              "reps": 3,
+              "weightSide": "single",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "技术组1",
+                "repsLower": 3,
+                "repsUpper": 3,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 180,
+                "effortCue": "当次热身确认快拉稳接才用20；降速、硬拽、追杠或接杠不稳即下调或结束，不追加组；不用RIR或旧高次数证明功率。"
+              }
+            },
+            {
+              "id": "07dcb94a-72bb-575b-a2b8-af8156ff0d0b",
+              "weight": 20,
+              "reps": 3,
+              "weightSide": "single",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "技术组2",
+                "repsLower": 3,
+                "repsUpper": 3,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 180,
+                "effortCue": "当次热身确认快拉稳接才用20；降速、硬拽、追杠或接杠不稳即下调或结束，不追加组；不用RIR或旧高次数证明功率。"
+              }
+            },
+            {
+              "id": "27b5e4c3-1927-5e0f-b235-585b84294f73",
+              "weight": 20,
+              "reps": 3,
+              "weightSide": "single",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "技术组3",
+                "repsLower": 3,
+                "repsUpper": 3,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 180,
+                "effortCue": "当次热身确认快拉稳接才用20；降速、硬拽、追杠或接杠不稳即下调或结束，不追加组；不用RIR或旧高次数证明功率。"
+              }
+            },
+            {
+              "id": "33aa3c90-03fb-544f-b16c-cb9752ca0ef8",
+              "weight": 20,
+              "reps": 3,
+              "weightSide": "single",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "技术组4",
+                "repsLower": 3,
+                "repsUpper": 3,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 180,
+                "effortCue": "当次热身确认快拉稳接才用20；降速、硬拽、追杠或接杠不稳即下调或结束，不追加组；不用RIR或旧高次数证明功率。"
+              }
+            }
+          ],
+          "category": "technical",
+          "loadRole": "technical",
+          "primaryTarget": false,
+          "priority": false,
+          "task": "先做低疲劳技术/速度",
+          "evidenceNote": "10/17每侧片20/25及本人稳定反馈；今天没有高翻，不从深蹲推算公斤或追加进阶。",
+          "timeEstimate": {
+            "setSeconds": 20,
+            "warmupSeconds": 240,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "906a3e8d-e6ff-4ad1-8bfc-e33b4f471675",
+          "catalogName": "腿举",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "displayName": "同机腿举",
+          "loadGuidance": "每侧片重kg，不含机器空载阻力；110/115只是条件候选，需有相应档位",
+          "notes": "10/26同机每侧75×14、90×12、100×10、110×10，末条约RIR2；今天为第4动作，顺序与本课不同，不能机械判力量提升。\n同机热身每侧50×8→75×5→90×3→100×1—2；110为今日已完成锚点，不自动追115。首组不足8或过早0—1RIR，后组降105/100邻近可用档；回退按次数/余力调整。",
+          "planPattern": "pyramidDown",
+          "plannedSets": [
+            {
+              "id": "1c696ef2-8deb-5791-80e8-91f9c4776431",
+              "weight": 110,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "同机热身每侧50×8→75×5→90×3→100×1—2；110为今日已完成锚点，不自动追115。首组不足8或过早0—1RIR，后组降105/100邻近可用档；回退按次数/余力调整。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "dd9b7e12-83c8-531d-b47d-61586d266f54",
+              "weight": 110,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "同机热身每侧50×8→75×5→90×3→100×1—2；110为今日已完成锚点，不自动追115。首组不足8或过早0—1RIR，后组降105/100邻近可用档；回退按次数/余力调整。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "efd765da-5553-5deb-8db7-8287ee25775b",
+              "weight": 100,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "同机热身每侧50×8→75×5→90×3→100×1—2；110为今日已完成锚点，不自动追115。首组不足8或过早0—1RIR，后组降105/100邻近可用档；回退按次数/余力调整。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "e457af8b-dd6b-5ff5-b50a-dee805e4135c",
+              "weight": 100,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组4",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 150,
+                "restUpperSeconds": 180,
+                "effortCue": "同机热身每侧50×8→75×5→90×3→100×1—2；110为今日已完成锚点，不自动追115。首组不足8或过早0—1RIR，后组降105/100邻近可用档；回退按次数/余力调整。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "category": "resistance",
+          "loadRole": "heavy",
+          "primaryTarget": true,
+          "priority": true,
+          "task": "重点膝主导，以今日同机110校准值为锚点",
+          "evidenceNote": "10/26同机每侧75×14、90×12、100×10、110×10，末条约RIR2；今天为第4动作，顺序与本课不同，不能机械判力量提升。",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 180,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "e00c9518-fc57-4543-b390-10b577b034a5",
+          "catalogName": "器械臀推",
+          "equipment": "器械臀推机",
+          "volumeUnit": "kilogram",
+          "displayName": "器械臀推",
+          "loadGuidance": "原机/原记重方式一致时采用原记录数值50→57.5→65；总/单侧未知不补猜。",
+          "notes": "原锚点10/15器械臀推50×15、57.5×12、65×10、72.5×8、57.5×12；本人只确认数字kg，侧别/具体设置及热身性质仍未知，不与杠铃臀推合并。\n只有原机/原记重方式核对一致才用本次50、57.5、65候选；数字不自动解释为总重或每侧。热身先较低阻力8次，再接近首组档轻做3次；设置或显示对不上时先独立校准到目标次数/余力，不套旧数字。\n首组余力2—3，后组1—2；50已达到目标余力则维持，不强追后档；休息150—180秒（周五120—150秒）。\n本版明确第四组回退57.5×10—12；不把今天髋外展61当作臀推已校准。",
+          "plannedSets": [
+            {
+              "id": "e4357632-c508-54a8-a6d5-b54f13d331eb",
+              "weight": 50,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 12,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 150,
+                "effortCue": "同一台真正臀推机/原记重才用50→57.5→65；当天首组校准，不把髋外展61用于臀推。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "6690b613-42f1-55cb-b850-14c5ec8bf3ed",
+              "weight": 57.5,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 150,
+                "effortCue": "同一台真正臀推机/原记重才用50→57.5→65；当天首组校准，不把髋外展61用于臀推。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "7dae84a7-6e8b-5941-94cb-d8d6fdb477c4",
+              "weight": 65,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 8,
+                "repsUpper": 10,
+                "restLowerSeconds": 120,
+                "restUpperSeconds": 150,
+                "effortCue": "同一台真正臀推机/原记重才用50→57.5→65；当天首组校准，不把髋外展61用于臀推。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "pyramidUp",
+          "category": "resistance",
+          "loadRole": "moderate",
+          "primaryTarget": true,
+          "priority": false,
+          "task": "真正髋伸主项，与今天侧抬腿机器分开",
+          "evidenceNote": "依据10/15器械臀推原50/57.5/65/72.5记录；计量/设置仍需同机核对。今天61是髋外展，绝不移用为臀推公斤数。",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 120,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "bed023f2-c4d6-4b0b-82d8-6a163644ab4e",
+          "catalogName": "坐姿腿弯举",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "displayName": "同机坐姿腿弯举",
+          "loadGuidance": "本人确认同一台坐姿腿弯举，机器显示kg；原40—55为今日锚点，不再套旧25/30，历史侧别不补猜。",
+          "notes": "10/26同机40×14、45×12、50×10、55×8；本人末条约RIR3，是练后估计，前三条RIR/性质未知。\n同机热身较轻档8次→40做3次；45首组校准。50组达到目标次数/控制才试55，否则维持50；最后50回退，必要时降45，保持范围，不强求力竭。",
+          "planPattern": "pyramidUp",
+          "plannedSets": [
+            {
+              "id": "662172dd-3a19-5549-b010-0cffad666e4d",
+              "weight": 45,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "综合课3组、次数较高；同机45→50→50条件候选。周三已有4组屈膝，本课在高翻/腿举/臀推后校准，不追55峰值；达到次数与余力则维持。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "d176e510-503e-5543-b642-6224b862f8ba",
+              "weight": 50,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "综合课3组、次数较高；同机45→50→50条件候选。周三已有4组屈膝，本课在高翻/腿举/臀推后校准，不追55峰值；达到次数与余力则维持。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "2c9b4134-989d-5f11-9bd8-d7b22158ea96",
+              "weight": 50,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "综合课3组、次数较高；同机45→50→50条件候选。周三已有4组屈膝，本课在高翻/腿举/臀推后校准，不追55峰值；达到次数与余力则维持。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": true,
+          "priority": false,
+          "task": "屈膝孤立，按今天同机基线选重",
+          "evidenceNote": "10/26同机40×14、45×12、50×10、55×8；本人末条约RIR3，是练后估计，前三条RIR/性质未知。",
+          "timeEstimate": {
+            "setSeconds": 40,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "d4e29910-1279-4168-9874-d320084ea21e",
+          "catalogName": "腿屈伸",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "displayName": "同机腿屈伸",
+          "loadGuidance": "同一机器显示数值；55仅在有该档并满足首组条件后采用",
+          "notes": "10/17同机50×10、本人估RIR3—5；今天Notes无腿屈伸，不把其他机器55移用。\n本次高次数控制采用固定组例外；较轻档8次→40做3次热身；原机显示50做12—15。达到15仍明显偏轻才下组试最小档；低于12或代偿降档，不为了容量强求力竭。",
+          "planPattern": "fixed",
+          "plannedSets": [
+            {
+              "id": "bea3661e-bd55-5538-b960-000b434d15b7",
+              "weight": 50,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "较轻档8次→40做3次热身；原机显示50做12—15。达到15仍明显偏轻才下组试最小档；低于12或代偿降档，不为了容量强求力竭。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "b9929114-691d-5bed-9160-d14c8b5861c2",
+              "weight": 50,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "较轻档8次→40做3次热身；原机显示50做12—15。达到15仍明显偏轻才下组试最小档；低于12或代偿降档，不为了容量强求力竭。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "edfbcff7-05af-53bc-b25f-98b14dd6496e",
+              "weight": 50,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 90,
+                "restUpperSeconds": 120,
+                "effortCue": "较轻档8次→40做3次热身；原机显示50做12—15。达到15仍明显偏轻才下组试最小档；低于12或代偿降档，不为了容量强求力竭。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": true,
+          "priority": false,
+          "task": "伸膝孤立，以固定组维持完整幅度",
+          "evidenceNote": "10/17同机50×10、本人估RIR3—5；今天Notes无腿屈伸，不把其他机器55移用。",
+          "timeEstimate": {
+            "setSeconds": 40,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "0fcd2a94-feb5-4433-abee-50750a249bb4",
+          "proposedCatalogName": "Hip and glute machine",
+          "sourceExerciseName": "Hip and glute machine",
+          "catalogName": "Hip and glute machine",
+          "equipment": "器械侧抬腿机",
+          "muscleGroup": "臀部",
+          "volumeUnit": "kilogram",
+          "displayName": "器械侧抬腿／髋外展",
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": false,
+          "priority": false,
+          "task": "侧向髋外展；今天原机61，不是髋伸/臀推",
+          "evidenceNote": "10/26原名Hip and glute machine，本人确认实际方向与全部kg；显示61为同机锚点，真实RIR及旧热身性质未知。已按本人确认独立登记该机器；外部动作仍仅候选，不借用或合并近似UUID。",
+          "loadGuidance": "沿今天同机/同设置显示61kg，不换算别机；原名与本人方向澄清并存。",
+          "notes": "先低档5—8次熟悉，再接近今日原档做2—3次；只有幅度/控制稳定、次数和目标余力匹配才用原档。到上限仍明显偏轻才下一组加最小可用档；未达下限、代偿或不适降档或结束。",
+          "plannedSets": [
+            {
+              "id": "7a3f3390-c90d-5b20-a234-a6364531a779",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "eeef2b04-4121-54e1-8f01-437b0b15bc5e",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "1f9b1ce4-4250-5e5d-a801-1405a8511334",
+              "weight": 61,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "single",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 10,
+                "repsUpper": 12,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方明确每侧，双侧各一轮计1组；不回填今日次数侧别。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "fixed",
+          "timeEstimate": {
+            "setSeconds": 80,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        },
+        {
+          "catalogExerciseID": "fc230b90-0405-492d-bf30-4c391c803578",
+          "proposedCatalogName": "Abductor machine",
+          "sourceExerciseName": "Abductor machine",
+          "catalogName": "Abductor machine",
+          "equipment": "髋内收器械",
+          "muscleGroup": "腿部",
+          "volumeUnit": "kilogram",
+          "displayName": "器械向内夹／髋内收（原Notes名Abductor）",
+          "category": "resistance",
+          "loadRole": "light",
+          "primaryTarget": false,
+          "priority": false,
+          "task": "髋内收；依据本人向内夹澄清，原英文留作来源，不用于外展匹配",
+          "evidenceNote": "10/26原名Abductor machine，本人确认实际方向与全部kg；显示25为同机锚点，真实RIR及旧热身性质未知。已按本人确认独立登记该机器；外部动作仍仅候选，不借用或合并近似UUID。",
+          "loadGuidance": "沿今天同机/同设置显示25kg，不换算别机；原名与本人方向澄清并存。",
+          "notes": "先低档5—8次熟悉，再接近今日原档做2—3次；只有幅度/控制稳定、次数和目标余力匹配才用原档。到上限仍明显偏轻才下一组加最小可用档；未达下限、代偿或不适降档或结束。",
+          "plannedSets": [
+            {
+              "id": "09cb93c2-5735-5d09-b90d-4c74527d2e54",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组1",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 2,
+                "rirUpper": 3
+              }
+            },
+            {
+              "id": "d43ae307-3909-5694-a457-5886780bb3b3",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组2",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            },
+            {
+              "id": "5c36e035-8869-5efd-b0a6-c4fea29585c6",
+              "weight": 25,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "bilateral",
+              "actualDefaultPolicyRaw": "blank",
+              "prescription": {
+                "label": "工作组3",
+                "repsLower": 12,
+                "repsUpper": 15,
+                "restLowerSeconds": 60,
+                "restUpperSeconds": 90,
+                "effortCue": "正式辅助组，达到规定余力；同机首组校准，不追机器数字。未来处方双腿一起向内夹，不按原英文猜向外。",
+                "rirLower": 1,
+                "rirUpper": 2
+              }
+            }
+          ],
+          "planPattern": "fixed",
+          "timeEstimate": {
+            "setSeconds": 45,
+            "warmupSeconds": 60,
+            "transitionSeconds": 60,
+            "includesBothSides": true
+          }
+        }
+      ]
+    }
+  ],
+  "confirmationReference": "REQ-20261026-100249 / 本人本轮明确确认R2原剂量、Notes补录和openGym结合登记"
+}

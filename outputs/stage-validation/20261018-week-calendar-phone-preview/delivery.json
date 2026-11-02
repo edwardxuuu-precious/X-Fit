@@ -1,0 +1,168 @@
+{
+  "requirement_id": "REQ-20261018-203317",
+  "updated_at": "2026-10-18T20:54:26.175033+08:00",
+  "delivery_status": "PASS",
+  "requirement_status": "真机待验收",
+  "stage_status": "PARTIAL_NOT_GO",
+  "device": "Edward_iPhone / iPhone17 / iOS26.6.2",
+  "transport": "localNetwork",
+  "app": {
+    "bundle_id": "com.edward.FitnessApp",
+    "version": "0.5.0",
+    "build": "20",
+    "signed_executable_sha256": "830c51e823e735e65c421546c47508047ac470632dce5e843fe0bc34e0bef710"
+  },
+  "installation": "原 App 覆盖安装，未卸载或清容器；本次仅包含已确认的周历常驻、今天独立标记、状态贴近标题界面改动",
+  "normal_launch": {
+    "status": "PASS",
+    "arguments": [],
+    "process_still_running": true,
+    "pid": 23368
+  },
+  "device_gates": {
+    "D00": "PASS",
+    "D01": "PASS",
+    "D02": "PASS",
+    "D03": "PASS",
+    "D04": "PASS",
+    "D05": "PASS",
+    "D06A": "PASS",
+    "D06B": "PASS",
+    "D06C": "PASS",
+    "D07": "NOT_RUN",
+    "D09": "BLOCKED_HUMAN"
+  },
+  "data_conservation": {
+    "status": "PASS",
+    "integrity_before": "ok",
+    "integrity_after": "ok",
+    "model_tables": 25,
+    "original_records": 2151,
+    "missing_original_rows": 0,
+    "changed_original_rows": 0,
+    "added_model_rows": 0,
+    "counts": {
+      "ZBODYMEASUREMENT": {
+        "before": 22,
+        "after": 22
+      },
+      "ZDAILYBODYCHECKIN": {
+        "before": 5,
+        "after": 5
+      },
+      "ZEXERCISE": {
+        "before": 178,
+        "after": 178
+      },
+      "ZFATLOSSPROGRAM": {
+        "before": 1,
+        "after": 1
+      },
+      "ZHYDRATIONENTRY": {
+        "before": 0,
+        "after": 0
+      },
+      "ZJUMPROPEENTRY": {
+        "before": 2,
+        "after": 2
+      },
+      "ZMEALENTRY": {
+        "before": 33,
+        "after": 33
+      },
+      "ZNUTRITIONTARGET": {
+        "before": 1,
+        "after": 1
+      },
+      "ZPLANNEDMEAL": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMDAILYLOG": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMHEALTHRECORD": {
+        "before": 3,
+        "after": 3
+      },
+      "ZPROGRAMTARGETREVISION": {
+        "before": 1,
+        "after": 1
+      },
+      "ZPROGRAMWEEKLYREVIEW": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMWORKOUTLINK": {
+        "before": 21,
+        "after": 21
+      },
+      "ZRECIPEVERSION": {
+        "before": 18,
+        "after": 18
+      },
+      "ZSCHEDULEDWORKOUT": {
+        "before": 53,
+        "after": 53
+      },
+      "ZSEDENTARYSESSION": {
+        "before": 0,
+        "after": 0
+      },
+      "ZSESSIONEXERCISE": {
+        "before": 304,
+        "after": 304
+      },
+      "ZSETLOG": {
+        "before": 1209,
+        "after": 1209
+      },
+      "ZTEMPLATEEXERCISE": {
+        "before": 201,
+        "after": 201
+      },
+      "ZTRAININGCOACHRECORD": {
+        "before": 0,
+        "after": 0
+      },
+      "ZTRAININGPREFERENCEREVISION": {
+        "before": 5,
+        "after": 5
+      },
+      "ZTRAININGPROGRAMREVISION": {
+        "before": 5,
+        "after": 5
+      },
+      "ZWORKOUTSESSION": {
+        "before": 49,
+        "after": 49
+      },
+      "ZWORKOUTTEMPLATE": {
+        "before": 40,
+        "after": 40
+      }
+    },
+    "original_photo_external_file_count": 0,
+    "photo_scope_note": "安装前备份中原图/外部载荷文件为 0，因此不据此声称已验证真实拍照链路。"
+  },
+  "backup": "artifacts/stage-validation/20261018-week-calendar-phone-preview/device-data/pre-install",
+  "evidence": {
+    "unified_gate_summary": "outputs/stage-validation/20261018-week-calendar-phone-preview/summary.md",
+    "source_snapshot": "artifacts/stage-validation/20261018-week-calendar-phone-preview/source-snapshot.json",
+    "verified_candidate": "artifacts/stage-validation/20261018-week-calendar-phone-preview/verified-candidate.json",
+    "conservation": "artifacts/stage-validation/20261018-week-calendar-phone-preview/device-audit/original-fields-conservation.json",
+    "installation": "artifacts/stage-validation/20261018-week-calendar-phone-preview/device-install.json",
+    "launch": "artifacts/stage-validation/20261018-week-calendar-phone-preview/device-launch.json",
+    "version": "artifacts/stage-validation/20261018-week-calendar-phone-preview/device-app-readback.json",
+    "running_process": "artifacts/stage-validation/20261018-week-calendar-phone-preview/final-processes.json"
+  },
+  "remaining": [
+    "本人手机实际体验与接受",
+    "完整阶段 non-device 和真机 XCTest 本轮未运行，不把体验交付标为阶段 GO"
+  ],
+  "scope_note": "用户明确要求本人先体验；D07 开关为 0 表示本轮未运行完整真机自动化，不表示用户永久拒绝测试或自动化已通过。未提交/tag/发布，未修改训练、数据模型、服务或同步配置。",
+  "local_knowledge_use": {
+    "device-lock-reading-group": "unverified historical guidance only; immediate lockState and current unified D00 independently verified."
+  }
+}

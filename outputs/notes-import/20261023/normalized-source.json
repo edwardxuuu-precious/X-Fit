@@ -1,0 +1,410 @@
+{
+  "date": "2026-10-23",
+  "timezone": "Asia/Shanghai",
+  "sourceNoteID": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p361",
+  "sourceModifiedAt": "2026-10-23T01:08:48.000Z",
+  "sourceSHA256": "4001ca16adddb0f5977c5b4468f93ad5d623f63ee5abd87dcbc5f73c27c7d0bf",
+  "exercises": [
+    {
+      "sourceExerciseID": "notes-20261023-e01",
+      "originalName": "Smith Bench Press",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e01-s01",
+          "raw": "20-16",
+          "numericValue": 20.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e01-s02",
+          "raw": "25-14",
+          "numericValue": 25.0,
+          "bodyweight": false,
+          "reps": 14
+        },
+        {
+          "sourceRowID": "notes-20261023-e01-s03",
+          "raw": "30-12",
+          "numericValue": 30.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e01-s04",
+          "raw": "35-10",
+          "numericValue": 35.0,
+          "bodyweight": false,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e01-s05",
+          "raw": "40-8",
+          "numericValue": 40.0,
+          "bodyweight": false,
+          "reps": 8
+        },
+        {
+          "sourceRowID": "notes-20261023-e01-s06",
+          "raw": "45-6",
+          "numericValue": 45.0,
+          "bodyweight": false,
+          "reps": 6
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e02",
+      "originalName": "Assisted Pull-up",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e02-s01",
+          "raw": "50-15",
+          "numericValue": 50.0,
+          "bodyweight": false,
+          "reps": 15
+        },
+        {
+          "sourceRowID": "notes-20261023-e02-s02",
+          "raw": "46.88-15",
+          "numericValue": 46.88,
+          "bodyweight": false,
+          "reps": 15
+        },
+        {
+          "sourceRowID": "notes-20261023-e02-s03",
+          "raw": "43.75-15",
+          "numericValue": 43.75,
+          "bodyweight": false,
+          "reps": 15
+        },
+        {
+          "sourceRowID": "notes-20261023-e02-s04",
+          "raw": "40.63-15",
+          "numericValue": 40.63,
+          "bodyweight": false,
+          "reps": 15
+        },
+        {
+          "sourceRowID": "notes-20261023-e02-s05",
+          "raw": "37.5-15",
+          "numericValue": 37.5,
+          "bodyweight": false,
+          "reps": 15
+        },
+        {
+          "sourceRowID": "notes-20261023-e02-s06",
+          "raw": "34.38-15",
+          "numericValue": 34.38,
+          "bodyweight": false,
+          "reps": 15
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e03",
+      "originalName": "Barbell Row",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e03-s01",
+          "raw": "20-14",
+          "numericValue": 20.0,
+          "bodyweight": false,
+          "reps": 14
+        },
+        {
+          "sourceRowID": "notes-20261023-e03-s02",
+          "raw": "22.5-12",
+          "numericValue": 22.5,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e03-s03",
+          "raw": "25-10",
+          "numericValue": 25.0,
+          "bodyweight": false,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e03-s04",
+          "raw": "27.5-8",
+          "numericValue": 27.5,
+          "bodyweight": false,
+          "reps": 8
+        },
+        {
+          "sourceRowID": "notes-20261023-e03-s05",
+          "raw": "30-6",
+          "numericValue": 30.0,
+          "bodyweight": false,
+          "reps": 6
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e04",
+      "originalName": "Push up",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e04-s01",
+          "raw": "bw-10",
+          "numericValue": null,
+          "bodyweight": true,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e04-s02",
+          "raw": "bw-10",
+          "numericValue": null,
+          "bodyweight": true,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e04-s03",
+          "raw": "bw-10",
+          "numericValue": null,
+          "bodyweight": true,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e04-s04",
+          "raw": "bw-10",
+          "numericValue": null,
+          "bodyweight": true,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e04-s05",
+          "raw": "bw-10",
+          "numericValue": null,
+          "bodyweight": true,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e05",
+      "originalName": "Cable Fly",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e05-s01",
+          "raw": "10-12",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e05-s02",
+          "raw": "10-12",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e05-s03",
+          "raw": "10-12",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e05-s04",
+          "raw": "10-12",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 12
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e06",
+      "originalName": "Pulley Low Row",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e06-s01",
+          "raw": "35-16",
+          "numericValue": 35.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e06-s02",
+          "raw": "42.5-14",
+          "numericValue": 42.5,
+          "bodyweight": false,
+          "reps": 14
+        },
+        {
+          "sourceRowID": "notes-20261023-e06-s03",
+          "raw": "50-12",
+          "numericValue": 50.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e06-s04",
+          "raw": "60-10",
+          "numericValue": 60.0,
+          "bodyweight": false,
+          "reps": 10
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e07",
+      "originalName": "Dumbbell Side Pull",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e07-s01",
+          "raw": "2.5-20",
+          "numericValue": 2.5,
+          "bodyweight": false,
+          "reps": 20
+        },
+        {
+          "sourceRowID": "notes-20261023-e07-s02",
+          "raw": "5-16",
+          "numericValue": 5.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e07-s03",
+          "raw": "7.5-12",
+          "numericValue": 7.5,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e07-s04",
+          "raw": "5-16",
+          "numericValue": 5.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e07-s05",
+          "raw": "2.5-20",
+          "numericValue": 2.5,
+          "bodyweight": false,
+          "reps": 20
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e08",
+      "originalName": "杠铃片胸前转体",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e08-s01",
+          "raw": "10-16",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e08-s02",
+          "raw": "10-16",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e08-s03",
+          "raw": "10-16",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e08-s04",
+          "raw": "10-16",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 16
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e09",
+      "originalName": "Dumbbell Reverse Fly",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e09-s01",
+          "raw": "5-20",
+          "numericValue": 5.0,
+          "bodyweight": false,
+          "reps": 20
+        },
+        {
+          "sourceRowID": "notes-20261023-e09-s02",
+          "raw": "8-16",
+          "numericValue": 8.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e09-s03",
+          "raw": "10-12",
+          "numericValue": 10.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e09-s04",
+          "raw": "8-16",
+          "numericValue": 8.0,
+          "bodyweight": false,
+          "reps": 16
+        },
+        {
+          "sourceRowID": "notes-20261023-e09-s05",
+          "raw": "5-20",
+          "numericValue": 5.0,
+          "bodyweight": false,
+          "reps": 20
+        }
+      ]
+    },
+    {
+      "sourceExerciseID": "notes-20261023-e10",
+      "originalName": "Smith shoulder press",
+      "sets": [
+        {
+          "sourceRowID": "notes-20261023-e10-s01",
+          "raw": "40-14",
+          "numericValue": 40.0,
+          "bodyweight": false,
+          "reps": 14
+        },
+        {
+          "sourceRowID": "notes-20261023-e10-s02",
+          "raw": "45-12",
+          "numericValue": 45.0,
+          "bodyweight": false,
+          "reps": 12
+        },
+        {
+          "sourceRowID": "notes-20261023-e10-s03",
+          "raw": "50-10",
+          "numericValue": 50.0,
+          "bodyweight": false,
+          "reps": 10
+        },
+        {
+          "sourceRowID": "notes-20261023-e10-s04",
+          "raw": "55-8",
+          "numericValue": 55.0,
+          "bodyweight": false,
+          "reps": 8
+        }
+      ]
+    }
+  ],
+  "rows": 48,
+  "phoneDedupStatus": "PASS: zero completed rows; R6 had 16 incomplete drafts; stable import absent",
+  "importPacketStatus": "frozen and applied; independent 48-row readback PASS",
+  "phoneSessionID": "01eb4b6b-7c68-44ea-9274-8dcef8eb8ea8",
+  "readback": "import-readback.json"
+}

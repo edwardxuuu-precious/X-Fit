@@ -7,8 +7,8 @@ final class FatLossUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments = ["--ui-testing"] + (started ? ["--ui-testing-fat-loss-started"] : [])
         app.launch()
-        XCTAssertTrue(app.tabBars.buttons["训练"].waitForExistence(timeout: 15))
-        XCTAssertTrue(app.tabBars.buttons["训练"].isSelected)
+        XCTAssertTrue(app.xfitTabButtons["训练"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.xfitTabButtons["训练"].isSelected)
         return app
     }
 
@@ -40,8 +40,46 @@ final class FatLossUITests: XCTestCase {
         XCTAssertTrue(calories.exists)
     }
 
+    private func openGoal(in app: XCUIApplication) {
+        app.xfitTabButtons["进展"].tap()
+        for _ in 0..<6 {
+            if app.navigationBars["目标与周期"].exists { return }
+            let goal = app.buttons["目标与周期"]
+            if goal.exists {
+                reveal(goal, in: app)
+                XCTAssertTrue(goal.isHittable)
+                goal.tap()
+                XCTAssertTrue(app.navigationBars["目标与周期"].waitForExistence(timeout: 5))
+                return
+            }
+            let back = app.navigationBars.buttons.firstMatch
+            guard back.exists else { break }
+            back.tap()
+        }
+        XCTFail("进展中的目标与周期必须可达")
+    }
+
+    private func openNutritionHome(in app: XCUIApplication) {
+        app.xfitTabButtons["饮食"].tap()
+        for _ in 0..<6 {
+            if app.navigationBars["餐单与备餐"].exists { return }
+            let nutrition = app.buttons["餐单、备餐与全部餐食"]
+            if nutrition.exists {
+                reveal(nutrition, in: app)
+                XCTAssertTrue(nutrition.isHittable)
+                nutrition.tap()
+                XCTAssertTrue(app.navigationBars["餐单与备餐"].waitForExistence(timeout: 5))
+                return
+            }
+            let back = app.navigationBars.buttons.firstMatch
+            guard back.exists else { break }
+            back.tap()
+        }
+        XCTFail("饮食中的餐单与备餐必须可达")
+    }
+
     private func createProgram(in app: XCUIApplication) {
-        app.tabBars.buttons["目标"].tap()
+        openGoal(in: app)
         let create = app.buttons["创建减脂周期"]
         reveal(create, in: app)
         XCTAssertTrue(create.waitForExistence(timeout: 5))
@@ -50,20 +88,24 @@ final class FatLossUITests: XCTestCase {
     }
 
     private func openMealCalendar(in app: XCUIApplication) {
-        app.tabBars.buttons["饮食"].tap()
+        openNutritionHome(in: app)
         let calendar = app.buttons["饮食-餐单日历"]
         reveal(calendar, in: app)
         XCTAssertTrue(calendar.waitForExistence(timeout: 5))
         calendar.tap()
     }
 
-    private func importMealsAndReturnHome(in app: XCUIApplication) {
+    private func importMealsInCalendar(in app: XCUIApplication) {
         openMealCalendar(in: app)
         XCTAssertTrue(app.staticTexts["当天尚未导入餐单"].waitForExistence(timeout: 5))
         app.buttons["预览导入餐单"].tap()
         XCTAssertTrue(app.buttons["确认导入餐单"].waitForExistence(timeout: 5))
         app.buttons["确认导入餐单"].tap()
         XCTAssertTrue(app.buttons["计划餐-早餐"].waitForExistence(timeout: 5))
+    }
+
+    private func importMealsAndReturnHome(in app: XCUIApplication) {
+        importMealsInCalendar(in: app)
         app.navigationBars.buttons.element(boundBy: 0).tap()
         let breakfast = app.buttons["饮食-按计划吃了-早餐"]
         reveal(breakfast, in: app)
@@ -74,14 +116,15 @@ final class FatLossUITests: XCTestCase {
     func testProgramCreationRequiresExplicitMealImport() {
         let app = launch()
         createProgram(in: app)
-        app.tabBars.buttons["饮食"].tap()
+        openNutritionHome(in: app)
         XCTAssertFalse(app.buttons["饮食-按计划吃了-早餐"].exists)
         openMealCalendar(in: app)
         XCTAssertTrue(app.staticTexts["当天尚未导入餐单"].waitForExistence(timeout: 5))
         app.buttons["预览导入餐单"].tap()
         XCTAssertTrue(app.buttons["确认导入餐单"].waitForExistence(timeout: 5))
         app.buttons["确认导入餐单"].tap()
-        XCTAssertTrue(app.buttons["14 天餐单预览"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["14 天餐单"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["计划餐-早餐"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.staticTexts["当天尚未导入餐单"].exists)
     }
 
@@ -98,10 +141,10 @@ final class FatLossUITests: XCTestCase {
         XCTAssertTrue(app.buttons["新增减脂目标版本"].exists)
     }
 
-    func testHomeKeepsFourTabsAndGoalWeightEntry() {
+    func testHomeKeepsFiveTabsAndGoalWeightEntry() {
         let app = launch()
-        XCTAssertEqual(app.tabBars.buttons.count, 4)
-        for title in ["训练", "饮食", "目标", "我的"] { XCTAssertTrue(app.tabBars.buttons[title].exists) }
+        XCTAssertEqual(app.xfitTabButtons.count, 5)
+        for title in ["训练", "饮食", "进展", "工具", "我的"] { XCTAssertTrue(app.xfitTabButtons[title].exists) }
         createProgram(in: app)
         let weight = app.buttons["目标-记录体重"]
         reveal(weight, in: app)
@@ -187,7 +230,7 @@ final class FatLossUITests: XCTestCase {
         XCTAssertEqual(XCTWaiter.wait(for: [returnedToPrep], timeout: 5), .completed)
         prepDone.tap()
         XCTAssertTrue(app.buttons["饮食-明日备餐"].waitForExistence(timeout: 5))
-        app.tabBars.buttons["目标"].tap()
+        openGoal(in: app)
         let review = app.buttons["减脂每周复盘"]
         reveal(review, in: app); review.tap()
         let saveReview = app.buttons["保存减脂周复盘"]
@@ -203,10 +246,20 @@ final class FatLossUITests: XCTestCase {
     func testReplacingUnrecordedMealKeepsPlanHistory() {
         let app = launch(started: true)
         createProgram(in: app)
-        importMealsAndReturnHome(in: app)
-        let lunch = app.buttons["饮食-调整实吃-午餐"]
-        reveal(lunch, in: app); lunch.tap()
-        let replacePicker = app.buttons["计划餐替换选择"]
+        // The meal calendar opens the same FatLossMealDetailView as the
+        // nutrition summary's adjustment sheet, with a stable plan entry.
+        importMealsInCalendar(in: app)
+        let lunch = app.buttons["计划餐-午餐"]
+        reveal(lunch, in: app)
+        let originalLunchLabel = lunch.label
+        lunch.tap()
+        XCTAssertTrue(app.navigationBars["餐食与反馈"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["计划 · 尚未记录实吃"].waitForExistence(timeout: 5))
+        guard let originalLunchTitle = app.staticTexts.allElementsBoundByIndex.map(\.label).first(where: {
+            $0.count > 2 && originalLunchLabel.contains($0)
+        }) else { return XCTFail("午餐详情必须显示刚打开的原计划菜名") }
+        XCTAssertNotEqual(originalLunchTitle, "小馒头＋蒸蛋", "换菜必须选择不同于原计划的菜式")
+        let replacePicker = app.descendants(matching: .any).matching(identifier: "计划餐替换选择").firstMatch
         reveal(replacePicker, in: app)
         replacePicker.tap()
         let replacement = app.buttons["小馒头＋蒸蛋"]
@@ -228,9 +281,15 @@ final class FatLossUITests: XCTestCase {
         dismissKeyboard(in: app)
         let replace = app.buttons["保存换菜"]
         reveal(replace, in: app); replace.tap()
-        XCTAssertTrue(lunch.waitForExistence(timeout: 5)); lunch.tap()
-        let history = app.staticTexts["这餐的计划历史"]
+        XCTAssertTrue(lunch.waitForExistence(timeout: 5))
+        XCTAssertTrue(lunch.label.contains("小馒头＋蒸蛋"), "保存换菜后，当前午餐应显示新菜式")
+        reveal(lunch, in: app); lunch.tap()
+        XCTAssertTrue(app.navigationBars["餐食与反馈"].waitForExistence(timeout: 5))
+        let history = app.staticTexts["计划历史"]
         reveal(history, in: app)
         XCTAssertTrue(history.exists)
+        let previousLunch = app.staticTexts[originalLunchTitle]
+        reveal(previousLunch, in: app)
+        XCTAssertTrue(previousLunch.exists, "保存新菜式后，原午餐必须仍保留在计划历史中")
     }
 }

@@ -1,0 +1,85 @@
+{
+  "status": "PASS_ALREADY_COMPLETED_NO_WRITE_NEEDED",
+  "verifiedAt": "2026-10-19T22:45:11.277037+08:00",
+  "capture": {
+    "captureStartedAt": "2026-10-19T22:44:04.138100+08:00",
+    "captureFinishedAt": "2026-10-19T22:44:07.605211+08:00",
+    "deviceIdentifier": "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "phoneWritesThisTurn": 0,
+    "appLaunchedThisTurn": false,
+    "phoneAction": "devicectl device copy from appGroupDataContainer",
+    "files": {
+      "phone-current/default.store": "19f0f45b95dbc1a11be4505bd573941cb8b54771dac1346073389c6af5641ba6",
+      "phone-current/default.store-wal": "b9e6d003f5b64d7e73211895d9a459553d763ad95fa6f5ebdce039ffc1a79477",
+      "phone-current/default.store-shm": "57b4b65666fb6f3d810e6abe1ce1a1a8d4d92ab6ebbf0b5d3ddcbcb7cc28a27e"
+    }
+  },
+  "request": "Mark Monday completed, preserve confirmed 38 actual sets, keep 7 drafts uncompleted, no other data changes.",
+  "actionTaken": "Read current phone snapshot and verify already-completed state; no repeated completion action.",
+  "phoneWritesThisTurn": 0,
+  "appLaunchedThisTurn": false,
+  "baselineSnapshotAt": "2026-10-19T21:54:09.715378+08:00",
+  "sessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+  "sessionStatus": "completed",
+  "scheduleStatus": "completed",
+  "completedAt": "2026-10-19T21:56:04.182767+08:00",
+  "completionTimeMeaning": "Existing retrospective completion confirmation time; actual workout end and duration unknown.",
+  "actualCompletedSets": 38,
+  "draftRowsRetainedUncompleted": 7,
+  "notes38ExactValuesAndUUIDsPreserved": true,
+  "originalFourRemainIn38": true,
+  "reverseFourAllCompleted": true,
+  "all1274SetLogRecordsUnchangedFromPriorAudit": true,
+  "allSessionExerciseRecordsUnchangedFromPriorAudit": true,
+  "allOtherBusinessRecordsUnchangedFromPriorAudit": true,
+  "modelTables": 25,
+  "recordCountsBefore": 2247,
+  "recordCountsCurrent": 2247,
+  "unchangedBusinessRecords": 2245,
+  "changesSincePriorAudit": [
+    {
+      "table": "ZSCHEDULEDWORKOUT",
+      "added": [],
+      "missing": [],
+      "changed": [
+        {
+          "id": "5185deb9cfb75810b9ece33cfdcac179",
+          "fields": {
+            "ZSTATUSRAW": {
+              "before": "inProgress",
+              "after": "completed"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "ZWORKOUTSESSION",
+      "added": [],
+      "missing": [],
+      "changed": [
+        {
+          "id": "0dd77d670967439aa50ac07d0b43cfee",
+          "fields": {
+            "ZCOMPLETEDAT": {
+              "before": null,
+              "after": 814110964.182767
+            },
+            "ZNOTES": {
+              "before": "Backfilled from Apple Notes Oct 19 2026. Original four Smith flat sets preserved. Smith flat and incline loads are kg per side， plates only， bar excluded. MTS decline， Seated Dip， Cable Fly and shoulder Side，",
+              "after": "Oct19 2026 Notes backfill. Smith flat and incline kg per side plates excluding bar. MTS decline， Dip， Fly and shoulder Side/Front/reverse kg per side. Pushdown original stack kg both sides total. Rep numbers match Notes. New rep SIDE and all RIR are unknown. Warmup/work type， actual rest/end/duration unknown. New timestamps are entry times only， not workout duration. Original4 preserved；7 plan rows unconfirmed."
+            },
+            "ZSTATUSRAW": {
+              "before": "inProgress",
+              "after": "completed"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceMetadataAlreadySaved": "Oct19 2026 Notes backfill. Smith flat and incline kg per side plates excluding bar. MTS decline， Dip， Fly and shoulder Side/Front/reverse kg per side. Pushdown original stack kg both sides total. Rep numbers match Notes. New rep SIDE and all RIR are unknown. Warmup/work type， actual rest/end/duration unknown. New timestamps are entry times only， not workout duration. Original4 preserved；7 plan rows unconfirmed.",
+  "assetsUnchanged": true,
+  "sourceNotesSHA256": "9c3086d1dac7165cb6fc791bf4e83737afced5dce8d5a01a691470afe0786fdd",
+  "dataFileHashesUnchangedByRead": true
+}

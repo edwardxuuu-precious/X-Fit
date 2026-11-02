@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-21T11:38:56.057858+08:00",
+  "planCode": "UPPER-20261019-R6",
+  "readbacks": [
+    {
+      "day": "2026-10-22",
+      "status": "PASS",
+      "exercises": 1,
+      "sets": 1,
+      "packetAndAllScheduleFieldsMatched": true,
+      "civilDateAndNoonStorageAnchorMatched": true,
+      "plannedNotCompleted": true
+    },
+    {
+      "day": "2026-10-23",
+      "status": "PASS",
+      "exercises": 5,
+      "sets": 16,
+      "packetAndAllScheduleFieldsMatched": true,
+      "civilDateAndNoonStorageAnchorMatched": true,
+      "plannedNotCompleted": true
+    }
+  ],
+  "applyNewScheduleCounts": [
+    1,
+    1
+  ],
+  "repeatNewScheduleCounts": [
+    0,
+    0
+  ],
+  "conservation": {
+    "status": "PASS",
+    "modelTables": 25,
+    "recordsBefore": 2375,
+    "recordsAfter": 2385,
+    "newPlanRecords": {
+      "ZSCHEDULEDWORKOUT": 2,
+      "ZTEMPLATEEXERCISE": 6,
+      "ZWORKOUTTEMPLATE": 2
+    },
+    "allowedOriginalBusinessChanges": [
+      {
+        "table": "ZSCHEDULEDWORKOUT",
+        "id": "fa0496b2-eb40-5978-9b3d-cbb7dd647ae4",
+        "fields": [
+          "ZUPDATEDAT",
+          "ZSKIPREASON",
+          "ZSTATUSRAW"
+        ]
+      },
+      {
+        "table": "ZSCHEDULEDWORKOUT",
+        "id": "637d2222-14b9-563c-8d5a-17eafda82a6f",
+        "fields": [
+          "ZUPDATEDAT",
+          "ZSKIPREASON",
+          "ZSTATUSRAW"
+        ]
+      }
+    ],
+    "allOtherOriginalBusinessFieldsUnchanged": true,
+    "allWorkoutSessionBusinessFieldsUnchanged": true,
+    "allSetLogFieldsUnchanged": true,
+    "todaySessionID": "98456d5b-5dfd-4e7c-add4-b649fff1273f",
+    "todayCompletedSets": 34,
+    "todayRawSetFieldsIdentical": true,
+    "todaySessionBusinessFieldsIdentical": true,
+    "todayInternalPersistenceMetadataChanges": {
+      "Z_OPT": {
+        "before": 2,
+        "after": 10
+      }
+    },
+    "comparisonExcludesOnlyCoreDataBookkeeping": [
+      "Z_ENT",
+      "Z_OPT"
+    ],
+    "actualWorkoutSessionsCreated": 0,
+    "actualSetLogsCreated": 0,
+    "allOtherSchedulesAndPreferencesUnchanged": true,
+    "oldPlanSourcesAndPrescriptionsPreserved": true,
+    "assetFilesCompared": 0,
+    "assetHashesUnchanged": null
+  },
+  "dateValidationSource": "FitnessApp/Models/MealPhotoModels.swift:14-21; civil days use local noon, not a training start time",
+  "humanTrainingOutcome": "NOT_YET_OBSERVED"
+}

@@ -1,0 +1,70 @@
+{
+  "requirement": "REQ-20261020-110641",
+  "phone_delivery": "PASS",
+  "version": "0.5.0",
+  "build": "21",
+  "accepted_source_inputs": 153,
+  "accepted_frozen_source_unchanged": true,
+  "unreviewed_worktree_drift_excluded": [
+    "FitnessApp/Features/DailyPlan/DailyWorkoutBuilderView.swift",
+    "FitnessApp/Features/History/HistoryView.swift",
+    "FitnessApp/Features/Plan/PlanView.swift",
+    "FitnessApp/Features/Redesign/EditorialHomeViews.swift",
+    "FitnessApp/Features/Workout/ActiveWorkoutView.swift",
+    "FitnessApp/Shared/TrainingSchedulePresentation.swift",
+    "FitnessAppTests/TrainingFeedbackTests.swift",
+    "FitnessAppUITests/TrainingExperienceUITests.swift",
+    "FitnessApp.xcodeproj/project.pbxproj"
+  ],
+  "device": "Edward_iPhone",
+  "device_udid": "00008150-001E49912122401C",
+  "delivery_method": "overlay installation, no uninstall or container clearing",
+  "signature": "PASS",
+  "launch_and_live_process_binding": "PASS",
+  "launch_arguments": [],
+  "original_business_records_at_install": 2259,
+  "all_original_business_fields_ids_relationships_preserved_by_install": true,
+  "actual_recording": "PASS",
+  "activity": "固定单车",
+  "local_day": "2026-10-20",
+  "actual_minutes": 35,
+  "machine_level": 10,
+  "phone_session_id": "2ffb29179d3a42349ce7ed5dc1593bab",
+  "new_business_rows": {
+    "ZSESSIONEXERCISE": 1,
+    "ZSETLOG": 1,
+    "ZWORKOUTSESSION": 1
+  },
+  "changed_original_rows": [
+    {
+      "table": "ZSCHEDULEDWORKOUT",
+      "id": "772c59378448503ca7623d2b8d3f904c",
+      "fields": [
+        "ZUPDATEDAT",
+        "ZSTATUSRAW"
+      ]
+    }
+  ],
+  "records_after_actual": 2262,
+  "all_other_original_fields_ids_relationships_preserved": true,
+  "native_phone_home_and_correct_session_summary_verified": true,
+  "phone_left_on_completed_home": true,
+  "simulator_refresh": "PASS",
+  "simulator_refresh_evidence": "artifacts/simulator-real-data/20261020-113953/result.json",
+  "phone_snapshot_copy_completed_at": "2026-10-20T11:39:28.457982+08:00",
+  "simulator_records": 2262,
+  "simulator_cloud_sync_enabled": false,
+  "simulator_data_uploaded_to_phone": false,
+  "evidence": [
+    "data-conservation.json",
+    "device-delivery-binding.json",
+    "actual-data-conservation.json",
+    "phone-home.png",
+    "phone-summary.png",
+    "phone-record-before-save.png",
+    "main-simulator-final-ax.txt"
+  ],
+  "device_xctest": "NOT_RUN",
+  "human_phone_acceptance": "pending",
+  "stage_decision": "PARTIAL"
+}

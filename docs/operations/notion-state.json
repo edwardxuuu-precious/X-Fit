@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "latest_storage_cleanup_sync": {
+    "status": "PASS",
+    "checked_at": "2026-10-14T06:43:33.604Z",
+    "evidence": "outputs/storage-retirement/20261014-project-consolidation.json#notion_sync",
+    "pages_updated": 4,
+    "targets_final_readback_verified": 5,
+    "new_objects": 0,
+    "new_task_ids": 0,
+    "R3_title": "业务目标与可收敛任务树 R3（本阶段已收尾）",
+    "original_phase_closeout_unchanged": true,
+    "T7_body_properties_version_unchanged": true,
+    "original_ledger_done": 7,
+    "original_ledger_total": 8,
+    "current_phase_pending_actions": 0,
+    "channel": "existing-shared-mcp",
+    "auth_or_permissions_changed": false,
+    "lease_released": true,
+    "active_unresolved_own_calls": 0,
+    "phone_actions": 0
+  },
+  "latest_formal_phase_closeout": {
+    "status": "PASS",
+    "decision": "REQ-20261013-131921/C-13",
+    "checked_at": "2026-10-14T04:46:38.902Z",
+    "final_progress_pages_verified": 5,
+    "total_owned_pages": 5,
+    "remaining_final_pages": 0,
+    "t8_remote_write_result": "resolved_exact_old_body_version_unchanged_then_one_apply_and_full_readback_PASS",
+    "current_phase_complete": true,
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#formal_phase_closeout_08",
+    "channel": "existing-shared-mcp",
+    "new_objects": 0,
+    "auth_or_permissions_changed": false,
+    "lease_released": true,
+    "active_unresolved_write_calls": 0,
+    "phone_actions": 0
+  },
+  "latest_business_scope_revision": {
+    "status": "PASS",
+    "decisions": [
+      "REQ-20261013-131921/C-11",
+      "REQ-20261013-131921/C-12",
+      "REQ-20260927-100827/C-05"
+    ],
+    "checked_at": "2026-10-14T04:01:17.894Z",
+    "notion_goal": "ordinary_collaboration_not_fixed_dual_workspace",
+    "strict_physical_p95_requirement": "cancelled_by_owner_no_future_task",
+    "strict_measurement_historical_status": "NOT_RUN",
+    "full_physical_ui": "BLOCKED_ENV_0_scenarios_upstream_unknown",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#business_scope_revision_07",
+    "pages": 4,
+    "new_objects": 0,
+    "returned_bodies_properties_ancestry_children_match": true,
+    "auth_or_permissions_changed": false,
+    "lease_released": true,
+    "active_calls_after": 0
+  },
+  "workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "workspace_name": "Edward's Notion",
+  "existing_archive_database_id": "6d6b5fb7-de5c-446a-a503-8b6462833486",
+  "existing_archive_state": "docs/training/notion-sync-state.json",
+  "checked_at": "2026-10-13",
+  "active_channel": "existing-shared-mcp",
+  "observed_workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "observed_workspace_name": "Edward's Notion",
+  "access": "identity_and_returned_content_verified",
+  "archive_fetch_result": "PASS",
+  "remote_readback": "PASS",
+  "private_verified": true,
+  "writes_this_cycle": 20,
+  "hub_page_id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+  "databases": {
+    "cycles": {
+      "stable_id": "XFO-DB-CYCLES-1",
+      "database_id": "b044f5d4066a44bca94332904b05c3ea",
+      "data_source_id": "ddc8879e-e661-442e-9536-83aac4f38a1d",
+      "title": "目标与迭代"
+    },
+    "work_items": {
+      "stable_id": "XFO-DB-WORK-1",
+      "database_id": "cfb739000fd847b389814dd4ca2f23f4",
+      "data_source_id": "beeed492-fb6f-4251-8457-a8adbfa47b91",
+      "title": "工作项"
+    },
+    "decisions_learning": {
+      "stable_id": "XFO-DB-LEARNING-1",
+      "database_id": "5686685e770a4cf9bfa636b7eb15d3d7",
+      "data_source_id": "09f9ec44-aa4f-4170-a55d-34c5f06334ae",
+      "title": "决策与学习"
+    }
+  },
+  "bindings": {
+    "XFO-HUB-1": {
+      "page_id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+      "url": "https://app.notion.com/p/3f84c857b834810bb182e00e55dc82b1?pvs=204",
+      "kind": "hub",
+      "readback": "PASS_expected_body_title_parent"
+    },
+    "XFO-CYCLE-20260927-01": {
+      "page_id": "3f84c857-b834-81f9-a97f-c8b770a5b032",
+      "url": "https://app.notion.com/p/3f84c857b83481f9a97fc8b770a5b032?pvs=204",
+      "kind": "cycle",
+      "readback": "PASS_final_body_fields_7of8_partial"
+    },
+    "XFO-T1": {
+      "page_id": "3f84c857-b834-81b0-b45f-e4df5473c55b",
+      "url": "https://app.notion.com/p/3f84c857b83481b0b45fe4df5473c55b?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T2": {
+      "page_id": "3f84c857-b834-8168-b7f4-df1a2bb27e2e",
+      "url": "https://app.notion.com/p/3f84c857b8348168b7f4df1a2bb27e2e?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T3": {
+      "page_id": "3f84c857-b834-8110-88c1-eebb987e4d51",
+      "url": "https://app.notion.com/p/3f84c857b834811088c1eebb987e4d51?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_done_body_fields_source_relation_and_acceptance_summary"
+    },
+    "XFO-T4": {
+      "page_id": "3f84c857-b834-81d3-88ad-f93978575be0",
+      "url": "https://app.notion.com/p/3f84c857b83481d388adf93978575be0?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T5": {
+      "page_id": "3f84c857-b834-81bc-9a78-e1ba9d62de35",
+      "url": "https://app.notion.com/p/3f84c857b83481bc9a78e1ba9d62de35?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T6": {
+      "page_id": "3f84c857-b834-8143-93e1-eb9faf4838d0",
+      "url": "https://app.notion.com/p/3f84c857b834814393e1eb9faf4838d0?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T7": {
+      "page_id": "3f84c857-b834-81f7-9f68-f386e0cd4f6d",
+      "url": "https://app.notion.com/p/3f84c857b83481f79f68f386e0cd4f6d?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-T8": {
+      "page_id": "3f84c857-b834-8105-9e5b-e97324b045eb",
+      "url": "https://app.notion.com/p/3f84c857b83481059e5be97324b045eb?pvs=204",
+      "kind": "work_item",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D01": {
+      "page_id": "3f84c857-b834-81e5-accf-d21d9c8b211e",
+      "url": "https://app.notion.com/p/3f84c857b83481e5accfd21d9c8b211e?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D02": {
+      "page_id": "3f84c857-b834-81d5-b129-c8c6edee6828",
+      "url": "https://app.notion.com/p/3f84c857b83481d5b129c8c6edee6828?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D03": {
+      "page_id": "3f84c857-b834-815e-b6be-e98d098947db",
+      "url": "https://app.notion.com/p/3f84c857b834815eb6bee98d098947db?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D04": {
+      "page_id": "3f84c857-b834-8161-9078-f88973e67663",
+      "url": "https://app.notion.com/p/3f84c857b83481619078f88973e67663?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D05": {
+      "page_id": "3f84c857-b834-8123-87ed-c67f187036c5",
+      "url": "https://app.notion.com/p/3f84c857b834812387edc67f187036c5?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-D06": {
+      "page_id": "3f84c857-b834-81b0-8e06-e5570ad40884",
+      "url": "https://app.notion.com/p/3f84c857b83481b08e06e5570ad40884?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    },
+    "XFO-L01": {
+      "page_id": "3f84c857-b834-8103-91b9-d7592284bb87",
+      "url": "https://app.notion.com/p/3f84c857b834810391b9d7592284bb87?pvs=204",
+      "kind": "decision_or_lesson",
+      "readback": "PASS_body_fields_source_and_cycle_relation"
+    }
+  },
+  "independent_access": {
+    "requirement": "docs/requirements/2026-10-04/195337_notion-independent-access.md",
+    "guide": "docs/operations/Notion独立通道.md",
+    "config": "docs/operations/notion-access.json",
+    "script": "scripts/xfit-notion-access.py",
+    "credential_present": false,
+    "local_tests": "PASS",
+    "keychain_isolated_selftest": "PASS",
+    "production_credentials_touched": false,
+    "remote_verification": "NOT_RUN",
+    "private_parent_page_id": "3f74c857-b834-8004-8a2d-ca7863ccfc2b",
+    "writes_enabled": false,
+    "remote_calls_this_check": 0,
+    "content_writes": 0,
+    "status": "retained_local_only_not_current_stage",
+    "current_stage_use": false
+  },
+  "legacy_connector": {
+    "checked_at": "2026-10-13",
+    "observed_workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+    "observed_workspace_name": "Edward's Notion",
+    "access": "identity_and_returned_content_verified",
+    "archive_fetch_result": "PASS",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json",
+    "current_verification": "PASS_existing_MCP_T3_owned_scope",
+    "reconnect_required_by_independent_channel": false,
+    "previous_failure": {
+      "checked_at": "2026-09-29T02:03:07.869Z",
+      "observed_workspace_id": "84ec1ddd-3200-8110-ae91-000338974a99",
+      "observed_workspace_name": "元见 PrimeViz",
+      "access": "wrong_workspace",
+      "archive_fetch_result": "object_not_found",
+      "evidence": "artifacts/project-loop/20260929-notion-postauth-check.json"
+    },
+    "verification_scope": "workspace/original DB/data source/8 IDs and returned managed content only; strict completeness and current private ACL not proven"
+  },
+  "native_app": {
+    "checked_at": "2026-10-10T23:29:00Z",
+    "workspace_name": "Edward's Notion",
+    "original_archive_url": "https://app.notion.com/p/6d6b5fb7de5c446aa5038b6462833486",
+    "access": "verified_in_ui",
+    "private_label_visible": true,
+    "known_archive_ids_visible": 8,
+    "full_content_readback": "new R1 projection fully returned after reload; original eight bodies not hash-compared",
+    "content_writes": 1,
+    "private_access_observed": "owner only; Only people invited; Only you can access",
+    "original_eight_titles_retained": true,
+    "new_page_id": "3f54c857-b834-8018-95b5-c6d19b0f2f8a",
+    "evidence": "artifacts/project-loop/20261011-local-ready/notion-native-readback.json",
+    "permissions_changed": false,
+    "lease": "XFIT-20261011-NATIVE-ARCHIVE-01 released; no next waiter"
+  },
+  "connector_reauthentication": {
+    "checked_at": "2026-09-29",
+    "status": "VERIFICATION_FAILED",
+    "reason": "User reported reconnection complete; this task's fresh connector self still returns PrimeViz and the exact original archive fetch returns object_not_found404. Active-account selection versus an older task/authentication binding remains unknown.",
+    "user_reported_connection_complete": true,
+    "credential_or_permission_changes": false,
+    "historical_result": true,
+    "superseded_for_current_identity_by": "artifacts/project-loop/20261005-readback/notion-validation.json"
+  },
+  "latest_access_evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json",
+  "resume_condition": "T3 is delivered. Read exact persisted returned IDs before later owned progress updates; do not recreate, obtain new credentials, switch authentication, migrate archive, or write phone data from Notion.",
+  "last_observation_channel": "connector",
+  "archive_identity_readback": "PASS",
+  "returned_managed_content_match": "PASS",
+  "strict_readback_reason": "Exact expected T3 managed semantics all read back; older original-eight mirror representation differences not rebaselined; absent API truncation/ACL metadata not manufactured",
+  "device_training_evidence": "artifacts/project-loop/20261005-readback/device-training-evidence.json",
+  "latest_native_archive_evidence": "artifacts/project-loop/20261011-local-ready/notion-native-readback.json",
+  "original_archive_native_update": "PASS; one R1 collaboration projection, not App application or T3 completion",
+  "private_verification_method": "owner confirmed exact existing private R3 parent; prior private-only native observation; genuine descendant ancestry; no sharing/permission mutation; independent current ACL API unavailable",
+  "verification_scope": "T3 exact20 objects/17 expected managed bodies/3 schemas/15 relationships/second live stable-ID reconciliation; original10 row properties/human fields/schema and R3 old body conserved; not old eight-body immutable mirror rebaseline",
+  "content_mutation_note": "20 new authorized objects; targeted corrections to two empty new relations and one new literal filename; additive current R3 owned section and owned new status-count updates",
+  "permissions_changed": false,
+  "whole_stage_go": false,
+  "latest_progress_readback": {
+    "status": "PASS",
+    "scope": "Four original owned progress sections only; full expected bodies and unchanged human/other properties",
+    "pages": [
+      {
+        "id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+        "record_id": "XFO-HUB-1",
+        "status": "PASS"
+      },
+      {
+        "id": "3f74c857-b834-8004-8a2d-ca7863ccfc2b",
+        "record_id": "XFIT-BUSINESS-TREE-R2",
+        "status": "PASS"
+      },
+      {
+        "id": "3f84c857-b834-81f9-a97f-c8b770a5b032",
+        "record_id": "XFO-CYCLE-20260927-01",
+        "status": "PASS"
+      },
+      {
+        "id": "3f84c857-b834-8105-9e5b-e97324b045eb",
+        "record_id": "XFO-T8",
+        "status": "PASS"
+      }
+    ],
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#offline_progress_update",
+    "new_objects": 0,
+    "lease_released": true,
+    "phone_actions": 0,
+    "source": "owner_consolidated_popup_reply"
+  },
+  "latest_performance_acceptance_readback": {
+    "status": "PASS",
+    "decision": "REQ-20260927-100827/C-04",
+    "closeout_decision": "REQ-20261013-131921/C-07",
+    "scope": "Only four existing owned current progress paragraphs; full expected bodies and human/other properties/child tags preserved",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#performance_acceptance_revision",
+    "current_app_side_validation": "NOT_RUN",
+    "strict_end_to_end_p95": "NOT_RUN",
+    "strict_end_to_end_stage_blocking": false,
+    "new_objects": 0,
+    "permissions_changed": false,
+    "lease_released": true,
+    "phone_actions": 0,
+    "whole_stage_go": false
+  },
+  "latest_batch_closeout": {
+    "status": "PASS",
+    "decision": "REQ-20261013-131921/C-10",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.meal_acceptance_deferred_closeout_05",
+    "pages": 4,
+    "new_objects": 0,
+    "normal_app_restored": true,
+    "real24_business_data_unchanged": true,
+    "original_test_db_wal_bytes_restored": true,
+    "returned_full_bodies_properties_ancestry_children_match": true,
+    "lease_released": true,
+    "active_calls": 0,
+    "permissions_changed": false,
+    "auth_changed": false,
+    "meal_acceptance": "NOT_RUN_deferred_until_actual_use",
+    "current_batch_closed": true,
+    "whole_original_stage_go": false
+  },
+  "latest_device_outcome_readback": {
+    "status": "PASS",
+    "metric_label_correction": "PASS: exact hub/R3 owned phrases corrected to 组记录1162条（包含热身及未完成组）, actual full returned content/old properties/children match; fresh Edward identity, finite lease released. Previous blocked/cancelled attempt retained in receipt; no objects or permissions changed.",
+    "run_id": "four-pack-final-wireless-20261013-01",
+    "scope": "Only four existing owned progress sections; full returned representation, original properties and children preserved",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes",
+    "new_objects": 0,
+    "permissions_changed": false,
+    "lease_released": true,
+    "active_calls_after": 0,
+    "ordinary_phone_build": "18",
+    "delivery": "PASS",
+    "native_unit": {
+      "passed": 388,
+      "skipped": 5,
+      "failed": 0
+    },
+    "old24_business_data_conservation": "PASS",
+    "ui_actual_scenes": 0,
+    "ui": "BLOCKED_ENV_unknown",
+    "input_save_engineering": "PASS_bounded_existing_numeric_Chinese_paste_RIR_search_save_coldreopen_and_App_capture; not_all_IME_or_physical_P95",
+    "meal_photo_chain": "NOT_RUN_owner_latest_deferred",
+    "strict_end_to_end_p95": "NOT_RUN_future_nonblocking",
+    "whole_stage_go": false,
+    "continuation_readback_delta_02": {
+      "status": "PARTIAL",
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.continuation_readback_delta_02",
+      "hub_updated": true,
+      "other_three_updated": false,
+      "lease_released": true
+    },
+    "acceptance_progress_03": {
+      "status": "PASS",
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.acceptance_progress_03",
+      "pages": 4,
+      "objects_created": 0,
+      "all_returned_owned_and_unrelated_content_matched": true,
+      "properties_children_unchanged": true,
+      "lease_released": true,
+      "active_calls": 0,
+      "meal_final_restore_pending": true,
+      "whole_stage_go": false
+    },
+    "final_restoration_progress_04": {
+      "status": "PASS",
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.final_restoration_progress_04",
+      "pages": 4,
+      "objects_created": 0,
+      "returned_full_body_match": true,
+      "human_other_properties_children_unchanged": true,
+      "lease_released": true,
+      "active_calls": 0,
+      "normal_app_restored": true,
+      "owner_camera_deferred": true,
+      "whole_stage_go": false
+    }
+  }
+}

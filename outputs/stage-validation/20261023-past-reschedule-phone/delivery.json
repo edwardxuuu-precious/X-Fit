@@ -1,0 +1,152 @@
+{
+  "requirement": "REQ-20261023-112357",
+  "device_delivery": "PASS",
+  "version": "0.5.0",
+  "build": "30",
+  "previous_build": "28",
+  "phone_data_conservation": "PASS",
+  "original_records_retained": 2489,
+  "after_records": 2489,
+  "model_tables": 25,
+  "table_counts": {
+    "ZBODYMEASUREMENT": {
+      "before": 22,
+      "after": 22
+    },
+    "ZDAILYBODYCHECKIN": {
+      "before": 5,
+      "after": 5
+    },
+    "ZEXERCISE": {
+      "before": 211,
+      "after": 211
+    },
+    "ZFATLOSSPROGRAM": {
+      "before": 1,
+      "after": 1
+    },
+    "ZHYDRATIONENTRY": {
+      "before": 0,
+      "after": 0
+    },
+    "ZJUMPROPEENTRY": {
+      "before": 2,
+      "after": 2
+    },
+    "ZMEALENTRY": {
+      "before": 33,
+      "after": 33
+    },
+    "ZNUTRITIONTARGET": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPLANNEDMEAL": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMDAILYLOG": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMHEALTHRECORD": {
+      "before": 3,
+      "after": 3
+    },
+    "ZPROGRAMTARGETREVISION": {
+      "before": 1,
+      "after": 1
+    },
+    "ZPROGRAMWEEKLYREVIEW": {
+      "before": 0,
+      "after": 0
+    },
+    "ZPROGRAMWORKOUTLINK": {
+      "before": 21,
+      "after": 21
+    },
+    "ZRECIPEVERSION": {
+      "before": 18,
+      "after": 18
+    },
+    "ZSCHEDULEDWORKOUT": {
+      "before": 60,
+      "after": 60
+    },
+    "ZSEDENTARYSESSION": {
+      "before": 0,
+      "after": 0
+    },
+    "ZSESSIONEXERCISE": {
+      "before": 356,
+      "after": 356
+    },
+    "ZSETLOG": {
+      "before": 1407,
+      "after": 1407
+    },
+    "ZTEMPLATEEXERCISE": {
+      "before": 231,
+      "after": 231
+    },
+    "ZTRAININGCOACHRECORD": {
+      "before": 1,
+      "after": 1
+    },
+    "ZTRAININGPREFERENCEREVISION": {
+      "before": 6,
+      "after": 6
+    },
+    "ZTRAININGPROGRAMREVISION": {
+      "before": 5,
+      "after": 5
+    },
+    "ZWORKOUTSESSION": {
+      "before": 58,
+      "after": 58
+    },
+    "ZWORKOUTTEMPLATE": {
+      "before": 47,
+      "after": 47
+    }
+  },
+  "all_original_business_fields_pk_uuid_relationships_json_and_nulls_unchanged": true,
+  "notes_oct23_48_completed_rows_preserved": true,
+  "r6_skipped_prescription_and_source_retained": true,
+  "non_database_files_retained": 4,
+  "new_business_records": 0,
+  "modified_business_records": 0,
+  "removed_business_records": 0,
+  "uninstall_performed": false,
+  "container_clear_performed": false,
+  "simulator_upload_performed": false,
+  "direct_phone_database_write": false,
+  "normal_process_id": 13658,
+  "normal_launch_arguments": [],
+  "cloud_sync_enabled": false,
+  "source_inputs_verified": 127,
+  "regression_tests": {
+    "passed": 54,
+    "failed": 0,
+    "skipped": 0,
+    "service": 48,
+    "ui": 6,
+    "evidence": "combined-regression-summary.json"
+  },
+  "baseline_source": "/tmp/xfit-notes-skip-build28-source",
+  "installed_source": "/tmp/xfit-past-reschedule-phone-build30-source",
+  "production_ui_changes": [
+    "FitnessApp/Features/Redesign/EditorialHomeViews.swift",
+    "FitnessApp/Features/Schedule/ScheduleView.swift"
+  ],
+  "before_backup": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261023-past-reschedule-phone/device-data/pre-install",
+  "after_backup": "/Users/edward/Documents/Fitness App/artifacts/stage-validation/20261023-past-reschedule-phone/device-data/post-install",
+  "runtime_evidence": "runtime-verification.json",
+  "data_evidence": "data-conservation.json",
+  "package_evidence": "installed-package-verification.json",
+  "device_fixture_tests": "NOT_RUN",
+  "human_acceptance": "BLOCKED_HUMAN",
+  "complete_stage": "PARTIAL",
+  "checked_at": "2026-10-23T14:53:24.251047+08:00",
+  "coordination": "Other chat authorized to continue after this PASS, retaining the approved entry in a higher build; no old Build29 installation."
+}

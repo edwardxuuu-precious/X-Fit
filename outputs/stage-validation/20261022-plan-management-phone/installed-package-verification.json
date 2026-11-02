@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "requirement": "REQ-20261022-153912",
+  "frozen_inputs_verified": 127,
+  "only_configuration_change": "isolated build number 25 to 27",
+  "packages": [
+    {
+      "bundle": "com.edward.FitnessApp",
+      "version": "0.5.0",
+      "build": "27",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "team": "664DT5VC99",
+      "phone_in_profile": true,
+      "profile_uuid": "761fe5b8-a547-4dd7-9b11-10dfa70b0980",
+      "profile_expiration_utc": "2026-10-28T03:52:10+00:00",
+      "executable_sha256": "3c000c509f276c395cc03ec9e0be8951e8c1c5a1132b4719846396814bed5248"
+    },
+    {
+      "bundle": "com.edward.FitnessApp.XFitShareExtension",
+      "version": "0.5.0",
+      "build": "27",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "team": "664DT5VC99",
+      "phone_in_profile": true,
+      "profile_uuid": "0cf8b535-a0b9-40c6-a0a5-2fc8622b26e2",
+      "profile_expiration_utc": "2026-10-28T03:52:07+00:00",
+      "executable_sha256": "ebe15e931dc4a95367a861b5eb3fff643ff82a2bf0c1171d2fec707a8e508a2f"
+    }
+  ],
+  "cloud_sync_enabled": false,
+  "candidate": "/tmp/xfit-plan-management-phone-build27-derived/Build/Products/Release-iphoneos/FitnessApp.app",
+  "checked_at": "2026-10-22T08:37:21.733012+00:00"
+}

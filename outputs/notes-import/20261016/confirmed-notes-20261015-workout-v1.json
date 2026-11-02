@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "packageID": "notes-20261015-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-10-15-oct15-notes-workout",
+      "date": "2026-10-15",
+      "name": "Oct 15 · 下肢后侧",
+      "startTimeKnown": false,
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「Oct 15」（原始标题）；本人明确要求同步昨天实际训练，最后澄清6个动作均以kg记录。原始名称/数字/次序保留；RDL与硬拉两个连续标题合并显示为RDL / 硬拉，不自动映射动作库别名。开始时刻、时长、RIR及单双侧口径未记录；热身/工作性质未知，导入行不能全部认定为有效工作组。提踵第二条20×5按原文保留。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "RDL / 硬拉",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "sets": [
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 45.0,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 55.0,
+              "reps": 6,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "器械臀推",
+          "muscleGroup": "臀部",
+          "equipment": "器械臀推机",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 原文说明为器械臀推，具体品牌/设置未记录。",
+          "sets": [
+            {
+              "weight": 50.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 57.5,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 65.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 72.5,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 57.5,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "双腿钟摆深蹲",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "sets": [
+            {
+              "weight": 40.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 50.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 60.0,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 70.0,
+              "reps": 6,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "Leg Curl",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 12,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 30.0,
+              "reps": 8,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 35.0,
+              "reps": 6,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "摇壶铃",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "sets": [
+            {
+              "weight": 16.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 18.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 20.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 20.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        },
+        {
+          "name": "斯密斯单腿提踵",
+          "muscleGroup": "其他",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "来源：Apple Notes「Oct 15」。原名/原数字保留；本人2026-10-16最终确认均为kg；重量与次数的单双侧未知；未记录RIR、热身/工作性质及具体器械设置。 未与近似动作自动合并。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 20.0,
+              "reps": 5,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            },
+            {
+              "weight": 25.0,
+              "reps": 15,
+              "weightSide": "unknown",
+              "repsSide": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": [],
+  "jumpRopeEntries": [],
+  "voidMealIDs": [],
+  "staleSession": null
+}

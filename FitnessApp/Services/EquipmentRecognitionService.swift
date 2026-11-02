@@ -46,7 +46,7 @@ enum EquipmentCatalogService {
         return definitions.first { item in
             ([item.id, item.nameZH, item.nameEN] + item.aliases).contains { candidate in
                 let normalizedCandidate = normalized(candidate)
-                return target.contains(normalizedCandidate) || normalizedCandidate.contains(target)
+                return target == normalizedCandidate
             }
         }
     }
@@ -54,6 +54,24 @@ enum EquipmentCatalogService {
     static func searchTerms(for equipment: String) -> [String] {
         guard let item = definition(for: equipment) else { return [] }
         return [item.nameZH, item.nameEN, item.id] + item.aliases
+    }
+
+    /// OCR can contain a complete machine label inside a longer string. Unlike
+    /// display-name resolution, this returns every candidate for review.
+    static func recognitionCandidates(in text: String) -> [EquipmentDefinition] {
+        let evidence = normalized(text)
+        guard !evidence.isEmpty else { return [] }
+        return definitions.filter { item in
+            ([item.nameZH, item.nameEN] + item.aliases).contains { value in
+                let term = normalized(value)
+                guard term.count >= 3 else { return false }
+                if term.unicodeScalars.allSatisfy(\.isASCII) {
+                    let pattern = "(?<![a-z0-9])" + NSRegularExpression.escapedPattern(for: term) + "(?![a-z0-9])"
+                    return evidence.range(of: pattern, options: .regularExpression) != nil
+                }
+                return evidence.contains(term)
+            }
+        }
     }
 
     static func englishName(for equipment: String) -> String? {
@@ -139,7 +157,8 @@ struct EquipmentRecognitionService: EquipmentRecognizing {
         if let endpoint {
             return try await recognizeRemotely(images: images, ocrText: localEvidence, endpoint: endpoint)
         }
-        if let definition = EquipmentCatalogService.definition(for: localEvidence.joined(separator: " ")) {
+        let candidates = EquipmentCatalogService.recognitionCandidates(in: localEvidence.joined(separator: " "))
+        if candidates.count == 1, let definition = candidates.first {
             return Self.response(for: definition, evidence: localEvidence, confidence: 0.72)
         }
         throw EquipmentRecognitionError.serviceNotConfigured

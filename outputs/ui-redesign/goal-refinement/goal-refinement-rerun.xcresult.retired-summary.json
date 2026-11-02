@@ -1,0 +1,47 @@
+{
+  "raw_payload_retirement": "preserved_tracked_acceptance_and_rollback_material",
+  "original_bundle_path": "/Users/edward/Documents/Fitness App/outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult",
+  "original_body_fingerprint_sha256": "f5b6e233ade38bbdf8fb13f2881e18de13dc85037c4cef900d6ff007bdeb7253",
+  "summary_read": {
+    "read_exit": 0,
+    "read_error": null,
+    "summary": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+            "deviceName": "iPhone 17 Pro",
+            "modelName": "iPhone 17 Pro",
+            "osBuildNumber": "23F77",
+            "osVersion": "26.5",
+            "platform": "iOS Simulator"
+          },
+          "expectedFailures": 0,
+          "failedTests": 0,
+          "passedTests": 1,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "FitnessApp · Built with macOS 26.6.2",
+      "expectedFailures": 0,
+      "failedTests": 0,
+      "finishTime": 1788764770.952,
+      "passedTests": 1,
+      "result": "Passed",
+      "skippedTests": 0,
+      "startTime": 1788764710.297,
+      "statistics": [],
+      "testFailures": [],
+      "title": "Test - FitnessApp",
+      "topInsights": [],
+      "totalTestCount": 1
+    }
+  },
+  "raw_archive_or_restore_available": false,
+  "raw_original_still_present": true
+}

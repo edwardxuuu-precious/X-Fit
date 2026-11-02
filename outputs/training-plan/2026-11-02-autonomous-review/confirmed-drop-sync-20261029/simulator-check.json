@@ -1,0 +1,39 @@
+{
+  "status": "PASS_LOCAL_SIMULATION_ONLY",
+  "testedAt": "2026-10-30 00:10 +0800",
+  "source": "2026-10-29 15:18 phone snapshot; simulated old schedules inserted before replacements",
+  "tests": 1,
+  "passed": 1,
+  "failed": 0,
+  "skipped": 0,
+  "days": [
+    "2026-11-02",
+    "2026-11-04",
+    "2026-11-06"
+  ],
+  "exerciseCounts": [
+    8,
+    7,
+    8
+  ],
+  "plannedSetCounts": [
+    32,
+    28,
+    32
+  ],
+  "checked": [
+    "App previews and three explicit replacements on copied store",
+    "per-set planned values and notes on independent context readback",
+    "prior packets retained with schedules marked skipped",
+    "repeat preview added zero",
+    "no actual workout or set rows added"
+  ],
+  "limitations": [
+    "Simulator logged Persistence-1629 versus Persistence-1526 store-version warning",
+    "Historical snapshot with simulated old schedules; does not establish current device state",
+    "Phone previews, writes and readbacks not executed"
+  ],
+  "xcresultTemporary": "/private/tmp/xfit-confirmed-drop-sim-20261029.xcresult",
+  "logTemporary": "/private/tmp/xfit-confirmed-drop-sim-20261029.log",
+  "reviewSHA256": "ebb971dba69317ddd930ddb5003c9ddf2434a3e447f32c8ead5ebe72933e2014"
+}

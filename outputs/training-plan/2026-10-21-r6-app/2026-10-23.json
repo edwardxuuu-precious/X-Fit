@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "localDay": "2026-10-23",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "preferenceRevisionCode": "TP-20260928-05",
+  "id": "93f581fb-c0c1-5ee5-a87f-be2cb95829bf",
+  "title": "肩＋三头",
+  "confirmedAt": "2026-10-21T11:23:01+08:00",
+  "confirmationReference": "REQ-20261021-112301；本人明确确认按已审阅的周四有氧和周五肩三头完整方案同步手机，今天已完成训练保持不变；只追加修订10/22、10/23，保留全部原实际。",
+  "guidance": "仅10/23已确认R6：肩＋三头5动作16工作组，热身另计，约60–75分钟。表内重量/次数均为可编辑建议，实际RIR及完成由本人记录。先核肩肘/三头及后束恢复；不追加二头、腹部或收尾。90分钟封顶，不缩短必要休息赶清单。出现新疼痛、头晕、恶心、明显乏力或技术持续失稳，停止受影响动作。\n当天校准不追加工作组；跨课加重仍需同动作/器械/口径/剂量连续两次全组达各自上限且动作和恢复正常。实际符合既有晨练供能不足条件时，首项下调5%–10%、保留3–4RIR，不因晨练自动触发、不加组补偿。连续两个可比动作明显下降或接近90分钟，停止追加孤立容量。占用可等候/调序，换机轻档重测，无可行替代记录受限，不复制跨机器公斤数。",
+  "exercises": [
+    {
+      "catalogExerciseID": "3063d520-06b1-4408-9eed-5d3297cc8a76",
+      "catalogName": "器械肩推",
+      "equipment": "器械",
+      "volumeUnit": "kilogram",
+      "displayName": "器械肩推",
+      "loadGuidance": "原机配重区显示kg，双侧合计；不乘2",
+      "notes": "轻松活动5–8分钟后，原机20×8→30×5→40×2–3，休息后试50。50kg不足8次、明显代偿或仅剩0–1RIR，顶组改45、回退改40。50/45是有历史依据的同机候选；不同器械从轻档校准。",
+      "plannedSets": [
+        {
+          "id": "364680b9-cf10-55ae-8d3e-c1e533fbe1c5",
+          "weight": 50,
+          "reps": 8,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "顶组",
+            "repsLower": 8,
+            "repsUpper": 10,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 150,
+            "restUpperSeconds": 180,
+            "effortCue": "顶组约RIR2；回退前两组RIR2、末组1–2，动作稳定，偏重按提示降档。"
+          }
+        },
+        {
+          "id": "61627ed1-6b3c-5068-9513-c6b37f75a7af",
+          "weight": 45,
+          "reps": 10,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "回退组",
+            "repsLower": 10,
+            "repsUpper": 12,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 150,
+            "restUpperSeconds": 180,
+            "effortCue": "顶组约RIR2；回退前两组RIR2、末组1–2，动作稳定，偏重按提示降档。"
+          }
+        },
+        {
+          "id": "447518d1-b37b-5ca8-9fbd-8d6bd1b7a690",
+          "weight": 45,
+          "reps": 10,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "回退组",
+            "repsLower": 10,
+            "repsUpper": 12,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 150,
+            "restUpperSeconds": 180,
+            "effortCue": "顶组约RIR2；回退前两组RIR2、末组1–2，动作稳定，偏重按提示降档。"
+          }
+        },
+        {
+          "id": "a3506012-a530-53c3-a59d-3658c152acda",
+          "weight": 45,
+          "reps": 10,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "回退组",
+            "repsLower": 10,
+            "repsUpper": 12,
+            "rirLower": 1,
+            "rirUpper": 2,
+            "restLowerSeconds": 150,
+            "restUpperSeconds": 180,
+            "effortCue": "顶组约RIR2；回退前两组RIR2、末组1–2，动作稳定，偏重按提示降档。"
+          }
+        }
+      ]
+    },
+    {
+      "catalogExerciseID": "96ceeea6-01ff-49cf-8b5c-4db411207b19",
+      "catalogName": "哑铃侧平举",
+      "equipment": "哑铃",
+      "volumeUnit": "kilogram",
+      "displayName": "哑铃侧平举",
+      "loadGuidance": "每只哑铃kg；次数按每侧",
+      "notes": "每只约5kg×6准备。7.5kg不能规范12次降5kg；规范15次仍明显比目标多约2次余力，下一组才试最小档。不甩动。",
+      "plannedSets": [
+        {
+          "id": "ce901a8f-09f4-588e-8e42-8ae013c584b2",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "02d867c1-7791-53a8-904f-e31ecce24b7d",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "f40d3415-47f9-5d45-af9c-2ad24b575c72",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 1,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        }
+      ]
+    },
+    {
+      "catalogExerciseID": "6e5744ec-d08f-4316-b3b9-dc4b36e179c9",
+      "catalogName": "哑铃反向飞鸟",
+      "equipment": "哑铃",
+      "volumeUnit": "kilogram",
+      "displayName": "哑铃反向飞鸟",
+      "loadGuidance": "每只哑铃kg；次数按每侧",
+      "notes": "每只约5kg×6准备，沿用熟悉变式。7.5kg不能规范12次降5kg。10/21背部课可能有后束间接参与，热身核对局部恢复，不追加收尾。",
+      "plannedSets": [
+        {
+          "id": "8fb82870-07ff-54fa-ae1d-39361b89cf32",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "f0bfe84b-d2f0-5dda-849a-23cfff22d056",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "bf0b2329-075d-5347-889a-cd1c4c6d82e8",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "single",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        }
+      ]
+    },
+    {
+      "catalogExerciseID": "bd28555c-efc5-49a6-b267-5bf091c103fc",
+      "catalogName": "绳索下压",
+      "equipment": "龙门架",
+      "volumeUnit": "kilogram",
+      "displayName": "绳索三头下压",
+      "loadGuidance": "原机配重区显示kg，双侧合计；不乘2",
+      "notes": "原机12.5kg×5–8准备。17.5kg×15–20，规范20次仍明显比目标多约2次余力，下一组才加实际最小档；不足15次、过早接近力竭降15kg或邻近轻档。10/19的17.5×20在第1及第4组，不是连续末两组，不当作已完成连续进阶。",
+      "plannedSets": [
+        {
+          "id": "a2602318-d518-54f7-9e65-68575cc78736",
+          "weight": 17.5,
+          "reps": 15,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 15,
+            "repsUpper": 20,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 120,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "ab2c2478-144f-5073-8753-72417a7a2d04",
+          "weight": 17.5,
+          "reps": 15,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 15,
+            "repsUpper": 20,
+            "rirLower": 2,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 120,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        },
+        {
+          "id": "499cb571-1b96-5c3a-b67a-df2e43abf57d",
+          "weight": 17.5,
+          "reps": 15,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 15,
+            "repsUpper": 20,
+            "rirLower": 1,
+            "rirUpper": 2,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 120,
+            "effortCue": "动作稳定；明显偏重降档"
+          }
+        }
+      ]
+    },
+    {
+      "catalogExerciseID": "7def3925-cd46-4959-986a-7701342c58f6",
+      "catalogName": "绳索过顶臂屈伸",
+      "equipment": "龙门架",
+      "volumeUnit": "kilogram",
+      "displayName": "绳索过顶臂屈伸",
+      "loadGuidance": "原机配重区显示kg，双侧合计；不乘2",
+      "notes": "条件动作、10kg试重：先核肩肘及三头恢复；恢复不佳、仍未知或轻试不适则省去3组，当天13组，不补组。原栈较轻档约5kg×5–8→10kg×2–3核验；仅偏重且无不适先降档，持续不适停止。",
+      "plannedSets": [
+        {
+          "id": "81dc97b4-6b0d-5af0-8247-7cca4b151a72",
+          "weight": 10,
+          "reps": 12,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 3,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "试重/恢复条件见动作提示"
+          }
+        },
+        {
+          "id": "97923710-3f45-54ae-ab15-55555442897a",
+          "weight": 10,
+          "reps": 12,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 3,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "试重/恢复条件见动作提示"
+          }
+        },
+        {
+          "id": "c05b6cce-8b8c-56ec-b5c3-ca4306609f50",
+          "weight": 10,
+          "reps": 12,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "plan",
+          "prescription": {
+            "label": "工作组",
+            "repsLower": 12,
+            "repsUpper": 15,
+            "rirLower": 2,
+            "rirUpper": 3,
+            "restLowerSeconds": 90,
+            "restUpperSeconds": 90,
+            "effortCue": "试重/恢复条件见动作提示"
+          }
+        }
+      ]
+    }
+  ],
+  "actualPrefillConfirmationReference": "REQ-20261021-112301；本人明确确认按已审阅的周四有氧和周五肩三头完整方案同步手机，今天已完成训练保持不变；只追加修订10/22、10/23，保留全部原实际。重量次数沿已确认方案作可编辑建议预填；真实RIR不填，完成由本人确认。",
+  "replacement": {
+    "scheduleID": "637D2222-14B9-563C-8D5A-17EAFDA82A6F",
+    "packetSHA256": "dfa0d0eea0c317e0db374705a986a227792b1dd780695c1ba937197d4e74302e"
+  },
+  "sourceMarkdown": "# 本周剩余训练 R6（已确认，10/22–10/23）\n\n- 确认登记：2026-10-21 11:23:01 +0800；本人要求按已审阅方案同步周四、周五，今天已完成训练保持不变。\n- 需求：REQ-20261021-112301；方法：METHOD-20261020-06；App偏好：TP-20260928-05；个人输入：SET-PREF-20261016-01、EXERCISE-PREF-20261020-01。\n- 仅追加修订10/22和10/23未开始日程；旧版本、10/21全部原字段、其他日程、偏好与历史实际保留，不续排下周。\n- 本人反馈：10/21练背部、二头、腹部，没有额外直接练肩或三头；无不适、整体强度合适。完整逐组实际未取得，不用草稿或此前背部样板替代实际，不新增完成组。\n- 以下重量和次数为可编辑建议；真实RIR、完成状态及时间由本人训练时填写。\n\n## 10/22周四：稳定有氧\n\n- 椭圆机或固定单车：热身5分钟＋稳定主训练40分钟＋放松5分钟，总50分钟。主段2400秒；热身、放松和中途停下休息不计主段，不记负重公斤。\n- 能说完整句子，不冲刺；椭圆机手柄自然轻扶，不大力推拉把手追心率。背部或握力仍疲劳可改固定单车，时长与强度相同。\n- 次晨背部、腹部或整体疲劳明显，主段缩到30分钟，实际记1800秒；恢复正常保持40分钟。\n- 新疼痛、头晕、恶心或明显乏力时停止。无器械记录受限，不把步行冒充等量完成；不追加力量或跳绳。\n\n## 10/23周五：肩＋三头\n\n5动作、16个工作组，约60–75分钟，热身另计。肩推按原机配重区显示值、双侧合计，不乘二；哑铃每只kg、次数每侧；绳索按原栈显示、双侧合计，不加算未知空载阻力，换机重新校准。\n\n| 动作 | 第1组 | 第2组 | 第3组 | 第4组 | 余力与休息 |\n|---|---|---|---|---|---|\n| 器械肩推（重点） | 50kg×8–10 | 45kg×10–12 | 45kg×10–12 | 45kg×10–12 | 顶组RIR2；回退前两组RIR2、末组1–2；150–180秒 |\n| 哑铃侧平举 | 每只7.5kg×12–15 | 同左 | 同左 | — | 前两组RIR2、末组1–2；90秒 |\n| 哑铃反向飞鸟 | 每只7.5kg×12–15 | 同左 | 同左 | — | RIR2，后侧发力和动作稳定；90秒 |\n| 绳索三头下压 | 17.5kg×15–20 | 同左 | 同左 | — | 前两组RIR2、末组1–2；90–120秒 |\n| 绳索过顶臂屈伸（条件） | 10kg×12–15 | 同左 | 同左 | — | 试重，RIR2–3；90秒 |\n\n### 热身、证据与当天调整\n\n- 先轻松活动5–8分钟。肩推20×8→30×5→40×2–3，休息后试50。9/21同动作有45/50/55/60各10次；旧RIR/设置不充分，本次50/45是有条件候选。50不足8次、明显代偿或仅剩0–1RIR，顶组改45、回退改40。\n- 侧平举、反向飞鸟各每只约5×6准备。侧平举9/8有7.5×10及10×10；反向飞鸟9/21有7.5×15等，真实RIR缺失；保持7.5起点，不能规范12次降5。侧平举15次仍明显偏轻，下一组才试最小档。后束可能受10/21背课影响，热身核对恢复，不追加收尾。\n- 下压原栈12.5×5–8准备。10/19实际顺序为17.5×20、12.5×20、15×20、17.5×20，不是连续末两组17.5×20。本次17.5×15–20；规范20次仍明显比目标多约2次余力，下一组才加最小档；不足15次或过早接近力竭降15或邻近轻档。\n- 过顶原栈较轻档约5×5–8→10×2–3核验。10kg无充分可比实际，是低置信度试重。周五肩肘/三头恢复不佳、恢复仍未知或轻试仍不适，省去3组，当天13组，不补组；仅偏重且无不适时先降档。\n- 当天校准与跨课进阶分开。同动作/器械/口径/剂量连续两次全组达各自次数上限，动作及恢复正常，才提出跨课最小档加重；缺项不算达标。\n- 符合既有晨练供能不足条件时，首项下调5%–10%、保留3–4RIR；不因晨练自动触发，不加组补偿。\n- 新疼痛、头晕、恶心、明显乏力或技术持续失稳时停止受影响动作。接近90分钟或连续两个可比动作明显下降时停止追加孤立容量，不缩短必要休息赶清单。\n- 器械占用可等候或调序；换机从轻档校准，不复制公斤数；无可行替代记录受限，不另拼新菜单。\n\n## 本次变化及边界\n\n- 周四保留40分钟主段，明确完整句子强度、疲劳30分钟及固定单车替代。周五仍16组：肩推45/40改50/45候选；余力按上表；下压12–15改15–20；过顶保留恢复和试重条件。\n- 10/24、25休息或随家庭安排轻松活动，不强制补课、不新建周末日程。\n- 历史力量定位于docs/training/力量表现档案.md；本人新输入为本轮直接反馈。写前重新核手机目标日、偏好、动作身份及来源。\n- 本次不改App代码、不安装、不改长期偏好、真实实际或Notion。经App现有单日入口预览、应用、去重和独立回读；手机写入与真人效果分别报告。\n- 交付入口：2026-10-21-r6-app/manifest.json；具体结果与剩余门禁以同一需求和最终核验为准。\n",
+  "sourceSHA256": "725129933394a62dcd5168f5865bcbca26b278281b080cbae5c31863a25e31db"
+}

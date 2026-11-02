@@ -99,6 +99,7 @@ enum WorkoutRecommendationService {
         sessionExercises: [SessionExercise],
         setLogs: [SetLog],
         templateExercises: [TemplateExercise],
+        preference: TrainingPreferenceSnapshot,
         variant: Int = 0,
         goalMode: TrainingGoalMode = .balancedProgression,
         now: Date = .now
@@ -204,6 +205,7 @@ enum WorkoutRecommendationService {
                 previousPerformance: previous,
                 baseline: baseline,
                 setLogs: setLogs,
+                preference: preference,
                 goalMode: goalMode
             )
 
@@ -221,6 +223,12 @@ enum WorkoutRecommendationService {
             }
             score -= Double(min(recentCount, 5) * 4)
             score += appearedInLastMenu ? -28 : 16
+            if preference.foundationalMuscleGroups.contains(exercise.muscleGroup) {
+                score += 3
+            }
+            if preference.extraVolumeMuscleGroups.contains(exercise.muscleGroup) {
+                score += 2
+            }
             score += stableVariantBias(for: exercise.id, variant: variant)
 
             let reason: String
@@ -414,6 +422,7 @@ enum WorkoutRecommendationService {
         previousPerformance: ExerciseLastPerformance?,
         baseline: TemplateExercise?,
         setLogs: [SetLog],
+        preference: TrainingPreferenceSnapshot,
         goalMode: TrainingGoalMode
     ) -> (
         sets: Int,
@@ -424,7 +433,7 @@ enum WorkoutRecommendationService {
         assessment: ProgressionAssessment
     ) {
         guard let lastHistory, let lastPerformance else {
-            let sets = baseline?.targetSets ?? (goalMode == .cuttingVolume ? 4 : 3)
+            let sets = baseline?.targetSets ?? preference.defaultSetCount(for: exercise.muscleGroup)
             let minReps = baseline?.minReps ?? (goalMode == .cuttingVolume ? 10 : 8)
             let maxReps = baseline?.maxReps ?? (goalMode == .cuttingVolume ? 15 : 12)
             let weight = baseline?.targetWeight ?? 0

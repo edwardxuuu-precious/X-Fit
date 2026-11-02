@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-21T11:45:22.367092+08:00",
+  "version": "0.5.0",
+  "build": "26",
+  "processIdentifier": 5178,
+  "executable": "file:///private/var/containers/Bundle/Application/EAF6EF9E-4A62-4AA5-86FE-575974CFF430/FitnessApp.app/FitnessApp",
+  "independent_process_readback": true,
+  "normal_launch_arguments": [],
+  "frozen_source_count": 160,
+  "all_frozen_hashes_match": true,
+  "installed_candidate_sha256": "178abc55ddad67a59fc44efc3ee7d985bf22fb4b4af96a8832704f101447452d",
+  "package_evidence": "installed-package-verification.json",
+  "data_evidence": "data-conservation.json",
+  "stage_scope": "Phone experience installation; full stage remains PARTIAL and human acceptance pending.",
+  "note": "Unified D03 relinked/resigned the frozen source, so its executable digest differs from the separate prebuild; actual rebuilt package rechecked for signature, groups, profiles and version."
+}

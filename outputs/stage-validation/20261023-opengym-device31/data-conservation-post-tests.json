@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "before": "pre-install",
+  "after": "post-tests",
+  "tables": 25,
+  "records_before": 2489,
+  "records_after": 2489,
+  "all_original_columns_pk_uuid_relationships_json_nulls_unchanged": true,
+  "changed_tables": {},
+  "all_non_database_files_unchanged": true,
+  "non_database_files": 4,
+  "assets": 0,
+  "all_photos_and_external_assets_unchanged": true,
+  "protected_records": {
+    "notes_rows": 48,
+    "notes_completed": 48,
+    "r6_status": "skipped",
+    "r6_reason": "Owner confirmed 2026-10-23 Notes Oct 23 actual 48 rows replace R6； original prescription and discarded draft retained."
+  },
+  "hash_exclusions": [
+    "Core Data Z_ENT",
+    "Core Data Z_OPT"
+  ],
+  "database_access": "copied stores, SQLite mode=ro",
+  "snapshot_reader_sha256": "a2a9bd18df9d03d2fbf7a685645d8eb76c9cb66f5af40a5a749611c1744929b4"
+}

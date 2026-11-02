@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "packageID": "notes-20260921-20260923-weight-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [],
+  "bodyMeasurements": [
+    {
+      "id": "A4A86E8D-FFF4-43AA-8650-202609210001",
+      "recordedAt": "2026-09-21 08:38",
+      "weightJin": 174.8,
+      "notes": "来源：Apple Notes「体重」，2026-10-09只读核对；原始值174.8斤，斤÷2=87.40kg；保留原记录时间。"
+    },
+    {
+      "id": "A4A86E8D-FFF4-43AA-8650-202609220001",
+      "recordedAt": "2026-09-22 08:19",
+      "weightJin": 173.8,
+      "notes": "来源：Apple Notes「体重」，2026-10-09只读核对；原始值173.8斤，斤÷2=86.90kg；保留原记录时间。"
+    },
+    {
+      "id": "A4A86E8D-FFF4-43AA-8650-202609230001",
+      "recordedAt": "2026-09-23 08:03",
+      "weightJin": 174.8,
+      "notes": "来源：Apple Notes「体重」，2026-10-09只读核对；原始值174.8斤，斤÷2=87.40kg；保留原记录时间。"
+    }
+  ],
+  "meals": [],
+  "jumpRopeEntries": [],
+  "voidMealIDs": []
+}

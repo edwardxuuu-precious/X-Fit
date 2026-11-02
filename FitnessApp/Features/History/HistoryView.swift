@@ -19,6 +19,7 @@ struct HistoryView: View {
     @Query(sort: \WorkoutSession.startedAt, order: .reverse) private var sessions: [WorkoutSession]
     @Query private var setLogs: [SetLog]
     @Query private var sessionExercises: [SessionExercise]
+    @Query private var schedules: [ScheduledWorkout]
 
     private var completedSessions: [WorkoutSession] {
         sessions.filter { $0.status == .completed }
@@ -30,13 +31,14 @@ struct HistoryView: View {
                 ContentUnavailableView(
                     "还没有完成的训练",
                     systemImage: "clock.arrow.circlepath",
-                    description: Text("从“训练”开始记录，完成后会保存在这里；也可以补录过去的训练。")
+                    description: Text("完成训练后保存在这里，也可以补录。")
                 )
             } else {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 0) {
+                        SprintPageHeader(title: "训练历史", icon: "clock.arrow.circlepath")
                         HStack {
-                            Text("完成记录").font(.title2.weight(.bold))
+                            SprintSectionHeading(title: "完成记录", icon: "checkmark.circle")
                             Spacer()
                             Text("\(completedSessions.count) 次")
                                 .font(.subheadline.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
@@ -54,7 +56,7 @@ struct HistoryView: View {
                 .background(AppTheme.background)
             }
         }
-        .screenBackground()
+        .sprintPage()
         .navigationTitle("训练历史")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -74,34 +76,45 @@ struct HistoryView: View {
     }
 
     private func historyCard(_ session: WorkoutSession) -> some View {
+        let schedule = schedules.first { $0.id == session.scheduledWorkoutID }
+        let displayDate = TrainingHistoryDate.displayDate(session, schedule: schedule)
         let logs = setLogs.filter {
             $0.sessionID == session.id && $0.isCompleted && !$0.isWarmup
         }
         let exerciseCount = sessionExercises.filter { $0.sessionID == session.id }.count
+        let cardio = CardioWorkoutPresentation.actual(session, exercises: sessionExercises, logs: setLogs)
 
         return HStack(alignment: .top, spacing: 16) {
             VStack(alignment: .leading, spacing: 3) {
-                Text(session.startedAt, format: .dateTime.day())
+                Text(displayDate, format: .dateTime.day())
                     .font(.system(.title, design: .rounded).weight(.semibold).monospacedDigit())
-                    .foregroundStyle(AppTheme.accent)
-                Text(session.startedAt, format: .dateTime.year().month())
+                    .foregroundStyle(AppTheme.ink)
+                Text(displayDate, format: .dateTime.year().month())
                     .font(.caption2).foregroundStyle(AppTheme.secondaryText)
             }
-            .frame(minWidth: 52, alignment: .leading)
+            .frame(minWidth: 58, minHeight: 64)
+            .padding(.horizontal, 7)
+            .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 17))
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(session.templateName)
-                    .font(.headline).foregroundStyle(.white)
+                Text(cardio?.title ?? TrainingWorkoutPresentation.title(session.templateName))
+                    .font(.headline).foregroundStyle(AppTheme.ink)
                     .fixedSize(horizontal: false, vertical: true)
-                if dynamicTypeSize.isAccessibilitySize {
+                if TrainingHistoryDate.knownLocalDay(session, schedule: schedule) == nil {
+                    Text("旧记录归属时区未知，日期按当前时区显示")
+                        .font(.caption2).foregroundStyle(AppTheme.secondaryText)
+                }
+                if let cardio {
+                    Text(cardio.label).font(.caption).foregroundStyle(AppTheme.secondaryText)
+                } else if dynamicTypeSize.isAccessibilitySize {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("\(exerciseCount) 动作 · \(logs.count) 工作组")
+                        Text("\(exerciseCount) 动作 · \(logs.count) 组已记录")
                         durationLabel(session)
                     }
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
                 } else {
                     HStack(spacing: 10) {
-                        Text("\(exerciseCount) 动作 · \(logs.count) 工作组")
+                        Text("\(exerciseCount) 动作 · \(logs.count) 组已记录")
                         Spacer(minLength: 0)
                         durationLabel(session)
                     }
@@ -121,6 +134,8 @@ struct HistoryView: View {
         if let completedAt = session.completedAt {
             Text(TrainingFormatters.duration(from: session.startedAt, to: completedAt))
                 .monospacedDigit()
+        } else if session.status == .completed {
+            Text("时长未知")
         }
     }
 }
@@ -129,6 +144,8 @@ struct WorkoutDetailView: View {
     @Query private var sessions: [WorkoutSession]
     @Query private var sessionExercises: [SessionExercise]
     @Query private var setLogs: [SetLog]
+    @Query private var schedules: [ScheduledWorkout]
+    @Query private var bodyMeasurements: [BodyMeasurement]
     @AppStorage(TrainingGoalMode.storageKey)
     private var trainingGoalRaw = TrainingGoalMode.cuttingVolume.rawValue
     @State private var showEditor = false
@@ -158,24 +175,44 @@ struct WorkoutDetailView: View {
         setLogs.filter { $0.isCompleted && !$0.isWarmup }
     }
 
+    private func bodyWeightSourceLabel(for exercise: SessionExercise) -> String? {
+        guard exercise.volumeUnit == .bodyweight, exercise.bodyWeightKgSnapshot != nil else { return nil }
+        if let sourceDate = exercise.bodyWeightSnapshotSourceDate {
+            return "自重体重快照 · 来源测量 \(sourceDate.formatted(date: .abbreviated, time: .omitted))"
+        }
+        // Legacy fallback is deliberately strict: only claim a source date when an
+        // exact local measurement matches the frozen value on/before this session.
+        guard let session,
+              let matching = bodyMeasurements
+                .filter({ $0.date <= session.startedAt && $0.weightKg == exercise.bodyWeightKgSnapshot })
+                .max(by: { $0.date < $1.date }) else {
+            return "自重体重快照 · 来源日期未知"
+        }
+        return "自重体重快照 · 来源测量 \(matching.date.formatted(date: .abbreviated, time: .omitted))"
+    }
+
     private var trainingGoalMode: TrainingGoalMode {
         TrainingGoalMode(rawValue: trainingGoalRaw) ?? .cuttingVolume
     }
 
     var body: some View {
         Group {
-            if let session {
+            if let session, session.status == .completed, CardioWorkoutPresentation.actual(session, exercises: exercises, logs: setLogs) != nil {
+                CardioWorkoutSummaryView(sessionID: session.id)
+            } else if let session {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         summary(session)
+                        if TrainingWorkoutPresentation.title(session.templateName) != session.templateName {
+                            DisclosureGroup("原始训练名称") { Text(session.templateName).font(.caption) }
+                        }
 
                         ForEach(exercises) { exercise in
                             exerciseSummary(exercise)
                         }
 
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("训练备注")
-                                .font(.headline)
+                            SprintSectionHeading(title: "训练备注", icon: "note.text")
                             Text(session.notes.isEmpty ? "暂无备注，点右上角“编辑”补充。" : session.notes)
                                 .foregroundStyle(.secondary)
                         }
@@ -185,7 +222,7 @@ struct WorkoutDetailView: View {
                     .padding(20)
                 }
                 .background(AppTheme.background)
-                .navigationTitle(session.templateName)
+                .navigationTitle(TrainingWorkoutPresentation.title(session.templateName))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar(.visible, for: .navigationBar)
                 .toolbar {
@@ -201,25 +238,32 @@ struct WorkoutDetailView: View {
                     NavigationStack {
                         HistoricalWorkoutEditView(sessionID: session.id)
                     }
-                    .preferredColorScheme(.dark)
-                    .tint(AppTheme.accent)
+                    .sprintPage()
+                    .tint(AppTheme.ink)
                 }
             } else {
                 ContentUnavailableView("找不到训练记录", systemImage: "questionmark.folder")
             }
         }
+        .sprintPage()
     }
 
     private func summary(_ session: WorkoutSession) -> some View {
         let volumeText = formattedVolumeTotals(logs: logs, snapshots: exercises)
         let duration = session.completedAt.map {
             TrainingFormatters.duration(from: session.startedAt, to: $0)
-        } ?? "进行中"
+        } ?? (session.status == .completed ? "未知" : "进行中")
+        let schedule = schedules.first { $0.id == session.scheduledWorkoutID }
+        let displayDate = TrainingHistoryDate.displayDate(session, schedule: schedule)
 
         return VStack(alignment: .leading, spacing: 16) {
-            Text(session.startedAt, format: .dateTime.year().month().day().weekday(.wide))
+            Text(displayDate, format: .dateTime.year().month().day().weekday(.wide))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
+            if TrainingHistoryDate.knownLocalDay(session, schedule: schedule) == nil {
+                Text("旧记录归属时区未知，日期按当前时区显示。")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 miniMetric("\(logs.count)", label: "完成组数")
@@ -259,15 +303,27 @@ struct WorkoutDetailView: View {
                 } else {
                     Text(exercise.volumeUnit.title)
                         .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                 }
             }
+
+            Text(recordedLoadBasis(exercise, logs: exerciseLogs))
+                .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("历史记重口径-\(exercise.exerciseName)")
 
             if let feeling = exercise.feeling {
                 Label("\(feeling.emoji) \(feeling.title)", systemImage: "face.smiling")
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .accessibilityLabel("动作体验，\(feeling.title)")
+            }
+
+            if let sourceLabel = bodyWeightSourceLabel(for: exercise) {
+                Text(sourceLabel)
+                    .font(.caption2)
+                    .foregroundStyle(AppTheme.secondaryText)
+                    .accessibilityIdentifier("自重来源日期-\(exercise.exerciseName)")
             }
 
             ForEach(exerciseLogs) { log in
@@ -286,20 +342,22 @@ struct WorkoutDetailView: View {
                         }
                     }
 
-                    HStack(spacing: 10) {
-                        let volumeWeight = exercise.volumeUnit == .bodyweight
-                            ? exercise.bodyWeightKgSnapshot
-                            : log.actualWeight
-                        Text(
-                            exercise.volumeUnit.volume(weight: volumeWeight, reps: log.actualReps)
-                                .map { "组训练量 \(Int($0)) \(exercise.volumeUnit.symbol)" }
-                                ?? "组训练量 暂无体重"
-                        )
-                    }
-                    .font(.caption2.monospacedDigit())
-                    .foregroundStyle(.secondary)
+
                 }
                 .font(.subheadline)
+            }
+            DisclosureGroup("逐组训练量") {
+                ForEach(exerciseLogs) { log in
+                    let volumeWeight = exercise.volumeUnit == .bodyweight ? exercise.bodyWeightKgSnapshot : log.actualWeight
+                    Text("第 \(log.setNumber) 组 · " + (exercise.volumeUnit.volume(weight: volumeWeight, reps: log.actualReps)
+                        .map { "\(Int($0)) \(exercise.volumeUnit.symbol)" } ?? "暂无体重"))
+                        .font(.caption.monospacedDigit())
+                }
+            }.font(.caption).foregroundStyle(AppTheme.secondaryText)
+            if !exercise.exerciseNotes.isEmpty {
+                DisclosureGroup("原始动作说明") {
+                    Text(exercise.exerciseNotes).font(.caption).fixedSize(horizontal: false, vertical: true)
+                }.font(.caption).foregroundStyle(AppTheme.secondaryText)
             }
             if let durationSeconds = exercise.durationSeconds {
                 Label("动作总时长 \(TrainingFormatters.clock(durationSeconds))", systemImage: "clock")
@@ -310,7 +368,7 @@ struct WorkoutDetailView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text("训练量 \(Int(exerciseVolume)) \(exercise.volumeUnit.symbol)")
                     .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Text(
                     exercise.volumeUnit == .kilogram
                         ? assessment.detail
@@ -333,6 +391,16 @@ struct WorkoutDetailView: View {
         .cardSurface()
     }
 
+    private func recordedLoadBasis(_ exercise: SessionExercise, logs: [SetLog]) -> String {
+        if let guidance = TrainingWorkoutPresentation.loadGuidance(in: exercise.exerciseNotes) { return guidance }
+        guard exercise.volumeUnit.usesMeasurementSide else { return exercise.volumeUnit.inputTitle }
+        let sides = Set(logs.compactMap { $0.actualWeightSideRaw ?? $0.targetWeightSideRaw })
+        if sides.count == 1, let raw = sides.first, let side = MeasurementSide(rawValue: raw) {
+            return "\(exercise.volumeUnit.symbol) · \(side.title)"
+        }
+        return sides.isEmpty ? "\(exercise.volumeUnit.symbol) · 记重侧别未注明" : "\(exercise.volumeUnit.symbol) · 侧别按各组原记录"
+    }
+
     private func setValueText(_ log: SetLog, unit: ExerciseVolumeUnit) -> String {
         switch unit {
         case .count:
@@ -342,7 +410,7 @@ struct WorkoutDetailView: View {
         case .meter:
             return "\(TrainingFormatters.weight(log.actualWeight)) 米 × \(log.actualReps) 趟"
         case .kilogram:
-            return "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps)"
+            return "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps) 次"
         case .bodyweight:
             return log.actualWeight > 0
                 ? "\(TrainingFormatters.weight(log.actualWeight)) kg × \(log.actualReps) 次"
@@ -373,7 +441,7 @@ struct WorkoutDetailView: View {
 
     private func recommendationColor(_ recommendation: ProgressionRecommendation) -> Color {
         switch recommendation {
-        case .increase: return AppTheme.accent
+        case .increase: return AppTheme.ink
         case .maintain: return .secondary
         case .reduce: return .orange
         }
@@ -419,6 +487,7 @@ private struct HistoricalExerciseEditDraft: Identifiable {
     let volumeUnit: ExerciseVolumeUnit
     var performanceNotes: String
     var sets: [HistoricalSetEditDraft]
+    var allowsEmpty: Bool = false
 }
 
 struct HistoricalWorkoutEditView: View {
@@ -434,7 +503,10 @@ struct HistoricalWorkoutEditView: View {
 
     @State private var name = ""
     @State private var startedAt = Date.now
+    @State private var loadedStartedAt: Date?
     @State private var durationMinutes = 60
+    @State private var hasExactStartTime = true
+    @State private var hasDuration = true
     @State private var workoutNotes = ""
     @State private var exerciseDrafts: [HistoricalExerciseEditDraft] = []
     @State private var hasLoaded = false
@@ -464,7 +536,12 @@ struct HistoricalWorkoutEditView: View {
 
     var body: some View {
         Form {
-            Section("训练信息") {
+            Section {
+                SprintPageHeader(title: "编辑记录", icon: "square.and.pencil")
+                    .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+                    .listRowBackground(Color.clear)
+            }
+            Section {
                 TextField("训练名称", text: $name)
                     .accessibilityIdentifier("历史训练名称")
                 DatePicker(
@@ -473,15 +550,23 @@ struct HistoricalWorkoutEditView: View {
                     in: Date.distantPast...Date.now,
                     displayedComponents: [.date, .hourAndMinute]
                 )
-                Stepper(
-                    "训练时长：\(durationMinutes) 分钟",
-                    value: $durationMinutes,
-                    in: 5...360,
-                    step: 5
-                )
+                Text("开始时间按当前时区（\(TimeZone.current.identifier)）显示；只修改时间或备注不会改变训练归属日期。")
+                    .font(.caption).foregroundStyle(.secondary)
+                Toggle("知道具体开始时间", isOn: $hasExactStartTime)
+                Toggle("知道训练时长", isOn: $hasDuration)
+                if hasDuration {
+                    Stepper(
+                        "训练时长：\(durationMinutes) 分钟",
+                        value: $durationMinutes,
+                        in: 1...360,
+                        step: 5
+                    )
+                }
+            } header: {
+                SprintSectionHeading(title: "训练信息", icon: "calendar")
             }
 
-            Section("训练备注") {
+            Section {
                 TextField(
                     "记录整场状态、恢复、疼痛或需要下次注意的事项",
                     text: $workoutNotes,
@@ -489,6 +574,8 @@ struct HistoricalWorkoutEditView: View {
                 )
                 .lineLimit(3...8)
                 .accessibilityIdentifier("历史训练备注")
+            } header: {
+                SprintSectionHeading(title: "训练备注", icon: "note.text")
             }
 
             Section {
@@ -519,7 +606,7 @@ struct HistoricalWorkoutEditView: View {
             }
         }
         .scrollContentBackground(.hidden)
-        .screenBackground()
+        .sprintPage()
         .scrollDismissesKeyboard(.interactively)
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -558,10 +645,12 @@ struct HistoricalWorkoutEditView: View {
         hasLoaded = true
         name = session.templateName
         startedAt = session.startedAt
-        durationMinutes = max(
-            5,
-            Int(((session.completedAt ?? session.startedAt).timeIntervalSince(session.startedAt) / 60).rounded())
-        )
+        loadedStartedAt = session.startedAt
+        hasExactStartTime = session.isStartTimeKnown
+        hasDuration = session.completedAt != nil
+        durationMinutes = session.completedAt.map {
+            max(1, Int(($0.timeIntervalSince(session.startedAt) / 60).rounded()))
+        } ?? 60
         workoutNotes = session.notes
         exerciseDrafts = snapshots.map { snapshot in
             let exercise = exercises.first { $0.id == snapshot.exerciseID }
@@ -587,7 +676,8 @@ struct HistoricalWorkoutEditView: View {
                 equipment: exercise?.equipment ?? "历史动作",
                 volumeUnit: snapshot.volumeUnit,
                 performanceNotes: snapshot.performanceNotes,
-                sets: setDrafts.isEmpty ? [HistoricalSetEditDraft()] : setDrafts
+                sets: setDrafts,
+                allowsEmpty: setDrafts.isEmpty
             )
         }
     }
@@ -617,7 +707,7 @@ struct HistoricalWorkoutEditView: View {
             errorMessage = "找不到需要编辑的训练记录。"
             return
         }
-        guard exerciseDrafts.allSatisfy({ !$0.sets.isEmpty }) else {
+        guard exerciseDrafts.allSatisfy({ !$0.sets.isEmpty || $0.allowsEmpty }) else {
             errorMessage = "每个动作至少需要保留一个完成组。"
             return
         }
@@ -628,9 +718,16 @@ struct HistoricalWorkoutEditView: View {
         }
 
         session.templateName = trimmedName
-        session.plannedDate = startedAt.startOfDay
+        TrainingHistoricalDateEditing.apply(
+            to: session,
+            originalStartedAt: loadedStartedAt ?? session.startedAt,
+            editedStartedAt: startedAt
+        )
         session.startedAt = startedAt
-        session.completedAt = startedAt.addingTimeInterval(TimeInterval(durationMinutes * 60))
+        session.isStartTimeKnown = hasExactStartTime
+        session.completedAt = hasDuration
+            ? startedAt.addingTimeInterval(TimeInterval(durationMinutes * 60))
+            : nil
         session.notes = workoutNotes.trimmingCharacters(in: .whitespacesAndNewlines)
 
         let retainedSnapshotIDs = Set(exerciseDrafts.compactMap(\.originalSnapshotID))
@@ -666,10 +763,15 @@ struct HistoricalWorkoutEditView: View {
             }
 
             snapshot.order = order
-            snapshot.targetSets = draft.sets.count
-            snapshot.minReps = max(1, draft.sets.map(\.reps).min() ?? 1)
-            snapshot.maxReps = max(snapshot.minReps, draft.sets.map(\.reps).max() ?? 1)
-            snapshot.targetWeight = max(0, draft.sets.map(\.weight).max() ?? 0)
+            let pendingCount = logs.filter {
+                $0.sessionExerciseID == snapshot.id && $0.reductionOrder == nil && !$0.isCompleted
+            }.count
+            snapshot.targetSets = draft.sets.count + pendingCount
+            if !draft.sets.isEmpty {
+                snapshot.minReps = max(1, draft.sets.map(\.reps).min() ?? 1)
+                snapshot.maxReps = max(snapshot.minReps, draft.sets.map(\.reps).max() ?? 1)
+                snapshot.targetWeight = max(0, draft.sets.map(\.weight).max() ?? 0)
+            }
             snapshot.performanceNotes = draft.performanceNotes
                 .trimmingCharacters(in: .whitespacesAndNewlines)
 
@@ -677,10 +779,14 @@ struct HistoricalWorkoutEditView: View {
             logs
                 .filter {
                     $0.sessionExerciseID == snapshot.id
+                        && $0.reductionOrder == nil
+                        && $0.isCompleted
                         && !retainedLogIDs.contains($0.id)
                 }
                 .forEach(modelContext.delete)
 
+            let preservesReducedNumbers = snapshot.hasManuallyReducedSets == true || pendingCount > 0
+            var nextSetNumber = (logs.filter { $0.sessionExerciseID == snapshot.id }.map(\.setNumber).max() ?? 0) + 1
             for (index, setDraft) in draft.sets.enumerated() {
                 let log: SetLog
                 if let originalID = setDraft.originalLogID,
@@ -691,27 +797,33 @@ struct HistoricalWorkoutEditView: View {
                         sessionID: session.id,
                         sessionExerciseID: snapshot.id,
                         exerciseID: snapshot.exerciseID,
-                        setNumber: index + 1,
+                        setNumber: preservesReducedNumbers ? nextSetNumber : index + 1,
                         targetWeight: max(0, setDraft.weight),
                         targetReps: max(1, setDraft.reps),
                         actualWeight: max(0, setDraft.weight),
                         actualReps: max(1, setDraft.reps),
                         rir: setDraft.rir,
                         isCompleted: true,
-                        completedAt: startedAt.addingTimeInterval(TimeInterval((index + 1) * 60))
+                        completedAt: hasExactStartTime
+                            ? startedAt.addingTimeInterval(TimeInterval((index + 1) * 60))
+                            : nil
                     )
                     modelContext.insert(log)
+                    nextSetNumber += 1
                 }
-                log.setNumber = index + 1
+                if !preservesReducedNumbers { log.setNumber = index + 1 }
                 log.targetWeight = max(0, setDraft.weight)
                 log.targetReps = max(1, setDraft.reps)
                 log.actualWeight = max(0, setDraft.weight)
                 log.actualReps = max(1, setDraft.reps)
                 log.rir = setDraft.rir
                 log.isCompleted = true
-                log.completedAt = log.completedAt ?? startedAt.addingTimeInterval(
-                    TimeInterval((index + 1) * 60)
-                )
+                if !hasExactStartTime {
+                    log.startedAt = nil
+                    log.completedAt = nil
+                } else if log.completedAt == nil {
+                    log.completedAt = startedAt.addingTimeInterval(TimeInterval((index + 1) * 60))
+                }
             }
         }
 
@@ -762,8 +874,9 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                     get: { draft.sets.count },
                     set: updateSetCount
                 ),
-                in: 1...12
+                in: (draft.allowsEmpty ? 0 : 1)...12
             )
+            .accessibilityIdentifier("history-edit-set-count-\(draft.exerciseName)")
 
             HStack {
                 Text("组").frame(width: 24)
@@ -802,7 +915,7 @@ private struct HistoricalWorkoutEditExerciseCard: View {
                         } else if draft.volumeUnit == .bodyweight {
                             Text("自重")
                                 .font(.caption.bold())
-                                .foregroundStyle(AppTheme.accent)
+                                .foregroundStyle(AppTheme.ink)
                                 .frame(maxWidth: .infinity)
                         }
 

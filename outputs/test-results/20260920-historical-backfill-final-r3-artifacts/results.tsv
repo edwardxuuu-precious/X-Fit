@@ -1,0 +1,7 @@
+N01	PASS	Git diff 空白与冲突标记检查	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N01.log
+N02	PASS	Xcode 工程与 Scheme 可读	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N02.log
+N03	PASS	器械识别后端全量测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N03.log
+N04	PASS	Simulator App 构建	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N04.log
+N05	PASS	Simulator 全量单元测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N05.log
+N06	PASS	Simulator 全量 UI 测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N06.log
+N07	PASS	通用 iPhoneOS Release 无签名构建	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-final-r3-artifacts/N07.log

@@ -7,11 +7,267 @@ import XCTest
 final class FatLossBackupTests: XCTestCase {
     private let start = FatLossCalendar.date(2026, 9, 7)
 
-    func testSchema13RoundTripPreservesEveryProgramEntityAndMealFacts() throws {
+    func testNotesRopeV4PreservesAggregateUnknownTimeAndCivilDay() throws {
+        let source = try makeContainer(), context = source.mainContext
+        let ropeID = UUID()
+        func packet(_ rows: [[String: Any]], version: Int = 4) throws -> Data {
+            try JSONSerialization.data(withJSONObject: ["version": version, "packageID": "rope-source",
+                "timeZoneIdentifier": "Asia/Shanghai", "workouts": [], "bodyMeasurements": [],
+                "meals": [], "jumpRopeEntries": rows])
+        }
+        let item: [String: Any] = ["id": ropeID.uuidString, "date": "2026-10-27",
+                                   "count": 1550, "totalSetCount": 8]
+        let data = try packet([item])
+        let before = Date()
+        let first = try ConfirmedNotesImportService.importPackage(data, into: context)
+        let again = try ConfirmedNotesImportService.importPackage(data, into: context)
+        XCTAssertEqual(first.importedJumpRopeEntries, 1)
+        XCTAssertEqual(again.importedJumpRopeEntries, 0)
+        XCTAssertEqual(again.skippedJumpRopeEntries, 1)
+        let entry = try XCTUnwrap(context.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertEqual(entry.id, ropeID)
+        XCTAssertEqual(entry.count, 1550)
+        XCTAssertEqual(entry.totalSetCount, 8)
+        XCTAssertEqual(entry.recordedTimeKnown, false)
+        XCTAssertEqual(entry.trainingLocalDay, "2026-10-27")
+        XCTAssertEqual(entry.trainingTimeZoneIdentifier, "Asia/Shanghai")
+        XCTAssertNil(entry.activeDurationSeconds)
+        XCTAssertNil(entry.elapsedDurationSeconds)
+        XCTAssertGreaterThanOrEqual(entry.createdAt, before)
+        XCTAssertEqual(entry.displaySummary, "1550 个 · 8 组")
+
+        let zone = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = zone
+        let localDay = try XCTUnwrap(TrainingLocalDate.date("2026-10-27", timeZone: zone))
+        XCTAssertEqual(TrainingJumpRopeDate.localDay(entry, schedules: [], timeZone: zone), "2026-10-27")
+        XCTAssertEqual(TrainingDaySummary(localDay: "2026-10-27", schedules: [], sessions: [],
+            jumpRopeEntries: [entry], timeZone: zone).jumpRopeEntries.map(\.id), [ropeID])
+        XCTAssertEqual(WellnessToolService.todaySummary(on: localDay, hydrationEntries: [],
+            jumpRopeEntries: [entry], sedentarySessions: [], calendar: calendar).jumpRopeCount, 1550)
+        let previousDay = try XCTUnwrap(TrainingLocalDate.date("2026-10-26", timeZone: zone))
+        XCTAssertEqual(WellnessToolService.todaySummary(on: previousDay, hydrationEntries: [],
+            jumpRopeEntries: [entry], sedentarySessions: [], calendar: calendar).jumpRopeCount, 0)
+        let program = FatLossProgram(startDate: FatLossCalendar.date(2026, 10, 26),
+                                     endDate: FatLossCalendar.date(2026, 10, 28))
+        let timeline = try FatLossService.timeline(program: program, in: context)
+        XCTAssertEqual(timeline.first { FatLossCalendar.label($0.date) == "2026-10-27" }?.jumpCount, 1550)
+
+        var conflict = item
+        conflict["count"] = 1549
+        let newItem: [String: Any] = ["id": UUID().uuidString, "date": "2026-10-26", "count": 500]
+        XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(packet([newItem, conflict]), into: context))
+        XCTAssertEqual(try context.fetchCount(FetchDescriptor<JumpRopeEntry>()), 1)
+        XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(packet([item], version: 2), into: context))
+        var invalid = item
+        invalid["date"] = "2026-02-30"
+        XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(packet([invalid]), into: context))
+        invalid = item; invalid["totalSetCount"] = 0
+        XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(packet([invalid]), into: context))
+        invalid = item; invalid["recordedTimeKnown"] = true
+        XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(packet([invalid]), into: context))
+        XCTAssertEqual(try context.fetchCount(FetchDescriptor<JumpRopeEntry>()), 1)
+    }
+
+    func testNotesV5DiscardsOnlyConfirmedDraftAndRetryIsIdempotent() throws {
+        let (container, schedule, draft, packet) = try guardedNotesFixture()
+        let context = container.mainContext
+        let data = try JSONSerialization.data(withJSONObject: packet)
+        let first = try ConfirmedNotesImportService.importPackage(data, into: context)
+        XCTAssertEqual(first.discardedStaleSessions, 1)
+        XCTAssertEqual(first.importedSessions, 1)
+        XCTAssertEqual(first.importedSets, 1)
+        XCTAssertEqual(draft.status, .discarded)
+        XCTAssertEqual(schedule.status, .planned)
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let ids = Set(sessions.map(\.id))
+        let second = try ConfirmedNotesImportService.importPackage(data, into: context)
+        XCTAssertEqual(second.importedSessions, 0)
+        XCTAssertEqual(second.skippedSessions, 1)
+        XCTAssertEqual(second.discardedStaleSessions, 0)
+        XCTAssertEqual(Set(try context.fetch(FetchDescriptor<WorkoutSession>()).map(\.id)), ids)
+    }
+
+    func testNotesV5RejectsChangedDraftScheduleOrCompletedWorkout() throws {
+        for caseIndex in 0..<6 {
+            let (container, schedule, draft, original) = try guardedNotesFixture()
+            let context = container.mainContext
+            var packet = original
+            switch caseIndex {
+            case 0:
+                var stale = try XCTUnwrap(packet["staleSession"] as? [String: Any])
+                stale["expectedSessionID"] = UUID().uuidString
+                packet["staleSession"] = stale
+            case 1: schedule.status = .planned
+            case 2:
+                context.insert(SetLog(sessionID: draft.id, sessionExerciseID: UUID(), exerciseID: UUID(),
+                    setNumber: 1, targetWeight: 10, targetReps: 5, actualWeight: 10,
+                    actualReps: 5, isCompleted: true))
+            case 3:
+                let completed = WorkoutSession(templateName: "另一个实际训练", plannedDate: draft.plannedDate,
+                    status: .completed)
+                completed.trainingLocalDay = "2026-10-28"
+                context.insert(completed)
+            case 4: schedule.plannedLocalDay = "2026-10-29"
+            default: packet["version"] = 2
+            }
+            try context.save()
+            let oldSessionCount = try context.fetchCount(FetchDescriptor<WorkoutSession>())
+            let oldSetCount = try context.fetchCount(FetchDescriptor<SetLog>())
+            XCTAssertThrowsError(try ConfirmedNotesImportService.importPackage(
+                JSONSerialization.data(withJSONObject: packet), into: context), "case \(caseIndex)")
+            XCTAssertEqual(draft.status, .inProgress)
+            XCTAssertEqual(try context.fetchCount(FetchDescriptor<WorkoutSession>()), oldSessionCount)
+            XCTAssertEqual(try context.fetchCount(FetchDescriptor<SetLog>()), oldSetCount)
+            XCTAssertTrue(try context.fetch(FetchDescriptor<Exercise>()).isEmpty)
+        }
+    }
+
+    func testRopeV18BackupRestoresMetadataAndV17KeepsLegacySemantics() throws {
+        let source = try makeContainer(includeProgram: false), context = source.mainContext
+        let zone = try XCTUnwrap(TimeZone(identifier: "Asia/Shanghai"))
+        let date = try XCTUnwrap(TrainingLocalDate.date("2026-10-27", timeZone: zone))
+        let entry = JumpRopeEntry(count: 1550, date: date)
+        entry.totalSetCount = 8
+        entry.recordedTimeKnown = false
+        entry.trainingLocalDay = "2026-10-27"
+        entry.trainingTimeZoneIdentifier = zone.identifier
+        context.insert(entry); try context.save()
+        let data = try backupData(context)
+        var json = try object(data)
+        XCTAssertEqual(json["schemaVersion"] as? Int, 19)
+        let destination = try makeContainer(includeProgram: false)
+        _ = try DataExportService.importBackup(data, into: destination.mainContext)
+        let restored = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertEqual(restored.id, entry.id)
+        XCTAssertEqual(restored.count, 1550)
+        XCTAssertEqual(restored.totalSetCount, 8)
+        XCTAssertEqual(restored.recordedTimeKnown, false)
+        XCTAssertEqual(restored.trainingLocalDay, "2026-10-27")
+        XCTAssertEqual(restored.trainingTimeZoneIdentifier, "Asia/Shanghai")
+        XCTAssertNil(restored.activeDurationSeconds)
+        XCTAssertEqual(try DataExportService.importBackup(data, into: destination.mainContext).imported, 0)
+
+        var rows = try XCTUnwrap(json["jumpRopeEntries"] as? [[String: Any]])
+        rows[0]["totalSetCount"] = 0
+        json["jumpRopeEntries"] = rows
+        let invalidDestination = try makeContainer(includeProgram: false)
+        XCTAssertThrowsError(try DataExportService.importBackup(JSONSerialization.data(withJSONObject: json), into: invalidDestination.mainContext))
+        XCTAssertEqual(try invalidDestination.mainContext.fetchCount(FetchDescriptor<JumpRopeEntry>()), 0)
+
+        json = try object(data)
+        rows = try XCTUnwrap(json["jumpRopeEntries"] as? [[String: Any]])
+        for key in ["totalSetCount", "recordedTimeKnown", "trainingLocalDay", "trainingTimeZoneIdentifier"] {
+            rows[0].removeValue(forKey: key)
+        }
+        json["jumpRopeEntries"] = rows
+        json["schemaVersion"] = 17
+        let legacyDestination = try makeContainer(includeProgram: false)
+        _ = try DataExportService.importBackup(JSONSerialization.data(withJSONObject: json), into: legacyDestination.mainContext)
+        let legacy = try XCTUnwrap(legacyDestination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertNil(legacy.totalSetCount)
+        XCTAssertNil(legacy.recordedTimeKnown)
+        XCTAssertNil(legacy.trainingLocalDay)
+        XCTAssertEqual(legacy.count, 1550)
+    }
+
+    func testRopeInputRejectsInvalidGroupsBeforeSaving() throws {
+        let store = try makeContainer(includeProgram: false), context = store.mainContext
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: 1550,
+            activeDurationSeconds: nil, elapsedDurationSeconds: nil, at: start,
+            totalSetCount: 0, recordedTimeKnown: false, in: context))
+        XCTAssertEqual(try context.fetchCount(FetchDescriptor<JumpRopeEntry>()), 0)
+        _ = try WellnessToolService.recordJumpRope(count: 1550, activeDurationSeconds: nil,
+            elapsedDurationSeconds: nil, at: start, totalSetCount: 8, recordedTimeKnown: false, in: context)
+        let entry = try XCTUnwrap(context.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertEqual(entry.totalSetCount, 8)
+        XCTAssertEqual(entry.recordedTimeKnown, false)
+        XCTAssertEqual(entry.trainingLocalDay, TrainingLocalDate.key(start))
+        XCTAssertEqual(entry.trainingTimeZoneIdentifier, TimeZone.current.identifier)
+        XCTAssertNil(entry.activeDurationSeconds)
+    }
+
+    func testDateMenuBackupPreservesTypedTargetsExplicitLinksAndUnlinkedLegacyRecords() throws {
+        let source = try makeContainer(includeProgram: true)
+        let day = TrainingLocalDate.key(Date.now.addingDays(-1))
+        let plan = JumpRopeMenuPlan(targetCount: nil, activeSeconds: 600, elapsedSeconds: 900, notes: "本人间歇目标")
+        let schedule = try TrainingDateMenuService.saveJumpRopePlan(plan, localDay: day, in: source.mainContext)
+        let recordID = try TrainingDateMenuService.recordJumpRope(schedule: schedule, count: nil,
+            active: 480, elapsed: 800, at: TrainingLocalDate.date(day)!, in: source.mainContext)
+        let legacy = JumpRopeEntry(count: nil, durationSeconds: 420, date: start)
+        source.mainContext.insert(legacy); try source.mainContext.save()
+        let data = try backupData(source.mainContext)
+        let destination = try makeContainer(includeProgram: true)
+        _ = try DataExportService.importBackup(data, into: destination.mainContext)
+        let restored = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<ScheduledWorkout>()).first)
+        let entries = try destination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>())
+        XCTAssertEqual(restored.id, schedule.id)
+        XCTAssertEqual(restored.jumpRopePlan, plan)
+        XCTAssertEqual(entries.first { $0.id == recordID }?.scheduledWorkoutID, schedule.id)
+        XCTAssertNil(entries.first { $0.id == recordID }?.count)
+        XCTAssertNil(entries.first { $0.id == legacy.id }?.scheduledWorkoutID)
+        XCTAssertEqual(entries.first { $0.id == legacy.id }?.durationSeconds, 420)
+        XCTAssertNil(entries.first { $0.id == legacy.id }?.activeDurationSeconds)
+        _ = try DataExportService.importBackup(data, into: destination.mainContext)
+        XCTAssertEqual(try destination.mainContext.fetchCount(FetchDescriptor<JumpRopeEntry>()), 2)
+    }
+
+    func testSessionBackupPreservesCivilOwnershipAndLegacyRawPlannedDate() throws {
+        let source = try makeContainer(includeProgram: false)
+        let rawPlan = ISO8601DateFormatter().date(from: "2026-09-26T16:00:00Z")!
+        let actualStart = rawPlan.addingTimeInterval(30 * 60)
+        let session = WorkoutSession(templateName: "跨时区历史", plannedDate: rawPlan,
+            startedAt: actualStart, status: .completed)
+        session.plannedDate = rawPlan
+        session.trainingLocalDay = "2026-09-27"
+        session.trainingTimeZoneIdentifier = "Asia/Shanghai"
+        source.mainContext.insert(session)
+        try source.mainContext.save()
+        let data = try backupData(source.mainContext)
+        let destination = try makeContainer(includeProgram: false)
+        _ = try DataExportService.importBackup(data, into: destination.mainContext)
+        let restored = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<WorkoutSession>()).first)
+        XCTAssertEqual(restored.trainingLocalDay, "2026-09-27")
+        XCTAssertEqual(restored.trainingTimeZoneIdentifier, "Asia/Shanghai")
+        XCTAssertEqual(restored.plannedDate, rawPlan)
+        XCTAssertEqual(restored.startedAt, actualStart)
+
+        var legacyJSON = try object(data)
+        var rows = try XCTUnwrap(legacyJSON["sessions"] as? [[String: Any]])
+        rows[0].removeValue(forKey: "trainingLocalDay")
+        rows[0].removeValue(forKey: "trainingTimeZoneIdentifier")
+        legacyJSON["sessions"] = rows
+        let legacyData = try JSONSerialization.data(withJSONObject: legacyJSON)
+        let legacyDestination = try makeContainer(includeProgram: false)
+        _ = try DataExportService.importBackup(legacyData, into: legacyDestination.mainContext)
+        let legacy = try XCTUnwrap(legacyDestination.mainContext.fetch(FetchDescriptor<WorkoutSession>()).first)
+        XCTAssertNil(legacy.trainingLocalDay)
+        XCTAssertNil(legacy.trainingTimeZoneIdentifier)
+        XCTAssertEqual(legacy.plannedDate, rawPlan)
+        XCTAssertEqual(legacy.startedAt, actualStart)
+    }
+
+    func testSchema14RoundTripPreservesEveryProgramEntityAndMealFacts() throws {
         let source = try makeContainer()
         let context = source.mainContext
         let program = FatLossProgram(startDate: start, endDate: FatLossCalendar.adding(91, to: start))
         context.insert(program)
+        let preference = try TrainingPreferenceRevision(
+            snapshot: .confirmed,
+            revision: 1,
+            effectiveAt: start,
+            reason: "用户确认四日部位分化"
+        )
+        context.insert(preference)
+        let trainingProgram = try TrainingProgramRevision(
+            programID: program.id,
+            preferenceRevision: preference,
+            snapshot: FatLossCatalog.trainingProgram(preference: .confirmed),
+            revision: 1,
+            effectiveDate: start,
+            reason: "保存编排快照"
+        )
+        context.insert(trainingProgram)
         let revision = ProgramTargetRevision(programID: program.id, effectiveDate: start, reason: "等待医学确认")
         revision.sourceNote = "不得按默认值补齐"
         context.insert(revision)
@@ -41,6 +297,7 @@ final class FatLossBackupTests: XCTestCase {
         let schedule = ScheduledWorkout(templateID: template.id, templateName: template.name, plannedDate: start, isManuallyScheduled: true)
         context.insert(schedule)
         let link = ProgramWorkoutLink(programID: program.id, scheduledWorkoutID: schedule.id, templateCode: "A", originalDate: start)
+        link.trainingProgramRevisionID = trainingProgram.id
         context.insert(link)
         let meal = MealEntry(date: start, mealType: .lunch, name: "已吃餐食", calories: 0, proteinGrams: 0, carbsGrams: 0, fatGrams: 0)
         meal.programID = program.id
@@ -60,7 +317,7 @@ final class FatLossBackupTests: XCTestCase {
 
         let data = try backupData(context)
         let preview = try DataExportService.preview(data)
-        XCTAssertEqual(preview.fatLossRecords, 8)
+        XCTAssertEqual(preview.fatLossRecords, 10)
         let destination = try makeContainer()
         let first = try DataExportService.importBackup(data, into: destination.mainContext)
         XCTAssertGreaterThan(first.imported, 0)
@@ -88,6 +345,8 @@ final class FatLossBackupTests: XCTestCase {
         XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<ProgramWorkoutLink>()).first?.scheduledWorkoutID, schedule.id)
         XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<PlannedMeal>()).first?.recipeID, recipe.id)
         XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<RecipeVersion>()).first?.draftJSON, recipe.draftJSON)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<TrainingPreferenceRevision>()).first?.revisionCode, preference.revisionCode)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<TrainingProgramRevision>()).first?.preferenceRevisionID, preference.id)
     }
 
     func testSchema12WithoutOptionalFieldsImportsWithoutInventingNutritionOrJumpDurations() throws {
@@ -113,6 +372,24 @@ final class FatLossBackupTests: XCTestCase {
         XCTAssertNil(rope.activeDurationSeconds)
         XCTAssertNil(rope.elapsedDurationSeconds)
         XCTAssertTrue(try destination.mainContext.fetch(FetchDescriptor<FatLossProgram>()).isEmpty)
+    }
+
+    func testSchema13WithoutTrainingPreferenceCollectionsStillImportsWithoutInventingVersions() throws {
+        let source = try makeContainer()
+        source.mainContext.insert(FatLossProgram(startDate: start, endDate: FatLossCalendar.adding(91, to: start)))
+        try source.mainContext.save()
+        var json = try object(backupData(source.mainContext))
+        json["schemaVersion"] = 13
+        var fatLoss = try XCTUnwrap(json["fatLoss"] as? [String: Any])
+        fatLoss.removeValue(forKey: "trainingPreferences")
+        fatLoss.removeValue(forKey: "trainingPrograms")
+        json["fatLoss"] = fatLoss
+
+        let destination = try makeContainer()
+        _ = try DataExportService.importBackup(JSONSerialization.data(withJSONObject: json), into: destination.mainContext)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<FatLossProgram>()).count, 1)
+        XCTAssertTrue(try destination.mainContext.fetch(FetchDescriptor<TrainingPreferenceRevision>()).isEmpty)
+        XCTAssertTrue(try destination.mainContext.fetch(FetchDescriptor<TrainingProgramRevision>()).isEmpty)
     }
 
     func testInvalidNewJumpDurationsAreRejectedBeforeAnyBackupInsertion() throws {
@@ -171,6 +448,113 @@ final class FatLossBackupTests: XCTestCase {
         XCTAssertNil(entry.durationSeconds)
         XCTAssertEqual(entry.activeDurationSeconds, 600)
         XCTAssertEqual(entry.elapsedDurationSeconds, 900)
+    }
+
+    func testDurationOnlyRopeBackupKeepsCountUnknownAndRestoresIdempotently() throws {
+        let source = try makeContainer(includeProgram: false)
+        source.mainContext.insert(JumpRopeEntry(count: 1200, activeDurationSeconds: 600,
+                                               elapsedDurationSeconds: 900, date: start))
+        try source.mainContext.save()
+        var json = try object(backupData(source.mainContext))
+        var rows = try XCTUnwrap(json["jumpRopeEntries"] as? [[String: Any]])
+        rows[0].removeValue(forKey: "count") // Observed duration, never an observed count.
+        json["jumpRopeEntries"] = rows
+        let data = try JSONSerialization.data(withJSONObject: json)
+        let destination = try makeContainer(includeProgram: false)
+        _ = try DataExportService.importBackup(data, into: destination.mainContext)
+        let restored = try XCTUnwrap(destination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertNil(restored.count as Int?)
+        XCTAssertEqual(restored.activeDurationSeconds, 600)
+        XCTAssertEqual(restored.elapsedDurationSeconds, 900)
+        let exported = try object(backupData(destination.mainContext))
+        let exportedRows = try XCTUnwrap(exported["jumpRopeEntries"] as? [[String: Any]])
+        XCTAssertNil(exportedRows[0]["count"])
+        XCTAssertEqual(try DataExportService.importBackup(data, into: destination.mainContext).imported, 0)
+        XCTAssertEqual(try destination.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).count, 1)
+    }
+
+    func testDurationOnlyRopeCompletesOnlySelectedScheduleAndUnknownTotalStaysUnknown() throws {
+        let store = try makeContainer(includeProgram: false), context = store.mainContext
+        let linked = ScheduledWorkout(templateID: UUID(), templateName: "轻松跳绳", plannedDate: start)
+        let unrelated = ScheduledWorkout(templateID: UUID(), templateName: "单车", plannedDate: start)
+        context.insert(linked); context.insert(unrelated)
+        try context.save()
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: nil, activeDurationSeconds: nil,
+            elapsedDurationSeconds: nil, at: start, in: context))
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: 0, activeDurationSeconds: 600,
+            elapsedDurationSeconds: 900, at: start, in: context))
+        XCTAssertTrue(try context.fetch(FetchDescriptor<JumpRopeEntry>()).isEmpty)
+        let result = try WellnessToolService.recordJumpRope(count: nil, activeDurationSeconds: 600,
+            elapsedDurationSeconds: 900, at: start, scheduledWorkoutID: linked.id, in: context)
+        let entry = try XCTUnwrap(context.fetch(FetchDescriptor<JumpRopeEntry>()).first)
+        XCTAssertNil(entry.count)
+        XCTAssertEqual(entry.activeDurationSeconds, 600)
+        XCTAssertEqual(entry.elapsedDurationSeconds, 900)
+        XCTAssertEqual(linked.status, .completed)
+        XCTAssertEqual(unrelated.status, .planned)
+        XCTAssertTrue(result.message.contains("次数未知"))
+        XCTAssertNil(WellnessToolService.todaySummary(on: start, hydrationEntries: [],
+            jumpRopeEntries: [entry, JumpRopeEntry(count: 1000, date: start)], sedentarySessions: []).jumpRopeCount)
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: nil, activeDurationSeconds: 600,
+            elapsedDurationSeconds: 900, at: start, scheduledWorkoutID: linked.id, in: context))
+        XCTAssertEqual(try context.fetch(FetchDescriptor<JumpRopeEntry>()).count, 1)
+    }
+
+    func testJumpRopeEntryCompletesOnlyItsLinkedSchedule() throws {
+        let container = try makeContainer(includeProgram: false)
+        let linked = ScheduledWorkout(
+            templateID: UUID(),
+            templateName: "跳绳间歇 · 技术与燃脂",
+            plannedDate: start
+        )
+        let unrelated = ScheduledWorkout(
+            templateID: UUID(),
+            templateName: "下肢后链＋足踝 · 高消耗",
+            plannedDate: start
+        )
+        container.mainContext.insert(linked)
+        container.mainContext.insert(unrelated)
+        try container.mainContext.save()
+
+        _ = try WellnessToolService.recordJumpRope(
+            count: 1_200,
+            activeDurationSeconds: 600,
+            elapsedDurationSeconds: 900,
+            at: start,
+            scheduledWorkoutID: linked.id,
+            in: container.mainContext
+        )
+
+        XCTAssertEqual(linked.status, .completed)
+        XCTAssertEqual(unrelated.status, .planned)
+        XCTAssertEqual(try container.mainContext.fetch(FetchDescriptor<JumpRopeEntry>()).count, 1)
+    }
+
+    func testJumpRopeCompletionUsesScheduledCivilDayRatherThanRawInstant() throws {
+        let schema = Schema([ScheduledWorkout.self, JumpRopeEntry.self])
+        let store = try ModelContainer(for: schema, configurations: [ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)])
+        let context = store.mainContext
+        let enteredDate = try XCTUnwrap(TrainingLocalDate.date("2026-09-24"))
+        let raw = FatLossCalendar.date(2026, 9, 23)
+        let schedule = ScheduledWorkout(templateID: UUID(), templateName: "跳绳", plannedDate: raw, status: .skipped)
+        schedule.plannedDate = raw
+        schedule.plannedLocalDay = "2026-09-24"
+        schedule.plannedTimeZoneIdentifier = "Australia/Sydney"
+        context.insert(schedule)
+        try context.save()
+
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: 100, activeDurationSeconds: 60,
+            elapsedDurationSeconds: 90, at: TrainingLocalDate.date("2026-09-23")!,
+            scheduledWorkoutID: schedule.id, in: context))
+        XCTAssertEqual(schedule.status, .skipped)
+        let result = try WellnessToolService.recordJumpRope(count: 100, activeDurationSeconds: 60,
+            elapsedDurationSeconds: 90, at: enteredDate, scheduledWorkoutID: schedule.id, in: context)
+        XCTAssertNotNil(result.recordID)
+        XCTAssertEqual(schedule.status, .completed)
+        XCTAssertEqual(schedule.plannedDate, raw)
+        XCTAssertEqual(schedule.plannedLocalDay, "2026-09-24")
+        XCTAssertThrowsError(try WellnessToolService.recordJumpRope(count: 100, activeDurationSeconds: 60,
+            elapsedDurationSeconds: 90, at: enteredDate, scheduledWorkoutID: schedule.id, in: context))
     }
 
     func testMissingRecipeReferenceAndMalformedSnapshotRejectBeforeInsertion() throws {
@@ -311,6 +695,8 @@ final class FatLossBackupTests: XCTestCase {
             let context = try XCTUnwrap(container).mainContext
             XCTAssertEqual(try context.fetch(FetchDescriptor<WorkoutSession>()).count, baseline["ZWORKOUTSESSION"]?.count)
             XCTAssertEqual(try context.fetch(FetchDescriptor<SetLog>()).count, baseline["ZSETLOG"]?.count)
+            XCTAssertTrue(try context.fetch(FetchDescriptor<SetLog>()).allSatisfy { $0.reductionOrder == nil })
+            XCTAssertTrue(try context.fetch(FetchDescriptor<SessionExercise>()).allSatisfy { $0.hasManuallyReducedSets == nil })
             XCTAssertTrue(try context.fetch(FetchDescriptor<FatLossProgram>()).isEmpty)
             let meal = MealEntry(date: start, mealType: .snack, name: "迁移后部分营养", calories: 0, proteinGrams: 0, carbsGrams: 0, fatGrams: 0)
             try MealNutritionInput(calories: "120", protein: "", carbs: "", fat: "0").apply(to: meal)
@@ -389,9 +775,17 @@ final class FatLossBackupTests: XCTestCase {
 
     private func identifiers(in url: URL) throws -> [String: [String]] {
         var connection: OpaquePointer?
-        guard sqlite3_open_v2(url.path, &connection, SQLITE_OPEN_READONLY, nil) == SQLITE_OK else {
+        func readFailure(_ code: Int32, stage: String) -> NSError {
+            let message = connection.map { String(cString: sqlite3_errmsg($0)) } ?? "no SQLite connection"
+            return NSError(domain: "XFitSQLiteRead", code: Int(code), userInfo: [
+                NSLocalizedDescriptionKey: "\(stage): SQLite \(code): \(message)"
+            ])
+        }
+        let openStatus = sqlite3_open_v2(url.path, &connection, SQLITE_OPEN_READONLY, nil)
+        guard openStatus == SQLITE_OK else {
+            let failure = readFailure(openStatus, stage: "open temporary migration copy")
             if let connection { sqlite3_close(connection) }
-            throw CocoaError(.fileReadCorruptFile)
+            throw failure
         }
         defer { sqlite3_close(connection) }
         let tables = ["ZEXERCISE", "ZWORKOUTTEMPLATE", "ZTEMPLATEEXERCISE", "ZSCHEDULEDWORKOUT",
@@ -400,8 +794,9 @@ final class FatLossBackupTests: XCTestCase {
         var result: [String: [String]] = [:]
         for table in tables {
             var statement: OpaquePointer?
-            guard sqlite3_prepare_v2(connection, "SELECT hex(ZID) FROM \(table) ORDER BY hex(ZID)", -1, &statement, nil) == SQLITE_OK else {
-                throw CocoaError(.fileReadCorruptFile)
+            let prepared = sqlite3_prepare_v2(connection, "SELECT hex(ZID) FROM \(table) ORDER BY hex(ZID)", -1, &statement, nil)
+            guard prepared == SQLITE_OK else {
+                throw readFailure(prepared, stage: "prepare \(table)")
             }
             var ids: [String] = []
             var status = sqlite3_step(statement)
@@ -409,8 +804,9 @@ final class FatLossBackupTests: XCTestCase {
                 if let text = sqlite3_column_text(statement, 0) { ids.append(String(cString: text)) }
                 status = sqlite3_step(statement)
             }
+            let failure = status == SQLITE_DONE ? nil : readFailure(status, stage: "step \(table)")
             sqlite3_finalize(statement)
-            guard status == SQLITE_DONE else { throw CocoaError(.fileReadCorruptFile) }
+            if let failure { throw failure }
             result[table] = ids
         }
         return result
@@ -442,9 +838,160 @@ final class FatLossBackupTests: XCTestCase {
                     steps: ["加热"], equipment: ["微波炉"], householdPortion: "一份", cookingMinutes: 5, storageNote: "当餐食用")
     }
 
+
+    func testMalformedTrainingVersionsRejectBeforeAnyInsertion() throws {
+        let source = try makeContainer()
+        _ = try FatLossService.createProgram(in: source.mainContext)
+        let original = try object(backupData(source.mainContext))
+        for mutation in ["negative-sets", "invalid-weekday", "bad-cardio-time", "missing-preference"] {
+            var json = original
+            var payload = try XCTUnwrap(json["fatLoss"] as? [String: Any])
+            var records = try XCTUnwrap(payload["trainingPrograms"] as? [[String: Any]])
+            var snapshot = try JSONDecoder().decode(TrainingProgramSnapshot.self, from: Data((records[0]["snapshotJSON"] as! String).utf8))
+            switch mutation {
+            case "negative-sets": snapshot.strengthWorkouts[0].exercises[0].sets = -1
+            case "invalid-weekday": snapshot.strengthWorkouts[0].weekday = 9
+            case "bad-cardio-time": snapshot.cardioWorkouts[0].activeSeconds = 1300
+            default: records[0]["preferenceRevisionID"] = UUID().uuidString
+            }
+            records[0]["snapshotJSON"] = String(decoding: try JSONEncoder().encode(snapshot), as: UTF8.self)
+            payload["trainingPrograms"] = records; json["fatLoss"] = payload
+            let destination = try makeContainer()
+            XCTAssertThrowsError(try DataExportService.importBackup(JSONSerialization.data(withJSONObject: json), into: destination.mainContext), mutation)
+            XCTAssertTrue(try destination.mainContext.fetch(FetchDescriptor<FatLossProgram>()).isEmpty)
+            XCTAssertTrue(try destination.mainContext.fetch(FetchDescriptor<TrainingPreferenceRevision>()).isEmpty)
+        }
+    }
+
+    func testBackupCannotChangeImmutableTrainingVersionWithSameUUID() throws {
+        let store = try makeContainer(), context = store.mainContext
+        _ = try FatLossService.createProgram(in: context)
+        let original = try XCTUnwrap(context.fetch(FetchDescriptor<TrainingProgramRevision>()).first)
+        let originalJSON = original.snapshotJSON
+        var json = try object(backupData(context))
+        var payload = try XCTUnwrap(json["fatLoss"] as? [String: Any])
+        var records = try XCTUnwrap(payload["trainingPrograms"] as? [[String: Any]])
+        var snapshot = try XCTUnwrap(original.snapshot)
+        snapshot.strengthWorkouts[0].exercises[0].sets = 2
+        records[0]["snapshotJSON"] = String(decoding: try JSONEncoder().encode(snapshot), as: UTF8.self)
+        payload["trainingPrograms"] = records; json["fatLoss"] = payload
+        XCTAssertThrowsError(try DataExportService.importBackup(JSONSerialization.data(withJSONObject: json), into: context))
+        XCTAssertEqual(original.snapshotJSON, originalJSON)
+    }
+
+    func testDuplicatePreferenceCodeInsideBackupRejectsBeforeAnyInsertion() throws {
+        let source = try makeContainer()
+        _ = try FatLossService.createProgram(in: source.mainContext)
+        source.mainContext.insert(Exercise(name: "不应导入的动作", muscleGroup: "胸部", equipment: "杠铃"))
+        try source.mainContext.save()
+        let data = try backupWithConflictingPreferenceCode(in: source.mainContext, includesOriginal: true)
+        let destination = try makeContainer(), context = destination.mainContext
+
+        XCTAssertThrowsError(try DataExportService.importBackup(data, into: context)) { error in
+            XCTAssertTrue(error.localizedDescription.contains("同一训练偏好版本号对应不同标识"))
+        }
+        XCTAssertTrue(try context.fetch(FetchDescriptor<Exercise>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<FatLossProgram>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<TrainingPreferenceRevision>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<TrainingProgramRevision>()).isEmpty)
+    }
+
+    func testPreferenceCodeConflictingWithDatabaseRejectsBeforeAnyInsertion() throws {
+        let source = try makeContainer()
+        _ = try FatLossService.createProgram(in: source.mainContext)
+        source.mainContext.insert(Exercise(name: "不应导入的动作", muscleGroup: "胸部", equipment: "杠铃"))
+        try source.mainContext.save()
+        let data = try backupWithConflictingPreferenceCode(in: source.mainContext, includesOriginal: false)
+        let destination = try makeContainer(), context = destination.mainContext
+        let existing = try XCTUnwrap(TrainingPreferenceService.ensureConfirmedProfile(in: context))
+        let existingJSON = existing.snapshotJSON
+
+        XCTAssertThrowsError(try DataExportService.importBackup(data, into: context)) { error in
+            XCTAssertTrue(error.localizedDescription.contains("同一训练偏好版本号对应不同标识"))
+        }
+        XCTAssertTrue(try context.fetch(FetchDescriptor<Exercise>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<FatLossProgram>()).isEmpty)
+        XCTAssertTrue(try context.fetch(FetchDescriptor<TrainingProgramRevision>()).isEmpty)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<TrainingPreferenceRevision>()).map(\.id), [existing.id])
+        XCTAssertEqual(existing.snapshotJSON, existingJSON)
+    }
+
+    func testTrainingVersionSelectionSupportsFutureAndExplicitHistory() throws {
+        let preference = try TrainingPreferenceRevision(snapshot: .confirmed, revision: 1,
+            effectiveAt: start, reason: "测试偏好")
+        let snapshot = FatLossCatalog.trainingProgram(preference: .confirmed)
+        let previous = try TrainingProgramRevision(programID: nil, preferenceRevision: preference,
+            snapshot: snapshot, revision: 1, effectiveDate: start, reason: "历史编排")
+        let next = try TrainingProgramRevision(programID: nil, preferenceRevision: preference,
+            snapshot: snapshot, revision: 2, effectiveDate: FatLossCalendar.adding(7, to: start), reason: "未来编排")
+        let today = FatLossCalendar.adding(2, to: start)
+
+        XCTAssertEqual(TrainingPlanPresentation.selectedRevision(in: [next], selectedID: nil, now: today)?.id, next.id)
+        XCTAssertEqual(TrainingPlanPresentation.selectedRevision(in: [next, previous], selectedID: nil, now: today)?.id, previous.id)
+        XCTAssertEqual(TrainingPlanPresentation.selectedRevision(in: [previous, next], selectedID: next.id, now: today)?.id, next.id)
+        next.snapshotJSON = "damaged"
+        XCTAssertEqual(TrainingPlanPresentation.selectedRevision(in: [next, previous], selectedID: previous.id,
+            now: FatLossCalendar.adding(9, to: start))?.id, previous.id)
+    }
+
+    func testJumpRopeInitialDateKeepsHistoryAndClampsFuture() {
+        let now = FatLossCalendar.adding(3, to: start).addingTimeInterval(12 * 3600)
+        XCTAssertEqual(TrainingPlanPresentation.initialActualDate(selectedDate: start, now: now), start)
+        XCTAssertEqual(TrainingPlanPresentation.initialActualDate(selectedDate: now, now: now), now)
+        XCTAssertEqual(TrainingPlanPresentation.initialActualDate(selectedDate: FatLossCalendar.adding(7, to: start), now: now), now)
+    }
+
+    private func backupWithConflictingPreferenceCode(in context: ModelContext, includesOriginal: Bool) throws -> Data {
+        var json = try object(backupData(context))
+        var payload = try XCTUnwrap(json["fatLoss"] as? [String: Any])
+        var preferences = try XCTUnwrap(payload["trainingPreferences"] as? [[String: Any]])
+        var duplicate = try XCTUnwrap(preferences.first)
+        let newID = UUID().uuidString
+        duplicate["id"] = newID
+        let snapshotJSON = try XCTUnwrap(duplicate["snapshotJSON"] as? String)
+        var snapshot = try JSONDecoder().decode(TrainingPreferenceSnapshot.self, from: Data(snapshotJSON.utf8))
+        snapshot.zone2Minutes = 35
+        duplicate["snapshotJSON"] = String(decoding: try JSONEncoder().encode(snapshot), as: UTF8.self)
+        if includesOriginal {
+            preferences.append(duplicate)
+        } else {
+            preferences = [duplicate]
+            var programs = try XCTUnwrap(payload["trainingPrograms"] as? [[String: Any]])
+            for index in programs.indices { programs[index]["preferenceRevisionID"] = newID }
+            payload["trainingPrograms"] = programs
+        }
+        payload["trainingPreferences"] = preferences
+        json["fatLoss"] = payload
+        return try JSONSerialization.data(withJSONObject: json)
+    }
+
     private func backupData(_ context: ModelContext) throws -> Data {
         let url = try DataExportService.createBackup(in: context)
         return try Data(contentsOf: url)
+    }
+
+    private func guardedNotesFixture() throws -> (ModelContainer, ScheduledWorkout, WorkoutSession, [String: Any]) {
+        let container = try makeContainer()
+        let context = container.mainContext
+        let zone = try XCTUnwrap(TimeZone(identifier: "Asia/Shanghai"))
+        let day = try XCTUnwrap(TrainingLocalDate.date("2026-10-28", timeZone: zone))
+        let schedule = ScheduledWorkout(templateID: UUID(), templateName: "原计划", plannedDate: day, status: .inProgress)
+        schedule.plannedLocalDay = "2026-10-28"
+        schedule.plannedTimeZoneIdentifier = zone.identifier
+        let draft = WorkoutSession(scheduledWorkoutID: schedule.id, templateName: "原计划",
+            plannedDate: day, status: .inProgress)
+        context.insert(schedule); context.insert(draft); try context.save()
+        let packet: [String: Any] = [
+            "version": 5, "packageID": "guarded-draft-test", "timeZoneIdentifier": zone.identifier,
+            "workouts": [["id": "actual", "date": "2026-10-28", "name": "实际训练", "notes": "",
+                "exercises": [["name": "新动作", "muscleGroup": "腿部", "equipment": "器械",
+                    "volumeUnit": "kilogram", "notes": "", "sets": [["weight": 30, "reps": 10,
+                        "weightSide": "bilateral", "repsSide": "bilateral"]]]]]],
+            "bodyMeasurements": [], "meals": [], "jumpRopeEntries": [],
+            "staleSession": ["plannedDate": "2026-10-28", "templateName": "原计划",
+                "expectedSessionID": draft.id.uuidString, "expectedScheduledWorkoutID": schedule.id.uuidString]
+        ]
+        return (container, schedule, draft, packet)
     }
 
     private func object(_ data: Data) throws -> [String: Any] {
@@ -457,7 +1004,8 @@ final class FatLossBackupTests: XCTestCase {
             MealEntry.self, DailyBodyCheckIn.self, BodyMeasurement.self, HydrationEntry.self, JumpRopeEntry.self, SedentarySession.self]
         if includeProgram {
             models += [FatLossProgram.self, ProgramTargetRevision.self, RecipeVersion.self, PlannedMeal.self,
-                ProgramDailyLog.self, ProgramHealthRecord.self, ProgramWeeklyReview.self, ProgramWorkoutLink.self]
+                ProgramDailyLog.self, ProgramHealthRecord.self, ProgramWeeklyReview.self, ProgramWorkoutLink.self,
+                TrainingPreferenceRevision.self, TrainingProgramRevision.self]
         }
         return Schema(models)
     }

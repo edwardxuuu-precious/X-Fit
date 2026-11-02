@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-10-23T12:54:25.811733+08:00",
+  "installedVersion": "0.5.0(28)",
+  "modelTables": 25,
+  "businessRecords": 2489,
+  "everyOriginalIDAndBusinessFieldUnchanged": true,
+  "all48ImportedActualsUnchanged": true,
+  "all16DiscardedDraftsUnchanged": true,
+  "resourceFilesUnchanged": true,
+  "uninstalled": false,
+  "containerCleared": false,
+  "simulatorUploaded": false,
+  "phoneSQLiteDirectWrite": false,
+  "R6Status": "planned; native skip next",
+  "before": "device-data/pre-install",
+  "after": "device-data/post-install"
+}

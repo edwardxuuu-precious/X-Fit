@@ -14,7 +14,7 @@ struct FatLossHomeSummary: View {
                 VStack(alignment: .leading, spacing: 14) {
                     HStack {
                         Label(program == nil ? "开启 13 周减脂" : "我的减脂周期", systemImage: "leaf.fill")
-                            .font(.headline).foregroundStyle(AppTheme.accent)
+                            .font(.headline).foregroundStyle(AppTheme.ink)
                         Spacer()
                         Image(systemName: "arrow.up.right").foregroundStyle(AppTheme.secondaryText)
                     }
@@ -28,7 +28,7 @@ struct FatLossHomeSummary: View {
                         }
                     } else {
                         Text("家常餐单、力量训练与每一天的变化")
-                            .font(.subheadline).foregroundStyle(.white)
+                            .font(.subheadline).foregroundStyle(AppTheme.ink)
                         Text("9 月 6 日 — 12 月 6 日 · 先查看完整计划")
                             .font(.caption).foregroundStyle(AppTheme.secondaryText)
                     }
@@ -37,9 +37,9 @@ struct FatLossHomeSummary: View {
             if let program {
                 NavigationLink(destination: FatLossMealsView(program: program)) {
                     HStack(alignment: .top, spacing: 13) {
-                        Image(systemName: "fork.knife").foregroundStyle(AppTheme.accent)
+                        Image(systemName: "fork.knife").foregroundStyle(AppTheme.ink)
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("今日餐单").font(.headline).foregroundStyle(.white)
+                            Text("今日餐单").font(.headline).foregroundStyle(AppTheme.ink)
                             let today = meals.filter { $0.programID == program.id && $0.isCurrent && FatLossCalendar.sameDay($0.date, .now) }
                             Text(today.isEmpty ? "查看餐单与明日备餐" : today.sorted { $0.mealTypeRaw < $1.mealTypeRaw }.map(\.title).joined(separator: " · "))
                                 .font(.caption).foregroundStyle(AppTheme.secondaryText).lineLimit(2)
@@ -75,7 +75,7 @@ struct FatLossQuickRecordLinks: View {
                     Label("跳绳 · 饮水", systemImage: "figure.jumprope").font(.caption.bold())
                         .frame(maxWidth: .infinity).cardSurface()
                 }
-            }.foregroundStyle(AppTheme.accent).buttonStyle(.plain)
+            }.foregroundStyle(AppTheme.ink).buttonStyle(.plain)
         }
     }
 }
@@ -90,13 +90,14 @@ struct FatLossDashboardView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
+                SprintPageHeader(title: "减脂周期", icon: "figure.run")
                 if let program {
                     summary(program)
                     NavigationLink(destination: FatLossMealsView(program: program)) {
                         route("餐单与备餐", "14 天轮换 · 明日采购 · 实吃反馈", icon: "fork.knife")
                     }.accessibilityIdentifier("餐单与备餐")
                     NavigationLink(destination: FatLossTrainingView(program: program)) {
-                        route("全身训练计划", "A / B / C · 先预览，再导入", icon: "dumbbell.fill")
+                        route("训练编排", "先预览，再导入", icon: "dumbbell.fill")
                     }
                     NavigationLink(destination: FatLossTimelineView(program: program)) {
                         route("完整周期记录", "每一天的计划、实际与漏记", icon: "calendar")
@@ -111,10 +112,12 @@ struct FatLossDashboardView: View {
                         route("训练历史", "继续查看已有训练记录", icon: "clock.arrow.circlepath")
                     }
                     HStack {
-                        Button("生成周期 CSV") {
+                        Button {
                             do { exportURL = try FatLossService.exportCSV(program: program, in: context) }
                             catch { errorMessage = error.localizedDescription }
-                        }.buttonStyle(.bordered)
+                        } label: {
+                            Label("导出 CSV", systemImage: "square.and.arrow.up")
+                        }.buttonStyle(SprintSecondaryButtonStyle())
                         if let exportURL { ShareLink(item: exportURL) { Label("分享", systemImage: "square.and.arrow.up") } }
                     }
                 } else {
@@ -124,7 +127,7 @@ struct FatLossDashboardView: View {
                 }
             }.padding(20).buttonStyle(.plain)
         }
-        .screenBackground().fatLossCalendar().navigationTitle("减脂周期").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        .sprintPage().fatLossCalendar().navigationTitle("减脂周期").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
         .fatLossError($errorMessage)
     }
     private func route(_ title: String, _ detail: String, icon: String) -> some View {
@@ -134,9 +137,10 @@ struct FatLossDashboardView: View {
         let values = BodyMeasurementService.dailyRepresentativeWeights(from: measurements).filter { program.contains($0.date) }
         let average = FatLossService.average(endingOn: .now, values: values)
         return VStack(alignment: .leading, spacing: 15) {
+            SprintSectionHeading(title: "当前进展", icon: "chart.xyaxis.line")
             Text("\(FatLossCalendar.label(program.startDate)) — \(FatLossCalendar.label(program.endDate))")
-                .font(.caption.monospacedDigit()).foregroundStyle(AppTheme.accent)
-            Text(phaseFocus(program)).font(.subheadline.bold()).foregroundStyle(.white)
+                .font(.caption.monospacedDigit()).foregroundStyle(AppTheme.ink)
+            Text(phaseFocus(program)).font(.subheadline.bold()).foregroundStyle(AppTheme.ink)
             HStack {
                 FatLossMetric(value: String(format: "%.1f", program.reportedStartWeightKg), label: "自述起点 kg")
                 FatLossMetric(value: values.first.map { String(format: "%.1f", $0.weightKg) } ?? "—", label: "首次实测 kg")
@@ -145,14 +149,14 @@ struct FatLossDashboardView: View {
             if !values.isEmpty {
                 Chart(values) { value in
                     LineMark(x: .value("日期", value.date), y: .value("体重", value.weightKg))
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                     PointMark(x: .value("日期", value.date), y: .value("体重", value.weightKg))
-                        .foregroundStyle(AppTheme.accent)
-                }.chartYScale(domain: .automatic(includesZero: false)).frame(height: 150)
+                        .foregroundStyle(AppTheme.ink)
+                }.chartYScale(domain: .automatic(includesZero: false)).frame(height: 150).sprintChart()
             }
             NavigationLink(destination: BodyMeasurementsView()) {
                 Label("记录体重与腰围", systemImage: "scalemass.fill").font(.subheadline.bold())
-            }.foregroundStyle(AppTheme.accent)
+            }.foregroundStyle(AppTheme.ink)
         }.cardSurface(padding: 18, cornerRadius: 22)
     }
     private func phaseFocus(_ program: FatLossProgram) -> String {
@@ -174,6 +178,7 @@ struct FatLossTimelineView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 16) {
+                SprintPageHeader(title: "周期记录", icon: "calendar")
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 44), spacing: 3)], spacing: 8) {
                     ForEach(days) { day in
                         Button { selectedDate = day.date } label: {
@@ -182,7 +187,7 @@ struct FatLossTimelineView: View {
                                 Circle().fill(day.hasRecords ? AppTheme.accent : AppTheme.secondaryText.opacity(0.2)).frame(width: 6, height: 6)
                             }.frame(maxWidth: .infinity, minHeight: 44).padding(.vertical, 4)
                                 .background(FatLossCalendar.sameDay(day.date, selectedDate ?? .distantPast) ? AppTheme.accent.opacity(0.18) : AppTheme.surface, in: RoundedRectangle(cornerRadius: 9))
-                        }.foregroundStyle(.white).accessibilityLabel("\(FatLossCalendar.label(day.date)) \(day.status(relativeTo: .now))")
+                        }.foregroundStyle(AppTheme.ink).accessibilityLabel("\(FatLossCalendar.label(day.date)) \(day.status(relativeTo: .now))")
                     }
                 }
                 ForEach(days.filter { selectedDate == nil || FatLossCalendar.sameDay($0.date, selectedDate!) }) { day in
@@ -191,16 +196,16 @@ struct FatLossTimelineView: View {
                             HStack {
                                 Text(FatLossCalendar.label(day.date)).font(.subheadline.bold())
                                 Spacer()
-                                Text(day.status(relativeTo: .now)).font(.caption).foregroundStyle(day.hasRecords ? AppTheme.accent : AppTheme.secondaryText)
+                                Text(day.status(relativeTo: .now)).font(.caption).foregroundStyle(day.hasRecords ? AppTheme.ink : AppTheme.secondaryText)
                             }
                             Text("体重 \(day.weightKg.map { String(format: "%.1f kg", $0) } ?? "—")  ·  餐食 \(day.loggedMeals)/\(day.plannedMeals)  ·  训练 \(day.completedWorkouts)")
                                 .font(.caption).foregroundStyle(AppTheme.secondaryText)
                         }.padding(.vertical, 10)
-                    }.foregroundStyle(.white).buttonStyle(.plain)
+                    }.foregroundStyle(AppTheme.ink).buttonStyle(.plain)
                 }
                 if selectedDate != nil { Button("显示全部日期") { selectedDate = nil } }
             }.padding(20)
-        }.screenBackground().fatLossCalendar().navigationTitle("完整周期记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.sprintPage().fatLossCalendar().navigationTitle("完整周期记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .onAppear { do { days = try FatLossService.timeline(program: program, in: context) } catch { errorMessage = error.localizedDescription } }
             .fatLossError($errorMessage)
     }
@@ -219,16 +224,16 @@ private struct FatLossDayDetailView: View {
     }
     var body: some View {
         List {
-            Section("计划与实际") {
+            Section(header: SprintSectionHeading(title: "计划与实际", icon: "checklist")) {
                 LabeledContent("餐食", value: "实记 \(day.loggedMeals) · 计划 \(day.plannedMeals) · 明确未吃 \(day.skippedMeals)")
                 LabeledContent("训练", value: "完成 \(day.completedWorkouts) · 计划 \(day.plannedWorkouts)")
                 LabeledContent("营养", value: day.loggedMeals == 0 ? "未记录" : (day.knownCalorieMeals == 0 ? "营养待核算" : (day.unknownNutritionMeals > 0 ? "\(day.knownCalories) kcal 已知 · \(day.unknownNutritionMeals) 餐营养不完整" : "\(day.knownCalories) kcal 已记录")))
             }
-            Section("身体与活动") {
+            Section(header: SprintSectionHeading(title: "身体与活动", icon: "figure.run")) {
                 LabeledContent("腰围", value: day.waistCm.map { "\($0) cm" } ?? "未记录")
                 LabeledContent("步数", value: day.steps.map(String.init) ?? "未记录")
                 LabeledContent("睡眠", value: day.sleepHours.map { "\($0) 小时" } ?? "未记录")
-                LabeledContent("跳绳个数", value: day.jumpCount > 0 ? "\(day.jumpCount)" : "未记录")
+                LabeledContent("跳绳个数", value: day.jumpCount.map { $0 > 0 ? String($0) : "未记录" } ?? "次数未知")
                 LabeledContent("实际跳跃", value: day.jumpActiveSeconds.map { "\($0 / 60) 分钟" } ?? "未记录")
                 LabeledContent("含休息总时长", value: day.jumpElapsedSeconds.map { "\($0 / 60) 分钟" } ?? "未记录")
                 LabeledContent("饮水记录", value: day.waterMilliliters > 0 ? "\(day.waterMilliliters) ml" : "未记录")
@@ -247,18 +252,20 @@ private struct FatLossDayDetailView: View {
                     .disabled(day.date > FatLossCalendar.day(.now))
                 NavigationLink("身体数据", destination: BodyMeasurementsView())
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar()
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar()
             .navigationTitle(FatLossCalendar.label(day.date)).navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .onAppear(perform: refresh)
             .sheet(isPresented: $showsBody, onDismiss: refresh) {
                 NavigationStack { DailyBodyCheckInEditor(checkIn: bodyCheckIn, date: day.date) }
-                    .preferredColorScheme(.dark)
+                    .sprintPage()
             }
             .sheet(isPresented: $showsJump, onDismiss: refresh) {
-                JumpRopeQuickEntrySheet(initialDate: day.date) { count, active, elapsed, date in
+                JumpRopeQuickEntrySheet(initialDate: day.date) { input in
                     do {
-                        _ = try WellnessToolService.recordJumpRope(count: count, activeDurationSeconds: active,
-                            elapsedDurationSeconds: elapsed, at: date, in: context)
+                        _ = try WellnessToolService.recordJumpRope(count: input.count,
+                            activeDurationSeconds: input.activeDurationSeconds, elapsedDurationSeconds: input.elapsedDurationSeconds,
+                            at: input.date, totalSetCount: input.totalSetCount,
+                            recordedTimeKnown: input.recordedTimeKnown, in: context)
                     } catch { errorMessage = error.localizedDescription }
                 }
             }

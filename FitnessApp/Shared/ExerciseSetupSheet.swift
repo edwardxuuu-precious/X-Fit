@@ -5,9 +5,24 @@ struct ExerciseSetupDraft: Equatable {
     var plannedSets: [WorkoutSetPlan]
     var restSeconds: Int
     var previousDate: Date?
+    var history: TrainingPlanHistory? = nil
 
     var measurementSide: MeasurementSide {
         plannedSets.first?.weightSide ?? .bilateral
+    }
+
+    func withSetCount(_ preferredCount: Int?) -> ExerciseSetupDraft {
+        guard let preferredCount else { return self }
+        let count = max(1, preferredCount)
+        var draft = self
+        draft.plannedSets = Array(plannedSets.prefix(count))
+        let seed = draft.plannedSets.last ?? WorkoutSetPlan(weight: 0, reps: 8)
+        while draft.plannedSets.count < count {
+            draft.plannedSets.append(WorkoutSetPlan(weight: seed.weight, reps: seed.reps,
+                weightSide: seed.weightSide, repsSide: seed.repsSide,
+                actualDefaultPolicy: seed.actualDefaultPolicy))
+        }
+        return draft
     }
 
     static func suggested(
@@ -15,59 +30,41 @@ struct ExerciseSetupDraft: Equatable {
         sessions: [WorkoutSession],
         sessionExercises: [SessionExercise],
         setLogs: [SetLog],
+        schedules: [ScheduledWorkout] = [],
         fallbackSets: Int = 3,
         fallbackReps: Int = 8,
-        fallbackWeight: Double = 0
+        fallbackWeight: Double = 0,
+        defaultPattern: SetPlanPattern = .fixed
     ) -> ExerciseSetupDraft {
-        let sessionByID = Dictionary(uniqueKeysWithValues: sessions.map { ($0.id, $0) })
-        let matchingSnapshots = sessionExercises
-            .filter { $0.exerciseID == exercise.id }
-            .sorted { left, right in
-                let leftDate = sessionByID[left.sessionID]?.completedAt
-                    ?? sessionByID[left.sessionID]?.startedAt
-                    ?? .distantPast
-                let rightDate = sessionByID[right.sessionID]?.completedAt
-                    ?? sessionByID[right.sessionID]?.startedAt
-                    ?? .distantPast
-                return leftDate > rightDate
-            }
-
-        for snapshot in matchingSnapshots {
-            let completed = setLogs
-                .filter {
-                    $0.sessionExerciseID == snapshot.id
-                        && $0.isCompleted
-                        && !$0.isWarmup
-                }
-                .sorted { $0.setNumber < $1.setNumber }
-            guard !completed.isEmpty else { continue }
-            let plans = completed.map { log in
-                WorkoutSetPlan(
-                    weight: exercise.volumeUnit.recordsNumericLoad ? log.actualWeight : 0,
-                    reps: max(1, log.actualReps),
-                    weightSide: log.actualWeightSide,
-                    repsSide: log.actualWeightSide
-                )
-            }
-            return ExerciseSetupDraft(
-                pattern: snapshot.planPattern,
-                plannedSets: plans,
-                restSeconds: snapshot.restSeconds,
-                previousDate: sessionByID[snapshot.sessionID]?.startedAt
-            )
+        let history = TrainingPlanHistory.resolve(exercise: exercise, before: .now,
+            sessions: sessions, snapshots: sessionExercises, logs: setLogs, schedules: schedules)
+        let reference = WorkoutHistoryResolver.latest(exerciseID: exercise.id, unit: exercise.volumeUnit,
+            equipment: exercise.equipment, before: .now, sessions: sessions,
+            snapshots: sessionExercises, logs: setLogs, schedules: schedules)
+        if defaultPattern == .fixed, let reference, reference.equipmentVerified,
+           reference.sets.indices.allSatisfy({ reference.prefillableSet(at: $0, unit: exercise.volumeUnit) != nil }) {
+            return ExerciseSetupDraft(pattern: sessionExercises.first(where: {
+                $0.sessionID == reference.sessionID && $0.exerciseID == exercise.id
+            })?.planPattern ?? .fixed,
+                plannedSets: reference.sets.map { WorkoutSetPlan(weight: exercise.volumeUnit.recordsNumericLoad ? $0.weight : 0,
+                    reps: $0.reps, weightSide: $0.weightSide, repsSide: $0.repsSide, actualDefaultPolicy: .history) },
+                restSeconds: reference.restSeconds, previousDate: reference.date, history: history)
         }
-
-        return ExerciseSetupDraft(
-            pattern: .fixed,
-            plannedSets: WorkoutSetPlan.preset(
-                .fixed,
-                count: fallbackSets,
-                baseWeight: exercise.volumeUnit.recordsNumericLoad ? fallbackWeight : 0,
-                baseReps: fallbackReps
-            ),
-            restSeconds: exercise.defaultRestSeconds,
-            previousDate: nil
-        )
+        let pattern = exercise.volumeUnit == .kilogram ? defaultPattern : .fixed
+        var draft = ExerciseSetupDraft(pattern: pattern,
+            plannedSets: history.initialPlans(pattern: pattern, count: fallbackSets,
+                weight: exercise.volumeUnit.recordsNumericLoad ? fallbackWeight : 0, reps: fallbackReps),
+            restSeconds: exercise.defaultRestSeconds, previousDate: nil, history: history)
+        for index in draft.plannedSets.indices {
+            guard let previous = reference?.prefillableSet(at: index, unit: exercise.volumeUnit) else { continue }
+            draft.plannedSets[index].weight = exercise.volumeUnit.recordsNumericLoad ? previous.weight : 0
+            draft.plannedSets[index].reps = previous.reps
+            draft.plannedSets[index].weightSide = previous.weightSide
+            draft.plannedSets[index].repsSide = previous.repsSide
+            draft.plannedSets[index].actualDefaultPolicyRaw = WorkoutActualDefaultPolicy.history.rawValue
+            draft.previousDate = reference?.date
+        }
+        return draft
     }
 }
 
@@ -93,7 +90,18 @@ struct ExerciseSetupSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
+                    SprintPageHeader(title: "本次设置", icon: "slider.horizontal.3", subtitle: "计划设置 · 可调整")
                     sourceCard
+                    if let history = draft.history {
+                        TrainingPlanHistoryComparison(history: history, plans: draft.plannedSets,
+                            unit: exercise.volumeUnit, exerciseName: exercise.name)
+                    }
+                    if exercise.volumeUnit == .kilogram {
+                        Picker("训练方式", selection: $draft.pattern) {
+                            ForEach(SetPlanPattern.allCases) { Text($0.title).tag($0) }
+                        }.accessibilityIdentifier("动作训练方式")
+                        Text("请逐组设置实际可用的器械档位，组型不自动生成重量。").font(.caption)
+                    }
 
                     if exercise.volumeUnit.usesMeasurementSide {
                         Picker("记录口径", selection: measurementSideBinding) {
@@ -116,6 +124,19 @@ struct ExerciseSetupSheet: View {
                     }
 
                     VStack(spacing: 10) {
+                        HStack {
+                            Text("组").frame(width: 26)
+                            if exercise.volumeUnit.recordsNumericLoad {
+                                Text("\(exercise.volumeUnit.inputTitle) \(exercise.volumeUnit.symbol)")
+                                    .frame(maxWidth: .infinity)
+                            } else if exercise.volumeUnit == .bodyweight {
+                                Text("负重").frame(maxWidth: .infinity)
+                            }
+                            Text(exercise.volumeUnit.recordsSingleAmount ? exercise.volumeUnit.symbol : exercise.volumeUnit.repetitionTitle)
+                                .frame(maxWidth: .infinity)
+                        }
+                        .font(.caption)
+                        .foregroundStyle(AppTheme.secondaryText)
                         ForEach(draft.plannedSets.indices, id: \.self) { index in
                             setupRow(index)
                         }
@@ -131,7 +152,7 @@ struct ExerciseSetupSheet: View {
                     onConfirm(draft)
                     dismiss()
                 } label: {
-                    Label("使用这些设置", systemImage: "checkmark.circle.fill")
+                    Label("使用设置", systemImage: "checkmark.circle.fill")
                         .neonButtonStyle()
                 }
                 .accessibilityIdentifier("使用上次设置")
@@ -152,8 +173,8 @@ struct ExerciseSetupSheet: View {
                 }
             }
         }
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .sprintPage()
+        .tint(AppTheme.ink)
     }
 
     private var sourceCard: some View {
@@ -169,17 +190,21 @@ struct ExerciseSetupSheet: View {
                     }
                 }
                 Spacer()
-                Text(draft.previousDate == nil ? "首次建议" : "沿用上次")
+                Text(draft.previousDate == nil ? (draft.history?.date == nil ? "首次设置" : "历史参考") : "上次实际默认")
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
 
             if let previousDate = draft.previousDate {
-                Text("来自 \(previousDate.formatted(.dateTime.year().month().day())) 的完成记录；可以直接使用，也可以调整。")
+                Text("来自 \(previousDate.formatted(.dateTime.year().month().day())) 的完成记录；对应组使用上次实际默认，其余沿用默认。可逐组调整。")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } else if draft.history?.date != nil {
+                Text("上次实际见逐组对比；自动建议与历史参考分开，缺项时逐组核对，不推算器械档位。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             } else {
-                Text("还没有完成记录，先用动作默认值；所有设置都可以调整。")
+                Text("暂无可核验的兼容记录，使用动作默认值；可调整。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -202,7 +227,10 @@ struct ExerciseSetupSheet: View {
             if exercise.volumeUnit.recordsNumericLoad {
                 TextField(
                     exercise.volumeUnit.symbol,
-                    value: binding.weight,
+                    value: Binding(get: { draft.plannedSets[index].weight }, set: {
+                        draft.plannedSets[index].weight = $0
+                        draft.plannedSets[index].actualDefaultPolicyRaw = WorkoutActualDefaultPolicy.plan.rawValue
+                    }),
                     format: .number.precision(.fractionLength(0...3))
                 )
                 .keyboardType(.decimalPad)
@@ -212,7 +240,7 @@ struct ExerciseSetupSheet: View {
             } else if exercise.volumeUnit == .bodyweight {
                 Text("自重")
                     .font(.subheadline.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 9)
                     .background(AppTheme.accent.opacity(0.08), in: RoundedRectangle(cornerRadius: 9))
@@ -243,7 +271,8 @@ struct ExerciseSetupSheet: View {
                     weight: plan.weight,
                     reps: plan.reps,
                     weightSide: side,
-                    repsSide: side
+                    repsSide: side,
+                    actualDefaultPolicy: plan.actualDefaultPolicy
                 )
             }
         }
@@ -262,7 +291,8 @@ struct ExerciseSetupSheet: View {
                             weight: seed.weight,
                             reps: seed.reps,
                             weightSide: seed.weightSide,
-                            repsSide: seed.repsSide
+                            repsSide: seed.repsSide,
+                            actualDefaultPolicy: seed.actualDefaultPolicy
                         )
                     )
                 }

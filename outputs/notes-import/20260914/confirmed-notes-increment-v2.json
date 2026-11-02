@@ -1,0 +1,262 @@
+{
+  "version": 2,
+  "packageID": "notes-20260910-20260912-v2",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-09-11-shoulders-chest",
+      "date": "2026-09-11",
+      "name": "肩部＋胸部训练",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「健身计划 / Week of Sep 7」。原文未记录训练时间、时长和 RIR。器械坐姿反向飞鸟第二组经本人确认为 10 次；站姿反向飞鸟经本人确认为哑铃。所有重量保留 Notes 原始数字，单双侧/总重口径未确认，不换算。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "站姿杠铃肩推",
+          "muscleGroup": "肩部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；单双侧/总重口径未确认。",
+          "sets": [
+            {"weight": 5, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "MTS 坐姿肩推",
+          "muscleGroup": "肩部",
+          "equipment": "MTS 器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+          "sets": [
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 35, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 40, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 45, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "哑铃站姿侧平举",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；单只/一对口径未确认。",
+          "sets": [
+            {"weight": 5, "reps": 16, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 7.5, "reps": 14, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 12.5, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 7.5, "reps": 14, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 5, "reps": 16, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "器械坐姿侧平举",
+          "muscleGroup": "肩部",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+          "sets": [
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 40, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 45, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "哑铃站姿反向飞鸟",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "本人确认站姿反向飞鸟使用哑铃；原始数字的单只/一对口径未确认。",
+          "sets": [
+            {"weight": 5, "reps": 14, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 7.5, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 12.5, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 7.5, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "器械坐姿反向飞鸟",
+          "muscleGroup": "肩部",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "第二组经本人确认为 10 次；Notes 原始重量口径未确认。",
+          "sets": [
+            {"weight": 15, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 15, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 15, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 15, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "MTS 卧推",
+          "muscleGroup": "胸部",
+          "equipment": "MTS 器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；器械刻度/公斤及总重口径未确认。",
+          "sets": [
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 35, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 40, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 40, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "绳索夹胸",
+          "muscleGroup": "胸部",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字；单边/总配重口径未确认。",
+          "sets": [
+            {"weight": 11.25, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 11.25, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 11.25, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-09-12-core-back",
+      "date": "2026-09-12",
+      "name": "核心＋背部训练",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「健身计划 / Week of Sep 7」。原文未记录训练时间、时长和 RIR；重量保留 Notes 原始数字，不换算。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "悬垂举腿",
+          "muscleGroup": "核心",
+          "equipment": "自重",
+          "volumeUnit": "count",
+          "notes": "Notes: leg raise；未记录额外负重。",
+          "sets": [
+            {"weight": 0, "reps": 12, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 12, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 12, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 12, "weightSide": "bilateral", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "负重仰卧起坐",
+          "muscleGroup": "核心",
+          "equipment": "负重片",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: situp；原始负重数字 10，口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 12, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "负重罗马椅背伸",
+          "muscleGroup": "下背部",
+          "equipment": "罗马椅＋负重片",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: back extension；原始负重数字 10，口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 10, "reps": 8, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "弹力带抗旋转推",
+          "muscleGroup": "核心",
+          "equipment": "弹力带",
+          "volumeUnit": "count",
+          "notes": "Notes: pallof press band；未记录阻力级别。",
+          "sets": [
+            {"weight": 0, "reps": 10, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 10, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 10, "weightSide": "bilateral", "repsSide": "bilateral"},
+            {"weight": 0, "reps": 10, "weightSide": "bilateral", "repsSide": "bilateral"}
+          ]
+        },
+        {
+          "name": "站姿水平伐木",
+          "muscleGroup": "核心",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字 12.5；单边/总配重及每侧次数口径未确认。",
+          "sets": [
+            {"weight": 12.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 12.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "地雷管转体",
+          "muscleGroup": "核心",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字 10；杠铃片/总重及每侧次数口径未确认。",
+          "sets": [
+            {"weight": 10, "reps": 16, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 10, "reps": 16, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 10, "reps": 16, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 10, "reps": 16, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "双滑轮高位下拉",
+          "muscleGroup": "背部",
+          "equipment": "双滑轮器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原始数字 21.25；单边/总配重口径未确认。",
+          "sets": [
+            {"weight": 21.25, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 21.25, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 21.25, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"},
+            {"weight": 21.25, "reps": 10, "weightSide": "unknown", "repsSide": "bilateral"}
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [
+    {"id": "A9060001-0914-5000-8000-000000000001", "recordedAt": "2026-09-06 21:32", "weightJin": 178.3, "notes": "来源：Notes；原始值 178.3 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9070001-0914-5000-8000-000000000002", "recordedAt": "2026-09-07 07:37", "weightJin": 176.6, "notes": "来源：Notes；原始值 176.6 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9070002-0914-5000-8000-000000000003", "recordedAt": "2026-09-07 20:50", "weightJin": 175.6, "notes": "来源：Notes；原始值 175.6 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9090001-0914-5000-8000-000000000004", "recordedAt": "2026-09-09 20:30", "weightJin": 175.9, "notes": "来源：Notes；原始值 175.9 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9100001-0914-5000-8000-000000000005", "recordedAt": "2026-09-10 20:04", "weightJin": 174.4, "notes": "来源：Notes；原始值 174.4 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9110001-0914-5000-8000-000000000006", "recordedAt": "2026-09-11 08:52", "weightJin": 174.5, "notes": "来源：Notes；原始值 174.5 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9110002-0914-5000-8000-000000000007", "recordedAt": "2026-09-11 20:35", "weightJin": 176.6, "notes": "来源：Notes；原始值 176.6 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9120001-0914-5000-8000-000000000008", "recordedAt": "2026-09-12 07:14", "weightJin": 174.1, "notes": "来源：Notes；原始值 174.1 斤，按 1 斤=0.5 kg 保存。"},
+    {"id": "A9130001-0914-5000-8000-000000000009", "recordedAt": "2026-09-13 10:07", "weightJin": 174.1, "notes": "来源：Notes；原始值 174.1 斤，按 1 斤=0.5 kg 保存。9 月 13 日餐食仍未同步。"}
+  ],
+  "meals": [
+    {"id": "B9070001-0914-5000-8000-000000000001", "date": "2026-09-07", "mealType": "breakfast", "name": "云吞；鸡蛋；卤牛肉 3 片；板烧鸡腿麦满分；黑咖啡"},
+    {"id": "B9070002-0914-5000-8000-000000000002", "date": "2026-09-07", "mealType": "lunch", "name": "咖喱鸡排饭"},
+    {"id": "B9070003-0914-5000-8000-000000000003", "date": "2026-09-07", "mealType": "dinner", "name": "未进食（Notes 原文：无）"},
+    {"id": "B9070004-0914-5000-8000-000000000004", "date": "2026-09-07", "mealType": "snack", "name": "维生素 C 水"},
+    {"id": "B9090001-0914-5000-8000-000000000005", "date": "2026-09-09", "mealType": "lunch", "name": "卤肉饭；麻婆豆腐 150 g"},
+    {"id": "B9100001-0914-5000-8000-000000000006", "date": "2026-09-10", "mealType": "breakfast", "name": "小米粥；包子"},
+    {"id": "B9100002-0914-5000-8000-000000000007", "date": "2026-09-10", "mealType": "lunch", "name": "巨无霸；麦辣鸡翅 2 块；中杯雪碧；玉米杯"},
+    {"id": "B9100003-0914-5000-8000-000000000008", "date": "2026-09-10", "mealType": "dinner", "name": "青菜 100 g；鸡腿半只；鸡蛋 50 g；杂菜 100 g"},
+    {"id": "B9110001-0914-5000-8000-000000000009", "date": "2026-09-11", "mealType": "breakfast", "name": "电解质饮料；黑咖啡；自制包子；牛奶 250 ml；牛油果 1/4 个；蜂蜜 20 g；黑松露香肠半根；午餐肉 30 g"},
+    {"id": "B9110002-0914-5000-8000-000000000010", "date": "2026-09-11", "mealType": "lunch", "name": "自制四季豆、辣椒和肉末"},
+    {"id": "B9110003-0914-5000-8000-000000000011", "date": "2026-09-11", "mealType": "dinner", "name": "自制咖喱鸡饭"},
+    {"id": "B9110004-0914-5000-8000-000000000012", "date": "2026-09-11", "mealType": "snack", "name": "青汁；香蕉；魔芋零食"},
+    {"id": "B9120001-0914-5000-8000-000000000013", "date": "2026-09-12", "mealType": "breakfast", "name": "黑咖啡；外星人饮料"},
+    {"id": "B9120002-0914-5000-8000-000000000014", "date": "2026-09-12", "mealType": "lunch", "name": "羊肉 150 g；小米糕 4 个；羊肉烧麦 2 个；沙拉 100 g；酸奶 50 g"},
+    {"id": "B9120003-0914-5000-8000-000000000015", "date": "2026-09-12", "mealType": "dinner", "name": "米饭 100 g；莴笋 150 g；牛肉 50 g；白菜 100 g；黄瓜 100 g；沙丁鱼 1 条"},
+    {"id": "B9120004-0914-5000-8000-000000000016", "date": "2026-09-12", "mealType": "snack", "name": "红枣 100 g；柚子 50 g"}
+  ],
+  "jumpRopeEntries": [
+    {"id": "C9100001-0914-5000-8000-000000000001", "date": "2026-09-10", "count": 1600, "activeDurationSeconds": null, "elapsedDurationSeconds": null}
+  ],
+  "voidMealIDs": [
+    "62D4995B-2477-5088-973A-CE071BF70807",
+    "870C5D6F-9C03-5AAB-A079-C368EE6793EC"
+  ],
+  "staleSession": null
+}

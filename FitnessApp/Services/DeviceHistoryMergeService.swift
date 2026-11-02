@@ -43,6 +43,7 @@ struct DeviceHistoryMergeExercise: Codable {
     var exerciseStartedAt: Date? = nil
     var exerciseCompletedAt: Date? = nil
     var bodyWeightKgSnapshot: Double? = nil
+    var bodyWeightSnapshotSourceDate: Date? = nil
     let sets: [DeviceHistoryMergeSet]
 }
 
@@ -256,7 +257,8 @@ enum DeviceHistoryMergeService {
                         feeling: item.feelingRaw.flatMap(WorkoutFeeling.init(rawValue:)),
                         exerciseStartedAt: item.exerciseStartedAt,
                         exerciseCompletedAt: item.exerciseCompletedAt,
-                        bodyWeightKgSnapshot: item.bodyWeightKgSnapshot
+                        bodyWeightKgSnapshot: item.bodyWeightKgSnapshot,
+                        bodyWeightSnapshotSourceDate: item.bodyWeightSnapshotSourceDate
                     )
                     context.insert(snapshot)
                     importedSnapshots += 1
@@ -381,6 +383,9 @@ enum DeviceHistoryMergeService {
             }
             if let bodyWeightKgSnapshot = item.bodyWeightKgSnapshot {
                 existingSnapshot.bodyWeightKgSnapshot = bodyWeightKgSnapshot
+            }
+            if let bodyWeightSnapshotSourceDate = item.bodyWeightSnapshotSourceDate {
+                existingSnapshot.bodyWeightSnapshotSourceDate = bodyWeightSnapshotSourceDate
             }
             for set in item.sets {
                 guard let existingLog = existingLogs.first(where: { $0.id == set.id }) else {

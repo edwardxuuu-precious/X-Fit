@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-21T06:47:27.592975+08:00",
+  "localDay": "2026-10-21",
+  "planCode": "UPPER-20261019-R5",
+  "scheduleID": "705a3157-22f9-5d08-90b8-39c0e2088ea8",
+  "previewConflicts": [],
+  "applyNewScheduleCount": 1,
+  "repeatNewScheduleCount": 0,
+  "independentReadback": {
+    "status": "PASS",
+    "exercises": 6,
+    "sets": 20,
+    "backExercises": 4,
+    "backSets": 14,
+    "bicepsSets": 6,
+    "allPacketFieldsMatched": true,
+    "allPlannedSetFieldsMatched": true,
+    "allLoadConventionsAndGuidancePreserved": true,
+    "file": "artifacts/training-sync/20261020-r5/readback/result/daily-training-readback.json"
+  },
+  "conservation": {
+    "status": "PASS",
+    "modelTables": 25,
+    "recordsBefore": 2262,
+    "recordsAfter": 2270,
+    "newPlanRecords": {
+      "ZSCHEDULEDWORKOUT": 1,
+      "ZTEMPLATEEXERCISE": 6,
+      "ZWORKOUTTEMPLATE": 1
+    },
+    "allowedOriginalChanges": [
+      {
+        "table": "ZSCHEDULEDWORKOUT",
+        "id": "41d61d2f-22eb-50ae-87ec-04e554bdfb92",
+        "fields": [
+          "ZUPDATEDAT",
+          "ZSKIPREASON",
+          "ZSTATUSRAW"
+        ]
+      }
+    ],
+    "allOtherOriginalBusinessFieldsUnchanged": true,
+    "mondayExercises": 9,
+    "mondayCompletedSets": 38,
+    "mondayRIRStillUnknown": 38,
+    "actualWorkoutSessionsCreated": 0,
+    "actualSetLogsCreated": 0,
+    "allOtherSchedulesAndPreferencesUnchanged": true,
+    "oldR4SourceAndPrescriptionPreserved": true,
+    "photoFilesCompared": false
+  },
+  "humanTrainingOutcome": "NOT_YET_OBSERVED"
+}

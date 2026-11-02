@@ -1,0 +1,58 @@
+{
+  "id": "c8a8cc35-eede-5807-b9c0-c80479e53067",
+  "localDay": "2026-10-23",
+  "source": "REQ-20261019-170447",
+  "status": "applied_and_independently_read_back_human_pending",
+  "title": "肩部＋手臂",
+  "replacement": {
+    "scheduleID": "799af6e3-a9ac-5081-b0af-3e18914ed8d1",
+    "packetSHA256": "4e546ee6a61ce7a33788383c275fcf7126da8ac150a5e1611db34da68a795200"
+  },
+  "packetFile": "outputs/training-plan/2026-10-23-r3-app/2026-10-23.json",
+  "transportSHA256": "d1ecbca71408d14edba891e4bb9399360948299dc251e4b69cdc7ef97138be3e",
+  "sourceSHA256": "61062af31d7a7d523f43ab84dc4dbb194dde46a67f9040aa4469af56f0e2778b",
+  "exercises": 7,
+  "sets": 24,
+  "triceps": [
+    [
+      [
+        17.5,
+        15
+      ],
+      [
+        17.5,
+        15
+      ],
+      [
+        17.5,
+        15
+      ]
+    ],
+    [
+      [
+        10,
+        12
+      ],
+      [
+        10,
+        12
+      ],
+      [
+        10,
+        12
+      ]
+    ]
+  ],
+  "allActualDefaultPolicy": "plan",
+  "completedAutomatically": false,
+  "installedVersion": "0.5.0(21)",
+  "packetCanonicalSHA256": "8e664879a1a1d5c97f2b5641827ae1b8eab238864266175302156e99fd20179d",
+  "applyNewScheduleCount": 1,
+  "repeatNewScheduleCount": 0,
+  "verification": "outputs/test-results/20261019-workout-table/final-phone-verification.json",
+  "appReadback": "artifacts/workout-table/20261019-170447/friday-readback/result/daily-training-readback.json",
+  "actualSessionsCreated": 0,
+  "actualSetLogsCreated": 0,
+  "humanAcceptance": "BLOCKED_HUMAN",
+  "fullStageGO": false
+}

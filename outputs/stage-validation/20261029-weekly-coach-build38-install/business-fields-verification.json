@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "modelTables": 25,
+  "originalRecords": 2693,
+  "supportFiles": 4,
+  "errors": [],
+  "compared": "all original model fields, IDs, relations and non-store support file hashes"
+}

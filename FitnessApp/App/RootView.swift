@@ -7,6 +7,7 @@ struct RootView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     @State private var isPrepared = false
+    @State private var editorialTab = 0
     @State private var preparationError: String?
     @State private var launchImportMessage: String?
     @State private var pendingShareDraft: ExerciseShareDraft?
@@ -19,41 +20,54 @@ struct RootView: View {
     @State private var notificationCenterEnabled = false
     @State private var notificationSoundsEnabled = false
     @State private var notificationScheduledDeliveryEnabled = false
+    @State private var workoutSaveIssues = WorkoutSaveIssueState()
 
     init() {
         let appearance = UITabBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundEffect = nil
-        appearance.backgroundColor = UIColor(red: 0.047, green: 0.055, blue: 0.059, alpha: 1)
+        appearance.backgroundColor = UIColor(AppTheme.background)
         appearance.shadowColor = .clear
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
-        UITabBar.appearance().unselectedItemTintColor = UIColor.white.withAlphaComponent(0.38)
+        UITabBar.appearance().unselectedItemTintColor = UIColor(AppTheme.secondaryText)
+        let navigation = UINavigationBarAppearance()
+        navigation.configureWithOpaqueBackground()
+        navigation.backgroundColor = UIColor(AppTheme.background)
+        navigation.shadowColor = .clear
+        navigation.titleTextAttributes = [.foregroundColor: UIColor(AppTheme.ink)]
+        navigation.largeTitleTextAttributes = [.foregroundColor: UIColor(AppTheme.ink)]
+        UINavigationBar.appearance().standardAppearance = navigation
+        UINavigationBar.appearance().scrollEdgeAppearance = navigation
+        UINavigationBar.appearance().compactAppearance = navigation
+        UINavigationBar.appearance().tintColor = UIColor(AppTheme.ink)
     }
 
-    var body: some View {
+    private var appContent: some View {
         Group {
             if isPrepared {
                 if isHistoryUITest {
                     NavigationStack {
-                        HistoryView()
+                        HistoryView().legacyTrainingScreen()
                     }
                     .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 } else {
-                    TabView {
-                        NavigationStack { TodayView() }
-                            .tabItem { Label("训练", systemImage: "dumbbell.fill") }
-                        NavigationStack { NutritionHomeView() }
-                            .tabItem { Label("饮食", systemImage: "fork.knife") }
-                        NavigationStack { GoalHomeView() }
-                            .tabItem { Label("目标", systemImage: "scope") }
-                        NavigationStack { ProfileView() }
-                            .tabItem { Label("我的", systemImage: "person.fill") }
-                    }
-                    .tint(AppTheme.accent)
-                    .toolbarBackground(AppTheme.background, for: .tabBar)
-                    .toolbarBackground(.visible, for: .tabBar)
-                    .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
+                    VStack(spacing: 0) {
+                        TabView(selection: $editorialTab) {
+                            NavigationStack { EditorialTrainingHomeView() }.tag(0)
+                                .tabItem { Label("训练", systemImage: "dumbbell") }.toolbar(.hidden, for: .tabBar)
+                            NavigationStack { EditorialNutritionHomeView() }.tag(1)
+                                .tabItem { Label("饮食", systemImage: "fork.knife") }.toolbar(.hidden, for: .tabBar)
+                            NavigationStack { EditorialProgressHomeView() }.tag(2)
+                                .tabItem { Label("进展", systemImage: "chart.xyaxis.line") }.toolbar(.hidden, for: .tabBar)
+                            NavigationStack { EditorialToolsHomeView() }.tag(3)
+                                .tabItem { Label("工具", systemImage: "square.grid.2x2") }.toolbar(.hidden, for: .tabBar)
+                            NavigationStack { EditorialProfileHomeView() }.tag(4)
+                                .tabItem { Label("我的", systemImage: "person") }.toolbar(.hidden, for: .tabBar)
+                        }
+                        EditorialTabBar(selection: $editorialTab)
+                    }.background(EditorialTheme.paper).tint(EditorialTheme.ink)
+                        .environment(\.locale, Locale(identifier: "zh_Hans_CN"))
                 }
             } else if let preparationError {
                 ContentUnavailableView(
@@ -66,7 +80,7 @@ struct RootView: View {
                     AppTheme.background.ignoresSafeArea()
                     VStack(spacing: 16) {
                         ProgressView()
-                            .tint(AppTheme.accent)
+                            .tint(AppTheme.ink)
                         Text("正在准备训练计划…")
                             .font(.subheadline)
                             .foregroundStyle(AppTheme.secondaryText)
@@ -74,7 +88,43 @@ struct RootView: View {
                 }
             }
         }
-        .preferredColorScheme(.dark)
+    }
+
+    var body: some View {
+        // Keep the notice and UIKit-backed TabView in separate layout regions.
+        // A root safeAreaInset can overlap the nested navigation bar on iOS.
+        VStack(spacing: 0) {
+            if workoutSaveIssues.issue != nil {
+                HStack(alignment: .center, spacing: 12) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(AppTheme.orange)
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("训练保存失败")
+                            .font(.subheadline.bold())
+                            .accessibilityIdentifier("训练保存失败提示")
+                        Text("请保持 App 打开，重试确认草稿已保存。")
+                            .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    }
+                    Spacer(minLength: 0)
+                    Button { workoutSaveIssues.retry(in: modelContext) } label: {
+                        Text("重试保存")
+                            .font(.subheadline.bold())
+                            .frame(minWidth: 84, minHeight: AppTheme.minimumTouchTarget)
+                            .background(AppTheme.orange.opacity(0.12), in: RoundedRectangle(cornerRadius: 8))
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain).foregroundStyle(AppTheme.orange)
+                    .accessibilityIdentifier("重试训练保存")
+                }
+                .padding(.horizontal, AppTheme.pageMargin)
+                .padding(.vertical, 8)
+                .background(AppTheme.elevatedSurface)
+            }
+            appContent.frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .sprintPage()
+        .environment(workoutSaveIssues)
         .overlay(alignment: .top) {
             if isNotificationUITest {
                 VStack(spacing: 2) {
@@ -148,10 +198,9 @@ struct RootView: View {
                     shareDraftInbox.clearPendingDraft(matching: draft.id)
                 }
             )
-            .preferredColorScheme(.dark)
-            .tint(AppTheme.accent)
+            .sprintPage()
         }
-        .alert("历史训练同步", isPresented: Binding(
+        .alert("数据同步", isPresented: Binding(
             get: { launchImportMessage != nil },
             set: { if !$0 { launchImportMessage = nil } }
         )) {
@@ -177,22 +226,36 @@ struct RootView: View {
                     in: modelContext,
                     allowInitialSeed: CloudSyncRuntime.allowsInitialSeed
                 )
+                if CommandLine.arguments.contains(ConfirmedHistoricalBackfillService.maintenanceArgument) {
+                    let result = try ConfirmedHistoricalBackfillService.apply(in: modelContext)
+                    try writeConfirmedHistoricalBackfillReceipt(result)
+                    launchImportMessage = "已恢复 9 月 14 日训练，并将 9 月 19 日跳绳标记为因拼家具跳过。"
+                }
                 #if DEBUG
                 try prepareUITestManualScheduleIfNeeded()
+                try prepareUITestHistoricalBackfillScheduleIfRequested()
                 try prepareUITestTerminologyFixtureIfRequested()
+                try prepareUITestSeatedDipFixtureIfRequested()
                 try prepareUITestShortRestFixtureIfRequested()
+                try prepareUITestLongExerciseNotesFixtureIfRequested()
                 try prepareUITestBodyFeedbackFixtureIfRequested()
                 try prepareUITestHistoryFixtureIfRequested()
+                try prepareUITestHistoryPrefillFixtureIfRequested()
                 try prepareUITestIsometricSecondsFixtureIfRequested()
                 try prepareUITestProgressFixtureIfRequested()
                 try prepareUITestHomeFixtureIfRequested()
                 try prepareRedesignPreviewIfRequested()
+                try prepareUITestRecordedDayIfRequested()
+                try ConfirmedTrainingPlanUITestFixture.prepare(in: modelContext)
+                try TrainingCoachUITestFixture.prepare(in: modelContext)
                 #endif
                 do {
-                    launchImportMessage = try importDeviceHistoryMergeIfRequested()
+                    launchImportMessage = try MealExchangeService.processLaunchRequest(arguments: CommandLine.arguments, in: modelContext)
+                        ?? importDeviceHistoryMergeIfRequested()
                         ?? importLaunchHistoryIfRequested()
+                        ?? launchImportMessage
                 } catch {
-                    launchImportMessage = "历史记录未写入：\(error.localizedDescription)"
+                    launchImportMessage = "同步未完成：\(error.localizedDescription)"
                     if let mergeFileName = deviceHistoryMergeFileName {
                         try? writeDeviceHistoryMergeReceipt(
                             DeviceHistoryMergeReceipt(
@@ -343,7 +406,10 @@ struct RootView: View {
     #if DEBUG
     @MainActor
     private func prepareUITestManualScheduleIfNeeded() throws {
-        guard CommandLine.arguments.contains("--ui-testing") else { return }
+        guard CommandLine.arguments.contains("--ui-testing"),
+              !CommandLine.arguments.contains("--ui-testing-confirmed-plan-import"),
+              !CommandLine.arguments.contains("--ui-testing-daily-prefill"),
+              !CommandLine.arguments.contains("--ui-testing-lower-body-week") else { return }
         let today = Date.now.startOfDay
         let sessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
         guard !sessions.contains(where: { $0.status == .inProgress }) else { return }
@@ -356,11 +422,29 @@ struct RootView: View {
     }
 
     @MainActor
+    private func prepareUITestHistoricalBackfillScheduleIfRequested() throws {
+        guard CommandLine.arguments.contains("--ui-testing-historical-backfill") else { return }
+        let targetDate = Date.now.addingDays(-2).startOfDay
+        let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
+        guard !schedules.contains(where: { $0.plannedDate.isSameDay(as: targetDate) }) else { return }
+        let templates = try modelContext.fetch(FetchDescriptor<WorkoutTemplate>())
+        guard let template = templates.first(where: { !$0.isOneOff }) else { return }
+        _ = try ScheduleService.addManual(template: template, on: targetDate, in: modelContext)
+    }
+
+    @MainActor
     private func prepareRedesignPreviewIfRequested() throws {
         guard CloudSyncRuntime.isTesting,
               !CloudSyncRuntime.usesPersistentUITestStore,
               CommandLine.arguments.contains("--ui-redesign-preview") else { return }
         let program = try FatLossService.createProgram(in: modelContext)
+        if CommandLine.arguments.contains("--ui-testing-lower-body-week") {
+            _ = try TrainingPreferenceService.activateLowerBodySpecialtyWeek(
+                programID: program.id,
+                effectiveDate: FatLossCalendar.date(2026, 9, 14),
+                in: modelContext
+            )
+        }
         _ = try FatLossService.importMeals(program: program, from: .now, in: modelContext)
         for offset in 0..<7 {
             modelContext.insert(BodyMeasurement(date: Date.now.startOfDay.addingDays(-offset),
@@ -368,6 +452,48 @@ struct RootView: View {
                 notes: "仅交互原型演示，不是真实测量"))
         }
         try modelContext.save()
+    }
+
+    private func prepareUITestRecordedDayIfRequested() throws {
+        #if DEBUG && targetEnvironment(simulator)
+        guard CloudSyncRuntime.isTesting, !CloudSyncRuntime.usesPersistentUITestStore,
+              CommandLine.arguments.contains("--ui-testing-recorded-day") else { return }
+        let today = Date.now.startOfDay
+        let partial = CommandLine.arguments.contains("--ui-testing-recorded-day-partial")
+        let template = WorkoutTemplate(name: "UI状态测试模板", weekday: today.weekdayNumber)
+        let oldPlan = ScheduledWorkout(templateID: template.id, templateName: "UI旧安排·胸肩", plannedDate: today)
+        oldPlan.plannedLocalDay = TrainingLocalDate.key(today)
+        oldPlan.plannedTimeZoneIdentifier = TimeZone.current.identifier
+        modelContext.insert(template); modelContext.insert(oldPlan)
+        let linked = partial ? ScheduledWorkout(templateID: template.id, templateName: "UI已结束安排", plannedDate: today, status: .completed) : nil
+        if let linked {
+            linked.plannedLocalDay = TrainingLocalDate.key(today)
+            modelContext.insert(linked)
+        }
+        let exercise = Exercise(name: "UI状态测试动作", muscleGroup: "腿部", equipment: "哑铃")
+        modelContext.insert(exercise)
+        for (index, date) in [today, today.addingDays(-60)].enumerated() {
+            let session = WorkoutSession(id: UUID(uuidString: index == 0
+                ? "DAD00000-0000-4000-8000-000000000001" : "DAD00000-0000-4000-8000-000000000002")!,
+                scheduledWorkoutID: index == 0 ? linked?.id : nil,
+                templateName: index == 0 ? "UI实际下肢" : "UI无安排实际", plannedDate: date,
+                startedAt: date.addingTimeInterval(3_600), completedAt: date.addingTimeInterval(5_400), status: .completed)
+            session.trainingLocalDay = TrainingLocalDate.key(date)
+            session.trainingTimeZoneIdentifier = TimeZone.current.identifier
+            let count = index == 0 && partial ? 20 : 3
+            let snapshot = SessionExercise(sessionID: session.id, exerciseID: exercise.id,
+                exerciseName: exercise.name, order: 0, targetSets: count, minReps: 8, maxReps: 12,
+                targetWeight: 20, restSeconds: 90, muscleGroup: "腿部")
+            modelContext.insert(session); modelContext.insert(snapshot)
+            for number in 1...count {
+                let completed = count != 20 || number <= 17
+                modelContext.insert(SetLog(sessionID: session.id, sessionExerciseID: snapshot.id,
+                    exerciseID: exercise.id, setNumber: number, targetWeight: 20, targetReps: 10,
+                    actualWeight: completed ? 20 : 0, actualReps: completed ? 10 : 0, isCompleted: completed))
+            }
+        }
+        try modelContext.save()
+        #endif
     }
 
     private func prepareUITestShareDraftFixtureIfRequested() throws {
@@ -476,6 +602,20 @@ struct RootView: View {
         let data = try encoder.encode(receipt)
         try data.write(
             to: URL.documentsDirectory.appendingPathComponent("device-history-merge-receipt.json"),
+            options: .atomic
+        )
+    }
+
+    private func writeConfirmedHistoricalBackfillReceipt(
+        _ result: ConfirmedHistoricalBackfillResult
+    ) throws {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let data = try encoder.encode(result)
+        try data.write(
+            to: URL.documentsDirectory.appendingPathComponent(
+                ConfirmedHistoricalBackfillService.receiptFileName
+            ),
             options: .atomic
         )
     }
@@ -627,6 +767,34 @@ struct RootView: View {
     }
 
     @MainActor
+    private func prepareUITestLongExerciseNotesFixtureIfRequested() throws {
+        guard CloudSyncRuntime.isUITesting,
+              !CloudSyncRuntime.usesPersistentUITestStore,
+              CommandLine.arguments.contains("--ui-testing-long-exercise-notes") else { return }
+        guard let exercise = try modelContext.fetch(FetchDescriptor<Exercise>())
+            .first(where: { $0.name == "杠铃卧推" }) else { return }
+        exercise.notes = """
+        训练说明测试夹具，仅用于验证完整说明可读。
+        第一组保留约三次规范动作余力，先确认当天舒适度。
+        本周不做力竭、递减组或额外重握力收尾。
+        复合动作充分休息，不用极短休息牺牲动作质量。
+        酒店器械不足时可以省去动作，不为凑组数重复堆量。
+        跳绳只能替代有氧，不能算完成背部力量训练。
+        最后一条：左肘疼痛逐组增加时停止该动作，手臂训练可以省去，不补组。
+        """
+        // This explicit, in-memory UI fixture must match the already frozen day plan.
+        let schedules = try modelContext.fetch(FetchDescriptor<ScheduledWorkout>())
+        for schedule in schedules where schedule.status == .planned && schedule.plannedDate.isSameDay(as: .now) {
+            var snapshot = schedule.planSnapshot
+            for index in snapshot.indices where snapshot[index].exerciseID == exercise.id {
+                snapshot[index].exerciseNotes = exercise.notes
+            }
+            schedule.planSnapshot = snapshot
+        }
+        try modelContext.save()
+    }
+
+    @MainActor
     private func prepareUITestBodyFeedbackFixtureIfRequested() throws {
         guard CommandLine.arguments.contains("--ui-testing-body-feedback") else { return }
         let existingSessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
@@ -727,6 +895,80 @@ struct RootView: View {
                     completedAt: completedAt
                 )
             )
+        }
+        try modelContext.save()
+    }
+
+    @MainActor
+    private func prepareUITestSeatedDipFixtureIfRequested() throws {
+        guard CloudSyncRuntime.isUITesting, CloudSyncRuntime.isTesting,
+              CommandLine.arguments.contains("--ui-testing-seated-dip") else { return }
+        let exercises = try modelContext.fetch(FetchDescriptor<Exercise>())
+        guard !exercises.contains(where: { $0.approvedCanonicalID == "machine_triceps_press" }) else {
+            return
+        }
+        // Exercise the real confirmed merge, not a hand-crafted archived row.
+        modelContext.insert(Exercise(name: "三头下压机", muscleGroup: "手臂", equipment: "器械", isBuiltIn: false))
+        modelContext.insert(Exercise(name: "seated dip", muscleGroup: "手臂", equipment: "器械", isBuiltIn: false))
+        try ExerciseCatalogService.consolidateConfirmedAliases(in: modelContext)
+        try modelContext.save()
+    }
+
+    @MainActor
+    private func prepareUITestHistoryPrefillFixtureIfRequested() throws {
+        guard CloudSyncRuntime.isUITesting, CloudSyncRuntime.isTesting,
+              CommandLine.arguments.contains("--ui-testing-history-prefill") else { return }
+        let sessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
+        guard !sessions.contains(where: { $0.importIdentifier == "ui-test-history-prefill" }),
+              let exercise = try modelContext.fetch(FetchDescriptor<Exercise>())
+                .first(where: { $0.name == "杠铃卧推" }) else { return }
+
+        // Only an explicitly requested, isolated in-memory UI test gets this
+        // compatible completed history. Production and persistent stores never do.
+        let completedAt = Date.now.addingDays(-60)
+        let startedAt = completedAt.addingTimeInterval(-3_600)
+        let session = WorkoutSession(
+            templateName: "历史预填验证",
+            plannedDate: startedAt,
+            startedAt: startedAt,
+            completedAt: completedAt,
+            status: .completed,
+            importIdentifier: "ui-test-history-prefill"
+        )
+        let snapshot = SessionExercise(
+            sessionID: session.id,
+            exerciseID: exercise.id,
+            exerciseName: exercise.name,
+            order: 0,
+            targetSets: 4,
+            minReps: 12,
+            maxReps: 12,
+            targetWeight: 25,
+            restSeconds: 90,
+            muscleGroup: exercise.muscleGroup,
+            volumeUnit: exercise.volumeUnit,
+            equipmentSnapshot: exercise.equipment
+        )
+        modelContext.insert(session)
+        modelContext.insert(snapshot)
+        for setNumber in 1...4 {
+            modelContext.insert(SetLog(
+                sessionID: session.id,
+                sessionExerciseID: snapshot.id,
+                exerciseID: exercise.id,
+                setNumber: setNumber,
+                targetWeight: 25,
+                targetReps: 12,
+                actualWeight: 25,
+                actualReps: 12,
+                rir: 2,
+                isCompleted: true,
+                completedAt: completedAt,
+                targetWeightSide: .bilateral,
+                targetRepsSide: .bilateral,
+                actualWeightSide: .bilateral,
+                actualRepsSide: .bilateral
+            ))
         }
         try modelContext.save()
     }
@@ -962,6 +1204,9 @@ struct RootView: View {
                 $0.plannedDate.isSameDay(as: .now) && $0.status == .planned
             })?.templateName = "核心 + 腿部 · 当天菜单"
             try modelContext.save()
+            // A named plan alone is unstarted; completed/volume combinations
+            // deliberately continue into their explicit fixture below.
+            if !wantsCompleted && !wantsSingle && !wantsSeven { return }
         }
 
         if wantsCompleted {

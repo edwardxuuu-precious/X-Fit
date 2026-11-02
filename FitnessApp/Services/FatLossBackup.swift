@@ -1,7 +1,7 @@
 import Foundation
 import SwiftData
 
-/// Schema 13 extension. Missing collections decode as empty for older backups.
+/// Schema 14 extension. Missing collections decode as empty for older backups.
 struct FatLossBackup: Codable {
     var programs: [FatLossProgramRecord]?
     var targetRevisions: [ProgramTargetRevisionRecord]?
@@ -11,8 +11,80 @@ struct FatLossBackup: Codable {
     var healthRecords: [ProgramHealthRecordRecord]?
     var weeklyReviews: [ProgramWeeklyReviewRecord]?
     var workoutLinks: [ProgramWorkoutLinkRecord]?
+    var trainingPreferences: [TrainingPreferenceRevisionRecord]?
+    var trainingPrograms: [TrainingProgramRevisionRecord]?
     var total: Int {
-        (programs?.count ?? 0) + (targetRevisions?.count ?? 0) + (recipes?.count ?? 0) + (plannedMeals?.count ?? 0) + (dailyLogs?.count ?? 0) + (healthRecords?.count ?? 0) + (weeklyReviews?.count ?? 0) + (workoutLinks?.count ?? 0)
+        (programs?.count ?? 0) + (targetRevisions?.count ?? 0) + (recipes?.count ?? 0) + (plannedMeals?.count ?? 0) + (dailyLogs?.count ?? 0) + (healthRecords?.count ?? 0) + (weeklyReviews?.count ?? 0) + (workoutLinks?.count ?? 0) + (trainingPreferences?.count ?? 0) + (trainingPrograms?.count ?? 0)
+    }
+}
+
+struct TrainingPreferenceRevisionRecord: Codable {
+    let id: UUID
+    let revisionCode: String
+    let revision: Int
+    let effectiveAt: Date
+    let createdAt: Date
+    let reason: String
+    let snapshotJSON: String
+
+    init(_ model: TrainingPreferenceRevision) {
+        id = model.id
+        revisionCode = model.revisionCode
+        revision = model.revision
+        effectiveAt = model.effectiveAt
+        createdAt = model.createdAt
+        reason = model.reason
+        snapshotJSON = model.snapshotJSON
+    }
+
+    @MainActor func makeModel() -> TrainingPreferenceRevision {
+        TrainingPreferenceRevision(
+            id: id,
+            revisionCode: revisionCode,
+            revision: revision,
+            effectiveAt: effectiveAt,
+            createdAt: createdAt,
+            reason: reason,
+            snapshotJSON: snapshotJSON
+        )
+    }
+}
+
+struct TrainingProgramRevisionRecord: Codable {
+    let id: UUID
+    let programID: UUID?
+    let preferenceRevisionID: UUID
+    let preferenceRevisionCode: String
+    let revision: Int
+    let effectiveDate: Date
+    let createdAt: Date
+    let reason: String
+    let snapshotJSON: String
+
+    init(_ model: TrainingProgramRevision) {
+        id = model.id
+        programID = model.programID
+        preferenceRevisionID = model.preferenceRevisionID
+        preferenceRevisionCode = model.preferenceRevisionCode
+        revision = model.revision
+        effectiveDate = model.effectiveDate
+        createdAt = model.createdAt
+        reason = model.reason
+        snapshotJSON = model.snapshotJSON
+    }
+
+    @MainActor func makeModel() -> TrainingProgramRevision {
+        TrainingProgramRevision(
+            id: id,
+            programID: programID,
+            preferenceRevisionID: preferenceRevisionID,
+            preferenceRevisionCode: preferenceRevisionCode,
+            revision: revision,
+            effectiveDate: effectiveDate,
+            createdAt: createdAt,
+            reason: reason,
+            snapshotJSON: snapshotJSON
+        )
     }
 }
 
@@ -278,6 +350,7 @@ struct ProgramWorkoutLinkRecord: Codable {
     let id: UUID
     let programID: UUID
     let scheduledWorkoutID: UUID
+    let trainingProgramRevisionID: UUID?
     let templateCode: String
     let originalDate: Date
     let createdAt: Date
@@ -285,6 +358,7 @@ struct ProgramWorkoutLinkRecord: Codable {
         id = model.id
         programID = model.programID
         scheduledWorkoutID = model.scheduledWorkoutID
+        trainingProgramRevisionID = model.trainingProgramRevisionID
         templateCode = model.templateCode
         originalDate = model.originalDate
         createdAt = model.createdAt
@@ -294,6 +368,7 @@ struct ProgramWorkoutLinkRecord: Codable {
         model.id = id
         model.programID = programID
         model.scheduledWorkoutID = scheduledWorkoutID
+        model.trainingProgramRevisionID = trainingProgramRevisionID
         model.templateCode = templateCode
         model.originalDate = originalDate
         model.createdAt = createdAt
@@ -317,7 +392,9 @@ enum FatLossBackupService {
             dailyLogs: try context.fetch(FetchDescriptor<ProgramDailyLog>()).map(ProgramDailyLogRecord.init),
             healthRecords: try context.fetch(FetchDescriptor<ProgramHealthRecord>()).map(ProgramHealthRecordRecord.init),
             weeklyReviews: try context.fetch(FetchDescriptor<ProgramWeeklyReview>()).map(ProgramWeeklyReviewRecord.init),
-            workoutLinks: try context.fetch(FetchDescriptor<ProgramWorkoutLink>()).map(ProgramWorkoutLinkRecord.init)
+            workoutLinks: try context.fetch(FetchDescriptor<ProgramWorkoutLink>()).map(ProgramWorkoutLinkRecord.init),
+            trainingPreferences: isRegistered(TrainingPreferenceRevision.self, in: context) ? try context.fetch(FetchDescriptor<TrainingPreferenceRevision>()).map(TrainingPreferenceRevisionRecord.init) : nil,
+            trainingPrograms: isRegistered(TrainingProgramRevision.self, in: context) ? try context.fetch(FetchDescriptor<TrainingProgramRevision>()).map(TrainingProgramRevisionRecord.init) : nil
         )
     }
 
@@ -331,6 +408,12 @@ enum FatLossBackupService {
         guard isRegistered(ProgramHealthRecord.self, in: context) else { throw invalid("当前数据库未注册减脂记录类型。") }
         guard isRegistered(ProgramWeeklyReview.self, in: context) else { throw invalid("当前数据库未注册减脂记录类型。") }
         guard isRegistered(ProgramWorkoutLink.self, in: context) else { throw invalid("当前数据库未注册减脂记录类型。") }
+        if !(backup.trainingPreferences ?? []).isEmpty || !(backup.trainingPrograms ?? []).isEmpty {
+            guard isRegistered(TrainingPreferenceRevision.self, in: context),
+                  isRegistered(TrainingProgramRevision.self, in: context) else {
+                throw invalid("当前数据库未注册训练偏好或编排版本类型。")
+            }
+        }
         let idGroups: [[UUID]] = [
             (backup.programs ?? []).map(\.id),
             (backup.targetRevisions ?? []).map(\.id),
@@ -339,7 +422,9 @@ enum FatLossBackupService {
             (backup.dailyLogs ?? []).map(\.id),
             (backup.healthRecords ?? []).map(\.id),
             (backup.weeklyReviews ?? []).map(\.id),
-            (backup.workoutLinks ?? []).map(\.id)
+            (backup.workoutLinks ?? []).map(\.id),
+            (backup.trainingPreferences ?? []).map(\.id),
+            (backup.trainingPrograms ?? []).map(\.id)
         ]
         guard idGroups.allSatisfy({ Set($0).count == $0.count }) else { throw invalid("减脂备份包含重复标识。") }
         for p in backup.programs ?? [] {
@@ -395,12 +480,67 @@ enum FatLossBackupService {
         for review in backup.weeklyReviews ?? [] {
             guard review.weekEnd >= review.weekStart else { throw invalid("周复盘日期无效。") }
         }
+        let existingPreferences = isRegistered(TrainingPreferenceRevision.self, in: context)
+            ? try context.fetch(FetchDescriptor<TrainingPreferenceRevision>()) : []
+        let existingTraining = isRegistered(TrainingProgramRevision.self, in: context)
+            ? try context.fetch(FetchDescriptor<TrainingProgramRevision>()) : []
+        var preferenceIDsByCode: [String: Set<UUID>] = [:]
+        for preference in existingPreferences {
+            preferenceIDsByCode[preference.revisionCode, default: []].insert(preference.id)
+        }
+        for preference in backup.trainingPreferences ?? [] {
+            guard preference.revision > 0, !preference.reason.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  let snapshot = try? JSONDecoder().decode(TrainingPreferenceSnapshot.self, from: Data(preference.snapshotJSON.utf8)),
+                  snapshot.revisionCode == preference.revisionCode, snapshot.isValid else {
+                throw invalid("训练偏好版本无效。")
+            }
+            let matchingIDs = preferenceIDsByCode[preference.revisionCode, default: []]
+            guard matchingIDs.isEmpty || matchingIDs == Set([preference.id]) else {
+                throw invalid("同一训练偏好版本号对应不同标识；请核对备份，不能合并导入。")
+            }
+            preferenceIDsByCode[preference.revisionCode, default: []].insert(preference.id)
+            if let same = existingPreferences.first(where: { $0.id == preference.id }),
+               same.snapshot != snapshot || same.revisionCode != preference.revisionCode
+                || same.effectiveAt != preference.effectiveAt || same.revision != preference.revision || same.reason != preference.reason {
+                throw invalid("同一偏好版本有不同内容；请保留两个备份并核对，不能覆盖。")
+            }
+        }
+        let preferenceCodes = Dictionary(existingPreferences.map { ($0.id, $0.revisionCode) }
+            + (backup.trainingPreferences ?? []).map { ($0.id, $0.revisionCode) }, uniquingKeysWith: { first, _ in first })
+        let preferenceDates = Dictionary(existingPreferences.map { ($0.id, $0.effectiveAt) }
+            + (backup.trainingPreferences ?? []).map { ($0.id, $0.effectiveAt) }, uniquingKeysWith: { first, _ in first })
+        for revision in backup.trainingPrograms ?? [] {
+            guard revision.revision > 0,
+                  preferenceCodes[revision.preferenceRevisionID] == revision.preferenceRevisionCode,
+                  (preferenceDates[revision.preferenceRevisionID].map { $0 <= revision.effectiveDate } ?? false),
+                  !revision.reason.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                  let snapshot = try? JSONDecoder().decode(TrainingProgramSnapshot.self, from: Data(revision.snapshotJSON.utf8)),
+                  snapshot.preferenceRevisionCode == revision.preferenceRevisionCode, snapshot.isValid else {
+                throw invalid("训练编排版本或偏好引用无效。")
+            }
+            if let same = existingTraining.first(where: { $0.id == revision.id }),
+               same.snapshot != snapshot || same.preferenceRevisionID != revision.preferenceRevisionID
+                || same.programID != revision.programID || same.effectiveDate != revision.effectiveDate
+                || same.revision != revision.revision || same.reason != revision.reason {
+                throw invalid("同一编排版本有不同内容；请保留两个备份并核对，不能覆盖。")
+            }
+        }
+        let revisionPrograms = Dictionary(existingTraining.map { ($0.id, $0.programID) }
+            + (backup.trainingPrograms ?? []).map { ($0.id, $0.programID) }, uniquingKeysWith: { first, _ in first })
+        for link in backup.workoutLinks ?? [] {
+            if let revisionID = link.trainingProgramRevisionID {
+                guard revisionPrograms[revisionID] == .some(link.programID) else {
+                    throw invalid("训练日程引用的编排版本不存在或不属于该周期。")
+                }
+            }
+        }
         let programIDs = Set((backup.programs ?? []).map(\.id))
             .union(try context.fetch(FetchDescriptor<FatLossProgram>()).map(\.id))
         let referencedPrograms = (backup.targetRevisions ?? []).map(\.programID)
             + (backup.plannedMeals ?? []).map(\.programID) + (backup.dailyLogs ?? []).map(\.programID)
             + (backup.healthRecords ?? []).map(\.programID) + (backup.weeklyReviews ?? []).map(\.programID)
             + (backup.workoutLinks ?? []).map(\.programID)
+            + (backup.trainingPrograms ?? []).compactMap(\.programID)
         guard referencedPrograms.allSatisfy(programIDs.contains) else { throw invalid("减脂备份包含不存在的周期引用。") }
         let recipeIDs = Set((backup.recipes ?? []).map(\.id))
             .union(try context.fetch(FetchDescriptor<RecipeVersion>()).map(\.id))
@@ -424,6 +564,18 @@ enum FatLossBackupService {
         guard let backup, backup.total > 0 else { return BackupImportSummary(imported: 0, skipped: 0) }
         var imported = 0
         var skipped = 0
+        var preferenceIDs = Set(isRegistered(TrainingPreferenceRevision.self, in: context) ? try context.fetch(FetchDescriptor<TrainingPreferenceRevision>()).map(\.id) : [])
+        for record in backup.trainingPreferences ?? [] {
+            guard preferenceIDs.insert(record.id).inserted else { skipped += 1; continue }
+            context.insert(record.makeModel())
+            imported += 1
+        }
+        var trainingProgramIDs = Set(isRegistered(TrainingProgramRevision.self, in: context) ? try context.fetch(FetchDescriptor<TrainingProgramRevision>()).map(\.id) : [])
+        for record in backup.trainingPrograms ?? [] {
+            guard trainingProgramIDs.insert(record.id).inserted else { skipped += 1; continue }
+            context.insert(record.makeModel())
+            imported += 1
+        }
         var programsIDs = Set(try context.fetch(FetchDescriptor<FatLossProgram>()).map(\.id))
         for record in backup.programs ?? [] {
             guard programsIDs.insert(record.id).inserted else { skipped += 1; continue }

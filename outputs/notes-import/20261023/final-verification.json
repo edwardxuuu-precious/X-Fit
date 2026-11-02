@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-23T12:58:47.321515+08:00",
+  "phoneVersion": "0.5.0(28)",
+  "date": "2026-10-23",
+  "sessionID": "01eb4b6b-7c68-44ea-9274-8dcef8eb8ea8",
+  "completedActions": 10,
+  "completedRows": 48,
+  "actuals48Of48": true,
+  "all48FieldsUnchangedSinceImport": true,
+  "repeatImportedSessions": 0,
+  "repeatImportedSets": 0,
+  "R6": {
+    "id": "93f581fb-c0c1-5ee5-a87f-be2cb95829bf",
+    "status": "skipped",
+    "skipReason": "Owner confirmed 2026-10-23 Notes Oct 23 actual 48 rows replace R6； original prescription and discarded draft retained.",
+    "originalPrescriptionAndSourceUnchanged": true,
+    "nativeUI": "PASS",
+    "fieldChanges": {
+      "ZUPDATEDAT": {
+        "before": 814421581.91066,
+        "after": 814424232.426671
+      },
+      "ZSKIPREASON": {
+        "before": "",
+        "after": "Owner confirmed 2026-10-23 Notes Oct 23 actual 48 rows replace R6； original prescription and discarded draft retained."
+      },
+      "ZSTATUSRAW": {
+        "before": "planned",
+        "after": "skipped"
+      }
+    }
+  },
+  "old16DraftsRetainedAndUnchanged": true,
+  "original2421RecordIDsRetained": true,
+  "finalModelTables": 25,
+  "finalBusinessRecords": 2489,
+  "allOtherBusinessFieldsUnchangedSinceImport": true,
+  "resourcesUnchanged": true,
+  "candidateScope": "verified Build27 baseline plus ScheduleService and Build28 version only",
+  "serviceRegression": "47 PASS, 0 FAIL, 0 SKIP",
+  "installationConservation": "outputs/stage-validation/20261023-notes-skip-phone/data-conservation.json",
+  "completeStageGo": "not claimed; full physical XCTest/human acceptance not run",
+  "snapshot": "/Users/edward/Documents/Fitness App/artifacts/training-sync/20261023-notes/phone-final",
+  "homeScreenshot": "/Users/edward/Documents/Fitness App/outputs/notes-import/20261023/today-48-of-48-phone.png",
+  "mainSimulator": {
+    "status": "PASS",
+    "evidence": "outputs/simulator-real-data/20261023-125847/result.json",
+    "snapshot": "artifacts/training-sync/20261023-notes/phone-final",
+    "tables": 25,
+    "records": 2489,
+    "phoneWritesByRefresh": 0,
+    "normalLaunch": true,
+    "cloudSync": false,
+    "R6Status": "skipped",
+    "binaryScope": "existing accepted simulator preview retained; final phone data refreshed"
+  },
+  "requestedOperationsComplete": true
+}

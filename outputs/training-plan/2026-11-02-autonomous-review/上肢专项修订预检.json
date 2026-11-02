@@ -1,0 +1,40 @@
+{
+  "status": "SUPERSEDED_SIMULATION_ONLY_NOT_APPROVED",
+  "candidate": "上肢专项修订候选.md",
+  "candidateSHA256": "1df171d3f3d270b0353b2e7bf1dca10c83757b3e0985858dd1901379f4531272",
+  "source": "2026-10-29 18:20 phone App Group read-only copy",
+  "procedure": "App daily-confirmed replacement service against isolated phone-data copy; no phone write",
+  "result": "PASS",
+  "test": "testUpperWeekRevisionOnFreshPhoneCopy",
+  "evidence": "/private/tmp/xfit-upper-week-revision-sim-20261029.xcresult",
+  "days": {
+    "2026-11-04": {
+      "exercises": 6,
+      "plannedSets": 19,
+      "estimatedSeconds": 4660
+    },
+    "2026-11-06": {
+      "exercises": 6,
+      "plannedSets": 19,
+      "estimatedSeconds": 4375
+    }
+  },
+  "checks": [
+    "original two plans retained as skipped in simulation",
+    "new packets read back independently",
+    "same-packet repeated preview adds zero",
+    "no new completed or draft workout session",
+    "no new actual set logs",
+    "preference count unchanged",
+    "chest and shoulder each four main exercises",
+    "four distinct core exercises across week",
+    "shoulder front middle rear tasks"
+  ],
+  "limits": [
+    "simulation confirmation reference explicitly says not owner-confirmed",
+    "no new phone week draft created",
+    "fresh phone preflight and owner confirmation required before replacement",
+    "simulator persistence version warning: source build Persistence-1629, simulator Persistence-1526; isolated test passed but cannot replace phone verification"
+  ],
+  "supersededReason": "本人澄清上肢周为胸肩、背腹、胸背肩综合；该草案不得写入。"
+}

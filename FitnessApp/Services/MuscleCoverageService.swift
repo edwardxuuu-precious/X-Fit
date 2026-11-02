@@ -16,17 +16,10 @@ enum WorkoutMeasurementSideEditing {
         let matching = logs.filter { $0.sessionExerciseID == exercise.id && $0.sessionID == exercise.sessionID }
         let pending = matching.filter { !$0.isCompleted }
         guard !pending.isEmpty else { return }
-        let completedNumbers = Set(matching.filter(\.isCompleted).map(\.setNumber))
-        exercise.plannedSets = exercise.plannedSets.enumerated().map { index, plan in
-            guard !completedNumbers.contains(index + 1) else { return plan }
-            return WorkoutSetPlan(id: plan.id, weight: plan.weight, reps: plan.reps,
-                weightSide: side, repsSide: side)
-        }
         for log in pending {
-            log.targetWeightSide = side
-            log.targetRepsSide = side
             log.actualWeightSide = side
             log.actualRepsSide = side
+            log.markActualEntryEdited()
         }
     }
 }
@@ -34,6 +27,132 @@ enum WorkoutMeasurementSideEditing {
 struct WorkoutActualReference: Equatable {
     let date: Date
     let rows: [String]
+}
+
+struct WorkoutHistorySet: Equatable {
+    let id: UUID
+    let weight: Double
+    let reps: Int
+    let weightSide: MeasurementSide
+    let repsSide: MeasurementSide
+    let weightIsBlank: Bool
+
+    init(id: UUID, weight: Double, reps: Int, weightSide: MeasurementSide,
+         repsSide: MeasurementSide, weightIsBlank: Bool = false) {
+        self.id = id
+        self.weight = weight
+        self.reps = reps
+        self.weightSide = weightSide
+        self.repsSide = repsSide
+        self.weightIsBlank = weightIsBlank
+    }
+
+    func canPrefill(unit: ExerciseVolumeUnit) -> Bool {
+        weight.isFinite && weight >= 0 && reps > 0
+            && (!unit.recordsNumericLoad || !weightIsBlank)
+            && (!unit.usesMeasurementSide || (weightSide != .unknown && repsSide != .unknown))
+    }
+}
+
+struct WorkoutHistoryReference: Equatable {
+    let sessionID: UUID
+    let date: Date
+    let sets: [WorkoutHistorySet]
+    let equipmentVerified: Bool
+    let restSeconds: Int
+
+    func prefillableSet(at index: Int, unit: ExerciseVolumeUnit) -> WorkoutHistorySet? {
+        guard equipmentVerified, sets.indices.contains(index), sets[index].canPrefill(unit: unit) else { return nil }
+        return sets[index]
+    }
+}
+
+struct WorkoutInitialActual: Equatable {
+    let weight: Double
+    let reps: Int
+    let weightSide: MeasurementSide
+    let repsSide: MeasurementSide
+    let source: WorkoutActualEntrySource
+    let sourceHistorySetID: UUID?
+    let weightIsBlank: Bool
+
+    enum Selection {
+        case automatic(reference: WorkoutHistoryReference?, setIndex: Int)
+        case confirmedSetup
+    }
+
+    static func resolve(fallback: Self, unit: ExerciseVolumeUnit, selection: Selection) -> Self {
+        switch selection {
+        case .confirmedSetup:
+            return Self(weight: fallback.weight, reps: fallback.reps, weightSide: fallback.weightSide,
+                repsSide: fallback.repsSide, source: .manual, sourceHistorySetID: nil,
+                weightIsBlank: fallback.weightIsBlank)
+        case let .automatic(reference, index):
+            guard let previous = reference?.prefillableSet(at: index, unit: unit) else { return fallback }
+            return Self(weight: unit.recordsNumericLoad ? previous.weight : fallback.weight,
+                reps: previous.reps, weightSide: previous.weightSide, repsSide: previous.repsSide,
+                source: .history, sourceHistorySetID: previous.id, weightIsBlank: false)
+        }
+    }
+}
+
+/// One structured source for both historical display and entry defaults. No RIR/age filter:
+/// copying a user's record is not a recommendation to increase training load.
+enum WorkoutHistoryResolver {
+    static func equipment(for snapshot: SessionExercise, sessions: [WorkoutSession], schedules: [ScheduledWorkout]) -> String? {
+        if let stored = snapshot.equipmentSnapshot, !stored.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty { return stored }
+        guard let scheduleID = sessions.first(where: { $0.id == snapshot.sessionID })?.scheduledWorkoutID else { return nil }
+        return schedules.first(where: { $0.id == scheduleID })?.planSnapshot
+            .first(where: { $0.exerciseID == snapshot.exerciseID && $0.volumeUnit == snapshot.volumeUnit })?.equipment
+    }
+
+    static func latest(exerciseID: UUID, unit: ExerciseVolumeUnit, equipment: String?, before: Date,
+                       excludingSessionID: UUID? = nil, sessions: [WorkoutSession], snapshots: [SessionExercise],
+                       logs: [SetLog], schedules: [ScheduledWorkout] = []) -> WorkoutHistoryReference? {
+        func normalized(_ value: String?) -> String? {
+            guard let value else { return nil }
+            let result = value.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            return result.isEmpty ? nil : result
+        }
+        let expectedEquipment = normalized(equipment)
+        let candidates = sessions.filter {
+            $0.id != excludingSessionID && $0.status == .completed && ($0.completedAt ?? $0.startedAt) <= before
+        }.sorted {
+            let left = $0.completedAt ?? $0.startedAt, right = $1.completedAt ?? $1.startedAt
+            return left == right ? $0.id.uuidString < $1.id.uuidString : left > right
+        }
+        var unverified: WorkoutHistoryReference?
+        for session in candidates {
+            for snapshot in snapshots.filter({ $0.sessionID == session.id && $0.exerciseID == exerciseID && $0.volumeUnit == unit }).sorted(by: { $0.order < $1.order }) {
+                let actualEquipment = normalized(Self.equipment(for: snapshot, sessions: sessions, schedules: schedules))
+                if let expectedEquipment, let actualEquipment, expectedEquipment != actualEquipment { continue }
+                let verified = expectedEquipment != nil && actualEquipment == expectedEquipment
+                let rows = logs.filter { $0.sessionID == session.id && $0.sessionExerciseID == snapshot.id
+                    && $0.exerciseID == exerciseID && $0.isCompleted && !$0.isWarmup }
+                    .sorted { $0.setNumber == $1.setNumber ? $0.id.uuidString < $1.id.uuidString : $0.setNumber < $1.setNumber }
+                guard !rows.isEmpty else { continue }
+                let reference = WorkoutHistoryReference(sessionID: session.id, date: session.startedAt,
+                    sets: rows.map { WorkoutHistorySet(id: $0.id, weight: $0.actualWeight, reps: $0.actualReps,
+                        weightSide: $0.actualWeightSideRaw.flatMap(MeasurementSide.init(rawValue:)) ?? .unknown,
+                        repsSide: $0.actualRepsSideRaw.flatMap(MeasurementSide.init(rawValue:)) ?? .unknown,
+                        weightIsBlank: $0.isActualWeightBlank) },
+                    equipmentVerified: verified, restSeconds: snapshot.restSeconds)
+                if verified { return reference }
+                if unverified == nil { unverified = reference }
+            }
+        }
+        return unverified
+    }
+
+    static func display(_ reference: WorkoutHistoryReference, unit: ExerciseVolumeUnit) -> WorkoutActualReference {
+        let rows = reference.sets.map { row in
+            if unit.recordsSingleAmount { return "\(row.reps) \(unit.symbol)" }
+            if unit == .bodyweight { return "自重 × \(row.reps)" }
+            let load = unit.recordsNumericLoad && row.weightIsBlank ? "重量未记录" : "\(TrainingFormatters.weight(row.weight)) \(unit.symbol)"
+            return "\(load) × \(row.reps) · 重量\(row.weightSide.title)／次数\(row.repsSide.title)"
+        }
+        return WorkoutActualReference(date: reference.date, rows: rows)
+    }
 }
 
 enum MuscleCoverageService {
@@ -97,23 +216,11 @@ enum MuscleCoverageService {
             return rows.isEmpty || rows.contains { !$0.isCompleted }
         }?.id ?? snapshots.first?.id
     }
-    static func lastReference(for exercise: SessionExercise, sessions: [WorkoutSession], snapshots: [SessionExercise], logs: [SetLog]) -> WorkoutActualReference? {
+    static func lastReference(for exercise: SessionExercise, sessions: [WorkoutSession], snapshots: [SessionExercise], logs: [SetLog], schedules: [ScheduledWorkout] = []) -> WorkoutActualReference? {
         let currentStart = sessions.first { $0.id == exercise.sessionID }?.startedAt ?? .now
-        let candidates = sessions.filter { $0.id != exercise.sessionID && $0.status == .completed && ($0.completedAt ?? $0.startedAt) <= currentStart }
-            .sorted { ($0.completedAt ?? $0.startedAt) > ($1.completedAt ?? $1.startedAt) }
-        for session in candidates {
-            let previous = snapshots.filter { $0.sessionID == session.id && $0.exerciseID == exercise.exerciseID && $0.volumeUnit == exercise.volumeUnit }
-            let ids = Set(previous.map(\.id))
-            let rows = logs.filter { $0.sessionID == session.id && ids.contains($0.sessionExerciseID) && $0.isCompleted && !$0.isWarmup }
-                .sorted { $0.setNumber < $1.setNumber }
-            guard !rows.isEmpty else { continue }
-            let text = rows.map { row in
-                if exercise.volumeUnit.recordsSingleAmount { return "\(row.actualReps) \(exercise.volumeUnit.symbol)" }
-                if exercise.volumeUnit == .bodyweight { return "自重 × \(row.actualReps)" }
-                return "\(TrainingFormatters.weight(row.actualWeight)) \(exercise.volumeUnit.symbol) × \(row.actualReps) · \(row.actualWeightSide.title)"
-            }
-            return WorkoutActualReference(date: session.startedAt, rows: text)
-        }
-        return nil
+        guard let reference = WorkoutHistoryResolver.latest(exerciseID: exercise.exerciseID, unit: exercise.volumeUnit,
+            equipment: WorkoutHistoryResolver.equipment(for: exercise, sessions: sessions, schedules: schedules),
+            before: currentStart, excludingSessionID: exercise.sessionID, sessions: sessions, snapshots: snapshots, logs: logs, schedules: schedules) else { return nil }
+        return WorkoutHistoryResolver.display(reference, unit: exercise.volumeUnit)
     }
 }

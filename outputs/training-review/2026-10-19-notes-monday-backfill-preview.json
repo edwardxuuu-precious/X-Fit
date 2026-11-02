@@ -1,0 +1,431 @@
+{
+  "status": "applied_completed_and_phone_verified",
+  "date": "2026-10-19",
+  "timeZone": "Asia/Shanghai",
+  "sourceTitle": "Oct 19",
+  "sourceModifiedAtShown": "2026-10-19 16:05 +0800",
+  "sourceSHA256": "9c3086d1dac7165cb6fc791bf4e83737afced5dce8d5a01a691470afe0786fdd",
+  "targetSessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+  "targetScheduleID": "5185deb9-cfb7-5810-b9ec-e33cfdcac179",
+  "sourceExerciseCount": 9,
+  "sourceCompletedRows": 38,
+  "matchedExistingCompletedRows": 4,
+  "additionalCompletedRowsRequired": 34,
+  "unknownRIRPolicy": "leave_nil",
+  "existingCompletedRowPolicy": "preserve_all_fields_and_ids",
+  "completionRequestedByOwner": true,
+  "completionApplied": true,
+  "weightBasisClarificationPending": false,
+  "exercises": [
+    {
+      "sourceName": "Smith Bench Press",
+      "sets": [
+        {
+          "weight": 25.0,
+          "reps": 14,
+          "rir": null,
+          "existingCompletedLogID": "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7"
+        },
+        {
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "existingCompletedLogID": "d68343aa-8aa0-4567-bfd4-3b9aca1d0472"
+        },
+        {
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "existingCompletedLogID": "1c053603-2189-4a2e-a3e8-c96f9b7e6b31"
+        },
+        {
+          "weight": 40.0,
+          "reps": 8,
+          "rir": null,
+          "existingCompletedLogID": "2c5171b4-7215-4122-b4f0-cf8e14945724"
+        },
+        {
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "史密斯卧推",
+      "appSessionExerciseID": "66c5be9b-5260-4cef-b498-20980e3c594c",
+      "appExerciseID": "5e1cec70-a19c-4da8-abf1-75c41e489943",
+      "appCompletedLogIDs": [
+        "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7",
+        "d68343aa-8aa0-4567-bfd4-3b9aca1d0472",
+        "1c053603-2189-4a2e-a3e8-c96f9b7e6b31",
+        "2c5171b4-7215-4122-b4f0-cf8e14945724",
+        "750f78dd-f333-4530-9d33-0a56dda2e38d"
+      ],
+      "appActualWeightSide": [
+        "single"
+      ],
+      "appActualRepsSide": [
+        "bilateral"
+      ]
+    },
+    {
+      "sourceName": "Smith Inclined Bench Press",
+      "sets": [
+        {
+          "weight": 20.0,
+          "reps": 14,
+          "rir": null
+        },
+        {
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null
+        },
+        {
+          "weight": 30.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 35.0,
+          "reps": 8,
+          "rir": null
+        },
+        {
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "史密斯上斜卧推",
+      "appSessionExerciseID": "328e14d7-f2ff-423f-ad76-1e62b563cc86",
+      "appExerciseID": "e914d0e3-85b1-405b-842b-17c8113c9ca3",
+      "appCompletedLogIDs": [
+        "b0403623-607d-4f55-b3f8-97f037872253",
+        "78961609-2d12-4b6b-8c70-24d462256ea3",
+        "32321974-e139-4957-8c9f-2d56cb9d5486",
+        "a92ae3b4-bf59-416a-a175-f3ccfda33b62",
+        "58ab282b-2226-4a18-85c7-a455b38e8a44"
+      ],
+      "appActualWeightSide": [
+        "unknown"
+      ],
+      "appActualRepsSide": [
+        "unknown"
+      ]
+    },
+    {
+      "sourceName": "MTS Declined Bench Press",
+      "sets": [
+        {
+          "weight": 22.5,
+          "reps": 14,
+          "rir": null
+        },
+        {
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null
+        },
+        {
+          "weight": 27.5,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 30.0,
+          "reps": 8,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "MTS器械下斜推胸",
+      "appSessionExerciseID": "69cb54b8-6194-4e18-9aec-2f7fa48135c5",
+      "appExerciseID": "bd2601d3-a32c-4d29-8c41-cb9152e2533a",
+      "appCompletedLogIDs": [
+        "02965981-a191-4c86-90e5-ef2128802847",
+        "ccda1161-beca-4621-acf7-72e0acbe8b22",
+        "fd6af548-f188-4bb2-897d-d1b4af1504b2",
+        "d051aba7-b51e-4b90-b7f2-b3eb5e158367"
+      ],
+      "appActualWeightSide": [
+        "single"
+      ],
+      "appActualRepsSide": [
+        "bilateral"
+      ]
+    },
+    {
+      "sourceName": "Seated Dip",
+      "sets": [
+        {
+          "weight": 30.0,
+          "reps": 14,
+          "rir": null
+        },
+        {
+          "weight": 35.0,
+          "reps": 12,
+          "rir": null
+        },
+        {
+          "weight": 40.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 45.0,
+          "reps": 8,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "坐姿器械臂屈伸",
+      "appSessionExerciseID": "b6428488-064c-4ade-8e09-1b57421121a7",
+      "appExerciseID": "5ef86df6-9f82-45d8-8592-2dd4fb9bb8a1",
+      "appCompletedLogIDs": [
+        "da151bd1-1e55-4a45-8ce4-122ef5314e94",
+        "fb197b90-a95d-4ab0-a201-1113f0d1a40e",
+        "e5a74a19-507d-465c-87ce-95d0c242c30f",
+        "b73cb70d-a1ea-4371-be02-c08c1ddd6c09"
+      ],
+      "appActualWeightSide": [
+        "unknown"
+      ],
+      "appActualRepsSide": [
+        "unknown"
+      ]
+    },
+    {
+      "sourceName": "Cable Fly",
+      "sets": [
+        {
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null
+        },
+        {
+          "weight": 12.5,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null
+        },
+        {
+          "weight": 10.0,
+          "reps": 12,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "站姿绳索夹胸",
+      "appSessionExerciseID": "6be867c0-8750-42a7-8fb3-0547e8eb0c22",
+      "appExerciseID": "8de3ee03-a5a3-4767-954b-333d4bd17332",
+      "appCompletedLogIDs": [
+        "8ef15c5a-1309-4e3e-96b8-16a97f5b3a4b",
+        "dfa1e422-967e-476b-8112-e813fa7e4e8f",
+        "11fc24cd-380d-4f08-9abd-70bff74cb4eb",
+        "fa47f125-6fd8-432f-bdc6-b48679aaa8c9"
+      ],
+      "appActualWeightSide": [
+        "single"
+      ],
+      "appActualRepsSide": [
+        "bilateral"
+      ]
+    },
+    {
+      "sourceName": "三头绳索下压",
+      "sets": [
+        {
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null
+        },
+        {
+          "weight": 12.5,
+          "reps": 20,
+          "rir": null
+        },
+        {
+          "weight": 15.0,
+          "reps": 20,
+          "rir": null
+        },
+        {
+          "weight": 17.5,
+          "reps": 20,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "bilateral",
+      "appName": "绳索下压",
+      "appSessionExerciseID": "e93a850e-469e-4463-b4b7-5152ed8bf5c6",
+      "appExerciseID": "bd28555c-efc5-49a6-b267-5bf091c103fc",
+      "appCompletedLogIDs": [
+        "b1f9ebac-926b-48c8-862e-0a6ef7b08226",
+        "239b8101-5aaa-4dea-8712-e8959a24e34e",
+        "ebf91844-2799-4b59-87f1-0f64c55ca10b",
+        "ab882aac-44a2-42d3-8ea7-d244f341d9c2"
+      ],
+      "appActualWeightSide": [
+        "bilateral"
+      ],
+      "appActualRepsSide": [
+        "bilateral"
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Side pull",
+      "sets": [
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "Cable shoulder Side pull",
+      "appSessionExerciseID": "ec86d169-0511-4c72-8f4c-d036ab8e8210",
+      "appExerciseID": "c896a8f9-8ede-4351-ad7b-bf83ea8ff7b1",
+      "appCompletedLogIDs": [
+        "aae5cdaa-68e6-4295-b2b7-85d8fe78e7b3",
+        "753deffb-3966-4f64-a649-71c15e999ed2",
+        "e154ab31-90f6-465a-ae61-f05627d50703",
+        "b8dea109-28be-45f6-82fa-207c4ea9b659"
+      ],
+      "appActualWeightSide": [
+        "unknown"
+      ],
+      "appActualRepsSide": [
+        "unknown"
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Front pull",
+      "sets": [
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "Cable shoulder Front pull",
+      "appSessionExerciseID": "97381414-a311-4385-922f-b1554fc6d3d6",
+      "appExerciseID": "ba327b41-55ad-49f7-bfb2-b948135635b2",
+      "appCompletedLogIDs": [
+        "6652949d-0e47-464f-8fe7-1ef291a95814",
+        "074c4e3b-10e9-4bae-9c44-d4e319b5124b",
+        "00cd9e36-3b13-409e-8f87-405e60b97002",
+        "92bd0246-7a23-4925-8819-73788fcd3418"
+      ],
+      "appActualWeightSide": [
+        "unknown"
+      ],
+      "appActualRepsSide": [
+        "unknown"
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder reverse pull",
+      "sets": [
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        },
+        {
+          "weight": 5.0,
+          "reps": 10,
+          "rir": null
+        }
+      ],
+      "volumeUnit": "kilogram",
+      "weightSide": "single",
+      "appName": "Cable shoulder reverse pull",
+      "appSessionExerciseID": "6c42f2fc-f581-4776-b5f4-5ebf083f1431",
+      "appExerciseID": "ac3d466d-64fc-49b3-b311-cabbd4f2a6da",
+      "appCompletedLogIDs": [
+        "bb143792-ef37-4f16-9ab6-e8f994308a3d",
+        "8bd0c518-0118-4517-aef0-74b72231c0dc",
+        "f8c4c6e5-5f4e-4957-bb45-58b1706bf388",
+        "c0f31e9a-c3b4-47b8-9720-7794ff9c7a44"
+      ],
+      "appActualWeightSide": [
+        "unknown"
+      ],
+      "appActualRepsSide": [
+        "unknown"
+      ]
+    }
+  ],
+  "ownerWeightBasisClarification": "2026-10-19: Smith inclined per-side plates excluding bar; Seated Dip, Cable Fly, shoulder side/front/reverse pull are kg, single side. Applies only to those asked exercises; reps side not newly confirmed.",
+  "method": "existing_workout_via_iPhone_Mirroring_normal_App_UI",
+  "entryProgress": {
+    "sourceRowsEnteredAccordingToUI": 38,
+    "sourceRowsFinalDatabaseVerified": true,
+    "sourceMetadataSaveInterrupted": false,
+    "currentBlocker": null
+  },
+  "verificationFile": "outputs/training-review/2026-10-19-notes-monday-backfill-verification.json",
+  "completionVerifiedAt": "2026-10-19T21:58:10+08:00",
+  "appliedSnapshot": "artifacts/training-sync/20261019-notes-monday-final",
+  "sourceMetadata": "Oct19 2026 Notes backfill. Smith flat and incline kg per side plates excluding bar. MTS decline， Dip， Fly and shoulder Side/Front/reverse kg per side. Pushdown original stack kg both sides total. Rep numbers match Notes. New rep SIDE and all RIR are unknown. Warmup/work type， actual rest/end/duration unknown. New timestamps are entry times only， not workout duration. Original4 preserved；7 plan rows unconfirmed.",
+  "weightSideMeaning": "Source-confirmed weight basis; App structured actual sides are separately recorded on each exercise",
+  "latestDayPlanReconciliation": "outputs/training-review/2026-10-19-notes-plan-reconciliation-verification.json",
+  "latestDayPlannedSetCount": 38,
+  "latestDayActualSetCount": 38
+}

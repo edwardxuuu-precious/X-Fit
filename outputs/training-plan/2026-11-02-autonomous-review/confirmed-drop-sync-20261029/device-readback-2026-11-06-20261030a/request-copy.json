@@ -1,0 +1,62 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "copy",
+      "--timeout",
+      "45",
+      "--json-output",
+      "outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/device-readback-2026-11-06-20261030a/request-copy.json",
+      "to",
+      "--device",
+      "00008150-001E49912122401C",
+      "--source",
+      "/var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-og7mshpp/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+      "--destination",
+      "Documents/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+      "--domain-type",
+      "appDataContainer",
+      "--domain-identifier",
+      "com.edward.FitnessApp"
+    ],
+    "commandType" : "devicectl.device.copy.to",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 5,
+    "outcome" : "success",
+    "version" : "651.13.5"
+  },
+  "result" : {
+    "destination" : "file:///private/var/mobile/Containers/Data/Application/97819148-05B5-4D6A-ABED-E70F22C6112B/Documents/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "domain" : "appDataContainer",
+    "domainIdentifier" : "com.edward.FitnessApp",
+    "file" : {
+      "metadata" : {
+        "extendedAttributes" : {
+
+        },
+        "lastModDate" : "2026-10-30T03:51:12.000Z",
+        "ownerGid" : 501,
+        "ownerUid" : 501,
+        "permissions" : 420,
+        "size" : 273
+      },
+      "name" : "/private/var/mobile/Containers/Data/Application/97819148-05B5-4D6A-ABED-E70F22C6112B/Documents/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+      "relativePath" : "/private/var/mobile/Containers/Data/Application/97819148-05B5-4D6A-ABED-E70F22C6112B/Documents/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+      "resources" : {
+        "isDirectory" : false,
+        "isHidden" : false,
+        "isReadable" : true,
+        "isSymbolicLink" : false,
+        "isWritable" : true
+      }
+    },
+    "source" : "file:///var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-og7mshpp/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json",
+    "sources" : [
+      "file:///var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-og7mshpp/meal-request-85160df8-efd7-4487-ade5-ebfe4fcbf4ad.json"
+    ]
+  }
+}

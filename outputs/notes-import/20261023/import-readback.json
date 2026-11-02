@@ -1,0 +1,534 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-23T12:14:37.856731+08:00",
+  "sessionID": "01eb4b6b-7c68-44ea-9274-8dcef8eb8ea8",
+  "stableImportID": "confirmed-notes:notes-20261023-workout-v1:2026-10-23-oct23-notes-workout",
+  "completedRows": 48,
+  "actualRowsExact": true,
+  "allActualRIRUnknown": true,
+  "trueSetTimesUnknown": true,
+  "startTimeKnownRaw": 0,
+  "date": "2026-10-23",
+  "dateTimezone": "Asia/Shanghai",
+  "newBusinessRows": {
+    "ZBODYMEASUREMENT": 0,
+    "ZEXERCISE": 9,
+    "ZMEALENTRY": 0,
+    "ZNUTRITIONTARGET": 0,
+    "ZSCHEDULEDWORKOUT": 0,
+    "ZSESSIONEXERCISE": 10,
+    "ZSETLOG": 48,
+    "ZTEMPLATEEXERCISE": 0,
+    "ZWORKOUTSESSION": 1,
+    "ZWORKOUTTEMPLATE": 0,
+    "ZDAILYBODYCHECKIN": 0,
+    "ZSEDENTARYSESSION": 0,
+    "ZJUMPROPEENTRY": 0,
+    "ZHYDRATIONENTRY": 0,
+    "ZRECIPEVERSION": 0,
+    "ZPROGRAMWORKOUTLINK": 0,
+    "ZPROGRAMWEEKLYREVIEW": 0,
+    "ZPROGRAMTARGETREVISION": 0,
+    "ZPROGRAMHEALTHRECORD": 0,
+    "ZPROGRAMDAILYLOG": 0,
+    "ZPLANNEDMEAL": 0,
+    "ZFATLOSSPROGRAM": 0,
+    "ZTRAININGPROGRAMREVISION": 0,
+    "ZTRAININGPREFERENCEREVISION": 0,
+    "ZTRAININGCOACHRECORD": 0
+  },
+  "existingFieldChanges": [
+    {
+      "table": "ZSCHEDULEDWORKOUT",
+      "id": "93f581fbc0c15ee5a87fbe2cb95829bf",
+      "fields": {
+        "ZUPDATEDAT": {
+          "before": 814246437.305869,
+          "after": 814421581.91066
+        },
+        "ZSTATUSRAW": {
+          "before": "inProgress",
+          "after": "planned"
+        }
+      }
+    },
+    {
+      "table": "ZWORKOUTSESSION",
+      "id": "be438c93cccc4267b07ad69c4ed3a03f",
+      "fields": {
+        "ZCOMPLETEDAT": {
+          "before": null,
+          "after": 814421581.910588
+        },
+        "ZSTATUSRAW": {
+          "before": "inProgress",
+          "after": "discarded"
+        }
+      }
+    }
+  ],
+  "originalBusinessRecordCount": 2421,
+  "afterBusinessRecordCount": 2489,
+  "allOriginalIDsRetained": true,
+  "old16DraftRowsUnchanged": true,
+  "assetsUnchanged": true,
+  "repeatImportedSessions": 0,
+  "repeatImportedSets": 0,
+  "originalR6StatusAfterImport": "planned; skip UI pending",
+  "exercises": [
+    {
+      "sourceName": "Smith Bench Press",
+      "sessionExerciseID": "707270d1-35db-4f6d-a755-21786615e0e2",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "d3053c8c-626b-4a19-b936-636f1e1a666c",
+          "weight": 20.0,
+          "reps": 16,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "74e152d8-030d-418d-a807-91a3d2999fa1",
+          "weight": 25.0,
+          "reps": 14,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "19fdd546-e559-4911-9f30-3bb3cca4acf1",
+          "weight": 30.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "8d67a36d-a61c-4c8c-ab6e-40d29d7ea606",
+          "weight": 35.0,
+          "reps": 10,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "b896e43d-b86a-45f5-8330-d9bd5f895601",
+          "weight": 40.0,
+          "reps": 8,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "f5d100cf-b500-43f3-9065-eebe816a4d72",
+          "weight": 45.0,
+          "reps": 6,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Assisted Pull-up",
+      "sessionExerciseID": "53cf62bb-2014-4999-8f14-7c540c3b7232",
+      "unit": "count",
+      "actualSets": [
+        {
+          "id": "32ea21e4-b22f-4da6-bde1-1b08a5514aa3",
+          "weight": 50.0,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "98021530-9502-4203-acc5-51b9bd87c357",
+          "weight": 46.88,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "f2f80a06-43fb-40c4-828c-cdcd4e0a4ed1",
+          "weight": 43.75,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "075f749d-e8f3-412e-8cd4-8a67f654f19e",
+          "weight": 40.63,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "fbbda444-3364-46bd-89a6-bb05caf82bfb",
+          "weight": 37.5,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "6c120381-9e81-482a-bdc0-ff09e458eb60",
+          "weight": 34.38,
+          "reps": 15,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Barbell Row",
+      "sessionExerciseID": "bc72645a-b3ba-41dc-821b-5cd6cb01e2e3",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "10efcd2c-4c98-46d1-b69e-9a39447dd397",
+          "weight": 20.0,
+          "reps": 14,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "e868d1e0-1555-442d-b4a2-7bb691b9de2a",
+          "weight": 22.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "76a96da4-c1ef-454d-a273-294a9e314824",
+          "weight": 25.0,
+          "reps": 10,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "0be619a1-f346-460e-8ffa-81511e88a04d",
+          "weight": 27.5,
+          "reps": 8,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "e0a142fe-3f04-4bcd-9544-78e7aa555680",
+          "weight": 30.0,
+          "reps": 6,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Push up",
+      "sessionExerciseID": "38785d96-eb31-44d3-9b47-f48f0a94f88b",
+      "unit": "count",
+      "actualSets": [
+        {
+          "id": "7c5b7ec2-fcf2-491b-8926-7540da3d8458",
+          "weight": 0.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "324eb767-b9a9-46c0-9182-bc2dce17935b",
+          "weight": 0.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "ae2ed534-12ac-43c0-8e35-9beec5071a28",
+          "weight": 0.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "82821f58-3780-4390-9324-1b580c576226",
+          "weight": 0.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "07cc9d40-713a-470f-b890-71daabe46e36",
+          "weight": 0.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable Fly",
+      "sessionExerciseID": "ea1515f2-096f-4605-8b3f-85fa842e19f5",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "a181a754-d65b-4734-8a68-e6ead6e43ea1",
+          "weight": 10.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "9e40b4ec-fe66-4843-a0e6-866883aecf06",
+          "weight": 10.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "869c6112-06cf-49ed-8d7f-5264e9d0709d",
+          "weight": 10.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "ae4fa5ac-0f38-41d4-b6e5-25096a0499d2",
+          "weight": 10.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Pulley Low Row",
+      "sessionExerciseID": "9784666b-5487-4e24-9dc8-fd8f017054fc",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "46e533e2-438f-437e-be00-f6c258719d6e",
+          "weight": 35.0,
+          "reps": 16,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "df16f607-1530-4a59-a56a-50bdfdf52a01",
+          "weight": 42.5,
+          "reps": 14,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "1c272147-8656-47aa-bb05-a0579bff8476",
+          "weight": 50.0,
+          "reps": 12,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "0a75c902-9080-44af-9458-87d1e78ad708",
+          "weight": 60.0,
+          "reps": 10,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Dumbbell Side Pull",
+      "sessionExerciseID": "1fe7d69e-b691-4e5c-acf8-ce32b58120b1",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "363e02d1-a279-4c1b-8cc3-42b4d2ab5ad5",
+          "weight": 2.5,
+          "reps": 20,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "d3de9871-f061-408c-b2bf-09b74fe81ce8",
+          "weight": 5.0,
+          "reps": 16,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "9954bf99-0e08-44a9-874d-06b634c2fdfc",
+          "weight": 7.5,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "4f9450b6-ee85-4409-80d6-3032ff32b25b",
+          "weight": 5.0,
+          "reps": 16,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "d1e8a9cb-1ad7-4f99-9237-d55c1c023215",
+          "weight": 2.5,
+          "reps": 20,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "杠铃片胸前转体",
+      "sessionExerciseID": "48646ca6-b015-4be3-be53-11c464d78c0d",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "da0114fa-0fd7-4a77-bbab-51dc33f20c15",
+          "weight": 10.0,
+          "reps": 16,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "da3e7b18-f44d-4bb4-b8ab-34877605cfc3",
+          "weight": 10.0,
+          "reps": 16,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "7f8a8a1e-ce60-43a9-a093-7a4c33cc8709",
+          "weight": 10.0,
+          "reps": 16,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "8f1848c3-6502-4ba5-b567-72f0de223503",
+          "weight": 10.0,
+          "reps": 16,
+          "weightSide": "unknown",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Dumbbell Reverse Fly",
+      "sessionExerciseID": "da1208cf-d885-4f00-9aad-8f3f7bd7d3c3",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "c296954e-bf7a-431c-a69a-b3028a66b31e",
+          "weight": 5.0,
+          "reps": 20,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "9873d91f-1fb4-43b0-9ef5-e4148f4fb794",
+          "weight": 8.0,
+          "reps": 16,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "0fc9dd7a-30d0-4c1c-8b9b-d04ce9446172",
+          "weight": 10.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "ee1e32bc-0eee-49f8-a41c-a35a97696043",
+          "weight": 8.0,
+          "reps": 16,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "e35e496e-9748-4030-bb4e-a17def5780d3",
+          "weight": 5.0,
+          "reps": 20,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Smith shoulder press",
+      "sessionExerciseID": "df6a98b2-f07e-463d-bd2b-3955873fdc97",
+      "unit": "kilogram",
+      "actualSets": [
+        {
+          "id": "006a99f2-57bf-478e-bc35-80a4c8949f51",
+          "weight": 40.0,
+          "reps": 14,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "32a17b3c-31d3-44be-896e-048b5d159dba",
+          "weight": 45.0,
+          "reps": 12,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "cbb33af7-25a2-420f-b34b-a713d0d938a9",
+          "weight": 50.0,
+          "reps": 10,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        },
+        {
+          "id": "77f34be0-cd1d-4cf3-a66a-21dd4b3750be",
+          "weight": 55.0,
+          "reps": 8,
+          "weightSide": "single",
+          "repsSide": "unknown",
+          "rir": null
+        }
+      ]
+    }
+  ]
+}

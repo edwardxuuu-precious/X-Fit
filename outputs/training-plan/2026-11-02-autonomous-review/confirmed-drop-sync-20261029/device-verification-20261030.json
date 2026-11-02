@@ -1,0 +1,75 @@
+{
+  "status": "APPLIED_READBACK_VERIFIED",
+  "timeLocal": "2026-10-30T11:52:33.104961+08:00",
+  "beforeSnapshot": "/Users/edward/Documents/Fitness App/outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/phone-before-20261030T114208",
+  "afterSnapshot": "/Users/edward/Documents/Fitness App/outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/phone-after-apply-20261030T115127",
+  "sqliteQuickCheck": "PASS",
+  "modelTablesCompared": 25,
+  "modelChanges": {
+    "ZSCHEDULEDWORKOUT": {
+      "added": 3,
+      "modified": 3,
+      "removed": 0
+    },
+    "ZTEMPLATEEXERCISE": {
+      "added": 23,
+      "modified": 0,
+      "removed": 0
+    },
+    "ZWORKOUTTEMPLATE": {
+      "added": 3,
+      "modified": 0,
+      "removed": 0
+    }
+  },
+  "days": [
+    {
+      "day": "2026-11-02",
+      "packetID": "C565F75B-5DF6-52AA-B5E9-2C5CE33C5DC3",
+      "exerciseCount": 8,
+      "plannedSetCount": 32,
+      "preview": "device-preview-2026-11-02-20261030a",
+      "apply": "device-apply-2026-11-02-20261030a",
+      "independentReadback": "device-readback-2026-11-02-20261030a",
+      "packetSHA256": "538a2664e2aec187ef674b4a44d8c009c9333f31434984d736541946e4f17ed8"
+    },
+    {
+      "day": "2026-11-04",
+      "packetID": "B5BD7C0C-C4B3-596A-A174-E018E0324B6D",
+      "exerciseCount": 7,
+      "plannedSetCount": 28,
+      "preview": "device-preview-2026-11-04-20261030a",
+      "apply": "device-apply-2026-11-04-20261030b",
+      "independentReadback": "device-readback-2026-11-04-20261030a",
+      "packetSHA256": "91b570ec48044d1c0c7374fe2d1cb9edd305a41b61e885c5750c30eb5bc549b1"
+    },
+    {
+      "day": "2026-11-06",
+      "packetID": "0DD88D81-CBD9-5D0A-9B73-7F9B10EDA173",
+      "exerciseCount": 8,
+      "plannedSetCount": 32,
+      "preview": "device-preview-2026-11-06-20261030a",
+      "apply": "device-apply-2026-11-06-20261030a",
+      "independentReadback": "device-readback-2026-11-06-20261030a",
+      "packetSHA256": "5c495d5073e25a67efa7f33165b52faccaa6fafd0e7d2745871bbfaa74791fea"
+    }
+  ],
+  "cardioSchedulesUnchanged": true,
+  "otherOriginalBusinessRecordsUnchanged": true,
+  "todaySessionPreserved": {
+    "status": "inProgress",
+    "completedAt": null,
+    "setRecords": 31,
+    "completedSetRecords": 23,
+    "userReportedApproximateFinish": "2026-10-30 09:30 Asia/Shanghai",
+    "lastCompletedSetRecordedAt": "2026-10-30 09:50:41 Asia/Shanghai",
+    "userClarification": "9:30 左右结束，9:50 的组为之后补记；精确结束时间未知。"
+  },
+  "phoneUIAcceptance": "NOT_RUN",
+  "actualWorkoutOrRecoveryOutcome": "NOT_VERIFIED",
+  "limitations": [
+    "三次单日替换分别提交，非整周原子事务",
+    "递减段通过动作备注记录，App 未结构化关联",
+    "本人回忆约 9:30 结束，9:50 组为后补；精确结束时间未知，手机仍为进行中。"
+  ]
+}

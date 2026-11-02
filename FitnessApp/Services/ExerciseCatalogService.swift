@@ -8,6 +8,33 @@ enum ExerciseCatalogSaveKind: Equatable {
     case restored
 }
 
+/// Native search input keeps marked text local; only settled queries reach the
+/// catalog. A monotonic timestamp makes the 300 ms policy independently testable.
+struct ExerciseSearchInputState {
+    private var text: String
+    private var publishedQuery: String
+    private var isComposing = false
+    private var changedAt: TimeInterval = 0
+
+    init(initialQuery: String) {
+        text = initialQuery
+        publishedQuery = initialQuery
+    }
+
+    mutating func receive(_ value: String, isComposing: Bool, at time: TimeInterval) {
+        text = value
+        self.isComposing = isComposing
+        changedAt = time
+    }
+
+    mutating func publishIfReady(at time: TimeInterval, force: Bool = false) -> String? {
+        guard !isComposing, text != publishedQuery,
+              force || time - changedAt >= 0.3 else { return nil }
+        publishedQuery = text
+        return text
+    }
+}
+
 struct ExerciseCatalogSaveResult {
     let exercise: Exercise
     let kind: ExerciseCatalogSaveKind
@@ -43,6 +70,108 @@ enum ExerciseCatalogError: LocalizedError, Equatable {
 }
 
 enum ExerciseCatalogService {
+    struct NotesCatalogSupplementEntry {
+        let id: UUID
+        let name: String
+        let muscleGroup: String
+        let equipment: String
+        let unit: ExerciseVolumeUnit
+    }
+
+    struct NotesCatalogSupplementResult {
+        let createdIDs: [UUID]
+        let conflictingNames: [String]
+    }
+
+    /// Owner-confirmed catalog-only supplement, REQ-20261021-103533.
+    /// Stable identities make retries safe even after the owner renames/archives an item.
+    /// No completed session, planned workout, set log or existing catalog field is changed.
+    static let notesSupplementEntries: [NotesCatalogSupplementEntry] = [
+        .init(id: UUID(uuidString: "E2A9B2AC-B8C0-50D0-8431-F6076AE100DC")!, name: "杠铃片胸前转体", muscleGroup: "核心", equipment: "杠铃片", unit: .kilogram),
+        .init(id: UUID(uuidString: "127E006F-F93E-5BD0-AD26-BE083009E305")!, name: "杠铃片过头提膝行进", muscleGroup: "核心", equipment: "杠铃片", unit: .kilogram),
+        .init(id: UUID(uuidString: "22A76B09-D7F7-59E4-B23A-406B7F0ECC4D")!, name: "垫高绳索站姿侧屈", muscleGroup: "核心", equipment: "龙门架", unit: .kilogram),
+        .init(id: UUID(uuidString: "5C52DA81-1416-5684-A5A0-0D45AE4E6980")!, name: "杠铃片交替曲髋绕颈（单边）", muscleGroup: "核心", equipment: "杠铃片", unit: .kilogram),
+        .init(id: UUID(uuidString: "6E4B410E-45A2-5FC3-BDC8-0FD0717846A8")!, name: "杠铃片铰链曲髋转体（单边）", muscleGroup: "核心", equipment: "杠铃片", unit: .kilogram),
+        .init(id: UUID(uuidString: "E2E25B0E-FF79-5645-A14B-C2786E494305")!, name: "杠铃片过头侧屈（单边）", muscleGroup: "核心", equipment: "杠铃片", unit: .kilogram),
+        .init(id: UUID(uuidString: "7A1D53AE-AB5E-5575-95F2-68272D574DDB")!, name: "站姿绳索划船", muscleGroup: "背部", equipment: "龙门架", unit: .kilogram),
+        .init(id: UUID(uuidString: "46EE66C4-50FA-5DD0-9020-CF6FFD9F2EDA")!, name: "站姿绳索下拉", muscleGroup: "背部", equipment: "龙门架", unit: .kilogram),
+        .init(id: UUID(uuidString: "87270BEA-2C8B-5B64-B02E-C1C01759A0A9")!, name: "绳索跪姿卷腹", muscleGroup: "核心", equipment: "龙门架", unit: .kilogram),
+        .init(id: UUID(uuidString: "747E76E2-2ABC-532A-A68F-9DA6448CC547")!, name: "平板支撑", muscleGroup: "核心", equipment: "自重", unit: .second),
+        .init(id: UUID(uuidString: "A5C2FC39-AF50-5B53-881D-F57155843020")!, name: "侧平板支撑", muscleGroup: "核心", equipment: "自重", unit: .second),
+        .init(id: UUID(uuidString: "BBEDB20F-F74D-5F69-BD79-34B1E49EB1CE")!, name: "开合跳", muscleGroup: "全身", equipment: "自重", unit: .count),
+        .init(id: UUID(uuidString: "F16408B6-8C53-581D-AA5E-D461E5381A42")!, name: "跑步机坡度走", muscleGroup: "心肺", equipment: "跑步机", unit: .second),
+        .init(id: UUID(uuidString: "7BF38382-DB2C-5564-BD4C-843F642AF0A8")!, name: "最伟大拉伸", muscleGroup: "全身", equipment: "自重", unit: .count)
+    ]
+
+    @discardableResult
+    static func ensureNotesCatalogSupplement(in context: ModelContext) throws -> NotesCatalogSupplementResult {
+        var catalog = try context.fetch(FetchDescriptor<Exercise>())
+        var inserted: [Exercise] = []
+        var conflicts: [String] = []
+        for entry in notesSupplementEntries {
+            // A renamed or manually archived identity belongs to the owner. Never reset it.
+            if catalog.contains(where: { $0.id == entry.id }) { continue }
+            if let existing = exactNameMatch(named: entry.name, in: catalog) {
+                if !semanticallyCompatible(existing, muscleGroup: entry.muscleGroup,
+                                           equipment: entry.equipment, volumeUnit: entry.unit) {
+                    conflicts.append(entry.name)
+                }
+                continue
+            }
+            let item = Exercise(id: entry.id, name: entry.name, muscleGroup: entry.muscleGroup,
+                                equipment: entry.equipment, defaultRestSeconds: 90,
+                                isBuiltIn: false, notes: "Notes动作目录补齐；计重和次数口径以本次确认为准。",
+                                volumeUnit: entry.unit)
+            ExerciseTerminologyService.stageCandidate(for: item)
+            context.insert(item)
+            inserted.append(item)
+            catalog.append(item)
+        }
+        if !inserted.isEmpty {
+            do { try context.save() }
+            catch {
+                // Discard only this batch's inserts; do not roll back unrelated pending edits.
+                for item in inserted { context.delete(item) }
+                throw error
+            }
+        }
+        return NotesCatalogSupplementResult(createdIDs: inserted.map(\.id), conflictingNames: conflicts)
+    }
+
+    /// Lexical search hints from the source Notes. These are not equivalence approvals:
+    /// they never affect exactNameMatch, canonical IDs, PRs or historical ownership.
+    static let notesSearchHints: [String: [String]] = [
+        "杠铃片胸前转体": ["腹部杠铃片胸前转体", "杠铃片胸前转体(单边）", "杠铃片胸前转体（单边）"],
+        "站姿绳索划船": ["Standing Cable Row"],
+        "平板支撑": ["Plank hold"],
+        "侧平板支撑": ["Side plank hold"],
+        "跑步机坡度走": ["Treadmill Incline Walk", "inclined walking"],
+        "双滑轮高位下拉": ["Dual Pulley Pulldown", "Dual Pulley Lat Pull down", "Dual Pulley pull down", "Dual Pulley Lat Pull"],
+        "双滑轮低位划船": ["Dual Pulley Low Row", "Dual Pulley Seated Row"],
+        "史密斯卧推": ["Smith Bench Press", "Bench press smith machine", "bench press smith"],
+        "史密斯上斜卧推": ["Smith Inclined Bench Press", "Inclined bench press smith machine"],
+        "MTS器械下斜推胸": ["MTS Declined Bench Press", "MTS Machine Declined Bench Press"],
+        "绳索弯举": ["Cable arm curl", "Cable bicep curl"],
+        "绳索下压": ["三头绳索下压", "Cable Triceps Pushdown"],
+        "直臂下压": ["绳索直臂下压"],
+        "杠铃划船": ["Barbell Row"],
+        "站姿杠铃肩推": ["standing barbell shoulder press"],
+        "哑铃侧平举": ["dumbbell side raise"],
+        "哑铃反向飞鸟": ["dumbbell reverse fly"],
+        "绳索侧平举": ["Cable Side Pull", "Cable Side Fly"],
+        "绳索反向飞鸟": ["Cable Rear Pull", "Cable Rear Delt Pull", "Rear Delts Cable Pull", "Cable Reverse Fly", "Cable Reverse Pull"],
+        "仰卧起坐": ["sit up"],
+        "举腿": ["leg raise"],
+        "引体向上": ["pullup"],
+        "深蹲": ["squat", "strict form squat"],
+        "罗马尼亚硬拉": ["RDL"],
+        "腿举": ["Leg Press"],
+        "腿弯举": ["Hamstring Curl", "Leg Curl"],
+        "腿屈伸": ["器械腿屈伸"],
+        "坐姿比目鱼肌等长": ["坐姿负重比目鱼肌等长保持"],
+        "跳绳": ["jump rope"]
+    ]
+
     static func search(
         _ exercises: [Exercise],
         query: String,
@@ -53,6 +182,8 @@ enum ExerciseCatalogService {
         return exercises
             .filter { exercise in
                 guard !excludedExerciseIDs.contains(exercise.id) else { return false }
+                if let primary = mergedPrimary(for: exercise, among: exercises),
+                   excludedExerciseIDs.contains(primary.id) { return false }
 
                 // Archived exercises stay out of the default list, but remain discoverable
                 // by search so the picker can restore the original catalog item.
@@ -66,10 +197,12 @@ enum ExerciseCatalogService {
                     exercise.terminologyStandardNameEN ?? "",
                     exercise.terminologyCanonicalID ?? "",
                     exercise.muscleGroup,
+                    muscleSummary(for: exercise) ?? "",
                     exercise.equipment,
                     exercise.notes,
                     exercise.referenceURL
-                ] + EquipmentCatalogService.searchTerms(for: exercise.equipment) + [
+                ] + EquipmentCatalogService.searchTerms(for: exercise.equipment)
+                  + ExternalExerciseCatalogService.searchTerms(for: exercise) + [
                     terminologyCandidate?.rawNames.joined(separator: " ") ?? "",
                     terminologyCandidate?.standardNameZH ?? "",
                     terminologyCandidate?.standardNameEN ?? "",
@@ -113,11 +246,16 @@ enum ExerciseCatalogService {
         let normalizedTarget = canonicalName(name)
         guard !normalizedTarget.isEmpty else { return nil }
 
-        let matches = exercises.filter { exercise in
-            exercise.id != excludingID && canonicalName(exercise.name) == normalizedTarget
+        let matches = exercises.filter { canonicalName($0.name) == normalizedTarget }
+
+        // A confirmed historical alias must never become a new catalog identity,
+        // including when the user has manually archived the entire group.
+        if let group = seatedDipGroup(named: name), let primary = preferredPrimary(in: matches, group: group) {
+            return primary.id == excludingID ? nil : primary
         }
 
-        return matches.first(where: { !$0.isArchived }) ?? matches.first
+        let otherMatches = matches.filter { $0.id != excludingID }
+        return otherMatches.first(where: { !$0.isArchived }) ?? otherMatches.first
     }
 
     static func save(
@@ -185,6 +323,13 @@ enum ExerciseCatalogService {
                 throw ExerciseCatalogError.conflictingIdentity
             }
             if matchingExercise.isArchived {
+                if let aliasGroup = seatedDipGroup(named: cleanName) {
+                    // Creating an old alias is an explicit restore of the known
+                    // identity, not permission to apply a new form's defaults.
+                    updateConfirmedIdentity(matchingExercise, group: aliasGroup, isPrimary: true, isArchived: false)
+                    try modelContext.save()
+                    return ExerciseCatalogSaveResult(exercise: matchingExercise, kind: .restored)
+                }
                 apply(
                     name: cleanName,
                     muscleGroup: cleanMuscleGroup,
@@ -227,10 +372,32 @@ enum ExerciseCatalogService {
     @discardableResult
     static func restore(_ exercise: Exercise, in modelContext: ModelContext) throws -> Exercise {
         guard exercise.isArchived else { return exercise }
-        exercise.isArchived = false
-        exercise.updatedAt = .now
+        let exercises = try modelContext.fetch(FetchDescriptor<Exercise>())
+        let target = mergedPrimary(for: exercise, among: exercises) ?? exercise
+        guard target.isArchived else { return target }
+        target.isArchived = false
+        target.updatedAt = .now
         try modelContext.save()
-        return exercise
+        return target
+    }
+
+    /// A merged historical alias is a route to the main identity, not a second
+    /// exercise to restore. Ordinary manually archived exercises still restore.
+    static func mergedPrimary(for exercise: Exercise, among exercises: [Exercise]) -> Exercise? {
+        guard exercise.isArchived, let canonical = exercise.approvedCanonicalID,
+              let group = confirmedAliasGroups.first(where: { $0.canonicalID == canonical }) else { return nil }
+        let matches = exercises.filter { $0.approvedCanonicalID == canonical }
+        guard let primary = preferredPrimary(in: matches, group: group), primary.id != exercise.id else { return nil }
+        return primary
+    }
+
+    /// Informational anatomy is deliberately separate from muscleGroup, which
+    /// remains the primary workload/recommendation bucket in existing records.
+    static func muscleSummary(for exercise: Exercise) -> String? {
+        let canonical = exercise.approvedCanonicalID
+            ?? ExerciseTerminologyService.candidate(for: exercise.name)?.canonicalID
+        guard canonical == "machine_triceps_press" else { return nil }
+        return "主要：肱三头肌 · 辅助：胸部（不重复计组）"
     }
 
     /// The user explicitly confirmed this one equivalence. Current plans and metrics
@@ -276,7 +443,7 @@ enum ExerciseCatalogService {
             log.exerciseID = primary.id
         }
 
-        for duplicate in duplicates {
+        for duplicate in duplicates where !duplicate.isArchived {
             duplicate.isArchived = true
             duplicate.updatedAt = .now
         }
@@ -310,7 +477,7 @@ enum ExerciseCatalogService {
         .init(canonicalID: "machine_reverse_fly", primaryName: "器械反向飞鸟", aliases: ["器械反向飞鸟", "Reverse Fly", "rear dealt"]),
         .init(canonicalID: "barbell_hip_thrust", primaryName: "杠铃臀推", aliases: ["杠铃臀推", "臀推", "顶髋"]),
         .init(canonicalID: "barbell_thruster", primaryName: "杠铃火箭推", aliases: ["杠铃火箭推", "火箭推", "半蹲上推"]),
-        .init(canonicalID: "machine_triceps_press", primaryName: "三头下压机", aliases: ["三头下压机", "seated dip"]),
+        .init(canonicalID: "machine_triceps_press", primaryName: "坐姿器械臂屈伸", aliases: ["坐姿器械臂屈伸", "三头下压机", "seated dip"]),
         .init(canonicalID: "dumbbell_side_lunge", primaryName: "哑铃侧弓步", aliases: ["哑铃侧弓步", "哑铃侧边蹲"])
     ]
 
@@ -330,26 +497,44 @@ enum ExerciseCatalogService {
     static func consolidateConfirmedAliases(in modelContext: ModelContext) throws {
         let activeSessions = try modelContext.fetch(FetchDescriptor<WorkoutSession>())
             .contains { $0.status == .inProgress }
-        guard !activeSessions else { return }
-
         let exercises = try modelContext.fetch(FetchDescriptor<Exercise>())
+        if activeSessions {
+            // An unfinished workout blocks reference rewiring and new identity
+            // decisions, not labels for an identity the user already confirmed.
+            // Keep every archive state, plan, snapshot and actual set unchanged.
+            if let group = confirmedAliasGroups.first(where: { $0.canonicalID == "machine_triceps_press" }) {
+                let approved = exercises.filter { $0.approvedCanonicalID == group.canonicalID }
+                if let primary = preferredPrimary(in: approved, group: group) {
+                    let aliasKeys = Set(group.aliases.map(normalizedName))
+                    for exercise in approved {
+                        updateConfirmedIdentity(exercise, group: group,
+                            isPrimary: exercise.id == primary.id && aliasKeys.contains(normalizedName(exercise.name)),
+                            isArchived: exercise.isArchived)
+                    }
+                }
+            }
+            return
+        }
+
         let templateItems = try modelContext.fetch(FetchDescriptor<TemplateExercise>())
 
         for group in confirmedAliasGroups {
             let aliasKeys = Set(group.aliases.map(normalizedName))
-            let matches = exercises.filter {
+            let candidates = exercises.filter {
                 $0.terminologyCanonicalID == group.canonicalID
                     || aliasKeys.contains(normalizedName($0.name))
             }
-            guard !matches.isEmpty else { continue }
-            let primary = matches.first { normalizedName($0.name) == normalizedName(group.primaryName) && !$0.isArchived }
-                ?? matches.first { !$0.isArchived }
-                ?? matches[0]
-            primary.name = group.primaryName
-            primary.isArchived = false
-            primary.terminologyCanonicalID = group.canonicalID
-            primary.terminologyDecision = .accepted
-            primary.updatedAt = .now
+            guard let primary = preferredPrimary(in: candidates, group: group) else { continue }
+            // An established identity is stronger evidence than an unreviewed
+            // name collision. Leave incompatible manual records entirely alone.
+            let matches = candidates.filter { candidate in
+                guard primary.approvedCanonicalID == group.canonicalID,
+                      candidate.approvedCanonicalID != group.canonicalID else { return true }
+                return semanticallyCompatible(candidate, muscleGroup: primary.muscleGroup,
+                    equipment: primary.equipment, volumeUnit: primary.volumeUnit)
+            }
+            let keepGroupArchived = matches.allSatisfy(\.isArchived)
+            updateConfirmedIdentity(primary, group: group, isPrimary: true, isArchived: keepGroupArchived)
 
             let duplicateIDs = Set(matches.filter { $0.id != primary.id }.map(\.id))
             for item in templateItems where duplicateIDs.contains(item.exerciseID) {
@@ -363,10 +548,7 @@ enum ExerciseCatalogService {
                 }
             }
             for duplicate in matches where duplicate.id != primary.id {
-                duplicate.isArchived = true
-                duplicate.terminologyCanonicalID = group.canonicalID
-                duplicate.terminologyDecision = .accepted
-                duplicate.updatedAt = .now
+                updateConfirmedIdentity(duplicate, group: group, isPrimary: false, isArchived: true)
             }
         }
 
@@ -383,6 +565,45 @@ enum ExerciseCatalogService {
             exercise.isArchived = true
             exercise.updatedAt = .now
         }
+    }
+
+    private static func preferredPrimary(in matches: [Exercise], group: ConfirmedAliasGroup) -> Exercise? {
+        let approved = matches.filter { $0.approvedCanonicalID == group.canonicalID }
+        let identityCandidates = approved.isEmpty ? matches : approved
+        let ordered = identityCandidates.sorted {
+            if $0.isArchived != $1.isArchived { return !$0.isArchived }
+            return $0.id.uuidString < $1.id.uuidString
+        }
+        return ordered.first { normalizedName($0.name) == normalizedName(group.primaryName) }
+            ?? ordered.first { group.canonicalID == "machine_triceps_press" && normalizedName($0.name) == normalizedName("三头下压机") }
+            ?? ordered.first
+    }
+
+    private static func seatedDipGroup(named name: String) -> ConfirmedAliasGroup? {
+        let key = normalizedName(name)
+        return confirmedAliasGroups.first {
+            $0.canonicalID == "machine_triceps_press" && $0.aliases.contains { normalizedName($0) == key }
+        }
+    }
+
+    private static func updateConfirmedIdentity(_ exercise: Exercise, group: ConfirmedAliasGroup, isPrimary: Bool, isArchived: Bool) {
+        var changed = false
+        if isPrimary && exercise.name != group.primaryName { exercise.name = group.primaryName; changed = true }
+        if exercise.isArchived != isArchived { exercise.isArchived = isArchived; changed = true }
+        if exercise.terminologyCanonicalID != group.canonicalID { exercise.terminologyCanonicalID = group.canonicalID; changed = true }
+        if exercise.terminologyDecision != .accepted { exercise.terminologyDecision = .accepted; changed = true }
+        if group.canonicalID == "machine_triceps_press",
+           let candidate = ExerciseTerminologyService.candidate(for: group.primaryName) {
+            if exercise.terminologyStandardNameZH != candidate.standardNameZH { exercise.terminologyStandardNameZH = candidate.standardNameZH; changed = true }
+            if exercise.terminologyStandardNameEN != candidate.standardNameEN { exercise.terminologyStandardNameEN = candidate.standardNameEN; changed = true }
+            if exercise.terminologyReviewStatus != candidate.reviewStatus { exercise.terminologyReviewStatus = candidate.reviewStatus; changed = true }
+            if exercise.terminologyConfidence != candidate.confidence { exercise.terminologyConfidence = candidate.confidence; changed = true }
+            if exercise.terminologyReviewNote != candidate.reviewNote { exercise.terminologyReviewNote = candidate.reviewNote; changed = true }
+            if exercise.terminologyCatalogVersion != ExerciseTerminologyService.catalogVersion {
+                exercise.terminologyCatalogVersion = ExerciseTerminologyService.catalogVersion; changed = true
+            }
+        }
+        if changed { exercise.updatedAt = .now }
     }
 
     private static func apply(
@@ -413,6 +634,7 @@ enum ExerciseCatalogService {
 
     private static func canonicalName(_ value: String) -> String {
         let normalized = normalizedName(value)
+        if let group = seatedDipGroup(named: value) { return normalizedName(group.primaryName) }
         if normalized == normalizedName("严格深蹲") {
             return normalizedName("深蹲")
         }
@@ -421,8 +643,10 @@ enum ExerciseCatalogService {
 
     private static func searchAliases(for name: String) -> [String] {
         let normalized = canonicalName(name)
-        if normalized == normalizedName("深蹲") { return ["深蹲", "严格深蹲"] }
-        return confirmedAliasesByNormalizedName[normalized] ?? []
+        let confirmed = normalized == normalizedName("深蹲")
+            ? ["深蹲", "严格深蹲"] : (confirmedAliasesByNormalizedName[normalized] ?? [])
+        let hints = notesSearchHints.first { normalizedName($0.key) == normalized }?.value ?? []
+        return confirmed + hints
     }
 
     private static let confirmedAliasesByNormalizedName: [String: [String]] = {

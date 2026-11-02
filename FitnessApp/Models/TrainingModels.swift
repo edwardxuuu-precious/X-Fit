@@ -226,6 +226,7 @@ enum PlanPatternSource: String, Codable, CaseIterable, Identifiable {
 enum MeasurementSide: String, Codable, CaseIterable, Identifiable {
     case single
     case bilateral
+    case unknown
 
     var id: String { rawValue }
 
@@ -233,6 +234,7 @@ enum MeasurementSide: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .single: return "单边"
         case .bilateral: return "双边"
+        case .unknown: return "未注明"
         }
     }
 }
@@ -267,25 +269,70 @@ enum WorkoutFeeling: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-struct WorkoutSetPlan: Codable, Equatable, Identifiable {
+enum WorkoutActualDefaultPolicy: String, Codable { case history, plan, blank }
+enum WorkoutActualEntrySource: String, Codable { case plan, history, manual, blank, legacy }
+
+/// Optional prescription metadata belongs to the plan, never to the actual log.
+struct WorkoutSetPrescription: Codable, Hashable {
+    var label: String
+    var repsLower: Int
+    var repsUpper: Int
+    var rirLower: Int? = nil
+    var rirUpper: Int? = nil
+    var restLowerSeconds: Int
+    var restUpperSeconds: Int
+    var effortCue: String? = nil
+
+    var isValid: Bool {
+        guard !label.isEmpty, (1...86400).contains(repsLower), (repsLower...86400).contains(repsUpper),
+              (0...3600).contains(restLowerSeconds), (restLowerSeconds...3600).contains(restUpperSeconds) else { return false }
+        if rirLower == nil && rirUpper == nil { return true }
+        guard let lower = rirLower, let upper = rirUpper else { return false }
+        return (0...10).contains(lower) && (lower...10).contains(upper)
+    }
+
+    var summary: String {
+        var parts = [label, repsLower == repsUpper ? "\(repsLower)" : "\(repsLower)–\(repsUpper)"]
+        if let lower = rirLower, let upper = rirUpper {
+            parts.append(lower == upper ? "RIR \(lower)" : "RIR \(lower)–\(upper)")
+        }
+        if let effortCue, !effortCue.isEmpty { parts.append(effortCue) }
+        parts.append(restLowerSeconds == restUpperSeconds ? "休息 \(restLowerSeconds) 秒" : "休息 \(restLowerSeconds)–\(restUpperSeconds) 秒")
+        return parts.joined(separator: " · ")
+    }
+}
+
+struct WorkoutSetPlan: Codable, Hashable, Identifiable {
     var id: UUID = UUID()
     var weight: Double
     var reps: Int
     var weightSide: MeasurementSide
     var repsSide: MeasurementSide
+    /// Optional so earlier per-set JSON remains readable. This is an entry policy, not a load recommendation.
+    var actualDefaultPolicyRaw: String?
+    var prescription: WorkoutSetPrescription? = nil
+
+    var actualDefaultPolicy: WorkoutActualDefaultPolicy {
+        guard let actualDefaultPolicyRaw else { return .history }
+        return WorkoutActualDefaultPolicy(rawValue: actualDefaultPolicyRaw) ?? .plan
+    }
 
     init(
         id: UUID = UUID(),
         weight: Double,
         reps: Int,
         weightSide: MeasurementSide = .bilateral,
-        repsSide: MeasurementSide = .bilateral
+        repsSide: MeasurementSide = .bilateral,
+        actualDefaultPolicy: WorkoutActualDefaultPolicy? = nil,
+        prescription: WorkoutSetPrescription? = nil
     ) {
         self.id = id
         self.weight = max(0, weight)
         self.reps = max(1, reps)
         self.weightSide = weightSide
         self.repsSide = repsSide
+        self.actualDefaultPolicyRaw = actualDefaultPolicy?.rawValue
+        self.prescription = prescription
     }
 
     static func preset(
@@ -461,6 +508,7 @@ final class WorkoutTemplate {
     var focusMuscleGroupsRaw: String = ""
     /// Optional so stores created before day-level patterns remain lightweight-migratable.
     var defaultPlanPatternRaw: String?
+    var trainingPreferenceSnapshotJSON: String?
 
     var defaultPlanPattern: SetPlanPattern {
         get { defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
@@ -488,7 +536,8 @@ final class WorkoutTemplate {
         isOneOff: Bool = false,
         plannedForDate: Date? = nil,
         focusMuscleGroups: [String] = [],
-        defaultPlanPattern: SetPlanPattern? = nil
+        defaultPlanPattern: SetPlanPattern? = nil,
+        trainingPreferenceSnapshotJSON: String? = nil
     ) {
         self.id = id
         self.name = name
@@ -499,6 +548,7 @@ final class WorkoutTemplate {
         self.plannedForDate = plannedForDate?.startOfDay
         self.focusMuscleGroupsRaw = focusMuscleGroups.joined(separator: ",")
         self.defaultPlanPatternRaw = defaultPlanPattern?.rawValue
+        self.trainingPreferenceSnapshotJSON = trainingPreferenceSnapshotJSON
     }
 }
 
@@ -587,6 +637,64 @@ final class TemplateExercise {
     }
 }
 
+struct ScheduledWorkoutExerciseSnapshot: Codable, Equatable, Identifiable {
+    var id: UUID
+    var exerciseID: UUID
+    var exerciseName: String
+    var muscleGroup: String
+    var equipment: String
+    var exerciseNotes: String
+    var referenceURL: String
+    var volumeUnit: ExerciseVolumeUnit
+    var order: Int
+    var targetSets: Int
+    var minReps: Int
+    var maxReps: Int
+    var targetWeight: Double
+    var restSeconds: Int
+    var plannedSets: [WorkoutSetPlan]
+    var planPattern: SetPlanPattern
+    var patternSource: PlanPatternSource
+
+    init(
+        id: UUID = UUID(),
+        exerciseID: UUID,
+        exerciseName: String,
+        muscleGroup: String,
+        equipment: String,
+        exerciseNotes: String,
+        referenceURL: String,
+        volumeUnit: ExerciseVolumeUnit,
+        order: Int,
+        targetSets: Int,
+        minReps: Int,
+        maxReps: Int,
+        targetWeight: Double,
+        restSeconds: Int,
+        plannedSets: [WorkoutSetPlan],
+        planPattern: SetPlanPattern,
+        patternSource: PlanPatternSource
+    ) {
+        self.id = id
+        self.exerciseID = exerciseID
+        self.exerciseName = exerciseName
+        self.muscleGroup = muscleGroup
+        self.equipment = equipment
+        self.exerciseNotes = exerciseNotes
+        self.referenceURL = referenceURL
+        self.volumeUnit = volumeUnit
+        self.order = order
+        self.targetSets = targetSets
+        self.minReps = minReps
+        self.maxReps = maxReps
+        self.targetWeight = targetWeight
+        self.restSeconds = restSeconds
+        self.plannedSets = plannedSets
+        self.planPattern = planPattern
+        self.patternSource = patternSource
+    }
+}
+
 @Model
 final class ScheduledWorkout {
     var id: UUID = UUID()
@@ -600,10 +708,51 @@ final class ScheduledWorkout {
     var skipReason: String = ""
     var reminderDate: Date?
     var updatedAt: Date = Date.now
+    /// Immutable exercise plan captured when the schedule is created.
+    var planSnapshotJSON: String?
+    /// Civil date is frozen when a new schedule is authored; nil preserves legacy ambiguity.
+    var plannedLocalDay: String?
+    var plannedTimeZoneIdentifier: String?
+    /// Optional provenance for an explicitly confirmed single-day import; legacy schedules remain unchanged.
+    var confirmedDailyImportJSON: String?
+    /// Optional typed target for manually scheduled jump rope. Existing plans stay unchanged.
+    var jumpRopePlanJSON: String?
+
+    var jumpRopePlan: JumpRopeMenuPlan? {
+        get {
+            guard let data = jumpRopePlanJSON?.data(using: .utf8) else { return nil }
+            return try? JSONDecoder().decode(JumpRopeMenuPlan.self, from: data)
+        }
+        set {
+            jumpRopePlanJSON = newValue.flatMap { try? JSONEncoder().encode($0) }
+                .flatMap { String(data: $0, encoding: .utf8) }
+        }
+    }
 
     var status: ScheduleStatus {
         get { ScheduleStatus(rawValue: statusRaw) ?? .planned }
         set { statusRaw = newValue.rawValue }
+    }
+
+    var planSnapshot: [ScheduledWorkoutExerciseSnapshot] {
+        get {
+            guard let planSnapshotJSON,
+                  let data = planSnapshotJSON.data(using: .utf8),
+                  let decoded = try? JSONDecoder().decode(
+                    [ScheduledWorkoutExerciseSnapshot].self,
+                    from: data
+                  ) else { return [] }
+            return decoded.sorted { $0.order < $1.order }
+        }
+        set {
+            guard !newValue.isEmpty,
+                  let data = try? JSONEncoder().encode(newValue.sorted(by: { $0.order < $1.order }))
+            else {
+                planSnapshotJSON = nil
+                return
+            }
+            planSnapshotJSON = String(data: data, encoding: .utf8)
+        }
     }
 
     init(
@@ -616,7 +765,8 @@ final class ScheduledWorkout {
         originalPlannedDate: Date? = nil,
         isManuallyScheduled: Bool = false,
         skipReason: String = "",
-        reminderDate: Date? = nil
+        reminderDate: Date? = nil,
+        planSnapshot: [ScheduledWorkoutExerciseSnapshot] = []
     ) {
         self.id = id
         self.templateID = templateID
@@ -629,6 +779,14 @@ final class ScheduledWorkout {
         self.skipReason = skipReason
         self.reminderDate = reminderDate
         self.updatedAt = createdAt
+        self.planSnapshot = planSnapshot
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = .current
+        formatter.dateFormat = "yyyy-MM-dd"
+        self.plannedLocalDay = formatter.string(from: plannedDate)
+        self.plannedTimeZoneIdentifier = TimeZone.current.identifier
     }
 }
 
@@ -639,7 +797,12 @@ final class WorkoutSession {
     var templateID: UUID?
     var templateName: String = ""
     var plannedDate: Date = Date.now
+    /// Frozen civil ownership for newly authored sessions; nil never guesses a legacy source timezone.
+    var trainingLocalDay: String?
+    var trainingTimeZoneIdentifier: String?
     var startedAt: Date = Date.now
+    /// Nil means a legacy record whose stored start time remains authoritative.
+    var startTimeKnownRaw: Bool?
     var completedAt: Date?
     var statusRaw: String = WorkoutSessionStatus.inProgress.rawValue
     var notes: String = ""
@@ -649,6 +812,8 @@ final class WorkoutSession {
     var importIdentifier: String = ""
     /// Snapshot of the day-level pattern used when this workout began.
     var defaultPlanPatternRaw: String?
+    /// Machine-specific cardio level. Nil preserves older records; never a kg load or an effort score.
+    var cardioResistanceLevel: Double?
 
     var defaultPlanPattern: SetPlanPattern {
         get { defaultPlanPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
@@ -658,6 +823,11 @@ final class WorkoutSession {
     var status: WorkoutSessionStatus {
         get { WorkoutSessionStatus(rawValue: statusRaw) ?? .inProgress }
         set { statusRaw = newValue.rawValue }
+    }
+
+    var isStartTimeKnown: Bool {
+        get { startTimeKnownRaw ?? true }
+        set { startTimeKnownRaw = newValue }
     }
 
     var restMode: WorkoutRestMode {
@@ -672,6 +842,7 @@ final class WorkoutSession {
         templateName: String,
         plannedDate: Date,
         startedAt: Date = .now,
+        isStartTimeKnown: Bool = true,
         completedAt: Date? = nil,
         status: WorkoutSessionStatus = .inProgress,
         notes: String = "",
@@ -686,6 +857,7 @@ final class WorkoutSession {
         self.templateName = templateName
         self.plannedDate = plannedDate.startOfDay
         self.startedAt = startedAt
+        self.startTimeKnownRaw = isStartTimeKnown
         self.completedAt = completedAt
         self.statusRaw = status.rawValue
         self.notes = notes
@@ -718,6 +890,7 @@ final class SessionExercise {
     var performanceNotes: String = ""
     /// Per-set plan snapshot; later template edits must not change this session.
     var plannedSetsJSON: String?
+    var hasManuallyReducedSets: Bool?
     var planPatternRaw: String?
     var patternSourceRaw: String?
     var feelingRaw: String?
@@ -726,6 +899,10 @@ final class SessionExercise {
     var exerciseCompletedAt: Date?
     /// Frozen at session start/first interaction so later body measurements cannot rewrite history.
     var bodyWeightKgSnapshot: Double?
+    /// Local body-measurement date that supplied the frozen weight; nil means unknown/Health fallback.
+    var bodyWeightSnapshotSourceDate: Date?
+    /// Never inferred from today's catalog for an old record. Older sessions may resolve from their frozen schedule.
+    var equipmentSnapshot: String?
 
     var planPattern: SetPlanPattern {
         get { planPatternRaw.flatMap(SetPlanPattern.init(rawValue:)) ?? .fixed }
@@ -782,7 +959,9 @@ final class SessionExercise {
         patternSource: PlanPatternSource = .exerciseOverride,
         exerciseStartedAt: Date? = nil,
         exerciseCompletedAt: Date? = nil,
-        bodyWeightKgSnapshot: Double? = nil
+        bodyWeightKgSnapshot: Double? = nil,
+        bodyWeightSnapshotSourceDate: Date? = nil,
+        equipmentSnapshot: String? = nil
     ) {
         self.id = id
         self.sessionID = sessionID
@@ -813,6 +992,8 @@ final class SessionExercise {
         self.exerciseStartedAt = exerciseStartedAt
         self.exerciseCompletedAt = exerciseCompletedAt
         self.bodyWeightKgSnapshot = bodyWeightKgSnapshot
+        self.bodyWeightSnapshotSourceDate = bodyWeightSnapshotSourceDate
+        self.equipmentSnapshot = equipmentSnapshot
     }
 
 
@@ -829,6 +1010,7 @@ final class SetLog {
     var sessionExerciseID: UUID = UUID()
     var exerciseID: UUID = UUID()
     var setNumber: Int = 1
+    var reductionOrder: Int?
     var targetWeight: Double = 0
     var targetReps: Int = 1
     var actualWeight: Double = 0
@@ -848,6 +1030,21 @@ final class SetLog {
     var targetRepsSideRaw: String?
     var actualWeightSideRaw: String?
     var actualRepsSideRaw: String?
+    var actualEntrySourceRaw: String?
+    var sourceHistorySetID: UUID?
+    /// Optional for migration; a blank load must stay blank when only reps/side are edited.
+    var actualWeightIsBlank: Bool?
+    var isActualWeightBlank: Bool { actualWeightIsBlank ?? (actualEntrySource == .blank) }
+
+    var actualEntrySource: WorkoutActualEntrySource {
+        get { actualEntrySourceRaw.flatMap(WorkoutActualEntrySource.init(rawValue:)) ?? .legacy }
+        set { actualEntrySourceRaw = newValue.rawValue }
+    }
+
+    func markActualEntryEdited() {
+        if actualWeightIsBlank == nil { actualWeightIsBlank = actualEntrySource == .blank }
+        actualEntrySource = .manual
+    }
 
     var targetWeightSide: MeasurementSide {
         get { targetWeightSideRaw.flatMap(MeasurementSide.init(rawValue:)) ?? .bilateral }
@@ -890,7 +1087,10 @@ final class SetLog {
         targetWeightSide: MeasurementSide = .bilateral,
         targetRepsSide: MeasurementSide = .bilateral,
         actualWeightSide: MeasurementSide? = nil,
-        actualRepsSide: MeasurementSide? = nil
+        actualRepsSide: MeasurementSide? = nil,
+        actualEntrySource: WorkoutActualEntrySource? = nil,
+        sourceHistorySetID: UUID? = nil,
+        actualWeightIsBlank: Bool? = nil
     ) {
         self.id = id
         self.sessionID = sessionID
@@ -913,5 +1113,8 @@ final class SetLog {
         self.targetRepsSideRaw = targetRepsSide.rawValue
         self.actualWeightSideRaw = (actualWeightSide ?? targetWeightSide).rawValue
         self.actualRepsSideRaw = (actualRepsSide ?? targetRepsSide).rawValue
+        self.actualEntrySourceRaw = actualEntrySource?.rawValue
+        self.sourceHistorySetID = sourceHistorySetID
+        self.actualWeightIsBlank = actualWeightIsBlank ?? actualEntrySource.map { $0 == .blank }
     }
 }

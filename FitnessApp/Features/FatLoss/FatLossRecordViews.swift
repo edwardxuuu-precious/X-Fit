@@ -15,7 +15,7 @@ struct FatLossDailyEditor: View {
     @State private var errorMessage: String?
     var body: some View {
         Form {
-            Section(FatLossCalendar.label(date)) {
+            Section(header: SprintSectionHeading(title: FatLossCalendar.label(date), icon: "figure.walk")) {
                 HStack { Text("步数"); TextField("未记录", text: $steps).frame(minHeight: 44).keyboardType(.numberPad).multilineTextAlignment(.trailing) }
                 HStack { Text("睡眠小时"); TextField("未记录", text: $sleep).frame(minHeight: 44).keyboardType(.decimalPad).multilineTextAlignment(.trailing) }
                 Picker("腹胀程度", selection: $bloating) {
@@ -28,7 +28,7 @@ struct FatLossDailyEditor: View {
                 Text("留空表示未知。")
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput().navigationTitle("日常记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput().navigationTitle("日常记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("保存", action: save).fontWeight(.semibold).frame(minHeight: 44)
@@ -63,17 +63,21 @@ struct FatLossTargetsView: View {
     var body: some View {
         List {
             Section {
-                NavigationLink("新增目标版本", destination: FatLossTargetEditor(program: program))
+                NavigationLink(destination: FatLossTargetEditor(program: program)) {
+                    Label("新增目标版本", systemImage: "scope")
+                }
                     .accessibilityIdentifier("新增减脂目标版本")
-                NavigationLink("化验、医生建议与用药记录", destination: FatLossHealthEditor(program: program))
+                NavigationLink(destination: FatLossHealthEditor(program: program)) {
+                    Label("补充健康记录", systemImage: "heart.text.clipboard")
+                }
             }
-            Section("目标历史") {
+            Section(header: SprintSectionHeading(title: "目标历史", icon: "clock.arrow.circlepath")) {
                 ForEach(targets.filter { $0.programID == program.id }) { target in
                     VStack(alignment: .leading, spacing: 8) {
                         Text("\(FatLossCalendar.label(target.effectiveDate)) 起").font(.headline)
                         Text(target.reason).font(.subheadline)
                         Text(target.isNutritionConfirmed ? "营养目标已确认" : "营养目标待确认")
-                            .font(.caption).foregroundStyle(target.isNutritionConfirmed ? AppTheme.accent : AppTheme.orange)
+                            .font(.caption).foregroundStyle(target.isNutritionConfirmed ? AppTheme.ink : AppTheme.orange)
                         Text("体重 \(target.targetWeightKg.map { "\($0) kg" } ?? "未设置") · 步数 \(target.steps.map(String.init) ?? "未设置")")
                             .font(.caption).foregroundStyle(AppTheme.secondaryText)
                         if target.isNutritionConfirmed {
@@ -84,7 +88,7 @@ struct FatLossTargetsView: View {
                     }.padding(.vertical, 5)
                 }
             }
-            Section("健康记录") {
+            Section(header: SprintSectionHeading(title: "健康记录", icon: "heart.text.clipboard")) {
                 ForEach(records.filter { $0.programID == program.id }) { record in
                     VStack(alignment: .leading, spacing: 7) {
                         Text(record.metric).font(.headline)
@@ -99,7 +103,7 @@ struct FatLossTargetsView: View {
                     }.padding(.vertical, 5)
                 }
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput().navigationTitle("目标与健康档案").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput().navigationTitle("目标与健康档案").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
     }
 }
 
@@ -120,7 +124,7 @@ private struct FatLossTargetEditor: View {
     @State private var errorMessage: String?
     var body: some View {
         Form {
-            Section("新版本") {
+            Section(header: SprintSectionHeading(title: "新版本", icon: "scope")) {
                 DatePicker("生效日期", selection: $effectiveDate, in: program.startDate...program.endDate, displayedComponents: .date)
                 TextField("调整原因（必填）", text: $reason, axis: .vertical).frame(minHeight: 44)
                 field("期望体重 kg", $weight, decimal: true)
@@ -128,7 +132,7 @@ private struct FatLossTargetEditor: View {
                 Text("留空表示待确定，已有版本保留。")
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
             }
-            Section("医学相关营养目标") {
+            Section(header: SprintSectionHeading(title: "营养目标", icon: "fork.knife")) {
                 Toggle("已取得并确认适用的营养建议", isOn: $nutritionConfirmed)
                 TextField("医生 / 营养师建议来源与日期", text: $source, axis: .vertical).frame(minHeight: 44)
                 if nutritionConfirmed {
@@ -138,7 +142,7 @@ private struct FatLossTargetEditor: View {
                     field("脂肪 g", $fat)
                 } else { Text("营养目标待确认") }
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput().navigationTitle("调整目标").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput().navigationTitle("调整目标").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("保存", action: save).fontWeight(.semibold).frame(minHeight: 44)
@@ -200,7 +204,7 @@ private struct FatLossHealthEditor: View {
     @State private var errorMessage: String?
     var body: some View {
         Form {
-            Section("记录内容") {
+            Section(header: SprintSectionHeading(title: "记录内容", icon: "heart.text.clipboard")) {
                 Picker("项目", selection: $metric) {
                     ForEach(["尿酸", "肌酐", "eGFR", "尿蛋白", "医生饮食建议", "用药自述", "其他"], id: \.self) { Text($0).tag($0) }
                 }
@@ -216,7 +220,7 @@ private struct FatLossHealthEditor: View {
                     .font(.caption).foregroundStyle(AppTheme.secondaryText)
 
             }
-        }.scrollContentBackground(.hidden).screenBackground().fatLossCalendar().fatLossInput().navigationTitle("补充健康记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.scrollContentBackground(.hidden).sprintPage().fatLossCalendar().fatLossInput().navigationTitle("补充健康记录").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("保存", action: saveHealth).fontWeight(.semibold).frame(minHeight: 44)
@@ -255,21 +259,21 @@ struct FatLossReviewView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("这一周的进展").font(AppTheme.pageTitle)
+                    SprintPageHeader(title: "周复盘", icon: "arrow.triangle.2.circlepath")
                     DatePicker("截至日期", selection: $endDate, in: program.startDate...program.endDate, displayedComponents: .date)
-                        .font(.subheadline).tint(AppTheme.accent)
+                        .font(.subheadline).tint(AppTheme.ink)
                 }
                 weekSummary
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("写下本周感受").font(.title3.bold())
+                    SprintSectionHeading(title: "本周感受", icon: "square.and.pencil")
                     TextField("本周体重、饥饿、腹胀与训练表现", text: $notes, axis: .vertical)
                         .lineLimit(3...6).padding(16).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 16))
-                    Text("下一步怎么做").font(.headline)
+                    SprintSectionHeading(title: "下一步", icon: "arrow.up.right")
                     TextField("下一步（如维持观察、换菜、复查）", text: $nextAction, axis: .vertical)
                         .lineLimit(2...5).padding(16).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 16))
                     if saved {
                         Text("已保存。后续补记不会修改这个快照。")
-                            .font(.caption).foregroundStyle(AppTheme.accent)
+                            .font(.caption).foregroundStyle(AppTheme.ink)
                     }
                     DisclosureGroup("参考记录建议") {
                         ForEach(suggestions, id: \.self) { suggestion in
@@ -300,7 +304,7 @@ struct FatLossReviewView: View {
                     ForEach(reviews.filter { $0.programID == program.id }) { review in
                         VStack(alignment: .leading, spacing: 10) {
                             Text("\(FatLossCalendar.label(review.weekStart)) — \(FatLossCalendar.label(review.weekEnd))").font(.headline)
-                            if review.previousReviewID != nil { Text("补充版本 · 原版保留").font(.caption).foregroundStyle(AppTheme.accent) }
+                            if review.previousReviewID != nil { Text("补充版本 · 原版保留").font(.caption).foregroundStyle(AppTheme.ink) }
                             Text(review.notes)
                             if !review.nextAction.isEmpty { Text("下一步：\(review.nextAction)").font(.subheadline) }
                             if let days = try? JSONDecoder().decode([FatLossDaySummary].self, from: Data(review.snapshotJSON.utf8)) {
@@ -313,7 +317,7 @@ struct FatLossReviewView: View {
                     }
                 }.accessibilityIdentifier("复盘-历史")
             }.padding(20)
-        }.screenBackground().fatLossCalendar().fatLossInput().navigationTitle("每周复盘").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
+        }.sprintPage().fatLossCalendar().fatLossInput().navigationTitle("每周复盘").navigationBarTitleDisplayMode(.inline).toolbar(.visible, for: .navigationBar)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Button(action: saveReview) { Text("保存本周复盘").neonButtonStyle() }
                     .disabled(FatLossCalendar.day(endDate) > FatLossCalendar.day(.now))
@@ -360,12 +364,12 @@ struct FatLossReviewView: View {
                 Text("近 7 天平均体重").font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 Text(mean.map { String(format: "%.1f", $0) } ?? "数据不足")
                     .font(.system(size: mean == nil ? 30 : 58, weight: .bold, design: .rounded)).monospacedDigit()
-                    .foregroundStyle(AppTheme.posterWarmWhite).accessibilityIdentifier("复盘-均重")
+                    .foregroundStyle(AppTheme.ink).accessibilityIdentifier("复盘-均重")
                 Text("\(mean == nil ? "" : "kg · ")称重 \(weights.count)/7 天")
                     .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
                 if let mean, let priorMean {
                     Text(String(format: "较前 7 天 %+.1f kg", mean - priorMean))
-                        .font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.accent)
+                        .font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.ink)
                 } else {
                     Text("两周各满 3 个称重日，再比较变化。")
                         .font(.caption).foregroundStyle(AppTheme.secondaryText)
@@ -392,7 +396,7 @@ struct FatLossReviewView: View {
     private func reviewMetric(_ title: String, _ value: String, _ detail: String) -> some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(title).font(.caption).foregroundStyle(AppTheme.secondaryText)
-            Text(value).font(.title2.bold()).foregroundStyle(AppTheme.posterWarmWhite)
+            Text(value).font(.title2.bold()).foregroundStyle(AppTheme.ink)
             Text(detail).font(.caption).foregroundStyle(AppTheme.secondaryText)
         }.frame(maxWidth: .infinity, alignment: .leading)
             .padding(16).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 16))

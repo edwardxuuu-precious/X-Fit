@@ -4,6 +4,7 @@ import SwiftUI
 
 struct BodyMeasurementsView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Query(sort: \BodyMeasurement.date, order: .reverse) private var measurements: [BodyMeasurement]
 
     @State private var showQuickEditor = false
@@ -23,19 +24,19 @@ struct BodyMeasurementsView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 18) {
+            VStack(alignment: .leading, spacing: 18) {
+                SprintPageHeader(title: "身体记录", icon: "figure.arms.open")
+                latestCard
                 Button {
                     fullEditor = BodyEditorRoute(measurement: nil)
                 } label: {
-                    Label("记录完整身体数据", systemImage: "ruler")
+                    Label("记录体脂与围度", systemImage: "ruler")
                         .font(.subheadline.bold())
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
-                .buttonStyle(.bordered)
-                .tint(AppTheme.accent)
+                .buttonStyle(SprintSecondaryButtonStyle())
                 .accessibilityIdentifier("记录完整身体数据")
 
-                latestCard
                 BodyWeightTrendCard(measurements: measurements)
                 SectionHeader(title: "历史记录", actionTitle: "\(measurements.count) 条")
 
@@ -48,8 +49,10 @@ struct BodyMeasurementsView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 36)
                 } else {
-                    ForEach(measurements) { measurement in
-                        measurementRow(measurement)
+                    LazyVStack(alignment: .leading, spacing: 18) {
+                        ForEach(measurements) { measurement in
+                            measurementRow(measurement)
+                        }
                     }
                 }
             }
@@ -58,13 +61,16 @@ struct BodyMeasurementsView: View {
             .padding(.bottom, 28)
         }
         .scrollDismissesKeyboard(.immediately)
-        .screenBackground()
+        .sprintPage()
         .navigationTitle("身体数据")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button { showQuickEditor = true } label: {
+                Button {
+                    traceQuickWeight("button.action")
+                    showQuickEditor = true
+                } label: {
                     Label("快速记录体重", systemImage: "plus")
                         .frame(minWidth: 44, minHeight: 44)
                 }
@@ -75,13 +81,18 @@ struct BodyMeasurementsView: View {
             QuickBodyWeightEntryView()
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .preferredColorScheme(.light)
+                .tint(AppTheme.ink)
+                .onAppear { traceQuickWeight("sheet.appear") }
+                .onDisappear { traceQuickWeight("sheet.disappear") }
+        }
+        .onChange(of: showQuickEditor) { _, presented in
+            traceQuickWeight(presented ? "presentation.true" : "presentation.false")
         }
         .sheet(item: $fullEditor) { route in
             BodyMeasurementEditorView(measurement: route.measurement)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .preferredColorScheme(.light)
+                .tint(AppTheme.ink)
         }
         .alert("操作失败", isPresented: Binding(
             get: { errorMessage != nil },
@@ -93,8 +104,17 @@ struct BodyMeasurementsView: View {
         }
     }
 
+    // Bounded diagnosis only: no user values, database writes or production logging.
+    private func traceQuickWeight(_ event: String) {
+#if DEBUG
+        guard CloudSyncRuntime.isTesting, CloudSyncRuntime.isUITesting,
+              CommandLine.arguments.contains("--ui-testing-quick-weight-diagnostics") else { return }
+        NSLog("XFitQuickWeightTrace %@", event)
+#endif
+    }
+
     private var latestCard: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 145), alignment: .leading)], spacing: 14) {
+        LazyVGrid(columns: [GridItem(dynamicTypeSize.isAccessibilitySize ? .flexible() : .adaptive(minimum: 145), alignment: .leading)], spacing: 14) {
             bodyMetric(
                 title: latestWeight.map { sourceAndDate($0) } ?? "体重",
                 value: latestWeight.map { "\(TrainingFormatters.weight($0.weightKg)) kg" } ?? "—",
@@ -111,11 +131,10 @@ struct BodyMeasurementsView: View {
 
     private func bodyMetric(title: String, value: String, icon: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Image(systemName: icon)
-                .foregroundStyle(AppTheme.accent)
+            SprintIcon(systemName: icon, size: 40)
             Text(value)
-                .font(.title3.bold().monospacedDigit())
-                .foregroundStyle(.white)
+                .font(.title.bold().monospacedDigit())
+                .foregroundStyle(AppTheme.ink)
                 .minimumScaleFactor(0.7)
             Text(title)
                 .font(.caption)
@@ -135,11 +154,11 @@ struct BodyMeasurementsView: View {
                 HStack {
                     Text(measurement.date, format: .dateTime.year().month().day().hour().minute())
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Spacer()
                     Text(measurement.source == .healthKit ? "Apple 健康" : "X-Fit 手动")
                         .font(.caption2.bold())
-                        .foregroundStyle(measurement.source == .healthKit ? AppTheme.secondaryText : AppTheme.accent)
+                        .foregroundStyle(measurement.source == .healthKit ? AppTheme.secondaryText : AppTheme.ink)
                 }
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), alignment: .leading)], alignment: .leading, spacing: 10) {
                     if let weight = measurement.weightKg {
@@ -190,6 +209,7 @@ struct BodyMeasurementsView: View {
 }
 
 struct BodyWeightTrendCard: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let measurements: [BodyMeasurement]
     var showsHistoryLink = false
 
@@ -212,28 +232,34 @@ struct BodyWeightTrendCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .firstTextBaseline) {
+        let headerLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
+            : AnyLayout(HStackLayout(alignment: .firstTextBaseline))
+        let legendLayout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 8))
+            : AnyLayout(HStackLayout(spacing: 14))
+        return VStack(alignment: .leading, spacing: 16) {
+            headerLayout {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("体重趋势")
+                    Label("体重趋势", systemImage: "chart.line.uptrend.xyaxis")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     if let latest = dailyValues.last {
                         Text("\(TrainingFormatters.weight(latest.weightKg)) kg")
                             .font(.title2.weight(.black).monospacedDigit())
-                            .foregroundStyle(.white)
+                            .foregroundStyle(AppTheme.ink)
                     } else {
                         Text("暂无记录")
                             .font(.subheadline)
                             .foregroundStyle(AppTheme.secondaryText)
                     }
                 }
-                Spacer()
+                if !dynamicTypeSize.isAccessibilitySize { Spacer() }
                 if let change {
-                    VStack(alignment: .trailing, spacing: 3) {
+                    VStack(alignment: dynamicTypeSize.isAccessibilitySize ? .leading : .trailing, spacing: 3) {
                         Text(change == 0 ? "0 kg" : String(format: "%+.1f kg", change))
                             .font(.subheadline.bold().monospacedDigit())
-                            .foregroundStyle(.white)
+                            .foregroundStyle(AppTheme.ink)
                         Text("本周期")
                             .font(.caption2)
                             .foregroundStyle(AppTheme.secondaryText)
@@ -241,19 +267,34 @@ struct BodyWeightTrendCard: View {
                 }
             }
 
-            Picker("体重趋势周期", selection: $period) {
-                ForEach(BodyWeightTrendPeriod.allCases) { option in
-                    Text(option.title).tag(option)
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("周期").font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    Picker("体重趋势周期", selection: $period) {
+                        ForEach(BodyWeightTrendPeriod.allCases) { option in
+                            Text(option.title).tag(option)
+                        }
+                    }
+                    .pickerStyle(.menu).labelsHidden()
+                    .accessibilityIdentifier("体重趋势周期")
                 }
+            } else {
+                Picker("体重趋势周期", selection: $period) {
+                    ForEach(BodyWeightTrendPeriod.allCases) { option in
+                        Text(option.title).tag(option)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("体重趋势周期")
             }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("体重趋势周期")
 
             if points.isEmpty {
-                Text("记录体重后，这里会显示每日值和 7 日均线。")
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.secondaryText)
-                    .frame(maxWidth: .infinity, minHeight: 120)
+                VStack(spacing: 12) {
+                    SprintIcon(systemName: "chart.line.uptrend.xyaxis", size: 46)
+                    Text("记录后显示每日值与 7 日均线")
+                        .font(.subheadline)
+                        .foregroundStyle(AppTheme.secondaryText)
+                }.frame(maxWidth: .infinity, minHeight: 150)
             } else {
                 Chart {
                     ForEach(points) { point in
@@ -270,15 +311,15 @@ struct BodyWeightTrendCard: View {
                             y: .value("7 日均线", point.movingAverageKg ?? point.weightKg)
                         )
                         .interpolationMethod(.catmullRom)
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                         .lineStyle(StrokeStyle(lineWidth: 3, lineCap: .round))
                     }
                 }
                 .chartLegend(.hidden)
-                .frame(height: 180)
+                .frame(height: 180).sprintChart()
                 .accessibilityIdentifier("体重趋势图")
 
-                HStack(spacing: 14) {
+                legendLayout {
                     Label("每日值", systemImage: "circle.fill")
                     Label("7 日均线", systemImage: "line.diagonal")
                 }
@@ -290,7 +331,7 @@ struct BodyWeightTrendCard: View {
                 NavigationLink(destination: BodyMeasurementsView()) {
                     Label("查看完整记录", systemImage: "arrow.right")
                         .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
+                        .foregroundStyle(AppTheme.ink)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .buttonStyle(.plain)
@@ -331,7 +372,7 @@ struct QuickBodyWeightEntryView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 18) {
                     VStack(alignment: .leading, spacing: 7) {
-                        Text("今天体重")
+                        Label("体重", systemImage: "scalemass")
                             .font(.caption.bold())
                             .foregroundStyle(AppTheme.secondaryText)
                             .contentShape(Rectangle())
@@ -349,7 +390,7 @@ struct QuickBodyWeightEntryView: View {
                                 .focused($focusedField, equals: .weight)
                                 .font(AppTheme.metricValue)
                                 .multilineTextAlignment(.center)
-                                .foregroundStyle(.white)
+                                .foregroundStyle(AppTheme.ink)
                                 .minimumScaleFactor(0.6)
                                 .accessibilityLabel("体重，单位千克")
                                 .accessibilityIdentifier("快速体重输入")
@@ -393,7 +434,7 @@ struct QuickBodyWeightEntryView: View {
                             Image(systemName: showsMore ? "chevron.up" : "chevron.down")
                         }
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .contentShape(Rectangle())
                     }
@@ -432,7 +473,8 @@ struct QuickBodyWeightEntryView: View {
                 focusedField = nil
                 KeyboardDismissal.dismiss()
             }
-            .navigationTitle("快速记录体重")
+            .sprintPage()
+            .navigationTitle("记录体重")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -464,7 +506,7 @@ struct QuickBodyWeightEntryView: View {
     private func decimalRow(_ title: String, text: Binding<String>, unit: String, field: Field) -> some View {
         HStack {
             Text(title)
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             Spacer()
             TextField("可选", text: text)
                 .keyboardType(.decimalPad)
@@ -551,21 +593,27 @@ private struct BodyMeasurementEditorView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("日期") {
+                Section {
                     DatePicker("记录日期", selection: $date, in: ...Date.now, displayedComponents: [.date, .hourAndMinute])
                         .datePickerStyle(.compact)
+                } header: {
+                    Label("日期", systemImage: "calendar")
                 }
-                Section("身体数据") {
+                Section {
                     decimalField("体重", value: $weightKg, unit: "kg")
                     decimalField("体脂", value: $bodyFatPercent, unit: "%")
                     decimalField("腰围", value: $waistCm, unit: "cm")
                     decimalField("胸围", value: $chestCm, unit: "cm")
                     decimalField("臂围", value: $armCm, unit: "cm")
+                } header: {
+                    Label("身体数据", systemImage: "ruler")
                 }
-                Section("备注") {
+                Section {
                     TextField("测量条件或身体状态", text: $notes, axis: .vertical)
                         .lineLimit(2...5)
                         .accessibilityIdentifier("完整身体数据-备注")
+                } header: {
+                    Label("备注", systemImage: "text.alignleft")
                 }
             }
             .scrollDismissesKeyboard(.immediately)
@@ -573,7 +621,7 @@ private struct BodyMeasurementEditorView: View {
                 KeyboardDismissal.dismiss()
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .navigationTitle(measurement == nil ? "记录身体数据" : "编辑身体数据")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

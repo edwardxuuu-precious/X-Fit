@@ -1,8 +1,50 @@
 # X-Fit
 
-X-Fit 是一款面向 iPhone 的中文力量训练计划与记录 App。当前版本使用 SwiftUI、SwiftData 和 Swift Charts，最低支持 iOS 17。
+X-Fit 是一款面向 iPhone 的中文力量训练计划与记录 App，使用 SwiftUI、SwiftData 和 Swift Charts，最低支持 iOS 17。
 
-## 当前可用功能（0.5.0）
+## 当前交付与入口
+
+- 当前整体规划：[R4业务任务树（已整体确认）](outputs/planning/xfit-business-task-tree-r4.md)；固定展示沿用[原Notion工作台](https://app.notion.com/p/3f84c857b834810bb182e00e55dc82b1)。首轮[已有训练复盘](outputs/training-review/2026-10-25-r4-training-review.md)与[下一腿＋核心C1候选](outputs/training-plan/2026-10-25-next-lower-candidate.md)已形成，具体方案待确认、未写App。业务指标与本地、手机、人工、效果进度分别展示，不合成总完成率。
+- 最近已证明手机交付为 **0.5.0 Build32**，证据截至2026-10-24 22:00快照；目录335待核，最新本地目录330待核，两轮增量未上手机。安装与数据守恒通过，完整真机UI `BLOCKED_ENV`、人工 `BLOCKED_HUMAN`，不是GO。见[Build32需求与证据](docs/requirements/2026-10-24/202853_build32-ui.md)、[最新本地复核](docs/requirements/2026-10-24/231501_opengym331.md)。本次没有读取实时手机。
+- 下列R3/C10–13描述的是已关闭历史阶段：原五处Notion最终同步已回读、当时必办项0；Build18为该阶段设备证据。原7/8台账保留，不作为当前全项目进度或重开授权。
+- 餐食原图保存/导出/恢复验收，等本人开始实际拍照并明确要求后再集中执行；真实指定周的评估与一次确认回写另由真实资料触发。
+- 完整真机 UI 自动化保留未通过证据，暂不推进，只有本人明确要求恢复才继续；严格物理 P95 测试已取消。
+- Notion 采用既有连接的普通协同写入，不配置新凭证、不移动旧训练档案、不实时上传手机。
+- 正文入口：[项目循环手册](docs/operations/项目循环手册.md) · [当前事实索引](docs/operations/事实与内容索引.md) · [R3 正式收尾](outputs/planning/xfit-business-task-tree-r3.md#124-本阶段正式收尾调整后范围)。
+- 原验收与未验项：[收尾需求 C-10–13](docs/requirements/2026-10-13/131921_remaining-business-convergence.md) · [阶段测试计划](docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md)。任务交付、本地通过、设备/人工验收和长期效果不互相替代。
+
+## 文件架构与资料归属
+
+| 目录/文件 | 保存什么 | 使用边界 |
+|---|---|---|
+| `FitnessApp/` | 主 App 源码、现用离线资源 | 不与历史设计候选混用 |
+| `XFitShareExtension/` | 分享扩展源码 | 只传递待确认草稿 |
+| `FitnessAppTests/`、`FitnessAppUITests/` | 原生单元/UI 测试 | 历史 fixture 保留，真机 UI 未通过事实不变 |
+| `EquipmentRecognitionBackend/` | 可选后端源码与锁文件 | 当前无服务器；需要使用时在该目录运行 `npm ci` 重建依赖 |
+| `FitnessApp.xcodeproj/`、`project.yml` | 工程与生成配置 | 保持现有编译路径，未产生新版本 |
+| `docs/requirements/` | 正式需求、用户确认、实现与验收 | 同一需求持续回写，历史确认不删除 |
+| `docs/training/`、`docs/fat-loss/` | 已确认偏好、训练方案与业务资料 | 实际训练仍由 App 保存，旧重量不是新处方 |
+| `docs/operations/` | 当前状态、调用规则、Notion 绑定、恢复说明 | 当前状态入口，旧工具存在不等于启用 |
+| `docs/releases/`、`docs/design/` | 分层验收与现有餐食设计 | 只记录各自证据层 |
+| `docs/archive/` | 旧版本说明、历史入口快照和设计候选 | 保留独有正文，不作为当前任务或状态 |
+| `outputs/planning/`、`outputs/training-plan/`、`outputs/notes-import/` | 正式任务树、确认计划和导入来源 | 稳定 ID 与来源保留；被测试读取的导入文件不可清掉 |
+| `outputs/stage-validation/`、`outputs/test-results/` | 测试结果与历史摘要 | 原失败/跳过/未知保留，历史 PASS 不代表当前验收 |
+| `artifacts/` | 必需原始证据、数据副本与恢复资料 | 只保留当前/必要载荷；旧结果包退役有摘要和明确不可恢复边界 |
+| `outputs/storage-retirement/` | 精确清理记录 | 删除与归档事实，不是一套新框架 |
+| `scripts/`、`tests/` | 原有工具和合同测试 | 不自动操作手机或访问真实服务 |
+| `.git/` | 完整 Git 历史 | 本次未裁剪、重写或提交 |
+
+当前只读状态可运行：
+
+```bash
+python3 scripts/xfit-project-loop.py status --cycle docs/operations/cycle-20260927.json
+```
+
+该原入口保留原 7/8 任务总账和原未验门；本阶段是否结束以 `cycle.current_phase_closeout` 与 R3 第 12.4 节为准，不能由旧 `overall=partial` 重新启动工作。
+
+## 已有实现概览
+
+以下沿用既有实现说明，不是所有功能均完成当前真机验收的声明：
 
 - 按星期创建和编辑训练模板
 - 自动生成训练安排，并支持改期、跳过、恢复和临时加练
@@ -37,21 +79,16 @@ X-Fit 是一款面向 iPhone 的中文力量训练计划与记录 App。当前�
 - 完整 JSON 备份/非覆盖恢复，以及逐组训练 CSV 导出
 - 本机离线存储，不需要账号或服务器
 
-## 打开项目
+
+## 打开与验证项目
 
 ```bash
 open FitnessApp.xcodeproj
 ```
 
-项目文件由 `project.yml` 生成。修改项目结构后运行：
+工程由 `project.yml` 生成；只有明确修改工程结构时才运行 `xcodegen generate`。本次只整理资料，没有修改工程或重新生成。
 
-```bash
-xcodegen generate
-```
-
-## 自动化验证
-
-仓库位于 File Provider 管理目录时，建议把 DerivedData 放到 `/tmp`，避免测试包继承 Finder 扩展属性：
+开发验证示例：使用项目外的临时 DerivedData，避免在项目中堆积构建缓存。
 
 ```bash
 FITNESS_DERIVED_PATH=$(mktemp -d /tmp/fitnessapp-derived.XXXXXX)
@@ -62,31 +99,27 @@ xcodebuild -project FitnessApp.xcodeproj \
   test
 ```
 
-当前共有 132 项单元测试和 32 项 UI 测试，覆盖训练指标、周/月周期汇总、日程状态、放弃训练、备份恢复、动作 canonical 身份、术语审核、同名冲突保护、AI 代理边界、自适应推荐、肌群恢复、目标背景图、首页导航去重、当天菜单、动作原地补录、分享草稿、参考链接、历史补录与同步入口。
+阶段固化仍使用 `scripts/xfit-stage-validation.sh` 的统一入口，安装与设备运行另核授权。本次目录整理不重跑 App/手机测试；已有结果查[阶段计划](docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md)。
 
-真机人工验收入口：
-
-- [真机人工测试清单](docs/X-Fit_真机人工测试清单.md)
-- [人工测试流程说明](docs/X-Fit_人工测试流程说明.md)
-- [今日体感与动作体验高鲁棒性测试与评估](docs/X-Fit_今日体感与动作体验高鲁棒性测试与评估.md)
-- [0.2.0 实现与自动化测试报告](docs/X-Fit_0.2.0_实现与自动化测试报告.md)
-- [0.3.0 自适应训练与历史同步测试清单](docs/X-Fit_0.3.0_自适应训练与历史同步测试清单.md)
-- [0.3.0 实现与自动化测试报告](docs/X-Fit_0.3.0_实现与自动化测试报告.md)
-- [0.4.0 动作补录与当天菜单实施报告](docs/X-Fit_0.4.0_动作补录与当天菜单实施报告.md)
-- [动作补录、当天菜单与分享入口高鲁棒性测试与评估](docs/X-Fit_动作补录与当天菜单高鲁棒性测试与评估.md)
-- [0.5.0 动作标准化审核与 AI 代理边界](docs/X-Fit_0.5.0_动作标准化审核与AI代理边界.md)
-- [训练背景图来源与许可](docs/X-Fit_训练背景图来源.md)
-- [历史训练导入模板](docs/X-Fit_历史训练导入模板.csv)
+当前人工入口为[真机人工清单](docs/X-Fit_真机人工测试清单.md)；餐食后续按[原工作流](docs/meal-photo-workflow.md)与[R3 触发条件](outputs/planning/xfit-business-task-tree-r3.md#124-本阶段正式收尾调整后范围)。旧版本报告和测试方法在[历史资料](docs/archive/README.md)，不要求重新验收已接受的体验。
 
 ## 数据边界
 
-- `WorkoutTemplate` / `TemplateExercise`：可持续修改的周计划模板
-- `ScheduledWorkout`：具体日期的训练安排
-- `WorkoutSession` / `SessionExercise`：开始训练时生成的历史快照，包括当时的动作要点与参考链接
-- `SetLog`：实际完成的逐组重量、次数、RIR、可选开始时间与组后休息记录
-- `NutritionTarget` / `MealEntry`：每日目标和按日期保存的真实餐食
-- `BodyMeasurement`：本机或主动从 Apple 健康导入的身体数据
+- `WorkoutTemplate` / `TemplateExercise`：可修改的周计划模板。
+- `ScheduledWorkout`：具体日期的训练安排。
+- `WorkoutSession` / `SessionExercise`：开始训练时生成的独立历史快照，包括动作要点和参考链接。
+- `SetLog`：逐组实际重量、次数、RIR、开始时间与休息等；计划组不自动算已完成组。
+- `NutritionTarget` / `MealEntry`：目标与实际餐食；原照片、备注、本人估算与 AI 评估分开。
+- `BodyMeasurement`：本机或主动从 Apple 健康导入的身体数据，来源日期与未知保留。
 
-当前权威数据保存在设备本地，并可导出 JSON/CSV。Share Extension 只通过 App Group `group.com.edward.FitnessApp` 传递一个待确认草稿，不直接写 SwiftData。HealthKit 与本地通知按用户选择启用。iCloud、Live Activity 和 Apple Watch 尚未启用；watchOS 将在 iPhone v1.0 真机稳定后开发。
+设备是实际数据真源；Share Extension 通过 App Group `group.com.edward.FitnessApp` 传递待确认草稿，不直接写 SwiftData。HealthKit 与通知按本人选择启用；不直接改手机 SQLite、不猜补缺失数据、不新增营养目标。历史签名/安装日期见归档 README，不用旧 profile 日期推断当前状态。
 
-主 App 与 `com.edward.FitnessApp.XFitShareExtension` 已在 development 签名中同时启用上述 App Group；`0.5.0 (10)` 已于 2026-08-21 覆盖安装到 `Edward_iPhone`，`0.5.0 (11)` 已完成高鲁棒性回归和签名构建，待设备恢复 DDI/Xcode destination 后覆盖安装。当前 Personal Team profile 到期时间为 2026-08-27；到期后需重新运行 Xcode 自动签名。Safari 分享入口和保存后的真机数据链路仍以人工测试清单的实机结果为准。
+资料入口：[训练档案流程](docs/training/训练档案工作流.md) · [餐食工作流](docs/meal-photo-workflow.md) · [动作标准化与代理边界](docs/X-Fit_0.5.0_动作标准化审核与AI代理边界.md) · [资源许可](docs/X-Fit_训练背景图来源.md) · [历史导入模板](docs/X-Fit_历史训练导入模板.csv)。
+
+## 存储与恢复
+
+本次已确认以精确清理替代 Build14/Build15/local-ready 原包“全部保留”的旧规则。当前最终包、关键 UI 诊断、所有实际数据副本、测试 fixture、源码与 Git 历史保留；76 个旧测试包先提取原生摘要再退役，闲置缓存可重建。
+
+具体结果与恢复限制见[存储说明](docs/operations/本地存储与历史测试载荷.md)、[清理需求](docs/requirements/2026-10-14/133439_project-folder-consolidation.md)与[唯一清理清单](outputs/storage-retirement/20261014-project-consolidation.json)。旧原包没有完整恢复副本；摘要不能用于原生重放。构建缓存可重新生成，后端依赖可用锁文件重建。
+
+后续新增资料按上述用途进入原目录；当前状态正文只维护一次，其他入口用摘要和链接。不自动扩建框架或重新执行已结束任务。

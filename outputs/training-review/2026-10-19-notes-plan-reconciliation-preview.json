@@ -1,0 +1,436 @@
+{
+  "status": "APPLIED_AND_PHONE_READBACK_PASS",
+  "trainingDate": "2026-10-19",
+  "currentAuthorityClarification": "Owner now explicitly uses Oct19 Notes as both the day plan and actual results, replacing original R2 for this day only.",
+  "sourceFreshRead": "Mac Notes Oct19 shows 16:05; current nine headings and all 38 rows are checked.",
+  "sourceSHA256": "9c3086d1dac7165cb6fc791bf4e83737afced5dce8d5a01a691470afe0786fdd",
+  "preferenceVersion": "TP-20260928-05",
+  "targetSessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+  "targetScheduleID": "5185deb9-cfb7-5810-b9ec-e33cfdcac179",
+  "backupSnapshot": "artifacts/training-sync/20261019-notes-authority-before",
+  "currentCompleted": 38,
+  "currentTotal": 45,
+  "proposedCompleted": 38,
+  "proposedTotal": 38,
+  "proposedActions": [
+    {
+      "sourceName": "Smith Bench Press",
+      "appName": "史密斯卧推",
+      "sessionExerciseID": "66c5be9b-5260-4cef-b498-20980e3c594c",
+      "sets": [
+        {
+          "existingLogID": "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7",
+          "plannedWeight": 25.0,
+          "plannedReps": 14,
+          "actualWeight": 25.0,
+          "actualReps": 14,
+          "rir": null
+        },
+        {
+          "existingLogID": "d68343aa-8aa0-4567-bfd4-3b9aca1d0472",
+          "plannedWeight": 30.0,
+          "plannedReps": 12,
+          "actualWeight": 30.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "1c053603-2189-4a2e-a3e8-c96f9b7e6b31",
+          "plannedWeight": 35.0,
+          "plannedReps": 10,
+          "actualWeight": 35.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "2c5171b4-7215-4122-b4f0-cf8e14945724",
+          "plannedWeight": 40.0,
+          "plannedReps": 8,
+          "actualWeight": 40.0,
+          "actualReps": 8,
+          "rir": null
+        },
+        {
+          "existingLogID": "750f78dd-f333-4530-9d33-0a56dda2e38d",
+          "plannedWeight": 30.0,
+          "plannedReps": 12,
+          "actualWeight": 30.0,
+          "actualReps": 12,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Smith Inclined Bench Press",
+      "appName": "史密斯上斜卧推",
+      "sessionExerciseID": "328e14d7-f2ff-423f-ad76-1e62b563cc86",
+      "sets": [
+        {
+          "existingLogID": "b0403623-607d-4f55-b3f8-97f037872253",
+          "plannedWeight": 20.0,
+          "plannedReps": 14,
+          "actualWeight": 20.0,
+          "actualReps": 14,
+          "rir": null
+        },
+        {
+          "existingLogID": "78961609-2d12-4b6b-8c70-24d462256ea3",
+          "plannedWeight": 25.0,
+          "plannedReps": 12,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "32321974-e139-4957-8c9f-2d56cb9d5486",
+          "plannedWeight": 30.0,
+          "plannedReps": 10,
+          "actualWeight": 30.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "a92ae3b4-bf59-416a-a175-f3ccfda33b62",
+          "plannedWeight": 35.0,
+          "plannedReps": 8,
+          "actualWeight": 35.0,
+          "actualReps": 8,
+          "rir": null
+        },
+        {
+          "existingLogID": "58ab282b-2226-4a18-85c7-a455b38e8a44",
+          "plannedWeight": 25.0,
+          "plannedReps": 12,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "MTS Declined Bench Press",
+      "appName": "MTS器械下斜推胸",
+      "sessionExerciseID": "69cb54b8-6194-4e18-9aec-2f7fa48135c5",
+      "sets": [
+        {
+          "existingLogID": "02965981-a191-4c86-90e5-ef2128802847",
+          "plannedWeight": 22.5,
+          "plannedReps": 14,
+          "actualWeight": 22.5,
+          "actualReps": 14,
+          "rir": null
+        },
+        {
+          "existingLogID": "ccda1161-beca-4621-acf7-72e0acbe8b22",
+          "plannedWeight": 25.0,
+          "plannedReps": 12,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "fd6af548-f188-4bb2-897d-d1b4af1504b2",
+          "plannedWeight": 27.5,
+          "plannedReps": 10,
+          "actualWeight": 27.5,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "d051aba7-b51e-4b90-b7f2-b3eb5e158367",
+          "plannedWeight": 30.0,
+          "plannedReps": 8,
+          "actualWeight": 30.0,
+          "actualReps": 8,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Seated Dip",
+      "appName": "坐姿器械臂屈伸",
+      "sessionExerciseID": "b6428488-064c-4ade-8e09-1b57421121a7",
+      "sets": [
+        {
+          "existingLogID": "da151bd1-1e55-4a45-8ce4-122ef5314e94",
+          "plannedWeight": 30.0,
+          "plannedReps": 14,
+          "actualWeight": 30.0,
+          "actualReps": 14,
+          "rir": null
+        },
+        {
+          "existingLogID": "fb197b90-a95d-4ab0-a201-1113f0d1a40e",
+          "plannedWeight": 35.0,
+          "plannedReps": 12,
+          "actualWeight": 35.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "e5a74a19-507d-465c-87ce-95d0c242c30f",
+          "plannedWeight": 40.0,
+          "plannedReps": 10,
+          "actualWeight": 40.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "b73cb70d-a1ea-4371-be02-c08c1ddd6c09",
+          "plannedWeight": 45.0,
+          "plannedReps": 8,
+          "actualWeight": 45.0,
+          "actualReps": 8,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable Fly",
+      "appName": "站姿绳索夹胸",
+      "sessionExerciseID": "6be867c0-8750-42a7-8fb3-0547e8eb0c22",
+      "sets": [
+        {
+          "existingLogID": "8ef15c5a-1309-4e3e-96b8-16a97f5b3a4b",
+          "plannedWeight": 10.0,
+          "plannedReps": 12,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "dfa1e422-967e-476b-8112-e813fa7e4e8f",
+          "plannedWeight": 12.5,
+          "plannedReps": 10,
+          "actualWeight": 12.5,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "11fc24cd-380d-4f08-9abd-70bff74cb4eb",
+          "plannedWeight": 10.0,
+          "plannedReps": 12,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "rir": null
+        },
+        {
+          "existingLogID": "fa47f125-6fd8-432f-bdc6-b48679aaa8c9",
+          "plannedWeight": 10.0,
+          "plannedReps": 12,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "三头绳索下压",
+      "appName": "绳索下压",
+      "sessionExerciseID": "e93a850e-469e-4463-b4b7-5152ed8bf5c6",
+      "sets": [
+        {
+          "existingLogID": "b1f9ebac-926b-48c8-862e-0a6ef7b08226",
+          "plannedWeight": 17.5,
+          "plannedReps": 20,
+          "actualWeight": 17.5,
+          "actualReps": 20,
+          "rir": null
+        },
+        {
+          "existingLogID": "239b8101-5aaa-4dea-8712-e8959a24e34e",
+          "plannedWeight": 12.5,
+          "plannedReps": 20,
+          "actualWeight": 12.5,
+          "actualReps": 20,
+          "rir": null
+        },
+        {
+          "existingLogID": "ebf91844-2799-4b59-87f1-0f64c55ca10b",
+          "plannedWeight": 15.0,
+          "plannedReps": 20,
+          "actualWeight": 15.0,
+          "actualReps": 20,
+          "rir": null
+        },
+        {
+          "existingLogID": "ab882aac-44a2-42d3-8ea7-d244f341d9c2",
+          "plannedWeight": 17.5,
+          "plannedReps": 20,
+          "actualWeight": 17.5,
+          "actualReps": 20,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Side pull",
+      "appName": "Cable shoulder Side pull",
+      "sessionExerciseID": "ec86d169-0511-4c72-8f4c-d036ab8e8210",
+      "sets": [
+        {
+          "existingLogID": "aae5cdaa-68e6-4295-b2b7-85d8fe78e7b3",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "753deffb-3966-4f64-a649-71c15e999ed2",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "e154ab31-90f6-465a-ae61-f05627d50703",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "b8dea109-28be-45f6-82fa-207c4ea9b659",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Front pull",
+      "appName": "Cable shoulder Front pull",
+      "sessionExerciseID": "97381414-a311-4385-922f-b1554fc6d3d6",
+      "sets": [
+        {
+          "existingLogID": "6652949d-0e47-464f-8fe7-1ef291a95814",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "074c4e3b-10e9-4bae-9c44-d4e319b5124b",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "00cd9e36-3b13-409e-8f87-405e60b97002",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "92bd0246-7a23-4925-8819-73788fcd3418",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder reverse pull",
+      "appName": "Cable shoulder reverse pull",
+      "sessionExerciseID": "6c42f2fc-f581-4776-b5f4-5ebf083f1431",
+      "sets": [
+        {
+          "existingLogID": "bb143792-ef37-4f16-9ab6-e8f994308a3d",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "8bd0c518-0118-4517-aef0-74b72231c0dc",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "f8c4c6e5-5f4e-4957-bb45-58b1706bf388",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        },
+        {
+          "existingLogID": "c0f31e9a-c3b4-47b8-9720-7794ff9c7a44",
+          "plannedWeight": 5.0,
+          "plannedReps": 10,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "rir": null
+        }
+      ]
+    }
+  ],
+  "oldPlanDraftsToRemove": [
+    {
+      "name": "上斜哑铃卧推",
+      "snapshotID": "f59db728-ebed-4ea7-82e1-cc07d7afc16b",
+      "uncompletedSetCount": 4,
+      "logIDs": [
+        "f186a124-153e-4ec5-9474-1f73ac0a69ae",
+        "337dc5db-406f-4bc1-ab30-aaf0db567d1d",
+        "338fdd34-e99c-4139-85ca-4c27fb76fe88",
+        "a7072af3-6297-433e-834b-60fdafe4b484"
+      ]
+    },
+    {
+      "name": "绳索过顶臂屈伸",
+      "snapshotID": "d2973cb6-c275-4df1-be00-7409c24a0bb5",
+      "uncompletedSetCount": 3,
+      "logIDs": [
+        "5188acaa-22dd-4f72-8b03-d835194ea96c",
+        "1c5867ba-8624-490e-bd33-cae100dfb9ab",
+        "e91d2d3e-92b7-47fd-a04b-c277eecca2c2"
+      ]
+    }
+  ],
+  "protectedActualFields": [
+    "existingLogID",
+    "actualWeight",
+    "actualReps",
+    "rir",
+    "actualWeightSide",
+    "actualRepsSide",
+    "actual timestamps"
+  ],
+  "unchangedScope": [
+    "other training days",
+    "workout catalog",
+    "original R2 version archive",
+    "all actual completed set identities and values"
+  ],
+  "unknowns": [
+    "Owner mentioned one exercise not performed. Current Notes has no unchecked exercise. Do not mark any checked Notes exercise unperformed without a named correction.",
+    "Actual training duration and end time remain unknown; history editor save recalculates session completedAt.",
+    "History editor has no reorder or undo; no product write has been made."
+  ],
+  "finalSaveRequiresOwnerConfirmation": "Seven uncompleted draft logs and two corresponding snapshots would be removed by normal history editor with no in-app undo.",
+  "phoneWrites": "One save through existing App history editor after exact owner confirmation",
+  "confirmation": "Owner explicitly confirmed removing exactly seven old draft sets and using Notes 38/38.",
+  "confirmedBackupSnapshot": "artifacts/training-sync/20261019-notes-authority-confirmed-before",
+  "appliedSnapshot": "artifacts/training-sync/20261019-notes-authority-final",
+  "verification": "outputs/training-review/2026-10-19-notes-plan-reconciliation-verification.json",
+  "appliedCompleted": 38,
+  "appliedTotal": 38,
+  "actualDurationKnown": false
+}

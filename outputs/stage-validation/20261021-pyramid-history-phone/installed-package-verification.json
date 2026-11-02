@@ -1,0 +1,31 @@
+{
+  "requirement": "REQ-20261021-103533",
+  "status": "PASS",
+  "scope": "signed package after unified D03 rebuild and device version readback",
+  "frozen_source_count": 160,
+  "only_metadata_change": "build25->26",
+  "packages": [
+    {
+      "bundle": "com.edward.FitnessApp",
+      "version": "0.5.0",
+      "build": "26",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "phone_in_profile": true,
+      "profile_expiration": "2026-10-23T13:43:46"
+    },
+    {
+      "bundle": "com.edward.FitnessApp.XFitShareExtension",
+      "version": "0.5.0",
+      "build": "26",
+      "strict_signature": "PASS",
+      "app_group": "group.com.edward.FitnessApp",
+      "phone_in_profile": true,
+      "profile_expiration": "2026-10-23T13:43:49"
+    }
+  ],
+  "cloud_sync_enabled": false,
+  "candidate": "/tmp/xfit-pyramid-history-phone-build26-derived/Build/Products/Release-iphoneos/FitnessApp.app",
+  "executable_sha256": "178abc55ddad67a59fc44efc3ee7d985bf22fb4b4af96a8832704f101447452d",
+  "checked_at": "2026-10-21T11:43:53.387437+08:00"
+}

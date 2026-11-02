@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-21T10:59:00.894756+08:00",
+  "phoneAppVersion": "0.5.0 (25)",
+  "trainingImport": "PASS",
+  "date": "2026-10-21",
+  "sessionID": "98456d5b-5dfd-4e7c-add4-b649fff1273f",
+  "sourceActions": 8,
+  "completedRows": 34,
+  "unit": "kilogram",
+  "all34ActualRowsExact": true,
+  "repeatImportedSessions": 0,
+  "repeatImportedSets": 0,
+  "allOriginalFieldsUnchangedAfterImport": true,
+  "beforeBusinessRecords": 2324,
+  "afterBusinessRecords": 2375,
+  "originalResourceFilesUnchanged": true,
+  "importReadback": "outputs/notes-import/20261021/import-readback.json",
+  "phoneSnapshot": "artifacts/training-sync/20261021-notes/phone-final",
+  "R5": {
+    "id": "705a3157-22f9-5d08-90b8-39c0e2088ea8",
+    "observedStatus": "skipped",
+    "statusWrite": "PASS",
+    "skipReason": "Owner confirmed 2026-10-21 Apple Notes Oct 21 actual workout replaces R5； original prescription retained.",
+    "originalPrescriptionUnchanged": true,
+    "changedFields": [
+      "ZUPDATEDAT",
+      "ZSKIPREASON",
+      "ZSTATUSRAW"
+    ],
+    "readback": "outputs/notes-import/20261021/r5-readback.json",
+    "blocker": null,
+    "historicalBlocker": "Initial mirroring connection unavailable; recovered after user locked phone. No repeat training import in resumed turn."
+  },
+  "mainSimulator": {
+    "status": "PASS",
+    "evidence": "outputs/simulator-real-data/20261021-105729/result.json",
+    "snapshot": "artifacts/training-sync/20261021-notes/phone-final",
+    "phoneWritesByRefresh": 0,
+    "all25TablesAnd2375RecordsMatched": true,
+    "normalLaunch": true,
+    "cloudSyncEnabled": false
+  },
+  "limitations": [
+    "No human app acceptance yet; requested phone data operation and readback are complete.",
+    "34 rows are source records; warmup/work classification remains unknown.",
+    "Missing RIR, measurement sides and actual workout times remain unknown."
+  ],
+  "requestedPhoneSyncComplete": true,
+  "allOriginalRecordsPreserved": true,
+  "finalConservation": "Only approved R5 status, reason and update timestamp changed; every other original and newly imported business field unchanged."
+}

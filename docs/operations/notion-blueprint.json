@@ -1,0 +1,368 @@
+{
+  "schema_version": 1,
+  "workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+  "version": "0.2",
+  "execution_status": "local_blueprint_only",
+  "last_reconciled": "2026-10-13",
+  "access_requirement": "docs/requirements/2026-10-04/195337_notion-independent-access.md",
+  "privacy": "private_only",
+  "existing_archive_database_id": "6d6b5fb7-de5c-446a-a503-8b6462833486",
+  "databases": [
+    {
+      "key": "cycles",
+      "stable_id": "XFO-DB-CYCLES-1",
+      "title": "目标与迭代",
+      "parent_stable_id": "XFO-HUB-1",
+      "properties": {
+        "名称": "TITLE",
+        "记录ID": "RICH_TEXT",
+        "版本": "RICH_TEXT",
+        "类型": "SELECT",
+        "状态": "SELECT",
+        "关联稳定ID": "RICH_TEXT",
+        "我的备注": "RICH_TEXT",
+        "建议调整": "RICH_TEXT"
+      }
+    },
+    {
+      "key": "work_items",
+      "stable_id": "XFO-DB-WORK-1",
+      "title": "工作项",
+      "parent_stable_id": "XFO-HUB-1",
+      "properties": {
+        "名称": "TITLE",
+        "记录ID": "RICH_TEXT",
+        "版本": "RICH_TEXT",
+        "类型": "SELECT",
+        "状态": "SELECT",
+        "关联稳定ID": "RICH_TEXT",
+        "我的备注": "RICH_TEXT",
+        "建议调整": "RICH_TEXT"
+      },
+      "relations_to_resolve": [
+        {
+          "name": "所属迭代",
+          "target_database_key": "cycles"
+        }
+      ]
+    },
+    {
+      "key": "decisions_learning",
+      "stable_id": "XFO-DB-LEARNING-1",
+      "title": "决策与学习",
+      "parent_stable_id": "XFO-HUB-1",
+      "properties": {
+        "名称": "TITLE",
+        "记录ID": "RICH_TEXT",
+        "版本": "RICH_TEXT",
+        "类型": "SELECT",
+        "状态": "SELECT",
+        "关联稳定ID": "RICH_TEXT",
+        "我的备注": "RICH_TEXT",
+        "建议调整": "RICH_TEXT"
+      },
+      "relations_to_resolve": [
+        {
+          "name": "所属迭代",
+          "target_database_key": "cycles"
+        }
+      ]
+    }
+  ],
+  "mapping_contract": [
+    "此为语义蓝图，不是可直接提交Notion的API payload。必须先确认正确workspace与原库访问，再搜索稳定ID。",
+    "本人已确认Edward私有R3页3f74c857-b834-8004-8a2d-ca7863ccfc2b为父级。先核验已有MCP的真实身份/范围/工具能力，专用内部连接保留为独立备选；不切共享认证、不把访问令牌当登录密码、不以旧训练历史条目猜父级。内部连接不能创建用户根级private page。",
+    "创建schema时使用工具实际支持的SQL/property类型与真实data source ID，不使用逻辑ID冒充UUID；无权限则停止。",
+    "根页仅用title属性，stable ID同时在标题与正文；数据库stable ID记录在description及本地绑定。",
+    "readback snapshot按schema还原管理属性的语义值；缺失、不支持、截断、未知块停止，不能删掉差异制造匹配。",
+    "关系另行解析为真实页面UUID并回读，比对关联稳定ID；CLI只检查给定语义正文/属性，不独立证明数据库schema、私有或关系正确。",
+    "首次create不写人工字段；更新不得清空我的备注/建议调整。CLI排除这两字段；不是自动更新或权限授予器。",
+    "已有绑定本地或远端变化均停止。人工决定范围后形成差异预览再更新，不用新基线吞掉冲突。",
+    "蓝图当前状态不会因上传自动变完成；同步成功后单独更新实际连接/回读证据，再重新核对任务。"
+  ],
+  "records": [
+    {
+      "id": "XFO-HUB-1",
+      "kind": "hub",
+      "title": "X-Fit 工作台 [XFO-HUB-1]",
+      "database_key": null,
+      "properties": {
+        "title": "X-Fit 工作台 [XFO-HUB-1]"
+      },
+      "content": "# X-Fit 工作台\n稳定ID：XFO-HUB-1；工作台内容0.2，沿用已确认框架0.1。\n\n目标：当天训练可查看和可靠记录，漏记可补录，餐食可拍照保存；真实记录支持可解释复盘，反馈可续用。App保存实际；项目保存确认规则/实现/测试；Notion用于协作。\n\n原私有档案：[X-Fit 训练档案](https://app.notion.com/p/6d6b5fb7de5c446aa5038b6462833486)。保留原库，只关联引用。\n\n三个入口：目标与迭代、工作项、决策与学习。工作项使用原8个稳定ID；子树是执行分解，不增加完成率分母。\n\n循环：读取当前事实与偏好→拉取就绪任务→执行→分层验证→回收反馈→更新当前状态和下一缺步骤。无新证据时停止同条件重试。\n\n本地调用：$xfit-project-loop；训练复盘：$xfit-training-coach。当前执行入口为R3规划第12节和cycle-20260927.json；不按日期或工期安排。\n\n这是首次创建源版本；线上创建及实际验收分别以受控回执为证，不由本文字宣称完成。"
+    },
+    {
+      "id": "XFO-CYCLE-20260927-01",
+      "kind": "cycle",
+      "title": "训练优先：产品、框架、内容首轮",
+      "database_key": "cycles",
+      "properties": {
+        "名称": "训练优先：产品、框架、内容首轮",
+        "记录ID": "XFO-CYCLE-20260927-01",
+        "版本": "0.2",
+        "类型": "cycle",
+        "状态": "partial",
+        "关联稳定ID": "",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "确认来源：REQ-20260927-222313、REQ-20261012-151220、REQ-20261013-131921。业务目标为低负担的训练/体重/餐食记录与可解释复盘。原8任务中6项done，T3 blocked、T7 in_progress；任务比例75%不代表业务效果比例。\n\n前序Build17完整本地N01–N07通过并已无线覆盖安装；最近真机单元387通过、5既有跳过、0失败，数据守恒通过。后来新增体重来源日期说明仅本地专项PASS，手机Schema尚无新字段，最终完整候选与交付未验。真机UI运行器在首个场景前退出，客观P95未知；触屏/中文/拍照/庆祝四项体验已由本人接受。\n\nR1确认方案已应用并完整回读7日程/24动作位/78计划组。9/23实际训练8动作37组及其日程completed、10/12实际训练9动作28组及未做的胸三头与跳绳skipped已独立回读；10/10按本人决定不补录。体重最近9/23为87.4kg，无新增读数。\n\n本人已确认现有R3私有页为工作台父级，实际传输已本地实现；现有MCP或专用通道的本批真实身份/范围/创建回读仍未验，不切共享认证、不索要登录密码。本人已确认餐食分阶段：当前手机保存/导出/照片恢复可用性继续完成，真实周评估与确认回写保留为资料触发后续任务。\n\n原事实/证据入口：docs/operations/cycle-20260927.json、当前阶段计划及R3任务树第12节。当前日期只标证据新鲜度。"
+    },
+    {
+      "id": "XFO-T1",
+      "kind": "work_item",
+      "title": "目标、范围与验收合同",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "目标、范围与验收合同",
+        "记录ID": "XFO-T1",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：framework。\n个人使用优先；业务指标和原8任务/验收合同已确认。后续明确授权的Build17覆盖安装和R1应用均有独立回读；新增处方仍先展示具体版本。\n证据：REQ-20260927-222313、REQ-20261012-151220；R3任务树。\n当前任务字段用于协作，授权和实际效果须各自有证据。"
+    },
+    {
+      "id": "XFO-T2",
+      "kind": "work_item",
+      "title": "当前事实、权属与旧资料索引",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "当前事实、权属与旧资料索引",
+        "记录ID": "XFO-T2",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：content。\n新索引引用原正文；旧规划不是当前验收。\n证据：docs/operations/事实与内容索引.md\n完整合同与验收：REQ-20260927-222313；确认不由本页面状态字段替代。"
+    },
+    {
+      "id": "XFO-T3",
+      "kind": "work_item",
+      "title": "私有Notion总览及三个库",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "私有Notion总览及三个库",
+        "记录ID": "XFO-T3",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "blocked",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：framework。\n本人确认只按四项收尾推进，不扩建框架、不配置专用凭证。现有Edward私有R3页3f74c857-b834-8004-8a2d-ca7863ccfc2b为已确认父级；使用既有MCP核验真实身份/范围，再创建、全文/关系回读和重复新增0。\n原1总览/3库/17语义记录不变，不搬原训练档案、不切共享认证、不扩大私有范围。实际完成后以受控创建回执更新状态，不能由本字段提前认定。\n证据：REQ-20261013-131921、原R3任务树、docs/operations/notion-state.json。"
+    },
+    {
+      "id": "XFO-T4",
+      "kind": "work_item",
+      "title": "项目循环skill与只读检查工具",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "项目循环skill与只读检查工具",
+        "记录ID": "XFO-T4",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：framework。\n只读CLI 9项测试通过；skill格式及三个独立行为场景通过。未证明桌面新会话自动发现或远端恢复。\n证据：artifacts/project-loop/validation.md；skill-behavior.md。\n完整合同与验收：REQ-20260927-222313；不授予新的设备写权。"
+    },
+    {
+      "id": "XFO-T5",
+      "kind": "work_item",
+      "title": "上一轮产品完整测试收口",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "上一轮产品完整测试收口",
+        "记录ID": "XFO-T5",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：product。\nN01–N07 PASS；362单元；104UI通过/7既有跳过/0失败；手机与人工待验证。\n证据：outputs/stage-validation/20260927-training-experience-final-r2/summary.md\n完整合同与验收：REQ-20260927-222313；确认不由本页面状态字段替代。"
+    },
+    {
+      "id": "XFO-T6",
+      "kind": "work_item",
+      "title": "六类可复用内容及事实调用口径",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "六类可复用内容及事实调用口径",
+        "记录ID": "XFO-T6",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：content。\n原六类：偏好、临时例外、录入规则、动作口径、数据流程、框架；10/04增加独立Notion通道入口XFC-07。正文只维护一次，skill路由项目事实，不内置个人数据。\n证据：docs/operations/事实与内容索引.md\n完整合同与验收：REQ-20260927-222313；确认不由本页面状态字段替代。"
+    },
+    {
+      "id": "XFO-T7",
+      "kind": "work_item",
+      "title": "产品技术链与真实强度复盘",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "产品技术链与真实强度复盘",
+        "记录ID": "XFO-T7",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "in_progress",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：content。\n训练案例已有实际Notes→长期偏好TP-20260928-05→完整R1→本人确认→App应用/读回链；新实际10/12的28组已记录。左肘近期改善是本人反馈，未知RIR/器械侧别/用时不据此推定强度或公斤数。\n产品案例的Build17本地和覆盖安装已通过；仍缺真机UI运行器恢复、客观P95及具名设备边界验收。按R3第12节作有限设备诊断，再合并设备回读/测试，不重复问已接受体验。\n正文：docs/operations/案例与复盘.md；阶段固化测试计划；REQ-20261013-131921。\n原T7整体仍未收敛，不将方案落地等同实际身体效果。"
+    },
+    {
+      "id": "XFO-T8",
+      "kind": "work_item",
+      "title": "首轮有限复盘与可恢复交接",
+      "database_key": "work_items",
+      "properties": {
+        "名称": "首轮有限复盘与可恢复交接",
+        "记录ID": "XFO-T8",
+        "版本": "0.1",
+        "类型": "work_item",
+        "状态": "done",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "工作线：content。\n可恢复交接与有限复盘已有；当前6项done、T3 blocked、T7 in_progress。原状态、最新验收证据和缺步骤由同一入口读取；成功/失败经验及关键决定留在项目，Skill保存调用方法。\n本轮重拆为Notion实际落地、手机剩余验收、真实资料触发三个执行方向。证据：docs/operations/案例与复盘.md、cycle-20260927.json、R3任务树第12节。\n原任务与效果层分别判断，无依据时不新增流程或重跑。"
+    },
+    {
+      "id": "XFO-D01",
+      "kind": "decision",
+      "title": "个人优先、训练先行",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "个人优先、训练先行",
+        "记录ID": "XFO-D01",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "先解决本人完整记录和调整任务；暂不做商业平台；有新用户/付费验证目标时另立范围。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-D02",
+      "kind": "decision",
+      "title": "Notion主协作，事实分层",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "Notion主协作，事实分层",
+        "记录ID": "XFO-D02",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "App保存实际，仓库保存已确认规则/代码/测试；Notion反馈不自动写手机。取舍是更严格回读；未来有可审计接口再试点。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-D03",
+      "kind": "decision",
+      "title": "沿用旧档案，仅加三个轻量库",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "沿用旧档案，仅加三个轻量库",
+        "记录ID": "XFO-D03",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "总览+目标循环/工作项/决策学习。初期类型较粗，换取低维护负担；检索实际受阻再拆分。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-D04",
+      "kind": "decision",
+      "title": "先收口现有产品验收",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "先收口现有产品验收",
+        "记录ID": "XFO-D04",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "新增页面暂后置，优先记录正确、保存可靠、日期与反馈；手机和本人体验未完成不标GO。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-D05",
+      "kind": "decision",
+      "title": "先查实际强度，再判断容量",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "先查实际强度，再判断容量",
+        "记录ID": "XFO-D05",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "真实负重/次数/RIR/恢复有缺项时不机械加组；获得可比实际后可重新判断。旧旅行周不永久延续。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-D06",
+      "kind": "decision",
+      "title": "skill保存方法，个人事实留项目",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "skill保存方法，个人事实留项目",
+        "记录ID": "XFO-D06",
+        "版本": "0.1",
+        "类型": "decision",
+        "状态": "confirmed",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "每次调用读取有效版本，避免固化过期偏好。缓存只用于稳定读取，不缓存最终训练建议。\n\n确认来源：2026-09-27项目循环v0.1方案后的“继续”。具体规则与重开条件见docs/operations/项目循环手册.md；本地内容未赋予新的设备写入权限。"
+    },
+    {
+      "id": "XFO-L01",
+      "kind": "lesson_candidate",
+      "title": "外部身份核对先于创建",
+      "database_key": "decisions_learning",
+      "properties": {
+        "名称": "外部身份核对先于创建",
+        "记录ID": "XFO-L01",
+        "版本": "0.1",
+        "类型": "lesson_candidate",
+        "状态": "candidate",
+        "关联稳定ID": "XFO-CYCLE-20260927-01",
+        "我的备注": "",
+        "建议调整": ""
+      },
+      "content": "历史观察：9/27–29 connector返回其他工作区，当时停止写入。10/04独立通道本地拒绝错空间测试通过；10/05共享MCP实际核实Edward和原8条，返回管理内容哈希一致，旧访问阻碍已解除；严格完整性/私有范围/真实创建与关系回读尚未验证。\n\n复用范围：项目同步检查案例；不晋升全局经验。保留稳定ID、源版本与人工字段保护；任何新批次仍需实际身份，不凭旧失败或旧成功代替当前状态。\n证据：docs/operations/notion-state.json、artifacts/project-loop/20261005-readback/notion-validation.json。"
+    }
+  ],
+  "bindings": {}
+}

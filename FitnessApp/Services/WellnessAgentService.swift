@@ -25,7 +25,7 @@ struct WellnessAgentMessage: Encodable, Equatable, Identifiable, Sendable {
 struct WellnessAgentContext: Equatable, Sendable {
     let localTimeISO: String
     let waterMilliliters: Int
-    let jumpRopeCount: Int
+    let jumpRopeCount: Int?
     let sedentaryMinutes: Int
     let activeSedentaryStartedAt: String?
     let latestWeightKg: Double?
@@ -33,7 +33,7 @@ struct WellnessAgentContext: Equatable, Sendable {
     init(
         localTimeISO: String,
         waterMilliliters: Int,
-        jumpRopeCount: Int,
+        jumpRopeCount: Int?,
         sedentaryMinutes: Int,
         activeSedentaryStartedAt: String? = nil,
         latestWeightKg: Double? = nil
@@ -69,7 +69,7 @@ struct WellnessAgentContextPayload: Encodable, Equatable, Sendable {
         localTimeISO = context.localTimeISO
         today = WellnessAgentTodayPayload(
             waterMilliliters: max(0, context.waterMilliliters),
-            jumpRopeCount: max(0, context.jumpRopeCount),
+            jumpRopeCount: context.jumpRopeCount.map { max(0, $0) },
             sedentaryMinutes: max(0, context.sedentaryMinutes),
             activeSedentaryStartedAt: context.activeSedentaryStartedAt,
             latestWeightKg: context.latestWeightKg
@@ -79,7 +79,7 @@ struct WellnessAgentContextPayload: Encodable, Equatable, Sendable {
 
 struct WellnessAgentTodayPayload: Encodable, Equatable, Sendable {
     let waterMilliliters: Int
-    let jumpRopeCount: Int
+    let jumpRopeCount: Int?
     let sedentaryMinutes: Int
     let activeSedentaryStartedAt: String?
     let latestWeightKg: Double?

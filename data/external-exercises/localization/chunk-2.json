@@ -1,0 +1,2212 @@
+[
+  {
+    "sourceID": "0259",
+    "nameZH": "窄距俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2398",
+    "nameZH": "跪姿窄距俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0260",
+    "nameZH": "茧式卷腹（Cocoons，待核对）",
+    "reviewNote": "Cocoons通常包含收膝与躯干同步卷起；上游步骤只描述双脚落地卷腹，无法确认茧式变式。"
+  },
+  {
+    "sourceID": "1468",
+    "nameZH": "蟹式转体触脚",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0262",
+    "nameZH": "交叉卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0267",
+    "nameZH": "双臂过头卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0271",
+    "nameZH": "健身球卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0272",
+    "nameZH": "健身球直臂卷腹",
+    "reviewNote": "标题指定直臂，步骤却允许双手抱头或交叉于胸，手臂姿势冲突。"
+  },
+  {
+    "sourceID": "0274",
+    "nameZH": "地面卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3016",
+    "nameZH": "卷腹起身",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3769",
+    "nameZH": "交叉后撤深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2331",
+    "nameZH": "交叉训练车（Cycle Cross Trainer）",
+    "reviewNote": "Cycle Cross Trainer可能指复合式骑行/椭圆训练器；步骤有座椅和踏板，未明确器械结构。"
+  },
+  {
+    "sourceID": "0276",
+    "nameZH": "死虫式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0277",
+    "nameZH": "下斜卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0279",
+    "nameZH": "下斜俯卧撑（脚抬高）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0282",
+    "nameZH": "下斜仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1274",
+    "nameZH": "加深幅度俯卧撑",
+    "reviewNote": "标题指定深幅度，步骤没有说明手部垫高或额外下沉幅度。"
+  },
+  {
+    "sourceID": "0283",
+    "nameZH": "钻石俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0284",
+    "nameZH": "驴式提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1275",
+    "nameZH": "下落式俯卧撑（Drop Push-up，待核对）",
+    "reviewNote": "Drop Push-up的步骤描述下降后双膝落地再推起，无法确认是落差爆发式还是跪姿衔接变式。"
+  },
+  {
+    "sourceID": "0285",
+    "nameZH": "哑铃交替弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2403",
+    "nameZH": "哑铃交替弯举（弯举护臂板）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1646",
+    "nameZH": "哑铃交替锤式牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1647",
+    "nameZH": "哑铃交替牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1648",
+    "nameZH": "哑铃坐姿交替锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0286",
+    "nameZH": "哑铃交替单侧推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1649",
+    "nameZH": "健身球抬腿哑铃交替弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1650",
+    "nameZH": "健身球坐姿哑铃交替弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2137",
+    "nameZH": "哑铃阿诺德推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0287",
+    "nameZH": "哑铃阿诺德推举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0288",
+    "nameZH": "哑铃环绕上拉（Around Pullover，待核对）",
+    "reviewNote": "标题含Around，步骤只描述普通哑铃上拉，未说明环绕路径。"
+  },
+  {
+    "sourceID": "0289",
+    "nameZH": "哑铃平板卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0290",
+    "nameZH": "哑铃训练凳坐姿推举",
+    "reviewNote": "标题为凳上坐姿推举，步骤又要求后倾至胸侧后推，无法明确肩推或卧推角度。"
+  },
+  {
+    "sourceID": "0291",
+    "nameZH": "哑铃触凳深蹲",
+    "reviewNote": "标题指定哑铃触凳深蹲，步骤却把哑铃放在地上且未描述如何负重。"
+  },
+  {
+    "sourceID": "0293",
+    "nameZH": "哑铃俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1651",
+    "nameZH": "哑铃保龄球式弓步弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1652",
+    "nameZH": "健身球抬腿哑铃弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1653",
+    "nameZH": "哑铃鹤式站姿弯举",
+    "reviewNote": "Stork Stance通常为单腿平衡；步骤却允许另一脚脚尖后方着地，支撑方式待核对。"
+  },
+  {
+    "sourceID": "0294",
+    "nameZH": "哑铃弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2401",
+    "nameZH": "哑铃弯举（弯举护臂板）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1654",
+    "nameZH": "哑铃反握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1655",
+    "nameZH": "哑铃深蹲弯举",
+    "reviewNote": "标题包含深蹲，步骤只描述站姿弯举，没有下蹲动作。"
+  },
+  {
+    "sourceID": "1656",
+    "nameZH": "BOSU半球V字坐姿哑铃弯举",
+    "reviewNote": "标题为V字坐姿，步骤却要求双脚落地，腿部支撑方式冲突。"
+  },
+  {
+    "sourceID": "1201",
+    "nameZH": "哑铃波比跳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0295",
+    "nameZH": "哑铃翻举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1731",
+    "nameZH": "哑铃窄距推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0296",
+    "nameZH": "哑铃窄距推举（Close-grip）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0297",
+    "nameZH": "哑铃集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3635",
+    "nameZH": "哑铃对侧负重前弓步",
+    "reviewNote": "标题指定对侧负重，步骤却双手各持哑铃，没有明确持重侧与前跨腿的对应关系。"
+  },
+  {
+    "sourceID": "0298",
+    "nameZH": "哑铃交叉锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1657",
+    "nameZH": "哑铃交叉锤式弯举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0299",
+    "nameZH": "哑铃古巴推举",
+    "reviewNote": "步骤缺少古巴推举的明确肩旋转阶段，不能据此等同普通肩推。"
+  },
+  {
+    "sourceID": "2136",
+    "nameZH": "哑铃古巴推举（版本2）",
+    "reviewNote": "步骤未充分说明版本2与原版古巴推举的差异；保留来源版本编号。"
+  },
+  {
+    "sourceID": "0300",
+    "nameZH": "哑铃硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0301",
+    "nameZH": "哑铃下斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0302",
+    "nameZH": "哑铃下斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0303",
+    "nameZH": "哑铃下斜锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1276",
+    "nameZH": "哑铃下斜单臂飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1617",
+    "nameZH": "哑铃下斜单臂锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0305",
+    "nameZH": "哑铃下斜耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0304",
+    "nameZH": "哑铃下斜耸肩（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0306",
+    "nameZH": "哑铃下斜臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0307",
+    "nameZH": "哑铃下斜旋转飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1437",
+    "nameZH": "哑铃手指弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0308",
+    "nameZH": "哑铃飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1277",
+    "nameZH": "健身球哑铃飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1732",
+    "nameZH": "哑铃前弓步臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0310",
+    "nameZH": "哑铃前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0309",
+    "nameZH": "哑铃前平举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0311",
+    "nameZH": "哑铃满罐式侧平举",
+    "reviewNote": "步骤未说明满罐式的拇指朝上/旋转位置，保留标题变式。"
+  },
+  {
+    "sourceID": "1760",
+    "nameZH": "哑铃高脚杯深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0313",
+    "nameZH": "哑铃锤式弯举",
+    "reviewNote": "原名为锤式弯举，但上游步骤要求将掌心旋转向前，握法与锤式中立握不符；具体握法待核对。"
+  },
+  {
+    "sourceID": "1659",
+    "nameZH": "健身球哑铃锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0312",
+    "nameZH": "哑铃锤式弯举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2402",
+    "nameZH": "哑铃锤式弯举（弯举护臂板）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1664",
+    "nameZH": "哑铃高位弯举",
+    "reviewNote": "High Curl可能指上臂抬高的高位弯举；步骤只写把哑铃弯举得尽量高，上臂位置不明。"
+  },
+  {
+    "sourceID": "3545",
+    "nameZH": "哑铃上斜交替卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0314",
+    "nameZH": "哑铃上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0315",
+    "nameZH": "哑铃上斜肱二头弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0316",
+    "nameZH": "哑铃上斜变式（Incline Breeding，待核对）",
+    "reviewNote": "原名Incline Breeding并非常用动作名；步骤类似上斜推举，无法确认是否飞鸟或推举，不擅自改名。"
+  },
+  {
+    "sourceID": "0318",
+    "nameZH": "哑铃上斜弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0317",
+    "nameZH": "哑铃上斜弯举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0319",
+    "nameZH": "哑铃上斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1278",
+    "nameZH": "健身球哑铃上斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0320",
+    "nameZH": "哑铃上斜锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0321",
+    "nameZH": "哑铃上斜锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1618",
+    "nameZH": "健身球哑铃上斜锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0322",
+    "nameZH": "哑铃上斜内侧弯举",
+    "reviewNote": "Inner的上臂/前臂方向未明确；步骤同时写掌心相对和掌心向前，变式需核对。"
+  },
+  {
+    "sourceID": "1279",
+    "nameZH": "哑铃上斜单臂飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1280",
+    "nameZH": "健身球哑铃上斜单臂飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1619",
+    "nameZH": "哑铃上斜单臂锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1620",
+    "nameZH": "健身球哑铃上斜单臂锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0323",
+    "nameZH": "哑铃上斜单臂侧平举",
+    "reviewNote": "标题为上斜单臂侧平举，步骤却要求上臂抵住大腿内侧，动作设置不自洽。"
+  },
+  {
+    "sourceID": "1281",
+    "nameZH": "哑铃上斜单臂卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1282",
+    "nameZH": "健身球哑铃上斜单臂卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0324",
+    "nameZH": "哑铃上斜掌心向内卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1283",
+    "nameZH": "健身球哑铃上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0325",
+    "nameZH": "哑铃上斜抬举（Incline Raise，待核对）",
+    "reviewNote": "标题仅为Incline Raise，步骤描述从肩位向头顶推起，无法确认平举还是推举。"
+  },
+  {
+    "sourceID": "0326",
+    "nameZH": "哑铃上斜俯卧反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0327",
+    "nameZH": "哑铃上斜划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0328",
+    "nameZH": "哑铃上斜肩部抬举（Incline Shoulder Raise，待核对）",
+    "reviewNote": "Incline Shoulder Raise可能指肩胛前伸抬举；上游步骤描述从肩位过头抬举，变式未明确。"
+  },
+  {
+    "sourceID": "0329",
+    "nameZH": "哑铃上斜耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3542",
+    "nameZH": "哑铃上斜T字平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0330",
+    "nameZH": "哑铃上斜臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0331",
+    "nameZH": "哑铃上斜旋转飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1733",
+    "nameZH": "哑铃上斜双臂伸展（Two Arm Extension，待核对）",
+    "reviewNote": "标题为双臂伸展，步骤未描述屈肘伸肘且从胸前向上伸直，不能确认是否肱三头臂屈伸。"
+  },
+  {
+    "sourceID": "3541",
+    "nameZH": "哑铃上斜Y字平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0332",
+    "nameZH": "哑铃十字平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0333",
+    "nameZH": "哑铃俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1734",
+    "nameZH": "健身球哑铃俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1660",
+    "nameZH": "跪姿健身球哑铃弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0334",
+    "nameZH": "哑铃侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0335",
+    "nameZH": "哑铃侧平举接前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0336",
+    "nameZH": "哑铃弓步",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1658",
+    "nameZH": "哑铃弓步弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0337",
+    "nameZH": "哑铃仰卧横面臂屈伸",
+    "reviewNote": "标题指定横过面部，步骤却描述向脑后下降，哑铃路径冲突。"
+  },
+  {
+    "sourceID": "1729",
+    "nameZH": "哑铃仰卧交替臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0338",
+    "nameZH": "哑铃仰卧屈肘推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0863",
+    "nameZH": "哑铃侧卧肩外旋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0339",
+    "nameZH": "哑铃卧姿股后侧训练（Lying Femoral，待核对）",
+    "reviewNote": "Lying Femoral通常可能指卧姿腿弯举；步骤写仰卧并将哑铃放在下腹，且双脚着地时将哑铃带向臀部，不自洽。"
+  },
+  {
+    "sourceID": "0340",
+    "nameZH": "哑铃仰卧锤式卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2470",
+    "nameZH": "哑铃地面俯卧后束平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0341",
+    "nameZH": "哑铃俯卧单臂后束抬举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0343",
+    "nameZH": "哑铃仰卧单臂卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0342",
+    "nameZH": "哑铃仰卧单臂卧推（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0344",
+    "nameZH": "哑铃仰卧单臂正握臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0345",
+    "nameZH": "哑铃俯卧单臂反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0346",
+    "nameZH": "哑铃仰卧单臂反握臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0347",
+    "nameZH": "哑铃卧姿前臂旋前",
+    "reviewNote": "标题是前臂旋前，步骤混合肘部弯举和掌心翻转，未清楚区分旋前与弯举。"
+  },
+  {
+    "sourceID": "2705",
+    "nameZH": "哑铃地面卧姿前臂旋前",
+    "reviewNote": "标题是地面卧姿旋前，步骤描述直臂举起哑铃到肩位，未清楚描述前臂旋转。"
+  },
+  {
+    "sourceID": "1284",
+    "nameZH": "健身球哑铃仰卧上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1328",
+    "nameZH": "哑铃俯卧后束划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0348",
+    "nameZH": "哑铃俯卧反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1735",
+    "nameZH": "哑铃仰卧单臂臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0349",
+    "nameZH": "哑铃卧姿前臂旋后",
+    "reviewNote": "标题是前臂旋后，步骤只描述掌心向上弯举，没有前臂旋转过程。"
+  },
+  {
+    "sourceID": "2706",
+    "nameZH": "哑铃地面卧姿前臂旋后",
+    "reviewNote": "标题是地面卧姿旋后，步骤主要描述肘部弯举，旋转范围未明确。"
+  },
+  {
+    "sourceID": "1661",
+    "nameZH": "哑铃仰卧肱二头弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0350",
+    "nameZH": "哑铃仰卧弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0351",
+    "nameZH": "哑铃仰卧臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1662",
+    "nameZH": "哑铃卧姿宽距弯举",
+    "reviewNote": "标题指定Wide，步骤没有说明手臂外展或宽距位置。"
+  },
+  {
+    "sourceID": "0352",
+    "nameZH": "哑铃中立握平板卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1285",
+    "nameZH": "哑铃单臂平板飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0292",
+    "nameZH": "哑铃单臂俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1286",
+    "nameZH": "健身球哑铃单臂胸部飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0353",
+    "nameZH": "健身球哑铃单臂集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1287",
+    "nameZH": "哑铃单臂下斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1288",
+    "nameZH": "健身球哑铃单臂飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1736",
+    "nameZH": "健身球哑铃单臂法式臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1663",
+    "nameZH": "哑铃单臂锤式牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1621",
+    "nameZH": "健身球哑铃单臂锤式推举",
+    "reviewNote": "标题Hammer Press未指定卧姿，步骤为球上坐姿向上推，不自动按卧推匹配。"
+  },
+  {
+    "sourceID": "1289",
+    "nameZH": "哑铃单臂上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0354",
+    "nameZH": "哑铃单臂俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0355",
+    "nameZH": "哑铃单臂侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0356",
+    "nameZH": "哑铃支撑式单臂侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1290",
+    "nameZH": "健身球哑铃单臂推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1665",
+    "nameZH": "哑铃俯卧单臂弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1666",
+    "nameZH": "哑铃俯卧单臂锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1291",
+    "nameZH": "健身球哑铃单臂上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0358",
+    "nameZH": "哑铃单臂反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0359",
+    "nameZH": "哑铃支撑式单臂反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1622",
+    "nameZH": "哑铃单臂反握推举",
+    "reviewNote": "标题反握推举未指定坐卧姿；步骤为坐姿肩位向上推，不按卧推自动匹配。"
+  },
+  {
+    "sourceID": "1414",
+    "nameZH": "哑铃单臂反握牧师凳弯举",
+    "reviewNote": "标题是反握牧师凳弯举，步骤却指定Underhand Grip（掌心向上），与反向弯举握法冲突。"
+  },
+  {
+    "sourceID": "1667",
+    "nameZH": "哑铃单臂反握蜘蛛弯举",
+    "reviewNote": "标题是反握蜘蛛弯举，步骤却为直立站姿，未描述俯卧凳上悬臂的蜘蛛式设置。"
+  },
+  {
+    "sourceID": "1668",
+    "nameZH": "健身球哑铃坐姿单臂弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1669",
+    "nameZH": "哑铃坐姿单臂锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1415",
+    "nameZH": "哑铃坐姿单臂中立握腕弯举",
+    "reviewNote": "标题指定中立握腕弯举，步骤却指定掌心向上，握法冲突。"
+  },
+  {
+    "sourceID": "0361",
+    "nameZH": "哑铃单臂肩上推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0360",
+    "nameZH": "哑铃单臂肩上推举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3888",
+    "nameZH": "哑铃单臂抓举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1670",
+    "nameZH": "哑铃站姿单臂弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1671",
+    "nameZH": "哑铃站姿单臂锤式弯举",
+    "reviewNote": "标题指定单臂，步骤却双手各持哑铃并双侧弯举，单侧动作时序未明确。"
+  },
+  {
+    "sourceID": "0362",
+    "nameZH": "哑铃凳上单臂臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0363",
+    "nameZH": "哑铃单臂直立划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0364",
+    "nameZH": "哑铃单臂腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1672",
+    "nameZH": "哑铃单臂佐特曼牧师凳弯举",
+    "reviewNote": "步骤起始已反握且顶部又写转为掌心向上，未完整描述佐特曼弯举的反握下降过程。"
+  },
+  {
+    "sourceID": "1292",
+    "nameZH": "健身球单腿支撑哑铃飞鸟",
+    "reviewNote": "标题单腿健身球飞鸟，步骤描述坐球前倾而非明确卧姿，胸部飞鸟支撑姿势需核对。"
+  },
+  {
+    "sourceID": "0365",
+    "nameZH": "哑铃凳上中立握腕弯举",
+    "reviewNote": "标题指定中立握腕弯举，步骤却写掌心向上并把哑铃弯举到肩部，握法与关节动作均不一致。"
+  },
+  {
+    "sourceID": "0366",
+    "nameZH": "哑铃凳上单臂中立握腕弯举",
+    "reviewNote": "标题是中立握腕弯举，步骤却描述上臂不动并把哑铃弯举到肩部，疑似肘部弯举。"
+  },
+  {
+    "sourceID": "1441",
+    "nameZH": "哑铃凳上单臂反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0367",
+    "nameZH": "哑铃凳上单臂腕弯举",
+    "reviewNote": "标题是一般腕弯举，步骤却指定掌心向下，可能与反向腕弯举混淆。"
+  },
+  {
+    "sourceID": "0368",
+    "nameZH": "哑铃凳上反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0369",
+    "nameZH": "哑铃凳上腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1329",
+    "nameZH": "哑铃转掌俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1623",
+    "nameZH": "哑铃掌心向内上斜卧推",
+    "reviewNote": "标题指定掌心向内，步骤同时写Overhand Grip，握法术语冲突，以标题保留候选。"
+  },
+  {
+    "sourceID": "0370",
+    "nameZH": "哑铃锤式牧师凳弯举",
+    "reviewNote": "原名Peacher疑为Preacher；步骤没有牧师凳且要求掌心向前，不符合锤式握法。"
+  },
+  {
+    "sourceID": "0371",
+    "nameZH": "哑铃弹跳深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0372",
+    "nameZH": "哑铃牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1673",
+    "nameZH": "健身球托臂哑铃牧师式弯举",
+    "reviewNote": "步骤同时要求坐在健身球上和将肘部托在同一球上，球的位置与托臂设置不清。"
+  },
+  {
+    "sourceID": "1293",
+    "nameZH": "健身球哑铃推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0373",
+    "nameZH": "哑铃正握臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0374",
+    "nameZH": "哑铃上斜俯卧弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1674",
+    "nameZH": "哑铃上斜俯卧锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0375",
+    "nameZH": "哑铃上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1294",
+    "nameZH": "健身球哑铃上拉接伸髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1295",
+    "nameZH": "健身球哑铃上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1700",
+    "nameZH": "哑铃借力推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0376",
+    "nameZH": "哑铃抬举（Raise）",
+    "reviewNote": "标题仅为Raise，步骤说明向两侧抬举；中文保留泛称，不自动视为已确认侧平举同义项。"
+  },
+  {
+    "sourceID": "2292",
+    "nameZH": "哑铃三角肌后束平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0377",
+    "nameZH": "哑铃后束划船（Rear Delt Row）",
+    "reviewNote": "标题称后束划船，步骤却描述向两侧抬臂，未说明肘部屈曲划船。"
+  },
+  {
+    "sourceID": "0378",
+    "nameZH": "哑铃后飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0380",
+    "nameZH": "哑铃俯身后束侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0379",
+    "nameZH": "哑铃头部支撑后束侧平举",
+    "reviewNote": "标题指定头部支撑，步骤未说明支撑物或头部位置。"
+  },
+  {
+    "sourceID": "0381",
+    "nameZH": "哑铃后撤弓步",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0382",
+    "nameZH": "哑铃反握肱二头弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1624",
+    "nameZH": "哑铃反握卧推",
+    "reviewNote": "标题是反握卧推，步骤却指定Overhand Grip并掌心朝脚，握法冲突。"
+  },
+  {
+    "sourceID": "0383",
+    "nameZH": "哑铃反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1330",
+    "nameZH": "哑铃反握上斜凳单臂划船",
+    "reviewNote": "标题反握，上游却将Reverse Grip解释为掌心向下，握法冲突。"
+  },
+  {
+    "sourceID": "1331",
+    "nameZH": "哑铃反握上斜凳双臂划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2327",
+    "nameZH": "哑铃反握划船（女性演示变式）",
+    "reviewNote": "标题反握划船，步骤却指定Overhand Grip，握法冲突；女性为来源演示标识。"
+  },
+  {
+    "sourceID": "0384",
+    "nameZH": "哑铃反握牧师凳弯举",
+    "reviewNote": "标题是反向牧师凳弯举，步骤却指定掌心向上的Underhand Grip，握法冲突。"
+  },
+  {
+    "sourceID": "1675",
+    "nameZH": "哑铃反握蜘蛛弯举",
+    "reviewNote": "标题是反握蜘蛛弯举，步骤却为直立站姿且掌心向身体，未明确蜘蛛式支撑与旋前握法。"
+  },
+  {
+    "sourceID": "0385",
+    "nameZH": "哑铃反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1459",
+    "nameZH": "哑铃罗马尼亚硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0386",
+    "nameZH": "哑铃旋转反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2397",
+    "nameZH": "哑铃斯科特推举",
+    "reviewNote": "标题为Scott Press，步骤只描述完整肩推，未体现斯科特推举的特定肘部轨迹。"
+  },
+  {
+    "sourceID": "0387",
+    "nameZH": "哑铃坐姿交替前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1676",
+    "nameZH": "健身球哑铃坐姿交替锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0388",
+    "nameZH": "哑铃坐姿交替推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3546",
+    "nameZH": "哑铃坐姿交替肩推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0389",
+    "nameZH": "哑铃坐姿凳上臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2317",
+    "nameZH": "哑铃坐姿屈臂侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1730",
+    "nameZH": "哑铃坐姿俯身交替臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1737",
+    "nameZH": "哑铃坐姿俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1677",
+    "nameZH": "哑铃坐姿肱二头弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0390",
+    "nameZH": "健身球哑铃坐姿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3547",
+    "nameZH": "哑铃坐姿弯举接肩推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1379",
+    "nameZH": "哑铃坐姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0391",
+    "nameZH": "哑铃坐姿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0392",
+    "nameZH": "哑铃坐姿前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1678",
+    "nameZH": "哑铃坐姿锤式弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0393",
+    "nameZH": "哑铃坐姿内侧弯举",
+    "reviewNote": "Inner的具体握距与上臂方向未明确，步骤类似大腿托臂弯举。"
+  },
+  {
+    "sourceID": "0394",
+    "nameZH": "哑铃坐姿后踢式臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0396",
+    "nameZH": "哑铃坐姿侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0395",
+    "nameZH": "哑铃坐姿侧平举（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0397",
+    "nameZH": "哑铃坐姿中立握腕弯举",
+    "reviewNote": "标题为中立握腕弯举，步骤却要求手腕保持中立并将哑铃弯举到肩部，疑似肘部弯举。"
+  },
+  {
+    "sourceID": "1679",
+    "nameZH": "健身球抬腿哑铃坐姿单臂弯举",
+    "reviewNote": "标题指定健身球抬腿变式，步骤只要求双脚落地，未说明抬腿阶段。"
+  },
+  {
+    "sourceID": "0398",
+    "nameZH": "哑铃坐姿单臂俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0399",
+    "nameZH": "哑铃坐姿单臂旋转",
+    "reviewNote": "标题仅写单臂旋转，步骤描述上臂固定的前臂外转，但未清楚定位旋转关节。"
+  },
+  {
+    "sourceID": "0400",
+    "nameZH": "哑铃坐姿单腿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1380",
+    "nameZH": "哑铃坐姿单腿提踵（锤式握法）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1381",
+    "nameZH": "哑铃坐姿单腿提踵（掌心向上）",
+    "reviewNote": "步骤要求训练腿伸向前离地后又以前脚掌蹬地提踵，支撑描述矛盾。"
+  },
+  {
+    "sourceID": "0401",
+    "nameZH": "哑铃坐姿掌心向上腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0402",
+    "nameZH": "哑铃坐姿牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0403",
+    "nameZH": "哑铃坐姿反握集中弯举",
+    "reviewNote": "标题反握集中弯举，步骤却指定掌心向上，握法冲突。"
+  },
+  {
+    "sourceID": "1738",
+    "nameZH": "哑铃坐姿反握单臂过头臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0405",
+    "nameZH": "哑铃坐姿肩上推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0404",
+    "nameZH": "哑铃坐姿肩上推举（平行握）",
+    "reviewNote": "标题为平行握，步骤后半却指定掌心向前，握法冲突。"
+  },
+  {
+    "sourceID": "2188",
+    "nameZH": "哑铃坐姿臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0406",
+    "nameZH": "哑铃耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0407",
+    "nameZH": "哑铃体侧屈",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0408",
+    "nameZH": "哑铃侧卧单臂平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3664",
+    "nameZH": "哑铃侧平板支撑接反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3548",
+    "nameZH": "哑铃单臂过头行走",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0409",
+    "nameZH": "哑铃单腿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1757",
+    "nameZH": "哑铃单腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2805",
+    "nameZH": "哑铃台阶支撑单腿硬拉",
+    "reviewNote": "标题为台阶支撑，步骤又要求将支撑脚向后抬起，支撑方式不清楚。"
+  },
+  {
+    "sourceID": "0410",
+    "nameZH": "哑铃单腿分腿蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0411",
+    "nameZH": "哑铃单腿深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0413",
+    "nameZH": "哑铃深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3560",
+    "nameZH": "哑铃站姿交替锤式弯举接推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0414",
+    "nameZH": "哑铃站姿交替过头推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0415",
+    "nameZH": "哑铃站姿交替平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1739",
+    "nameZH": "哑铃站姿交替俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2143",
+    "nameZH": "哑铃站姿环绕举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1740",
+    "nameZH": "哑铃站姿俯身单臂臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1741",
+    "nameZH": "哑铃站姿俯身双臂臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0416",
+    "nameZH": "哑铃站姿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0417",
+    "nameZH": "哑铃站姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0418",
+    "nameZH": "哑铃站姿集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0419",
+    "nameZH": "哑铃站姿过头前举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2321",
+    "nameZH": "哑铃站姿内侧弯举（版本2）",
+    "reviewNote": "标题指定内侧弯举，步骤只写常规掌心向前弯举，未明确内侧变式差异。"
+  },
+  {
+    "sourceID": "0420",
+    "nameZH": "哑铃站姿俯身臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0421",
+    "nameZH": "哑铃站姿单臂集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0422",
+    "nameZH": "哑铃站姿单臂弯举（上斜凳支撑）",
+    "reviewNote": "标题可能指上臂跨在上斜凳托垫；步骤只描述空闲手扶凳，托臂方式不清。"
+  },
+  {
+    "sourceID": "1680",
+    "nameZH": "哑铃站姿单臂弯举（倚上斜凳）",
+    "reviewNote": "标题可能指上臂跨在上斜凳托垫；步骤只描述空闲手扶凳，托臂方式不清。"
+  },
+  {
+    "sourceID": "0423",
+    "nameZH": "哑铃站姿单臂臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0424",
+    "nameZH": "哑铃站姿单臂掌心向内推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0425",
+    "nameZH": "哑铃站姿单臂反握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0426",
+    "nameZH": "哑铃站姿过头推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0427",
+    "nameZH": "哑铃站姿掌心向内推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0428",
+    "nameZH": "哑铃站姿牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0429",
+    "nameZH": "哑铃站姿反握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0430",
+    "nameZH": "哑铃站姿臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2293",
+    "nameZH": "哑铃站姿佐特曼牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1684",
+    "nameZH": "哑铃上台阶单腿平衡弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0431",
+    "nameZH": "哑铃上台阶",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2796",
+    "nameZH": "哑铃上台阶弓步",
+    "reviewNote": "标题有Lunge，步骤只描述上台阶与下台阶，未明确弓步环节。"
+  },
+  {
+    "sourceID": "2812",
+    "nameZH": "哑铃上台阶分腿蹲",
+    "reviewNote": "标题有Split Squat，步骤却描述上台阶接提膝，没有分腿蹲环节。"
+  },
+  {
+    "sourceID": "0432",
+    "nameZH": "哑铃僵腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0433",
+    "nameZH": "哑铃直臂上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0434",
+    "nameZH": "哑铃直腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2808",
+    "nameZH": "哑铃相扑式胯下提拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2803",
+    "nameZH": "哑铃支撑式深蹲",
+    "reviewNote": "标题指定支撑式深蹲，步骤没有说明外部支撑物或支撑方式。"
+  },
+  {
+    "sourceID": "0436",
+    "nameZH": "哑铃泰特推举",
+    "reviewNote": "标题为Tate Press，步骤类似肩位旋转推举，未描述泰特推举的向内屈肘路径。"
+  },
+  {
+    "sourceID": "1742",
+    "nameZH": "哑铃鹤式站姿后踢式臂屈伸",
+    "reviewNote": "标题为Stork Stance鹤式站姿，步骤未说明单腿平衡或另一腿位置。"
+  },
+  {
+    "sourceID": "1743",
+    "nameZH": "哑铃旋转卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0437",
+    "nameZH": "哑铃直立划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1765",
+    "nameZH": "哑铃直立划船（背面视角变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0864",
+    "nameZH": "哑铃直立肩外旋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "5201",
+    "nameZH": "哑铃侍者式弯举",
+    "reviewNote": "标题为Waiter Curl，步骤仅描述双手各持哑铃的普通弯举，未说明侍者式托握。"
+  },
+  {
+    "sourceID": "0438",
+    "nameZH": "哑铃W形推举",
+    "reviewNote": "标题为W-Press，步骤未说明W形的肘部与上臂轨迹。"
+  },
+  {
+    "sourceID": "0439",
+    "nameZH": "哑铃佐特曼弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2294",
+    "nameZH": "哑铃佐特曼牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2189",
+    "nameZH": "双哑铃坐姿臂屈伸",
+    "reviewNote": "标题复数Dumbbells，步骤却是双手握一只哑铃，器械数量冲突。"
+  },
+  {
+    "sourceID": "1167",
+    "nameZH": "动态胸部拉伸（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3287",
+    "nameZH": "肘撑臂屈伸（Elbow Dips，待核对）",
+    "reviewNote": "Elbow Dips常指肘部支撑的高阶变式；步骤仅描述凳上反撑臂屈伸，无法确认变式。"
+  },
+  {
+    "sourceID": "1772",
+    "nameZH": "抬肘反向俯卧撑（Elbow Lift，待核对）",
+    "reviewNote": "标题为抬肘/反向俯卧撑，步骤却从俯卧手撑推起，未体现反向或抬肘特征。"
+  },
+  {
+    "sourceID": "0443",
+    "nameZH": "肘触膝卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3292",
+    "nameZH": "升降式（Elevator，待核对）",
+    "reviewNote": "Elevator的动作语义不明确；步骤只描述站姿髋折叠，无法确认原名对应的体操变式。"
+  },
+  {
+    "sourceID": "1332",
+    "nameZH": "健身球交替抬臂",
+    "reviewNote": "标题未指定哑铃，步骤要求双手各持哑铃且抬臂方向不明，器械与轨迹需核对。"
+  },
+  {
+    "sourceID": "1333",
+    "nameZH": "健身球直臂背伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1334",
+    "nameZH": "健身球双手抱头背伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1335",
+    "nameZH": "健身球膝离地背伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1336",
+    "nameZH": "健身球背伸接转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1744",
+    "nameZH": "健身球臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1559",
+    "nameZH": "健身球髋屈肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1338",
+    "nameZH": "抱健身球拉伸",
+    "reviewNote": "步骤同时要求坐在健身球上和双手抱同一个球于胸前，位置不自洽。"
+  },
+  {
+    "sourceID": "1339",
+    "nameZH": "健身球背阔肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1341",
+    "nameZH": "健身球下背部金字塔式拉伸",
+    "reviewNote": "标题为Pyramid式下背拉伸，步骤仅描述仰卧滚到球上，未体现金字塔姿势。"
+  },
+  {
+    "sourceID": "1342",
+    "nameZH": "健身球侧卧背阔肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1382",
+    "nameZH": "健身球靠墙提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3241",
+    "nameZH": "健身球靠墙提踵（双踝夹网球）",
+    "reviewNote": "步骤同时要求面朝墙与下背部夹球靠墙，站立方向冲突。"
+  },
+  {
+    "sourceID": "3240",
+    "nameZH": "健身球靠墙提踵（双膝夹网球）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1416",
+    "nameZH": "健身球俯卧单腿下肢旋转",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1417",
+    "nameZH": "健身球单腿斜踢腿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1296",
+    "nameZH": "健身球屈体俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1343",
+    "nameZH": "健身球俯卧抬腿",
+    "reviewNote": "步骤先要求脚尖放在球上，又要求将双腿从地面抬起，球和支撑位置不清。"
+  },
+  {
+    "sourceID": "1560",
+    "nameZH": "健身球坐姿腘绳肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1745",
+    "nameZH": "健身球坐姿肱三头拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1746",
+    "nameZH": "健身球仰卧臂屈伸",
+    "reviewNote": "标题指定仰卧，步骤却是坐姿过头臂屈伸，姿势冲突。"
+  },
+  {
+    "sourceID": "1747",
+    "nameZH": "健身球EZ曲杆法式臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3010",
+    "nameZH": "EZ曲杆仰卧屈臂上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1748",
+    "nameZH": "EZ曲杆仰卧窄握脑后臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1344",
+    "nameZH": "EZ曲杆反握俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1682",
+    "nameZH": "EZ曲杆坐姿窄握集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1749",
+    "nameZH": "EZ曲杆站姿法式臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0445",
+    "nameZH": "EZ曲杆反重力推举（Anti Gravity Press，待核对）",
+    "reviewNote": "Anti Gravity Press常有特定卧凳/前伸变式；步骤只描述站姿过头推举，无法确定。"
+  },
+  {
+    "sourceID": "1627",
+    "nameZH": "EZ曲杆窄握牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0446",
+    "nameZH": "EZ曲杆窄握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0447",
+    "nameZH": "EZ曲杆弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0448",
+    "nameZH": "EZ曲杆下斜窄握额前臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2186",
+    "nameZH": "EZ曲杆下斜臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0449",
+    "nameZH": "EZ曲杆上斜臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0450",
+    "nameZH": "EZ曲杆JM卧推",
+    "reviewNote": "标题为JM卧推，步骤只描述杠铃降至胸部的普通卧推，未体现JM屈肘路径。"
+  },
+  {
+    "sourceID": "0451",
+    "nameZH": "EZ曲杆反握弯举",
+    "reviewNote": "标题为反向弯举，步骤却指定Underhand Grip（掌心向上），握法冲突。"
+  },
+  {
+    "sourceID": "0452",
+    "nameZH": "EZ曲杆反握牧师凳弯举",
+    "reviewNote": "标题为反向牧师凳弯举，步骤却指定Underhand Grip，握法冲突。"
+  },
+  {
+    "sourceID": "1458",
+    "nameZH": "EZ曲杆坐姿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0453",
+    "nameZH": "EZ曲杆坐姿臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0454",
+    "nameZH": "EZ曲杆蜘蛛弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1628",
+    "nameZH": "EZ曲杆蜘蛛弯举（来源条目1628）",
+    "reviewNote": "与来源ID0454同名；保留独立来源ID，不据名称合并。"
+  },
+  {
+    "sourceID": "2404",
+    "nameZH": "EZ曲杆弯举（弯举护臂板）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2432",
+    "nameZH": "EZ曲杆窄握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2741",
+    "nameZH": "EZ曲杆站姿宽握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2133",
+    "nameZH": "农夫行走",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0455",
+    "nameZH": "杠铃手指弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3303",
+    "nameZH": "人体旗帜",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0456",
+    "nameZH": "屈腿仰卧起坐（屈膝）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0457",
+    "nameZH": "屈腿仰卧起坐（直臂）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0458",
+    "nameZH": "杠铃地面飞鸟（待核对）",
+    "reviewNote": "标题指定杠铃飞鸟，步骤要求一根杠铃向两侧展开，不符合刚性单杆约束，无法确定是否使用双杆或其他器械。"
+  },
+  {
+    "sourceID": "0459",
+    "nameZH": "仰卧交替打腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1472",
+    "nameZH": "向前跳跃",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3470",
+    "nameZH": "前弓步（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3194",
+    "nameZH": "弗兰肯斯坦深蹲",
+    "reviewNote": "标题Frankenstein Squat通常指直臂平衡前架式；步骤却写双手直臂持杆于身前，负重位置需核对。"
+  },
+  {
+    "sourceID": "2429",
+    "nameZH": "蛙式卷腹",
+    "reviewNote": "标题蛙式卷腹，步骤只描述屈膝双脚平放卷腹，未说明蛙式髋外旋。"
+  },
+  {
+    "sourceID": "3301",
+    "nameZH": "蛙式俄式挺身",
+    "reviewNote": "标题Frog Planche，步骤混合屈肘下沉与收膝抬脚，支撑姿态和静态/动态形式不清。"
+  },
+  {
+    "sourceID": "3296",
+    "nameZH": "前水平支撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3295",
+    "nameZH": "前水平起落",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0464",
+    "nameZH": "直臂平板支撑转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3315",
+    "nameZH": "完整马耳他十字支撑（待核对）",
+    "reviewNote": "标题完整马耳他十字支撑，上游步骤只是站姿前倾并以双脚推地起身，缺少手部/吊环支撑，不能确认高阶动作。"
+  },
+  {
+    "sourceID": "3299",
+    "nameZH": "完整俄式挺身",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3327",
+    "nameZH": "完整俄式挺身俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0466",
+    "nameZH": "吉隆达胸骨引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3561",
+    "nameZH": "臀桥交替抬腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3523",
+    "nameZH": "双脚凳上臀桥（男性演示变式）",
+    "reviewNote": "标题指定双腿放在凳上，步骤却要求双脚落地、背部靠凳，支撑位置冲突。"
+  },
+  {
+    "sourceID": "3193",
+    "nameZH": "臀腿挺身",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0467",
+    "nameZH": "猩猩式引体向上",
+    "reviewNote": "标题为Gorilla Chin猩猩式引体，步骤仅普通引体向上，未说明特定腿部/躯干变式。"
+  },
+  {
+    "sourceID": "0469",
+    "nameZH": "腹股沟卷腹（Groin Crunch，待核对）",
+    "reviewNote": "Groin Crunch的特定含义不明；步骤只描述仰卧收膝，未明确腹股沟变式差异。"
+  },
+  {
+    "sourceID": "1383",
+    "nameZH": "哈克机提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1384",
+    "nameZH": "哈克机单腿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3221",
+    "nameZH": "半蹲（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3202",
+    "nameZH": "半程仰卧起坐（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1511",
+    "nameZH": "腘绳肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2139",
+    "nameZH": "手摇功率车",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3218",
+    "nameZH": "双手交握绕圈触脚（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3215",
+    "nameZH": "双手反扣绕圈触脚（男性演示变式）",
+    "reviewNote": "步骤要求双手先在腿后相扣又绕过头至脚尖，路径与可行姿态不清。"
+  },
+  {
+    "sourceID": "3302",
+    "nameZH": "倒立",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0471",
+    "nameZH": "倒立俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1764",
+    "nameZH": "悬垂举腿提髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0472",
+    "nameZH": "悬垂举腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1761",
+    "nameZH": "悬垂斜向提膝",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0473",
+    "nameZH": "悬垂屈体",
+    "reviewNote": "步骤同时要求身体V形又称双腿平行地面，屈髋角度与终点冲突。"
+  },
+  {
+    "sourceID": "0474",
+    "nameZH": "悬垂直腿提髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0475",
+    "nameZH": "悬垂直腿举腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0476",
+    "nameZH": "悬垂直腿转体提髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3636",
+    "nameZH": "扶墙高抬腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0484",
+    "nameZH": "屈膝提髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1418",
+    "nameZH": "抱膝至胸",
+    "reviewNote": "步骤写站姿下蹲同时将双膝抱至胸，不清楚身体支撑方式，不能确定站姿还是仰卧抱膝。"
+  },
+  {
+    "sourceID": "3234",
+    "nameZH": "海特式哑铃飞鸟（Hyght）",
+    "reviewNote": "标题Hyght Fly通常有特定上斜/托举轨迹，步骤仅描述平板飞鸟，变式差异未明确。"
+  },
+  {
+    "sourceID": "0489",
+    "nameZH": "背部超伸展",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0488",
+    "nameZH": "凳上背部超伸展",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3289",
+    "nameZH": "不可能臂屈伸（Impossible Dips，待核对）",
+    "reviewNote": "标题为Impossible Dips高阶变式，步骤仅普通双杠臂屈伸，无法确认变式。"
+  },
+  {
+    "sourceID": "1471",
+    "nameZH": "尺蠖式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3698",
+    "nameZH": "尺蠖式（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0490",
+    "nameZH": "上斜窄距俯卧撑（手抬高）",
+    "reviewNote": "标题为窄距上斜俯卧撑，步骤却要求双手略宽于肩，握距冲突。"
+  },
+  {
+    "sourceID": "0491",
+    "nameZH": "斜凳直腿举腿提髋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0492",
+    "nameZH": "上斜俯卧撑接深度跳（待核对）",
+    "reviewNote": "标题Incline Push-up Depth Jump，步骤在手扶高台俯卧撑后要求从台边跳落，未明确手部落差俯卧撑或全身跳台衔接。"
+  },
+  {
+    "sourceID": "0493",
+    "nameZH": "上斜俯卧撑（手抬高）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3785",
+    "nameZH": "箱上上斜俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0494",
+    "nameZH": "上斜反握俯卧撑（手抬高）",
+    "reviewNote": "标题指定反握，步骤未说明手指和手掌方向，反握设置需核对。"
+  },
+  {
+    "sourceID": "3011",
+    "nameZH": "上斜肩胛俯卧撑",
+    "reviewNote": "标题是肩胛俯卧撑，步骤却要求屈伸肘部，不能等同常见直臂肩胛俯卧撑。"
+  },
+  {
+    "sourceID": "0495",
+    "nameZH": "斜凳转体仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1564",
+    "nameZH": "中阶髋屈肌与股四头肌拉伸",
+    "reviewNote": "标题难度为Intermediate；步骤提及抓握绳子但标题未说明辅助器械，具体设置需核对。"
+  },
+  {
+    "sourceID": "0496",
+    "nameZH": "反向腿弯举（训练凳支撑）",
+    "reviewNote": "标题Inverse Leg Curl可能指反向腿弯举/北欧式变式，步骤仅俯卧凳上屈膝，身体移动方式未明确。"
+  },
+  {
+    "sourceID": "2400",
+    "nameZH": "反向腿弯举（引体绳索机）",
+    "reviewNote": "标题指定引体绳索机的反向腿弯举，步骤却为脚踝接低位绳索的俯卧腿弯举，设置不一致。"
+  },
+  {
+    "sourceID": "0499",
+    "nameZH": "反向划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2300",
+    "nameZH": "屈膝反向划船",
+    "reviewNote": "标题指定屈膝，步骤却只要求身体伸直且未说明屈膝角度，膝部设置需核对。"
+  },
+  {
+    "sourceID": "2298",
+    "nameZH": "凳上反向划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0497",
+    "nameZH": "反向划船（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0498",
+    "nameZH": "吊带反向划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1419",
+    "nameZH": "十字转体拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1297",
+    "nameZH": "等长胸部挤压",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0500",
+    "nameZH": "等长雨刷式摆腿",
+    "reviewNote": "标题指定等长，步骤却左右动态摆腿，等长保持阶段未明确。"
+  },
+  {
+    "sourceID": "0501",
+    "nameZH": "开合式波比跳",
+    "reviewNote": "标题包含Jack开合动作，步骤只描述普通波比跳，没有开合环节。"
+  },
+  {
+    "sourceID": "3224",
+    "nameZH": "开合跳（男性演示变式）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0507",
+    "nameZH": "折刀式仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0508",
+    "nameZH": "扬达式仰卧起坐",
+    "reviewNote": "标题扬达式仰卧起坐，步骤未描述用于该变式的腘绳肌收缩/足部固定特征。"
+  },
+  {
+    "sourceID": "2612",
+    "nameZH": "跳绳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0514",
+    "nameZH": "跳跃深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0513",
+    "nameZH": "跳跃深蹲（版本2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0517",
+    "nameZH": "壶铃进阶风车式",
+    "reviewNote": "步骤先要求壶铃手臂始终举过头顶，后又说该手臂指向地面，方向矛盾。"
+  },
+  {
+    "sourceID": "0518",
+    "nameZH": "壶铃交替悬垂翻举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0520",
+    "nameZH": "壶铃交替推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0519",
+    "nameZH": "壶铃地板交替卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0521",
+    "nameZH": "壶铃交替叛逆者划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0522",
+    "nameZH": "壶铃交替俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0523",
+    "nameZH": "壶铃阿诺德推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0524",
+    "nameZH": "壶铃侧屈推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0525",
+    "nameZH": "壶铃悬垂底朝上翻举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0526",
+    "nameZH": "双壶铃交替悬垂翻举",
+    "reviewNote": "标题为双壶铃交替翻举，步骤却描述双侧同步翻举，交替时序未明确。"
+  },
+  {
+    "sourceID": "0527",
+    "nameZH": "双壶铃挺举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0528",
+    "nameZH": "双壶铃借力推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0529",
+    "nameZH": "双壶铃抓举",
+    "reviewNote": ""
+  }
+]

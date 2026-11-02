@@ -1,0 +1,338 @@
+{
+  "status": "PASS",
+  "sessionID": "98456d5b-5dfd-4e7c-add4-b649fff1273f",
+  "stableImportID": "confirmed-notes:notes-20261021-workout-v1:2026-10-21-oct21-notes-workout",
+  "date": "2026-10-21",
+  "sessionStatus": "completed",
+  "exercises": [
+    {
+      "sourceName": "Dual Pulley Low Row",
+      "sessionExerciseID": "cc5b19b5-b081-4e20-a65f-2db7575754d9",
+      "sets": [
+        {
+          "setLogID": "e16d4e0c-a94f-4f52-98d9-0af6463916ce",
+          "weight": 25.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "01abf5ed-09a1-4304-8922-9ca57a80d2c1",
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "4ba2b3c7-e379-4458-86dc-001b0840cfb4",
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "348884bc-5a6b-4b53-ac62-7ea64b167686",
+          "weight": 40.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "c8923996-02ca-4722-b148-069fbfb4d5b2",
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "杠铃片胸前转体",
+      "sessionExerciseID": "f37d875a-82dc-4746-acac-d3288ff14eba",
+      "sets": [
+        {
+          "setLogID": "39d556dd-07eb-4c1c-a49b-0308bac17281",
+          "weight": 10.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "cc5c0001-d4cc-4d79-b9ce-407ed93373a1",
+          "weight": 15.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "383b91d7-9619-4ca6-93e4-29e420813773",
+          "weight": 15.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "fea715ab-907d-4bd3-b66b-a523111f64ec",
+          "weight": 15.0,
+          "reps": 16,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Dual Pulley Pulldown",
+      "sessionExerciseID": "6175306e-df09-4c12-9944-65a176d93ccf",
+      "sets": [
+        {
+          "setLogID": "b6dc7d02-3c6b-423c-bc96-e0c6062dddae",
+          "weight": 25.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "a46dd746-5fd6-4c6f-8d55-22f4d7390217",
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "8ea23e52-7036-45c8-9734-641c60949902",
+          "weight": 35.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "cbc17dda-516d-479b-a6ee-877d6948e3ee",
+          "weight": 40.0,
+          "reps": 8,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "a91f3543-bdcc-4b36-9a5a-71a8cfc89425",
+          "weight": 30.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "站姿抬腿侧弯",
+      "sessionExerciseID": "1e327bdd-999c-46d4-ad01-724826a191d7",
+      "sets": [
+        {
+          "setLogID": "6e09bbee-c406-4956-841a-82ae8e4729f8",
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "ef66f7f3-6233-467b-bcfd-c524e91c1544",
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "82371af0-6bc5-4369-aee9-139332b0f2ff",
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "9325a831-3161-4496-b2c0-6020a28ac606",
+          "weight": 10.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "T bar row",
+      "sessionExerciseID": "b77a26cc-81c1-4dd7-8c20-e8aef3b5b40f",
+      "sets": [
+        {
+          "setLogID": "d1423d99-c6ef-41b3-a6a5-e7c6773797f0",
+          "weight": 30.0,
+          "reps": 14,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "23028a16-50a9-46d4-90f5-234d4e0d2b0c",
+          "weight": 40.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "32c9659b-c8af-415b-b4a8-d6c246e309a3",
+          "weight": 50.0,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "961a5807-d827-4b79-9e7e-4f9a93d4daf9",
+          "weight": 40.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "weighted leg raise",
+      "sessionExerciseID": "45b2b377-1fce-4578-9a9a-e91493ba2a72",
+      "sets": [
+        {
+          "setLogID": "3ce93f41-26c2-40dc-90e8-2bf9f85902e5",
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "af2f905c-bc3d-4fcb-a32b-974f35b7c212",
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "1eac601c-d39a-4da6-af50-781558bca3f3",
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "f0f184dd-ccd2-4c6a-9465-a3b97206a469",
+          "weight": 7.5,
+          "reps": 10,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "绳索直臂下压",
+      "sessionExerciseID": "b8712aa7-3239-4f1b-9724-ebef78d9241d",
+      "sets": [
+        {
+          "setLogID": "c59a18fa-9956-43f8-a022-be6dd22b0ef9",
+          "weight": 21.25,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "02f6684e-827f-4793-8a67-12b2e64ca0f0",
+          "weight": 25.0,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "c42c00e3-a0d7-43e4-9245-ad9a8ae323b8",
+          "weight": 28.75,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "face4fc2-b9d1-4413-bf65-aa6ed9af2edf",
+          "weight": 32.5,
+          "reps": 12,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable arm curl",
+      "sessionExerciseID": "2aaed0dd-863e-470d-a8e1-4d9c741f63e9",
+      "sets": [
+        {
+          "setLogID": "4860b073-aa88-4a6e-ba29-b944c32c788d",
+          "weight": 10.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "c690d96f-3820-4868-85b6-f2293fdcfc22",
+          "weight": 12.5,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "105fd046-fbf4-47e2-9e37-9d2ba7c45e3a",
+          "weight": 15.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "setLogID": "9708a5b3-bf6e-4124-942d-bce7024c5574",
+          "weight": 15.0,
+          "reps": 20,
+          "rir": null,
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    }
+  ],
+  "completedSets": 34,
+  "all34SetsExact": true,
+  "unknownFieldsPreserved": true,
+  "allOriginalFieldsUnchangedAfterImport": true,
+  "beforeTables": 25,
+  "beforeRecords": 2324,
+  "afterRecords": 2375,
+  "originalAssetsUnchanged": true,
+  "R5SchedulePendingSkip": true
+}

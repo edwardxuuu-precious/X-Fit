@@ -7,8 +7,8 @@ import XCTest
 final class ExerciseTerminologyTests: XCTestCase {
     func testCatalogCoversAuditedRawNamesWithoutCollisions() {
         let rawNames = ExerciseTerminologyService.catalog.flatMap(\.rawNames)
-        XCTAssertEqual(rawNames.count, 55)
-        XCTAssertEqual(Set(rawNames).count, 55)
+        XCTAssertEqual(rawNames.count, 57)
+        XCTAssertEqual(Set(rawNames).count, 57)
         XCTAssertEqual(Set(ExerciseTerminologyService.catalog.map(\.canonicalID)).count, 49)
         XCTAssertEqual(
             ExerciseTerminologyService.candidate(for: "坐姿肩推")?.canonicalID,

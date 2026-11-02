@@ -1,0 +1,28 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "lockState",
+      "--device",
+      "00008150-001E49912122401C",
+      "--timeout",
+      "20",
+      "--json-output",
+      "outputs/stage-validation/20260920-historical-backfill-device-prewrite/lock-state-4.json"
+    ],
+    "commandType" : "devicectl.device.info.lockState",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.33"
+  },
+  "result" : {
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "passcodeRequired" : true,
+    "unlockedSinceBoot" : true
+  }
+}

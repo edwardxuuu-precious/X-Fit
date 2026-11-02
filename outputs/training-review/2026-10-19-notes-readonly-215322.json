@@ -1,0 +1,776 @@
+{
+  "status": "MATCHED_38_SETS_SESSION_STILL_IN_PROGRESS",
+  "checkedAt": "2026-10-19T21:58:15.008985+08:00",
+  "phoneSnapshot": {
+    "captureStartedAt": "2026-10-19T21:54:06.824690+08:00",
+    "captureFinishedAt": "2026-10-19T21:54:09.715378+08:00",
+    "device": "Edward_iPhone",
+    "deviceIdentifier": "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "phoneAction": "devicectl device copy from appGroupDataContainer",
+    "phoneWrites": 0,
+    "appLaunched": false,
+    "simulatorModified": false,
+    "files": {
+      "phone-current/default.store": "19f0f45b95dbc1a11be4505bd573941cb8b54771dac1346073389c6af5641ba6",
+      "phone-current/default.store-wal": "b157ff88aab6d4b903172cb19e0aada3e604e151e119c1b2a58f4922066cd736",
+      "phone-current/default.store-shm": "2d60164e42dbed0e207432022edb1878e2b1b1650a89956d45ffd0188c59c087"
+    }
+  },
+  "source": "Apple Notes Oct 19 owner-confirmed 38 sets, source copy parsed independently",
+  "sourceSHA256": "9c3086d1dac7165cb6fc791bf4e83737afced5dce8d5a01a691470afe0786fdd",
+  "sourceMappingIndependentlyParsed": true,
+  "sqliteIntegrity": "ok",
+  "targetSessionID": "0dd77d67-0967-439a-a50a-c07d0b43cfee",
+  "trainingLocalDay": "2026-10-19",
+  "sessionStatus": "inProgress",
+  "sessionCompletedAt": null,
+  "sourceExercises": 9,
+  "expectedCompletedSets": 38,
+  "actualCompletedSets": 38,
+  "matchedExpectedSets": 38,
+  "all38IDsUnique": true,
+  "missingOrMismatchedExercises": [],
+  "extraCompletedSets": [],
+  "originalFour": [
+    {
+      "id": "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7",
+      "beforeOccurrences": 1,
+      "currentOccurrences": 1,
+      "sameSession": true,
+      "allOriginalBusinessFieldsUnchanged": true,
+      "changedColumns": []
+    },
+    {
+      "id": "d68343aa-8aa0-4567-bfd4-3b9aca1d0472",
+      "beforeOccurrences": 1,
+      "currentOccurrences": 1,
+      "sameSession": true,
+      "allOriginalBusinessFieldsUnchanged": true,
+      "changedColumns": []
+    },
+    {
+      "id": "1c053603-2189-4a2e-a3e8-c96f9b7e6b31",
+      "beforeOccurrences": 1,
+      "currentOccurrences": 1,
+      "sameSession": true,
+      "allOriginalBusinessFieldsUnchanged": true,
+      "changedColumns": []
+    },
+    {
+      "id": "2c5171b4-7215-4122-b4f0-cf8e14945724",
+      "beforeOccurrences": 1,
+      "currentOccurrences": 1,
+      "sameSession": true,
+      "allOriginalBusinessFieldsUnchanged": true,
+      "changedColumns": []
+    }
+  ],
+  "originalFourIncludedIn38": true,
+  "newlyCompletedBeyondOriginalFour": 34,
+  "all38UnknownRIRLeftNil": true,
+  "duplicateModelIDs": {
+    "ZWORKOUTSESSION": [],
+    "ZSESSIONEXERCISE": [],
+    "ZSETLOG": []
+  },
+  "duplicateExerciseIDsWithinSession": [],
+  "duplicateNormalizedNamesWithinSession": [],
+  "otherSameDayOrScheduleSessions": [
+    {
+      "id": "a7de9ca2-cf9d-4ebd-879b-2059a16d856d",
+      "status": "discarded",
+      "title": "胸部＋三头 · R2建议预填 · 20组",
+      "storedSets": 20,
+      "completedSets": 0
+    }
+  ],
+  "sourceRows": [
+    {
+      "sourceName": "Smith Bench Press",
+      "appName": "史密斯卧推",
+      "sessionExerciseID": "66c5be9b-5260-4cef-b498-20980e3c594c",
+      "expectedSets": 5,
+      "storedSets": 5,
+      "completedSets": 5,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "0bb19e42-ee57-4aff-9cb8-d48982dbd1b7",
+          "setNumber": 1,
+          "actualWeight": 25.0,
+          "actualReps": 14,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T08:40:21.150996+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "d68343aa-8aa0-4567-bfd4-3b9aca1d0472",
+          "setNumber": 2,
+          "actualWeight": 30.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T08:40:21.649928+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "1c053603-2189-4a2e-a3e8-c96f9b7e6b31",
+          "setNumber": 3,
+          "actualWeight": 35.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T08:40:22.350634+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "2c5171b4-7215-4122-b4f0-cf8e14945724",
+          "setNumber": 4,
+          "actualWeight": 40.0,
+          "actualReps": 8,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T08:40:24.154566+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "750f78dd-f333-4530-9d33-0a56dda2e38d",
+          "setNumber": 5,
+          "actualWeight": 30.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:41:03.952608+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Smith Inclined Bench Press",
+      "appName": "史密斯上斜卧推",
+      "sessionExerciseID": "328e14d7-f2ff-423f-ad76-1e62b563cc86",
+      "expectedSets": 5,
+      "storedSets": 5,
+      "completedSets": 5,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "b0403623-607d-4f55-b3f8-97f037872253",
+          "setNumber": 1,
+          "actualWeight": 20.0,
+          "actualReps": 14,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:09:27.601237+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "78961609-2d12-4b6b-8c70-24d462256ea3",
+          "setNumber": 2,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:09:28.111826+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "32321974-e139-4957-8c9f-2d56cb9d5486",
+          "setNumber": 3,
+          "actualWeight": 30.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:09:28.910412+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "a92ae3b4-bf59-416a-a175-f3ccfda33b62",
+          "setNumber": 4,
+          "actualWeight": 35.0,
+          "actualReps": 8,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:09:29.728229+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "58ab282b-2226-4a18-85c7-a455b38e8a44",
+          "setNumber": 5,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:10:42.712721+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "MTS Declined Bench Press",
+      "appName": "MTS器械下斜推胸",
+      "sessionExerciseID": "69cb54b8-6194-4e18-9aec-2f7fa48135c5",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "02965981-a191-4c86-90e5-ef2128802847",
+          "setNumber": 1,
+          "actualWeight": 22.5,
+          "actualReps": 14,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:45:45.886780+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "ccda1161-beca-4621-acf7-72e0acbe8b22",
+          "setNumber": 2,
+          "actualWeight": 25.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:45:46.389705+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "fd6af548-f188-4bb2-897d-d1b4af1504b2",
+          "setNumber": 3,
+          "actualWeight": 27.5,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:45:47.183906+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "d051aba7-b51e-4b90-b7f2-b3eb5e158367",
+          "setNumber": 4,
+          "actualWeight": 30.0,
+          "actualReps": 8,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:45:48.000732+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Seated Dip",
+      "appName": "坐姿器械臂屈伸",
+      "sessionExerciseID": "b6428488-064c-4ade-8e09-1b57421121a7",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "da151bd1-1e55-4a45-8ce4-122ef5314e94",
+          "setNumber": 1,
+          "actualWeight": 30.0,
+          "actualReps": 14,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:16:30.822255+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "fb197b90-a95d-4ab0-a201-1113f0d1a40e",
+          "setNumber": 2,
+          "actualWeight": 35.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:16:31.312127+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "e5a74a19-507d-465c-87ce-95d0c242c30f",
+          "setNumber": 3,
+          "actualWeight": 40.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:16:32.126289+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "b73cb70d-a1ea-4371-be02-c08c1ddd6c09",
+          "setNumber": 4,
+          "actualWeight": 45.0,
+          "actualReps": 8,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:16:32.937224+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable Fly",
+      "appName": "站姿绳索夹胸",
+      "sessionExerciseID": "6be867c0-8750-42a7-8fb3-0547e8eb0c22",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "8ef15c5a-1309-4e3e-96b8-16a97f5b3a4b",
+          "setNumber": 1,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:49:31.658514+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "dfa1e422-967e-476b-8112-e813fa7e4e8f",
+          "setNumber": 2,
+          "actualWeight": 12.5,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:49:32.174976+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "11fc24cd-380d-4f08-9abd-70bff74cb4eb",
+          "setNumber": 3,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:49:33.000038+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "fa47f125-6fd8-432f-bdc6-b48679aaa8c9",
+          "setNumber": 4,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:49:33.820391+08:00",
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "三头绳索下压",
+      "appName": "绳索下压",
+      "sessionExerciseID": "e93a850e-469e-4463-b4b7-5152ed8bf5c6",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "b1f9ebac-926b-48c8-862e-0a6ef7b08226",
+          "setNumber": 1,
+          "actualWeight": 17.5,
+          "actualReps": 20,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:53:05.335731+08:00",
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "239b8101-5aaa-4dea-8712-e8959a24e34e",
+          "setNumber": 2,
+          "actualWeight": 12.5,
+          "actualReps": 20,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:53:05.851742+08:00",
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "ebf91844-2799-4b59-87f1-0f64c55ca10b",
+          "setNumber": 3,
+          "actualWeight": 15.0,
+          "actualReps": 20,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:53:06.667275+08:00",
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "ab882aac-44a2-42d3-8ea7-d244f341d9c2",
+          "setNumber": 4,
+          "actualWeight": 17.5,
+          "actualReps": 20,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T19:53:07.488824+08:00",
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Side pull",
+      "appName": "Cable shoulder Side pull",
+      "sessionExerciseID": "ec86d169-0511-4c72-8f4c-d036ab8e8210",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "aae5cdaa-68e6-4295-b2b7-85d8fe78e7b3",
+          "setNumber": 1,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:28:20.849132+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "753deffb-3966-4f64-a649-71c15e999ed2",
+          "setNumber": 2,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:28:21.358332+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "e154ab31-90f6-465a-ae61-f05627d50703",
+          "setNumber": 3,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:28:21.880451+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "b8dea109-28be-45f6-82fa-207c4ea9b659",
+          "setNumber": 4,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:28:22.368177+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder Front pull",
+      "appName": "Cable shoulder Front pull",
+      "sessionExerciseID": "97381414-a311-4385-922f-b1554fc6d3d6",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "6652949d-0e47-464f-8fe7-1ef291a95814",
+          "setNumber": 1,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:36:08.128369+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "074c4e3b-10e9-4bae-9c44-d4e319b5124b",
+          "setNumber": 2,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:36:08.642509+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "00cd9e36-3b13-409e-8f87-405e60b97002",
+          "setNumber": 3,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:36:09.133397+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "92bd0246-7a23-4925-8819-73788fcd3418",
+          "setNumber": 4,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:36:09.630473+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    },
+    {
+      "sourceName": "Cable shoulder reverse pull",
+      "appName": "Cable shoulder reverse pull",
+      "sessionExerciseID": "6c42f2fc-f581-4776-b5f4-5ebf083f1431",
+      "expectedSets": 4,
+      "storedSets": 4,
+      "completedSets": 4,
+      "exactOrderedValuesAndCompletionMatch": true,
+      "sourceLogIDsStillIdentical": true,
+      "duplicateSetNumbers": [],
+      "sets": [
+        {
+          "id": "bb143792-ef37-4f16-9ab6-e8f994308a3d",
+          "setNumber": 1,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:39:27.866084+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "8bd0c518-0118-4517-aef0-74b72231c0dc",
+          "setNumber": 2,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:39:28.409067+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "f8c4c6e5-5f4e-4957-bb45-58b1706bf388",
+          "setNumber": 3,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:41:46.054526+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        },
+        {
+          "id": "c0f31e9a-c3b4-47b8-9720-7794ff9c7a44",
+          "setNumber": 4,
+          "actualWeight": 5.0,
+          "actualReps": 10,
+          "completed": true,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": "2026-10-19T20:41:46.551996+08:00",
+          "weightSide": "unknown",
+          "repsSide": "unknown"
+        }
+      ]
+    }
+  ],
+  "retainedDraftRows": [
+    {
+      "appName": "上斜哑铃卧推",
+      "sessionExerciseID": "f59db728-ebed-4ea7-82e1-cc07d7afc16b",
+      "sets": [
+        {
+          "id": "f186a124-153e-4ec5-9474-1f73ac0a69ae",
+          "setNumber": 1,
+          "actualWeight": 25.0,
+          "actualReps": 8,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "337dc5db-406f-4bc1-ab30-aaf0db567d1d",
+          "setNumber": 2,
+          "actualWeight": 22.5,
+          "actualReps": 10,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "338fdd34-e99c-4139-85ca-4c27fb76fe88",
+          "setNumber": 3,
+          "actualWeight": 22.5,
+          "actualReps": 10,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "a7072af3-6297-433e-834b-60fdafe4b484",
+          "setNumber": 4,
+          "actualWeight": 22.5,
+          "actualReps": 10,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "single",
+          "repsSide": "bilateral"
+        }
+      ]
+    },
+    {
+      "appName": "绳索过顶臂屈伸",
+      "sessionExerciseID": "d2973cb6-c275-4df1-be00-7409c24a0bb5",
+      "sets": [
+        {
+          "id": "5188acaa-22dd-4f72-8b03-d835194ea96c",
+          "setNumber": 1,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "1c5867ba-8624-490e-bd33-cae100dfb9ab",
+          "setNumber": 2,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        },
+        {
+          "id": "e91d2d3e-92b7-47fd-a04b-c277eecca2c2",
+          "setNumber": 3,
+          "actualWeight": 10.0,
+          "actualReps": 12,
+          "completed": false,
+          "warmup": false,
+          "rir": null,
+          "completionSavedAt": null,
+          "weightSide": "bilateral",
+          "repsSide": "bilateral"
+        }
+      ]
+    }
+  ],
+  "retainedDraftSetCount": 7,
+  "schedule": [
+    {
+      "id": "5185deb9-cfb7-5810-b9ec-e33cfdcac179",
+      "status": "inProgress",
+      "updatedAt": "2026-10-19T08:32:27.298875+08:00"
+    }
+  ],
+  "sessionSourceNotes": "Backfilled from Apple Notes Oct 19 2026. Original four Smith flat sets preserved. Smith flat and incline loads are kg per side， plates only， bar excluded. MTS decline， Seated Dip， Cable Fly and shoulder Side，",
+  "limitations": [
+    "Completion timestamps are retrospective data-entry times, not actual training times.",
+    "New action structured side fields remain unknown; owner-confirmed single-side kg basis is retained separately in source notes.",
+    "This audit uses a timestamped phone snapshot and sends no phone write or launch command."
+  ],
+  "checksPassed": true,
+  "capturedStoreAndWalUnchangedByLocalAudit": true
+}

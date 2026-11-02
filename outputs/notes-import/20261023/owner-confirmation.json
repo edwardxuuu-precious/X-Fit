@@ -1,0 +1,25 @@
+{
+  "confirmedAtDate": "2026-10-23",
+  "source": "User reply to exact import and method confirmation",
+  "allNumericLoadsUnit": "kg",
+  "platePerSideExcludesBar": [
+    "Smith Bench Press",
+    "Barbell Row",
+    "Smith shoulder press"
+  ],
+  "assistanceLoad": "Assisted Pull-up",
+  "aliases": {
+    "Dumbbell Side Pull": "哑铃侧平举"
+  },
+  "perHandOrSide": [
+    "Dumbbell Side Pull",
+    "Dumbbell Reverse Fly",
+    "Cable Fly"
+  ],
+  "repsSides": "unknown",
+  "barMassKg": null,
+  "rir": null,
+  "warmupClassification": "unknown",
+  "actualStartEndTimeAndDuration": "unknown",
+  "scope": "Notes replaces today menu and actual; retain R6 and mark replaced; no change to long-term split or next week"
+}

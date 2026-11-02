@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X-Fit · 训练记录布局确认稿</title>
+<!-- 独立、可丢弃的布局提案。一个 Hevy 参考方案，切换训练前/记录中状态。无网络请求、存储或 App 数据写入。 -->
+<style>
+:root{--ink:#17191c;--muted:#777e87;--line:#eceef1;--soft:#f4f5f7;--accent:#c5f432;--green:#326d16}
+*{box-sizing:border-box}body{margin:0;background:#eef0f2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:#275da0}h1{font-size:28px;letter-spacing:-1px;margin:10px 0}h2{font-size:17px;margin:0 0 13px}p{line-height:1.65}header.page{max-width:1170px;margin:34px auto 24px;padding:0 24px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:2px;color:#626b76}.intro{max-width:850px;color:#616973;font-size:14px}.layout{display:grid;grid-template-columns:320px 393px 1fr;gap:28px;max-width:1170px;margin:auto;padding:0 24px 110px;align-items:start}.panel{background:white;border:1px solid #e1e4e7;border-radius:15px;padding:22px}.panel p,.panel li{font-size:13px;line-height:1.7;color:#616973}.panel ol{padding-left:19px}.ref-photo{width:100%;border-radius:9px;display:block}.reference{font-size:12px}.keyline{height:1px;background:var(--line);margin:20px 0}.item{margin-bottom:19px}.item b{display:block;font-size:13px;margin-bottom:5px}.item span{font-size:12px;line-height:1.7;color:#69717b}.badge{display:inline-block;border-radius:5px;background:#eff5e3;color:#3e661f;padding:4px 7px;font-size:11px;font-weight:600}.phone{width:393px;height:852px;background:white;border:7px solid #191b1d;border-radius:43px;box-shadow:0 12px 35px #20252d16;overflow:hidden;position:relative}.phone-inner{height:100%;display:flex;flex-direction:column}.status{height:43px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;font-size:13px;font-weight:600}.status .island{width:112px;height:26px;background:#191b1d;border-radius:20px;position:absolute;left:50%;transform:translateX(-50%)}.nav{display:flex;align-items:center;justify-content:space-between;padding:5px 13px 11px;border-bottom:1px solid var(--line);height:56px}.nav-title{font-size:17px;font-weight:650}.icon-btn{border:0;background:none;min-width:44px;min-height:44px;padding:0;font-size:22px}.primary-small{border:0;background:var(--accent);color:#21300b;border-radius:7px;font-size:14px;font-weight:650;min-height:40px;padding:0 13px}.stats{display:flex;gap:30px;padding:14px 18px;border-bottom:1px solid var(--line)}.stats label{display:block;font-size:11px;color:var(--muted);margin-bottom:5px}.stats b{font-size:14px;font-weight:600}.scroll{overflow:auto;flex:1;padding-bottom:12px;scrollbar-width:thin}.exercise{padding:17px 15px 18px;border-bottom:1px solid var(--line)}.exercise-top{display:flex;align-items:center;gap:10px}.thumb{width:32px;height:32px;border-radius:7px;background:var(--soft);display:grid;place-items:center;font-size:19px}.exercise-title{font-size:16px;font-weight:650;flex:1;line-height:1.3}.more{border:0;background:none;font-size:22px;min-width:44px;min-height:44px}.measure{font-size:12px;color:#626c77;margin:8px 0 0}.measure strong{font-weight:600;color:#4a535d}.hint{display:flex;align-items:center;justify-content:space-between;margin:10px 0 12px;font-size:12px;color:#606a76;gap:6px}.linkbtn{background:none;border:0;font-size:12px;color:#3a5a18;padding:0;min-height:32px}.tbl-head,.set-row{display:grid;grid-template-columns:25px 86px 1fr 1fr 44px;gap:7px;align-items:center;text-align:center}.tbl-head{color:#8a9098;font-size:10px;margin-bottom:7px}.set-row{min-height:49px;font-size:14px;font-variant-numeric:tabular-nums;border-radius:5px;margin:2px 0;padding:0 2px}.set-row .prev{font-size:11px;color:#8b929a;white-space:nowrap}.set-row input{border:0;background:var(--soft);border-radius:5px;width:100%;min-width:0;height:34px;text-align:center;font-size:16px;color:var(--ink);outline-color:#8eab56}.set-row.completed{background:#f0f6e8}.set-row.completed input{background:transparent;color:#567647}.tick{min-height:44px;width:44px;border:0;background:none;border-radius:5px;font-size:19px;color:#b3bac1}.tick span{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:6px;background:#e9ecef}.completed .tick span{background:var(--accent);color:#22380c}.addset{display:block;width:100%;min-height:44px;border:0;border-radius:6px;background:var(--soft);font-size:13px;font-weight:550;color:#3a414a;margin-top:9px}.extra .set-id{font-size:11px;color:#52752d}.extra{border:1px dashed #a9bc89}.addexercise{border:0;border-radius:7px;background:var(--accent);font-size:14px;font-weight:600;min-height:44px;width:calc(100% - 30px);margin:16px 15px 8px}.quiet{font-size:12px;color:#7e8690;margin:6px 16px 16px}.collapsed{padding:15px 17px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)}.collapsed b{display:block;font-size:14px}.collapsed small{display:block;font-size:11px;color:#808892;margin-top:5px}.collapsed .number{width:29px;height:29px;background:var(--soft);border-radius:6px;display:grid;place-items:center;font-size:12px;color:#838a93}.collapsed .arrow{margin-left:auto;color:#9299a0}.bottom-line{height:5px;width:120px;background:#151719;border-radius:9px;margin:11px auto 6px}.footer{padding:8px 15px 0;border-top:1px solid var(--line);background:white}.footer button{width:100%;min-height:46px;background:var(--accent);border:0;border-radius:8px;font-size:15px;font-weight:650}.footer p{font-size:10px;text-align:center;color:#818995;margin:7px 0 4px}.plan-summary{font-size:12px;color:#8a929b;margin-left:auto}.plan-sets{font-size:12px;line-height:1.8;color:#4b5661;padding:8px 0 0 42px}.callout{border-left:3px solid var(--accent);padding:8px 11px;font-size:12px;line-height:1.7;color:#5f6a76;margin:14px 15px}.switcher{position:fixed;bottom:20px;left:28px;transform:none;background:#1c2026;color:white;box-shadow:0 6px 20px #0002;border-radius:15px;display:flex;align-items:center;gap:5px;padding:7px 9px;z-index:5}.switcher button{border:0;background:transparent;color:#adb5be;border-radius:9px;font-size:12px;min-height:38px;padding:0 16px;white-space:nowrap}.switcher button.active{background:white;color:#1c2026;font-weight:650}.view{display:none}.view.active{display:flex;flex-direction:column;min-height:0;flex:1}.toast{font-size:11px;line-height:1.6;margin-top:12px;padding:10px;background:#f3f6ed;color:#587334;border-radius:7px;display:none}.sheet-overlay{position:absolute;inset:0;background:#0004;display:none;align-items:flex-end;z-index:3}.sheet{background:white;border-radius:23px 23px 0 0;width:100%;max-height:84%;padding:20px;overflow:auto}.sheet h3{font-size:18px;margin:0 0 14px}.sheet p{font-size:13px;color:#65707c}.sheet .close{border:0;background:var(--soft);border-radius:7px;min-height:44px;width:100%;font-size:14px;margin-top:10px}.proposal-label{font-size:11px;color:#85909d;line-height:1.65;margin-top:14px}.compact-caption{font-size:12px;color:#66717c;margin-top:20px}#state{font-size:11px;line-height:1.7;white-space:pre-wrap;color:#697481}.record-note{font-size:10px;color:#8a929c;padding:9px 16px;border-bottom:1px solid var(--line)}.danger{color:#a84e36}.undo{border:0;background:none;text-decoration:underline;font-size:12px;color:#4c661d;min-height:35px}.plan-table{display:grid;grid-template-columns:25px 1fr 1fr;align-items:center;text-align:center;font-size:13px;gap:8px;min-height:35px}.plan-table.head{font-size:10px;color:#8a929a;min-height:23px}.plan-table span:not(:first-child){background:#f6f7f8;border-radius:4px;padding:6px}.plan-table.head span{background:none}
+@media(max-width:1080px){.layout{grid-template-columns:300px 393px;max-width:780px}.right-panel{grid-column:1/-1}.layout .panel{padding:18px}}@media(max-width:750px){header.page{margin-top:20px}h1{font-size:23px}.layout{display:flex;flex-direction:column;align-items:center;padding:0 12px 100px}.panel{width:min(100%,393px)}.phone{max-width:100%;height:820px}.left-panel{order:2}.right-panel{order:3}.switcher{bottom:12px;left:50%;transform:translateX(-50%);max-width:97%}.switcher button{padding:0 9px}}
+</style>
+<header class="page">
+  <div class="eyebrow">X-FIT / 2026.10.19 / 布局确认稿</div>
+  <h1>打开训练，先看到组表。</h1>
+  <p class="intro">选定 Hevy 为唯一主要布局参考：紧凑页头、轻量动作标题、逐组输入、表下加组。保留 X-Fit 荧光绿作为品牌色。此页为独立提案；按钮只在浏览器内演示，不连接 App。</p>
+</header>
+<main class="layout">
+  <aside class="panel left-panel">
+    <h2>参考依据</h2>
+    <img class="ref-photo" src="https://www.hevyapp.com/wp-content/uploads/Img-4366-4367-1-1024x683.png" alt="Hevy 官方截图：逐组表格，表下 Add Set，左滑删除">
+    <p class="reference"><a href="https://www.hevyapp.com/features/exercise-programming-options/" target="_blank" rel="noreferrer">Hevy 官方 · Exercise Programming Options ↗</a><br>已实际查看官方组表及加组截图，2026-10-19。</p>
+    <div class="keyline"></div>
+    <div class="item"><b>1　短页头</b><span>训练名称独占一行；日期、进度另列。R2、版本编号与导入说明进入「计划详情」。</span></div>
+    <div class="item"><b>2　动作标题后立刻进入组表</b><span>重量口径保留一行。目标次数、余力和休息集中一处。长依据不进入动作标题的窄栏。</span></div>
+    <div class="item"><b>3　加组位于每张表下面</b><span>「＋加一组」固定可见。新增组可改数值，默认未完成、余力未知；完成组保持原记录。</span></div>
+    <div class="item"><b>4　解释按需打开</b><span>原始说明完整保留；「计划详情」查看原文、热身及版本。可点右侧预览中的入口。</span></div>
+    <span class="badge">保留原始数据 / 仅替代页面布局</span>
+  </aside>
+  <section>
+    <div class="phone"><div class="phone-inner">
+      <div class="status"><span>9:41</span><div class="island"></div><span>▰ ▮▮</span></div>
+      <div id="record" class="view active">
+        <nav class="nav"><button class="icon-btn" onclick="showInfo('收起训练','原生实现回到训练首页；进行中的草稿保留。本预览没有 App 导航或持久化。')" aria-label="收起训练">⌄</button><div class="nav-title">胸部＋三头</div><button class="primary-small" onclick="showInfo('完成训练','原生实现需本人确认完成；不会因为预填或查看计划自动完成。这个独立预览不会写入任何训练记录。')">完成</button></nav>
+        <div class="stats"><div><label>训练日期</label><b>10月19日</b></div><div><label>实际已记录</label><b id="progress">4 / 20 组</b></div><div><label>状态</label><b>进行中</b></div></div>
+        <div class="record-note">手机快照：10/19 11:47 · 下方 4 组来自已有 App 记录</div>
+        <div class="scroll">
+          <section class="exercise">
+            <div class="exercise-top"><div class="thumb" aria-hidden="true">⌁</div><div class="exercise-title">史密斯卧推</div><button class="more" onclick="showInfo('动作操作','原生布局提供换动作、记录口径、备注及删除未完成临时组；不覆盖或删除已完成记录。')" aria-label="动作菜单">⋮</button></div>
+            <div class="measure"><strong>kg · 每侧片重，不含杆</strong></div>
+            <div class="hint"><span>余力目标 2–3 · 休息 2:30–3:00</span><button class="linkbtn" onclick="openDetails()">计划详情 ›</button></div>
+            <div class="tbl-head"><span>组</span><span>原计划</span><span>kg</span><span>次数</span><span>✓</span></div>
+            <div id="sets"></div>
+            <button class="addset" onclick="addSet()">＋ 加一组</button>
+            <div id="toast" class="toast"></div>
+          </section>
+          <div class="collapsed"><span class="number">02</span><div><b>上斜哑铃卧推</b><small>4 组 · 每只 25 / 22.5 kg</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">03</span><div><b>MTS 下斜推胸</b><small>3 组 · 每侧 20 kg</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">04</span><div><b>站姿绳索夹胸</b><small>3 组 · 每栈 8.75 kg</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">05</span><div><b>绳索下压</b><small>3 组 · 单栈 17.5 kg</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">06</span><div><b>绳索过顶臂屈伸</b><small>3 组 · 单栈 10 kg</small></div><span class="arrow">⌄</span></div>
+          <button class="addexercise" onclick="showInfo('添加动作','原生实现使用现有动作选择器添加本场临时动作；不会改写原始模板。')">＋ 添加动作</button>
+          <p class="quiet">训练备注　›</p>
+        </div>
+      </div>
+      <div id="plan" class="view">
+        <nav class="nav"><button class="icon-btn" aria-label="返回" onclick="setView('record')">‹</button><div class="nav-title">肩部＋手臂</div><button class="icon-btn" onclick="openDetails()" aria-label="计划详情">⋯</button></nav>
+        <div class="stats"><div><label>训练日期</label><b>10月23日 · 周五</b></div><div><label>动作 / 组</label><b>7 / 24</b></div><div><label>计划</label><b>调整待确认</b></div></div>
+        <div class="scroll">
+          <div class="collapsed"><span class="number">01</span><div><b>器械肩推</b><small>4 组 · 双侧合计 45 / 40 kg</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">02</span><div><b>哑铃侧平举</b><small>4 组 · 每只 7.5 kg · 12 次</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">03</span><div><b>哑铃反向飞鸟</b><small>4 组 · 每只 7.5 kg · 12 次</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">04</span><div><b>哑铃弯举</b><small>3 组 · 每只 7.5 kg · 每侧 10 次</small></div><span class="arrow">⌄</span></div>
+          <div class="collapsed"><span class="number">05</span><div><b>锤式弯举</b><small>3 组 · 每只 10 kg · 每侧 10 次</small></div><span class="arrow">⌄</span></div>
+          <section class="exercise">
+            <div class="exercise-top"><div class="thumb" aria-hidden="true">⌁</div><div class="exercise-title">绳索下压</div><button class="more" onclick="showInfo('周五下压依据','周一最新 Notes：17.5×20、12.5×20、15×20、17.5×20。17.5出现在第1与第4组；本人确认今天无不适，实际余力、同机同握把和之后恢复仍未知。另新增三个肩部绳索动作各4组。暂维持17.5，预填15次；首组达到15次且仍明显多余力时，可现场短试下一档。20kg不是已经确认适合的工作重量。')" aria-label="查看下压依据">⋮</button></div>
+            <div class="measure"><strong>kg · 单个配重栈，双手同一绳把</strong></div>
+            <div class="hint"><span>目标 12–15 次 · 余力 2 · 休息 75–90秒</span></div>
+            <div class="plan-table head"><span>组</span><span>建议 kg</span><span>建议次数</span></div>
+            <div class="plan-table"><span>1</span><span>17.5</span><span>15</span></div><div class="plan-table"><span>2</span><span>17.5</span><span>15</span></div><div class="plan-table"><span>3</span><span>17.5</span><span>15</span></div>
+          </section>
+          <div class="collapsed"><span class="number">07</span><div><b>绳索过顶臂屈伸</b><small>3 组 · 单栈 10 kg · 12 次 · 试重</small></div><span class="arrow">⌄</span></div>
+          <div class="callout">周一未记录过顶臂屈伸，不把下压表现换算到该动作。恢复异常时先减量；计划值均为建议。</div>
+        </div>
+        <div class="footer"><button onclick="showInfo('开始训练','这个按钮只演示位置。原生实现先创建未完成训练草稿，逐组由本人确认完成；此页不写入 App。')">开始训练</button><p>所有预填组均未完成 · 训练时可修改</p></div>
+      </div>
+      <div class="bottom-line"></div>
+      <div id="sheet-overlay" class="sheet-overlay"><div class="sheet"><h3 id="sheet-title"></h3><div id="sheet-body"></div><button class="close" onclick="closeInfo()">关闭</button></div></div>
+    </div></div>
+    <p class="proposal-label">可点击「＋加一组」「计划详情」及下方状态切换。示范数值来自已注明的快照或建议；布局并非已安装原生界面。</p>
+  </section>
+  <aside class="panel right-panel">
+    <h2>这次解决的具体问题</h2>
+    <div class="item"><b>长文挤在动作标题窄栏</b><span>当前动作说明约545字，挤在编号与折叠按钮之间；第一条重量输入被推到首屏外。改为一行口径＋组表，完整原文进入详情。</span></div>
+    <div class="item"><b>同一内容重复出现</b><span>动作头、展开区与每组目标反复出现热身、版本和依据。组表只显示必要数字，差异目标可按组点开，完整处方仍可审阅。</span></div>
+    <div class="item"><b>加组逻辑有实现、页面无按钮</b><span>当前 addSet / removeLastSet 只有函数定义，没有界面调用。新增表下常驻入口，完成动作也能展开追加未完成组。</span></div>
+    <div class="item"><b>首页短标题未覆盖记录页</b><span>首页已有单独需求修正；本提案延伸到记录页、详情和日程摘要。只改显示，原始名称保留。</span></div>
+    <div class="keyline"></div>
+    <h2>演示当前状态</h2><pre id="state"></pre>
+    <p>同一套参考布局，两个业务状态；不提供彼此混搭的多种视觉风格。</p>
+    <button class="undo" onclick="resetDemo()">还原本页演示</button>
+  </aside>
+</main>
+<div class="switcher" aria-label="提案状态切换"><button id="btn-record" class="active" onclick="setView('record')">记录中 · 加组演示</button><button id="btn-plan" onclick="setView('plan')">周五 · 计划详情</button></div>
+<script>
+let mode=new URLSearchParams(location.search).get('view')==='plan'?'plan':'record';
+const original=[{kg:25,reps:14,plan:'25 × 8',done:true},{kg:30,reps:12,plan:'20 × 10',done:true},{kg:35,reps:10,plan:'20 × 10',done:true},{kg:40,reps:8,plan:'20 × 10',done:true}];
+let rows=original.map(x=>({...x}));
+function render(){
+ document.getElementById('sets').innerHTML=rows.map((r,i)=>`<div class="set-row ${r.done?'completed':''} ${i>=4?'extra':''}"><span class="set-id">${i>=4?'加'+(i-3):i+1}</span><span class="prev">${r.plan}</span><input aria-label="第${i+1}组重量" type="number" step="0.5" value="${r.kg}" ${r.done?'readonly':''} onchange="rows[${i}].kg=Number(this.value);showState()"><input aria-label="第${i+1}组次数" type="number" value="${r.reps}" ${r.done?'readonly':''} onchange="rows[${i}].reps=Number(this.value);showState()"><button class="tick" aria-label="${r.done?'已有完成记录':'仅在演示中勾选第'+(i+1)+'组'}" onclick="toggleDemo(${i})"><span>${r.done?'✓':'　'}</span></button></div>`).join('');
+ document.getElementById('progress').textContent=rows.filter(x=>x.done).length+' / '+(20+rows.length-4)+' 组';showState();
+}
+function addSet(){let last=rows.at(-1);rows.push({kg:last.kg,reps:last.reps,plan:'额外组',done:false,rir:null});render();let t=document.getElementById('toast');t.style.display='block';t.innerHTML='已追加未完成组，可直接改重量和次数。原4组与计划保持。<br><button class="undo" onclick="undoExtra()">撤销最新未完成加组</button>'}
+function undoExtra(){if(rows.length>4&&!rows.at(-1).done){rows.pop();render()}if(rows.length===4)document.getElementById('toast').style.display='none'}
+function toggleDemo(i){if(i<4){showInfo('已有完成记录','这4组来自手机快照，原生实现保持原值。本预览不编辑历史已完成组。');return}rows[i].done=!rows[i].done;render()}
+function setView(v){mode=v;document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===v));document.getElementById('btn-record').classList.toggle('active',v==='record');document.getElementById('btn-plan').classList.toggle('active',v==='plan');let u=new URL(location.href);u.searchParams.set('view',v);history.replaceState(null,'',u);showState()}
+function showState(){document.getElementById('state').textContent=JSON.stringify({状态:mode==='record'?'记录中布局':'计划详情布局',来源:'2026-10-19 11:47手机快照 / 周五建议',演示新增组:rows.length-4,App写入:0,持久化:false,额外组:rows.slice(4).map(r=>({kg:r.kg,次数:r.reps,完成:r.done,实际RIR:null}))},null,2)}
+function showInfo(title,text){document.getElementById('sheet-title').textContent=title;document.getElementById('sheet-body').innerHTML='';let p=document.createElement('p');p.textContent=text;document.getElementById('sheet-body').appendChild(p);document.getElementById('sheet-overlay').style.display='flex'}
+function openDetails(){showInfo('计划详情 · 完整说明入口','原生实现保留原始处方、来源与版本，不改历史数据。史密斯口径：每侧杠铃片kg，不含杆。准备：空机约10次 → 每侧10kg×6 → 20kg×3。原计划：首组25×8、随后20×10共3组；首组目标余力3，其余2–3，休息150–180秒。完整依据在原生详情中按原文显示；本提案仅节选演示入口，不替代完整确认文档。')}
+function closeInfo(){document.getElementById('sheet-overlay').style.display='none'}
+function resetDemo(){rows=original.map(x=>({...x}));document.getElementById('toast').style.display='none';render();closeInfo()}
+render();setView(mode);
+</script>
+</html>

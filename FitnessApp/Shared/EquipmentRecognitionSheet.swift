@@ -11,7 +11,13 @@ struct EquipmentRecognitionSheet: View {
     @Query private var sessionExercises: [SessionExercise]
     @Query private var setLogs: [SetLog]
 
+    let defaultSetCount: Int?
     let onConfiguredSelect: (Exercise, ExerciseSetupDraft) -> Void
+
+    init(defaultSetCount: Int? = nil, onConfiguredSelect: @escaping (Exercise, ExerciseSetupDraft) -> Void) {
+        self.defaultSetCount = defaultSetCount
+        self.onConfiguredSelect = onConfiguredSelect
+    }
 
     @State private var images: [UIImage] = []
     @State private var photoItems: [PhotosPickerItem] = []
@@ -26,6 +32,7 @@ struct EquipmentRecognitionSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
+                    SprintPageHeader(title: "识别器械", icon: "camera.viewfinder", subtitle: "拍全景与标牌 · 最多 3 张")
                     captureCard
 
                     if isRecognizing {
@@ -62,12 +69,12 @@ struct EquipmentRecognitionSheet: View {
             .sheet(item: $pendingSetupExercise) { exercise in
                 ExerciseSetupSheet(
                     exercise: exercise,
-                    draft: pendingDraft ?? ExerciseSetupDraft.suggested(
+                    draft: (pendingDraft ?? ExerciseSetupDraft.suggested(
                         for: exercise,
                         sessions: sessions,
                         sessionExercises: sessionExercises,
                         setLogs: setLogs
-                    )
+                    )).withSetCount(defaultSetCount)
                 ) { draft in
                     onConfiguredSelect(exercise, draft)
                     dismiss()
@@ -97,15 +104,13 @@ struct EquipmentRecognitionSheet: View {
                 Text(errorMessage ?? "未知错误")
             }
         }
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .sprintPage()
+        .tint(AppTheme.ink)
     }
 
     private var captureCard: some View {
         VStack(alignment: .leading, spacing: 13) {
-            Label("拍机器全景和说明标牌", systemImage: "camera.viewfinder")
-                .font(.headline)
-            Text("最多 3 张。机器轮廓、品牌或动作示意图越清楚，候选结果越可靠。")
+            Text("轮廓、品牌和动作示意图越清楚，候选结果越可靠。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -126,8 +131,9 @@ struct EquipmentRecognitionSheet: View {
                                     Image(systemName: "xmark.circle.fill")
                                         .symbolRenderingMode(.palette)
                                         .foregroundStyle(.white, .black.opacity(0.7))
+                                        .frame(width: 44, height: 44)
                                 }
-                                .padding(5)
+                                .accessibilityLabel("移除第 \(index + 1) 张器械照片")
                             }
                         }
                     }
@@ -145,7 +151,7 @@ struct EquipmentRecognitionSheet: View {
                     Label("拍照", systemImage: "camera.fill")
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(SprintSecondaryButtonStyle())
                 .disabled(images.count >= 3)
 
                 PhotosPicker(
@@ -156,7 +162,7 @@ struct EquipmentRecognitionSheet: View {
                     Label("相册", systemImage: "photo.on.rectangle")
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(SprintSecondaryButtonStyle())
                 .disabled(images.count >= 3)
             }
 
@@ -164,13 +170,8 @@ struct EquipmentRecognitionSheet: View {
                 recognize()
             } label: {
                 Label("开始识别", systemImage: "sparkles")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 11)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(AppTheme.accent)
-            .foregroundStyle(.black)
+            .buttonStyle(SprintPrimaryButtonStyle())
             .disabled(images.isEmpty || isRecognizing)
             .accessibilityIdentifier("开始识别器械")
         }
@@ -190,7 +191,7 @@ struct EquipmentRecognitionSheet: View {
                 Spacer()
                 Text("\(Int(result.machine.confidence * 100))% 候选")
                     .font(.caption.bold().monospacedDigit())
-                    .foregroundStyle(result.machine.confidence >= 0.8 ? AppTheme.accent : AppTheme.orange)
+                    .foregroundStyle(result.machine.confidence >= 0.8 ? AppTheme.ink : AppTheme.orange)
             }
 
             if result.needsConfirmation {
@@ -203,8 +204,7 @@ struct EquipmentRecognitionSheet: View {
             MuscleMapView(highlightedMuscles: muscles)
                 .frame(maxWidth: .infinity)
 
-            Text("可以做什么动作")
-                .font(.headline)
+            SprintSectionHeading(title: "候选动作", icon: "dumbbell")
 
             ForEach(result.exerciseCandidates) { candidate in
                 Button {
@@ -219,12 +219,12 @@ struct EquipmentRecognitionSheet: View {
                                 .foregroundStyle(.secondary)
                             Text((candidate.primaryMuscles + candidate.secondaryMuscles).joined(separator: " · "))
                                 .font(.caption2)
-                                .foregroundStyle(AppTheme.accent)
+                                .foregroundStyle(AppTheme.ink)
                         }
                         Spacer()
                         Image(systemName: "plus.circle.fill")
                             .font(.title3)
-                            .foregroundStyle(AppTheme.accent)
+                            .foregroundStyle(AppTheme.ink)
                     }
                     .padding(12)
                     .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 12))
@@ -346,7 +346,7 @@ struct MuscleMapView: View {
         }
         .aspectRatio(2.0 / 3.0, contentMode: .fit)
         .padding(8)
-        .background(Color.black.opacity(0.26), in: RoundedRectangle(cornerRadius: 14))
+        .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 18))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("主要肌群：\(highlightedMuscles.joined(separator: "、"))")
     }

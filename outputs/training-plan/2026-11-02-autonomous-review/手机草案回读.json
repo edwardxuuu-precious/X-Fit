@@ -1,0 +1,22 @@
+{
+  "sameSourceFingerprint": true,
+  "sameDaysExceptRandomSetIDs": true,
+  "sameShortfalls": true,
+  "phoneDraftID": "41767BFD-263E-40A9-9423-2E12F4DB28C5",
+  "rootID": "813DE9B3-E00E-4E0E-9CF2-6074305AB9D4",
+  "revision": 1,
+  "removedCount": 0,
+  "changedCount": 0,
+  "added": {
+    "ZTRAININGCOACHRECORD": 1
+  },
+  "status": "DRAFT_READBACK_VERIFIED",
+  "phoneVersion": "0.5.0 (38)",
+  "week": "2026-11-02/2026-11-08",
+  "readbackAt": "2026-10-29 15:35:44 +0800",
+  "originalBusinessRecords": 2693,
+  "formalSchedulesCreated": 0,
+  "actualTrainingCreated": 0,
+  "chatRecoveryFeedback": "本人表示没有需要调整的疼痛、受伤或明显疲劳；未写入 App 恢复记录",
+  "completePlanConfirmed": false
+}

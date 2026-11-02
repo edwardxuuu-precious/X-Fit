@@ -5,71 +5,37 @@ struct ProfileView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 24) {
-                HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("X-FIT / PERSONAL")
-                            .font(.caption.weight(.bold)).tracking(2)
-                            .foregroundStyle(AppTheme.accent)
-                        Text("我的").font(AppTheme.pageTitle)
-                    }
-                    Spacer()
-                    Image(systemName: "person.crop.circle")
-                        .font(.system(size: 42, weight: .light))
-                        .foregroundStyle(AppTheme.secondaryText)
-                        .accessibilityHidden(true)
-                }.padding(.bottom, 4)
+                SprintPageHeader(title: "我的", icon: "person.crop.circle")
 
                 NavigationLink(destination: AppSettingsView()) {
                     HStack(spacing: 14) {
-                        Image(systemName: "slider.horizontal.3")
-                            .font(.title3).foregroundStyle(AppTheme.accent)
+                        SprintIcon(systemName: "slider.horizontal.3", size: 42)
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("个人设置与权限").font(.headline)
-                            Text("训练提醒 · Apple 健康")
+                            Text("设置").font(.headline)
+                            Text("通知 · Apple 健康 · 数据")
                                 .font(.caption).foregroundStyle(AppTheme.secondaryText)
                         }
                         Spacer(minLength: 8)
-                        Image(systemName: "arrow.up.right").foregroundStyle(AppTheme.accent)
+                        Image(systemName: "arrow.up.right").foregroundStyle(AppTheme.ink)
                     }
                     .padding(18).frame(minHeight: 76)
                     .background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: 12))
                 }.accessibilityIdentifier("打开设置")
 
                 VStack(alignment: .leading, spacing: 10) {
-                    sectionLabel("我的记录", count: "01")
+                    SprintSectionHeading(title: "记录", icon: "clock.arrow.circlepath")
                     VStack(spacing: 0) {
                         NavigationLink(destination: HistoryView()) { row("训练历史", "clock.arrow.circlepath") }
                         rowDivider
                         NavigationLink(destination: BodyMeasurementsView()) { row("身体数据", "figure.arms.open") }
                         rowDivider
-                        NavigationLink(destination: ToolsView()) { row("更多记录工具", "square.grid.2x2") }
-                            .accessibilityIdentifier("更多记录工具")
+                        NavigationLink(destination: TrainingCoachPreferencesView()) { row("训练偏好", "slider.horizontal.3") }
+                            .accessibilityIdentifier("偏好与编排")
                     }.cardSurface(padding: 0)
                 }
 
-                VStack(alignment: .leading, spacing: 10) {
-                    sectionLabel("数据管理", count: "02")
-                    VStack(spacing: 0) {
-                        NavigationLink(destination: AppSettingsView(initialMode: .data)) { row("备份与恢复", "externaldrive") }
-                            .accessibilityIdentifier("我的-备份与恢复")
-                        rowDivider
-                        NavigationLink(destination: ProgramDataExportView()) { row("导出减脂周期", "square.and.arrow.up") }
-                            .accessibilityIdentifier("导出减脂周期")
-                        rowDivider
-                        NavigationLink(destination: HistoricalWorkoutImportView()) { row("导入历史训练", "square.and.arrow.down") }
-                            .accessibilityIdentifier("历史同步")
-                    }.cardSurface(padding: 0)
-                }
             }.padding(.horizontal, 20).padding(.top, 20).padding(.bottom, 28)
-        }.screenBackground().toolbar(.hidden, for: .navigationBar).buttonStyle(.plain)
-    }
-
-    private func sectionLabel(_ title: String, count: String) -> some View {
-        HStack {
-            Text(title).font(.subheadline.weight(.semibold))
-            Spacer()
-            Text(count).font(.caption.monospacedDigit())
-        }.foregroundStyle(AppTheme.secondaryText)
+        }.sprintPage().toolbar(.hidden, for: .navigationBar).buttonStyle(.plain)
     }
 
     private var rowDivider: some View {
@@ -78,8 +44,8 @@ struct ProfileView: View {
 
     private func row(_ title: String, _ icon: String) -> some View {
         HStack(spacing: 14) {
-            Image(systemName: icon).frame(width: 22).foregroundStyle(AppTheme.secondaryText)
-            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.white)
+            SprintIcon(systemName: icon, size: 36)
+            Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(AppTheme.ink)
             Spacer(minLength: 8)
             Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
         }.padding(.horizontal, 16).padding(.vertical, 15)
@@ -88,6 +54,7 @@ struct ProfileView: View {
 }
 
 struct ToolsView: View {
+    var isTabRoot = false
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \HydrationEntry.date, order: .reverse) private var hydrationEntries: [HydrationEntry]
     @Query(sort: \JumpRopeEntry.date, order: .reverse) private var jumpRopeEntries: [JumpRopeEntry]
@@ -130,16 +97,16 @@ struct ToolsView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                ScreenHeader(eyebrow: nil, title: "更多记录工具")
+                SprintPageHeader(title: "记录工具", icon: "square.grid.2x2")
                 agentCard
 
-                SectionHeader(title: "快速记录", actionTitle: "确认后写入")
+                SprintSectionHeading(title: "快速记录", icon: "plus.circle")
                 quickToolsGrid
 
                 todayCard
 
                 if !recentActivities.isEmpty {
-                    SectionHeader(title: "最近操作")
+                    SprintSectionHeading(title: "最近操作", icon: "clock.arrow.circlepath")
                     recentActivityCard
                 }
 
@@ -151,8 +118,8 @@ struct ToolsView: View {
             .padding(.top, 12)
             .padding(.bottom, 28)
         }
-        .screenBackground()
-        .toolbar(.visible, for: .navigationBar)
+        .sprintPage()
+        .toolbar(isTabRoot ? .hidden : .visible, for: .navigationBar)
         .navigationTitle("记录工具").navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showsWaterEntry) {
             WaterQuickEntrySheet(initialAmount: lastWaterAmount) { amount, date in
@@ -161,11 +128,13 @@ struct ToolsView: View {
             }
         }
         .sheet(isPresented: $showsJumpRopeEntry) {
-            JumpRopeQuickEntrySheet { count, active, elapsed, date in
+            JumpRopeQuickEntrySheet { input in
                 do {
                     lastResult = try WellnessToolService.recordJumpRope(
-                        count: count, activeDurationSeconds: active, elapsedDurationSeconds: elapsed,
-                        at: date, in: modelContext
+                        count: input.count, activeDurationSeconds: input.activeDurationSeconds,
+                        elapsedDurationSeconds: input.elapsedDurationSeconds, at: input.date,
+                        totalSetCount: input.totalSetCount, recordedTimeKnown: input.recordedTimeKnown,
+                        in: modelContext
                     )
                 } catch { errorMessage = error.localizedDescription }
             }
@@ -179,8 +148,8 @@ struct ToolsView: View {
             QuickBodyWeightEntryView()
                 .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
-                .preferredColorScheme(.dark)
-                .tint(AppTheme.accent)
+                .preferredColorScheme(.light)
+                .tint(AppTheme.ink)
         }
         .sheet(isPresented: $showsAgentConfirmation, onDismiss: {
             pendingAgentCommand = nil
@@ -219,9 +188,9 @@ struct ToolsView: View {
                     .frame(width: 46, height: 46)
 
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("今天想记录什么？")
+                        Text("记一笔")
                             .font(.headline.bold())
-                            .foregroundStyle(.white)
+                            .foregroundStyle(AppTheme.ink)
                         Text(agentContextLine)
                             .font(.caption)
                             .foregroundStyle(AppTheme.secondaryText)
@@ -253,7 +222,7 @@ struct ToolsView: View {
                     if agentMessages.isEmpty {
                         agentBubble(WellnessAgentMessage(
                             role: .assistant,
-                            content: "直接告诉我：喝了多少水、跳了多少个，或久坐了多久。写入前我会先给你确认。"
+                            content: "说出喝水、跳绳或久坐记录，确认后写入。"
                         ))
                     } else {
                         ForEach(agentMessages.suffix(6)) { message in
@@ -263,7 +232,7 @@ struct ToolsView: View {
 
                     if isAgentThinking {
                         HStack(spacing: 8) {
-                            ProgressView().tint(AppTheme.accent)
+                            ProgressView().tint(AppTheme.ink)
                             Text("正在理解你的意思…")
                                 .font(.caption)
                                 .foregroundStyle(AppTheme.secondaryText)
@@ -329,12 +298,12 @@ struct ToolsView: View {
                     withAnimation(.easeInOut(duration: 0.22)) { isAgentExpanded = true }
                 } label: {
                     HStack {
-                        Text("说出你想记录或查看的事")
+                        Text("说出记录或查询")
                             .font(.subheadline)
                             .foregroundStyle(AppTheme.secondaryText)
                         Spacer()
                         Image(systemName: "waveform")
-                            .foregroundStyle(AppTheme.accent)
+                            .foregroundStyle(AppTheme.ink)
                     }
                     .padding(.horizontal, 14)
                     .frame(minHeight: 46)
@@ -357,8 +326,8 @@ struct ToolsView: View {
 
     private var agentSourceTint: Color {
         switch displayedAgentSource {
-        case .deepSeek: return .cyan
-        case .local: return AppTheme.accent
+        case .deepSeek: return AppTheme.ink
+        case .local: return AppTheme.ink
         case .localFallback: return AppTheme.orange
         }
     }
@@ -367,16 +336,16 @@ struct ToolsView: View {
         if let activeSedentarySession {
             return "久坐计时从 \(activeSedentarySession.startedAt.formatted(date: .omitted, time: .shortened)) 开始"
         }
-        if summary.waterMilliliters + summary.jumpRopeCount + summary.sedentaryMinutes == 0 {
-            return "能听懂自然语言，也保留本地离线理解"
+        if summary.jumpRopeCount != nil && summary.waterMilliliters + (summary.jumpRopeCount ?? 0) + summary.sedentaryMinutes == 0 {
+            return "自然语言记录 · 支持离线理解"
         }
-        return "今天：\(summary.waterMilliliters) ml · \(summary.jumpRopeCount) 个 · 久坐 \(summary.sedentaryMinutes) 分"
+        return "今天：\(summary.waterMilliliters) ml · \(summary.jumpRopeCount.map { "\($0) 个" } ?? "跳绳次数未知") · 久坐 \(summary.sedentaryMinutes) 分"
     }
 
     private func agentBubble(_ message: WellnessAgentMessage) -> some View {
         Text(message.content)
             .font(.subheadline)
-            .foregroundStyle(message.role == .user ? .black : .white)
+            .foregroundStyle(AppTheme.ink)
             .padding(.horizontal, 13)
             .padding(.vertical, 10)
             .background(
@@ -392,7 +361,7 @@ struct ToolsView: View {
             interpretAgentText(request)
         }
         .font(.caption2.bold())
-        .foregroundStyle(AppTheme.accent)
+        .foregroundStyle(AppTheme.ink)
         .lineLimit(1)
         .padding(.horizontal, 10)
         .frame(minHeight: 34)
@@ -407,10 +376,10 @@ struct ToolsView: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text("今天")
                         .font(.caption.bold())
-                        .foregroundStyle(AppTheme.accent)
-                    Text("一眼看清，随手记下")
+                        .foregroundStyle(AppTheme.ink)
+                    Text("今日记录")
                         .font(.headline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                 }
                 Spacer()
                 if let activeSedentarySession {
@@ -424,7 +393,7 @@ struct ToolsView: View {
 
             HStack(spacing: 0) {
                 summaryMetric("\(summary.waterMilliliters)", unit: "ml", label: "喝水")
-                summaryMetric("\(summary.jumpRopeCount)", unit: "个", label: "跳绳")
+                summaryMetric(summary.jumpRopeCount.map { String($0) } ?? "未知", unit: "个", label: "跳绳")
                 summaryMetric("\(summary.sedentaryMinutes)", unit: "分", label: "久坐")
             }
         }
@@ -438,7 +407,7 @@ struct ToolsView: View {
             HStack(alignment: .firstTextBaseline, spacing: 3) {
                 Text(value)
                     .font(.title3.weight(.black).monospacedDigit())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Text(unit)
                     .font(.caption2.bold())
                     .foregroundStyle(AppTheme.secondaryText)
@@ -503,12 +472,12 @@ struct ToolsView: View {
             HStack(spacing: 9) {
                 Image(systemName: icon)
                     .font(.subheadline.bold())
-                    .foregroundStyle(tint)
+                    .foregroundStyle(AppTheme.ink)
                     .frame(width: 34, height: 34)
                     .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 11))
                 Text(title)
                     .font(.subheadline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                     .lineLimit(1)
             }
             .padding(.horizontal, 12)
@@ -540,11 +509,13 @@ struct ToolsView: View {
             ToolActivityItem(
                 id: "jump-\($0.id)",
                 title: "跳绳",
-                detail: "\($0.count) 个",
+                detail: $0.displaySummary,
                 date: $0.date,
                 systemImage: "figure.jumprope",
                 tint: AppTheme.accent,
-                undoAction: .deleteJumpRope($0.id)
+                undoAction: .deleteJumpRope($0.id),
+                dateLabel: $0.recordedTimeKnown == false
+                    ? "\($0.trainingLocalDay ?? TrainingLocalDate.key($0.date)) · 时间未知" : nil
             )
         }
         let sedentary = sedentarySessions.compactMap { session -> ToolActivityItem? in
@@ -568,19 +539,19 @@ struct ToolsView: View {
                 HStack(spacing: 12) {
                     Image(systemName: item.systemImage)
                         .font(.subheadline.bold())
-                        .foregroundStyle(item.tint)
+                        .foregroundStyle(AppTheme.ink)
                         .frame(width: 36, height: 36)
                         .background(item.tint.opacity(0.1), in: RoundedRectangle(cornerRadius: 11))
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(item.title).font(.subheadline.bold()).foregroundStyle(.white)
-                        Text(item.date.formatted(date: .abbreviated, time: .shortened))
+                        Text(item.title).font(.subheadline.bold()).foregroundStyle(AppTheme.ink)
+                        Text(item.dateLabel ?? item.date.formatted(date: .abbreviated, time: .shortened))
                             .font(.caption2)
                             .foregroundStyle(AppTheme.secondaryText)
                     }
                     Spacer()
                     Text(item.detail)
                         .font(.subheadline.bold().monospacedDigit())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Button {
                         undo(item.undoAction)
                     } label: {
@@ -605,15 +576,15 @@ struct ToolsView: View {
     private func resultCard(_ result: WellnessToolResult) -> some View {
         HStack(spacing: 12) {
             Image(systemName: "checkmark.circle.fill")
-                .foregroundStyle(AppTheme.accent)
+                .foregroundStyle(AppTheme.ink)
             Text(result.message)
                 .font(.subheadline.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             Spacer()
             if let undoAction = result.undoAction {
                 Button("撤销") { undo(undoAction) }
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
                     .buttonStyle(.plain)
                     .frame(minHeight: 44)
             }
@@ -711,6 +682,7 @@ private struct ToolActivityItem: Identifiable {
     let systemImage: String
     let tint: Color
     let undoAction: WellnessToolUndoAction
+    var dateLabel: String? = nil
 }
 
 private struct AgentToolConfirmationSheet: View {
@@ -720,18 +692,17 @@ private struct AgentToolConfirmationSheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 20) {
-                Image(systemName: "checkmark.shield.fill")
-                    .font(.system(size: 34, weight: .bold))
-                    .foregroundStyle(AppTheme.accent)
+            ScrollView(showsIndicators: false) {
+              VStack(alignment: .leading, spacing: 20) {
+                SprintIcon(systemName: "checkmark.shield", size: 64, prominent: true)
                 VStack(alignment: .leading, spacing: 7) {
                     Text(command.previewTitle)
                         .font(.title2.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text(command.previewDetail)
                         .font(.title3.weight(.black).monospacedDigit())
-                        .foregroundStyle(AppTheme.accent)
-                    Text("确认后才会写入你的本机健康记录。")
+                        .foregroundStyle(AppTheme.ink)
+                    Text("确认后写入健康记录。")
                         .font(.subheadline)
                         .foregroundStyle(AppTheme.secondaryText)
                 }
@@ -743,10 +714,10 @@ private struct AgentToolConfirmationSheet: View {
                 }
                 .neonButtonStyle()
                 .accessibilityIdentifier("Agent确认执行")
-                Spacer()
+              }
+              .padding(20)
             }
-            .padding(18)
-            .screenBackground()
+            .sprintPage()
             .navigationTitle("执行前确认")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -755,10 +726,10 @@ private struct AgentToolConfirmationSheet: View {
                 }
             }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .preferredColorScheme(.light)
+        .tint(AppTheme.ink)
         .accessibilityIdentifier("Agent工具确认卡")
     }
 }
@@ -777,16 +748,15 @@ struct WaterQuickEntrySheet: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 22) {
-                Text("这次喝了多少？")
-                    .font(.title2.bold())
-                    .foregroundStyle(.white)
+            ScrollView(showsIndicators: false) {
+              VStack(alignment: .leading, spacing: 22) {
+                SprintPageHeader(title: "喝了多少？", icon: "drop")
 
                 HStack(spacing: 10) {
                     ForEach([200, 250, 500], id: \.self) { value in
                         Button("\(value) ml") { amount = value }
                             .font(.subheadline.bold())
-                            .foregroundStyle(amount == value ? .black : .white)
+                            .foregroundStyle(AppTheme.ink)
                             .frame(maxWidth: .infinity, minHeight: 50)
                             .background(
                                 amount == value ? AppTheme.accent : AppTheme.elevatedSurface,
@@ -809,40 +779,65 @@ struct WaterQuickEntrySheet: View {
                 }
                 .neonButtonStyle()
                 .accessibilityIdentifier("保存喝水记录")
-                Spacer()
+              }
+              .padding(20)
             }
-            .padding(18)
-            .screenBackground()
+            .sprintPage()
             .navigationTitle("喝水")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } } }
         }
-        .presentationDetents([.medium])
+        .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .preferredColorScheme(.light)
+        .tint(AppTheme.ink)
     }
 }
 
 struct JumpRopeQuickEntrySheet: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var count = 1_000
+    @State private var countText = ""
+    @State private var setCountText = ""
     @State private var activeMinutes = 10
     @State private var elapsedMinutes = 15
-    @State private var includesDuration = false
+    @State private var includesDuration = true
     @State private var date = Date.now
-    let onSave: (Int, Int?, Int?, Date) -> Void
+    @State private var recordedTimeKnown: Bool
+    let onSave: (JumpRopeActualInput) -> Void
 
-    init(initialDate: Date = .now, onSave: @escaping (Int, Int?, Int?, Date) -> Void) {
+    init(initialDate: Date = .now, onSave: @escaping (JumpRopeActualInput) -> Void) {
+        let sameDay = Calendar.current.isDateInToday(initialDate)
+        let hasTime = sameDay && initialDate != Calendar.current.startOfDay(for: initialDate)
         _date = State(initialValue: initialDate)
+        _recordedTimeKnown = State(initialValue: hasTime)
         self.onSave = onSave
+    }
+
+    private var parsedCount: Int? { Int(countText.trimmingCharacters(in: .whitespacesAndNewlines)) }
+    private var parsedSetCount: Int? { Int(setCountText.trimmingCharacters(in: .whitespacesAndNewlines)) }
+    private var countInputValid: Bool {
+        countText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            || (parsedCount.map { (1...100_000).contains($0) } ?? false)
+    }
+    private var setCountInputValid: Bool {
+        setCountText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+            || (parsedSetCount.map { (1...10_000).contains($0) } ?? false)
     }
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("跳绳") {
-                    Stepper("次数：\(count) 个", value: $count, in: 100...100_000, step: 100)
+                Section {
+                    TextField("未记录次数（可留空）", text: $countText)
+                        .keyboardType(.numberPad)
+                        .accessibilityIdentifier("跳绳-次数")
+                    Text(parsedCount == nil ? "次数未知，不会按时长推算。" : "次数以本人实际记录为准。")
+                        .font(.caption).foregroundStyle(AppTheme.secondaryText)
+                    if !countInputValid { Text("次数需为 1 到 100000 的整数，或留空。 ").foregroundStyle(.red) }
+                    TextField("总组数（可留空）", text: $setCountText)
+                        .keyboardType(.numberPad)
+                        .accessibilityIdentifier("跳绳-总组数")
+                    if !setCountInputValid { Text("组数需为 1 到 10000 的整数，或留空。 ").foregroundStyle(.red) }
                     Toggle("记录时长", isOn: $includesDuration)
                     if includesDuration {
                         Stepper("有效跳绳：\(activeMinutes) 分钟", value: $activeMinutes, in: 1...1_440)
@@ -851,31 +846,53 @@ struct JumpRopeQuickEntrySheet: View {
                             Text("有效时长不能超过总时长").foregroundStyle(.red)
                         }
                     }
+                } header: {
+                    Label("跳绳", systemImage: "figure.jumprope")
                 }
-                Section("时间") {
-                    DatePicker("完成时间", selection: $date, in: ...Date.now)
+                Section {
+                    Toggle("记录具体完成时间", isOn: $recordedTimeKnown)
+                        .accessibilityIdentifier("跳绳-记录具体时间")
+                    if recordedTimeKnown {
+                        DatePicker("完成时间", selection: $date, in: ...Date.now)
+                            .accessibilityIdentifier("跳绳-完成时间")
+                    } else {
+                        DatePicker("训练日期", selection: $date, in: ...Date.now, displayedComponents: .date)
+                            .accessibilityIdentifier("跳绳-训练日期")
+                    }
+                } header: {
+                    Label("时间", systemImage: "clock")
                 }
                 Section {
                     Button("保存跳绳记录") {
-                        onSave(count, includesDuration ? activeMinutes * 60 : nil,
-                               includesDuration ? elapsedMinutes * 60 : nil, date)
+                        onSave(JumpRopeActualInput(count: parsedCount, totalSetCount: parsedSetCount,
+                            activeDurationSeconds: includesDuration ? activeMinutes * 60 : nil,
+                            elapsedDurationSeconds: includesDuration ? elapsedMinutes * 60 : nil,
+                            date: date, recordedTimeKnown: recordedTimeKnown))
                         dismiss()
                     }
-                    .frame(maxWidth: .infinity)
+                    .buttonStyle(SprintPrimaryButtonStyle())
                     .accessibilityIdentifier("保存跳绳记录")
-                    .disabled(includesDuration && activeMinutes > elapsedMinutes)
+                    .disabled(!countInputValid || !setCountInputValid || (includesDuration && activeMinutes > elapsedMinutes)
+                              || (!includesDuration && parsedCount == nil))
                 }
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .navigationTitle("跳绳")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } } }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("完成") { KeyboardDismissal.dismiss() }
+                        .accessibilityIdentifier("跳绳-收起键盘")
+                }
+            }
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .preferredColorScheme(.light)
+        .tint(AppTheme.ink)
     }
 }
 
@@ -896,17 +913,19 @@ private struct SedentaryQuickEntrySheet: View {
                             onCommand(.stopSedentary(at: .now))
                             dismiss()
                         }
+                        .buttonStyle(SprintPrimaryButtonStyle())
                         .accessibilityIdentifier("结束久坐计时")
                     }
                 } else {
                     Section("久坐计时") {
-                        Text("开始后可随时回来结束；同一时间只保留一段进行中的久坐。")
+                        Text("可随时回来结束。同一时间只保留一段计时。")
                             .font(.caption)
                             .foregroundStyle(AppTheme.secondaryText)
                         Button("开始计时") {
                             onCommand(.startSedentary(at: .now))
                             dismiss()
                         }
+                        .buttonStyle(SprintPrimaryButtonStyle())
                         .accessibilityIdentifier("开始久坐计时")
                     }
                 }
@@ -918,18 +937,19 @@ private struct SedentaryQuickEntrySheet: View {
                         onCommand(.recordSedentary(startedAt: startedAt, durationMinutes: durationMinutes))
                         dismiss()
                     }
+                    .buttonStyle(SprintPrimaryButtonStyle())
                     .accessibilityIdentifier("保存久坐补录")
                 }
             }
             .scrollContentBackground(.hidden)
-            .screenBackground()
+            .sprintPage()
             .navigationTitle("久坐")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } } }
         }
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
-        .preferredColorScheme(.dark)
-        .tint(AppTheme.accent)
+        .preferredColorScheme(.light)
+        .tint(AppTheme.ink)
     }
 }

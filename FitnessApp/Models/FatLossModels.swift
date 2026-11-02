@@ -76,6 +76,10 @@ struct ProgramExerciseDraft: Codable, Hashable, Identifiable {
     var volumeUnitRaw: String = ExerciseVolumeUnit.kilogram.rawValue
     var unilateral: Bool = false
     var note: String = "保留约 3 次余力；工作重量按当天状态选择"
+    var catalogExerciseID: UUID? = nil
+    /// Exact raw catalog label at preview time; the confirmed plan label remains separate.
+    var catalogName: String? = nil
+    var plannedSets: [WorkoutSetPlan]? = nil
     var id: String { name }
 }
 
@@ -241,6 +245,7 @@ final class ProgramWorkoutLink {
     var id: UUID = UUID()
     var programID: UUID = UUID()
     var scheduledWorkoutID: UUID = UUID()
+    var trainingProgramRevisionID: UUID?
     var templateCode: String = ""
     var originalDate: Date = Date.now
     var createdAt: Date = Date.now
@@ -263,7 +268,7 @@ struct FatLossDaySummary: Codable, Identifiable {
     var unknownNutritionMeals: Int
     var completedWorkouts: Int
     var plannedWorkouts: Int
-    var jumpCount: Int
+    var jumpCount: Int?
     var jumpActiveSeconds: Int?
     var jumpElapsedSeconds: Int?
     var waterMilliliters: Int
@@ -279,7 +284,8 @@ struct FatLossDaySummary: Codable, Identifiable {
     var id: Date { date }
     var hasRecords: Bool {
         weightKg != nil || waistCm != nil || loggedMeals > 0 || skippedMeals > 0
-            || completedWorkouts > 0 || jumpCount > 0 || waterMilliliters > 0 || hasDailyLog || bodyFeeling != nil
+            || completedWorkouts > 0 || jumpCount == nil || (jumpCount ?? 0) > 0 || jumpActiveSeconds != nil || jumpElapsedSeconds != nil
+            || waterMilliliters > 0 || hasDailyLog || bodyFeeling != nil
     }
     var nutritionComplete: Bool { loggedMeals > 0 && unknownNutritionMeals == 0 }
     func status(relativeTo now: Date) -> String {
@@ -296,12 +302,49 @@ struct FatLossWeightAverage: Equatable {
     var recordedDays: Int
 }
 
-struct ProgramImportPreview: Identifiable {
+struct ProgramImportPreview: Identifiable, Equatable {
+    var trainingProgramRevisionID: UUID? = nil
+    var loadPlans: [String: WorkoutSetPlan] = [:]
     var date: Date
     var workout: ProgramWorkoutDraft
     var alreadyImported: Bool
     var conflictingNames: [String]
     var id: String { "\(FatLossCalendar.label(date))-\(workout.code)" }
+}
+
+struct ProgramCardioImportPreview: Identifiable, Equatable {
+    var trainingProgramRevisionID: UUID
+    var date: Date
+    var cardio: ProgramCardioDraft
+    var alreadyImported: Bool
+    var conflictingNames: [String]
+    var id: String { "\(FatLossCalendar.label(date))-\(cardio.code)" }
+}
+
+struct ProgramImportSummary: Equatable {
+    var importableCount: Int
+    var conflictCount: Int
+    var alreadyImportedCount: Int
+
+    init(preview: [ProgramImportPreview]) {
+        importableCount = preview.filter { !$0.alreadyImported && $0.conflictingNames.isEmpty }.count
+        conflictCount = preview.filter { !$0.alreadyImported && !$0.conflictingNames.isEmpty }.count
+        alreadyImportedCount = preview.filter(\.alreadyImported).count
+    }
+
+    var canImport: Bool { importableCount > 0 }
+    var actionTitle: String {
+        guard canImport else { return "没有可导入的训练" }
+        return conflictCount > 0 || alreadyImportedCount > 0
+            ? "导入其余 \(importableCount) 天"
+            : "导入 \(importableCount) 天训练"
+    }
+    var unavailableReason: String? {
+        guard !canImport else { return nil }
+        if alreadyImportedCount > 0 && conflictCount == 0 { return "这些训练已经导入，无需重复操作。" }
+        if conflictCount > 0 { return "所选日期都有现有训练；将保留现有记录，不会覆盖。" }
+        return "所选范围内没有已确认的力量训练。"
+    }
 }
 
 enum ProgramImportConflictPolicy { case reject, skipConflicts }

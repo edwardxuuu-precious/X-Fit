@@ -1,0 +1,602 @@
+{
+  "version": 1,
+  "packageID": "notes-20260908-20260909-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-09-08-push",
+      "date": "2026-09-08",
+      "name": "胸部＋肩部训练",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「健身计划 / Week of Sep 7」。原始记录仅有日期，具体训练时间、时长和 RIR 未记录。重量按本人确认口径保存，不做换算。",
+      "scheduleTemplateCode": null,
+      "exercises": [
+        {
+          "name": "杠铃卧推",
+          "muscleGroup": "胸部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: Bench press；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 16,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 12,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 8,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 40.0,
+              "reps": 6,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "上斜卧推",
+          "muscleGroup": "胸部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: inclined bench press；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "MTS 下斜卧推",
+          "muscleGroup": "胸部",
+          "equipment": "MTS 器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: mts decline bench press；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "站姿绳索夹胸",
+          "muscleGroup": "胸部",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: cable fly；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 8.75,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 11.25,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 11.25,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 11.25,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "三头下压机",
+          "muscleGroup": "手臂",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: dip press；重量按整机/总挂片保存。",
+          "sets": [
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "史密斯肩推",
+          "muscleGroup": "肩部",
+          "equipment": "史密斯机",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: sm shoulder press；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 15.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 15.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 15.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 15.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "哑铃侧平举",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: dumbbell side raise；重量按单只保存。",
+          "sets": [
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "哑铃反向飞鸟",
+          "muscleGroup": "肩部",
+          "equipment": "哑铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: dumbbell reverse fly；重量按单只保存。",
+          "sets": [
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2026-09-09-pull",
+      "date": "2026-09-09",
+      "name": "背部＋核心训练",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「健身计划 / Week of Sep 7」。原始记录仅有日期，具体训练时间、时长和 RIR 未记录；实际动作与原计划不同，关联日程只表示当天训练已完成。",
+      "scheduleTemplateCode": "BACK_BI_R2",
+      "exercises": [
+        {
+          "name": "杠铃划船",
+          "muscleGroup": "背部",
+          "equipment": "杠铃",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: Barbell row；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "宽握 T 杠划船",
+          "muscleGroup": "背部",
+          "equipment": "T 杠器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: T-bar row wide grip；重量按整机/总挂片保存。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "bilateral",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "MTS 划船",
+          "muscleGroup": "背部",
+          "equipment": "MTS 器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: Iso-lateral row；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 20.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 40.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 50.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "双滑轮高位下拉",
+          "muscleGroup": "背部",
+          "equipment": "双滑轮器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: dual pulley pulldown；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 35.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "双滑轮低位划船",
+          "muscleGroup": "背部",
+          "equipment": "双滑轮器械",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: dual pulley low row；重量按单边保存。",
+          "sets": [
+            {
+              "weight": 25.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            },
+            {
+              "weight": 30.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "bilateral"
+            }
+          ]
+        },
+        {
+          "name": "绳索伸展转体",
+          "muscleGroup": "核心",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "Notes 原名；重量和次数按单边保存。",
+          "sets": [
+            {
+              "weight": 7.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            }
+          ]
+        },
+        {
+          "name": "绳索躯干旋转",
+          "muscleGroup": "核心",
+          "equipment": "龙门架",
+          "volumeUnit": "kilogram",
+          "notes": "Notes: 绳索转体；重量和次数按单边保存。",
+          "sets": [
+            {
+              "weight": 10.0,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 12.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 12.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            },
+            {
+              "weight": 12.5,
+              "reps": 10,
+              "weightSide": "single",
+              "repsSide": "single"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [
+    {
+      "id": "3F136E17-6420-53EA-B418-14A7FFD2F95E",
+      "recordedAt": "2026-09-08 06:41",
+      "weightJin": 175.3,
+      "notes": "来源：Apple Notes；原始单位 斤。"
+    },
+    {
+      "id": "6DA683E5-D1E1-5EA2-A87F-5446AEE07EAF",
+      "recordedAt": "2026-09-08 20:52",
+      "weightJin": 175.1,
+      "notes": "来源：Apple Notes；原始单位 斤。"
+    },
+    {
+      "id": "4A6127BD-E771-5C4A-9D69-C01DECFC9865",
+      "recordedAt": "2026-09-09 08:15",
+      "weightJin": 173.4,
+      "notes": "来源：Apple Notes；原始单位 斤。"
+    }
+  ],
+  "meals": [
+    {
+      "id": "9EC1AE85-29C6-5F8B-9512-60045769AAFE",
+      "date": "2026-09-08",
+      "mealType": "breakfast",
+      "name": "黑咖啡；外星人（赤藓糖醇）；牛油果 1/3 个；牛奶 200 ml；蜂蜜 20 g；猪柳蛋麦满分"
+    },
+    {
+      "id": "276612B5-2043-545A-8F22-E08325E4B316",
+      "date": "2026-09-08",
+      "mealType": "lunch",
+      "name": "鸡肉咖喱饭"
+    },
+    {
+      "id": "E06E2E27-D737-5121-93E3-5AA1A087DB8C",
+      "date": "2026-09-08",
+      "mealType": "dinner",
+      "name": "鸡肉咖喱饭"
+    },
+    {
+      "id": "50FCCFE2-2BDF-5F66-9ED3-7ED191FAFB71",
+      "date": "2026-09-09",
+      "mealType": "breakfast",
+      "name": "黑咖啡；外星人（赤藓糖醇）；1/5 牛油果＋牛奶 50 ml；板烧鸡腿麦满分；麦当劳小杯豆浆"
+    },
+    {
+      "id": "62D4995B-2477-5088-973A-CE071BF70807",
+      "date": "2026-09-09",
+      "mealType": "lunch",
+      "name": "鸡肉咖喱饭"
+    },
+    {
+      "id": "79BE5584-28EE-5ABE-90A2-761124A519E6",
+      "date": "2026-09-09",
+      "mealType": "dinner",
+      "name": "鸡肉咖喱饭"
+    },
+    {
+      "id": "870C5D6F-9C03-5AAB-A079-C368EE6793EC",
+      "date": "2026-09-09",
+      "mealType": "snack",
+      "name": "香蕉 1 根；青瓜 1 根"
+    }
+  ],
+  "staleSession": {
+    "plannedDate": "2026-09-04",
+    "templateName": "推 · 胸肩三头"
+  }
+}

@@ -12,9 +12,38 @@ final class HealthKitService {
     static let enabledKey = "healthKitEnabled"
 
     private let healthStore = HKHealthStore()
+    private let healthDataAvailable: () -> Bool
+    private let workoutWriter: (Date, Date) async throws -> Void
+    private let arguments: [String]
+    private let isXCTestHost: Bool
+
+    init(
+        arguments: [String] = CommandLine.arguments,
+        environment: [String: String] = ProcessInfo.processInfo.environment,
+        healthDataAvailable: @escaping () -> Bool = HKHealthStore.isHealthDataAvailable,
+        workoutWriter: ((Date, Date) async throws -> Void)? = nil
+    ) {
+        self.arguments = arguments
+        self.isXCTestHost = environment["XCTestConfigurationFilePath"] != nil
+        self.healthDataAvailable = healthDataAvailable
+        self.workoutWriter = workoutWriter ?? { [healthStore] start, end in
+            let configuration = HKWorkoutConfiguration()
+            configuration.activityType = .traditionalStrengthTraining
+            configuration.locationType = .indoor
+
+            let builder = HKWorkoutBuilder(
+                healthStore: healthStore,
+                configuration: configuration,
+                device: .local()
+            )
+            try await builder.beginCollection(at: start)
+            try await builder.endCollection(at: end)
+            _ = try await builder.finishWorkout()
+        }
+    }
 
     var isAvailable: Bool {
-        HKHealthStore.isHealthDataAvailable()
+        healthDataAvailable()
     }
 
     func requestAuthorization() async throws {
@@ -39,20 +68,13 @@ final class HealthKitService {
     }
 
     func saveWorkout(start: Date, end: Date) async throws {
-        guard isAvailable, end > start else { return }
-
-        let configuration = HKWorkoutConfiguration()
-        configuration.activityType = .traditionalStrengthTraining
-        configuration.locationType = .indoor
-
-        let builder = HKWorkoutBuilder(
-            healthStore: healthStore,
-            configuration: configuration,
-            device: .local()
-        )
-        try await builder.beginCollection(at: start)
-        try await builder.endCollection(at: end)
-        _ = try await builder.finishWorkout()
+        // Persistent UI tests deliberately bypass the in-memory store flag;
+        // both UI modes and XCTest hosts must still suppress external writes.
+        guard !arguments.contains("--ui-testing"),
+              !arguments.contains("--ui-testing-persistent"),
+              !isXCTestHost,
+              isAvailable, end > start else { return }
+        try await workoutWriter(start, end)
     }
 
     func latestBodySnapshot() async throws -> HealthBodySnapshot? {

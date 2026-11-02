@@ -1,0 +1,38 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "copy",
+      "--timeout",
+      "45",
+      "--json-output",
+      "outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/device-readback-2026-11-04-20261030a/result-copy.json",
+      "from",
+      "--device",
+      "00008150-001E49912122401C",
+      "--source",
+      "Documents/MealExchange/99f5d417-2e6f-437f-a80b-08d3a3ffc350",
+      "--destination",
+      "outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/device-readback-2026-11-04-20261030a/result",
+      "--domain-type",
+      "appDataContainer",
+      "--domain-identifier",
+      "com.edward.FitnessApp"
+    ],
+    "commandType" : "devicectl.device.copy.from",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 5,
+    "outcome" : "success",
+    "version" : "651.13.5"
+  },
+  "result" : {
+    "destination" : "file:///Users/edward/Documents/Fitness%20App/outputs/training-plan/2026-11-02-autonomous-review/confirmed-drop-sync-20261029/device-readback-2026-11-04-20261030a/result",
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "domain" : "appDataContainer",
+    "domainIdentifier" : "com.edward.FitnessApp",
+    "source" : "Documents/MealExchange/99f5d417-2e6f-437f-a80b-08d3a3ffc350"
+  }
+}

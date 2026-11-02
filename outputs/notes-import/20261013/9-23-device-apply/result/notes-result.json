@@ -1,0 +1,18 @@
+{
+  "alreadyVoidedMeals" : 0,
+  "createdExercises" : 7,
+  "discardedStaleSessions" : 1,
+  "importedBodyMeasurements" : 0,
+  "importedJumpRopeEntries" : 0,
+  "importedMeals" : 0,
+  "importedSessionExercises" : 8,
+  "importedSessions" : 1,
+  "importedSets" : 37,
+  "linkedSchedules" : 1,
+  "repairedSessionDateMetadata" : 0,
+  "skippedBodyMeasurements" : 0,
+  "skippedJumpRopeEntries" : 0,
+  "skippedMeals" : 0,
+  "skippedSessions" : 0,
+  "voidedMeals" : 0
+}

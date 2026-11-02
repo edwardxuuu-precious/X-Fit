@@ -1,0 +1,48 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "info",
+      "apps",
+      "--device",
+      "00008150-001E49912122401C",
+      "--bundle-id",
+      "com.edward.FitnessApp",
+      "--timeout",
+      "60",
+      "--json-output",
+      "outputs/stage-validation/20260920-historical-backfill-device-prewrite/device-app-readback.json"
+    ],
+    "commandType" : "devicectl.device.info.apps",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 3,
+    "outcome" : "success",
+    "version" : "518.33"
+  },
+  "result" : {
+    "apps" : [
+      {
+        "appClip" : false,
+        "builtByDeveloper" : true,
+        "bundleIdentifier" : "com.edward.FitnessApp",
+        "bundleVersion" : "11",
+        "defaultApp" : false,
+        "hidden" : false,
+        "internalApp" : false,
+        "name" : "X-Fit",
+        "removable" : true,
+        "url" : "file:///private/var/containers/Bundle/Application/13D67057-FB54-49C5-8228-75E148F5B48B/FitnessApp.app/",
+        "version" : "0.5.0"
+      }
+    ],
+    "defaultAppsIncluded" : false,
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "hiddenAppsIncluded" : false,
+    "internalAppsIncluded" : false,
+    "matchingBundleIdentifier" : "com.edward.FitnessApp",
+    "removableAppsIncluded" : true
+  }
+}

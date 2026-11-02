@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import CryptoKit
 
 enum FatLossError: LocalizedError {
     case invalidInput(String)
@@ -16,6 +17,139 @@ enum FatLossError: LocalizedError {
     }
 }
 
+struct ConfirmedTravelWeekPreview: Codable, Equatable {
+    var programID: UUID
+    var programCode: String
+    var preferenceRevisionCode: String
+    var pendingStrengthWorkouts: Int
+    var pendingCardioWorkouts: Int
+    var alreadyImportedCodes: [String]
+    var conflictingDates: [String]
+    var stateFingerprint: String
+}
+
+struct ConfirmedTravelWeekResult: Codable, Equatable {
+    var programRevisionID: UUID
+    var programCode: String
+    var preferenceRevisionCode: String
+    var importedSchedules: Int
+}
+
+@MainActor
+enum ConfirmedTravelWeekService {
+    static let startDate = FatLossCalendar.date(2026, 9, 21)
+    static let programCode = "CUT-UPPER-TRAVEL-20260921-R1"
+
+    /// Read-only approval payload. Missing or ambiguous authoritative state stops the import.
+    static func preview(in context: ModelContext) throws -> ConfirmedTravelWeekPreview {
+        let active = try context.fetch(FetchDescriptor<FatLossProgram>()).filter { $0.statusRaw == "active" }
+        guard active.count == 1, let program = active.first,
+              program.contains(startDate), program.contains(FatLossCalendar.adding(6, to: startDate)) else {
+            throw FatLossError.invalidInput("需要唯一且覆盖旅行周的生效减脂周期；未创建或修改日程。")
+        }
+        let snapshot = FatLossCatalog.trainingProgram(preference: .upperBodyTravelWeek)
+        let preferences = try context.fetch(FetchDescriptor<TrainingPreferenceRevision>())
+        let restoreDate = FatLossCalendar.adding(7, to: startDate)
+        guard !preferences.contains(where: {
+            $0.effectiveAt >= startDate && $0.effectiveAt <= restoreDate
+                && ![TrainingPreferenceSnapshot.upperBodyTravelWeek.revisionCode,
+                     TrainingPreferenceSnapshot.postTravelRestoration.revisionCode].contains($0.revisionCode)
+        }) else { throw FatLossError.invalidInput("旅行周或恢复日已有其他偏好调整，需先确认冲突。") }
+        for (expected, date) in [(TrainingPreferenceSnapshot.upperBodyTravelWeek, startDate),
+                                 (.postTravelRestoration, FatLossCalendar.adding(7, to: startDate))] {
+            let matching = preferences.filter { $0.revisionCode == expected.revisionCode }
+            guard matching.count <= 1, matching.allSatisfy({ $0.snapshot == expected && FatLossCalendar.sameDay($0.effectiveAt, date) }) else {
+                throw FatLossError.invalidInput("旅行周或恢复偏好版本存在冲突，请保留原数据并核对。")
+            }
+        }
+        let revisions = try context.fetch(FetchDescriptor<TrainingProgramRevision>()).filter { $0.programID == program.id }
+        let matching = revisions.filter { $0.snapshot?.code == programCode }
+        guard matching.count <= 1, matching.allSatisfy({
+            $0.snapshot == snapshot && FatLossCalendar.sameDay($0.effectiveDate, startDate)
+        }) else { throw FatLossError.invalidInput("旅行周编排已有不同内容或日期。") }
+        if let existing = matching.first,
+           !preferences.contains(where: { $0.id == existing.preferenceRevisionID && $0.revisionCode == snapshot.preferenceRevisionCode }) {
+            throw FatLossError.invalidInput("旅行周编排关联的偏好无法核对。")
+        }
+        let end = FatLossCalendar.adding(7, to: startDate)
+        let firstLocalDay = FatLossCalendar.label(startDate)
+        let endLocalDay = FatLossCalendar.label(end)
+        let allSchedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+        func sessionLocalDay(_ session: WorkoutSession) -> String {
+            if let linked = allSchedules.first(where: { $0.id == session.scheduledWorkoutID }) {
+                return TrainingScheduleDate.localDay(linked)
+            }
+            // A legacy/free session has no source-timezone metadata. Keep its
+            // existing current-day display interpretation; never rewrite it.
+            return TrainingLocalDate.key(session.plannedDate)
+        }
+        let schedules = allSchedules.filter {
+            let day = TrainingScheduleDate.localDay($0)
+            return day >= firstLocalDay && day < endLocalDay
+        }
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>()).filter {
+            let day = sessionLocalDay($0)
+            return day >= firstLocalDay && day < endLocalDay
+        }
+        let links = try context.fetch(FetchDescriptor<ProgramWorkoutLink>()).filter { $0.programID == program.id && $0.originalDate >= startDate && $0.originalDate < end }
+        let exercises = try context.fetch(FetchDescriptor<Exercise>())
+        for draft in snapshot.strengthWorkouts.flatMap(\.exercises) {
+            let candidates = exercises.filter { !$0.isArchived && $0.name == draft.name && $0.equipment == draft.equipment && $0.volumeUnit.rawValue == draft.volumeUnitRaw }
+            guard candidates.count <= 1 else { throw FatLossError.invalidInput("动作“\(draft.name)”身份不唯一，请先核对。") }
+        }
+        guard exercises.filter({ !$0.isArchived && $0.name == "轻松单车／椭圆机"
+            && $0.equipment == "单车或椭圆机" && $0.volumeUnit == .second }).count <= 1 else {
+            throw FatLossError.invalidInput("恢复有氧动作身份不唯一，请先核对。")
+        }
+        var imported: [String] = [], conflicts: [String] = []
+        let days = snapshot.strengthWorkouts.map { ($0.weekday, $0.code) } + snapshot.cardioWorkouts.map { ($0.weekday, $0.code) }
+        for (weekday, code) in days {
+            let day = FatLossCalendar.adding(weekday - 2, to: startDate)
+            let ownLinks = links.filter { $0.templateCode == code && FatLossCalendar.sameDay($0.originalDate, day) }
+            guard ownLinks.count <= 1 else { throw FatLossError.invalidInput("旅行日程关联重复，请先核对。") }
+            if let link = ownLinks.first {
+                guard schedules.contains(where: { $0.id == link.scheduledWorkoutID }),
+                      link.trainingProgramRevisionID == matching.first?.id else {
+                    throw FatLossError.invalidInput("旅行日程关联缺失或已变化，请先核对。")
+                }
+                imported.append(code)
+            } else if schedules.contains(where: { TrainingScheduleDate.localDay($0) == FatLossCalendar.label(day) })
+                        || sessions.contains(where: { $0.status != .discarded && sessionLocalDay($0) == FatLossCalendar.label(day) }) {
+                conflicts.append(FatLossCalendar.label(day))
+            }
+        }
+        if revisions.contains(where: { $0.effectiveDate >= startDate && $0.effectiveDate < end && $0.snapshot?.code != programCode }) {
+            conflicts.append("旅行周已有其他编排版本")
+        }
+        var state = ["\(program.id)|\(program.startDate.timeIntervalSince1970)|\(program.endDate.timeIntervalSince1970)"]
+        state += preferences.map { "pref|\($0.id)|\($0.effectiveAt.timeIntervalSince1970)|\($0.snapshotJSON)" }
+        state += revisions.map { "revision|\($0.id)|\($0.effectiveDate.timeIntervalSince1970)|\($0.preferenceRevisionID)|\($0.snapshotJSON)" }
+        state += schedules.map { "schedule|\($0.id)|\($0.plannedDate.timeIntervalSince1970)|\($0.plannedLocalDay ?? "<unknown>")|\($0.plannedTimeZoneIdentifier ?? "<unknown>")|\($0.statusRaw)|\($0.planSnapshotJSON ?? "")" }
+        state += sessions.map { "session|\($0.id)|\($0.plannedDate.timeIntervalSince1970)|\(sessionLocalDay($0))|\($0.statusRaw)" }
+        state += links.map { "link|\($0.id)|\($0.scheduledWorkoutID)|\($0.templateCode)" }
+        state += exercises.map { "exercise|\($0.id)|\($0.name)|\($0.equipment)|\($0.volumeUnit.rawValue)|\($0.isArchived)" }
+        let fingerprint = SHA256.hash(data: try JSONEncoder().encode(state.sorted())).map { String(format: "%02x", $0) }.joined()
+        return ConfirmedTravelWeekPreview(programID: program.id, programCode: programCode,
+            preferenceRevisionCode: snapshot.preferenceRevisionCode,
+            pendingStrengthWorkouts: snapshot.strengthWorkouts.filter { !imported.contains($0.code) }.count,
+            pendingCardioWorkouts: snapshot.cardioWorkouts.filter { !imported.contains($0.code) }.count,
+            alreadyImportedCodes: imported.sorted(), conflictingDates: conflicts.sorted(), stateFingerprint: fingerprint)
+    }
+
+    static func apply(expectedPreview: ConfirmedTravelWeekPreview, in context: ModelContext) throws -> ConfirmedTravelWeekResult {
+        let fresh = try preview(in: context)
+        guard fresh == expectedPreview else { throw FatLossError.invalidInput("旅行周数据已变化，请重新预览确认。") }
+        guard fresh.conflictingDates.isEmpty else { throw FatLossError.scheduleConflict }
+        guard let program = try context.fetch(FetchDescriptor<FatLossProgram>()).first(where: { $0.id == fresh.programID }) else {
+            throw FatLossError.invalidInput("减脂周期已变化，请重新预览。")
+        }
+        let revision = try TrainingPreferenceService.activateUpperBodyTravelWeek(programID: program.id, effectiveDate: startDate, in: context)
+        let count = try FatLossService.importWorkouts(program: program, from: startDate, days: 7, in: context)
+        return ConfirmedTravelWeekResult(programRevisionID: revision.id, programCode: programCode,
+            preferenceRevisionCode: revision.preferenceRevisionCode, importedSchedules: count)
+    }
+}
+
 @MainActor
 enum FatLossService {
     static func activeProgram(in context: ModelContext) throws -> FatLossProgram? {
@@ -27,14 +161,25 @@ enum FatLossService {
     /// Called only by the explicit setup confirmation. Opening the app never calls this.
     @discardableResult
     static func createProgram(in context: ModelContext) throws -> FatLossProgram {
-        if let existing = try activeProgram(in: context) { return existing }
+        if let existing = try activeProgram(in: context) {
+            _ = try TrainingPreferenceService.ensureProgramRevision(
+                programID: existing.id,
+                effectiveDate: existing.startDate,
+                in: context
+            )
+            return existing
+        }
         var startDate = FatLossCalendar.date(2026, 9, 6)
         var endDate = FatLossCalendar.date(2026, 12, 6)
         #if DEBUG
         if CloudSyncRuntime.isTesting && !CloudSyncRuntime.usesPersistentUITestStore
             && ProcessInfo.processInfo.arguments.contains("--ui-redesign-preview") {
             // Keep the isolated UI fixture on day one as the real date advances.
-            startDate = FatLossCalendar.day(.now)
+            if ProcessInfo.processInfo.arguments.contains("--ui-testing-lower-body-week") {
+                startDate = FatLossCalendar.date(2026, 9, 14)
+            } else {
+                startDate = FatLossCalendar.day(.now)
+            }
             endDate = FatLossCalendar.adding(91, to: startDate)
         } else if CloudSyncRuntime.isTesting && ProcessInfo.processInfo.arguments.contains("--ui-testing-fat-loss-started") {
             startDate = FatLossCalendar.adding(-7, to: .now)
@@ -62,6 +207,11 @@ enum FatLossService {
         medication.notes = "综合维生素、非布司他、非那雄胺；剂量与频率未知。本记录不提供调整用药建议。"
         context.insert(medication)
         try context.save()
+        _ = try TrainingPreferenceService.ensureProgramRevision(
+            programID: program.id,
+            effectiveDate: program.startDate,
+            in: context
+        )
         return program
     }
 
@@ -150,7 +300,7 @@ enum FatLossService {
         let actuals = try context.fetch(FetchDescriptor<MealEntry>()).filter(\.isActiveMeal)
         if let existing = actuals.first(where: { $0.plannedMealID == meal.id }) { return existing }
         guard !actuals.contains(where: {
-            $0.mealType == meal.mealType && FatLossCalendar.sameDay($0.date, meal.date)
+            $0.mealType == meal.mealType && $0.stableLocalDay == FatLossCalendar.label(meal.date)
                 && ($0.programID == nil || $0.programID == meal.programID)
         }) else {
             throw FatLossError.invalidInput("这一天的\(meal.mealType.title)已有实吃记录，请到饮食记录中修改；原记录会保留。")
@@ -255,39 +405,156 @@ enum FatLossService {
         try context.save()
     }
 
-    static func importPreview(program: FatLossProgram, from date: Date, days: Int = 14, in context: ModelContext) throws -> [ProgramImportPreview] {
-        guard (1...91).contains(days) else { throw FatLossError.invalidInput("请选择 1–91 天。") }
+    private static func matchingExercises(for draft: ProgramExerciseDraft, in exercises: [Exercise]) -> [Exercise] {
+        exercises.filter {
+            !$0.isArchived && $0.name == draft.name && $0.equipment == draft.equipment
+                && $0.volumeUnit.rawValue == draft.volumeUnitRaw
+        }
+    }
+
+    /// The confirmed 2026-09-14 lower-body specialty week treats its two rope
+    /// sessions as first-class schedule items. Other program revisions retain
+    /// their existing strength-only import behavior.
+    static func cardioImportPreview(
+        program: FatLossProgram,
+        from date: Date,
+        days: Int,
+        in context: ModelContext
+    ) throws -> [ProgramCardioImportPreview] {
+        guard (1...7).contains(days) else {
+            throw FatLossError.invalidInput("先安排 1–7 天，复盘后再确认下一周。")
+        }
+        let revisions = try context.fetch(FetchDescriptor<TrainingProgramRevision>())
         let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
         let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
         let links = try context.fetch(FetchDescriptor<ProgramWorkoutLink>()).filter { $0.programID == program.id }
+
         return (0..<days).compactMap { offset in
             let day = FatLossCalendar.adding(offset, to: date)
-            guard program.contains(day, includeReviewDay: false), let workout = FatLossCatalog.workout(on: day) else { return nil }
+            guard program.contains(day, includeReviewDay: false),
+                  let revision = TrainingPreferenceService.effectiveProgram(revisions, programID: program.id, on: day),
+                  let snapshot = revision.snapshot,
+                  ["CUT-LB3-20260914-R1", ConfirmedTravelWeekService.programCode].contains(snapshot.code),
+                  let cardio = snapshot.cardioWorkouts.first(where: {
+                      $0.weekday == FatLossCalendar.calendar.component(.weekday, from: day)
+                  }) else { return nil }
+
+            let alreadyImported = links.contains {
+                FatLossCalendar.sameDay($0.originalDate, day) && $0.templateCode == cardio.code
+            }
+            let localDay = FatLossCalendar.label(day)
+            let scheduledNames = schedules.filter {
+                TrainingScheduleDate.localDay($0) == localDay && $0.status != .skipped
+            }.map(\.templateName)
+            let freeSessionNames = sessions.filter {
+                $0.scheduledWorkoutID == nil && TrainingLocalDate.key($0.plannedDate) == localDay && $0.status != .discarded
+            }.map(\.templateName)
+            return ProgramCardioImportPreview(
+                trainingProgramRevisionID: revision.id,
+                date: day,
+                cardio: cardio,
+                alreadyImported: alreadyImported,
+                conflictingNames: alreadyImported ? [] : scheduledNames + freeSessionNames
+            )
+        }
+    }
+
+    static func importPreview(program: FatLossProgram, from date: Date, days: Int = 7, lowEnergyMorning: Bool = false, in context: ModelContext) throws -> [ProgramImportPreview] {
+        guard (1...7).contains(days) else { throw FatLossError.invalidInput("先安排 1–7 天，复盘后再确认下一周。") }
+        let revisions = try context.fetch(FetchDescriptor<TrainingProgramRevision>())
+        let exerciseCatalog = try context.fetch(FetchDescriptor<Exercise>())
+        let history = try context.fetch(FetchDescriptor<SessionExercise>())
+        let logs = try context.fetch(FetchDescriptor<SetLog>())
+        let schedules = try context.fetch(FetchDescriptor<ScheduledWorkout>())
+        let sessions = try context.fetch(FetchDescriptor<WorkoutSession>())
+        let links = try context.fetch(FetchDescriptor<ProgramWorkoutLink>()).filter { $0.programID == program.id }
+        return try (0..<days).compactMap { offset in
+            let day = FatLossCalendar.adding(offset, to: date)
+            guard program.contains(day, includeReviewDay: false),
+                  let revision = TrainingPreferenceService.effectiveProgram(revisions, programID: program.id, on: day) else { return nil }
+            guard let snapshot = revision.snapshot, snapshot.isValid else {
+                throw FatLossError.invalidInput("该日期的编排无法读取，请保留原版本并检查备份。")
+            }
+            guard let workout = snapshot.strengthWorkouts.first(where: {
+                $0.weekday == FatLossCalendar.calendar.component(.weekday, from: day)
+            }) else { return nil }
             let alreadyImported = links.contains { FatLossCalendar.sameDay($0.originalDate, day) && $0.templateCode == workout.code }
-            let names = schedules.filter { FatLossCalendar.sameDay($0.plannedDate, day) }.map(\.templateName)
-            let freeSessions = sessions.filter { $0.scheduledWorkoutID == nil && FatLossCalendar.sameDay($0.plannedDate, day) && $0.status != .discarded }.map(\.templateName)
-            return ProgramImportPreview(date: day, workout: workout, alreadyImported: alreadyImported,
+            let localDay = FatLossCalendar.label(day)
+            let names = schedules.filter { TrainingScheduleDate.localDay($0) == localDay }.map(\.templateName)
+            let freeSessions = sessions.filter { $0.scheduledWorkoutID == nil && TrainingLocalDate.key($0.plannedDate) == localDay && $0.status != .discarded }.map(\.templateName)
+            let firstLoadedExercise = workout.exercises.first { $0.volumeUnitRaw == ExerciseVolumeUnit.kilogram.rawValue }?.name
+            var loads: [String: WorkoutSetPlan] = [:]
+            for draft in workout.exercises {
+                let matches = matchingExercises(for: draft, in: exerciseCatalog)
+                guard matches.count <= 1 else {
+                    throw FatLossError.invalidInput("动作“\(draft.name)”有多个同器械记录，请先在动作库核对，避免混入错误历史。")
+                }
+                // Left-elbow symptoms and travel fatigue make this confirmed
+                // one-week plan a warmup-selected load, not a history preload.
+                if snapshot.code == ConfirmedTravelWeekService.programCode { continue }
+                guard draft.volumeUnitRaw == ExerciseVolumeUnit.kilogram.rawValue, let exercise = matches.first else { continue }
+                let validSnapshots = Set(history.filter { $0.exerciseID == exercise.id && $0.volumeUnit == .kilogram }.map(\.id))
+                let completedSessions = Set(sessions.filter { $0.status == .completed && $0.startedAt < day }.map(\.id))
+                let sets = logs.filter {
+                    $0.exerciseID == exercise.id && validSnapshots.contains($0.sessionExerciseID)
+                        && completedSessions.contains($0.sessionID) && $0.isCompleted && !$0.isWarmup
+                        && ($0.completedAt.map { $0 < day && $0 >= FatLossCalendar.adding(-42, to: day) } ?? false)
+                        && $0.actualWeight.isFinite && $0.actualWeight > 0 && $0.actualReps >= draft.repsLower
+                        && $0.actualRepsSide == (draft.unilateral ? .single : .bilateral)
+                        && ($0.rir.map { $0 >= 2 } ?? false)
+                }.sorted { ($0.completedAt ?? .distantPast) > ($1.completedAt ?? .distantPast) }
+                guard let last = sets.first else { continue }
+                let factor = lowEnergyMorning && draft.name == firstLoadedExercise ? 0.9 : 1.0
+                loads[draft.name] = WorkoutSetPlan(id: last.id, weight: (last.actualWeight * factor * 10).rounded(.down) / 10,
+                    reps: draft.repsLower, weightSide: last.actualWeightSide,
+                    repsSide: draft.unilateral ? .single : .bilateral)
+            }
+            return ProgramImportPreview(trainingProgramRevisionID: revision.id, loadPlans: loads, date: day, workout: workout, alreadyImported: alreadyImported,
                                         conflictingNames: alreadyImported ? [] : names + freeSessions)
         }
     }
 
     @discardableResult
-    static func importWorkouts(program: FatLossProgram, from date: Date, days: Int = 14,
-                               conflictPolicy: ProgramImportConflictPolicy = .reject, in context: ModelContext) throws -> Int {
-        let preview = try importPreview(program: program, from: date, days: days, in: context)
+    static func importWorkouts(program: FatLossProgram, from date: Date, days: Int = 7,
+                               conflictPolicy: ProgramImportConflictPolicy = .reject, lowEnergyMorning: Bool = false,
+                               expectedPreview: [ProgramImportPreview]? = nil,
+                               expectedCardioPreview: [ProgramCardioImportPreview]? = nil,
+                               in context: ModelContext) throws -> Int {
+        let preview = try importPreview(program: program, from: date, days: days, lowEnergyMorning: lowEnergyMorning, in: context)
+        if let expectedPreview, expectedPreview != preview {
+            throw FatLossError.invalidInput("编排或已有日程已变化，请重新预览后导入。")
+        }
         if case .reject = conflictPolicy, preview.contains(where: { !$0.conflictingNames.isEmpty }) { throw FatLossError.scheduleConflict }
         var exercises = try context.fetch(FetchDescriptor<Exercise>())
+        let revisions = try context.fetch(FetchDescriptor<TrainingProgramRevision>())
+        let preferences = try context.fetch(FetchDescriptor<TrainingPreferenceRevision>())
         let candidates = preview.filter { !$0.alreadyImported && $0.conflictingNames.isEmpty }
+        let cardioPreview = try cardioImportPreview(
+            program: program,
+            from: date,
+            days: days,
+            in: context
+        )
+        if let expectedCardioPreview, expectedCardioPreview != cardioPreview {
+            throw FatLossError.invalidInput("有氧编排或已有日程已变化，请重新预览后导入。")
+        }
+        if case .reject = conflictPolicy, cardioPreview.contains(where: { !$0.conflictingNames.isEmpty }) {
+            throw FatLossError.scheduleConflict
+        }
+        let cardioCandidates = cardioPreview.filter { !$0.alreadyImported && $0.conflictingNames.isEmpty }
         for candidate in candidates {
             // Each imported day gets its own template: future edits cannot alter another day.
             let template = WorkoutTemplate(name: candidate.workout.title, weekday: candidate.workout.weekday,
                                            isActive: false, isOneOff: true, plannedForDate: candidate.date,
                                            focusMuscleGroups: Array(Set(candidate.workout.exercises.map(\.muscleGroup))).sorted())
+            if let revision = revisions.first(where: { $0.id == candidate.trainingProgramRevisionID }) {
+                template.trainingPreferenceSnapshotJSON = preferences.first { $0.id == revision.preferenceRevisionID }?.snapshotJSON
+            }
             context.insert(template)
             for (index, draft) in candidate.workout.exercises.enumerated() {
                 let unit = ExerciseVolumeUnit(rawValue: draft.volumeUnitRaw) ?? .kilogram
                 let exercise: Exercise
-                if let existing = exercises.first(where: { !$0.isArchived && $0.name == draft.name && $0.volumeUnit == unit }) {
+                if let existing = matchingExercises(for: draft, in: exercises).first {
                     exercise = existing
                 } else {
                     exercise = Exercise(name: draft.name, muscleGroup: draft.muscleGroup, equipment: draft.equipment,
@@ -297,26 +564,131 @@ enum FatLossService {
                     exercises.append(exercise)
                 }
                 let isDistance = unit == .meter
+                let basePlan = candidate.loadPlans[draft.name] ?? WorkoutSetPlan(
+                    weight: isDistance ? Double(draft.repsLower) : 0,
+                    reps: isDistance ? 1 : draft.repsLower,
+                    weightSide: candidate.workout.code.hasPrefix("TRAVEL_") ? .unknown : .bilateral,
+                    repsSide: draft.unilateral ? .single : .bilateral)
+                // Preview references use the source log ID for stable comparison. Saved plan rows own independent IDs.
                 let plans = (0..<draft.sets).map { _ in
-                    WorkoutSetPlan(weight: isDistance ? Double(draft.repsLower) : 0,
-                                   reps: isDistance ? 1 : draft.repsLower,
-                                   repsSide: draft.unilateral ? .single : .bilateral)
+                    var plan = basePlan
+                    plan.id = UUID()
+                    return plan
                 }
                 context.insert(TemplateExercise(templateID: template.id, exerciseID: exercise.id, order: index,
                                                 targetSets: draft.sets, minReps: isDistance ? 1 : draft.repsLower,
-                                                maxReps: isDistance ? 1 : draft.repsUpper, targetWeight: isDistance ? Double(draft.repsLower) : 0,
+                                                maxReps: isDistance ? 1 : draft.repsUpper, targetWeight: basePlan.weight,
                                                 restSeconds: draft.restSeconds, plannedSets: plans))
             }
             let schedule = ScheduledWorkout(templateID: template.id, templateName: template.name,
                                             plannedDate: candidate.date, isManuallyScheduled: true)
             // Preserve the program's natural-day timezone even if the device timezone differs.
             schedule.plannedDate = candidate.date
+            schedule.plannedLocalDay = FatLossCalendar.label(candidate.date)
+            schedule.plannedTimeZoneIdentifier = FatLossCalendar.calendar.timeZone.identifier
             context.insert(schedule)
-            context.insert(ProgramWorkoutLink(programID: program.id, scheduledWorkoutID: schedule.id,
-                                              templateCode: candidate.workout.code, originalDate: candidate.date))
+            try ScheduleService.freezePlanSnapshot(for: schedule, in: context)
+            if candidate.workout.code.hasPrefix("TRAVEL_") {
+                // A shared catalog exercise can retain old cues. Freeze this week's
+                // approved safety instructions into the new schedule only.
+                schedule.planSnapshot = schedule.planSnapshot.map { item in
+                    var updated = item
+                    if let draft = candidate.workout.exercises.first(where: { $0.name == item.exerciseName }) {
+                        updated.exerciseNotes = draft.note + "\n" + candidate.workout.guidance
+                    }
+                    return updated
+                }
+            }
+            let link = ProgramWorkoutLink(programID: program.id, scheduledWorkoutID: schedule.id,
+                                          templateCode: candidate.workout.code, originalDate: candidate.date)
+            link.trainingProgramRevisionID = candidate.trainingProgramRevisionID
+            context.insert(link)
+        }
+
+        for candidate in cardioCandidates {
+            let isRecovery = candidate.cardio.code.hasPrefix("RECOVERY_")
+            let template = WorkoutTemplate(
+                name: candidate.cardio.title,
+                weekday: candidate.cardio.weekday,
+                isActive: false,
+                isOneOff: true,
+                plannedForDate: candidate.date,
+                focusMuscleGroups: isRecovery ? ["心肺", "恢复"] : ["心肺", "足踝"]
+            )
+            if let revision = revisions.first(where: { $0.id == candidate.trainingProgramRevisionID }) {
+                template.trainingPreferenceSnapshotJSON = preferences.first {
+                    $0.id == revision.preferenceRevisionID
+                }?.snapshotJSON
+            }
+            context.insert(template)
+
+            let cardioName = isRecovery ? "轻松单车／椭圆机" : "跳绳"
+            let cardioEquipment = isRecovery ? "单车或椭圆机" : "跳绳"
+            let matchingRopeExercises = exercises.filter {
+                !$0.isArchived && $0.name == cardioName && $0.equipment == cardioEquipment && $0.volumeUnit == .second
+            }
+            guard matchingRopeExercises.count <= 1 else {
+                throw FatLossError.invalidInput("动作“\(cardioName)”有多个同器械记录，请先在动作库核对。")
+            }
+            let ropeExercise: Exercise
+            if let existing = matchingRopeExercises.first {
+                ropeExercise = existing
+            } else {
+                ropeExercise = Exercise(
+                    name: cardioName,
+                    muscleGroup: "心肺",
+                    equipment: cardioEquipment,
+                    defaultRestSeconds: 0,
+                    isBuiltIn: false,
+                    notes: isRecovery ? candidate.cardio.guidance : "按当日日程完成间歇；实际次数、有效时长和含休息总时长从今日页记录。",
+                    volumeUnit: .second
+                )
+                context.insert(ropeExercise)
+                exercises.append(ropeExercise)
+            }
+
+            let activeSeconds = candidate.cardio.activeSeconds ?? 1
+            context.insert(TemplateExercise(
+                templateID: template.id,
+                exerciseID: ropeExercise.id,
+                order: 0,
+                targetSets: 1,
+                minReps: activeSeconds,
+                maxReps: isRecovery ? 1800 : activeSeconds,
+                targetWeight: 0,
+                restSeconds: 0,
+                plannedSets: [WorkoutSetPlan(weight: 0, reps: activeSeconds)]
+            ))
+
+            let schedule = ScheduledWorkout(
+                templateID: template.id,
+                templateName: template.name,
+                plannedDate: candidate.date,
+                isManuallyScheduled: true
+            )
+            schedule.plannedDate = candidate.date
+            schedule.plannedLocalDay = FatLossCalendar.label(candidate.date)
+            schedule.plannedTimeZoneIdentifier = FatLossCalendar.calendar.timeZone.identifier
+            context.insert(schedule)
+            try ScheduleService.freezePlanSnapshot(for: schedule, in: context)
+            if isRecovery {
+                schedule.planSnapshot = schedule.planSnapshot.map { item in
+                    var updated = item
+                    updated.exerciseNotes = candidate.cardio.intervals + "；" + candidate.cardio.guidance
+                    return updated
+                }
+            }
+            let link = ProgramWorkoutLink(
+                programID: program.id,
+                scheduledWorkoutID: schedule.id,
+                templateCode: candidate.cardio.code,
+                originalDate: candidate.date
+            )
+            link.trainingProgramRevisionID = candidate.trainingProgramRevisionID
+            context.insert(link)
         }
         try context.save()
-        return candidates.count
+        return candidates.count + cardioCandidates.count
     }
 
     static func average(endingOn date: Date, values: [BodyWeightDailyValue]) -> FatLossWeightAverage {
@@ -349,10 +721,12 @@ enum FatLossService {
                 if $0.source != $1.source { return $0.source == .manual }
                 return $0.date > $1.date
             }
-            let entries = meals.filter { matches($0.date) && ($0.programID == nil || $0.programID == program.id) }
+            let entries = meals.filter { $0.stableLocalDay == FatLossCalendar.label(day) && ($0.programID == nil || $0.programID == program.id) }
             let dayPlans = plans.filter { matches($0.date) }
             let feeling = feelings.filter { matches($0.date) }.max { $0.updatedAt < $1.updatedAt }
-            let dayJumps = jumps.filter { matches($0.date) }
+            let dayJumps = jumps.filter { entry in
+                entry.trainingLocalDay.map { $0 == FatLossCalendar.label(day) } ?? matches(entry.date)
+            }
             let log = logs.filter { matches($0.date) }.max { $0.updatedAt < $1.updatedAt }
             func durationSum(_ key: KeyPath<JumpRopeEntry, Int?>) -> Int? {
                 guard !dayJumps.isEmpty, dayJumps.allSatisfy({ $0[keyPath: key] != nil }) else { return nil }
@@ -366,7 +740,7 @@ enum FatLossService {
                                      unknownNutritionMeals: entries.filter { !$0.isNutritionKnown }.count,
                                      completedWorkouts: workouts.filter { matches($0.completedAt ?? $0.plannedDate) && $0.status == .completed }.count,
                                      plannedWorkouts: schedules.filter { matches($0.plannedDate) && $0.status != .skipped }.count,
-                                     jumpCount: dayJumps.reduce(0) { $0 + $1.count },
+                                     jumpCount: JumpRopeEntry.totalKnownCount(dayJumps),
                                      jumpActiveSeconds: durationSum(\.activeDurationSeconds), jumpElapsedSeconds: durationSum(\.elapsedDurationSeconds),
                                      waterMilliliters: water.filter { matches($0.date) }.reduce(0) { $0 + $1.milliliters },
                                      steps: log?.steps, sleepHours: log?.sleepHours,
@@ -433,17 +807,24 @@ enum FatLossService {
         for day in try timeline(program: program, in: context) {
             var row: [String] = [FatLossCalendar.label(day.date), day.status(relativeTo: .now), text(day.weightKg), text(day.waistCm),
                           String(day.loggedMeals), day.knownCalorieMeals == 0 ? "" : String(day.knownCalories), String(day.unknownNutritionMeals)]
-            row += [String(day.completedWorkouts), String(day.jumpCount), text(day.jumpActiveSeconds), text(day.jumpElapsedSeconds),
+            row += [String(day.completedWorkouts), text(day.jumpCount), text(day.jumpActiveSeconds), text(day.jumpElapsedSeconds),
                           day.waterMilliliters > 0 ? String(day.waterMilliliters) : "", text(day.steps), text(day.sleepHours), text(day.bloatingScore), day.bodyFeeling ?? "", day.workoutNotes?.joined(separator: "；") ?? ""]
             lines.append(row.map(csvCell).joined(separator: ","))
         }
-        lines += ["", "餐食明细", "日期,餐次,菜名,实际份数,热量kcal,蛋白质g,碳水g,脂肪g,营养状态,喜欢1至5,难度1至5,腹胀0至3,备注"]
-        let meals = try context.fetch(FetchDescriptor<MealEntry>()).filter { $0.isActiveMeal && program.contains($0.date) && ($0.programID == nil || $0.programID == program.id) }.sorted { $0.date < $1.date }
+        lines += ["", "餐食明细", "日期,餐次,菜名,实际份数,热量kcal,蛋白质g,碳水g,脂肪g,营养状态,喜欢1至5,难度1至5,腹胀0至3,备注,估算来源"]
+        let startLocalDay = FatLossCalendar.label(program.startDate)
+        let endLocalDay = FatLossCalendar.label(program.endDate)
+        let meals = try context.fetch(FetchDescriptor<MealEntry>()).filter {
+            $0.isActiveMeal && $0.stableLocalDay >= startLocalDay && $0.stableLocalDay <= endLocalDay
+                && ($0.programID == nil || $0.programID == program.id)
+        }.sorted {
+            $0.stableLocalDay == $1.stableLocalDay ? $0.date < $1.date : $0.stableLocalDay < $1.stableLocalDay
+        }
         for meal in meals {
-            var row: [String] = [FatLossCalendar.label(meal.date), meal.mealType.title, meal.name, meal.actualPortions.map { String($0) } ?? ""]
+            var row: [String] = [meal.stableLocalDay, meal.mealType.title, meal.name, meal.actualPortions.map { String($0) } ?? ""]
             row += [meal.isCalorieKnown ? String(meal.calories) : "",
                           meal.isProteinKnown ? String(meal.proteinGrams) : "", meal.isCarbsKnown ? String(meal.carbsGrams) : "", meal.isFatKnown ? String(meal.fatGrams) : ""]
-            row += [meal.isNutritionKnown ? "估算 / 手动记录" : "部分或全部待核算", text(meal.tasteRating), text(meal.preparationDifficulty), text(meal.bloatingScore), meal.feedbackNotes ?? ""]
+            row += [meal.isNutritionKnown ? "估算 / 手动记录" : "部分或全部待核算", text(meal.tasteRating), text(meal.preparationDifficulty), text(meal.bloatingScore), meal.feedbackNotes ?? "", meal.estimationMethod ?? ""]
             lines.append(row.map(csvCell).joined(separator: ","))
         }
         lines += ["", "目标版本", "生效日期,记录时间,目标体重kg,热量kcal,蛋白质g,步数,营养已确认,原因,依据"]

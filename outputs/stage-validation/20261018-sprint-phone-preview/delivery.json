@@ -1,0 +1,163 @@
+{
+  "requirement_id": "REQ-20261018-175709",
+  "updated_at": "2026-10-18T18:53:14.534624+08:00",
+  "delivery_status": "PASS",
+  "requirement_status": "真机待验收",
+  "device": "Edward_iPhone / iPhone17 / iOS26.6.2",
+  "transport": "localNetwork",
+  "app": {
+    "bundle_id": "com.edward.FitnessApp",
+    "version": "0.5.0",
+    "build": "20",
+    "signed_executable_sha256": "c1641a49cfd9c8f41581a46a6f0a7ad8a9667c24a53d6e525c85fbcc9707596d"
+  },
+  "installation": "原App覆盖安装，未卸载或清容器",
+  "normal_launch": {
+    "status": "PASS",
+    "arguments": [],
+    "process_still_running": true,
+    "pid": 23114
+  },
+  "device_gates": {
+    "D00": "PASS",
+    "D01": "PASS",
+    "D02": "PASS",
+    "D03": "PASS",
+    "D04": "PASS",
+    "D05": "PASS",
+    "D06A": "PASS",
+    "D06B": "PASS",
+    "D06C": "PASS",
+    "D07": "NOT_RUN",
+    "D09": "BLOCKED_HUMAN"
+  },
+  "data_conservation": {
+    "status": "PASS",
+    "integrity_before": "ok",
+    "integrity_after": "ok",
+    "model_tables": 25,
+    "original_records": 2151,
+    "missing_original_rows": 0,
+    "changed_original_rows": 0,
+    "added_model_rows": 0,
+    "counts": {
+      "ZBODYMEASUREMENT": {
+        "before": 22,
+        "after": 22
+      },
+      "ZDAILYBODYCHECKIN": {
+        "before": 5,
+        "after": 5
+      },
+      "ZEXERCISE": {
+        "before": 178,
+        "after": 178
+      },
+      "ZFATLOSSPROGRAM": {
+        "before": 1,
+        "after": 1
+      },
+      "ZHYDRATIONENTRY": {
+        "before": 0,
+        "after": 0
+      },
+      "ZJUMPROPEENTRY": {
+        "before": 2,
+        "after": 2
+      },
+      "ZMEALENTRY": {
+        "before": 33,
+        "after": 33
+      },
+      "ZNUTRITIONTARGET": {
+        "before": 1,
+        "after": 1
+      },
+      "ZPLANNEDMEAL": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMDAILYLOG": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMHEALTHRECORD": {
+        "before": 3,
+        "after": 3
+      },
+      "ZPROGRAMTARGETREVISION": {
+        "before": 1,
+        "after": 1
+      },
+      "ZPROGRAMWEEKLYREVIEW": {
+        "before": 0,
+        "after": 0
+      },
+      "ZPROGRAMWORKOUTLINK": {
+        "before": 21,
+        "after": 21
+      },
+      "ZRECIPEVERSION": {
+        "before": 18,
+        "after": 18
+      },
+      "ZSCHEDULEDWORKOUT": {
+        "before": 53,
+        "after": 53
+      },
+      "ZSEDENTARYSESSION": {
+        "before": 0,
+        "after": 0
+      },
+      "ZSESSIONEXERCISE": {
+        "before": 304,
+        "after": 304
+      },
+      "ZSETLOG": {
+        "before": 1209,
+        "after": 1209
+      },
+      "ZTEMPLATEEXERCISE": {
+        "before": 201,
+        "after": 201
+      },
+      "ZTRAININGCOACHRECORD": {
+        "before": 0,
+        "after": 0
+      },
+      "ZTRAININGPREFERENCEREVISION": {
+        "before": 5,
+        "after": 5
+      },
+      "ZTRAININGPROGRAMREVISION": {
+        "before": 5,
+        "after": 5
+      },
+      "ZWORKOUTSESSION": {
+        "before": 49,
+        "after": 49
+      },
+      "ZWORKOUTTEMPLATE": {
+        "before": 40,
+        "after": 40
+      }
+    },
+    "original_photo_external_file_count": 0,
+    "photo_scope_note": "安装前活动备份中无MealPhotos或_EXTERNAL_DATA原图文件；不能据此声称已验证真实拍照保存链路。"
+  },
+  "backup": "artifacts/stage-validation/20261018-sprint-phone-preview/device-data/pre-install",
+  "evidence": {
+    "unified_gate_summary": "outputs/stage-validation/20261018-sprint-phone-preview/summary.md",
+    "source_snapshot": "artifacts/stage-validation/20261018-sprint-phone-preview/source-snapshot.json",
+    "conservation": "artifacts/stage-validation/20261018-sprint-phone-preview/device-audit/original-fields-conservation.json",
+    "installation": "artifacts/stage-validation/20261018-sprint-phone-preview/device-install.json",
+    "launch": "artifacts/stage-validation/20261018-sprint-phone-preview/device-launch.json",
+    "version": "artifacts/stage-validation/20261018-sprint-phone-preview/device-app-readback.json",
+    "running_process": "artifacts/stage-validation/20261018-sprint-phone-preview/final-processes.json"
+  },
+  "remaining": [
+    "本人手机实际体验与接受",
+    "完整阶段non-device和真机自动化仍独立未执行；本次手机体验交付不标阶段GO"
+  ],
+  "scope_note": "本人明确要求先覆盖安装体验。D07开关0是本轮未运行完整真机自动化，不表示永久拒绝或测试已通过。未提交/tag/发布，未修改模型/服务/同步配置。"
+}

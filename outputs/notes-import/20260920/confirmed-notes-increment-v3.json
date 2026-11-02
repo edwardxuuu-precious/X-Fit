@@ -1,0 +1,27 @@
+{
+  "version": 3,
+  "packageID": "notes-20260920-confirmed-v3",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [],
+  "bodyMeasurements": [
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609140001","recordedAt":"2026-09-14 09:07","weightJin":174.1,"notes":"Notes 原始体重 174.1 斤；本人确认同步；斤÷2=87.05 kg。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609150001","recordedAt":"2026-09-15 07:39","weightJin":173.5,"notes":"Notes 原始体重 173.5 斤；本人确认同步；斤÷2=86.75 kg。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609160001","recordedAt":"2026-09-16 07:50","weightJin":173.1,"notes":"Notes 原始体重 173.1 斤；本人确认同步；07:50 与 07:52 两次测量分别保留。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609160002","recordedAt":"2026-09-16 07:52","weightJin":173.1,"notes":"Notes 原始体重 173.1 斤；本人确认同步；07:50 与 07:52 两次测量分别保留。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609170001","recordedAt":"2026-09-17 07:42","weightJin":175.3,"notes":"Notes 原始体重 175.3 斤；本人确认同步；斤÷2=87.65 kg。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609180001","recordedAt":"2026-09-18 06:35","weightJin":172.7,"notes":"Notes 原始体重 172.7 斤；本人确认同步；斤÷2=86.35 kg。"},
+    {"id":"A4A86E8D-FFF4-43AA-8650-202609190001","recordedAt":"2026-09-19 08:10","weightJin":174.6,"notes":"Notes 原始体重 174.6 斤；本人确认同步；斤÷2=87.30 kg。"}
+  ],
+  "meals": [
+    {"id":"8CF2A37B-23E6-4D19-B455-202609140001","date":"2026-09-14","mealType":"breakfast","name":"魔爪 白色 无糖版\n燃补水\n肉酱意粉 小半碗\n香蕉牛奶 一碗"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609140002","date":"2026-09-14","mealType":"lunch","name":"番茄肉酱米饭"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609140003","date":"2026-09-14","mealType":"dinner","name":"山姆牛肉卷 半个"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609140004","date":"2026-09-14","mealType":"snack","name":"玉米一根"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609150001","date":"2026-09-15","mealType":"breakfast","name":"黑咖啡\n猪柳蛋汉堡一个\n1/4个牛肉卷"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609150002","date":"2026-09-15","mealType":"lunch","name":"自制 洋葱肥牛饭"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609150003","date":"2026-09-15","mealType":"dinner","name":"聚会用餐算一千卡","calories":1000,"estimationSource":"本人估算（Notes）"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609160001","date":"2026-09-16","mealType":"breakfast","name":"在家吃的 鸡蛋米粉 也吃多了 算四百卡","calories":400,"estimationSource":"本人估算（Notes）"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609160002","date":"2026-09-16","mealType":"lunch","name":"在家吃 烧味吃多了算八百卡","calories":800,"estimationSource":"本人估算（Notes）"},
+    {"id":"8CF2A37B-23E6-4D19-B455-202609160003","date":"2026-09-16","mealType":"dinner","name":"广西菜 味精重 算一千卡","calories":1000,"estimationSource":"本人估算（Notes）"}
+  ]
+}

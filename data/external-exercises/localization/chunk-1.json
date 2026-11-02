@@ -1,0 +1,2212 @@
+[
+  {
+    "sourceID": "0001",
+    "nameZH": "3/4 程仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0002",
+    "nameZH": "45° 侧屈（待核对）",
+    "reviewNote": "原名含 45°，步骤仅说明站姿侧屈，未说明 45° 的倾角或支撑方式。"
+  },
+  {
+    "sourceID": "0003",
+    "nameZH": "仰卧自行车卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1512",
+    "nameZH": "四点跪姿拉伸（squad）（待核对）",
+    "reviewNote": "原名 squad 疑有拼写问题；步骤同时要求单腿向后伸直及保持屈膝，无法确认具体拉伸姿势。"
+  },
+  {
+    "sourceID": "0006",
+    "nameZH": "仰卧交替触踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0007",
+    "nameZH": "交替高位下拉（待核对）",
+    "reviewNote": "原名要求交替，步骤描述双侧同时握把下拉，未说明交替方式。"
+  },
+  {
+    "sourceID": "1368",
+    "nameZH": "踝关节绕环",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3293",
+    "nameZH": "弓箭手引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3294",
+    "nameZH": "弓箭手俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2355",
+    "nameZH": "吊带悬垂屈膝举腿（待核对）",
+    "reviewNote": "原名 arm slingers 表示吊带支撑，步骤却描述双手悬挂单杠，支撑器材不一致。"
+  },
+  {
+    "sourceID": "2333",
+    "nameZH": "吊带悬垂直腿举腿（待核对）",
+    "reviewNote": "原名 arm slingers 表示吊带支撑，步骤却描述双手悬挂单杠，支撑器材不一致。"
+  },
+  {
+    "sourceID": "3214",
+    "nameZH": "展臂环绕触趾（男性示范版）（待核对）",
+    "reviewNote": "原名含 circular，步骤描述触趾并抬起对侧腿，未说明环绕轨迹。"
+  },
+  {
+    "sourceID": "3204",
+    "nameZH": "双臂上举全程仰卧起坐（男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0009",
+    "nameZH": "跪垫辅助双杠臂屈伸（胸部侧重）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0011",
+    "nameZH": "辅助悬垂举膝（待核对）",
+    "reviewNote": "原名含辅助，步骤未说明辅助人员、器械或支撑方式。"
+  },
+  {
+    "sourceID": "0010",
+    "nameZH": "辅助悬垂举膝下甩（待核对）",
+    "reviewNote": "原名含辅助下甩，步骤描述自己爆发下甩，未说明辅助者及阻力来源。"
+  },
+  {
+    "sourceID": "1708",
+    "nameZH": "辅助仰卧小腿拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1709",
+    "nameZH": "辅助仰卧臀肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1710",
+    "nameZH": "辅助仰卧臀肌及梨状肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0012",
+    "nameZH": "辅助仰卧举腿侧向下甩（待核对）",
+    "reviewNote": "原名含辅助及侧向下甩，步骤描述自行控制侧放双腿，未说明辅助或下甩方式。"
+  },
+  {
+    "sourceID": "0013",
+    "nameZH": "辅助仰卧举腿下甩（待核对）",
+    "reviewNote": "原名含辅助，步骤未说明辅助者，并同时描述缓慢下降及向下甩腿。"
+  },
+  {
+    "sourceID": "0014",
+    "nameZH": "辅助俄罗斯转体（待核对）",
+    "reviewNote": "原名含 assisted motion，步骤描述持药球俄罗斯转体，未说明辅助方式。"
+  },
+  {
+    "sourceID": "0015",
+    "nameZH": "辅助窄距对握引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0016",
+    "nameZH": "辅助俯卧腘绳肌练习（待核对）",
+    "reviewNote": "步骤要求脚踝固定、双腿向臀部抬起，同时保持膝盖伸直，无法确认膝屈曲或髋伸变式。"
+  },
+  {
+    "sourceID": "1713",
+    "nameZH": "辅助俯卧股四头肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1714",
+    "nameZH": "辅助俯卧股直肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0017",
+    "nameZH": "辅助引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1716",
+    "nameZH": "稳定球辅助坐姿胸大肌拉伸（待核对）",
+    "reviewNote": "步骤同时要求坐在稳定球上及双手持球，未交代球的数量或辅助支撑方式。"
+  },
+  {
+    "sourceID": "1712",
+    "nameZH": "辅助侧卧内收肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1758",
+    "nameZH": "辅助仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1431",
+    "nameZH": "站垫辅助反握引体向上（待核对）",
+    "reviewNote": "原名 chin-up 通常指反握，步骤明确写 overhand 正握，握法冲突。"
+  },
+  {
+    "sourceID": "1432",
+    "nameZH": "站垫辅助正握引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0018",
+    "nameZH": "毛巾辅助站姿臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0019",
+    "nameZH": "跪垫辅助双杠臂屈伸（三头肌侧重）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2364",
+    "nameZH": "跪垫辅助宽握双杠臂屈伸（胸部侧重）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3220",
+    "nameZH": "分腿跳（男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3672",
+    "nameZH": "前后踏步",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1314",
+    "nameZH": "健身球背伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3297",
+    "nameZH": "后水平支撑（待核对）",
+    "reviewNote": "原名为后水平，步骤未说明翻转及躯干朝向，无法仅凭抬腿至水平区分前后水平。"
+  },
+  {
+    "sourceID": "1405",
+    "nameZH": "背部及胸肌拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1473",
+    "nameZH": "向后跳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0020",
+    "nameZH": "平衡板练习",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0968",
+    "nameZH": "弹力带交替弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0969",
+    "nameZH": "弹力带交替 V 字两头起（待核对）",
+    "reviewNote": "原名交替 V 字两头起，步骤要求双腿交叉换位，未说明交替单腿还是双腿交叉变式。"
+  },
+  {
+    "sourceID": "0970",
+    "nameZH": "弹力带辅助引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0971",
+    "nameZH": "弹力带辅助健腹轮前滚（待核对）",
+    "reviewNote": "步骤让双手握弹力带把手，却同时要求滚动健腹轮，未说明弹力带与健腹轮的连接方式。"
+  },
+  {
+    "sourceID": "1254",
+    "nameZH": "弹力带卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0980",
+    "nameZH": "弹力带俯身髋伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0972",
+    "nameZH": "弹力带自行车卷腹（待核对）",
+    "reviewNote": "原名含弹力带，步骤未说明弹力带的佩戴、固定点或阻力方式。"
+  },
+  {
+    "sourceID": "0974",
+    "nameZH": "弹力带窄握下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0975",
+    "nameZH": "弹力带窄距俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0976",
+    "nameZH": "弹力带集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3117",
+    "nameZH": "弹力带固定背姿窄握下拉（待核对）",
+    "reviewNote": "原名 fixed back 的背部固定方式未在步骤说明，不能确认支撑式或仅保持直背。"
+  },
+  {
+    "sourceID": "3116",
+    "nameZH": "弹力带固定背姿反握下拉（待核对）",
+    "reviewNote": "原名 fixed back 的背部固定方式未在步骤说明，不能确认支撑式或仅保持直背。"
+  },
+  {
+    "sourceID": "0977",
+    "nameZH": "弹力带前侧平举（待核对）",
+    "reviewNote": "原名包含 front lateral，步骤仅描述向前抬臂，无法确认前平举或前侧向变式。"
+  },
+  {
+    "sourceID": "0978",
+    "nameZH": "弹力带前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1408",
+    "nameZH": "弹力带臀桥",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0979",
+    "nameZH": "弹力带水平帕洛夫推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0981",
+    "nameZH": "弹力带折刀式仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0983",
+    "nameZH": "弹力带跪姿单臂下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0985",
+    "nameZH": "弹力带跪姿转体卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0984",
+    "nameZH": "弹力带仰卧髋内旋（待核对）",
+    "reviewNote": "原名为髋内旋，步骤描述双脚并拢并将双膝向外转，动作方向冲突。"
+  },
+  {
+    "sourceID": "1002",
+    "nameZH": "弹力带仰卧直腿举腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0986",
+    "nameZH": "弹力带单臂过顶弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0987",
+    "nameZH": "弹力带单臂单腿分腿蹲（待核对）",
+    "reviewNote": "步骤同时要求一腿向前伸及将脚背放在身后凳上，且未说明单臂负重还是扶持。"
+  },
+  {
+    "sourceID": "0988",
+    "nameZH": "弹力带站姿单臂低位划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0989",
+    "nameZH": "弹力带单臂转体推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0990",
+    "nameZH": "弹力带坐姿单臂转体划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0991",
+    "nameZH": "弹力带胯下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0992",
+    "nameZH": "弹力带推举式仰卧起坐",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0993",
+    "nameZH": "弹力带反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0994",
+    "nameZH": "弹力带反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0996",
+    "nameZH": "弹力带坐姿髋内旋（待核对）",
+    "reviewNote": "原名为髋内旋，步骤描述双膝向外打开对抗弹力带，动作方向冲突。"
+  },
+  {
+    "sourceID": "1011",
+    "nameZH": "弹力带坐姿转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0997",
+    "nameZH": "弹力带肩推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1018",
+    "nameZH": "弹力带耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0998",
+    "nameZH": "弹力带侧向臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0999",
+    "nameZH": "弹力带单腿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1000",
+    "nameZH": "弹力带单腿反向提踵（待核对）",
+    "reviewNote": "原名为反向提踵，步骤描述抬起脚跟的常规提踵，未体现足尖上抬。"
+  },
+  {
+    "sourceID": "1001",
+    "nameZH": "弹力带单腿分腿蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1004",
+    "nameZH": "弹力带深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1003",
+    "nameZH": "弹力带深蹲划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1005",
+    "nameZH": "弹力带站姿卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1022",
+    "nameZH": "弹力带站姿后束划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1007",
+    "nameZH": "弹力带站姿转体卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1008",
+    "nameZH": "弹力带登阶",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1009",
+    "nameZH": "弹力带僵腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1023",
+    "nameZH": "弹力带直背僵腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1010",
+    "nameZH": "弹力带直腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1012",
+    "nameZH": "弹力带转体过顶推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1369",
+    "nameZH": "弹力带双腿提踵（带置双脚下，版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1013",
+    "nameZH": "弹力带反握下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1014",
+    "nameZH": "弹力带 V 字两头起",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1015",
+    "nameZH": "弹力带垂直帕洛夫推（待核对）",
+    "reviewNote": "原名为垂直帕洛夫推，步骤仅描述胸前水平前推，没有垂直上举。"
+  },
+  {
+    "sourceID": "1016",
+    "nameZH": "弹力带腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1017",
+    "nameZH": "弹力带 Y 字上举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0023",
+    "nameZH": "杠铃交替弯举（待核对）",
+    "reviewNote": "原名为杠铃交替弯举，步骤要求每只手各持一根杠铃，未说明具体器材及持握。"
+  },
+  {
+    "sourceID": "0024",
+    "nameZH": "杠铃凳式前蹲（待核对）",
+    "reviewNote": "原名含 bench，步骤没有凳子的用途或接触位置。"
+  },
+  {
+    "sourceID": "0025",
+    "nameZH": "杠铃卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0026",
+    "nameZH": "杠铃凳式深蹲（待核对）",
+    "reviewNote": "原名含 bench，步骤没有坐凳、触凳或凳高说明。"
+  },
+  {
+    "sourceID": "1316",
+    "nameZH": "杠铃屈臂上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0027",
+    "nameZH": "杠铃俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2407",
+    "nameZH": "杠铃弯举（臂弯举支撑器）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0028",
+    "nameZH": "杠铃翻举推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0029",
+    "nameZH": "杠铃举重握法前蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0030",
+    "nameZH": "杠铃窄握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0031",
+    "nameZH": "杠铃弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0032",
+    "nameZH": "杠铃硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0033",
+    "nameZH": "杠铃下斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0034",
+    "nameZH": "杠铃下斜屈臂上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0035",
+    "nameZH": "杠铃下斜窄握额前推伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1255",
+    "nameZH": "杠铃下斜上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0036",
+    "nameZH": "杠铃下斜宽握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0037",
+    "nameZH": "杠铃下斜宽握上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0038",
+    "nameZH": "杠铃拖曳弯举（待核对）",
+    "reviewNote": "原名为拖曳弯举，步骤要求上臂固定，未说明肘部后移及沿身体上拖的轨迹。"
+  },
+  {
+    "sourceID": "1370",
+    "nameZH": "杠铃地面提踵（待核对）",
+    "reviewNote": "步骤要求脚掌踩在地面杠铃边缘提踵，未说明杠铃是负重还是垫高支撑。"
+  },
+  {
+    "sourceID": "0039",
+    "nameZH": "杠铃胸前深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0041",
+    "nameZH": "杠铃前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0040",
+    "nameZH": "杠铃前平举接上拉（待核对）",
+    "reviewNote": "步骤先描述站姿前平举，再直接要求将杠铃降到脑后，未说明两段动作之间的姿势转换。"
+  },
+  {
+    "sourceID": "0042",
+    "nameZH": "杠铃前蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0043",
+    "nameZH": "杠铃全蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1461",
+    "nameZH": "杠铃全蹲（背面视角版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1462",
+    "nameZH": "杠铃全蹲（侧面视角版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1545",
+    "nameZH": "杠铃泽奇全蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1409",
+    "nameZH": "杠铃臀桥",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3562",
+    "nameZH": "杠铃双腿置凳臀桥（男性示范版）（待核对）",
+    "reviewNote": "原名双腿放在凳上，步骤却描述上背靠凳且双脚落地，支撑位置冲突。"
+  },
+  {
+    "sourceID": "0044",
+    "nameZH": "杠铃早安式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0045",
+    "nameZH": "杠铃断头台卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0046",
+    "nameZH": "杠铃哈克深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1436",
+    "nameZH": "杠铃高杠深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0047",
+    "nameZH": "杠铃上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1719",
+    "nameZH": "杠铃上斜窄握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0048",
+    "nameZH": "杠铃上斜反握推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0049",
+    "nameZH": "杠铃上斜凳划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0050",
+    "nameZH": "杠铃上斜肩上举（待核对）",
+    "reviewNote": "原名 shoulder raise 为肩上举，步骤实际描述上斜坐姿过顶推举，运动类型不一致。"
+  },
+  {
+    "sourceID": "0051",
+    "nameZH": "杠铃杰斐逊深蹲（待核对）",
+    "reviewNote": "原名 Jefferson 深蹲的跨杠方式未在步骤体现，步骤描述胸前持杠并前后换脚。"
+  },
+  {
+    "sourceID": "0052",
+    "nameZH": "杠铃 JM 卧推（待核对）",
+    "reviewNote": "原名为 JM 卧推，步骤仅描述普通卧推，未说明 JM 变式的肘部及杠铃轨迹。"
+  },
+  {
+    "sourceID": "0053",
+    "nameZH": "杠铃深蹲跳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1410",
+    "nameZH": "杠铃侧弓步",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1435",
+    "nameZH": "杠铃低杠深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0054",
+    "nameZH": "杠铃弓步蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1720",
+    "nameZH": "杠铃仰卧脑后臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0055",
+    "nameZH": "杠铃仰卧窄握推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0056",
+    "nameZH": "杠铃仰卧窄握臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0057",
+    "nameZH": "杠铃仰卧臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0058",
+    "nameZH": "杠铃仰卧髋上举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0059",
+    "nameZH": "杠铃卧姿牧师凳弯举（待核对）",
+    "reviewNote": "原名为卧姿牧师凳弯举，步骤明确要求坐在牧师凳上。"
+  },
+  {
+    "sourceID": "0061",
+    "nameZH": "杠铃仰卧臂屈伸（肱三头肌）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0060",
+    "nameZH": "杠铃仰卧碎颅者臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0063",
+    "nameZH": "杠铃窄站距深蹲（待核对）",
+    "reviewNote": "原名为窄站距深蹲，步骤却要求双脚与肩同宽。"
+  },
+  {
+    "sourceID": "0064",
+    "nameZH": "杠铃单臂俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0065",
+    "nameZH": "杠铃单臂地板卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0066",
+    "nameZH": "杠铃单臂体侧硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0067",
+    "nameZH": "杠铃单臂抓举（待核对）",
+    "reviewNote": "原名为单臂抓举，起始步骤却要求双手以宽于肩的握距持杠。"
+  },
+  {
+    "sourceID": "0068",
+    "nameZH": "杠铃单腿深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0069",
+    "nameZH": "杠铃过顶深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1411",
+    "nameZH": "杠铃凳上正握腕伸展（待核对）",
+    "reviewNote": "原名要求凳上前臂支撑，步骤却将前臂放在大腿上。"
+  },
+  {
+    "sourceID": "1412",
+    "nameZH": "杠铃凳上反握腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3017",
+    "nameZH": "杠铃潘德雷划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1751",
+    "nameZH": "杠铃限位架推举（pin press）（待核对）",
+    "reviewNote": "原名为限位架推举，步骤写站在杠下并将杠降至胸部，未明确卧姿或肩推及限位高度。"
+  },
+  {
+    "sourceID": "0070",
+    "nameZH": "杠铃牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0071",
+    "nameZH": "杠铃推举式仰卧起坐（待核对）",
+    "reviewNote": "原名含推举，步骤仅将杠铃放在胸部做起坐，没有推举动作。"
+  },
+  {
+    "sourceID": "0072",
+    "nameZH": "杠铃上斜俯卧弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0073",
+    "nameZH": "杠铃上拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0022",
+    "nameZH": "杠铃上拉接推举（待核对）",
+    "reviewNote": "原名为上拉接推举，步骤只描述直臂上拉返回，未说明独立推举阶段。"
+  },
+  {
+    "sourceID": "0074",
+    "nameZH": "杠铃架上硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0075",
+    "nameZH": "杠铃后束平举（待核对）",
+    "reviewNote": "步骤要求握住杠铃将双臂伸直向两侧平举，未说明长杠如何实现该轨迹。"
+  },
+  {
+    "sourceID": "0076",
+    "nameZH": "杠铃后束划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0078",
+    "nameZH": "杠铃后撤弓步蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0077",
+    "nameZH": "杠铃后撤弓步蹲（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0079",
+    "nameZH": "杠铃反向腕弯举（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2187",
+    "nameZH": "杠铃反握窄握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0080",
+    "nameZH": "杠铃反向弯举（正握）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0118",
+    "nameZH": "杠铃反握俯身划船（待核对）",
+    "reviewNote": "原名为反握划船，步骤却明确写 overhand、掌心向下的正握。"
+  },
+  {
+    "sourceID": "1256",
+    "nameZH": "杠铃反握下斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1257",
+    "nameZH": "杠铃反握上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1317",
+    "nameZH": "杠铃反握上斜凳划船（待核对）",
+    "reviewNote": "步骤将 reverse grip 与 palms facing down 并列，反握名称与正握掌心方向冲突。"
+  },
+  {
+    "sourceID": "1721",
+    "nameZH": "杠铃反握碎颅者臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0081",
+    "nameZH": "杠铃反向牧师凳弯举（正握）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0082",
+    "nameZH": "杠铃反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0084",
+    "nameZH": "杠铃健腹前滚",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0083",
+    "nameZH": "杠铃凳上健腹前滚",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0085",
+    "nameZH": "杠铃罗马尼亚硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0086",
+    "nameZH": "杠铃坐姿颈后推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0087",
+    "nameZH": "杠铃坐姿布拉德福德洛奇推举（待核对）",
+    "reviewNote": "原名 Bradford Rocky，步骤仅描述普通坐姿过顶推举，没有颈前颈后交替轨迹。"
+  },
+  {
+    "sourceID": "0088",
+    "nameZH": "杠铃坐姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1371",
+    "nameZH": "杠铃坐姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1718",
+    "nameZH": "杠铃坐姿窄握颈后臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0089",
+    "nameZH": "杠铃坐姿窄握集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0090",
+    "nameZH": "杠铃坐姿早安式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0091",
+    "nameZH": "杠铃坐姿过顶推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0092",
+    "nameZH": "杠铃坐姿过顶臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0094",
+    "nameZH": "杠铃坐姿转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0095",
+    "nameZH": "杠铃耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0096",
+    "nameZH": "杠铃侧屈（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0098",
+    "nameZH": "杠铃侧分腿蹲（待核对）",
+    "reviewNote": "原名为侧分腿蹲，步骤仅描述宽站距双腿同时下蹲，没有单侧转移。"
+  },
+  {
+    "sourceID": "0097",
+    "nameZH": "杠铃侧分腿蹲（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1756",
+    "nameZH": "杠铃单腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0099",
+    "nameZH": "杠铃单腿分腿蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2799",
+    "nameZH": "杠铃坐姿交替举腿",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2800",
+    "nameZH": "杠铃坐姿交替举腿（女性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0100",
+    "nameZH": "杠铃滑雪式摆动（skier）（待核对）",
+    "reviewNote": "原名 skier，步骤描述将杠铃提向肩并小跳，无法确认滑雪式摆动的具体轨迹。"
+  },
+  {
+    "sourceID": "0101",
+    "nameZH": "杠铃快速深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2810",
+    "nameZH": "杠铃分腿蹲（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0102",
+    "nameZH": "杠铃跪姿深蹲（待核对）",
+    "reviewNote": "原名跪姿深蹲，步骤却使用站姿大腿平行地面及脚跟发力起身描述，姿势不一致。"
+  },
+  {
+    "sourceID": "2798",
+    "nameZH": "杠铃深蹲跳接后撤弓步蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0103",
+    "nameZH": "杠铃站姿健腹前滚",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0104",
+    "nameZH": "杠铃站姿背后腕弯举（待核对）",
+    "reviewNote": "原名含背后，步骤未说明手臂位于体后，且将杠铃置于手背的描述不清。"
+  },
+  {
+    "sourceID": "0105",
+    "nameZH": "杠铃站姿布拉德福德推举（待核对）",
+    "reviewNote": "原名 Bradford 推举，步骤仅描述普通站姿过顶推举，没有颈前颈后交替。"
+  },
+  {
+    "sourceID": "1372",
+    "nameZH": "杠铃站姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0106",
+    "nameZH": "杠铃站姿窄握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1456",
+    "nameZH": "杠铃站姿窄握肩上推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2414",
+    "nameZH": "杠铃站姿集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0107",
+    "nameZH": "杠铃站姿前举过顶（待核对）",
+    "reviewNote": "原名要求前举过顶，步骤只抬至略高于肩，终点高度冲突。"
+  },
+  {
+    "sourceID": "0108",
+    "nameZH": "杠铃站姿腿部提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0109",
+    "nameZH": "杠铃站姿过顶臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0110",
+    "nameZH": "杠铃站姿反向弯举（正握）（待核对）",
+    "reviewNote": "原名 reverse grip curl 通常表示正握反向弯举，步骤却明确要求 underhand、掌心向上。"
+  },
+  {
+    "sourceID": "0111",
+    "nameZH": "杠铃站姿摇摆提踵（待核对）",
+    "reviewNote": "原名含 rocking 摇摆，步骤仅描述抬起与放下脚跟，未说明摇摆方式。"
+  },
+  {
+    "sourceID": "0112",
+    "nameZH": "杠铃站姿转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1629",
+    "nameZH": "杠铃站姿宽握肱二头肌弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1457",
+    "nameZH": "杠铃站姿宽握肩上推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0113",
+    "nameZH": "杠铃站姿宽握弯举（待核对）",
+    "reviewNote": "步骤同时使用 overhand 与掌心远离身体描述，宽握弯举的握法方向需要核对。"
+  },
+  {
+    "sourceID": "0114",
+    "nameZH": "杠铃登阶",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0115",
+    "nameZH": "杠铃僵腿早安式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0116",
+    "nameZH": "杠铃直腿硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0117",
+    "nameZH": "杠铃相扑硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3305",
+    "nameZH": "杠铃深蹲推举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0120",
+    "nameZH": "杠铃直立划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0119",
+    "nameZH": "杠铃直立划船（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0121",
+    "nameZH": "杠铃直立划船（版本 3）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0122",
+    "nameZH": "杠铃宽握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1258",
+    "nameZH": "杠铃宽握反握卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0124",
+    "nameZH": "杠铃宽站距深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0123",
+    "nameZH": "杠铃宽握直立划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0126",
+    "nameZH": "杠铃腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0125",
+    "nameZH": "杠铃腕弯举（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0127",
+    "nameZH": "杠铃泽奇深蹲",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3212",
+    "nameZH": "基础俯身触趾（男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0128",
+    "nameZH": "战绳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3360",
+    "nameZH": "熊爬",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1259",
+    "nameZH": "脑后抱头胸部拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0129",
+    "nameZH": "屈膝凳上臂屈伸（待核对）",
+    "reviewNote": "原名为屈膝版本，步骤却要求双腿伸直、脚跟落地。"
+  },
+  {
+    "sourceID": "1399",
+    "nameZH": "地面凳上臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0130",
+    "nameZH": "凳上髋伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3019",
+    "nameZH": "凳上引体向上（待核对）",
+    "reviewNote": "原名含 bench，步骤仅说明胸高横杆及下巴过杆，未交代凳子支撑和身体角度。"
+  },
+  {
+    "sourceID": "3639",
+    "nameZH": "仰卧屈膝转体（男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1770",
+    "nameZH": "腿部集中弯举（biceps leg）（待核对）",
+    "reviewNote": "原名含 biceps leg，器械为自重，但步骤要求持哑铃做腿内侧支撑集中弯举，阻力来源不一致。"
+  },
+  {
+    "sourceID": "0139",
+    "nameZH": "窄握肱二头肌引体向上（反握）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0140",
+    "nameZH": "肱二头肌引体向上（正握）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0137",
+    "nameZH": "自重撑体（body-up）（待核对）",
+    "reviewNote": "原名 body-up 的具体动作不明确，步骤描述双手撑凳及屈伸肘，可能与凳上臂屈伸混淆。"
+  },
+  {
+    "sourceID": "3543",
+    "nameZH": "自重落地跳深蹲（待核对）",
+    "reviewNote": "原名含 drop，步骤只描述原地深蹲起跳及落地，未交代高处下落阶段。"
+  },
+  {
+    "sourceID": "3544",
+    "nameZH": "自重上斜侧平板支撑（待核对）",
+    "reviewNote": "原名含 incline 上斜，步骤却描述前臂落地的普通侧平板，没有上斜支撑。"
+  },
+  {
+    "sourceID": "1771",
+    "nameZH": "自重跪姿臂屈伸（待核对）",
+    "reviewNote": "原名为跪姿臂屈伸，步骤随后要求双腿伸直、脚尖支撑并按俯卧撑方式屈肘。"
+  },
+  {
+    "sourceID": "1769",
+    "nameZH": "自重侧卧弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3168",
+    "nameZH": "自重蹲姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3167",
+    "nameZH": "毛巾自重蹲姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1373",
+    "nameZH": "自重站姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3156",
+    "nameZH": "自重站姿窄握单臂划船（待核对）",
+    "reviewNote": "原名及器械为自重划船，步骤却要求单手持哑铃，阻力来源冲突。"
+  },
+  {
+    "sourceID": "3158",
+    "nameZH": "自重站姿窄握划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3162",
+    "nameZH": "自重站姿单臂划船（待核对）",
+    "reviewNote": "原名及器械为自重划船，步骤却要求单手持哑铃，阻力来源冲突。"
+  },
+  {
+    "sourceID": "3161",
+    "nameZH": "毛巾自重站姿单臂划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3166",
+    "nameZH": "自重站姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3165",
+    "nameZH": "毛巾自重站姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0138",
+    "nameZH": "仰卧屈膝举臀",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1374",
+    "nameZH": "跳下箱单腿稳定（待核对）",
+    "reviewNote": "原名为跳下箱后单腿稳定，步骤却要求向上跳到箱上并单腿站稳。"
+  },
+  {
+    "sourceID": "2466",
+    "nameZH": "支撑交叉登山跑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1160",
+    "nameZH": "波比跳",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0870",
+    "nameZH": "仰卧举臀（butt-ups）（待核对）",
+    "reviewNote": "原名 butt-ups 通常包含举臀，步骤只描述屈膝收腿，未说明骨盆离地。"
+  },
+  {
+    "sourceID": "1494",
+    "nameZH": "瑜伽蝴蝶式",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0148",
+    "nameZH": "绳索交替肩推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0149",
+    "nameZH": "绳索交替臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3235",
+    "nameZH": "绳索辅助反向腿弯举（待核对）",
+    "reviewNote": "原名为辅助反向腿弯举，步骤却描述俯卧凳上拉动踝部绳索做常规腿弯举，未说明辅助及反向方式。"
+  },
+  {
+    "sourceID": "0150",
+    "nameZH": "绳索直杆高位下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0151",
+    "nameZH": "绳索卧推（待核对）",
+    "reviewNote": "原名为绳索卧推，步骤明确要求站姿向前推胸，没有卧凳。"
+  },
+  {
+    "sourceID": "1630",
+    "nameZH": "绳索窄握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1631",
+    "nameZH": "绳索集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0152",
+    "nameZH": "绳索膝上集中臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0153",
+    "nameZH": "绳索交叉高位下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0154",
+    "nameZH": "绳索交叉反向飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0155",
+    "nameZH": "绳索交叉夹胸变式（待核对）",
+    "reviewNote": "原名只写 variation，步骤未提供能区别于普通交叉夹胸的变式特征。"
+  },
+  {
+    "sourceID": "0868",
+    "nameZH": "绳索弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0157",
+    "nameZH": "绳索硬拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0158",
+    "nameZH": "绳索下斜飞鸟（待核对）",
+    "reviewNote": "原名为下斜飞鸟，步骤描述站姿并未交代下斜凳或向下夹胸的轨迹。"
+  },
+  {
+    "sourceID": "1260",
+    "nameZH": "绳索单臂下斜推胸（待核对）",
+    "reviewNote": "步骤同时要求站姿及背靠下斜凳，未明确实际身体角度与支撑方式。"
+  },
+  {
+    "sourceID": "1261",
+    "nameZH": "绳索下斜推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0159",
+    "nameZH": "绳索下斜坐姿宽握划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1632",
+    "nameZH": "绳索拖曳弯举（待核对）",
+    "reviewNote": "原名为拖曳弯举，步骤要求上臂固定，未说明肘部后移及拖曳轨迹。"
+  },
+  {
+    "sourceID": "0160",
+    "nameZH": "绳索地面坐姿宽握划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0161",
+    "nameZH": "绳索向前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0162",
+    "nameZH": "绳索前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0164",
+    "nameZH": "绳索肩前平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0165",
+    "nameZH": "绳索锤式弯举（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1722",
+    "nameZH": "绳索高位过顶臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0167",
+    "nameZH": "绳索跪姿高位划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0168",
+    "nameZH": "绳索髋内收",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0169",
+    "nameZH": "绳索上斜卧推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1318",
+    "nameZH": "绳索上斜凳划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0171",
+    "nameZH": "绳索上斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0170",
+    "nameZH": "稳定球绳索上斜飞鸟（待核对）",
+    "reviewNote": "步骤称稳定球设为上斜，却描述坐球后前倾，未明确上斜躯干支撑姿势。"
+  },
+  {
+    "sourceID": "0172",
+    "nameZH": "绳索上斜下压（待核对）",
+    "reviewNote": "原名含 incline，步骤描述站姿前倾下压，未说明上斜凳或上斜支撑方式。"
+  },
+  {
+    "sourceID": "0173",
+    "nameZH": "绳索上斜臂屈伸（待核对）",
+    "reviewNote": "原名含 incline，步骤描述站姿前倾过顶臂屈伸，未说明上斜凳或上斜支撑。"
+  },
+  {
+    "sourceID": "0174",
+    "nameZH": "绳索柔道式翻转",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0860",
+    "nameZH": "绳索俯身臂后伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0175",
+    "nameZH": "绳索跪姿卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3697",
+    "nameZH": "绳索跪姿后束划船（绳把，男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0176",
+    "nameZH": "绳索跪姿臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2330",
+    "nameZH": "绳索全程高位下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0177",
+    "nameZH": "绳索高位下拉（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2616",
+    "nameZH": "绳索高位下拉（V 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0178",
+    "nameZH": "绳索侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0179",
+    "nameZH": "绳索低位飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0180",
+    "nameZH": "绳索低位坐姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1634",
+    "nameZH": "绳索仰卧弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0182",
+    "nameZH": "绳索仰卧窄握弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0184",
+    "nameZH": "绳索仰卧伸臂上拉（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0185",
+    "nameZH": "绳索仰卧飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0186",
+    "nameZH": "绳索仰卧臂屈伸（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0188",
+    "nameZH": "绳索中位飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0189",
+    "nameZH": "绳索单臂俯身划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0190",
+    "nameZH": "绳索单臂弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1262",
+    "nameZH": "绳索单臂下斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1263",
+    "nameZH": "健身球绳索单臂飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1264",
+    "nameZH": "健身球绳索单臂上斜飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1265",
+    "nameZH": "绳索单臂上斜推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1266",
+    "nameZH": "健身球绳索单臂上斜推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0191",
+    "nameZH": "绳索单臂俯身侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0192",
+    "nameZH": "绳索单臂侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1633",
+    "nameZH": "绳索单臂牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1267",
+    "nameZH": "健身球绳索单臂推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "3563",
+    "nameZH": "绳索单臂下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1635",
+    "nameZH": "绳索单臂反向牧师凳弯举（正握）（待核对）",
+    "reviewNote": "原名为反握牧师凳弯举，步骤却要求 underhand，握法与反向弯举变式不一致。"
+  },
+  {
+    "sourceID": "0193",
+    "nameZH": "绳索跪姿单臂直背高位划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1723",
+    "nameZH": "绳索单臂肱三头肌下压",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1636",
+    "nameZH": "绳索过顶弯举（待核对）",
+    "reviewNote": "原名为过顶弯举，步骤要求肘贴身体两侧又将杆卷向额头，未明确上臂位置。"
+  },
+  {
+    "sourceID": "1637",
+    "nameZH": "健身球绳索过顶弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0194",
+    "nameZH": "绳索过顶臂屈伸（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1319",
+    "nameZH": "绳索旋掌划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0195",
+    "nameZH": "绳索牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1268",
+    "nameZH": "健身球绳索推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0196",
+    "nameZH": "绳索胯下拉（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0198",
+    "nameZH": "绳索高位下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0197",
+    "nameZH": "绳索高位下拉（Pro Lat 杆）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1638",
+    "nameZH": "绳索下拉式弯举（待核对）",
+    "reviewNote": "原名为弯举，步骤却要求上臂固定并将杆下拉到大腿，肘部运动方向不清。"
+  },
+  {
+    "sourceID": "0201",
+    "nameZH": "绳索肱三头肌下压",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0199",
+    "nameZH": "绳索直臂下压（版本 2）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0200",
+    "nameZH": "绳索肱三头肌下压（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0202",
+    "nameZH": "绳索后束划船（D 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0203",
+    "nameZH": "绳索后束划船（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0204",
+    "nameZH": "绳索后驱拉（rear drive）（待核对）",
+    "reviewNote": "原名 rear drive 未给出明确标准动作；步骤要求肘固定、将把手拉向身体并收缩三头肌，轨迹不清。"
+  },
+  {
+    "sourceID": "0205",
+    "nameZH": "绳索颈后下拉（待核对）",
+    "reviewNote": "原名为颈后下拉，步骤却要求拉至胸前。"
+  },
+  {
+    "sourceID": "0873",
+    "nameZH": "绳索反向卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0206",
+    "nameZH": "绳索反向弯举（正握）（待核对）",
+    "reviewNote": "原名为反向弯举，步骤却明确要求 underhand，掌心向上的常规弯举握法。"
+  },
+  {
+    "sourceID": "2406",
+    "nameZH": "绳索反握肱三头肌下压（SZ 杆及臂弯举支撑器）（待核对）",
+    "reviewNote": "原名要求 SZ 杆及臂弯举支撑器，步骤却写直杆且未说明支撑器的使用。"
+  },
+  {
+    "sourceID": "1413",
+    "nameZH": "绳索单臂反向弯举（正握）（待核对）",
+    "reviewNote": "步骤同时写 underhand 与掌心向下，握法描述自相矛盾。"
+  },
+  {
+    "sourceID": "0209",
+    "nameZH": "绳索反向牧师凳弯举（正握）（待核对）",
+    "reviewNote": "步骤同时写掌心向下与 underhand，反握弯举的握法需要核对。"
+  },
+  {
+    "sourceID": "0210",
+    "nameZH": "绳索反向腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0207",
+    "nameZH": "绳索反握下压",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0208",
+    "nameZH": "绳索反握直背坐姿高位划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1320",
+    "nameZH": "绳索绳把交叉坐姿划船（待核对）",
+    "reviewNote": "原名含 crossover，步骤未说明双绳交叉的握持或运行方式。"
+  },
+  {
+    "sourceID": "1321",
+    "nameZH": "绳索绳把高座划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1322",
+    "nameZH": "绳索绳把伸臂上斜凳划船（待核对）",
+    "reviewNote": "步骤同时要求伸直手臂及拉向上胸，伸臂与划船阶段的先后关系不明确。"
+  },
+  {
+    "sourceID": "1639",
+    "nameZH": "绳索绳把锤式牧师凳弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1724",
+    "nameZH": "绳索绳把高位过顶臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1725",
+    "nameZH": "绳索绳把上斜臂屈伸（待核对）",
+    "reviewNote": "原名含上斜，步骤提到调斜凳却要求站姿，未说明是否使用斜凳支撑。"
+  },
+  {
+    "sourceID": "1726",
+    "nameZH": "绳索绳把地板仰卧臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1640",
+    "nameZH": "绳索绳把单臂锤式牧师凳弯举（待核对）",
+    "reviewNote": "原名为锤式弯举，步骤却明确要求 underhand、掌心向上，没有对握。"
+  },
+  {
+    "sourceID": "1323",
+    "nameZH": "绳索绳把坐姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0211",
+    "nameZH": "稳定球绳索俄罗斯转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2144",
+    "nameZH": "绳索坐姿推胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0212",
+    "nameZH": "绳索坐姿卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1641",
+    "nameZH": "绳索坐姿弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0213",
+    "nameZH": "绳索坐姿高位划船（V 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0214",
+    "nameZH": "绳索坐姿单臂交替划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1642",
+    "nameZH": "绳索坐姿单臂集中弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1643",
+    "nameZH": "绳索坐姿过顶弯举（待核对）",
+    "reviewNote": "原名为过顶弯举，步骤却要求肘贴身体两侧并向肩弯举，未体现过顶位置。"
+  },
+  {
+    "sourceID": "0215",
+    "nameZH": "绳索坐姿后侧平举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0861",
+    "nameZH": "绳索坐姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0216",
+    "nameZH": "绳索坐姿肩内旋（待核对）",
+    "reviewNote": "原名为肩内旋，步骤描述直臂向身体中线移动，未明确肱骨绕长轴内旋，可能与水平内收混淆。"
+  },
+  {
+    "sourceID": "2399",
+    "nameZH": "绳索坐姿转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0218",
+    "nameZH": "绳索坐姿宽握划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0219",
+    "nameZH": "绳索肩推",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0220",
+    "nameZH": "绳索耸肩",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0222",
+    "nameZH": "绳索侧屈",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0221",
+    "nameZH": "BOSU 球绳索侧屈卷腹（待核对）",
+    "reviewNote": "原名含 BOSU 球，步骤全程站地且未说明球的使用及支撑位置。"
+  },
+  {
+    "sourceID": "0223",
+    "nameZH": "绳索侧卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1717",
+    "nameZH": "绳索深蹲划船（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1644",
+    "nameZH": "绳索深蹲弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0224",
+    "nameZH": "绳索站姿背后腕弯举（待核对）",
+    "reviewNote": "原名含背后，步骤写面向器械及体前弯腕，未明确背后持握。"
+  },
+  {
+    "sourceID": "1375",
+    "nameZH": "绳索站姿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0225",
+    "nameZH": "绳索站姿交叉高位反向飞鸟（待核对）",
+    "reviewNote": "原名为反向飞鸟，步骤却要求把双手向身体前方拉，方向与反向飞鸟不一致。"
+  },
+  {
+    "sourceID": "0226",
+    "nameZH": "绳索站姿卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0874",
+    "nameZH": "绳索站姿卷腹（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0227",
+    "nameZH": "绳索站姿飞鸟",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0228",
+    "nameZH": "绳索站姿髋伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0229",
+    "nameZH": "绳索站姿内侧弯举（待核对）",
+    "reviewNote": "原名含 inner，步骤只有普通弯举，未说明内侧或跨体轨迹。"
+  },
+  {
+    "sourceID": "0230",
+    "nameZH": "绳索站姿斜向上提",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0231",
+    "nameZH": "绳索站姿单臂臂屈伸（待核对）",
+    "reviewNote": "步骤同时要求上臂水平向前、肘靠身体及把手降向脑后，起始肘位与伸展方向不一致。"
+  },
+  {
+    "sourceID": "1376",
+    "nameZH": "绳索站姿单腿提踵",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0232",
+    "nameZH": "绳索站姿下拉（绳把）（待核对）",
+    "reviewNote": "步骤写下拉到大腿并收缩二头肌，未说明是否保持直臂，无法确认屈肘或直臂下拉。"
+  },
+  {
+    "sourceID": "0233",
+    "nameZH": "绳索站姿后束划船（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1727",
+    "nameZH": "绳索站姿单臂反握过顶臂屈伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0234",
+    "nameZH": "绳索站姿划船（V 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0235",
+    "nameZH": "绳索站姿肩外旋",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0236",
+    "nameZH": "绳索站姿转体划船（V 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1269",
+    "nameZH": "绳索直立站姿交叉夹胸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0238",
+    "nameZH": "绳索直臂下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0237",
+    "nameZH": "绳索直臂下拉（绳把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0239",
+    "nameZH": "绳索直背坐姿划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0240",
+    "nameZH": "绳索仰卧反向飞鸟（待核对）",
+    "reviewNote": "原名 supine 表示仰卧，步骤却明确要求 face down 俯卧。"
+  },
+  {
+    "sourceID": "2464",
+    "nameZH": "绳索蒂博多皮划艇划船（待核对）",
+    "reviewNote": "原名 Thibaudeau kayak row，步骤只描述普通单臂坐姿划船，未说明皮划艇式轨迹。"
+  },
+  {
+    "sourceID": "0241",
+    "nameZH": "绳索肱三头肌下压（V 形把）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2405",
+    "nameZH": "绳索肱三头肌下压（V 形把及臂弯举支撑器）（待核对）",
+    "reviewNote": "原名要求臂弯举支撑器，步骤未说明支撑器的佩戴或接触位置。"
+  },
+  {
+    "sourceID": "0242",
+    "nameZH": "绳索收膝反向卷腹",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0243",
+    "nameZH": "绳索转体",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0862",
+    "nameZH": "绳索上下转体（待核对）",
+    "reviewNote": "原名含 up-down，步骤只描述水平左右转体，未说明上下斜向轨迹。"
+  },
+  {
+    "sourceID": "0244",
+    "nameZH": "绳索转体拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1645",
+    "nameZH": "绳索上斜凳双臂弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1728",
+    "nameZH": "绳索双臂俯身臂后伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0245",
+    "nameZH": "绳索反握下拉",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1270",
+    "nameZH": "绳索上胸交叉夹胸（待核对）",
+    "reviewNote": "原名强调上胸，步骤只描述胸高水平交叉夹胸，未明确向上的运行角度。"
+  },
+  {
+    "sourceID": "1324",
+    "nameZH": "绳索上部划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0246",
+    "nameZH": "绳索直立划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1325",
+    "nameZH": "绳索宽握颈后下拉（待核对）",
+    "reviewNote": "原名明确为宽握颈后下拉，步骤却要求拉至上胸。"
+  },
+  {
+    "sourceID": "0247",
+    "nameZH": "绳索腕弯举",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1407",
+    "nameZH": "扶墙推压式小腿拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1377",
+    "nameZH": "扶墙小腿拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1378",
+    "nameZH": "绳带辅助小腿拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0248",
+    "nameZH": "弧形杠俯卧划船",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2963",
+    "nameZH": "肘撑举腿架直腿举腿（船长椅）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1548",
+    "nameZH": "椅上直腿拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1271",
+    "nameZH": "胸部及肩前侧拉伸（待核对）",
+    "reviewNote": "名称为胸部及肩前侧拉伸，步骤同时要求肩胛后收和交叉双手向前推，拉伸姿势不清。"
+  },
+  {
+    "sourceID": "0251",
+    "nameZH": "双杠臂屈伸（胸部侧重）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1430",
+    "nameZH": "引体双杠架臂屈伸（胸部侧重）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "2462",
+    "nameZH": "直杠臂屈伸（胸部侧重）（待核对）",
+    "reviewNote": "原名为直杠臂屈伸，步骤却要求抓住双杠，器械形式冲突。"
+  },
+  {
+    "sourceID": "1272",
+    "nameZH": "健身球胸部拉伸（待核对）",
+    "reviewNote": "步骤同时要求坐在健身球上及双手持球，未交代球的数量或胸部支撑方式。"
+  },
+  {
+    "sourceID": "3216",
+    "nameZH": "拍胸俯卧撑（男性示范版）",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1326",
+    "nameZH": "反握引体向上",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0253",
+    "nameZH": "窄距对握引体向上（待核对）",
+    "reviewNote": "原名为窄距对握，步骤却写掌心朝向自己，对握及反握描述冲突。"
+  },
+  {
+    "sourceID": "0257",
+    "nameZH": "屈膝绕环拉伸",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "1273",
+    "nameZH": "击掌俯卧撑",
+    "reviewNote": ""
+  },
+  {
+    "sourceID": "0258",
+    "nameZH": "时钟俯卧撑（待核对）",
+    "reviewNote": "原名为时钟俯卧撑，步骤描述侧转并伸出一侧手臂，未说明沿时钟方向换位方式。"
+  },
+  {
+    "sourceID": "1327",
+    "nameZH": "窄握反握引体向上",
+    "reviewNote": ""
+  }
+]

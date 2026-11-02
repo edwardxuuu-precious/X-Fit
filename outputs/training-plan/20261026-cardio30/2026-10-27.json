@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "id": "972172e9-9df6-51aa-a43c-a739550c8822",
+  "localDay": "2026-10-27",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "title": "有氧恢复 · 跳绳① · 约30分钟",
+  "preferenceRevisionCode": "TP-20261021-06",
+  "confirmedAt": "2026-10-26T12:47:59+08:00",
+  "confirmationReference": "REQ-20261026-100249; 本人本轮明确要求纯有氧恢复约30分钟；原已确认10/12轮60/45和强度不变，热身/休息/缓和计入总时长。",
+  "guidance": "CARDIO-PREF-20261026-01；COACH-DEFAULT-20261026-02。纯有氧恢复整课约30分钟，包含5分钟热身、跳绳主段与轮间休息及结束缓和；不套用力量课6—8动作或60—90分钟。采用原普通稳定跳及既有强度上限，实际次数/时长留待本人填写；不适或落地失控按说明结束/替代。仅本周明确日期，不自动续排。",
+  "exercises": [
+    {
+      "catalogExerciseID": "0cf14bfa-29c7-4154-9bc4-74fb4ad3f1eb",
+      "catalogName": "跳绳",
+      "equipment": "跳绳",
+      "volumeUnit": "second",
+      "displayName": "跳绳间歇",
+      "loadGuidance": "计时单位为秒，每轮有效60秒；0负重表示计时项目，不是负重公斤数。",
+      "notes": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。",
+      "plannedSets": [
+        {
+          "id": "7c3f2d23-e2db-5712-bcc2-7ecba2fc66a4",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮1",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "47262b2d-a1d1-5dd2-a362-3cb65f9da5c7",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮2",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "3e6aef73-a9e1-5361-a696-f6816dc49bd4",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮3",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "495d100d-3a35-5f64-ac7d-466f65c546af",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮4",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "e1323649-3305-5d66-955f-133a386ecb50",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮5",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "9272806a-9312-5b9b-a752-39bdf327abce",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮6",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "0e54f6ba-bbc3-5559-9f7f-22a7626f48e7",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮7",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "de51b7ad-890d-5c59-a364-992847e6dcb5",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮8",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "68ecea45-68bf-5a78-8c72-aa82f5906607",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮9",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 45,
+            "restUpperSeconds": 45,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        },
+        {
+          "id": "97fdce6c-d86d-5ad1-9f19-267adfc99cfb",
+          "weight": 0,
+          "reps": 60,
+          "weightSide": "unknown",
+          "repsSide": "bilateral",
+          "actualDefaultPolicyRaw": "blank",
+          "prescription": {
+            "label": "跳绳轮10",
+            "repsLower": 60,
+            "repsUpper": 60,
+            "restLowerSeconds": 0,
+            "restUpperSeconds": 0,
+            "effortCue": "普通稳定跳绳10轮，每轮60秒、轮间45秒，最后一轮后无额外间歇；有效跳绳600秒，主段含休息1005秒。用力约RPE5—6/10，落地轻、节奏稳定。\n全程约30分钟：轻松热身5分钟＋上述原跳绳主段（含轮间休息）＋结束轻松步行/缓和5—8分钟。净跳绳仍为10分钟，不另加30分钟或追次数配额。\n周二控制次日残余疲劳，给周三后链留余地。足踝/膝部不适或落地失控时停止，改轻松步行/单车并记为调整，不强行凑时长。"
+          }
+        }
+      ],
+      "planPattern": "fixed"
+    }
+  ],
+  "sourceMarkdown": "# 本周有氧恢复约30分钟与长期编排标准\n\n- 本人本轮明确要求：以后力量6—8正式动作、轻重搭配、90分钟以内，结合实际训练调整；纯有氧恢复约30分钟。\n- 长期教练默认COACH-DEFAULT-20261026-02；力量约束SESSION-PREF-20261026-01不变；有氧CARDIO-PREF-20261026-01；方法METHOD-20261026-10；App偏好TP-20261021-06。\n- 今天Notes补录1场7动作31条及周三后链6动作21抗阻工作组、周五综合7动作19抗阻＋4高翻技术组已从本轮新鲜手机副本核对，保持原已确认R2。\n\n| 日期 | 原已确认跳绳主段（保持） | 热身 | 结束缓和 | 整课合计 |\n|---|---|---|---|---|\n| 10/27 周二 | 10轮，每轮60秒，轮间45秒；最后一轮不再加间歇，主段16分45秒，有效跳10分钟 | 5分钟 | 5—8分钟轻松步行/缓和 | 26分45秒—29分45秒，约30分钟 |\n| 10/31 周六 | 12轮，每轮60秒，轮间45秒；最后一轮不再加间歇，主段20分15秒，有效跳12分钟 | 5分钟 | 3—4分钟轻松缓和 | 28分15秒—29分15秒，约30分钟 |\n\n- 原普通稳定跳、落地控制、强度上限与停止/替代条件保持；周六原先8轮后检查腿部状态、再决定后4轮仍有效。约30分钟计入间歇，不另加30分钟净跳，不追次数配额。\n- 原通用“每课60—90分钟”等力量内容从这两个有氧日的说明中移除；日程只追加明确约30分钟的新版本，指定未开始旧来源保留。\n- 本周10/29、11/1继续恢复/休息，不新增训练；今天原四动作日程、所有旧实际、偏好和周版本保持。不改软件、全库动作资源或Notion，不自动排后续周。\n- 保存后同来源受控重复新增0，逐轮数字/休息/侧别/说明独立回读；25表原业务字段守恒，仅指定两条旧有氧日程状态/修订原因/更新时间允许改变。\n",
+  "sourceSHA256": "b66423183f132a9161d70accbbd137a00d649c36bd83e40c7c3af15f31a962c2",
+  "replacement": {
+    "scheduleID": "a2bd263d-1696-5125-9d56-f980a331ea3b",
+    "packetSHA256": "f0fb27cc673b0ce9de8e8154c72eccfe995d0ce721781bad5047d1892bbd494a"
+  }
+}

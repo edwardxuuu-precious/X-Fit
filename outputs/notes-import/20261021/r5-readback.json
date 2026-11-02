@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-21T10:57:29.791992+08:00",
+  "scheduleID": "705a3157-22f9-5d08-90b8-39c0e2088ea8",
+  "statusRaw": "skipped",
+  "skipReason": "Owner confirmed 2026-10-21 Apple Notes Oct 21 actual workout replaces R5； original prescription retained.",
+  "changedFieldsExcludingBookkeeping": [
+    "ZUPDATEDAT",
+    "ZSKIPREASON",
+    "ZSTATUSRAW"
+  ],
+  "originalPrescriptionAndImportMetadataUnchanged": true,
+  "all2375RecordIdentitiesPreserved": true,
+  "allOtherFieldsUnchangedSinceImport": true,
+  "all34ImportedSetsUnchangedSinceExactVerification": true,
+  "assetsUnchanged": true,
+  "snapshot": "artifacts/training-sync/20261021-notes/phone-final",
+  "inputPunctuationNote": "Initial exact-string check caught colon removal/full-width semicolon from input method. Saved reason retains confirmed date, source, replacement and original-prescription retention; readback above is authoritative."
+}

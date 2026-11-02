@@ -1,0 +1,1243 @@
+{
+  "schema_version": 1,
+  "id": "XFIT-BUSINESS-R4",
+  "version": "R4",
+  "approval": "confirmed",
+  "prepared_at": "2026-10-25",
+  "date_policy": "日期只表示证据取得时间；不设置工期、截止日、按日任务量或日期触发自动执行。",
+  "scope": "R4已整体确认；首轮复盘C1主方案＋高翻已按本人确认安排2026-10-26并同步App，6动作20计划位置，重复新增0。原历史/设置保留，UI/布局/手机Build32不变；后续训练与恢复尚未发生。",
+  "user": "Edward本人；当前不规划多用户商业化、增长或收入指标。",
+  "objective": "以可持续的记录成本执行并保留真实训练，用实际表现与恢复支持可解释的下一次决定，服务减脂期间保留力量、肌肉与训练质量及运动能力的已确认方向。",
+  "dashboard": {
+    "page_id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+    "url": "https://app.notion.com/p/3f84c857b834810bb182e00e55dc82b1",
+    "state": "artifacts/external-exercises/20261025-cross329/dashboard-readback.json",
+    "source": "outputs/planning/xfit-business-dashboard.json",
+    "view": "outputs/planning/xfit-business-task-tree-r4.md",
+    "old_cycle": "docs/operations/cycle-20260927.json",
+    "old_cycle_rule": "旧阶段已按调整范围关闭；原总账7/8保留，不作为全项目进度或新任务授权。"
+  },
+  "goals": [
+    {
+      "id": "G1",
+      "title": "日常训练任务能独立完成",
+      "branches": [
+        "A",
+        "B"
+      ],
+      "effect": "能查看/调整自己的计划，找到正确动作，真实录入、保存及补录后不丢不重。",
+      "metrics": [
+        "K1",
+        "K2"
+      ],
+      "exit": "具体本人真实任务得到接受，未解问题明确；不以动作总数或自动化替代。"
+    },
+    {
+      "id": "G2",
+      "title": "真实记录能支持下一次决定",
+      "branches": [
+        "C",
+        "D"
+      ],
+      "effect": "明确每个维持/调整决定来自什么实际、偏好与恢复；后续观察方向而非空泛加量。",
+      "metrics": [
+        "K3",
+        "O1"
+      ],
+      "exit": "实际→提案→确认→应用→反馈各层可追溯；效果需可比真实样本。"
+    },
+    {
+      "id": "G3",
+      "title": "产品、反馈与方法能持续续用",
+      "branches": [
+        "E",
+        "F"
+      ],
+      "effect": "功能交付安全，原记录保留，反馈只需录一次，下次能恢复正确任务。",
+      "metrics": [
+        "K1",
+        "K2",
+        "K3",
+        "G0"
+      ],
+      "exit": "固定入口状态真实，决定/失败边界可调用；无无收益框架扩展。"
+    }
+  ],
+  "branches": [
+    {
+      "id": "A",
+      "goal": "G1",
+      "title": "可靠训练与低负担记录",
+      "purpose": "首先让已交付产品支撑完整真实任务。",
+      "decision": "实际优先，手动控制，历史保护。",
+      "tradeoff": "先验证真实使用；新效率优化按问题进入。",
+      "stage_exit": "A1–A3交付证据承接，A4形成实际使用基线。"
+    },
+    {
+      "id": "B",
+      "goal": "G1",
+      "title": "找对动作与疑点管理",
+      "purpose": "动作库服务选择和解释，避免错误身份及单位。",
+      "decision": "MIT非媒体候选、已练优先、增量证据。",
+      "tradeoff": "可保留未知；不追求329清零或自动合并。",
+      "stage_exit": "本地有据修正可用，需用项能判断；剩余项有具体重开条件。"
+    },
+    {
+      "id": "C",
+      "goal": "G2",
+      "title": "实际驱动的训练复盘与落地",
+      "purpose": "将实际训练转成可执行下一次决定。",
+      "decision": "有效版本/强度优先、完整方案本人确认。",
+      "tradeoff": "缺项限制结论；具体处方与整体树分开授权。",
+      "stage_exit": "完成一条指定真实范围的可追溯复盘应用链；后续反馈另列。"
+    },
+    {
+      "id": "D",
+      "goal": "G2",
+      "title": "力量/身体观察与条件餐食分支",
+      "purpose": "检查长期方向是否得到真实样本支持。",
+      "decision": "同口径观察，餐食真实使用触发。",
+      "tradeoff": "不承诺体重期限或因果效果；不制造测试餐。",
+      "stage_exit": "有可比样本则给变化/限制，无样本明确未知。"
+    },
+    {
+      "id": "E",
+      "goal": "G3",
+      "title": "保数据交付与真实体验",
+      "purpose": "使确认功能到手机可用，避免牺牲已有体验。",
+      "decision": "有限无线批次、统一原测试门、人工独立。",
+      "tradeoff": "本地/手机/人验/效果分开；不为测试率重装清库。",
+      "stage_exit": "具体批次各门有状态；真实问题最小修复并接受，未验不GO。"
+    },
+    {
+      "id": "F",
+      "goal": "G3",
+      "title": "固定看板、Skill和经验循环",
+      "purpose": "让背景与决定续用，减少反复说明及返工。",
+      "decision": "复用已有入口/Skills/三库，最小记录。",
+      "tradeoff": "只为当前结果维护方法，不将治理数量当收益。",
+      "stage_exit": "R4树已获整体确认；当前与后续结果在原看板负责段回读，实际方法复用才评价收益。"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "K1",
+      "type": "业务结果",
+      "name": "独立记录任务成功率",
+      "formula": "独立完成且保存重开一致的真实任务数/本人明确尝试任务数；训练/补录/餐食分开，取消单列。",
+      "baseline": null,
+      "target": "硬场景可完成；实际成功率先有分母再设改善目标，不补100%。",
+      "collection": "自然使用反馈与App事实；不新增强制日表。",
+      "limitation": "测试PASS、导入48/48不等于日常独立成功率。",
+      "owner": "Codex整理；本人体验"
+    },
+    {
+      "id": "K2",
+      "type": "业务结果",
+      "name": "同任务记录负担",
+      "formula": "输入/纠错/补救/切换次数、可比任务耗时和本人接受度；排除休息。",
+      "baseline": null,
+      "target": "保留已接受风格和手感，无重复录入既有内容；改善幅度待基线。",
+      "collection": "同场景/设备/版本的真实任务；没有计时只报可观察事实。",
+      "limitation": "严格物理触键P95已取消；不恢复为待办。",
+      "owner": "本人自然反馈；Codex归纳"
+    },
+    {
+      "id": "K3",
+      "type": "业务结果",
+      "name": "可追溯复盘闭环",
+      "formula": "指定真实复盘意图中，实际/当次恢复及异常状态/有效偏好/理由/完整提案/具体确认/应用回读齐全的数量；应用后新反馈回收单列。",
+      "baseline": "历史R1已证完整落地链1次；R4首个指定意图的实际/复盘/完整方案/具体确认/应用回读已完成1/1，后续训练与恢复待自然输入；日常覆盖率总分母unknown。",
+      "target": "每个启动意图有具名出口；保持或减量可为有效决定。",
+      "collection": "原实际/恢复、训练方法、完整候选、具体确认及独立读回；按意图分阶段显示。",
+      "limitation": "恢复未知须明确限制决定；齐全数量与覆盖率分开，不能由1次历史落地推日常闭环率或效果。",
+      "owner": "Codex教练流程；本人决定"
+    },
+    {
+      "id": "O1",
+      "type": "长期方向观察",
+      "name": "力量/身体/恢复的可比趋势",
+      "formula": "相同动作/器械/单位/侧别及质量下的实际变化；身体测量按原口径另看，缺失不拼接。",
+      "baseline": null,
+      "target": "已确认减脂保力量/肌肉和质量方向；不自行加数字目标或期限。",
+      "collection": "自然训练、已有身体测量与恢复反馈。",
+      "limitation": "暂无本轮可比效果结论；单次表现/体重/吨位不足以证明因果。",
+      "owner": "本人真实输入；Codex观察"
+    },
+    {
+      "id": "G0",
+      "type": "硬护栏",
+      "name": "身份、历史、版权与权限",
+      "formula": "记录/文件丢失、重复应用新增、误自动身份合并、未授权写入均须为0。",
+      "baseline": "本轮原25表2489行业务字段/UUID关系及4文件、设置全保留；仅新增8行计划至2497行，实际场次/组新增0、重复新增0；原图样本0。",
+      "target": "任何护栏失败立即停止相关写入，不能被平均分抵消。",
+      "collection": "具体批次前后独立读回与权限范围。",
+      "limitation": "历史快照不是此刻实时手机；零照片不证明有图恢复。",
+      "owner": "Codex执行；本人授权"
+    }
+  ],
+  "facts": {
+    "evidence_as_of": "本轮排序及主预览数据来自10/26 07:49手机保护副本；25表2523行完整业务字段/UUID/关系、4文件及本地主/共享设置守恒。手机软件最近已交付Build33，但本轮0365/0366两条本地增量未上手机，不冒充实时双向同步。",
+    "phone": {
+      "version": "0.5.0 Build33",
+      "review_pending": 329,
+      "installation": "保留数据无线覆盖，已恢复正常Release并启动回读",
+      "unit_pass": 497,
+      "unit_existing_skip": 5,
+      "ui": "BLOCKED_ENV",
+      "ui_executed": 0,
+      "human": "BLOCKED_HUMAN",
+      "stage_go": false,
+      "source": "artifacts/stage-validation/20261026-opengym-build33-device/delivery-status.json"
+    },
+    "local": {
+      "version": "正常Build33本地主预览含0365/0366新修正；手机仍为此前交付资源",
+      "catalog_total": 1324,
+      "review_initial": 348,
+      "review_resolved": 19,
+      "review_pending": 329,
+      "originally_unflagged": 976,
+      "unit_pass": 502,
+      "ui_pass": 161,
+      "resource_sha256": "4fa348f78f6e18529735057114392069f373178ed93c74ddcc99eadd7d89d7df",
+      "source": "artifacts/external-exercises/20261026-cross329-r2/final-verification.json",
+      "latest_delta": "329/329复核；0365/0366译名与说明收窄2条，清标0，仍329。5条有新增外查/采纳活动，324条无新路径；旧查询、失败与同源复述不计新证据。18服务＋5独立UI通过，正常主预览25表2523行/4文件/设置保持。仅本地，手机Build33未接收这两条。",
+      "ui_existing_skip": 8,
+      "current_delta": {
+        "requirement": "REQ-20261026-095750",
+        "scope": "local_only_after_phone_build33",
+        "corrected": 2,
+        "cleared": 0,
+        "reviewed": 329,
+        "service_pass": 18,
+        "ui_pass": 5,
+        "failed": 0,
+        "skipped": 0,
+        "phone_delivered": false,
+        "main_data_rows": 2523
+      }
+    },
+    "history": {
+      "tables": 25,
+      "business_rows": 2523,
+      "exercise_with_completed_records": 171,
+      "notes_rows": 48,
+      "notes_imported": 48,
+      "notes_exercises": 10,
+      "non_database_files": 4,
+      "photo_samples": 0,
+      "r6": "保留原稿、skipped及原替代原因",
+      "source": "artifacts/stage-validation/20261026-opengym-build33-device/conservation-phone-post-tests-full.json",
+      "pre_import_business_rows": 2489
+    },
+    "old_stage": {
+      "closed": true,
+      "original_ledger_done": 7,
+      "original_ledger_total": 8,
+      "current_required": 0,
+      "not_project_completion": true,
+      "source": "outputs/planning/xfit-business-task-tree-r3.md"
+    },
+    "usage": {
+      "sessions_total": 58,
+      "sessions_completed": 50,
+      "sessions_discarded": 8,
+      "set_rows_total": 1407,
+      "set_rows_completed": 1280,
+      "set_rows_incomplete": 127,
+      "exercise_with_completed_rows": 171,
+      "interpretation": "组记录含不同性质，完成行不等于正常工作组；不从原始行数算坚持率或训练质量。",
+      "source": "artifacts/stage-validation/20261026-opengym-build33-device/phone-post-tests-full-audit.json"
+    }
+  },
+  "priorities": [
+    {
+      "rank": 0,
+      "rule": "任何真实数据损失、身份/单位错误或越权风险先处理受影响路径；不主动制造诊断。",
+      "tasks": [
+        "A1",
+        "A3",
+        "C1",
+        "E1"
+      ]
+    },
+    {
+      "rank": 1,
+      "rule": "整体确认后先用真实已完成记录与自然反馈，形成记录基线和下一次决定。",
+      "tasks": [
+        "A4",
+        "C2",
+        "E2",
+        "C3"
+      ]
+    },
+    {
+      "rank": 2,
+      "rule": "B2本地有据结果已就绪；需手机时另核具体授权与完整门禁，不等待329清零。",
+      "tasks": [
+        "B2",
+        "E1"
+      ]
+    },
+    {
+      "rank": 3,
+      "rule": "已练相关且有新证据的B3按需批次，与真实训练分析可并行只读；共享资源写串行。",
+      "tasks": [
+        "B3",
+        "D1"
+      ]
+    },
+    {
+      "rank": 4,
+      "rule": "F2/F3只随真实复用/失败最小更新；D2等本人真实启用。",
+      "tasks": [
+        "F2",
+        "F3",
+        "D2"
+      ]
+    }
+  ],
+  "dependencies": "只读来源核查、历史比较、候选分析可并行；同一训练/资源/Notion段落写入与最终合并串行。C1→C2→具体方案确认→C3；A1/A2/A3→A4；B1→B2→B3条件批；E1与E2不是身体效果的替代。新手机交付不依赖B3清零；餐食/UI环境未恢复不阻断独立训练路径。",
+  "milestones": [
+    {
+      "id": "M0",
+      "name": "规划可审阅",
+      "exit": "当前事实、完整树、分母/未知、固定dashboard回读齐全，等待整体确认。"
+    },
+    {
+      "id": "M1",
+      "name": "真实日常任务可判断",
+      "exit": "已有真实尝试可分类，关键保存正确，本人接受或具名问题有出口；无样本保持待输入。"
+    },
+    {
+      "id": "M2",
+      "name": "一次真实训练决定可追溯",
+      "exit": "指定实际→依据→完整方案→具体确认→应用读回；未来反馈独立等待。"
+    },
+    {
+      "id": "M3",
+      "name": "一次反馈真正改变下一轮",
+      "exit": "新真实反馈与预期对照，明确保留/改/停；必要方法/内容最小更新，长期效果仍按样本。"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "WF0",
+      "name": "接续与看板",
+      "trigger": "用户问进度/继续/有新实质事实",
+      "steps": "问状态：只读定位最新需求/确认规则/证据并回答，不自动写Notion或启动执行；有新实质事实且获本轮更新授权：选就绪出口→更新固定看板负责段→读回",
+      "exit": "状态问题只读答清；授权更新则核实写后结果。无增量结束，不为了汇报重测/同步。",
+      "upgrade": "状态漂移或反复重述才改入口；不自动启动后台。"
+    },
+    {
+      "id": "WF1",
+      "name": "日常训练",
+      "trigger": "自然训练/改期/录入反馈",
+      "steps": "查看确认计划→记录实际→保存重开→自然反馈→K1/K2归类→具体问题转E2",
+      "exit": "本人真实任务有结论。",
+      "upgrade": "业务改场景/负担；框架只改误读取/重复采集环节。"
+    },
+    {
+      "id": "WF2",
+      "name": "历史补录",
+      "trigger": "用户指定真实Notes等新源",
+      "steps": "读原源/App→核关键口径→稳定ID预览→具体确认→支持入口写入→独立回读与查重",
+      "exit": "数字/日期/身份完整、重复0，未知保留。",
+      "upgrade": "新重复/冲突样例才补最小护栏；不重导旧48条。"
+    },
+    {
+      "id": "WF3",
+      "name": "动作疑点研究",
+      "trigger": "真实选择阻塞或原始疑点的新证据",
+      "steps": "冻结ID/问题→已练优先→原始独立资料→反证→有据修正/保留未知→相关验证→按需交付",
+      "exit": "本批每项有增量结论或具体缺口；无收益停止。",
+      "upgrade": "区分来源依赖、首次阅读和新证据；检验误解除，不以数量清零优化。"
+    },
+    {
+      "id": "WF4",
+      "name": "训练复盘",
+      "trigger": "用户指定复盘/下一次计划或新的可比实际",
+      "steps": "有效偏好与实际→可比/未知→恢复与替代解释→完整候选→具体确认→应用读回→下一实际反馈",
+      "exit": "决定可执行、有依据并保留历史；观察结果与流程交付独立。",
+      "upgrade": "业务看质量/接受/恢复；方法看漏问、伪精确、重复解释/返工。"
+    },
+    {
+      "id": "WF5",
+      "name": "餐食条件循环",
+      "trigger": "真实拍照并明确要求",
+      "steps": "原图保存与关联→真实原图链验收→指定范围估算→一次确认→写回回读→实际反馈",
+      "exit": "原图与估算来源不混，原数据保留。",
+      "upgrade": "实际痛点再改，不用测试餐填分母。"
+    },
+    {
+      "id": "WF6",
+      "name": "产品与交付",
+      "trigger": "具名真实问题或用户要求新手机批次",
+      "steps": "需求确认→最小实现→相关验证；固化/真机时统一完整分层→备份覆盖→守恒→本人体验",
+      "exit": "每层有真实状态；未验不GO；无新证据不盲重跑。",
+      "upgrade": "先分环境/测试/真实bug；不弱化原门或已确认风格。"
+    },
+    {
+      "id": "WF7",
+      "name": "方法与经验",
+      "trigger": "真实任务复用/问题/决策改变",
+      "steps": "保留原事件→预期/实际/替代解释→保留/改/停→必要最小Skill或项目内容变更→关键正常/反例复验→下次实际引用",
+      "exit": "改变了后续行为或明确不适用；无可复用变化只存最小事件。",
+      "upgrade": "业务收益与框架成本分开；没有真实改善不扩Skill/adapter/库。"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D01",
+      "state": "已确认继承",
+      "choice": "个人训练优先，减脂保力量/肌肉与质量，非多用户商业平台。",
+      "tradeoff": "不以收入/增长量衡量当前个人项目。",
+      "reopen": "本人明确改变目标。"
+    },
+    {
+      "id": "D02",
+      "state": "已确认继承",
+      "choice": "App实际真源，偏好/计划追加版本，Notion协作，Skill仅方法。",
+      "tradeoff": "多视图需有指针，禁止各自手改出第二真源。",
+      "reopen": "真实所有权需求变化先确认。"
+    },
+    {
+      "id": "D03",
+      "state": "已确认继承",
+      "choice": "强度与实际能力优先；容量、动作数、递增默认沿最新偏好，异常恢复保留例外。",
+      "tradeoff": "不机械降量或凑配额；不在本规划指定重量。",
+      "reopen": "新反馈或本人永久偏好更新。"
+    },
+    {
+      "id": "D04",
+      "state": "已确认继承",
+      "choice": "原Notes48条与R6保留；单次混合课不改长期分化。",
+      "tradeoff": "部分热身/RIR/时长未知仍可保存实际。",
+      "reopen": "本人提供可核原数据更正。"
+    },
+    {
+      "id": "D05",
+      "state": "已确认继承",
+      "choice": "MIT非媒体动作候选；歧义不自动合并身份/PR。",
+      "tradeoff": "1324覆盖不等于1324条专业认证。",
+      "reopen": "明确独立变式或人工身份确认。"
+    },
+    {
+      "id": "D06",
+      "state": "本轮建议待确认",
+      "choice": "原330队列已完整复核，当前余329；保留全队列，按已练相关/真实阻塞/原疑点新证据启动有限批次。",
+      "tradeoff": "不再无增量机械全量重搜；不承诺清零。",
+      "reopen": "上游勘误/官方手册/当前训练具体需求。"
+    },
+    {
+      "id": "D07",
+      "state": "已确认继承",
+      "choice": "原风格、紧凑布局、短说明折叠，完整取证放项目。",
+      "tradeoff": "可解释性按需展开，主操作不过载。",
+      "reopen": "真实可达性/辨认问题需另提最小设计变更。"
+    },
+    {
+      "id": "D08",
+      "state": "已确认继承",
+      "choice": "本地/安装/真机自动化/本人验收/真实效果分别判断；无线有限交付。",
+      "tradeoff": "不拼总完成率；未过必测不GO。",
+      "reopen": "具体新批次授权与新环境证据。"
+    },
+    {
+      "id": "D09",
+      "state": "已确认继承",
+      "choice": "严格物理P95已取消；固定双Notion空间目标被普通协同替代。",
+      "tradeoff": "保留历史失败但不复活为待办。",
+      "reopen": "仅本人明确新需求，不能由旧台账重开。"
+    },
+    {
+      "id": "D10",
+      "state": "已确认继承",
+      "choice": "餐食真实使用触发；完整真机UI专项保持已知阻塞且不盲重试。",
+      "tradeoff": "独立分支不阻断训练使用；原未验状态保留。",
+      "reopen": "餐食真实资料/明确启用；UI需新定位证据与明确恢复范围。"
+    },
+    {
+      "id": "D11",
+      "state": "本轮建议待确认",
+      "choice": "采用G1–G3/6分支17叶与事件门，复用原Notion Hub。",
+      "tradeoff": "旧8任务是历史分母；新树是新的业务阅读范围，未确认不计算执行完成率。",
+      "reopen": "整体确认时调整范围/指标；之后变动需显式版本差异。"
+    }
+  ],
+  "methods": [
+    {
+      "id": "M-HEART",
+      "status": "成熟方法；X-Fit适配待真实验证",
+      "name": "目标→可观察信号→指标",
+      "application": "只为记录成功/负担/决定闭环选指标；按个人场景取用，不照搬DAU或全HEART打分。",
+      "source": "https://research.google/pubs/measuring-the-user-experience-on-a-large-scale-user-centered-metrics-for-web-applications/",
+      "read_scope": "Google原论文摘要；作者HEART页核查。2010方法，2026-10-25访问。",
+      "limit": "大规模Web经验不能证明单用户X-Fit收益；选指标不等于获得真实分母。"
+    },
+    {
+      "id": "M-PDSA",
+      "status": "成熟改进方法；用于小范围真实任务",
+      "name": "预测→小试→观察→保留/改/停",
+      "application": "把一次具体问题/计划调整写为可检验预期，观察真实质量/负担/副作用，不按日期造任务。",
+      "source": "https://www.ihi.org/library/model-for-improvement/testing-changes",
+      "read_scope": "Testing Changes正文PDSA步骤、测试/停止与连续学习部分；2026-10-25访问。",
+      "limit": "来源是改进方法，不为训练剂量或医疗判断背书；单次成功不证明因果。"
+    },
+    {
+      "id": "M-EVAL",
+      "status": "工程经验方法；个人教练效果仍未知",
+      "name": "最终状态+正常/反例/缺输入例",
+      "application": "Skill评估优先查真实记录/版本/权限最终状态，结合本人质量判断，AI复核仅辅助。",
+      "source": "https://www.anthropic.com/research/demystifying-evals-for-ai-agents",
+      "read_scope": "2026-01-09正文evaluation结构、结果/轨迹、代码/模型/人工grader及能力/回归区分；2026-10-25访问。",
+      "limit": "厂商自身与客户经验，有利益关系；不是独立临床/个人训练收益研究；多模型一致不等于事实。"
+    }
+  ],
+  "experiments": [
+    {
+      "id": "H1",
+      "state": "候选未执行；待整体确认后按真实问题另定小试",
+      "hypothesis": "只补问会改变动作决定的缺项，可能减少负担而保留质量。",
+      "test": "选自然发生的至多3个复盘意图，先用已有资料，对照需要的关键输入与实际补救/误判。",
+      "metrics": "补问/重复解释次数、方案可执行性、关键未知是否遗漏。",
+      "stop": "任何关键恢复/计量未知被掩盖即停并回原流程；没自然案例不造样本。",
+      "ceiling": "可行性观察，不证明一般性效率提升。"
+    },
+    {
+      "id": "H2",
+      "state": "候选未执行",
+      "hypothesis": "对高歧义名称采用证据审查加独立反例检查，可能减少误解除。",
+      "test": "只在新B3批次复用既有明确/冲突/信息不足案例，不增新全量研究平台。",
+      "metrics": "误自动匹配0、错误清标、仍需人工判断及成本。",
+      "stop": "任何错误身份/PR关联立即回退对应候选；AI一致不能替来源。",
+      "ceiling": "方法试验，不认定来源本意或个人身份。"
+    },
+    {
+      "id": "H3",
+      "state": "候选未执行",
+      "hypothesis": "先核有效版本与可比性、允许明确不建议，可能减少旧规则误用和伪精确。",
+      "test": "从真实任务中取正常、口径冲突、缺恢复各类，不造真实数据；仅作Skill输入/输出检查。",
+      "metrics": "版本/单位正确、未知透明、可执行建议或具体缺口。",
+      "stop": "造成额外确认且不改变决定时压缩；任何越权写入停用。",
+      "ceiling": "回放通过是方法证据；后续真实任务才说明实际收益。"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "L1",
+      "kind": "可复用成功方法",
+      "fact": "稳定来源ID和独立回读使10/23实际48/48进入App并保留R6。",
+      "rule": "新补录先查同意图/源ID，逐字段回读；保留未知。",
+      "boundary": "不推断48条工作组性质、长期分化或未来收益。",
+      "source": "docs/requirements/2026-10-23/114454_notes-oct23-coach-learning.md"
+    },
+    {
+      "id": "L2",
+      "kind": "失败护栏",
+      "fact": "连续版本真机UI在首个用例前控制通道拒绝，实际0场景，上游未知。",
+      "rule": "保留原失败和0分母；没有新定位证据停止同条件重试。",
+      "boundary": "不能据此证明App UI本身失败或通过；不能代填人验。",
+      "source": "docs/requirements/2026-10-24/202853_build32-ui.md"
+    },
+    {
+      "id": "L3",
+      "kind": "内容研究教训",
+      "fact": "最新331项新取证仅1项解除，4项局部澄清仍待核，326产品字段保持。",
+      "rule": "先问新来源能否区分原疑点；来源数不等于独立证据或解除数。",
+      "boundary": "不是当前剩余329永远无法核实的证据；队列保留。",
+      "source": "docs/requirements/2026-10-24/231501_opengym331.md"
+    },
+    {
+      "id": "L4",
+      "kind": "判断边界",
+      "fact": "L-pull-up已有旧定义，新CrossFit课案提供独立佐证。",
+      "rule": "区分首次发现、新独立证据、来源本意与个人身份批准。",
+      "boundary": "名称解释不授权历史UUID/PR合并。",
+      "source": "docs/requirements/2026-10-24/231501_opengym331.md"
+    },
+    {
+      "id": "L5",
+      "kind": "治理教训",
+      "fact": "旧cycle脚本仍7/8、partial，但原阶段已明确调整收尾；后续版本与需求已变化。",
+      "rule": "用当前原始证据刷新固定入口，旧台账不当当前全部状态。",
+      "boundary": "不重写旧历史，不以新规划擅自重开已取消范围。",
+      "source": "outputs/planning/xfit-business-task-tree-r3.md"
+    },
+    {
+      "id": "L6",
+      "kind": "经验适用范围",
+      "fact": "本地专项、手机安装与本人接受分别有不同门和缺项。",
+      "rule": "交付时分层报告，不用更多测试或文档抵消真实使用未知。",
+      "boundary": "方法可复用，个人效果仍需新真实案例；不自动晋升全局记忆。",
+      "source": "docs/operations/项目循环手册.md"
+    }
+  ],
+  "feedback_contract": {
+    "event": "真实使用/新实际/实质问题/确认决定/交付回读时更新；无变化不更新数字、不轮询制造进展。",
+    "minimum_fields": [
+      "意图/场景",
+      "来源与版本",
+      "预期/实际",
+      "结果分类与是否补救",
+      "影响/未知",
+      "决定与确认状态",
+      "证据定位",
+      "下一最小动作/负责方/重开条件"
+    ],
+    "ownership": "原话与人工字段保留；App存实际；项目存规则/精确证据；Notion仅负责段摘要；Skill存方法。正文一次，其余引用。",
+    "updates": "业务升级看K1–K3/O1和具体场景；框架升级看重复说明/错误/返工与成本。先固定同一任务/单位/版本口径，再比较；改定义要版本化，不能改旧分母。",
+    "evaluation": "定量结构/守恒用确定性检查；动作/训练语义看原证据与反例；本人接受由本人填写。若缺样本→unknown；若环境阻断→具体缺项；任何P0/P1或护栏失败不GO。",
+    "unvalidated": "AI提案/检索/评审先标候选，写明预测/反证/停止/回退；不借主流方法名义升级成已验证效果。",
+    "skill_inventory": [
+      {
+        "entry": "xfit-project-loop + project-iteration-loop",
+        "use": "定位真实进度/选择出口/分层验证/反馈",
+        "change_gate": "反复出现入口漂移或重复说明，且修改会改变下一真实任务。"
+      },
+      {
+        "entry": "xfit-training-coach",
+        "use": "实际/偏好→完整候选→具体确认→回读→后续反馈",
+        "change_gate": "具体正常/反例/缺输入场景失败；事实仍在项目训练文档。"
+      },
+      {
+        "entry": "research",
+        "use": "动作原始疑点的一手新证据与反证",
+        "change_gate": "新的证据质量失败；不按条数无限搜索。"
+      },
+      {
+        "entry": "notion-session-coordination",
+        "use": "原工作台身份/目标、有限队列、负责段写入和回读",
+        "change_gate": "实际共享访问问题；不恢复已替代的双空间目标。"
+      }
+    ]
+  },
+  "confirmation": {
+    "status": "confirmed",
+    "question": "R4整体及C1主方案＋高翻均已本人明确确认；日期10/26已明确，单日计划已应用并完整回读。REQ-20261025-104305记录数据同步验收；不构成手机软件升级或下一课自动续排授权。",
+    "limits": "整体确认允许按树推进已授权的本地工作；不等于自动批准任何新训练处方、手机覆盖安装、外发、发布或永久偏好变更。",
+    "registered_at": "2026-10-25 09:58:37 +0800",
+    "requirement": "docs/requirements/2026-10-25/095837_r4-training-review-candidate.md",
+    "user_decision": "确认采用R4整体任务树，按建议优先级推进，先已有训练复盘和下一次候选；保留UI/紧凑布局/历史，330按已练相关与新证据核查。"
+  },
+  "research_contract": {
+    "question": "基于当前X-Fit真源与本人历史决策，什么任务树最能收敛个人训练闭环并避免支线研究替代真实收益？",
+    "type": "描述+决策研究；非医学/训练剂量研究",
+    "assurance": "standard",
+    "exclusions": "不新增商业化、医学或营养处方，不估算未知效果，不激活计划。",
+    "counter_evidence": "已有功能可用且旧阶段正式关闭，不能以缺新指标为由重建产品；大规模UX和厂商AI方法不能证明个人收益；小样本身体变化有恢复/器械/测量混杂。",
+    "conclusion_ceiling": "可审阅规划、现状与证据边界；业务改善和人工接受仍待真实任务。"
+  },
+  "evidence": {
+    "notes": "docs/requirements/2026-10-23/114454_notes-oct23-coach-learning.md",
+    "catalog": "docs/requirements/2026-10-23/133150_opengym-nonmedia-catalog.md",
+    "review": "docs/requirements/2026-10-24/231501_opengym331.md",
+    "phone": "docs/requirements/2026-10-24/202853_build32-ui.md",
+    "plan": "docs/requirements/2026-10-22/153912_plan-management-entry.md",
+    "reschedule": "docs/requirements/2026-10-23/112357_past-pending-reschedule.md",
+    "preference": "docs/training/用户训练偏好.md",
+    "method": "docs/training/训练编排方法.md",
+    "manual": "docs/operations/项目循环手册.md",
+    "old": "outputs/planning/xfit-business-task-tree-r3.md",
+    "oldclose": "docs/requirements/2026-10-13/131921_remaining-business-convergence.md",
+    "actual": "artifacts/external-exercises/20261024-cross331/final-verification.json"
+  },
+  "tasks": [
+    {
+      "id": "A1",
+      "branch": "A",
+      "title": "真实训练录入、保存与重开",
+      "priority": "P0",
+      "status": "已交付证据",
+      "purpose": "让每次训练留下可信实际，避免记录成本中断训练。",
+      "scenario": "训练中记重量/次数，离开或重开后仍能继续。",
+      "decision": "沿用已交付训练表与完成组保护，实际和预填分开。",
+      "tradeoff": "保留熟悉入口；新效率想法先验证真实问题。",
+      "not_now": "新的输入控件、被动遥测及全新页面。",
+      "inputs": "当前App与实际场次；明确单位/侧别。",
+      "output": "可重开的同一场次及原完成组。",
+      "exit": "具名录入→保存→重开链字段一致；P0/P1问题为零；真实本人接受另记。",
+      "evaluation": "K1按实际尝试计；K2按相同任务观察；已有自动化不计真实使用成功率。",
+      "depends_on": [],
+      "trigger": "承接Build32已有能力；新真实失败重开该路径。",
+      "stop_or_reopen": "保存丢失/重复/单位漂移立即停止相关写入并保留原库。",
+      "evidence": [
+        "docs/requirements/2026-10-24/202853_build32-ui.md",
+        "docs/requirements/2026-10-23/114454_notes-oct23-coach-learning.md"
+      ],
+      "workflow": "WF1",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "A2",
+      "branch": "A",
+      "title": "日程、改期及当日菜单可控",
+      "priority": "P1",
+      "status": "已交付证据",
+      "purpose": "让真实生活变动能反映在计划中，避免漏练被误算完成。",
+      "scenario": "未开始的过去计划改到今天；临时调整剩余菜单。",
+      "decision": "手动创建/复用；已开始与已完成保护、合法例外沿原需求，不新增自动排周。",
+      "tradeoff": "便利改期与历史保护同时保留，冲突先预览。",
+      "not_now": "自动补课、自动优化分化、自动跨周滚动。",
+      "inputs": "目标日程UUID/状态及已有实际。",
+      "output": "明确原/新日期、取消/保存/撤销结果。",
+      "exit": "原确认状态矩阵通过；只改目标对象；不改完成组、其他日程和确认来源。",
+      "evaluation": "功能交付和真实体验分别报告；计划组数不算完成组。",
+      "depends_on": [],
+      "trigger": "用户主动调整；已有入口继续使用。",
+      "stop_or_reopen": "状态/实际不一致停止保存，查目标身份；新需求冲突先询问。",
+      "evidence": [
+        "docs/requirements/2026-10-22/153912_plan-management-entry.md",
+        "docs/requirements/2026-10-23/112357_past-pending-reschedule.md",
+        "docs/requirements/2026-10-24/202853_build32-ui.md"
+      ],
+      "workflow": "WF1",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "A3",
+      "branch": "A",
+      "title": "Notes历史实际补录可追溯且不重复",
+      "priority": "P0",
+      "status": "已交付证据",
+      "purpose": "把已经完成的训练纳入真实记录，免重复手抄。",
+      "scenario": "10/23 Notes替代当日原菜单，但原R6仍留档。",
+      "decision": "稳定来源ID去重；未知RIR、热身、时长留空；每侧/辅助重量语义原样。",
+      "tradeoff": "保全原始事实，接受部分字段未知。",
+      "not_now": "自动解释热身/动机；把单次混合课变长期分化。",
+      "inputs": "原Notes、已确认计量语义、App原记录与源ID。",
+      "output": "10动作48条实际及R6被替代原因。",
+      "exit": "48/48完整，重复新增0，日期/数字/顺序/UUID及R6原稿保留；已取得手机回读。",
+      "evaluation": "导入完整率48/48；不声称48条均为正常工作组。",
+      "depends_on": [],
+      "trigger": "本条已交付；有新Notes且用户要求时复用同流程。",
+      "stop_or_reopen": "同ID内容不同先停止该条；不直接改活动SQLite。",
+      "evidence": [
+        "docs/requirements/2026-10-23/114454_notes-oct23-coach-learning.md",
+        "artifacts/external-exercises/20261024-cross331/final-verification.json"
+      ],
+      "workflow": "WF2",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "A4",
+      "branch": "A",
+      "title": "真实使用闭环与记录负担基线",
+      "priority": "P1",
+      "status": "待真实输入",
+      "purpose": "知道现有产品是否让你独立完成任务，找到值得改的摩擦。",
+      "scenario": "自然完成一次训练记录/改期/补录后，无需额外测试课。",
+      "decision": "先从自然使用和已有反馈整理分母，最多补问影响判断的缺项。",
+      "tradeoff": "先观察可用性，暂不承诺省时百分比；不强制日填表。",
+      "not_now": "大规模埋点、日活增长；已取消物理P95不属于未来候选。",
+      "inputs": "用户明确尝试的任务、版本、结果和现有备注。",
+      "output": "成功/需补救/失败/取消分类与K1/K2首个可用基线。",
+      "exit": "每个已报告尝试可分类且有来源；不知道是否尝试的任务不入分母；明确本人接受或具体问题。",
+      "evaluation": "K1分子/分母；K2纠错/补救/切换次数和同任务用时，缺计时则仅报定性。",
+      "depends_on": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "trigger": "确认整体树后，下一条真实使用反馈即触发；不等待一整周。",
+      "stop_or_reopen": "没有新样本不刷新虚构进度；出现真实失败转E2。",
+      "evidence": [
+        "docs/operations/项目循环手册.md",
+        "docs/requirements/2026-10-24/202853_build32-ui.md"
+      ],
+      "workflow": "WF1",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "AND：直接前置全部就绪；各前置之间可并行"
+    },
+    {
+      "id": "B1",
+      "branch": "B",
+      "title": "可搜索的中英文非媒体动作候选库",
+      "priority": "P1",
+      "status": "已交付证据",
+      "purpose": "让你找得到动作且能区分器械，减少新建重复动作。",
+      "scenario": "中英文搜同一动作，先复用个人动作；新动作确认单位后选用。",
+      "decision": "1324个MIT固定来源；候选库独立保存，选用才加入个人库；含糊项保留提示。",
+      "tradeoff": "获得覆盖但不把相似名称认成同一历史身份。",
+      "not_now": "图片/动画、AGPL后续代码、批量写入个人动作或自动共享PR。",
+      "inputs": "固定sourceID、中文名、英文别名、器械/肌群和人工映射。",
+      "output": "搜索/筛选/复用/新增流程，原版权可追溯。",
+      "exit": "1324来源无丢失，中文名覆盖，重复选择不重复创建；个人UUID/PR不自动合并。",
+      "evaluation": "来源覆盖1324/1324；误自动身份合并容忍0；不计训练收益。",
+      "depends_on": [],
+      "trigger": "承接手机Build32；真实查找困难进入B3或E2。",
+      "stop_or_reopen": "动作变式、单位或身份有关键冲突则只展示候选。",
+      "evidence": [
+        "docs/requirements/2026-10-23/133150_opengym-nonmedia-catalog.md",
+        "docs/requirements/2026-10-24/202853_build32-ui.md"
+      ],
+      "workflow": "WF3",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "B2",
+      "branch": "B",
+      "title": "已核实的本地名称与变式修正交付包",
+      "priority": "P1",
+      "status": "本地就绪",
+      "purpose": "把已有证据形成可用修正，保留未解疑点而非追求清零。",
+      "scenario": "练过相关动作可看到更准确的中文/器械/变式解释。",
+      "decision": "1324来源全部保留；原348疑点已解释19，剩329；976原未标疑点不冒称已逐条专业认证。",
+      "tradeoff": "解释足够才解除；局部就绪不等于手机生效。",
+      "not_now": "为清标猜来源意图；自动合并身份；加入媒体或调整训练。",
+      "inputs": "cross335/cross331证据、原始文本及历史映射。",
+      "output": "手机Build33已有前序核实资源；本轮0365/0366中文名/短说明与候选检索修正仅本地验证，1324来源/329待核。",
+      "exit": "当前两条本地资源/服务/独立UI/真实副本守恒已通过；本地任务可收敛。若要手机生效，仍需具体授权及既有完整交付门。",
+      "evaluation": "本批纠正2条过度翻译、清标0；原125映射和其他1322资源保持，新增两条仅候选；手机未接收本轮增量。",
+      "depends_on": [
+        "B1"
+      ],
+      "trigger": "本轮本地修正已完成；手机更新另依用户具体请求，不自动安装。",
+      "stop_or_reopen": "新反证只重开受影响sourceID；未授权不安装。",
+      "evidence": [
+        "docs/requirements/2026-10-24/231501_opengym331.md",
+        "artifacts/external-exercises/20261024-cross331/final-verification.json",
+        "docs/requirements/2026-10-24/202853_build32-ui.md",
+        "artifacts/external-exercises/20261025-0381-candidate/final-verification.json",
+        "docs/requirements/2026-10-25/200715_opengym329-local.md",
+        "docs/requirements/2026-10-25/232048_opengym-build33-device.md",
+        "docs/requirements/2026-10-26/095750_opengym329.md",
+        "artifacts/external-exercises/20261026-cross329-r2/research-review.json"
+      ],
+      "workflow": "WF3",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "单一前置"
+    },
+    {
+      "id": "B3",
+      "branch": "B",
+      "title": "剩余329疑点按真实使用和新增证据收敛",
+      "priority": "P2",
+      "status": "条件候选",
+      "purpose": "把研究资源优先用在影响你选动作或解释训练的数据缺口上。",
+      "scenario": "你练过的变式原步骤与名称冲突，出现官方勘误/手册等新线索。",
+      "decision": "排序：已练直接冲突→相近器械变式→其他；每条定义能区分原疑点的证据需求。",
+      "tradeoff": "保留329未解队列；本轮纠正有据的本地译法，不将腕中立与握法强等同，也不把作者摘要、同链页面或无新路径包装为核清。",
+      "not_now": "无新线索再全量机械重搜；同源复制当多源；清零目标。",
+      "inputs": "原疑点、171个有完成记录动作的明确时间快照、独立新资料。",
+      "output": "outputs/external-exercises/20261025-cross329/329条去重核查与本地修正.md; artifacts/external-exercises/20261025-cross329/final-verification.json",
+      "exit": "每一启动批有固定ID/问题/证据增量；能定才改；无增量明确停；个人身份批准仍0。",
+      "evaluation": "分开计本批处理N、增量证据N、解除N、仍未知N；不混为一个完成率。",
+      "depends_on": [
+        "B1",
+        "B2"
+      ],
+      "trigger": "有能解释原疑点的新一手材料，或当前训练实际被该疑点阻挡。",
+      "stop_or_reopen": "同障碍连续两轮无新证据结束分支；新勘误/手册/明确变式才重开。",
+      "evidence": [
+        "docs/requirements/2026-10-24/231501_opengym331.md",
+        "outputs/external-exercises/20261024-cross331/331条新增证据复核.md",
+        "docs/requirements/2026-10-25/133416_opengym330-local.md",
+        "outputs/external-exercises/20261025-cross330/330条新增证据复核.md",
+        "docs/requirements/2026-10-25/184150_opengym330-r2-local.md",
+        "artifacts/external-exercises/20261025-cross330-r2/final-verification.json",
+        "docs/requirements/2026-10-25/200715_opengym329-local.md",
+        "artifacts/external-exercises/20261025-cross329/final-verification.json",
+        "docs/requirements/2026-10-26/095750_opengym329.md",
+        "artifacts/external-exercises/20261026-cross329-r2/research-review.json"
+      ],
+      "workflow": "WF3",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "AND：直接前置全部就绪；各前置之间可并行",
+      "current_result": "329/329复核；0365/0366译名与说明收窄2条，清标0，仍329。5条有新增外查/采纳活动，324条无新路径；旧查询、失败与同源复述不计新证据。18服务＋5独立UI通过，正常主预览25表2523行/4文件/设置保持。仅本地，手机Build33未接收这两条。"
+    },
+    {
+      "id": "C1",
+      "branch": "C",
+      "title": "有效偏好、实际水平和计量口径基线",
+      "priority": "P0",
+      "status": "已交付证据",
+      "purpose": "保证每次计划延续你的选择，不反复问诊或机械降量。",
+      "scenario": "下一次胸背腿训练沿最新偏好，Smith每侧片重不当总重。",
+      "decision": "读取当前生效版本与附录；METHOD-20261023-09；强度先于加量；临时例外不续用。",
+      "tradeoff": "尊重你的正常容量与60–90分钟边界，异常恢复/技术质量触发例外，不为凑配额牺牲质量。",
+      "not_now": "从跨器械吨位推能力；用未知RIR精算1RM；自动把偏好写成全App算法。",
+      "inputs": "偏好文档、App有效Revision、力量档案与可比实际。",
+      "output": "带版本的逐动作可比/不可比及未知清单。",
+      "exit": "每次新方案记录有效版本；单位/侧别/器械一致；新永久偏好须本人确认追加。",
+      "evaluation": "历史基线TP-20261021-06来自已知设备回读；下一次编排前再读，不当实时。",
+      "depends_on": [],
+      "trigger": "新复盘/推荐前先读；不因本次规划生成处方。",
+      "stop_or_reopen": "版本冲突或计量不明仅暂停受影响动作建议，不改旧实际。",
+      "evidence": [
+        "docs/training/用户训练偏好.md",
+        "docs/training/训练编排方法.md",
+        "docs/requirements/2026-10-23/114454_notes-oct23-coach-learning.md"
+      ],
+      "workflow": "WF4",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "C2",
+      "branch": "C",
+      "title": "指定真实训练复盘与下一次完整候选",
+      "priority": "P1",
+      "status": "已交付证据",
+      "purpose": "让真实表现改变下一次决定，而非只增加记录或生成泛泛建议。",
+      "scenario": "实际已做完，判断某动作应维持、校准、进阶或减量。",
+      "decision": "先已有App/Notes实际与可比历史；只问会改变决定的恢复/技术等缺项；维持也是有效结果。",
+      "tradeoff": "能给可执行重量才给；关键缺项则给有条件校准和未知，避免伪精确。",
+      "not_now": "无实际就造一周；追求每次加重；越过专业医疗/营养约束。",
+      "inputs": "用户指定训练范围，当前实际，原处方，C1与已有恢复/不适反馈。",
+      "output": "outputs/training-review/2026-10-25-r4-training-review.md；outputs/training-plan/2026-10-25-next-lower-candidate.md；结构化证据同目录r4-evidence.json。",
+      "exit": "每项变化有可比依据或校准条件；全部方案可审阅；未知和替代解释明确；完整版本等待确认。",
+      "evaluation": "R4本轮复盘/完整提案/具体确认已有证据；应用1/1在C3回读，后续实际/效果独立，不报日常总闭环率。",
+      "depends_on": [
+        "C1",
+        "A3"
+      ],
+      "trigger": "确认整体树后，先定位已有已完成记录；只补关键缺项，不要求重抄或凑周。",
+      "stop_or_reopen": "没有恢复信息降低结论强度；疼痛/技术问题优先限制对应动作，不编医学结论。",
+      "evidence": [
+        "docs/training/训练编排方法.md",
+        "docs/training/用户训练偏好.md",
+        "docs/training/力量表现档案.md"
+      ],
+      "workflow": "WF4",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "AND：直接前置全部就绪；各前置之间可并行",
+      "current_result": "复盘和完整C1已确认；后续10/26应用已在C3回读，原提案保留。"
+    },
+    {
+      "id": "C3",
+      "branch": "C",
+      "title": "确认方案、应用回读与下一次反馈",
+      "priority": "P1",
+      "status": "待真实输入",
+      "purpose": "把已审阅决定落地，并知道它是否适合你。",
+      "scenario": "确认完整方案后只写一次；下次同动作反馈用于复核。",
+      "decision": "方案单独确认；计划/偏好追加版本；真实反馈与原处方并存。",
+      "tradeoff": "保留操作门换取数据与训练控制；一次成功不证明最优剂量。",
+      "not_now": "整体树批准后自动写计划；自动续排；从建议直接覆盖实际。",
+      "inputs": "C2完整方案、本人确认、当前目标日程及后续真实训练。",
+      "output": "当前完整周方案：`outputs/training-plan/2026-10-26-lower-chain-week-confirmed.md`；五日回读及重复0证据：`artifacts/training-sync/20261025-lower-chain-week/final-verification.json`；原C1提案/同步链保留。后续真人反馈待取得。",
+      "exit": "写入成功与独立回读齐全、重复新增0、原记录保留；下次真实反馈独立标记，不因无未来样本否定已应用链。",
+      "evaluation": "K3拆成提案/确认/应用/反馈各阶段；已有R1一次落地是历史样本，不当本次成功。",
+      "depends_on": [
+        "C2"
+      ],
+      "trigger": "当前周计划应用及回读已完成；本人自然训练及后续接受度/恢复到达后复盘，不重复导入或提前自动续排。",
+      "stop_or_reopen": "目标变化/回执未知先核同一意图；无新反馈不虚构改善。",
+      "evidence": [
+        "docs/training/训练编排方法.md",
+        "docs/operations/项目循环手册.md",
+        "docs/requirements/2026-10-25/104305_c1-clean-app-sync.md",
+        "docs/requirements/2026-10-25/230536_lower-chain-week-phone.md",
+        "artifacts/stage-validation/20261026-opengym-build33-device/weekly-plans-preservation.json"
+      ],
+      "workflow": "WF4",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "单一前置",
+      "current_result": "当前安排已由本人后续确认修订为10/26—11/1下肢专项：前链、后链、综合含高翻＋两次跳绳，五日计划已同步，重复新增0；旧C1处方留档。Build33升级后五日全部字段仍一致，真实训练/恢复尚未发生。"
+    },
+    {
+      "id": "D1",
+      "branch": "D",
+      "title": "力量、身体趋势与恢复的可比观察",
+      "priority": "P1",
+      "status": "待真实输入",
+      "purpose": "检查是否朝减脂期间保留力量与训练质量的方向前进。",
+      "scenario": "同动作/器械/单位重复记录，结合可比较身体测量和恢复。",
+      "decision": "结果和驱动分开；已确认偏好不等于数值减重目标；先建立可比样本。",
+      "tradeoff": "接受小样本只能观察关联；不把体重单次波动或吨位当肌肉/能力效果。",
+      "not_now": "减重截止日、未经确认的营养数值、跨器械排行或因果疗效。",
+      "inputs": "可比实际组、动作质量/恢复、带来源的身体测量；缺项不补零。",
+      "output": "可比对/排除对、变化及混杂因素、下一最小观察。",
+      "exit": "至少有真实可比前后记录才报变化；测量口径/删改/缺失明确；无样本标unknown。",
+      "evaluation": "同动作同设置下负重/次数/真实RIR/质量；身体趋势另列，无自动综合分。",
+      "depends_on": [
+        "C1"
+      ],
+      "trigger": "有新的可比训练或自然测量；不强制新增称重/极限测试。",
+      "stop_or_reopen": "口径变动不拼接；疾病/用药等解释由专业人员判断；数据不支持即保留未知。",
+      "evidence": [
+        "docs/training/用户训练偏好.md",
+        "docs/training/力量表现档案.md"
+      ],
+      "workflow": "WF4",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "只需可比口径；不依赖A4记录负担基线"
+    },
+    {
+      "id": "D2",
+      "branch": "D",
+      "title": "真实餐食原图与指定范围评估",
+      "priority": "P2",
+      "status": "条件候选",
+      "purpose": "在你实际开始用时，让餐食记录支持回顾且原图可靠。",
+      "scenario": "仅拍照片保存；指定真实范围后评估一次、审阅后回写。",
+      "decision": "继承C10：真实使用并明确要求后才启动；原图链和周评估分开。",
+      "tradeoff": "保留未来价值，当前不要求测试餐或重做已关闭阶段。",
+      "not_now": "空照片样本、自动营养处方、从无照片推未进食、先建服务器。",
+      "inputs": "本人真实餐食/原图及明确指定范围；专业限制保持。",
+      "output": "原图保存/追加/重开/导出/隔离恢复证据；有来源的估算与确认版本。",
+      "exit": "真实原图链各门分别通过；周评估另需指定真实周；本人确认一次后写回，原值/原图保持。",
+      "evaluation": "照片样本当前0；33餐记录不等于33张照片；原图恢复仍NOT_RUN。",
+      "depends_on": [],
+      "trigger": "本人开始真实拍照并明确要求；无需等满周即可验原图，评估周另按真实资料。",
+      "stop_or_reopen": "原图/权限/来源不足停止对应分支，保留原数据；不编估算为事实。",
+      "evidence": [
+        "docs/requirements/2026-10-13/131921_remaining-business-convergence.md",
+        "docs/meal-photo-workflow.md",
+        "artifacts/external-exercises/20261024-cross331/final-verification.json"
+      ],
+      "workflow": "WF5",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "E1",
+      "branch": "E",
+      "title": "有限交付批次与数据保护",
+      "priority": "P0",
+      "status": "已交付证据",
+      "purpose": "让已确认功能到手机可用，同时保住长期实际。",
+      "scenario": "先备份当前手机，再覆盖安装，正常启动并逐字段核对。",
+      "decision": "本轮Build33按明确授权无线覆盖；当前手机完整备份后安装，真机单元后恢复正常Release，再逐字段核对。Build32旧证据保留。",
+      "tradeoff": "集中有限批次减少设备打断；本地就绪和手机生效严格分开。",
+      "not_now": "为通过率删除断言；以旧快照覆盖当前手机；自动提交/发布。",
+      "inputs": "具名需求、冻结候选、当前设备数据及授权。",
+      "output": "版本/范围读回，安装前后及测试后UUID/业务字段/关系/文件守恒。",
+      "exit": "Build33手机版本/正常Release及当前25表2523行、4文件、主/共享设置全部守恒；全量单元497通过/5原跳过。UI与人工门继续独立。",
+      "evaluation": "本批本地8检查、设备部署/单元/数据核对通过；完整真机UI暂停、人工未验，阶段非GO。",
+      "depends_on": [],
+      "trigger": "本批交付完成；新交付仍需具体授权、当前备份和对应完整门禁。",
+      "stop_or_reopen": "核心记录减少/P0P1失败停止；未知安装回执先读回，不重装重导。",
+      "evidence": [
+        "docs/requirements/2026-10-24/202853_build32-ui.md",
+        "artifacts/external-exercises/20261024-cross331/final-verification.json",
+        "docs/requirements/2026-10-25/232048_opengym-build33-device.md"
+      ],
+      "workflow": "WF6",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "E2",
+      "branch": "E",
+      "title": "真实体验反馈及最小产品修复",
+      "priority": "P1",
+      "status": "待真实输入",
+      "purpose": "解决你训练时确实遇到的阻碍，同时保留UI风格和紧凑布局。",
+      "scenario": "找动作/录一组/改期/保存时出现卡点，按原清单反馈具体场景。",
+      "decision": "自然体验和电脑测试分开；保留已接受手感；只改有失败证据的最小路径。",
+      "tradeoff": "保持熟悉信息层级；解释折叠，完整取证放文档；无新问题不重构。",
+      "not_now": "重做视觉、常驻长说明、同条件反复跑真机UI；已取消物理P95不属于未来候选。",
+      "inputs": "明确版本/操作/实际与预期、原人工清单、必要截图或已有证据。；当前生成清单仍含旧Build11表头，使用前须按Build32需求AC重新映射，不以旧勾选框数作分母。",
+      "output": "本人接受或具名问题→最小修复需求→验证→实际复验。",
+      "exit": "已指定人工项由本人填写；问题有复现/接受/保留未知；不代填。修改仍先确认具体需求。",
+      "evaluation": "人工BLOCKED_HUMAN保持；真机UI BLOCKED_ENV/0用例单列，不能用模拟器或体验替代。",
+      "depends_on": [
+        "A1",
+        "A2",
+        "B1",
+        "E1"
+      ],
+      "trigger": "自然使用反馈或明确恢复专项；完整真机UI仅新定位证据+明确范围恢复。",
+      "stop_or_reopen": "同障碍连续两轮无增量停止盲试；不复活旧已取消要求。",
+      "evidence": [
+        "docs/requirements/2026-10-24/202853_build32-ui.md",
+        "docs/X-Fit_真机人工测试清单.md",
+        "docs/requirements/2026-10-13/131921_remaining-business-convergence.md"
+      ],
+      "workflow": "WF6",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "AND：直接前置全部就绪；各前置之间可并行"
+    },
+    {
+      "id": "F1",
+      "branch": "F",
+      "title": "固定dashboard与可恢复任务树",
+      "priority": "P1",
+      "status": "已交付证据",
+      "purpose": "一句话能看到已完成、缺口、阻塞、下一步，防止主线被研究支线替代。",
+      "scenario": "打开同一Notion工作台看当前状态，再展开某任务的理由/验收。",
+      "decision": "复用原Hub/三库/R3历史；R4为待整体确认草案；不重置旧7/8或扩库。",
+      "tradeoff": "首页压缩、细节折叠；不做一个混合总百分比；最小本地结构驱动展示。",
+      "not_now": "新通用调度器、更多数据库、重写旧关闭状态。",
+      "inputs": "本轮原始需求、现有需求档案、当前资源/交付证据与已确认决策。",
+      "output": "同一Hub当前面板、完整可审阅树及本地恢复源。",
+      "exit": "17叶完整、依赖无环、原工作台已回读；本人已明确整体确认。后续结果继续更新原负责段，具体处方仍单独确认。",
+      "evaluation": "草案覆盖17/17不算执行完成；Notion同步/本人确认各有实际状态。",
+      "depends_on": [],
+      "trigger": "本轮已授权准备和更新草案；业务执行等整体确认。",
+      "stop_or_reopen": "无新事实不另建报告；展示冲突只暂停冲突写入。",
+      "evidence": [
+        "docs/operations/项目循环手册.md",
+        "outputs/planning/xfit-business-task-tree-r3.md",
+        "docs/operations/notion-state.json"
+      ],
+      "workflow": "WF0",
+      "owner": "Codex维护；Edward整体决策",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "无强制前置"
+    },
+    {
+      "id": "F2",
+      "branch": "F",
+      "title": "重复任务的Skill复用与效果校准",
+      "priority": "P2",
+      "status": "方法可用",
+      "purpose": "减少重复解释和同类错误，让方法在真实任务上更可靠。",
+      "scenario": "用训练教练复盘、研究核疑、项目循环续任务，个人数据不塞Skill。",
+      "decision": "复用现有Skill；只在真实重复缺口/失败后修改最小方法；项目事实留项目。",
+      "tradeoff": "先真实结果再扩框架；AI评审是候选，原始来源和本人意见仍权威。",
+      "not_now": "现在新建一堆Skill、自动学习一切、自动恢复Context Router。",
+      "inputs": "一个重复任务及原成功/失败/边界案例，当前Skill版本。",
+      "output": "触发/输入/输出/停止门与小型回归例；必要时单独预览Skill变更。",
+      "exit": "原正常/关键反例/缺输入例均检查；实际任务复用无重复解释/错误复发证据才称改善。",
+      "evaluation": "实际任务成功/补救/返工、关键误判；token/工具调用仅成本线索。",
+      "depends_on": [
+        "F1"
+      ],
+      "trigger": "重复失败或可比较真实任务表明方法需要变；不为跑循环而改。",
+      "stop_or_reopen": "无业务阻断不建adapter；任何关键越权/误合并立即停止候选方法。",
+      "evidence": [
+        "docs/operations/项目循环手册.md",
+        "docs/training/训练编排方法.md"
+      ],
+      "workflow": "WF7",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "单一前置"
+    },
+    {
+      "id": "F3",
+      "branch": "F",
+      "title": "问题、决策和经验反馈入同一循环",
+      "priority": "P2",
+      "status": "方法可用",
+      "purpose": "让成功能复用、失败能改变下一步，避免反复诊断同一未知。",
+      "scenario": "新增问题保留原话，记录预期/实际/替代解释和保留/改/停。",
+      "decision": "沿原工作项与决策学习库；通用方法和个人事实分开；经验默认候选。",
+      "tradeoff": "只存会改变未来行为的结论；原正文写一次，其余用指针。",
+      "not_now": "自动晋升全局记忆/Skill；因文件数量增加判进展。",
+      "inputs": "具名真实事件、原决策、来源、作用范围、负例与修复结果。",
+      "output": "问题→最小方案→验证→反馈；必要决策条目及重开条件。",
+      "exit": "每个实质失败有原因边界/下一动作；unknown不编根因；成功有适用范围；下一任务实际引用或明确不适用。",
+      "evaluation": "重复解释/返工/复发是否减少；无可比案例则改善unknown。",
+      "depends_on": [
+        "F1"
+      ],
+      "trigger": "真实任务结束/新失败/决定改变；不按日期例行制造日志。",
+      "stop_or_reopen": "连续两个可执行产品任务只产治理材料则重审路径；未知写入先核结果。",
+      "evidence": [
+        "docs/operations/项目循环手册.md",
+        "docs/requirements/2026-10-24/231501_opengym331.md",
+        "docs/requirements/2026-10-13/131921_remaining-business-convergence.md"
+      ],
+      "workflow": "WF7",
+      "owner": "Codex整理；Edward确认/自然使用",
+      "authorization": "R4整体已确认；已授权本地任务按真实输入与证据门推进。具体计划写入、手机安装及范围外修改仍各走原确认门。",
+      "dependency_mode": "单一前置"
+    }
+  ],
+  "metrics_definition_note": "K1–K3沿原业务定义；O1是本轮新增观察标签，不覆盖R3的K4协作/K5餐食诊断含义。既有K4固定双空间验收已按C11被替代；相关历史保留。",
+  "current_iteration": {
+    "id": "R4-FIRST-REVIEW",
+    "requirement": "REQ-20261025-095837",
+    "status": "confirmed_week_applied_pending_natural_training_feedback",
+    "review": "outputs/training-review/2026-10-25-r4-training-review.md",
+    "candidate": "outputs/training-plan/2026-10-25-next-lower-candidate.md",
+    "candidate_id": "NEXT-LOWER-20261025-C1",
+    "observed": "近7天120条抗阻/核心完成行及35分钟单车；10/23十动作48条；未知组性质/RIR保持。",
+    "owner_feedback": "10/23后未再训练、当前身体正常；未另说明沿用当前健身房和通常60–90分钟。",
+    "proposal": "当前完整处方见`outputs/training-plan/2026-10-26-lower-chain-week-confirmed.md`；三课39腿工作＋4高翻技术＋3核心，跳绳10/12轮。原C1仅作确认与修订历史，未覆盖原处方。",
+    "stage_counts": "R4首轮复盘/提案/确认/应用1/1是历史；后续本人确认周修订五日计划已应用5/5、同包重复新增0。两批为不同意图，后续真实训练/恢复样本仍0，不合并为日常覆盖率。",
+    "catalog": "329/329复核；0365/0366译名与说明收窄2条，清标0，仍329。5条有新增外查/采纳活动，324条无新路径；旧查询、失败与同源复述不计新证据。18服务＋5独立UI通过，正常主预览25表2523行/4文件/设置保持。仅本地，手机Build33未接收这两条。",
+    "next": "按当前已确认下肢专项周计划自然训练，在App记录真实实际、技术质量与不适；练后和次晨反馈到达再复盘，不重导或自动续排。329待核仅按已练相关及解释原疑点的新证据触发。",
+    "phone_product_writes": 1,
+    "catalog_delta_requirement": "REQ-20261026-095750",
+    "catalog_delta_status": "local_verified_after_build33_phone_delivery",
+    "sync_requirement": "REQ-20261025-104305",
+    "headline": "当前安排已由本人后续确认修订为10/26—11/1下肢专项：前链、后链、综合含高翻＋两次跳绳，五日计划已同步，重复新增0；旧C1处方留档。Build33升级后五日全部字段仍一致，真实训练/恢复尚未发生。",
+    "local_prepared_exercises": 6,
+    "local_prepared_sets": 20,
+    "date_status": "owner_confirmed",
+    "device_status": "wireless_applied_and_full_readback_PASS",
+    "sync_evidence": "artifacts/training-sync/20261025-c1/final-verification.json",
+    "localDay": "2026-10-26",
+    "app_apply_count": 1,
+    "repeat_new_schedule_count": 0,
+    "main_preview": "normal local Build33 with0365/0366 catalog delta; data source phone07:49; cloud off; no phone write",
+    "historical_c1_headline": "10/26（周一）C1主方案＋高翻已同步App：6动作20计划组位置；首次新增1日程，重复新增0。原2489行业务字段/ID全保留，新增8行仅本次计划；真实训练/恢复尚未发生。",
+    "historical_c1_proposal": "已确认10/26：高翻在前4×每侧片重20×3；同机腿举105→110→115→115（条件递增）、扶架单哑铃30每侧8–10×3、同机腿弯举25→30→30、腿屈伸50→55→55（条件）、死虫每侧6–10×3；4技术＋13腿工作＋3核心，原口径/热身/休息/90分钟停止保留。",
+    "current_week_requirement": "REQ-20261025-230536",
+    "current_week_plan": "outputs/training-plan/2026-10-26-lower-chain-week-confirmed.md",
+    "current_week_evidence": "artifacts/training-sync/20261025-lower-chain-week/final-verification.json",
+    "build33_week_preservation": "artifacts/stage-validation/20261026-opengym-build33-device/weekly-plans-preservation.json"
+  },
+  "catalog_review": {
+    "id": "CROSS329-20261025",
+    "requirement": "REQ-20261025-200715",
+    "status": "LOCAL_VALIDATED",
+    "reviewed": 329,
+    "actualSuccessfulWebSearchQueries": 9,
+    "IDsWithTargetedExternalLookup": 4,
+    "IDsWithoutNewTargetedExternalLookup": 325,
+    "failedConnectorSearchAttempts": 1,
+    "namesCorrected": 1,
+    "notesNarrowed": 1,
+    "flagsCleared": 0,
+    "remaining": 329,
+    "source": "artifacts/external-exercises/20261025-cross329/final-verification.json",
+    "previous": "artifacts/external-exercises/20261025-cross330-r2/final-verification.json",
+    "next": "仅以能解释原始疑点的新作者说明、具体协议/手册或真实变式证据重开相应条目；全量覆盖不等于全量新增外搜，先去重后有限取证。"
+  },
+  "phone_delivery": {
+    "id": "BUILD33-CATALOG-DELIVERY",
+    "requirement": "docs/requirements/2026-10-25/232048_opengym-build33-device.md",
+    "status": "installed_data_verified",
+    "summary": "Build33已保留数据无线更新并恢复正常Release；1324来源/329待核。当前25表2523行全部业务字段、UUID关系、4文件及主/共享设置守恒；真机497单元通过/5原跳过，UI/人工独立待验。",
+    "phone_writes": null,
+    "source": "artifacts/stage-validation/20261026-opengym-build33-device/delivery-status.json",
+    "non_device": {
+      "status": "PASS",
+      "passed_gates": 8,
+      "total_gates": 8,
+      "unit_pass": 502,
+      "ui_status": "PASS",
+      "expected_ui_total": 169,
+      "ui_pass": 161,
+      "ui_skip": 8,
+      "ui_fail": 0,
+      "wrapper_finalization": "Recovered report only; raw exit2 retained"
+    },
+    "device_unit": "PASS",
+    "device_ui": "BLOCKED_ENV",
+    "human": "BLOCKED_HUMAN",
+    "stage_go": false,
+    "updated_at": "2026-10-26T07:55:49.300152+08:00",
+    "target_version": "0.5.0 Build33",
+    "next_gate": "完整真机UI继续暂缓；真人体验及自然训练效果独立待验，不标阶段GO",
+    "device_lock": "UNLOCKED_AT_EXECUTION",
+    "explicit_cover_installs": 2,
+    "training_data_edits": 0,
+    "device_unit_pass": 497,
+    "device_unit_skip": 5
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "phone_independent_readback_unchanged": true,
+  "cold_restart_model_fields_match": true,
+  "preference_keys_checked": 2,
+  "missing_preference_keys": [],
+  "changed_preference_keys": [],
+  "today_client_date": "2026-10-19",
+  "oct18_oct19_schedule_source": [
+    {
+      "ZPLANNEDLOCALDAY": "2026-10-19",
+      "ZTEMPLATENAME": "胸部＋三头 · R1 · 20组",
+      "ZSTATUSRAW": "skipped"
+    },
+    {
+      "ZPLANNEDLOCALDAY": "2026-10-19",
+      "ZTEMPLATENAME": "胸部＋三头 · R2建议预填 · 20组",
+      "ZSTATUSRAW": "inProgress"
+    }
+  ],
+  "recent_session_source": [
+    {
+      "ZTEMPLATENAME": "胸部＋三头 · R2建议预填 · 20组",
+      "ZTRAININGLOCALDAY": "2026-10-19",
+      "ZSTATUSRAW": "inProgress"
+    },
+    {
+      "ZTEMPLATENAME": "胸部＋三头 · R2建议预填 · 20组",
+      "ZTRAININGLOCALDAY": "2026-10-19",
+      "ZSTATUSRAW": "discarded"
+    }
+  ]
+}

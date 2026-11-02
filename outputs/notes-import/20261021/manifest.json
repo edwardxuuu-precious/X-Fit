@@ -1,0 +1,22 @@
+{
+  "status": "applied_and_phone_verified",
+  "date": "2026-10-21",
+  "sourceNoteID": "x-coredata://398652F2-410F-4034-BAD1-03D6EF649FE6/ICNote/p360",
+  "sourceNoteModifiedAt": "2026-10-21T08:45:33+08:00",
+  "sourceTranscriptionSHA256": "547df2dfb03d9164206471aa392724ec098aaab1c105a233b3690b2ce75a55de",
+  "packet": "/Users/edward/Documents/Fitness App/outputs/notes-import/20261021/confirmed-notes-20261021-workout-v1.json",
+  "packetSHA256": "57108a6f0251167c86b8086582327413ff85f003e2a9f82bdea31a487616829d",
+  "sourceActions": 8,
+  "sourceRows": 34,
+  "allUnits": "kilogram",
+  "sidePolicy": "unknown",
+  "targetPlanID": "705a3157-22f9-5d08-90b8-39c0e2088ea8",
+  "targetPlanAction": "skipped_via_app_UI_and_independently_read_back",
+  "skipReason": "本人确认：以2026-10-21 Apple Notes「Oct 21」实际训练替代今日R5，原处方保留。",
+  "beforeTables": 25,
+  "beforeRecords": 2324,
+  "newCatalogNamesExpected": 8,
+  "preserveDiscardedSessions": true,
+  "savedSkipReason": "Owner confirmed 2026-10-21 Apple Notes Oct 21 actual workout replaces R5； original prescription retained.",
+  "finalVerification": "outputs/notes-import/20261021/verification.json"
+}

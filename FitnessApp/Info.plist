@@ -27,7 +27,7 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>X-Fit 仅在你授权后把已完成的力量训练写入 Apple 健康。</string>
 	<key>NSCameraUsageDescription</key>
-	<string>X-Fit 使用相机拍摄健身器械和说明标牌，识别可做动作与目标肌群。</string>
+	<string>X-Fit 使用相机拍摄餐食并保存在本机，也可拍摄健身器械和说明标牌。餐食照片不会自动上传服务器。</string>
 	<key>EQUIPMENT_RECOGNITION_ENDPOINT</key>
 	<string>$(EQUIPMENT_RECOGNITION_ENDPOINT)</string>
 	<key>WELLNESS_AGENT_ENDPOINT</key>

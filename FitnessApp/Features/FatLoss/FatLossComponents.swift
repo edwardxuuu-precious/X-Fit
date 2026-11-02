@@ -4,11 +4,10 @@ struct FatLossProgressLink: View {
     var body: some View {
         NavigationLink(destination: FatLossDashboardView()) {
             HStack(spacing: 14) {
-                Image(systemName: "chart.xyaxis.line")
-                    .font(.title2).foregroundStyle(AppTheme.accent)
+                SprintIcon(systemName: "chart.xyaxis.line", size: 48, prominent: true)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("减脂周期").font(.headline).foregroundStyle(.white)
-                    Text("体重 · 餐食 · 训练 · 每周复盘")
+                    Text("减脂周期").font(.headline).foregroundStyle(AppTheme.ink)
+                    Text("体重 · 餐食 · 训练")
                         .font(.caption).foregroundStyle(AppTheme.secondaryText)
                 }
                 Spacer()
@@ -26,7 +25,7 @@ struct FatLossMetric: View {
     let label: String
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(value).font(.title3.bold().monospacedDigit()).foregroundStyle(.white)
+            Text(value).font(.title3.bold().monospacedDigit()).foregroundStyle(AppTheme.ink)
             Text(label).font(.caption2).foregroundStyle(AppTheme.secondaryText)
         }.frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -47,12 +46,12 @@ struct FatLossNavigationRow: View {
     var trailing: String? = nil
     var body: some View {
         HStack(spacing: 13) {
-            Image(systemName: icon).font(.body).frame(width: 24).foregroundStyle(AppTheme.secondaryText)
-            Text(title).font(.subheadline.weight(.medium)).foregroundStyle(.white)
+            SprintIcon(systemName: icon, size: 36)
+            Text(title).font(.subheadline.weight(.medium)).foregroundStyle(AppTheme.ink)
             Spacer(minLength: 8)
             if let trailing { Text(trailing).font(.caption).foregroundStyle(AppTheme.secondaryText) }
             Image(systemName: "chevron.right").font(.caption2.bold()).foregroundStyle(AppTheme.secondaryText)
-        }.frame(maxWidth: .infinity, minHeight: 52, alignment: .leading).contentShape(Rectangle())
+        }.frame(maxWidth: .infinity, minHeight: 60, alignment: .leading).contentShape(Rectangle())
     }
 }
 
@@ -80,6 +79,7 @@ extension View {
             .environment(\.timeZone, FatLossCalendar.calendar.timeZone)
             .environment(\.defaultMinListRowHeight, 52)
             .buttonStyle(FatLossQuietButtonStyle())
+            .sprintPage()
     }
 
     func fatLossError(_ message: Binding<String?>) -> some View {

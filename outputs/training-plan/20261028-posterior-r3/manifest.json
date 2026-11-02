@@ -1,0 +1,62 @@
+{
+  "status": "APPLIED_READBACK_VERIFIED",
+  "localDay": "2026-10-28",
+  "id": "5b024606-dbe3-59d6-a3b4-dca35b24fd60",
+  "file": "CONFIRMED-2026-10-28-r3.json",
+  "title": "下肢后侧动力链 R3 · 6动作",
+  "oldScheduleID": "a7d06e41-feb1-5d44-b755-d211bd263683",
+  "reviewedSHA256": "4ffe9462248890d7a35a6cb3356cd62048f3c0d9056161ddee29a39e3d1c3d2e",
+  "sourceSHA256": "2fe53c9cbd84031f8f7d688a02e254a711148a6ed5221635614b4f01230fe536",
+  "payloadSHA256": "5fb62c2da3b1e5c6dc8a06398637f88d4bd2cb22774efa1a31f297dc89c686a5",
+  "catalogAdditions": [
+    {
+      "id": "e0234c19-749c-4e15-bbfc-3f0696e62ba9",
+      "name": "双手髋铰链壶铃摆动",
+      "equipment": "壶铃",
+      "muscleGroup": "臀部",
+      "volumeUnit": "kilogram",
+      "defaultRestSeconds": 120
+    },
+    {
+      "id": "a556e14c-502a-4867-959d-72e9369126ab",
+      "name": "罗马椅髋伸",
+      "equipment": "罗马椅＋可选负重片",
+      "muscleGroup": "臀部",
+      "volumeUnit": "kilogram",
+      "defaultRestSeconds": 90
+    },
+    {
+      "id": "74eb322c-65bd-43cd-8dea-29c2af0d1858",
+      "name": "臀桥脚跟走步",
+      "equipment": "地垫",
+      "muscleGroup": "腿部",
+      "volumeUnit": "count",
+      "defaultRestSeconds": 90
+    }
+  ],
+  "formalExercises": 6,
+  "resistanceSets": 18,
+  "technicalSets": 3,
+  "estimatedMinutes": 86.92,
+  "ownerConfirmation": "artifacts/training-sync/20261027-wednesday-r3/owner-confirmation.json",
+  "newSchedules": 1,
+  "conflictReview": "outputs/training-plan/20261028-posterior-r3/delivery-conflict-review.md",
+  "discardedDraftID": "3e89bc18-61f2-45bf-9133-2c5b0392a341",
+  "appCodeChanged": true,
+  "actualRowsChanged": 0,
+  "catalogEntriesCreated": 3,
+  "localValidation": "artifacts/training-sync/20261027-wednesday-r3/code/local-validation.json",
+  "softwareConfirmation": "artifacts/training-sync/20261027-wednesday-r3/software-owner-confirmation.json",
+  "targetPhoneBuild": "35",
+  "verification": "artifacts/training-sync/20261027-wednesday-r3/final-verification.json",
+  "repeatNewSchedules": 0,
+  "phoneVersion": "0.5.0",
+  "phoneBuild": "35",
+  "softwareInstallation": "artifacts/training-sync/20261027-wednesday-r3/installation-verification.json",
+  "oldDiscardedDraftPreserved": true,
+  "mainSimulatorVerification": "artifacts/simulator-real-data/20261027-224908/result.json",
+  "deviceUIVerification": "artifacts/training-sync/20261027-wednesday-r3/ui-verification.json",
+  "deliveryReceipt": "outputs/training-plan/20261028-posterior-r3/delivery.md",
+  "historicalPreviewConflict": "待修订日程已有实际训练或草稿，不能替换",
+  "explicitAppDraftReviewAccepted": true
+}

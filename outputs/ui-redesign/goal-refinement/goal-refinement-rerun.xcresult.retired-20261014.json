@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "requirement": "REQ-20261014-133439",
+  "original_path": "outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult",
+  "original_tree": {
+    "files": 38,
+    "nodes": 39,
+    "logical_bytes": 2069467,
+    "allocated_bytes": 2199552,
+    "tree_sha256": "e6ee84d101da665cd1f4dd8174703951acc17e80bcdf51bd7b68a7ed13c6ea28",
+    "inode": 95722175,
+    "mtime": "2026-09-07T07:06:39.743Z"
+  },
+  "observed_at": "2026-10-14T05:42:08.157Z",
+  "disposition": "original_payload_removed_and_readback_verified",
+  "native_summary": {
+    "devicesAndConfigurations": [
+      {
+        "device": {
+          "architecture": "arm64",
+          "deviceId": "0B1E41EF-D1D4-49BD-9490-E30F45D833DC",
+          "deviceName": "iPhone 17 Pro",
+          "modelName": "iPhone 17 Pro",
+          "osBuildNumber": "23F77",
+          "osVersion": "26.5",
+          "platform": "iOS Simulator"
+        },
+        "expectedFailures": 0,
+        "failedTests": 0,
+        "passedTests": 1,
+        "skippedTests": 0,
+        "testPlanConfiguration": {
+          "configurationId": "1",
+          "configurationName": "Test Scheme Action"
+        }
+      }
+    ],
+    "environmentDescription": "FitnessApp · Built with macOS 26.6.2",
+    "expectedFailures": 0,
+    "failedTests": 0,
+    "finishTime": 1788764770.952,
+    "passedTests": 1,
+    "result": "Passed",
+    "runtimeWarnings": [],
+    "skippedTests": 0,
+    "startTime": 1788764710.297,
+    "statistics": [],
+    "testFailures": [],
+    "title": "Test - FitnessApp",
+    "topInsights": [],
+    "totalTestCount": 1
+  },
+  "native_read": {
+    "exit_code": 0,
+    "error": null
+  },
+  "previous_retirement_summary": "outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult.retired-summary.json",
+  "historical_reference_files": [],
+  "recoverability": "No full recovery copy is retained for payload retirement; native unreadable/error state is not PASS.",
+  "native_index_observation": {
+    "path": "outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult",
+    "original_tree": {
+      "files": 38,
+      "nodes": 39,
+      "logical_bytes": 2069467,
+      "allocated_bytes": 2199552,
+      "tree_sha256": "e6ee84d101da665cd1f4dd8174703951acc17e80bcdf51bd7b68a7ed13c6ea28",
+      "inode": 95722175,
+      "mtime": "2026-09-07T07:06:39.743Z"
+    },
+    "after_native_summary_read": {
+      "files": 38,
+      "nodes": 39,
+      "logical_bytes": 2069467,
+      "allocated_bytes": 2199552,
+      "tree_sha256": "233b388cd5ef60b52e9e7429e360a95d5779c1492c889a80cc96647beaa8a11b",
+      "inode": 95722175,
+      "mtime": "2026-10-14T05:42:08.152Z"
+    },
+    "index_paths": [
+      "outputs/ui-redesign/goal-refinement/goal-refinement-rerun.xcresult/database.sqlite3"
+    ],
+    "entire_original_tree_matches_when_excluding_new_indexes": false,
+    "older_existing_index_rebuilt": true,
+    "boundary": "xcresulttool creates/rebuilds root test-result SQLite index; original pre-read fingerprint retained, original non-index files have no refreshed mtime, full preservation is separately enforced for all protected source/business files."
+  },
+  "removed_at": "2026-10-14T05:48:09.237Z",
+  "final_receipt": "outputs/storage-retirement/20261014-project-consolidation.json"
+}

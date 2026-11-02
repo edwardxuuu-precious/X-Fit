@@ -1,0 +1,56 @@
+{
+  "raw_payload_retirement": "preserved_tracked_acceptance_and_rollback_material",
+  "original_bundle_path": "/Users/edward/Documents/Fitness App/outputs/stage-validation/20260902-template-bilingual-volume-device/agent-acceptance/xcresults/xfit-t5-run4.xcresult",
+  "original_body_fingerprint_sha256": "a42a3c18e4ae3da5a8fdc5cffd718235f5bcfb85f79d34c156f4781ffd312794",
+  "summary_read": {
+    "read_exit": 0,
+    "read_error": null,
+    "summary": {
+      "devicesAndConfigurations": [
+        {
+          "device": {
+            "architecture": "arm64",
+            "deviceId": "00008150-001E49912122401C",
+            "deviceName": "Edward_iPhone",
+            "modelName": "iPhone 17",
+            "osBuildNumber": "23G71",
+            "osVersion": "26.6",
+            "platform": "iOS"
+          },
+          "expectedFailures": 0,
+          "failedTests": 1,
+          "passedTests": 0,
+          "skippedTests": 0,
+          "testPlanConfiguration": {
+            "configurationId": "1",
+            "configurationName": "Test Scheme Action"
+          }
+        }
+      ],
+      "environmentDescription": "FitnessApp · Built with macOS 26.6.2",
+      "expectedFailures": 0,
+      "failedTests": 1,
+      "finishTime": 1788364556.956,
+      "passedTests": 0,
+      "result": "Failed",
+      "skippedTests": 0,
+      "startTime": 1788364437.662,
+      "statistics": [],
+      "testFailures": [
+        {
+          "failureText": "failed - 模板编辑器三次尝试均未加载出动作列表（持久化存储慢查询竞态）",
+          "targetName": "FitnessAppUITests",
+          "testIdentifier": 1,
+          "testIdentifierString": "FitnessAppUITests/testDeviceTemplateWritebackAfterFinishAndPersist()",
+          "testIdentifierURL": "test://com.apple.xcode/FitnessApp/FitnessAppUITests/FitnessAppUITests/testDeviceTemplateWritebackAfterFinishAndPersist",
+          "testName": "testDeviceTemplateWritebackAfterFinishAndPersist()"
+        }
+      ],
+      "title": "Test - FitnessApp",
+      "topInsights": [],
+      "totalTestCount": 1
+    }
+  },
+  "raw_archive_or_restore_available": false,
+  "raw_original_still_present": true
+}

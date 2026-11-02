@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "bundle_id": "com.edward.FitnessApp",
+  "version": "0.5.0",
+  "build": "21",
+  "installed_url": "file:///private/var/containers/Bundle/Application/DD98FC9C-9048-439C-B4A8-3B2E00F33685/FitnessApp.app/",
+  "running_pid": 28049,
+  "running_executable": "file:///private/var/containers/Bundle/Application/DD98FC9C-9048-439C-B4A8-3B2E00F33685/FitnessApp.app/FitnessApp",
+  "install_readback_and_live_process_paths_match": true,
+  "launch_arguments": [],
+  "app_activated_when_started": true
+}

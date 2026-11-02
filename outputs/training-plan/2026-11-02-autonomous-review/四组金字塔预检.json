@@ -1,0 +1,21 @@
+{
+  "status": "STRUCTURE_SIMULATED_INCREMENT_DECISION_PENDING",
+  "candidate": "四组金字塔预编排.md",
+  "candidateSHA256": "a3003283bdfaf8cae13439a97a006e0b322bcd9d41d068cc3435eb00895880eb",
+  "phoneSnapshot": "2026-10-29 18:41 +0800",
+  "phoneWritesThisRevision": 0,
+  "approvedScope": "本人要求各动作四个工作组、14/12/10/8递减与递增金字塔，维持90分钟上限且允许缩短组间休息。",
+  "pending": "主项及小肌群动作的5 kg增量范围、不同器械的计重口径与具体首组重量尚待本人答复或同机校准。",
+  "simulation": {
+    "test": "testPyramidFourSetStorageOnFreshPhoneCopy",
+    "result": "PASS",
+    "evidence": "/private/tmp/xfit-pyramid-replan-structure-sim-20261029-r2.xcresult",
+    "checks": ["三天按旧日程身份及摘要替换的隔离预检通过", "每个动作的四组逐组14/12/10/8及休息时间可回读", "原确认包保留", "重试预览新增0", "不新增实际训练及组记录"],
+    "limitations": ["模拟目标重量均为未指定占位，并未验证5 kg递增或真实负重", "来源数据Persistence-1629、模拟器Persistence-1526出现版本兼容告警，不代替真机预检或本人实际体验", "周教练旧规则仍把复合动作低于120秒的休息标为阻断，不等于自动编排已按本人新选择更新"]
+  },
+  "timeEstimates": {
+    "2026-11-02": {"exerciseCount": 8, "workSetCount": 32, "seconds": 5346},
+    "2026-11-04": {"exerciseCount": 7, "workSetCount": 28, "seconds": 5358},
+    "2026-11-06": {"exerciseCount": 8, "workSetCount": 32, "seconds": 5376}
+  }
+}

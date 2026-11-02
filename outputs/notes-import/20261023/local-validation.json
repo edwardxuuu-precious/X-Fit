@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "validatedAt": "2026-10-23T11:55:04.117126+08:00",
+  "sourceActions": 10,
+  "sourceRows": 48,
+  "sourceStableIDsUnique": true,
+  "draftAllOriginalValuesAndOrderExact": true,
+  "unknownTimesAndRepsSidesPreserved": true,
+  "assistanceCountOnlyInDraft": true,
+  "draftMetadataBlockedUntilFreshPhoneRead": true,
+  "skillQuickValidate": "PASS",
+  "newSkillIncrementHasNoPersonalLoadsOrAbsoluteWorkspace": true,
+  "newPointersResolve": true,
+  "unrelatedPreexistingMissingLinks": [],
+  "phoneImport": "NOT_RUN",
+  "phoneReadback": "NOT_RUN",
+  "phoneWrites": 0
+}

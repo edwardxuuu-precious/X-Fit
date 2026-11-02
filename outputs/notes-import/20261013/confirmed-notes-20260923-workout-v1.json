@@ -1,0 +1,135 @@
+{
+  "version": 1,
+  "packageID": "notes-20260923-wednesday-bench-workout-v1",
+  "timeZoneIdentifier": "Asia/Shanghai",
+  "workouts": [
+    {
+      "id": "2026-09-23-wednesday-bench-press",
+      "date": "2026-09-23",
+      "name": "Wednesday Bench press",
+      "durationMinutes": null,
+      "notes": "来源：Apple Notes「Wednesday Bench press」（2026-09-23）；原文所列37组均已勾选。按用户已确认的训练记录单位使用kg；具体开始时间、时长、RIR及所有组的单双侧口径未记录，保持未知。未在Notes注明器械的动作按未记录保存。",
+      "scheduleTemplateCode": "TRAVEL_CHEST_B",
+      "startTimeKnown": false,
+      "exercises": [
+        {
+          "name": "Bench press",
+          "muscleGroup": "胸部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes未注明器械及侧别。",
+          "sets": [
+            {"weight": 20, "reps": 14, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 25, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 35, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 40, "reps": 6, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 14, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "Inclined Bench Press",
+          "muscleGroup": "胸部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes未注明器械及侧别。",
+          "sets": [
+            {"weight": 20, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 25, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "MTS machine declined bench press",
+          "muscleGroup": "胸部",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes注明MTS machine；组次及器械负荷口径按原文，不推断单双侧。",
+          "sets": [
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 30, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "seated dip",
+          "muscleGroup": "手臂",
+          "equipment": "器械",
+          "volumeUnit": "kilogram",
+          "notes": "沿用现有历史动作条目的原名及器械类别；Notes未注明侧别。",
+          "sets": [
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 35, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "seated fly",
+          "muscleGroup": "胸部",
+          "equipment": "未记录",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes未明确器械及侧别。",
+          "sets": [
+            {"weight": 15, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 20, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "Cable 中束平举",
+          "muscleGroup": "肩部",
+          "equipment": "绳索",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes注明Cable；单双侧口径未记录。",
+          "sets": [
+            {"weight": 5, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 5, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 10, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 2.5, "reps": 16, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "cable 前束平举",
+          "muscleGroup": "肩部",
+          "equipment": "绳索",
+          "volumeUnit": "kilogram",
+          "notes": "原Notes注明cable；单双侧口径未记录。",
+          "sets": [
+            {"weight": 2.5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 5, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 8, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 5, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 2.5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        },
+        {
+          "name": "cable 后束下拉",
+          "muscleGroup": "肩部",
+          "equipment": "绳索",
+          "volumeUnit": "kilogram",
+          "notes": "按Notes名称原样保留；原文未注明单双侧或具体器械型号。",
+          "sets": [
+            {"weight": 2.5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 15, "weightSide": "unknown", "repsSide": "unknown"},
+            {"weight": 7.5, "reps": 12, "weightSide": "unknown", "repsSide": "unknown"}
+          ]
+        }
+      ]
+    }
+  ],
+  "bodyMeasurements": [],
+  "meals": [],
+  "jumpRopeEntries": [],
+  "voidMealIDs": [],
+  "staleSession": {
+    "plannedDate": "2026-09-23",
+    "templateName": "胸肩 B＋三头 · 出发前减量"
+  }
+}

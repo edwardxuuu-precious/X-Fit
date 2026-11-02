@@ -1,0 +1,23 @@
+{
+  "status": "PHONE_PREVIEW_INSTALLED",
+  "verified_at": "2026-10-19T17:16:37.214633+08:00",
+  "device": "Edward_iPhone",
+  "version": "0.5.0",
+  "build": "20",
+  "overwrite_install": "PASS",
+  "normal_launch": "PASS",
+  "running_process_readback": "PASS",
+  "all_original_business_fields": "PASS",
+  "tables": 25,
+  "records_before": 2205,
+  "records_after": 2205,
+  "original_long_title_records": 2,
+  "backup": "artifacts/stage-validation/20261019-home-title-phone-preview-resumed/device-data/pre-install",
+  "requirement": "docs/requirements/2026-10-19/154708_home-training-title.md",
+  "candidate_source_binding": "artifacts/stage-validation/20261019-home-title-phone-preview-resumed/candidate-source-binding.json",
+  "field_conservation": "artifacts/stage-validation/20261019-home-title-phone-preview-resumed/original-fields-conservation.json",
+  "full_device_xctest": "NOT_RUN",
+  "human_acceptance": "BLOCKED_HUMAN",
+  "stage_go": false,
+  "native_phone_visual_readback": "NOT_RUN: Device Hub display remained Connecting display; installed version and process verified independently"
+}

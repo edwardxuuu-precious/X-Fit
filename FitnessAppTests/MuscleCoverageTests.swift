@@ -105,7 +105,9 @@ final class MuscleCoverageTests: XCTestCase {
         XCTAssertEqual(first.completedAt, completedAt)
         XCTAssertTrue(first.isCompleted)
         XCTAssertEqual(exercise.plannedSets[0].weightSide, .bilateral)
-        XCTAssertEqual(exercise.plannedSets[1].weightSide, .single)
+        XCTAssertEqual(exercise.plannedSets[1].weightSide, .bilateral)
+        XCTAssertEqual(second.targetWeightSide, .bilateral)
+        XCTAssertEqual(second.actualEntrySource, .manual)
     }
     func testMeasurementSideCannotChangeAllCompletedRows() {
         let workout = session()

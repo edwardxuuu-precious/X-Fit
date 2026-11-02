@@ -1,0 +1,62 @@
+{
+  "info" : {
+    "arguments" : [
+      "devicectl",
+      "device",
+      "copy",
+      "--timeout",
+      "45",
+      "--json-output",
+      "outputs/notes-import/20261013/9-23-device-apply/request-copy.json",
+      "to",
+      "--device",
+      "00008150-001E49912122401C",
+      "--source",
+      "/var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-3x0dhe6a/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+      "--destination",
+      "Documents/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+      "--domain-type",
+      "appDataContainer",
+      "--domain-identifier",
+      "com.edward.FitnessApp"
+    ],
+    "commandType" : "devicectl.device.copy.to",
+    "environment" : {
+      "TERM" : "dumb"
+    },
+    "jsonVersion" : 5,
+    "outcome" : "success",
+    "version" : "642.16"
+  },
+  "result" : {
+    "destination" : "file:///private/var/mobile/Containers/Data/Application/B897BDFD-0D66-4073-81A1-6F358D3DB997/Documents/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+    "deviceIdentifier" : "DC2912E0-36B3-5555-B66D-09C1A1DD12AD",
+    "domain" : "appDataContainer",
+    "domainIdentifier" : "com.edward.FitnessApp",
+    "file" : {
+      "metadata" : {
+        "extendedAttributes" : {
+
+        },
+        "lastModDate" : "2026-10-13T03:48:05.000Z",
+        "ownerGid" : 501,
+        "ownerUid" : 501,
+        "permissions" : 420,
+        "size" : 263
+      },
+      "name" : "/private/var/mobile/Containers/Data/Application/B897BDFD-0D66-4073-81A1-6F358D3DB997/Documents/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+      "relativePath" : "/private/var/mobile/Containers/Data/Application/B897BDFD-0D66-4073-81A1-6F358D3DB997/Documents/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+      "resources" : {
+        "isDirectory" : false,
+        "isHidden" : false,
+        "isReadable" : true,
+        "isSymbolicLink" : false,
+        "isWritable" : true
+      }
+    },
+    "source" : "file:///var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-3x0dhe6a/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json",
+    "sources" : [
+      "file:///var/folders/z9/y4tf7c4137s8505zlb3w6n6w0000gn/T/xfit-meal-exchange-3x0dhe6a/meal-request-993a3623-79b3-48d6-a98a-ec05b4134e8d.json"
+    ]
+  }
+}

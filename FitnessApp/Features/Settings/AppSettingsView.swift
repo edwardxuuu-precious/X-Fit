@@ -5,7 +5,7 @@ import UserNotifications
 
 struct AppSettingsView: View {
     enum Mode: String, CaseIterable {
-        case preferences = "偏好"
+        case preferences = "通用"
         case data = "数据"
     }
 
@@ -16,6 +16,7 @@ struct AppSettingsView: View {
     }
 
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Query private var schedules: [ScheduledWorkout]
     @Query private var bodyMeasurements: [BodyMeasurement]
     @Query private var exercises: [Exercise]
@@ -63,11 +64,7 @@ struct AppSettingsView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 22) {
                     if selectedMode == .preferences {
-                        VStack(alignment: .leading, spacing: 6) {
-                            Text("按你的节奏").font(.title2.weight(.bold))
-                            Text("提醒、连接与训练偏好")
-                                .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
-                        }
+                        SprintPageHeader(title: "设置", icon: "slider.horizontal.3")
                         reminderCard
                         healthCard
                         terminologyCard
@@ -83,14 +80,15 @@ struct AppSettingsView: View {
                     }
                     .font(.subheadline).tint(AppTheme.secondaryText)
                     .padding(.vertical, 6)
+                    .accessibilityIdentifier("设置-关于")
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 28)
             }
             .id(selectedMode)
         }
-        .screenBackground()
-        .navigationTitle("设置与数据")
+        .sprintPage()
+        .navigationTitle("设置")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
         .task {
@@ -140,7 +138,7 @@ struct AppSettingsView: View {
                 Button {
                     selectedMode = mode
                 } label: {
-                    Text(mode.rawValue)
+                    modeLabel(mode)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(selectedMode == mode ? Color.black : AppTheme.secondaryText)
                         .frame(maxWidth: .infinity, minHeight: 44)
@@ -151,6 +149,17 @@ struct AppSettingsView: View {
                 .accessibilityAddTraits(selectedMode == mode ? .isSelected : [])
             }
         }.padding(4).background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 12))
+    }
+
+    @ViewBuilder
+    private func modeLabel(_ mode: Mode) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            // Decorative symbols otherwise force two-character labels onto
+            // separate lines and consume the small screen's scroll viewport.
+            Text(mode.rawValue)
+        } else {
+            Label(mode.rawValue, systemImage: mode == .preferences ? "slider.horizontal.3" : "externaldrive")
+        }
     }
 
     private var appVersionText: String {
@@ -168,7 +177,7 @@ struct AppSettingsView: View {
             )) {
                 settingsLabel("训练日提醒", detail: notificationStatus, icon: "bell.badge.fill")
             }
-            .tint(AppTheme.accent)
+            .tint(AppTheme.ink)
             .padding(14)
 
             if workoutRemindersEnabled {
@@ -184,7 +193,7 @@ struct AppSettingsView: View {
             )) {
                 settingsLabel("休息结束提醒", detail: "锁屏或切到后台时仍提醒", icon: "timer")
             }
-            .tint(AppTheme.accent)
+            .tint(AppTheme.ink)
             .padding(14)
         }
         .cardSurface(padding: 0, cornerRadius: 18)
@@ -209,30 +218,20 @@ struct AppSettingsView: View {
 
     @ViewBuilder
     private var healthActions: some View {
-        Button(healthKitEnabled ? "重新授权" : "连接 Apple 健康") { connectHealthKit() }
-            .buttonStyle(.bordered).tint(AppTheme.accent).frame(minHeight: 44)
+        Button(healthKitEnabled ? "重新授权" : "连接") { connectHealthKit() }
+            .buttonStyle(SprintSecondaryButtonStyle())
         if healthKitEnabled {
-            Button("导入最新身体数据") { importHealthBodyData() }
-                .buttonStyle(.bordered).tint(AppTheme.accent).frame(minHeight: 44)
+            Button("导入身体数据") { importHealthBodyData() }
+                .buttonStyle(SprintSecondaryButtonStyle())
         }
     }
 
     private var dataCard: some View {
         VStack(alignment: .leading, spacing: 22) {
             VStack(alignment: .leading, spacing: 14) {
-                HStack(alignment: .top) {
-                    VStack(alignment: .leading, spacing: 6) {
-                        Text("随时带走记录").font(.title2.weight(.bold))
-                        Text("完整备份，留住每次进步")
-                            .font(.subheadline).foregroundStyle(AppTheme.secondaryText)
-                    }
-                    Spacer(minLength: 8)
-                    Image(systemName: "externaldrive")
-                        .font(.system(size: 30, weight: .light)).foregroundStyle(AppTheme.accent)
-                        .accessibilityHidden(true)
-                }
+                SprintPageHeader(title: "数据", icon: "externaldrive")
                 Button { prepareBackup() } label: {
-                    Label("生成完整 JSON 备份", systemImage: "arrow.up.doc")
+                    Label("生成 JSON 备份", systemImage: "arrow.up.doc")
                         .frame(maxWidth: .infinity)
                 }
                 .neonButtonStyle()
@@ -241,23 +240,31 @@ struct AppSettingsView: View {
                     ShareLink(item: backupURL) {
                         Label("分享最新备份", systemImage: "square.and.arrow.up")
                             .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
-                    }.tint(AppTheme.accent)
+                    }.tint(AppTheme.ink)
                 }
             }.padding(.vertical, 4)
 
             VStack(spacing: 0) {
+                NavigationLink { HistoricalWorkoutImportView().legacyTrainingScreen() } label: {
+                    settingsAction("导入历史训练", detail: "预览并核对逐组记录", icon: "square.and.arrow.down")
+                }.accessibilityIdentifier("设置-导入历史训练")
+                Divider().overlay(AppTheme.line).padding(.leading, 64)
+                NavigationLink { ProgramDataExportView().legacyTrainingScreen() } label: {
+                    settingsAction("导出减脂周期", detail: "导出周期计划与记录", icon: "square.and.arrow.up")
+                }.accessibilityIdentifier("设置-导出减脂周期")
+                Divider().overlay(AppTheme.line).padding(.leading, 64)
                 Button { showImporter = true } label: {
-                    settingsAction("导入 JSON 备份", detail: "预检后补入缺失记录", icon: "arrow.down.doc")
+                    settingsAction("导入 JSON", detail: "预检后补入缺失记录", icon: "arrow.down.doc")
                 }.accessibilityIdentifier("设置-导入备份")
                 Divider().overlay(AppTheme.line).padding(.leading, 64)
                 Button { prepareCSV() } label: {
-                    settingsAction("生成训练 CSV", detail: "导出逐组重量、次数与 RIR", icon: "tablecells")
+                    settingsAction("导出训练 CSV", detail: "逐组重量、次数与 RIR", icon: "tablecells")
                 }.accessibilityIdentifier("设置-生成训练CSV")
                 if let csvURL {
                     ShareLink(item: csvURL) {
                         Label("分享最新 CSV", systemImage: "square.and.arrow.up")
                             .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
-                    }.tint(AppTheme.accent).padding(.bottom, 8)
+                    }.tint(AppTheme.ink).padding(.bottom, 8)
                 }
             }.buttonStyle(.plain).cardSurface(padding: 0)
 
@@ -274,7 +281,8 @@ struct AppSettingsView: View {
         HStack(spacing: 12) {
             settingsLabel(title, detail: detail, icon: icon)
             Image(systemName: "chevron.right")
-                .font(.caption2.weight(.bold)).foregroundStyle(AppTheme.secondaryText)
+                .font(dynamicTypeSize.isAccessibilitySize ? .system(size: 16, weight: .bold) : .caption2.weight(.bold))
+                .foregroundStyle(AppTheme.secondaryText).accessibilityHidden(true)
         }.padding(16).frame(minHeight: 64).contentShape(Rectangle())
     }
 
@@ -288,16 +296,15 @@ struct AppSettingsView: View {
         return NavigationLink {
             ExerciseTerminologyReviewView()
         } label: {
-            HStack(spacing: 12) {
-                Image(systemName: "character.book.closed.fill")
-                    .font(.subheadline.bold())
-                    .foregroundStyle(AppTheme.accent)
-                    .frame(width: 38, height: 38)
-                    .background(AppTheme.accent.opacity(0.11), in: RoundedRectangle(cornerRadius: 11))
+            if dynamicTypeSize.isAccessibilitySize {
+                settingsLabel("动作名称审核", detail: "待审核 \(pending) 个 · 未唯一解析 \(unresolved) 个", icon: "character.book.closed")
+            } else {
+              HStack(spacing: 12) {
+                SprintIcon(systemName: "character.book.closed", size: 40)
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("审核中英文动作名称")
+                    Text("动作名称审核")
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                     Text("待审核 \(pending) 个 · 未唯一解析 \(unresolved) 个")
                         .font(.caption2)
                         .foregroundStyle(AppTheme.secondaryText)
@@ -307,27 +314,33 @@ struct AppSettingsView: View {
                     .font(.caption.bold())
                     .foregroundStyle(AppTheme.secondaryText)
             }
+            }
         }
         .buttonStyle(.plain)
         .cardSurface()
+        .accessibilityIdentifier("设置-动作名称审核")
     }
 
+    @ViewBuilder
     private func settingsLabel(_ title: String, detail: String, icon: String) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title).font(.subheadline.bold()).foregroundStyle(AppTheme.ink)
+                Text(detail).font(.caption2).foregroundStyle(AppTheme.secondaryText)
+            }.frame(maxWidth: .infinity, alignment: .leading).fixedSize(horizontal: false, vertical: true)
+        } else {
         HStack(spacing: 12) {
-            Image(systemName: icon)
-                .font(.subheadline.bold())
-                .foregroundStyle(AppTheme.accent)
-                .frame(width: 38, height: 38)
-                .background(AppTheme.accent.opacity(0.11), in: RoundedRectangle(cornerRadius: 11))
+            SprintIcon(systemName: icon, size: 40)
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.subheadline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Text(detail)
                     .font(.caption2)
                     .foregroundStyle(AppTheme.secondaryText)
             }
             Spacer()
+        }
         }
     }
 
@@ -462,6 +475,7 @@ struct AppSettingsView: View {
         do {
             let summary = try DataExportService.importBackup(data, into: modelContext)
             resultMessage = "导入 \(summary.imported) 条记录，跳过 \(summary.skipped) 条已有记录。"
+                + (summary.warning.map { "\n\($0)" } ?? "")
             pendingBackupData = nil
         } catch {
             errorMessage = error.localizedDescription

@@ -1,0 +1,61 @@
+{
+  "status": "OWNER_REVIEW_REQUIRED",
+  "bindings": [
+    {
+      "sourceName": "Squat",
+      "appName": "深蹲",
+      "existingID": "f9c538a3-5740-4740-99eb-87bbb50dda97",
+      "status": "PROPOSED_BINDING_OWNER_REVIEW",
+      "equipment": "杠铃"
+    },
+    {
+      "sourceName": "保加利亚单腿蹲",
+      "appName": "保加利亚单腿蹲",
+      "existingID": "4f3d5bfa-76ec-45b5-9ff3-f906ad58b945",
+      "status": "PROPOSED_BINDING_OWNER_REVIEW",
+      "equipment": "哑铃"
+    },
+    {
+      "sourceName": "坐姿腿弯举",
+      "appName": "坐姿腿弯举",
+      "existingID": "bed023f2-c4d6-4b0b-82d8-6a163644ab4e",
+      "status": "PROPOSED_BINDING_OWNER_REVIEW",
+      "equipment": "器械"
+    },
+    {
+      "sourceName": "Leg press",
+      "appName": "腿举",
+      "existingID": "906a3e8d-e6ff-4ad1-8bfc-e33b4f471675",
+      "status": "PROPOSED_BINDING_OWNER_REVIEW",
+      "equipment": "器械"
+    },
+    {
+      "sourceName": "Hip and glute machine",
+      "appName": "Hip and glute machine",
+      "existingID": null,
+      "status": "NEW_EXACT_PERSONAL_ENTRY_OWNER_REVIEW",
+      "equipment": "器械侧抬腿机"
+    },
+    {
+      "sourceName": "Abductor machine",
+      "appName": "Abductor machine",
+      "existingID": null,
+      "status": "NEW_EXACT_PERSONAL_ENTRY_OWNER_REVIEW",
+      "equipment": "髋内收器械"
+    },
+    {
+      "sourceName": "斯密斯单腿提踵",
+      "appName": "斯密斯单腿提踵",
+      "existingID": "778d1b94-a59e-4eaf-9a26-063e2490c9df",
+      "status": "PROPOSED_BINDING_OWNER_REVIEW",
+      "equipment": "未记录"
+    }
+  ],
+  "expectedNewSessions": 1,
+  "expectedNewSnapshots": 7,
+  "expectedNewSetRows": 31,
+  "expectedNewPersonalExercises": 2,
+  "originalHistoryChanges": 0,
+  "originalScheduleStatusChange": "NOT_IN_THIS_PACKAGE",
+  "deviceRequestsSent": 0
+}

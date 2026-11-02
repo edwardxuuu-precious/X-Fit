@@ -1,0 +1,57 @@
+{
+  "status": "APPLIED_READBACK_VERIFIED",
+  "requirement": "REQ-20261026-100249",
+  "confirmationReference": "REQ-20261026-100249 / 本人本轮明确确认R2原剂量、Notes补录和openGym结合登记",
+  "sourceSHA256": "3a9f4f75b00c3d78854ddb622f706c029b8e13b4eb6644be81fa3d5c3cb66789",
+  "notesPackageID": "notes-20261026-volume-feedback-v1",
+  "notesPayload": "CONFIRMED-notes-oct26-import.json",
+  "newExerciseBindings": {
+    "Hip and glute machine": {
+      "id": "0fcd2a94-feb5-4433-abee-50750a249bb4",
+      "equipment": "器械侧抬腿机",
+      "volumeUnit": "kilogram",
+      "globalIdentityDecision": "pending",
+      "personalMovementConfirmed": true
+    },
+    "Abductor machine": {
+      "id": "fc230b90-0405-492d-bf30-4c391c803578",
+      "equipment": "髋内收器械",
+      "volumeUnit": "kilogram",
+      "globalIdentityDecision": "pending",
+      "personalMovementConfirmed": true
+    }
+  },
+  "days": [
+    {
+      "localDay": "2026-10-28",
+      "id": "a7d06e41-feb1-5d44-b755-d211bd263683",
+      "title": "后链6动作",
+      "file": "CONFIRMED-2026-10-28-r2.json",
+      "transportSHA256": "9d5ab2aa13f54c12767de030dc4415ba519fd644df71dc8009a9e711ffd746f2",
+      "oldScheduleID": "fc2b3746-217f-528a-a71a-fba1a16c6710",
+      "exercises": 6,
+      "plannedPositions": 21
+    },
+    {
+      "localDay": "2026-10-30",
+      "id": "a9bf9b10-7923-5b28-a63c-9c7f2b7a5857",
+      "title": "综合7动作",
+      "file": "CONFIRMED-2026-10-30-r2.json",
+      "transportSHA256": "4d3d049d5834fc9239cb2a99101e331a7da45277ba216244530f96ac1194c201",
+      "oldScheduleID": "61f10965-718f-58c7-b53f-01a2e00795da",
+      "exercises": 7,
+      "plannedPositions": 23
+    }
+  ],
+  "preferenceVersion": "SESSION-PREF-20261026-01",
+  "appPreference": "TP-20261021-06",
+  "method": "METHOD-20261026-10",
+  "actualSupplementSessionID": "254b2ff8-59f8-4036-a4b2-0bee30ac5a0e",
+  "phoneSourceCapturedAt": "2026-10-26T12:33:32.271523+08:00",
+  "repeatActualAddedRows": 0,
+  "repeatNewSchedules": 0,
+  "verification": "artifacts/training-sync/20261026-notes-and-r2/final-verification.json",
+  "mainSimulatorVerification": "artifacts/simulator-real-data/20261026-123356/result.json",
+  "currentReviewSHA256": "ba550616824c61a0813344ebb91b01955d4b0e9e58b0d2c76c4774ecb2da6ef6",
+  "frozenSourceScope": "sourceSHA256 binds the confirmed sourceMarkdown stored in both exact phone packets; review.md updates delivery status only"
+}

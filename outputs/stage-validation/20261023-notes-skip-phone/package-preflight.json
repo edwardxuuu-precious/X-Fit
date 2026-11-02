@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "version": "0.5.0(28)",
+  "frozenInputs": 127,
+  "productionChanges": [
+    "FitnessApp/Services/ScheduleService.swift",
+    "FitnessApp.xcodeproj/project.pbxproj"
+  ],
+  "packages": [
+    {
+      "bundle": "com.edward.FitnessApp",
+      "build": "28",
+      "signature": "PASS",
+      "group": "group.com.edward.FitnessApp",
+      "profileExpiration": "2026-10-28T03:52:10+00:00",
+      "executableSHA256": "ae1b33978dd4ecca670a721d5e525a73316031d43e040cf7759aeeb32a6d86c5"
+    },
+    {
+      "bundle": "com.edward.FitnessApp.XFitShareExtension",
+      "build": "28",
+      "signature": "PASS",
+      "group": "group.com.edward.FitnessApp",
+      "profileExpiration": "2026-10-28T03:52:07+00:00",
+      "executableSHA256": "046ee7ffbc70d261520b291736c7312aa78f57775cc382c50cc97cd5b0d485f2"
+    }
+  ],
+  "phoneAppBaseline": "0.5.0(27)",
+  "candidate": "/tmp/xfit-notes-skip-phone-build28-derived/Build/Products/Release-iphoneos/FitnessApp.app",
+  "checkedAt": "2026-10-23T04:53:17.771246+00:00"
+}

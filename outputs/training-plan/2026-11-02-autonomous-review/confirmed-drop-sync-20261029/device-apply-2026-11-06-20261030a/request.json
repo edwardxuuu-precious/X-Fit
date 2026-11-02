@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "id": "e30b8034-7b70-48d7-af2a-ae109c1ac47f",
+  "operation": "applyDailyTrainingPlan",
+  "payloadFileName": "meal-payload-e30b8034-7b70-48d7-af2a-ae109c1ac47f.json",
+  "approvedSHA256": "932faf83e64a3b357bb2f4550201dcc580e49d1192ae91377549007a1858b231"
+}

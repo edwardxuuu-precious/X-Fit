@@ -4,9 +4,22 @@ import XCTest
 
 @MainActor
 final class AdaptivePlanningTests: XCTestCase {
+    private var savedWorkoutReminderSetting: Any?
+
     override func setUp() {
         super.setUp()
+        savedWorkoutReminderSetting = UserDefaults.standard.object(forKey: NotificationService.workoutEnabledKey)
         UserDefaults.standard.set(false, forKey: NotificationService.workoutEnabledKey)
+    }
+
+    override func tearDown() {
+        if let savedWorkoutReminderSetting {
+            UserDefaults.standard.set(savedWorkoutReminderSetting, forKey: NotificationService.workoutEnabledKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: NotificationService.workoutEnabledKey)
+        }
+        savedWorkoutReminderSetting = nil
+        super.tearDown()
     }
 
     func testConfirmedAliasCatalogIncludesNewlyApprovedSixGroups() {
@@ -37,7 +50,7 @@ final class AdaptivePlanningTests: XCTestCase {
         )
         XCTAssertEqual(groups["barbell_hip_thrust"]?.0, "杠铃臀推")
         XCTAssertEqual(groups["barbell_thruster"]?.0, "杠铃火箭推")
-        XCTAssertEqual(groups["machine_triceps_press"]?.1, ["三头下压机", "seated dip"])
+        XCTAssertEqual(groups["machine_triceps_press"]?.1, ["坐姿器械臂屈伸", "三头下压机", "seated dip"])
         XCTAssertEqual(groups["dumbbell_side_lunge"]?.1, ["哑铃侧弓步", "哑铃侧边蹲"])
     }
 
@@ -99,7 +112,7 @@ final class AdaptivePlanningTests: XCTestCase {
         XCTAssertTrue(activeNames.contains("器械下斜卧推"))
         XCTAssertTrue(activeNames.contains("杠铃臀推"))
         XCTAssertTrue(activeNames.contains("杠铃火箭推"))
-        XCTAssertTrue(activeNames.contains("三头下压机"))
+        XCTAssertTrue(activeNames.contains("坐姿器械臂屈伸"))
         XCTAssertTrue(activeNames.contains("器械肩推"))
         XCTAssertTrue(activeNames.contains("器械反向飞鸟"))
         XCTAssertTrue(activeNames.contains("哑铃侧弓步"))
@@ -189,6 +202,7 @@ final class AdaptivePlanningTests: XCTestCase {
             sessionExercises: [benchSnapshot, inclineSnapshot],
             setLogs: logs,
             templateExercises: [],
+            preference: .confirmed,
             now: now
         )
 
@@ -250,6 +264,7 @@ final class AdaptivePlanningTests: XCTestCase {
             sessionExercises: [snapshot],
             setLogs: logs,
             templateExercises: [],
+            preference: .confirmed,
             now: now
         ).first
 
@@ -313,6 +328,7 @@ final class AdaptivePlanningTests: XCTestCase {
             sessionExercises: [snapshot],
             setLogs: [log],
             templateExercises: [],
+            preference: .confirmed,
             now: now
         )
 
@@ -371,6 +387,7 @@ final class AdaptivePlanningTests: XCTestCase {
             sessionExercises: [snapshot],
             setLogs: logs,
             templateExercises: [],
+            preference: .confirmed,
             goalMode: .cuttingVolume,
             now: now
         ).first
@@ -681,9 +698,12 @@ final class AdaptivePlanningTests: XCTestCase {
 
         try WorkoutService.addSet(to: flySnapshot, in: context)
         XCTAssertEqual(flySnapshot.targetSets, 4)
-        try WorkoutService.removeLastIncompleteSet(from: flySnapshot, in: context)
+        let candidate = try XCTUnwrap(WorkoutService.reductionCandidate(for: flySnapshot, in: context))
+        try WorkoutService.reduceSet(from: flySnapshot, candidateID: candidate.id, confirmingEnteredData: false, in: context)
         XCTAssertEqual(flySnapshot.targetSets, 3)
 
+        XCTAssertThrowsError(try WorkoutService.removeExercise(flySnapshot, from: session, in: context))
+        try WorkoutService.restoreReducedSet(for: flySnapshot, in: context)
         try WorkoutService.removeExercise(flySnapshot, from: session, in: context)
         XCTAssertEqual(
             try context.fetch(FetchDescriptor<SessionExercise>())
@@ -1313,6 +1333,7 @@ final class AdaptivePlanningTests: XCTestCase {
             sessionExercises: try context.fetch(FetchDescriptor<SessionExercise>()),
             setLogs: try context.fetch(FetchDescriptor<SetLog>()),
             templateExercises: [],
+            preference: .confirmed,
             now: activeDate.addingTimeInterval(86_400)
         )
         let bulgarianRecommendation = try XCTUnwrap(

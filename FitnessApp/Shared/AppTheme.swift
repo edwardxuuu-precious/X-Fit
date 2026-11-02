@@ -1,5 +1,8 @@
 import SwiftUI
+import SwiftData
 import UIKit
+import os.signpost
+import Observation
 
 enum AppTheme {
     static let pageMargin: CGFloat = 20
@@ -8,57 +11,58 @@ enum AppTheme {
     static let pageTitle = Font.title2.bold()
     static let metricValue = Font.title.bold().monospacedDigit()
 
-    static let accent = Color(red: 0.77, green: 0.98, blue: 0.275)
-    static let accentSoft = Color(red: 0.57, green: 0.75, blue: 0.20)
-    static let background = Color(red: 0.047, green: 0.051, blue: 0.043)
-    static let surface = Color(red: 0.083, green: 0.090, blue: 0.075)
-    static let elevatedSurface = Color(red: 0.126, green: 0.137, blue: 0.114)
-    static let line = Color.white.opacity(0.075)
-    static let secondaryText = Color(red: 0.67, green: 0.69, blue: 0.63)
-    static let tabBar = Color(red: 0.025, green: 0.031, blue: 0.034)
-    static let posterBackground = Color(red: 0.035, green: 0.043, blue: 0.045)
-    static let posterWarmWhite = Color(red: 0.96, green: 0.96, blue: 0.92)
-    static let orange = Color(red: 1.00, green: 0.39, blue: 0.12)
-    static let purple = Color(red: 0.73, green: 0.27, blue: 1.00)
+    static let ink = Color(red: 0.067, green: 0.094, blue: 0.106)
+    static let accent = Color(red: 0.773, green: 0.957, blue: 0.259)
+    static let accentSoft = Color(red: 0.91, green: 0.98, blue: 0.76)
+    static let background = Color.white
+    static let surface = Color(red: 0.961, green: 0.969, blue: 0.965)
+    static let elevatedSurface = Color(red: 0.929, green: 0.945, blue: 0.937)
+    static let line = Color(red: 0.89, green: 0.917, blue: 0.902)
+    static let secondaryText = Color(red: 0.36, green: 0.405, blue: 0.42)
+    static let tabBar = background
+    static let posterBackground = surface
+    static let posterWarmWhite = ink
+    static let orange = Color(red: 0.72, green: 0.25, blue: 0.055)
+    static let purple = Color(red: 0.43, green: 0.29, blue: 0.66)
 
     static let heroGradient = LinearGradient(
-        colors: [Color.black.opacity(0.08), Color.black.opacity(0.94)],
+        colors: [background.opacity(0), background.opacity(0.96)],
         startPoint: .top,
         endPoint: .bottom
     )
 
     static let screenGradient = LinearGradient(
-        colors: [Color(red: 0.035, green: 0.045, blue: 0.050), background],
+        colors: [background, background],
         startPoint: .top,
         endPoint: .center
     )
 
     static let homeBackgroundGradient = LinearGradient(
         stops: [
-            .init(color: Color(red: 0.055, green: 0.068, blue: 0.068), location: 0),
-            .init(color: Color(red: 0.020, green: 0.027, blue: 0.028), location: 0.42),
-            .init(color: Color(red: 0.006, green: 0.009, blue: 0.010), location: 1)
+            .init(color: background, location: 0),
+            .init(color: background, location: 0.42),
+            .init(color: background, location: 1)
         ],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
 
     static let homeAmbientGlow = RadialGradient(
-        colors: [Color.white.opacity(0.075), .clear],
+        colors: [.clear, .clear],
         center: UnitPoint(x: 0.78, y: 0.04),
         startRadius: 0,
         endRadius: 340
     )
 
     static let homeAccentGlow = RadialGradient(
-        colors: [accent.opacity(0.085), .clear],
+        colors: [.clear, .clear],
         center: UnitPoint(x: 0.10, y: 0.42),
         startRadius: 0,
         endRadius: 300
     )
 
     static let homeCoolGlow = RadialGradient(
-        colors: [Color(red: 0.18, green: 0.27, blue: 0.29).opacity(0.16), .clear],
+        colors: [.clear, .clear],
         center: UnitPoint(x: 0.90, y: 0.48),
         startRadius: 0,
         endRadius: 320
@@ -78,9 +82,24 @@ struct CardSurface: ViewModifier {
 }
 
 struct FloatingGlassSurface: ViewModifier {
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.colorSchemeContrast) private var contrast
     let cornerRadius: CGFloat
+
+    @ViewBuilder
     func body(content: Content) -> some View {
-        content.background(AppTheme.elevatedSurface, in: RoundedRectangle(cornerRadius: cornerRadius))
+        if reduceTransparency || contrast == .increased {
+            content
+                .background(AppTheme.background, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .stroke(AppTheme.secondaryText.opacity(contrast == .increased ? 0.7 : 0.15), lineWidth: 1)
+                }
+        } else if #available(iOS 26.0, *) {
+            content.glassEffect(.regular, in: .rect(cornerRadius: cornerRadius))
+        } else {
+            content.background(.thinMaterial, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        }
     }
 }
 
@@ -90,11 +109,11 @@ extension View {
     }
 
     func screenBackground() -> some View {
-        background(AppTheme.background.ignoresSafeArea())
+        sprintPage()
     }
 
     func homeScreenBackground() -> some View {
-        background(AppTheme.background.ignoresSafeArea())
+        sprintPage()
     }
 
     func floatingGlassSurface(cornerRadius: CGFloat) -> some View {
@@ -103,10 +122,110 @@ extension View {
 
     func neonButtonStyle() -> some View {
         font(.subheadline.bold())
-            .foregroundStyle(.black)
+            .foregroundStyle(.white)
             .padding(.vertical, 15)
-            .frame(maxWidth: .infinity)
-            .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            .frame(maxWidth: .infinity, minHeight: AppTheme.minimumTouchTarget)
+            .background(AppTheme.ink, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+    }
+}
+
+private struct SprintPageModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .tint(AppTheme.ink)
+            .scrollContentBackground(.hidden)
+            .background(AppTheme.background.ignoresSafeArea())
+            .toolbarBackground(AppTheme.background, for: .navigationBar)
+            .toolbarColorScheme(.light, for: .navigationBar)
+            .environment(\.colorScheme, .light)
+            .preferredColorScheme(.light)
+    }
+}
+
+extension View {
+    func sprintPage() -> some View { modifier(SprintPageModifier()) }
+
+    /// Chart ticks stay compact while the surrounding values and record lists
+    /// continue to honor the full accessibility text size.
+    func sprintChart() -> some View { dynamicTypeSize(...DynamicTypeSize.xxxLarge) }
+}
+
+struct SprintIcon: View {
+    let systemName: String
+    var size: CGFloat = 48
+    var prominent = false
+
+    var body: some View {
+        Image(systemName: systemName)
+            .font(.system(size: size * 0.52, weight: .semibold))
+            .symbolRenderingMode(.hierarchical)
+            .foregroundStyle(AppTheme.ink)
+            .frame(width: size, height: size)
+            .background(prominent ? AppTheme.accent : AppTheme.surface,
+                        in: RoundedRectangle(cornerRadius: size * 0.27, style: .continuous))
+            .accessibilityHidden(true)
+    }
+}
+
+struct SprintSectionHeading: View {
+    let title: String
+    let icon: String
+
+    var body: some View {
+        Label(title, systemImage: icon)
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(AppTheme.ink)
+            .padding(.top, 8)
+            .accessibilityAddTraits(.isHeader)
+    }
+}
+
+struct SprintPageHeader: View {
+    let title: String
+    let icon: String
+    var subtitle: String? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SprintIcon(systemName: icon, size: 56, prominent: true)
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title).font(.title.bold()).tracking(-0.6)
+                    .accessibilityIdentifier("页标题-" + title).accessibilityAddTraits(.isHeader)
+                if let subtitle, !subtitle.isEmpty {
+                    Text(subtitle).font(.subheadline).foregroundStyle(AppTheme.secondaryText)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 12)
+    }
+}
+
+struct SprintPrimaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 18).padding(.vertical, 15)
+            .frame(maxWidth: .infinity, minHeight: 54)
+            .background(AppTheme.ink, in: RoundedRectangle(cornerRadius: 15, style: .continuous))
+            .opacity(!isEnabled ? 0.4 : configuration.isPressed ? 0.78 : 1)
+            .contentShape(RoundedRectangle(cornerRadius: 15))
+    }
+}
+
+struct SprintSecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.subheadline.weight(.medium))
+            .foregroundStyle(AppTheme.ink)
+            .padding(.horizontal, 16).padding(.vertical, 13)
+            .frame(maxWidth: .infinity, minHeight: 48)
+            .background(AppTheme.surface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .opacity(!isEnabled ? 0.4 : configuration.isPressed ? 0.7 : 1)
+            .contentShape(RoundedRectangle(cornerRadius: 14))
     }
 }
 
@@ -167,30 +286,44 @@ struct StableNumericTextField: UIViewRepresentable {
     private let kind: Kind
     private let placeholder: String
     private let accessibilityIdentifier: String
+    private let commitDelay: TimeInterval
+    private let onCommit: () -> Void
+    private let showsEmptyValue: Bool
 
     init(
         _ placeholder: String,
         value: Binding<Double>,
         maximumFractionDigits: Int = 3,
-        accessibilityIdentifier: String
+        accessibilityIdentifier: String,
+        commitDelay: TimeInterval = 0,
+        showsEmptyValue: Bool = false,
+        onCommit: @escaping () -> Void = {}
     ) {
         decimalValue = value
         integerValue = nil
         kind = .decimal(maximumFractionDigits: maximumFractionDigits)
         self.placeholder = placeholder
         self.accessibilityIdentifier = accessibilityIdentifier
+        self.commitDelay = commitDelay
+        self.onCommit = onCommit
+        self.showsEmptyValue = showsEmptyValue
     }
 
     init(
         _ placeholder: String,
         value: Binding<Int>,
-        accessibilityIdentifier: String
+        accessibilityIdentifier: String,
+        commitDelay: TimeInterval = 0,
+        onCommit: @escaping () -> Void = {}
     ) {
         decimalValue = nil
         integerValue = value
         kind = .integer
         self.placeholder = placeholder
         self.accessibilityIdentifier = accessibilityIdentifier
+        self.commitDelay = commitDelay
+        self.onCommit = onCommit
+        self.showsEmptyValue = false
     }
 
     func makeCoordinator() -> Coordinator {
@@ -222,6 +355,7 @@ struct StableNumericTextField: UIViewRepresentable {
         ]
         field.inputAccessoryView = toolbar
         field.text = formattedValue
+        context.coordinator.field = field
         return field
     }
 
@@ -246,11 +380,12 @@ struct StableNumericTextField: UIViewRepresentable {
     }
 
     private var formattedValue: String {
+        if showsEmptyValue { return "" }
         switch kind {
         case .decimal:
-            TrainingFormatters.weight(decimalValue?.wrappedValue ?? 0)
+            return TrainingFormatters.weight(decimalValue?.wrappedValue ?? 0)
         case .integer:
-            String(integerValue?.wrappedValue ?? 0)
+            return String(integerValue?.wrappedValue ?? 0)
         }
     }
 
@@ -273,21 +408,46 @@ struct StableNumericTextField: UIViewRepresentable {
         guard !normalized.isEmpty else { return }
         switch kind {
         case .decimal:
-            if let value = Double(normalized) { decimalValue?.wrappedValue = value }
+            guard let value = Double(normalized), value.isFinite else { return }
+            if decimalValue?.wrappedValue != value { decimalValue?.wrappedValue = value }
         case .integer:
-            if let value = Int(normalized) { integerValue?.wrappedValue = value }
+            guard let value = Int(normalized) else { return }
+            if integerValue?.wrappedValue != value { integerValue?.wrappedValue = value }
         }
+        onCommit()
+    }
+
+    static func dismantleUIView(_ field: UITextField, coordinator: Coordinator) {
+        coordinator.flush()
+        NotificationCenter.default.removeObserver(coordinator)
     }
 
     final class Coordinator: NSObject, UITextFieldDelegate {
         var parent: StableNumericTextField
+        weak var field: UITextField?
+        lazy var draft = WorkoutInputDraft(delay: parent.commitDelay) { [weak self] text in
+            self?.parent.commit(text.isEmpty ? "0" : text)
+        }
 
         init(parent: StableNumericTextField) {
             self.parent = parent
+            super.init()
+            NotificationCenter.default.addObserver(self, selector: #selector(flush), name: WorkoutInputDraft.flushNotification, object: nil)
         }
 
         @objc func editingChanged(_ field: UITextField) {
-            parent.commit(field.text ?? "")
+            self.field = field
+            WorkoutInputProfiler.shared.inputReceived()
+            draft.edit(field.text ?? "", isComposing: field.markedTextRange != nil)
+        }
+
+        @objc func flush() {
+            guard let field else { return }
+            if field.markedTextRange != nil {
+                field.unmarkText()
+                draft.edit(field.text ?? "", isComposing: false)
+            }
+            draft.flush()
         }
 
         @objc func dismissKeyboard() {
@@ -301,9 +461,8 @@ struct StableNumericTextField: UIViewRepresentable {
         }
 
         func textFieldDidEndEditing(_ field: UITextField) {
-            if field.text?.isEmpty == true {
-                parent.commit("0")
-            }
+            self.field = field
+            flush()
             field.text = parent.formattedValue
         }
 
@@ -317,6 +476,256 @@ struct StableNumericTextField: UIViewRepresentable {
             else { return false }
             return parent.accepts(current.replacingCharacters(in: swiftRange, with: string))
         }
+    }
+}
+
+/// A root-owned acknowledgement of a failed save, never a copy of user input.
+struct WorkoutSaveIssue: Identifiable {
+    let id: UUID
+    let sessionID: UUID
+    let contextID: ObjectIdentifier
+}
+
+@MainActor @Observable
+final class WorkoutSaveIssueState {
+    private(set) var issue: WorkoutSaveIssue?
+    @ObservationIgnored private let persist: (ModelContext) throws -> Void
+
+    init(persist: @escaping (ModelContext) throws -> Void = { try $0.save() }) {
+        self.persist = persist
+    }
+
+    @discardableResult
+    func save(sessionID: UUID, in context: ModelContext, isInputCommit: Bool = false) -> Bool {
+        let priorEvent = issue.flatMap {
+            $0.sessionID == sessionID && $0.contextID == ObjectIdentifier(context) ? $0.id : nil
+        }
+        do {
+            #if DEBUG && targetEnvironment(simulator)
+            try injectFailureIfRequested(in: context, isInputCommit: isInputCommit)
+            #endif
+            if context.hasChanges || priorEvent != nil {
+                try WorkoutInputProfiler.shared.measureSave { try persist(context) }
+            }
+            if let priorEvent { resolveSavedEvent(priorEvent, in: context) }
+            return true
+        } catch {
+            // Do not rollback, dismiss, complete the session, or copy input/error payloads.
+            issue = WorkoutSaveIssue(id: UUID(), sessionID: sessionID, contextID: ObjectIdentifier(context))
+            return false
+        }
+    }
+
+    @discardableResult
+    func retry(in context: ModelContext) -> Bool {
+        guard let pending = issue, pending.contextID == ObjectIdentifier(context) else { return false }
+        do {
+            // Explicit retry confirms the same context, even if autosave already ran.
+            try WorkoutInputProfiler.shared.measureSave { try persist(context) }
+            resolveSavedEvent(pending.id, in: context)
+            #if DEBUG && targetEnvironment(simulator)
+            if let autosaveBeforeFault {
+                context.autosaveEnabled = autosaveBeforeFault
+                self.autosaveBeforeFault = nil
+                faultArmed = false
+                faultConsumed = true
+            }
+            #endif
+            return true
+        } catch {
+            issue = WorkoutSaveIssue(id: UUID(), sessionID: pending.sessionID, contextID: pending.contextID)
+            return false
+        }
+    }
+
+    func resolveSavedEvent(_ eventID: UUID, in context: ModelContext) {
+        guard issue?.id == eventID, issue?.contextID == ObjectIdentifier(context) else { return }
+        issue = nil
+    }
+
+    #if DEBUG && targetEnvironment(simulator)
+    @ObservationIgnored private var faultArmed = false
+    @ObservationIgnored private var faultConsumed = false
+    @ObservationIgnored private var autosaveBeforeFault: Bool?
+
+    private func injectFailureIfRequested(in context: ModelContext, isInputCommit: Bool) throws {
+        guard CommandLine.arguments.contains("--ui-testing"),
+              CommandLine.arguments.contains("--ui-testing-workout-save-failure"),
+              !faultConsumed else { return }
+        if isInputCommit && context.hasChanges && !faultArmed {
+            // Only the isolated simulator test reaches this branch. Prevent an
+            // unrelated autosave from turning a failed-save test into a false pass.
+            autosaveBeforeFault = context.autosaveEnabled
+            context.autosaveEnabled = false
+            faultArmed = true
+        }
+        if faultArmed { throw NSError(domain: "XFit.UITest.WorkoutSave", code: 1) }
+    }
+    #endif
+}
+
+/// Owns only an editing draft; no model or database mutation until a committed
+/// input has been quiet for 300 ms (or the caller explicitly flushes).
+@MainActor
+final class WorkoutInputDraft {
+    static let flushNotification = Notification.Name("XFit.flushWorkoutInput")
+    private let delay: TimeInterval
+    private let commit: (String) -> Void
+    private var task: Task<Void, Never>?
+    private var pending: String?
+    private var composing = false
+
+    init(delay: TimeInterval = 0.3, commit: @escaping (String) -> Void) {
+        self.delay = delay
+        self.commit = commit
+    }
+
+    func edit(_ text: String, isComposing: Bool) {
+        task?.cancel()
+        composing = isComposing
+        pending = text
+        guard !isComposing else { return }
+        guard delay > 0 else { flush(); return }
+        task = Task { @MainActor [weak self, delay] in
+            try? await Task.sleep(for: .seconds(delay))
+            guard !Task.isCancelled else { return }
+            self?.flush()
+        }
+    }
+
+    func flush() {
+        task?.cancel()
+        task = nil
+        guard !composing, let value = pending else { return }
+        pending = nil
+        commit(value)
+    }
+
+    static func flushAll() {
+        KeyboardDismissal.dismiss()
+        NotificationCenter.default.post(name: flushNotification, object: nil)
+    }
+}
+
+/// UIKit keeps Chinese marked text and caret local; SwiftData receives only a
+/// committed draft, never the transient pinyin/candidate composition.
+struct BufferedWorkoutTextEditor: UIViewRepresentable {
+    let placeholder: String
+    @Binding var text: String
+    var accessibilityIdentifier: String
+
+    func makeCoordinator() -> Coordinator { Coordinator(parent: self) }
+    func makeUIView(context: Context) -> UITextView {
+        let view = UITextView()
+        view.delegate = context.coordinator
+        view.font = .preferredFont(forTextStyle: .body)
+        view.adjustsFontForContentSizeCategory = true
+        view.backgroundColor = .clear
+        view.textColor = .label
+        view.tintColor = UIColor(AppTheme.accent)
+        view.text = text
+        view.accessibilityIdentifier = accessibilityIdentifier
+        view.accessibilityLabel = placeholder
+        view.textContainerInset = UIEdgeInsets(top: 6, left: 0, bottom: 6, right: 0)
+        context.coordinator.view = view
+        return view
+    }
+    func updateUIView(_ view: UITextView, context: Context) {
+        context.coordinator.parent = self
+        if !view.isFirstResponder, view.text != text { view.text = text }
+    }
+    static func dismantleUIView(_ view: UITextView, coordinator: Coordinator) {
+        coordinator.flush()
+        NotificationCenter.default.removeObserver(coordinator)
+    }
+    final class Coordinator: NSObject, UITextViewDelegate {
+        var parent: BufferedWorkoutTextEditor
+        weak var view: UITextView?
+        lazy var draft = WorkoutInputDraft { [weak self] text in
+            guard let self, self.parent.text != text else { return }
+            self.parent.text = text
+        }
+        init(parent: BufferedWorkoutTextEditor) {
+            self.parent = parent
+            super.init()
+            NotificationCenter.default.addObserver(self, selector: #selector(flush), name: WorkoutInputDraft.flushNotification, object: nil)
+        }
+        func textViewDidChange(_ textView: UITextView) {
+            view = textView
+            WorkoutInputProfiler.shared.inputReceived()
+            draft.edit(textView.text, isComposing: textView.markedTextRange != nil)
+        }
+        func textViewDidEndEditing(_ textView: UITextView) { flush() }
+        @objc func flush() {
+            if let view, view.markedTextRange != nil {
+                view.unmarkText()
+                draft.edit(view.text, isComposing: false)
+            }
+            draft.flush()
+        }
+    }
+}
+
+/// Opt-in timestamps only: the next display-link callback is a proxy, not proof
+/// of keyboard-to-pixel latency. No input content or model values are logged.
+@MainActor
+final class WorkoutInputProfiler: NSObject {
+    static let shared = WorkoutInputProfiler()
+    private let enabled = ProcessInfo.processInfo.arguments.contains("--workout-input-profiling")
+    private let log = OSLog(subsystem: "com.xfit.input", category: .pointsOfInterest)
+    private var link: CADisplayLink?
+    private var lastFrame: CFTimeInterval?
+    private var pendingInputs: [(CFTimeInterval, OSSignpostID)] = []
+    private var samples: [Double] = []
+    private var stalls = 0
+    private var saves = 0
+    private var owners: Set<String> = []
+    func start(owner: String = "workout") {
+        owners.insert(owner)
+        guard enabled, link == nil else { return }
+        lastFrame = nil
+        let link = CADisplayLink(target: self, selector: #selector(frame(_:)))
+        link.add(to: .main, forMode: .common)
+        self.link = link
+    }
+    func stop(owner: String = "workout") {
+        owners.remove(owner)
+        guard owners.isEmpty else { return }
+        guard enabled else { return }
+        link?.invalidate(); link = nil; lastFrame = nil
+        for (_, id) in pendingInputs { os_signpost(.end, log: log, name: "InputNextFrame", signpostID: id, "cancelled") }
+        pendingInputs.removeAll()
+        let sorted = samples.sorted()
+        let p95 = sorted.isEmpty ? 0 : sorted[min(sorted.count - 1, Int(ceil(Double(sorted.count) * 0.95)) - 1)]
+        os_log("Input summary count=%d p95_ms=%.2f max_ms=%.2f gaps_over_250ms=%d saves=%d", log: log, type: .info, sorted.count, p95, sorted.last ?? 0, stalls, saves)
+        samples.removeAll(); stalls = 0; saves = 0
+    }
+    func inputReceived() {
+        guard enabled, link != nil else { return }
+        let id = OSSignpostID(log: log)
+        pendingInputs.append((CACurrentMediaTime(), id))
+        os_signpost(.begin, log: log, name: "InputNextFrame", signpostID: id)
+    }
+    func measureSave<T>(_ action: () throws -> T) rethrows -> T {
+        guard enabled else { return try action() }
+        let id = OSSignpostID(log: log)
+        saves += 1
+        os_signpost(.begin, log: log, name: "WorkoutSave", signpostID: id)
+        defer { os_signpost(.end, log: log, name: "WorkoutSave", signpostID: id) }
+        return try action()
+    }
+    @objc private func frame(_ link: CADisplayLink) {
+        let now = CACurrentMediaTime()
+        if let lastFrame, now - lastFrame > 0.250 {
+            stalls += 1
+            os_signpost(.event, log: log, name: "FrameGapOver250ms", "gap_ms=%.2f", (now - lastFrame) * 1000)
+        }
+        lastFrame = now
+        for (at, id) in pendingInputs {
+            if samples.count < 10000 { samples.append((now - at) * 1000) }
+            os_signpost(.end, log: log, name: "InputNextFrame", signpostID: id)
+        }
+        pendingInputs.removeAll()
     }
 }
 
@@ -346,7 +755,7 @@ struct ScreenHeader: View {
                 Button(action: trailingAction ?? {}) {
                     Image(systemName: trailingSystemImage)
                         .font(.subheadline.bold())
-                        .foregroundStyle(.white)
+                        .foregroundStyle(AppTheme.ink)
                         .frame(width: 44, height: 44)
                         .background(AppTheme.elevatedSurface, in: Circle())
                         .overlay(Circle().stroke(AppTheme.line, lineWidth: 1))
@@ -365,12 +774,12 @@ struct SectionHeader: View {
         HStack {
             Text(title)
                 .font(.headline.bold())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             Spacer()
             if let actionTitle {
                 Text(actionTitle)
                     .font(.caption.bold())
-                    .foregroundStyle(AppTheme.accent)
+                    .foregroundStyle(AppTheme.ink)
             }
         }
     }
@@ -385,7 +794,7 @@ struct NeonProgressRing: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(Color.white.opacity(0.08), lineWidth: 8)
+                .stroke(AppTheme.elevatedSurface, lineWidth: 8)
             Circle()
                 .trim(from: 0, to: min(max(progress, 0), 1))
                 .stroke(
@@ -396,9 +805,9 @@ struct NeonProgressRing: View {
             VStack(spacing: 1) {
                 Text(value)
                     .font(.headline.weight(.black).monospacedDigit())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                 Text(detail)
-                    .font(.system(size: 9, weight: .medium))
+                    .font(.caption2.weight(.medium))
                     .foregroundStyle(AppTheme.secondaryText)
             }
         }
@@ -417,18 +826,18 @@ struct MetricCard: View {
         VStack(alignment: .leading, spacing: 9) {
             Image(systemName: systemImage)
                 .font(.subheadline.bold())
-                .foregroundStyle(tint)
+                .foregroundStyle(AppTheme.ink)
                 .frame(width: 32, height: 32)
-                .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: 9))
+                .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 10))
             Text(value)
                 .font(.title3.weight(.black).monospacedDigit())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
                 .contentTransition(.numericText())
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             Text(title)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             Text(detail)
                 .font(.caption2)
                 .foregroundStyle(AppTheme.secondaryText)
@@ -529,16 +938,21 @@ struct HeroWorkoutImage: View {
 
     var body: some View {
         GeometryReader { proxy in
-            Image(kind.assetName)
-                .resizable()
-                .scaledToFill()
-                .frame(
-                    width: proxy.size.width,
-                    height: proxy.size.height,
-                    alignment: kind.imageAlignment
-                )
-                .clipped()
+            SprintIcon(systemName: symbol, size: min(proxy.size.width * 0.44, proxy.size.height * 0.68), prominent: true)
+                .rotationEffect(.degrees(-8))
+                .frame(width: proxy.size.width, height: proxy.size.height)
+                .background(AppTheme.background)
                 .accessibilityLabel(kind.accessibilityLabel)
+        }
+    }
+
+    private var symbol: String {
+        switch kind {
+        case .push: "figure.strengthtraining.traditional"
+        case .pull: "dumbbell"
+        case .legs: "figure.strengthtraining.functional"
+        case .core: "figure.core.training"
+        case .full: "figure.cross.training"
         }
     }
 }
@@ -560,6 +974,16 @@ enum ExerciseMuscleTaxonomy {
         "核心": ["腹直肌", "腹斜肌"],
         "其他": ["其他"]
     ]
+
+    /// Browse-only anatomy. Workload statistics continue to use the stored primary
+    /// muscleGroup and category(_:), never this expanded list.
+    static func filterCategories(name: String, muscleGroup: String) -> [ExerciseMuscleCategory] {
+        let primary = category(name: name, muscleGroup: muscleGroup)
+        let key = name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        guard ["坐姿器械臂屈伸", "三头下压机", "seated dip"].contains(key),
+              primary.majorGroup != "胸部" else { return [primary] }
+        return [primary, .init(majorGroup: "胸部", minorGroup: "辅助参与")]
+    }
 
     static func category(name: String, muscleGroup: String) -> ExerciseMuscleCategory {
         let normalizedName = name.replacingOccurrences(of: " ", with: "").lowercased()
@@ -610,7 +1034,7 @@ enum ExerciseMuscleTaxonomy {
                 minorGroup = "前束"
             }
         case "手臂":
-            if containsAny(combined, terms: ["三头", "下压", "臂屈伸"]) {
+            if containsAny(combined, terms: ["三头", "下压", "臂屈伸", "seateddip"]) {
                 minorGroup = "肱三头肌"
             } else if containsAny(combined, terms: ["前臂", "腕弯举"]) {
                 minorGroup = "前臂"
@@ -658,7 +1082,7 @@ enum ExerciseMuscleTaxonomy {
         if containsAny(value, terms: ["卧推", "夹胸", "飞鸟", "推胸"]) { return "胸部" }
         if containsAny(value, terms: ["划船", "下拉", "引体"]) { return "背部" }
         if containsAny(value, terms: ["肩推", "侧平举", "面拉"]) { return "肩部" }
-        if containsAny(value, terms: ["弯举", "下压", "臂屈伸"]) { return "手臂" }
+        if containsAny(value, terms: ["弯举", "下压", "臂屈伸", "seateddip"]) { return "手臂" }
         if containsAny(value, terms: ["深蹲", "腿举", "硬拉", "髋推", "提踵", "弓步"]) { return "腿部" }
         if containsAny(value, terms: ["卷腹", "举腿", "躯干旋转"]) { return "核心" }
         return "其他"
@@ -768,7 +1192,7 @@ struct ExerciseGlyph: View {
                 for point in segment.dropFirst() {
                     path.addLine(to: renderedPoint(point))
                 }
-                context.stroke(path, with: .color(AppTheme.accent), style: stroke)
+                context.stroke(path, with: .color(AppTheme.ink), style: stroke)
             }
 
             for circle in geometry.circles {
@@ -778,7 +1202,7 @@ struct ExerciseGlyph: View {
                     width: circle.width * scale,
                     height: circle.height * scale
                 )
-                context.fill(Path(ellipseIn: rect), with: .color(AppTheme.accent))
+                context.fill(Path(ellipseIn: rect), with: .color(AppTheme.ink))
             }
         }
         .aspectRatio(1, contentMode: .fit)

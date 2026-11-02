@@ -1,0 +1,1102 @@
+{
+  "schema_version": 1,
+  "current_phase_closeout": {
+    "status": "PASS",
+    "decision": "REQ-20261013-131921/C-13",
+    "disposition": "closed_adjusted_scope_C13_final_Notion_5_of_5_verified",
+    "scope": "Build18 delivery, bounded input/save/readback, normal App/test cleanup/data conservation, ordinary existing Notion collaboration",
+    "pending_current_actions": [],
+    "original_task_progress": {
+      "done": 7,
+      "total": 8,
+      "percentage": 87.5,
+      "scope": "original_ledger_not_current_phase_or_business_effect",
+      "unchanged": true
+    },
+    "original_whole_stage_go": false,
+    "meal_acceptance": {
+      "status": "NOT_RUN",
+      "disposition": "deferred_until_actual_use_not_current_phase_blocker",
+      "existing_task": "XFO-T7/B3-1",
+      "conditions_ref": "outputs/planning/xfit-business-task-tree-r3.md#124-本阶段正式收尾调整后范围"
+    },
+    "weekly_meal_review": {
+      "status": "NOT_RUN",
+      "disposition": "existing_real_selected_week_then_once_version_confirmation",
+      "existing_task": "XFO-T7/B3-2"
+    },
+    "full_physical_ui": {
+      "status": "BLOCKED_ENV",
+      "actual_scenarios": 0,
+      "upstream_root_cause": "unknown",
+      "disposition": "independent_future_technical_specialty_not_current_phase_blocker",
+      "new_task_created": false,
+      "reopen_condition": "new_actionable_diagnostic_or_control_restore_evidence_and_scoped_device_batch"
+    },
+    "strict_physical_p95_requirement": "cancelled_C12_no_future_task",
+    "fixed_two_workspace_goal": "superseded_C11_no_current_remaining_route_tasks",
+    "source_ref": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#formal_phase_closeout_08",
+    "phone_actions_this_closeout": 0,
+    "App_test_reruns_this_closeout": 0,
+    "new_task_ids": 0,
+    "finalized_at": "2026-10-14T04:46:38.902Z",
+    "notion": {
+      "status": "PASS",
+      "pages_verified": 5,
+      "total_pages": 5,
+      "objects_created": 0,
+      "original_T8_unknown_resolved": true,
+      "full_returned_bodies_properties_ancestry_children_match": true,
+      "lease_released": true,
+      "active_calls_after": 0,
+      "auth_or_permissions_changed": false,
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#formal_phase_closeout_08/resume"
+    },
+    "current_phase_closed": true
+  },
+  "business_scope_revision": {
+    "decisions": ["REQ-20261013-131921/C-11", "REQ-20261013-131921/C-12"],
+    "notion": "ordinary_existing_connection_collaboration_with_identity_exact_target_owned_patch_and_readback",
+    "fixed_two_workspace_goal": "superseded_by_owner_not_technically_passed",
+    "fixed_route_nodes_removed_from_current_business_todo": ["NGC-08", "NGC-09", "NGC-10", "NGC-11"],
+    "strict_physical_p95_requirement": "cancelled_by_owner_not_passed_no_future_task",
+    "input_correctness_and_visible_hang_or_character_loss_guard": "retained",
+    "phone_actions_this_revision": 0,
+    "notion_scope_projection": "PASS_original_four_owned_sections_readback_and_release",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#business_scope_revision_07"
+  },
+  "current_batch_closeout": {
+    "status": "PASS",
+    "scope": "Owner C10: ordinary App restoration, exact test cleanup, real-data verification and original Notion outcome projection",
+    "decision": "REQ-20261013-131921/C-10",
+    "normal_app": "0.5.0(18), arguments[], foreground, PID4955",
+    "test_restore": "PASS original isolated1/9/0 meals, exact DB/WAL bytes and24 business tables",
+    "real_data": "PASS24 tables, new0/missing0/changed0, SQLite ok, counts47/1162all-set-records/33/22/44 preserved",
+    "notion": "PASS original four owned sections full returned-body/attributes/ancestry/children readback, zero objects/auth/permission changes, lease released",
+    "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/meal-03-xeAzHu/receipt.json",
+    "notion_evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.meal_acceptance_deferred_closeout_05",
+    "pending_current_actions": [],
+    "original_meal_acceptance": "NOT_RUN_deferred_until_actual_use_not_passed",
+    "whole_original_stage_go": false
+  },
+  "id": "XFO-CYCLE-20260927-01",
+  "version": "0.1",
+  "goal": "个人训练优先，以低负担可靠记录和可解释调整为目标，验证产品、框架、内容有限一轮",
+  "requirement": "docs/requirements/2026-09-27/222313_project-loop.md",
+  "recovery_requirement": "docs/requirements/2026-10-04/195337_notion-independent-access.md",
+  "updated_at": "2026-10-14T04:46:38.902Z",
+  "tasks": [
+    {
+      "id": "XFO-T1",
+      "title": "目标、范围与验收合同",
+      "track": "framework",
+      "status": "done",
+      "evidence": [
+        "docs/requirements/2026-09-27/222313_project-loop.md",
+        "docs/operations/项目循环手册.md",
+        "artifacts/project-loop/20261006-goal-contract-validation.json"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "XFO-T2",
+      "title": "当前事实、权属与旧资料索引",
+      "track": "content",
+      "status": "done",
+      "evidence": [
+        "docs/operations/事实与内容索引.md"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "XFO-T3",
+      "title": "私有Notion总览及三个库",
+      "track": "framework",
+      "status": "done",
+      "evidence": [
+        "docs/operations/notion-state.json",
+        "docs/operations/Notion独立通道.md",
+        "docs/requirements/2026-10-04/195337_notion-independent-access.md",
+        "artifacts/notion-independent/20261004-validation.json",
+        "artifacts/project-loop/20261005-readback/notion-validation.json",
+        "docs/requirements/2026-10-09/082013_notion-workspace-local-creator.md",
+        "artifacts/notion-workspace-local/20261009-t3-creator/validation.json",
+        "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/notion-coordination-gate.json",
+        "artifacts/project-loop/20261011-local-ready/notion-native-readback.json",
+        "artifacts/project-loop/20261011-local-ready/notion-original-export-audit.json",
+        "docs/requirements/2026-10-12/151220_r3-business-execution.md",
+        "outputs/planning/xfit-business-task-tree-r3.md",
+        "artifacts/project-loop/20261012-r3-execution/execution-readback.json",
+        "artifacts/project-loop/20261012-r3-execution/sdk27-notion-progress-readback.json",
+        "artifacts/project-loop/20261012-r3-execution/sdk27-notion-terminal-gate.json",
+        "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json"
+      ],
+      "blockers": [],
+      "connector_preflight": {
+        "checked_at": "2026-10-13 07:11:20 UTC",
+        "status": "PASS_released",
+        "live_identity_or_archive_read": "PASS_Edward_workspace_and_exact_R3_parent",
+        "lease_acquired": true,
+        "lease_released": true,
+        "active_calls": 0,
+        "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json"
+      },
+      "local_creator": {
+        "requirement": "docs/requirements/2026-10-09/082013_notion-workspace-local-creator.md",
+        "script": "scripts/xfit-notion-workspace.py",
+        "mode": "simulation_only",
+        "status": "PASS",
+        "evidence": "artifacts/notion-workspace-local/20261009-t3-creator/validation.json",
+        "online_apply_available": false
+      },
+      "live_creator_implementation": {
+        "script": "scripts/xfit-notion-live-workspace.py",
+        "requirement": "docs/requirements/2026-10-13/131921_remaining-business-convergence.md",
+        "local_status": "PASS_55_isolated_contract_checks_before_prompt_wording_update",
+        "offline_proposal": "artifacts/notion-independent/20261013-live-workspace/proposed-scope.json",
+        "approved_parent_page_id": "3f74c857-b834-8004-8a2d-ca7863ccfc2b",
+        "approved_scope": "1 hub, 3 databases, 17 semantic pages including hub; 20 objects",
+        "live_validation": "PASS_existing_MCP_original_20_object_scope",
+        "dedicated_credential_present": false,
+        "shared_mcp_batch": "XFIT-FOUR-PACK-CLOSEOUT-NOTION-20261013-01",
+        "shared_lease_acquired": true,
+        "current_stage_channel": "existing-shared-mcp",
+        "shared_lease_state": "released_no_active_calls"
+      },
+      "delivery": {
+        "status": "PASS",
+        "channel": "existing Notion MCP",
+        "hub_page_id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+        "databases": 3,
+        "semantic_pages": 17,
+        "objects": 20,
+        "repeat_create": 0,
+        "original_archive_rows_conserved": 10,
+        "permissions_changed": false,
+        "new_credentials": false,
+        "lease_released": true,
+        "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json"
+      }
+    },
+    {
+      "id": "XFO-T4",
+      "title": "项目循环skill与只读检查工具",
+      "track": "framework",
+      "status": "done",
+      "evidence": [
+        "scripts/xfit-project-loop.py",
+        "artifacts/project-loop/cli-tests.md",
+        "artifacts/project-loop/skill-behavior.md",
+        "artifacts/project-loop/validation.md",
+        "artifacts/project-loop/20261006-reconciliation-validation.json"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "XFO-T5",
+      "title": "上一轮产品完整测试收口",
+      "track": "product",
+      "status": "done",
+      "evidence": [
+        "outputs/stage-validation/20260927-training-experience-final-r2/summary.md",
+        "docs/requirements/2026-09-27/100827_training-experience.md"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "XFO-T6",
+      "title": "六类可复用内容及事实调用口径",
+      "track": "content",
+      "status": "done",
+      "evidence": [
+        "docs/operations/事实与内容索引.md",
+        "docs/training/训练档案工作流.md"
+      ],
+      "blockers": []
+    },
+    {
+      "id": "XFO-T7",
+      "title": "两个贯穿案例：产品技术链与真实强度复盘",
+      "track": "content",
+      "status": "in_progress",
+      "evidence": [
+        "docs/operations/案例与复盘.md",
+        "artifacts/project-loop/20261005-readback/device-training-evidence.json",
+        "artifacts/project-loop/20261009-device-readback/review.json",
+        "artifacts/project-loop/20261009-remaining-closeout/notes/oct5-monday.html",
+        "artifacts/project-loop/20261009-remaining-closeout/notes/oct6-tuesday.html",
+        "artifacts/project-loop/20261009-remaining-closeout/notes/oct8-thursday.html",
+        "outputs/training-plan/2026-10-12-recovery-review-r1.md",
+        "docs/requirements/2026-10-10/160518_confirmed-training-import.md",
+        "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/device-delivery-binding.json",
+        "artifacts/stage-validation/quick-weight-causal-probe-20261010/diagnostic-result.json",
+        "artifacts/project-loop/20261011-local-ready/local-paths-result.json",
+        "artifacts/stage-validation/goal-catalog-local-complete-20261011/ui-failure-live.json",
+        "outputs/stage-validation/goal-catalog-local-complete-20261011/summary.md",
+        "artifacts/stage-validation/goal-catalog-local-complete-20261011/ui-terminal-summary.json",
+        "artifacts/stage-validation/goal-catalog-local-complete-20261011/source-after.json",
+        "artifacts/stage-validation/goal-catalog-local-complete-20261011/cycle-feedback-causal-result.json",
+        "artifacts/stage-validation/goal-catalog-local-complete-20261011/final-import-paths-summary.json",
+        "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/source-before.json",
+        "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/ui-terminal-summary.json",
+        "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/source-after.json",
+        "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/picker-predecessor-sequence-result.json",
+        "artifacts/project-loop/20261011-local-ready/notes-source-refresh.json",
+        "artifacts/stage-validation/goal-confirmed-wireless-device-batch-20261011/device-delivery-binding.json",
+        "artifacts/stage-validation/goal-confirmed-wireless-device-batch-20261011/r1-semantic-verification.json",
+        "artifacts/stage-validation/goal-confirmed-wireless-device-batch-20261011/r1-native-visual-verification.json",
+        "artifacts/stage-validation/goal-cardio-local-complete-20261011/ui-terminal-summary.json",
+        "artifacts/stage-validation/goal-cardio-local-complete-20261011/source-after.json",
+        "artifacts/stage-validation/goal-confirmed-wireless-device-batch-20261011/device-ui-bootstrap-diagnostic.json",
+        "artifacts/stage-validation/goal-sdk27-pinned-local-20261012/launch-receipt.json",
+        "artifacts/stage-validation/goal-sdk27-pinned-local-20261012/unit-readback.json",
+        "artifacts/stage-validation/goal-sdk27-pinned-local-20261012/terminal-readback.json",
+        "artifacts/stage-validation/goal-sdk27-pinned-local-20261012/migration-probe-readback.json",
+        "artifacts/stage-validation/goal-sdk27-pinned-local-20261012/migration-context-readback.json",
+        "docs/requirements/2026-10-12/204928_archive-idempotence-timed-rope.md",
+        "artifacts/stage-validation/goal-archive-timed-rope-local-complete-20261012/source-before.json",
+        "artifacts/stage-validation/goal-archive-timed-rope-local-resumed-20261012/recovery-receipt.json",
+        "outputs/stage-validation/goal-archive-timed-rope-local-fixed-20261013/summary.md",
+        "artifacts/stage-validation/goal-archive-timed-rope-local-fixed-20261013/results.tsv",
+        "outputs/stage-validation/goal-archive-timed-rope-wireless-20261013/summary.md",
+        "artifacts/stage-validation/goal-archive-timed-rope-wireless-20261013/device-ui.xcresult",
+        "outputs/stage-validation/goal-archive-timed-rope-wireless-retry-20261013/summary.md",
+        "artifacts/stage-validation/goal-archive-timed-rope-wireless-retry-20261013/device-ui.xcresult",
+        "artifacts/stage-validation/goal-archive-timed-rope-wireless-retry-20261013/ui-bootstrap-followup-20261013.json",
+        "artifacts/project-loop/20261013-notes-refresh.json",
+        "docs/requirements/2026-10-13/090344_notes-import-date-unknown-time.md",
+        "outputs/stage-validation/notes-oct12-date-fix-20261013/supplemental-retry.md",
+        "outputs/stage-validation/notes-oct12-date-repair-20261013/summary.md",
+        "artifacts/stage-validation/notes-oct12-date-repair-20261013/notes-repair/result/receipt.json",
+        "docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md",
+        "artifacts/stage-validation/four-pack-final-local-20261013-01/source-after.json",
+        "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-readback-02.json",
+        "artifacts/stage-validation/four-pack-final-wireless-20261013-01/input-app-proxy-02.json",
+        "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#wireless_device_outcomes.acceptance_progress_03",
+        "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-final-conservation-02.json"
+      ],
+      "blockers": [
+        "Owner C10: remaining meal original-photo acceptance NOT_RUN until actual use, not current-batch camera handoff. Current batch exact isolated restore/cleanup, normal Build18 noargs launch and all24 real business-table conservation PASS; original future AC preserved, no invented overall PASS.",
+        "Full physical UI retains BLOCKED_ENV/actual0 scenes/rootunknown; C09 deferred its hard gate. Owner C12 cancelled the strict physical P95 requirement and future task; historical NOT_RUN/null is not PASS. Neither is a current-stage blocker.",
+        "App capture PASS numeric37.92ms/search56.04ms; search2 framegaps>250ms rootunknown preserved. No repeatable producthang/loss established; do not claim allstuttersfixed/fullIMEtiming/pairedimprovement."
+      ],
+      "latest_diagnostics": {
+        "performance_acceptance_revision_20261013": "Owner explicitly confirmed C-04/C-07 replacement: strict physical touch-to-visible P95<=100ms remains NOT_RUN/null as future non-blocking specialty check; current stage uses existing Mac+iPhone App-side capture, input/save correctness and accepted feel. Four existing Notion current progress paragraphs updated and fully matched on readback with unchanged properties/children, no new objects, lease released/active calls0. App-side checks still NOT_RUN; no code/device actions; original 9 state checks and 139 bound source conservation PASS. Same notion-receipt.json#performance_acceptance_revision is the evidence.",
+        "run_destination_gui": "Current fresh read shows FitnessApp.xcodeproj open and Edward_iPhone selected in Xcode toolbar",
+        "ui_test_rerun": "goal-xcode-selected-destination-device-20261013 D07B failed with runner exit74 before first UI scenario despite project open and real device selected; no further same-condition retry",
+        "notes_oct12_schedule": "User confirmed chest/triceps and jump rope were not completed; both were marked skipped through the iPhone app UI and read back as 已跳过. Notes workout remains unchanged.",
+        "training_review_20261013": "Post-test read-only device copy confirms 2026-10-12 Notes workout completed with 28 groups. TP-20260928-05 has a usual 20+ set high-volume preference; volume is consistent but missing RIR, several movement/equipment/side definitions and duration prevent judging intensity or prescribing load/volume changes. User reports left elbow recently much better; subjective, not medical clearance.",
+        "notes_workout_20260923": "User confirms the 2026-09-23 workout was completed but not recorded that day; while logging later around the next Wednesday session, the empty old 12-set draft was discarded, then the completed session was backfilled from Notes. Mac Notes Sep 21 folder contains Wednesday Bench press: 8 exercises, 37 checked sets. App Notes import receipt: 1 session, 8 exercises, 37 sets; 7 exercise definitions created; old empty in-progress draft discarded; original TRAVEL_CHEST_B schedule linked. On-device History UI readback shows 2026-09-23, 8 exercises, 37 work sets, duration unknown; first exercise sets match Notes. The App import service marks a matched schedule completed and its service test asserts that behavior; receipt confirms one linked schedule, but no independent post-import 9/23 schedule-status snapshot was retained, so verify this in the consolidated device round. RIR, exact start time and per-side semantics remain unknown. Evidence: outputs/notes-import/20261013/confirmed-notes-20260923-workout-v1.json and 9-23-device-apply/result/.",
+        "notion_coordination_local_regression_20261013": "An isolated routing regression fixture failed because its hard-coded shared Bene root does not exist on this host (PROJECT_ROOT_UNAVAILABLE). Changed only the test fixture to use an existing temporary shared root; targeted router 6/6, full Notion coordination Node suite 152/152, Notion Python tests 43/43, and project-loop state tests 9/9 pass. Production route/profile/queue, credentials and remote state unchanged. This does not close NGC08-11 or T3 live access.",
+        "notion_progress_projection": "Final restoration andowner nowinconvenient choice genuinelyupdatedoriginalcycle/T8/hub/R3progresssections, fullreturnedbody andproperties/children matched,zerocreates,ownlease released. notion-receipt.json#wireless_device_outcomes.final_restoration_progress_04.",
+        "notes_oct10_candidate_and_weight": "Fresh Mac Notes read found an Oct 10 note created Oct 12 with only five checked Barbell Row sets (10x12,15x12,20x10,25x10,10x12); other exercise sections are blank/incomplete. iPhone history list has no Oct 10 session. User decided not to import and to keep current state; no App write or schedule mutation. Weight note remains through 2026-09-23 08:03 at 174.8 jin; no later entry found.",
+        "notes_evidence": "docs/requirements/2026-10-13/090344_notes-import-date-unknown-time.md",
+        "latest_device_batch": "Continuation02 final: input/Chinesepaste/RIR/search/coldreopen and1/20completed in isolatedcopy validated; proxy37.92/56.04ms and2unknownsearchgaps preserved. Owner now explicitly deferred camera. Oldtest1/9 exactDB/WAL andall24field/ID restored; normalBuild18noargsPID2603; finalreal24tables unchanged,new0,quickcheckok,139sourceSHA/HEAD unchanged. Only current-stage mealoriginalphotochain outstanding.",
+        "latest_device_evidence": "outputs/stage-validation/four-pack-final-wireless-20261013-01/summary.md",
+        "bodyweight_source_date_20261013": "PASS real phone visible legacy exact-value source fallback: Oct12 wall tibialis bodyweight87.4kg from Sep23; no new measurement and no optional source column backfill. Read-only24table commonfield/ID preservation PASS.",
+        "evidence": "docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md#后续-xcode-gui-目的地切换诊断",
+        "offline_continuation_20261013": "Owner phone deferral and precise temporary test/cleanup approval recorded; objective P95 no hardware, not waived. Existing state enum mismatch repaired without changing validator/App; original status exit0, 9 original regression checks PASS. Four existing Notion owned progress sections genuinely updated and fully read back; unchanged properties/child structure, zero creates, lease released. 139 App/test/project sources unchanged, no phone access.",
+        "current_c08_c09": "C08 restoration complete; C09 real key-scenarios exit adopted. OriginalfullUI failure retainedfuture. No currentphone operation/user request.",
+        "current_meal_handoff": "C10 device batch CLOSED; meal original-photo acceptance remains NOT_RUN until actual use, no blank-test camera request. Existing final normal App/isolated restore/real24-table evidence remains unchanged. C13 formal phase and final five Notion records now PASS/released; no current phone operation.",
+        "current_formal_phase_closeout": "C13 adjusted phase CLOSED: fresh Edward identity, exact T8 old body/version/properties observed before one controlled apply, existing cycle not rewritten, hub/R3/T7 completed, allfive returned bodies/properties/ancestry/children verified and original lease released/active0. Existing meal/real-week followups retained, fullUI independent specialty, P95 cancelled and fixed-route goal superseded; no new tasks or device tests. Evidence: notion-receipt.json#formal_phase_closeout_08/resume."
+      },
+      "historical_blockers": [
+        "四器械/kg本人确认已解决，R1显式新增身份及公共保存/完整UI定向已通过；长期TP-05、旧实际及原稿不改",
+        "历史Build15完整FAIL：383单元PASS、108 UI PASS/2 FAIL/7原SKIP，其余层PASS、169来源/Git守恒。原两条定向2 PASS；加入原紧邻动作库前序后4 PASS，五轮/断言/预算与来源不变，仍无稳定RED且根因unknown。停止无变化全量。10/11本人明确允许本批无线真机运行，C04顺序例外已确认，原AC/FAIL及不GO边界保留。",
+        "本批无线覆盖0.5.0(15)及R1预览/应用/重复零/完整回读已PASS，24动作位/78组/7日程；旧九表字段/UUID守恒。真机单元378 PASS/5原host-only SKIP/0 FAIL，UI运行器exit74且实际用例0，根因unknown，本批不重试；普通Release恢复完成。本人锁屏后代理无线视觉PASS：7日程/第5版/18-20-20-20组及首项逐组目标可见，已返回今天；不重装/重导/开始未来训练。P95及新入口本人体验仍NOT_RUN。附加动作库发现1个旧归档动作仅更新时间重复刷新，扩展receipt FAIL保留，不称全库不变",
+        "R1调整决定、本人确认及手机应用/全量回读链已交付，后续实际效果独立待真实反馈，不以未来效果阻断当前链的交付认定，不猜未知RIR/重量；T7整体仍因案例A与完整产品验收未关闭。",
+        "前序Build16完整SDK27 FAIL及SQLite5原因unknown保留；两条具名规则已由本人确认。归档RED→GREEN1项、跳绳备份及相关单元33项、新保存/原取消UI2项、准确R1路由整类19项、旧时长未知计数摘要整类43项通过。Build17与本轮完整non-device已有UI/Release通过；当前本轮首个全量单测出现1项SQLite database-is-locked失败，具名用例孤立复跑通过，关闭诊断后全量392/392通过，初次FAIL保留，详情见supplemental-retry.md。无线覆盖安装、D00-D06、真机全量单测及数据守恒通过；此前D07B两次在首个UI用例前runner exit74/DTX channel refused，0场景执行；只读展开两份xcresult确认CoreDevice/testmanagerd连接成功、Runner报Running tests后约30秒IDE/XCTest通道断开、上游原因unknown，停止同条件重试。10/13解锁后新鲜受控复验Run `goal-unlocked-device-recheck-20261013`：iPhone无线在线/destination可用；D00-D06C通过，0.5.0(17)覆盖安装与记录守恒通过，D07A 392项中387 PASS/5既有SKIP/0 FAIL；D07B第三次仍在Runner Running tests后约31秒IDE disconnection、exit74 before establishing connection、UI场景0；D07C-D08C恢复及数据守恒通过。锁屏和destination不可用不支持为当前原因；上游IDE/XCTest/无线DTX仍unknown，停止同条件重试，需新诊断证据或版本变化重开。随后在Mac已运行Xcode 27.0进程的条件下，再执行统一device Run `goal-xcode-host-ui-device-recheck-20261013`：D00-D06C、D07C-D08C及数据守恒通过，D07A 392项中387 PASS/5既有SKIP/0 FAIL；D07B仍在Runner报Running tests后约31秒由DTX peer拒绝`XCTestManager_IDEInterface`并exit74，UI场景0。Welcome window可见但未证明IDE内已建立项目测试会话；限定8分钟本机统一日志筛选没有匹配事件，仍无法确定上游根因。停止同条件重跑，需真实IDE测试会话/Runner日志、可定位host-testmanager/无线DTX事件或版本变化才重开。详见两批统一摘要及原xcresult。日期型10/12 Notes训练已本人确认并通过App导入，之后同一包幂等补修仅填`2026-10-12`/`Asia/Shanghai`/未知开始时间：0场/0动作/0组新增、修复1条、跳过1场；同一session、9动作/28组、两条当日排期仍planned，活动库`quick_check=ok`且核心ID/counts守恒，详情见REQ-20261013-090344与supplemental-retry.md。87.4kg仍为9/23已有体重快照、未新建10/12体重；其UI来源标签未由本轮验收。本人已接受四项主观体验；客观P95、未报告的人工边界及真实餐食照片评估仍分别未验。Notion connector当前由其他项目持有且有未决调用；固定adapter未配置目标/凭证，未写Notion。T7整体仍in_progress；本轮数据补录与两次解锁/Xcode条件受控device复验均不关闭Notion T3、全量真机UI、P95或其余贯穿案例，任务计数不变。"
+      ]
+    },
+    {
+      "id": "XFO-T8",
+      "title": "首轮有限复盘与可恢复交接",
+      "track": "content",
+      "status": "done",
+      "evidence": [
+        "docs/operations/案例与复盘.md",
+        "artifacts/project-loop/validation.md",
+        "artifacts/project-loop/20261006-reconciliation-validation.json"
+      ],
+      "blockers": []
+    }
+  ],
+  "gates": {
+    "local": "PASS",
+    "device": "BLOCKED_HUMAN",
+    "human": "BLOCKED_HUMAN",
+    "effect": "NOT_RUN"
+  },
+  "human_acceptance": {
+    "reported_date": "2026-10-09",
+    "source": "owner_annotation_reply",
+    "owner": "Edward",
+    "status": "PASS",
+    "scope": [
+      "touch_and_numeric_input_feel",
+      "chinese_ime_feel",
+      "phone_camera_experience",
+      "completion_celebration_experience"
+    ],
+    "quantitative_input_p95": "NOT_RUN",
+    "quantitative_input_p95_requirement": "cancelled_by_owner_C12_not_future_todo",
+    "unreported_manual_scenarios": "NOT_RUN",
+    "stage_go": false,
+    "evidence": "docs/X-Fit_真机人工测试清单.md#k-2026-10-09-本人体验验收增量",
+    "note": "本人已接受四项主观体验，不再要求重复验收。整体human门仅保留未报告的其他原情景；主观接受不填客观P95，真实照片交换/恢复仍待证据。",
+    "quantitative_input_p95_blocking": false,
+    "current_performance_protocol": "REQ-20260927-100827/C04; currentAppcapture plus bounded directinput/savecoldreopen PASS, accepted feel retained. Full physicalUI C09 future, meals/restore currentpending."
+  },
+  "notion": {
+    "expected_workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+    "observed_workspace_id": "c63f367d-6f39-41c0-9a28-e4ad2ce10251",
+    "active_channel": "existing-shared-mcp",
+    "access": "verified",
+    "remote_readback": "PASS",
+    "last_observation_channel": "connector",
+    "returned_managed_content_match": "PASS",
+    "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json",
+    "original_archive_native_update": "PASS_one_R1_projection_only_not_T3",
+    "original_archive_native_content_readback": {
+      "status": "PARTIAL_UI_READBACK",
+      "pages_read_through_rendered_end": 3,
+      "original_pages": 8,
+      "visible_difference_observed": false,
+      "strict_API_or_eight_body_completeness": "NOT_RUN",
+      "writes": 0,
+      "lease_released": true,
+      "interruption": "external native app state change; actor unknown; navigation stopped",
+      "evidence": "artifacts/project-loop/20261011-original-archive-readback/native-partial-readback.json"
+    },
+    "local_access_check": {
+      "checked_date": "2026-10-10",
+      "command": "python3 scripts/xfit-notion-access.py --config docs/operations/notion-access.json status",
+      "read_only": true,
+      "remote_calls": 0,
+      "dedicated_credential_present": false,
+      "private_parent_page_id": null,
+      "writes_enabled": false,
+      "remote_verification": "NOT_RUN",
+      "scope": "local_configuration_and_credential_metadata_only_not_current_shared_mcp_auth"
+    },
+    "latest_evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json",
+    "t3_delivered": true,
+    "private_scope_method": "Owner confirmed exact private R3 parent; genuine ancestry and prior private-only native observation; no permission mutation; independent current ACL API unavailable",
+    "verification_scope": "Last genuine T3 exact20 managed-object identity/content/schema/relationship/reconciliation validation only. Not old eight-body immutable mirror rebaseline or independent current ACL inspection.",
+    "latest_progress_readback": {
+      "status": "PASS",
+      "scope": "Four original owned progress sections only; full expected bodies and unchanged human/other properties",
+      "pages": [
+        {
+          "id": "3f84c857-b834-810b-b182-e00e55dc82b1",
+          "record_id": "XFO-HUB-1",
+          "status": "PASS"
+        },
+        {
+          "id": "3f74c857-b834-8004-8a2d-ca7863ccfc2b",
+          "record_id": "XFIT-BUSINESS-TREE-R2",
+          "status": "PASS"
+        },
+        {
+          "id": "3f84c857-b834-81f9-a97f-c8b770a5b032",
+          "record_id": "XFO-CYCLE-20260927-01",
+          "status": "PASS"
+        },
+        {
+          "id": "3f84c857-b834-8105-9e5b-e97324b045eb",
+          "record_id": "XFO-T8",
+          "status": "PASS"
+        }
+      ],
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#offline_progress_update",
+      "new_objects": 0,
+      "lease_released": true,
+      "phone_actions": 0,
+      "source": "owner_consolidated_popup_reply"
+    },
+    "performance_revision_projection": {
+      "status": "PASS",
+      "decision": "REQ-20260927-100827/C-04",
+      "reason": "Confirmed replacement applied to exact existing hub/R3/cycle/T8 current progress; full expected bodies, human/other properties and child tags preserved. Does not indicate App-side tests passed.",
+      "evidence": "artifacts/project-loop/20261013-four-pack-closeout/notion-receipt.json#performance_acceptance_revision",
+      "new_objects": 0,
+      "lease_released": true,
+      "phone_actions": 0
+    }
+  },
+  "metrics": {
+    "input_p95_ms": null,
+    "recording_task_time_seconds": null,
+    "actual_record_coverage": null,
+    "training_outcome": null,
+    "input_app_proxy_p95_ms": 37.92
+  },
+  "not_authorized": [
+    "phone_data_write",
+    "new_week_write",
+    "server",
+    "git_commit",
+    "git_tag",
+    "git_push"
+  ],
+  "phone_data_write_scope_note": "列表中的phone_data_write/new_week_write指本轮精确已确认范围之外的其他写入。三条体重增量已完成；REQ-20261010-160518已授权CUT-RESTORE-20261012-R1及必要无线覆盖，但精确器械身份、当前目标和回读仍须通过，不授予其他计划、历史组或餐食估算写入。",
+  "confirmed_weight_increment": {
+    "requirement": "docs/requirements/2026-10-09/214811_remaining-stage-closeout.md",
+    "payload_sha256": "b786b140c1002bfce7d7f42dc9cb5fa82ca8c90efc34d3b38dff3713795472b9",
+    "status": "PASS",
+    "imported": 3,
+    "repeat_imported": 0,
+    "repeat_skipped": 3,
+    "old_core_business_fields_and_ids": "PASS",
+    "evidence": "artifacts/project-loop/20261009-remaining-closeout/weight-readback.json"
+  },
+  "restored_training_notes": {
+    "read_date": "2026-10-09",
+    "record_dates": [
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-08"
+    ],
+    "recorded_rows": [
+      29,
+      33,
+      43
+    ],
+    "not_proven_effective_work_sets": true,
+    "phone_training_write": false,
+    "completion_confirmed_by_owner": true,
+    "owner_feedback_date": "2026-10-10",
+    "current_recovery": "left_elbow_much_improved_not_confirmed_pain_free",
+    "owner_wording_interpretation": "号很多 interpreted as 好很多; no symptom-free or medical-clearance inference",
+    "historical_units_sides_rir_and_warmup": "unknown",
+    "proposal_id": "CUT-RESTORE-20261012-R1",
+    "proposal": "outputs/training-plan/2026-10-12-recovery-review-r1.md",
+    "proposal_confirmation": "PASS_owner_confirmed_full_R1_schedule_and_one_week_exceptions_20261010",
+    "proposal_app_application": "NOT_RUN",
+    "R1_equipment_confirmation": {
+      "owner_reported_date": "2026-10-11",
+      "available": [
+        "MTS下斜推胸机",
+        "胸托T-Bar划船机",
+        "哈克深蹲机",
+        "器械臀推机"
+      ],
+      "unit": "kg",
+      "scope": "R1 current machines; historical Notes units/sides/RIR remain unknown"
+    },
+    "app_entry_audit": {
+      "checked_date": "2026-10-10",
+      "scope": "current_source_capability_only_no_new_runtime_or_device_write",
+      "delivery_gap": "four owner facts resolved and explicit catalog/App-owned plan import targeted PASS; Build14 full local qualification running, actual phone application and original independent gates remain",
+      "proposed_minimal_entry": "implemented_targeted_PASS_scroll_hypothesis_rejected_and_reverted_async_test_boundaries_5_PASS_final_full_regression_in_progress",
+      "evidence": "artifacts/project-loop/20261010-recovery-review/app-entry-audit.json",
+      "confirmed_requirement": "docs/requirements/2026-10-10/160518_confirmed-training-import.md"
+    },
+    "review": "docs/operations/案例与复盘.md"
+  },
+  "real_meal_photo_readback": {
+    "owner_reported_not_started_date": "2026-10-11",
+    "current_local_delivery": "Build18 localcomplete/ordinaryphone delivered, savedinputandrestoreverified; mealoriginalphotochain NOT_RUN_owner_deferred.",
+    "checked_at": "2026-10-14",
+    "meal_entries": 33,
+    "photos": 0,
+    "assessments": 0,
+    "photo_week_review_and_phone_restore": "NOT_RUN_owner_C10_actual_use_trigger; realweeklyreview_future_real_week_input_and_version_confirmation",
+    "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/meal-03-xeAzHu/receipt.json",
+    "source": "Fresh App Group copy after ordinary noargs launch; raw evidence protected locally outside project/Notion, see current receipt"
+  },
+  "current_remaining_scope": {
+    "confirmed_on": "2026-10-13",
+    "requirement": "docs/requirements/2026-10-13/131921_remaining-business-convergence.md",
+    "tree": "outputs/planning/xfit-business-task-tree-r3.md#12-当前剩余执行子树原任务与验收不增加分母",
+    "fresh_phone_readback": "artifacts/project-loop/20261013-convergence/readback.json",
+    "sep23_schedule_completed": "PASS_independent_active_store",
+    "oct12_unperformed_schedules_skipped": "PASS_independent_active_store",
+    "bodyweight_source_date_device_delivery": "PASS_schema_and_real_visible_legacy_source_label;87.4kgsourceSep23notOct12measurement;24table read-onlyconservationPASS",
+    "device_diagnostics": "Original IDE diagnostics locate config/DTX refusal before scene0, root unknown; C09 fullphysicalUI failure retained as future specialty, no rerun.",
+    "meal_stage_decision": "Owner 10/14 C10 supersedes current-batch original-photo hard gate: meal acceptance after actual use, all original AC/NOT_RUN retained. Real weekly review/once-confirmed writeback still genuine input-triggered; current batch only restore/cleanup/conserve/original Notion closeout.",
+    "meal_original_ac05": "NOT_RUN_future_real_week_input_trigger_not_cancelled_or_passed",
+    "original_task_denominator": 8,
+    "original_done": 7,
+    "stage_go": false,
+    "notion_package": "PASS_20_objects_full_managed_readback_relations_repeat_zero_original_10_rows_conserved",
+    "app_candidate": "Build18 complete non-device and wireless ordinary Release delivery PASS; whole phase PARTIAL.",
+    "device_prebatch": {
+      "status": "PASS",
+      "reason": "Owner now reports phone near Mac and explicitly approves wireless batch; merged popup confirms unlocked/keep screen on. Current D00 wireless/DDI/unlock and D01-D06C passed, Build18 covering installed and started.",
+      "phone_mutations_this_batch": "Build18 covering delivered; authorized isolatedtest1session20sets then exact oldtest1/9 restored. RealAppGroup no SQLwrite/new0/missing0/changed0 across24tables.",
+      "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/install-business-conservation.json",
+      "gui_readback": "Actual source label, numeric/RIR/Chinesepaste/search andsavecoldreopen+completion1/20isolated validated. Normal noargsBuild18 restored/readback; later nativeMachelper UI timedout, not phoneAppfailure.",
+      "human_request": "Owner confirmed unlocked and keep screen on; previous temporary-test/cleanup approval remains exact scope; no second device needed",
+      "resume": "Fresh future camera availability only for currentmealoriginalphotochain; fullUI/runtime failures only newdiagnosticcondition."
+    },
+    "device_batch_owner_choice": "Owner C10 defers meal acceptance until actual use and requests current restore/cleanup/real verification/Notion. One unlock popup answered; ordinary Build18 launched args[] PID4955, exact isolated1/9 restored and fresh real24tables unchanged. No current camera/input request.",
+    "input_p95": "NOT_RUN",
+    "approved_temporary_tests": {
+      "confirmation_date": "2026-10-13",
+      "source": "owner_consolidated_popup",
+      "prefix": "X-Fit验收测试",
+      "allowed": [
+        "create marked temporary meal and workout",
+        "backup then delete and restore only newly created marked items",
+        "finally clean only these temporary items",
+        "change only X-Fit camera permission for refusal test and restore original setting"
+      ],
+      "forbidden": [
+        "delete or overwrite existing training, meals, weights or photos",
+        "use test meals in nutrition assessment",
+        "treat permission as current phone availability"
+      ],
+      "execution_status": "C08 isolatedtestonly complete, original1/9 restored exact DB/WAL/24tablefields, no testmeals/photos created. Allreal24tables conserved; normalApp restored. Newtest snapshot retained locally for recovery."
+    },
+    "offline_closeout": {
+      "status": "PASS_current_authorized_non_phone_scope",
+      "local_status_entry": "PASS",
+      "status_regression": {
+        "passed": 9,
+        "failed": 0
+      },
+      "app_source_conservation": {
+        "status": "PASS",
+        "bound": 139,
+        "changed": [],
+        "phone_actions": 0
+      },
+      "notion_owned_progress": "PASS_four_pages_full_readback",
+      "notion_new_objects": 0,
+      "notion_lease_released": true,
+      "phone_actions": 0,
+      "remaining": "Mealoriginalphotochain deferreduntilactualuse; fullphysicalUI independentlyunresolvedfuture. Owner C12 cancelsstrictphysicalP95futuretask; C11 replacesfixedtwo-workspacegoalwithordinarycollaboration. CurrentBuild18/inputboundedreadback/Appcapture/source-label/normalrestore/realfinalconservation delivered.",
+      "stage_go": false
+    },
+    "performance_acceptance_revision": {
+      "decision": "REQ-20260927-100827/C-04",
+      "closeout_decision": "REQ-20261013-131921/C-07",
+      "confirmed_on": "2026-10-13",
+      "confirmation_source": "owner_popup_explicit_replacement",
+      "current_stage": {
+        "status": "PASS",
+        "blocking": false,
+        "scope": [
+          "Existing Mac+iPhone App-side signpost/timing collection and anomaly evidence",
+          "AC-03 numeric/Chinese input and save/readback correctness",
+          "Owner already accepted real input feel; do not reask"
+        ],
+        "no_new_proxy_100ms_threshold": true,
+        "visible_hangs_or_character_loss_must_be_fixed": true,
+        "partial_evidence": "Actual nativeConsole narrowcom.xfit.input metric numeric60samples p9537.92; search12samples56.04 and2framegapscauseunknown. Device isolated store finalnumeric/RIR/Chinesepaste/search/savecoldreopen PASS. No fullIMEtiming/physicalP95/pairedimprovement claim.",
+        "capture_evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/input-app-proxy-02.json"
+      },
+      "strict_end_to_end": {
+        "status": "NOT_RUN",
+        "requirement_status": "cancelled_by_owner",
+        "decision": "REQ-20261013-131921/C-12; REQ-20260927-100827/C-05",
+        "future_task": false,
+        "blocking": false,
+        "target_p95_ms": 100,
+        "metric_value_ms": null,
+        "disposition": "cancelled_requirement_historical_measurement_not_run_not_passed",
+        "hardware_purchase_required": false
+      },
+      "unchanged": [
+        "historical data conservation",
+        "meal save/export/original-photo restore",
+        "original failed/unmeasured evidence",
+        "other human/permission gates"
+      ],
+      "tradeoff": "No strict physical-touch-to-pixel numeric proof for this phase; retain actual App engineering evidence and reliable recording checks instead.",
+      "phone_authority": "Performance confirmation alone did not grant device availability; subsequent explicit owner wireless-batch request and unlocked popup now permit this bounded batch. Other permissions unchanged."
+    },
+    "input_p95_stage_blocking": false,
+    "performance_app_side": "PASS",
+    "wireless_batch_closeout": {
+      "run_id": "four-pack-final-wireless-20261013-01",
+      "status": "PARTIAL",
+      "delivery": "PASS_Build18_normal_release",
+      "unit": {
+        "passed": 388,
+        "skipped": 5,
+        "failed": 0,
+        "total": 393
+      },
+      "ui": "BLOCKED_ENV_before_scene0_root_unknown",
+      "conservation": "PASS_finalcontinuation_all24_oldIDs_commonfields_unchanged_new0_quickcheck_ok",
+      "mirror": "PASS_bounded_numeric_Chinese_paste_RIR_search_coldreopen_and_completed1of20isolated",
+      "app_side_performance": "PASS_capture",
+      "meal_chain": "NOT_RUN_owner_explicitly_deferred",
+      "temporary_records_created": "one test session20sets onlyisolatedthenremovedbyexactrestore; backupretained; production0",
+      "normal_app_restored": true,
+      "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-final-conservation-02.json",
+      "summary": "outputs/stage-validation/four-pack-final-wireless-20261013-01/summary.md",
+      "source": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/source-final-check.json",
+      "stage_go": false,
+      "continuation_evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-readback-02.json",
+      "full_ui_blocking_for_current_stage": false,
+      "notion_final_readback": "PASS_four_pages_zero_creates_properties_children_preserved_release"
+    },
+    "ui_acceptance_revision": {
+      "decision": "REQ-20261013-131921/C-09",
+      "confirmed_source": "owner_popup_explicit_replacement",
+      "current_stage": [
+        "Phone key business scenes direct interaction",
+        "Save/reopen and activity data/photos readback",
+        "Existing full localUI and native phoneunit evidence"
+      ],
+      "original_full_physical_ui": {
+        "status": "BLOCKED_ENV",
+        "actual_cases": 0,
+        "blocking": false,
+        "disposition": "future_specialty_not_passed"
+      },
+      "current_pending": [],
+      "deferred_original_acceptance": [
+        "C10 meal_original_photo_chain NOT_RUN until owner actual use"
+      ],
+      "tradeoff": "No complete physical XCTest coverage; approved actual business routes still mandatory."
+    }
+  },
+  "next_actions": [
+    "Current C13 adjusted phase formally CLOSED/PASS: Build18/key input/data-protection results retained and final original five Notion records verified/released; pending current actions0. No current phone/user action or scope expansion.",
+    "Meal original-photo acceptance is deferred NOT_RUN until owner actual use with real original photos; resume original B3-1/AC only then, not blank-test camera handoff now.",
+    "Notion original cycle/T8/hub/R3/T7 final progress and meal trigger conditions genuinely readback verified; old unknown T8 reconciled before one apply, cycle not rewritten, zero objects/auth/credentials/permission changes, original lease released/active0. Same receipt formal_phase_closeout_08/resume; do not repeat this sync without source change.",
+    "OriginalfullphysicalUI0cases BLOCKED_ENV remainsindependentunresolvedunderC09; upstreamconfiguration/DTXcauseunknown. StrictphysicalP95requirementandfuturetaskcancelledC12; oldNOT_RUN/nullnotPASS. Search2framegapunknown preserved; onlynew actionable symptoms/evidence reopenaffectedpath.",
+    "Realnutritionweeklyassessment retainedasfutureactualweeklyphotos+singleversionconfirmation; no testmealnutrition."
+  ],
+  "training_readback": {
+    "checked_at": "2026-10-09T00:45:00Z",
+    "evidence": "artifacts/project-loop/20261009-device-readback/review.json",
+    "installed_version": "0.5.0",
+    "installed_build": "12",
+    "latest_completed_day_preflight_china": "2026-09-21",
+    "recorded_non_warmup_sets": 36,
+    "rir_entries_for_that_session": 0,
+    "latest_started_record_reference_utc": "2026-09-22T16:00:00Z",
+    "device_write": false
+  },
+  "device_delivery": {
+    "run_id": "four-pack-final-wireless-20261013-01",
+    "status": "PARTIAL",
+    "version": "0.5.0",
+    "build": "18",
+    "transport": "localNetwork",
+    "installation_status": "PASS",
+    "launch_status": "PASS_normal_release_no_arguments",
+    "version_readback": "PASS",
+    "core_business_conservation": "PASS_all24_old_common_business_fields_and_IDs_unchanged_new0",
+    "extra_catalog_updated_at_observation": "Historical Build15 archived timestamp FAIL retained; current final24-table whole-field readback unchanged.",
+    "automated_unit": {
+      "total": 393,
+      "passed": 388,
+      "failed": 0,
+      "skipped_host_fixtures": 5
+    },
+    "automated_ui": {
+      "actual_cases_executed": 0,
+      "runner_exit_code": null,
+      "classification": "BLOCKED_ENV",
+      "root_cause": "unknown",
+      "entry": "Genuine Xcode IDE original Run",
+      "error": "Lost pending connection to the test runner after launch.",
+      "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/ide-ui-probe.json",
+      "blocking_for_current_stage": false,
+      "disposition": "future_specialty_under_owner_C09_not_passed"
+    },
+    "r1_application": "PASS_7_schedules_24_slots_78_sets_repeat_zero_full_semantic_readback",
+    "agent_visual": "PASS_bounded_source_label_numeric_Chinese_paste_RIR_search_and_savecoldreopen; completiondata1/19onlyisolated",
+    "agent_visual_evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-readback-02.json",
+    "owner_new_entry_acceptance": "NOT_RUN",
+    "objective_input_p95": "NOT_RUN_historical_requirement_cancelled_C12_no_future_task",
+    "current_binding": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/source-before.json",
+    "semantic_readback": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-final-conservation-02.json",
+    "summary": "outputs/stage-validation/four-pack-final-wireless-20261013-01/summary.md",
+    "stage_go": false,
+    "app_side_performance": "PASS",
+    "prior_r1_delivery": "goal-confirmed-wireless-device-batch-20261011; original applied plan preserved, not reapplied this batch.",
+    "continuation": {
+      "status": "PARTIAL",
+      "evidence": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/continuation-readback-02.json",
+      "current_mode": "normal_release_no_arguments",
+      "original_test_restoration": "PASS_exact_DB_WAL_and24tables1session9sets",
+      "normal_final_restore": "PASS_current_C10_batch_normalBuild18_noargs_PID4955_after_owner_unlock",
+      "production_final_conservation": "PASS24tables",
+      "meal_chain": "NOT_RUN_owner_explicitly_deferred",
+      "latest_meal_batch": "artifacts/stage-validation/four-pack-final-wireless-20261013-01/meal-03-xeAzHu/receipt.json"
+    }
+  },
+  "historical_build13_device_delivery": {
+    "install_authorized": true,
+    "authorization_ref": "2026-10-09 direct user request to update phone App",
+    "automated_tests_authorized": true,
+    "automated_tests_authorization_ref": "2026-10-09 direct user request: 你可以直接跑完所有测试然后收敛嘛",
+    "automated_tests_run_id": "goal-device-full-tests-20261009",
+    "run_id": "goal-confirmed-import-wireless-delivery-20261010",
+    "status": "PASS",
+    "installation_status": "PASS",
+    "launch_status": "PASS",
+    "version_readback": "PASS",
+    "data_conservation_before_successful_launch": "PASS",
+    "data_conservation_after_successful_launch": "PASS",
+    "automated_tests": "BLOCKED_ENV",
+    "automated_unit": {
+      "passed": 357,
+      "failed": 0,
+      "skipped_host_fixtures": 5,
+      "total": 362
+    },
+    "automated_ui": {
+      "actual_cases_executed": 0,
+      "runner_failures": 1,
+      "classification": "BLOCKED_ENV",
+      "minimal_probe": "same_prebootstrap_exit_code_74"
+    },
+    "wireless_followup": {
+      "run_id": "goal-device-wireless-20261009",
+      "transport": "localNetwork",
+      "usb_required": false,
+      "device_preparation": "completed",
+      "owner_ui_automation_enabled": true,
+      "owner_authorization_or_password_prompt": false,
+      "cli_probe": "BLOCKED_ENV_prebootstrap_runner_74_zero_actual_cases",
+      "gui_probe": "cancelled_zero_cases_cause_unknown",
+      "release_restore": "PASS",
+      "data_conservation": "PASS_nine_original_core_tables_and_business_fields",
+      "evidence": "artifacts/stage-validation/goal-device-wireless-20261009/wireless-result-evidence.json",
+      "resume_condition": "Evidence-supported recovery of UI control connection or GUI cancellation; then one original case and the unified device entry. No unchanged retries or user-setting speculation."
+    },
+    "reason": "Signed Build13 cover-installed over wireless and normally launched; actual installed container, version and process are bound. Nine original core tables and all old business columns unchanged after install and App-owned R1 preview. Preview reports four exact equipment identity conflicts, no apply requested, R1 revision count zero. Prior full-device unit/UI results remain historical under automated_tests_run_id; existing test authorization valid, no retry without recovery evidence. Delivery is not stage GO, device XCTest, objective P95 or new-entry human acceptance.",
+    "evidence": "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/business-field-conservation-after-preview.json",
+    "current_binding": "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/device-delivery-binding.json",
+    "native_isolation_slice": "artifacts/stage-validation/goal-health-isolation-device-20261009-resumed/native-health-isolation-evidence.json",
+    "prior_failure_evidence": "artifacts/stage-validation/goal-device-delivery-20261009-connected/device-delivery-readback.json",
+    "summary": "outputs/stage-validation/goal-confirmed-import-wireless-delivery-20261010/summary.md",
+    "generated_D07_label_correction": "NOT_RUN because tests switch zero; actual prior UI-driver blocker and no recovery evidence, not missing user authorization",
+    "prior_build12_delivery": {
+      "run_id": "goal-health-isolation-device-20261009-resumed",
+      "binding": "artifacts/stage-validation/goal-health-isolation-device-20261009-resumed/device-delivery-binding.json",
+      "summary": "outputs/stage-validation/goal-health-isolation-device-20261009-resumed/summary.md",
+      "scope": "Historical Build12 delivery and native Health-isolation slice only"
+    },
+    "prior_full_device_summary": "outputs/stage-validation/goal-device-full-tests-20261009/summary.md",
+    "current_preinstall_blocked_attempt": "goal-health-isolation-device-20261009",
+    "previous_attempts": [
+      "goal-device-delivery-20261009",
+      "goal-device-delivery-20261009-unlocked"
+    ]
+  },
+  "current_app_validation": {
+    "stage": "four-pack-final-local-20261013-01",
+    "candidate_build": "0.5.0 (18)",
+    "status": "PASS",
+    "status_scope": "Original complete N01-N07 PASS; independent 393 unit PASS, 111 UI PASS/7 original SKIP/0 FAIL; 139 bound App/test/project sources and Git unchanged. Only current local candidate; phone update/device/Human/P95 not claimed.",
+    "evidence": "outputs/stage-validation/four-pack-final-local-20261013-01/summary.md",
+    "source_after": "artifacts/stage-validation/four-pack-final-local-20261013-01/source-after.json",
+    "runtime_warning_count": 24
+  },
+  "local_reconciliation": {
+    "checked_at": "2026-10-06T01:42:14Z",
+    "evidence": "artifacts/project-loop/20261006-reconciliation-validation.json",
+    "tests_passed": 47,
+    "documents_updated": 7,
+    "live_notion_or_device_read_performed": false,
+    "authority_or_acceptance_contract_changed": false
+  },
+  "business_contract_clarification": {
+    "checked_at": "2026-10-06T02:29:30Z",
+    "source": "docs/operations/项目循环手册.md",
+    "evidence": "artifacts/project-loop/20261006-goal-contract-validation.json",
+    "documentation_status": "updated",
+    "framework_version": "0.1",
+    "authority_or_acceptance_contract_changed": false,
+    "product_behavior_changed": false,
+    "new_business_effect_claimed": false
+  },
+  "historical_build13_validation": {
+    "stage": "GOAL-CONFIRMED-PLAN-IMPORT-FINAL-20261010",
+    "status": "FAIL",
+    "status_scope": "new_0.5.0_13_terminal_non_device_failure_ui_interrupted_prefix_not_full_not_stage_GO",
+    "changed_candidate_run": "goal-confirmed-plan-import-final-20261010",
+    "changed_candidate_source": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/source-before.json",
+    "changed_candidate_unit": {
+      "passed": 377,
+      "failed": 0,
+      "skipped": 0,
+      "total": 377
+    },
+    "changed_candidate_ui": {
+      "execution": "interrupted_prefix_not_full_suite",
+      "passed": 54,
+      "failed_assertions": 1,
+      "skipped_retired": 7,
+      "cancelled": 1,
+      "xcresult_failed_including_cancelled": 2,
+      "total": 63
+    },
+    "quick_weight_diagnostic": {
+      "status": "PASS_single_unchanged_case_not_full_failure_resolution",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "cause": "unknown_intermittent",
+      "evidence": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/quick-weight-diagnostic-summary.json",
+      "failure_evidence": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/quick-weight-evidence/manifest.json",
+      "stop_rule": "no_unchanged_full_retry_or_product_fix_without_new_causal_evidence",
+      "bounded_causal_probe": {
+        "status": "inconclusive_failure_not_reproduced",
+        "testCasesPassed": 2,
+        "singleTapIterations": 16,
+        "tapRetries": 0,
+        "instrumentationRemoved": true,
+        "productFixMade": false,
+        "evidence": "artifacts/stage-validation/quick-weight-causal-probe-20261010/diagnostic-result.json",
+        "sourceConservation": "artifacts/stage-validation/quick-weight-causal-probe-20261010/cleanup-source-conservation.json"
+      }
+    },
+    "changed_candidate_source_conservation": "PASS_150_explicit_entries_only",
+    "wireless_preparation": {
+      "checked_date": "2026-10-10",
+      "status": "PASS_CLI_wireless_delivery_and_preview",
+      "evidence": "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/device-delivery-binding.json",
+      "lock_state_evidence": "artifacts/stage-validation/quick-weight-causal-probe-20261010/device-lock-after-xfit-open.json",
+      "post_install_mirror": "iPhone_Not_Found_after_one_Resume_not_retried",
+      "new_entry_visual_validation": "NOT_RUN",
+      "usb_required": false,
+      "device_write": "authorized_cover_install_and_exchange_request_files_no_plan_apply_or_SQLite_write"
+    },
+    "scroll_phase_trial": {
+      "run_id": "goal-confirmed-plan-import-fixed-20261010",
+      "status": "FAIL",
+      "exit_code": 1,
+      "unit": {
+        "passed": 376,
+        "failed": 1,
+        "skipped": 0,
+        "total": 377
+      },
+      "ui_prefix": {
+        "passed": 12,
+        "failed_assertions": 3,
+        "cancelled": 1,
+        "total": 16
+      },
+      "source_conservation": "PASS_150_explicit_entries",
+      "product_hypothesis": "rejected_and_reverted_not_a_paste_fix",
+      "async_boundary_probe": {
+        "passed": 5,
+        "failed": 0,
+        "unit": 1,
+        "ui": 4,
+        "evidence": "artifacts/stage-validation/goal-confirmed-plan-import-fixed-20261010/async-boundary-diagnostic.xcresult"
+      },
+      "paste_observation": "immediate_old_fixture_value_then_exact_correct_value_before_explicit_two_second_UI_boundary_not_performance_measurement",
+      "legacy_copy_read_failure_cause": "unknown_intermittent_not_reproduced_by_targeted_probe"
+    },
+    "prior_import_candidate": {
+      "run_id": "goal-confirmed-plan-import-20261010",
+      "exit_code": 1,
+      "status": "FAIL",
+      "unit": {
+        "passed": 377,
+        "failed": 0,
+        "skipped": 0,
+        "total": 377
+      },
+      "ui": {
+        "passed": 10,
+        "failed_assertions": 4,
+        "cancelled": 1,
+        "execution": "interrupted_prefix_not_full_suite"
+      },
+      "source_conservation": "PASS_150_explicit_entries_before_keyboard_fix",
+      "unchanged_four_case_replay": {
+        "passed": 3,
+        "failed": 1,
+        "scope": "not_full_regression_not_root_cause_for_intermittent_clicks"
+      },
+      "keyboard_scroll_fix_probe": {
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "evidence": "artifacts/stage-validation/goal-confirmed-plan-import-20261010/paste-scroll-boundary-green.xcresult"
+      }
+    },
+    "changed_candidate_install": "PASS_wireless_cover_install_Build13_actual_container_and_version_bound",
+    "changed_candidate_delivery_evidence": "artifacts/stage-validation/goal-confirmed-import-wireless-delivery-20261010/device-delivery-binding.json",
+    "r1_phone_preview": "PASS_four_identity_conflicts_only_no_apply_zero_R1_revisions",
+    "r1_phone_application": "NOT_RUN_four_exact_equipment_identities_unresolved",
+    "health_test_isolation": "PASS_public_five_modes_normal_controls_full_local_and_native_single_memory_completion_no_Health_workout",
+    "health_fix_requirement": "docs/requirements/2026-10-09/193142_health-test-isolation.md",
+    "health_cleanup": "PASS_exact_owner_confirmed_workout_only_permanently_deleted_and_readback_verified",
+    "health_cleanup_evidence": "artifacts/stage-validation/goal-device-mirror-20261009/health-test-side-effect.json",
+    "previous_changed_candidate": {
+      "run_id": "goal-mirror-fixes-20261009",
+      "status": "FAIL",
+      "unit": {
+        "passed": 363,
+        "failed": 0,
+        "skipped": 0
+      },
+      "ui": {
+        "passed": 107,
+        "failed": 1,
+        "skipped_retired": 7,
+        "total": 115
+      },
+      "diagnostic_status": "inconclusive_isolated_PASS_does_not_erase_full_FAIL"
+    },
+    "prior_full_local_run": "goal-app-closeout-r2",
+    "prior_full_local_status": "FAIL",
+    "evidence": "docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md",
+    "diagnostic": "artifacts/stage-validation/goal-mirror-fixes-20261009/terminology-diagnostic.json",
+    "followup": "Build13新增导入已无线交付/普通启动，安装及预览后九表业务字段守恒；App实际R1预览仅列四身份冲突，未应用。最终统一层UI FAIL保留；两组各8次有限探针未捕获失败，已清除探针，不重跑刷绿。本人四项体验接受保留；四器械身份、原设备控制/P95、新入口体验、真实照片及T3等独立门仍开，不改旧实际或长期偏好、不标整体GO",
+    "device_install_not_claimed": false,
+    "device_launch": "PASS_normal_no_arguments_after_preview_process90190_same_Build13_install_container",
+    "previous_pass_run": "goal-health-isolation-20261009",
+    "previous_pass_summary": "outputs/stage-validation/goal-health-isolation-20261009/summary.md",
+    "current_full_local_run": "goal-confirmed-plan-import-final-20261010",
+    "current_full_local_status": "FAIL",
+    "current_full_local_execution": "terminal_with_ui_interrupted_prefix_not_full",
+    "current_full_local_exit_code": 1,
+    "current_full_local_summary": "outputs/stage-validation/goal-confirmed-plan-import-final-20261010/summary.md",
+    "current_full_local_unit": {
+      "passed": 377,
+      "failed": 0,
+      "skipped": 0,
+      "total": 377
+    },
+    "current_full_local_ui": {
+      "execution": "interrupted_prefix_not_full_suite",
+      "passed": 54,
+      "failed_assertions": 1,
+      "skipped_retired": 7,
+      "cancelled": 1,
+      "xcresult_failed_including_cancelled": 2,
+      "total": 63
+    },
+    "current_full_local_evidence": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/N06.log",
+    "current_full_local_source": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/source-before.json",
+    "interrupted_local_run": "goal-app-full-tests-20261009",
+    "interruption_evidence": "artifacts/stage-validation/goal-app-full-tests-20261009/interruption-evidence.json",
+    "device_automation": "BLOCKED_ENV"
+  },
+  "historical_build14_validation": {
+    "stage": "GOAL-CATALOG-LOCAL-COMPLETE-20261011",
+    "candidate_build": "0.5.0 (14)",
+    "status": "FAIL",
+    "status_scope": "full non-device terminal FAIL: three UI failures, N01-N05/N07 PASS; no stage GO or phone operations",
+    "current_full_local_run": "goal-catalog-local-complete-20261011",
+    "current_full_local_status": "FAIL",
+    "current_full_local_execution": "terminal",
+    "current_full_local_exit_code": 1,
+    "current_full_local_summary": "outputs/stage-validation/goal-catalog-local-complete-20261011/summary.md",
+    "current_full_local_source": "artifacts/stage-validation/goal-catalog-local-complete-20261011/source-before.json",
+    "current_full_local_unit": {
+      "passed": 383,
+      "failed": 0,
+      "skipped": 0,
+      "total": 383,
+      "evidence": "artifacts/stage-validation/goal-catalog-local-complete-20261011/non-device-unit.xcresult"
+    },
+    "current_full_local_ui": {
+      "execution": "terminal",
+      "terminal": true,
+      "passed": 107,
+      "failed": 3,
+      "skipped": 7,
+      "total": 117,
+      "evidence": "artifacts/stage-validation/goal-catalog-local-complete-20261011/ui-terminal-summary.json",
+      "failed_tests": [
+        {
+          "test": "FitnessAppUITests/testTerminologyDecisionsPersistAcrossRelaunchAndPreserveHistoricalSnapshots()",
+          "assertion": "FitnessAppUITests/FitnessAppUITests.swift:1468",
+          "observed": "expected row absent; final AX still pending filter selected",
+          "root_cause": "unknown"
+        },
+        {
+          "test": "RedesignUITests/testCycleImportAndExportRemainReachable()",
+          "assertion": "FitnessAppUITests/RedesignUITests.swift:277",
+          "observed": "success text absent in original five-second budget; actual import outcome not yet verified",
+          "root_cause": "unknown"
+        },
+        {
+          "test": "TrainingExperienceUITests/testNewWorkoutPrefillsHistoricalDraftAndRestoresOriginalPlanWithoutCompleting()",
+          "assertion": "FitnessAppUITests/TrainingExperienceUITests.swift:109",
+          "observed": "RIR control absent; disclosure still collapsed; three 25x12 bilateral incomplete draft assertions passed before this failure",
+          "root_cause": "unknown"
+        }
+      ],
+      "attachments": "artifacts/stage-validation/goal-catalog-local-complete-20261011/failed-attachments"
+    },
+    "current_full_local_evidence": "artifacts/stage-validation/goal-catalog-local-complete-20261011",
+    "last_failed_full_local_run": "goal-confirmed-plan-import-final-20261010",
+    "last_failed_full_local_evidence": "artifacts/stage-validation/goal-confirmed-plan-import-final-20261010/ui-terminal-summary.json",
+    "catalog_import": {
+      "status": "PASS_targeted_not_full",
+      "equipment_and_kg_confirmed": true,
+      "evidence": "artifacts/project-loop/20261011-local-ready/local-paths-result.json",
+      "prepared_packet": "outputs/training-plan/2026-10-12-r1-import-confirmed-catalog.json",
+      "packet_evidence": "artifacts/project-loop/20261011-local-ready/r1-packet-evidence.json",
+      "original_plan_changed": false
+    },
+    "quick_weight_diagnostic": {
+      "status": "PASS_bounded_sequence_not_causal_fix",
+      "preceding_home_cases": 8,
+      "original_failure_reproduced": false,
+      "root_cause": "unknown",
+      "product_fix_made": false,
+      "test_only_logging": true,
+      "original_timeout_limits_preserved": true,
+      "evidence": "artifacts/project-loop/20261011-local-ready/local-paths-result.json"
+    },
+    "meal_ui": {
+      "status": "PASS_three_isolated_fixture_cases",
+      "real_owner_photos_used": 0,
+      "real_week_review_or_restore": "NOT_RUN"
+    },
+    "r1_phone_application": "NOT_RUN_batched_after_local_qualification",
+    "device_operations_this_root": 0,
+    "device_automation": "BLOCKED_ENV_previous_control_gate_not_retested",
+    "quantitative_input_p95": "NOT_RUN",
+    "owner_four_subjective_items": "PASS_prior_acceptance_preserved",
+    "evidence": "docs/releases/0.5.0/goal-stage-closeout/阶段固化测试计划.md",
+    "followup": "Build14完整统一批次终态exit1；383单元、107UI通过，3UI失败、7原退役跳过，N07通过、169明确来源与Git守恒。三失败原界面树和录像已读，原因未证：筛选仍待审核、RIR详情未展开、导入成功提示缺席。只对原三个公共UI场景有限复现，保留断言和等待预算；不使用局部PASS覆盖全量FAIL、不猜数据丢失，本地合格后最后一批手机。",
+    "current_full_local_source_after": "artifacts/stage-validation/goal-catalog-local-complete-20261011/source-after.json",
+    "current_full_local_source_conservation": "PASS_169_explicit_bound_files_and_git",
+    "bounded_failure_triage": {
+      "execution": "terminal",
+      "result": "FAIL",
+      "passed": 2,
+      "failed": 1,
+      "skipped": 0,
+      "source_assertions_wait_budgets_unchanged": true,
+      "evidence": "artifacts/stage-validation/goal-catalog-local-complete-20261011/triage-original-red-summary.json",
+      "phone_operations": 0
+    },
+    "diagnosis_followup": {
+      "confirmed_cycle_cause": "saved result offscreen lazy List",
+      "fix_candidate": "0.5.0 (15)",
+      "evidence": "artifacts/stage-validation/goal-catalog-local-complete-20261011/cycle-feedback-causal-result.json",
+      "other_two_original_causes": "unknown"
+    }
+  },
+  "historical_build15_validation": {
+    "candidate_build": "0.5.0 (15)",
+    "run_id": "goal-import-feedback-local-complete-20261011",
+    "status": "FAIL",
+    "summary": "outputs/stage-validation/goal-import-feedback-local-complete-20261011/summary.md",
+    "unit": {
+      "passed": 383,
+      "failed": 0,
+      "skipped": 0
+    },
+    "ui": {
+      "passed": 108,
+      "failed": 2,
+      "skipped": 7,
+      "total": 117,
+      "evidence": "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/ui-terminal-summary.json",
+      "root_causes": "unknown; bounded original and predecessor diagnostics passed without stable RED"
+    },
+    "source_after": "artifacts/stage-validation/goal-import-feedback-local-complete-20261011/source-after.json",
+    "source_conservation": "PASS_169_bound_files_same_branch_and_head"
+  }
+}

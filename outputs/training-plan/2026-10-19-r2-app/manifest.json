@@ -1,0 +1,90 @@
+{
+  "planCode": "UPPER-20261019-R2",
+  "status": "APPLIED_AND_READBACK_VERIFIED",
+  "confirmationRecordedAt": "2026-10-18T00:05:28+08:00",
+  "confirmationReference": "REQ-20261017-235651；本人确认R2，替代本周R1留空规则并同步升级，按已展示重量和次数预填；完成状态由本人训练时确认。",
+  "sourcePath": "outputs/training-plan/2026-10-19-upper-week-r2.md",
+  "sourceSHA256": "7b9f76023798b6218c44d7f03e1330fed9fa77ee3bcba0ee6471f525a289ee5f",
+  "requirementsPath": "docs/requirements/2026-10-17/235651_upper-week-r2-prefill.md",
+  "strengthSessions": 3,
+  "resistanceExerciseSlots": 19,
+  "resistanceSets": 66,
+  "files": [
+    {
+      "localDay": "2026-10-19",
+      "id": "5185deb9-cfb7-5810-b9ec-e33cfdcac179",
+      "file": "outputs/training-plan/2026-10-19-r2-app/2026-10-19.json",
+      "transportSHA256": "aea25622a8fc87e0a2100291a3d0baa25f16291c03d6d7d1c4eeb264bcfe2ef3",
+      "replaces": {
+        "scheduleID": "bf6cbdc1-062b-566c-81f8-37017fbc619c",
+        "packetSHA256": "953b524309c4e8f9a86e372519d23f1b5291f493a0c5aeb3421226f2b3a96c88"
+      },
+      "title": "胸部＋三头 · R2建议预填 · 20组",
+      "exerciseCount": 6,
+      "plannedSets": 20,
+      "packetSHA256": "8759da4557dcc4f6997277f830bdfb6c85f40b1008e862fa984ca05abd1eb1c9",
+      "apply": "PASS",
+      "repeatNewSchedules": 0,
+      "readback": "PASS"
+    },
+    {
+      "localDay": "2026-10-21",
+      "id": "f18b7b28-e012-516a-bf92-2892db2ac06d",
+      "file": "outputs/training-plan/2026-10-19-r2-app/2026-10-21.json",
+      "transportSHA256": "ecdc5befb9f0223050208e5647a78f1a7734bab9487e8637cec867162a57cc20",
+      "replaces": {
+        "scheduleID": "a7509a31-e228-558f-a2ea-fb160d0ffc45",
+        "packetSHA256": "5297fb3e37edb3d6f0584d4b2dc6d53b13af68c0bd8b53c3deff8deb18169c0a"
+      },
+      "title": "背部＋二头 · R2建议预填 · 22组",
+      "exerciseCount": 6,
+      "plannedSets": 22,
+      "packetSHA256": "afcbe61c7d5336042da5b10d204f3a5428f49f11434e96c4e3f6c17ccdfda80b",
+      "apply": "PASS",
+      "repeatNewSchedules": 0,
+      "readback": "PASS"
+    },
+    {
+      "localDay": "2026-10-23",
+      "id": "799af6e3-a9ac-5081-b0af-3e18914ed8d1",
+      "file": "outputs/training-plan/2026-10-19-r2-app/2026-10-23.json",
+      "transportSHA256": "2f0370aa5c3d5731dec4ff2bfef4b24cef65cc2d3f0efa765513bfe727e144f7",
+      "replaces": {
+        "scheduleID": "f6a4f6b8-113c-5528-93bb-b371736bbc15",
+        "packetSHA256": "a57c17f6f7c603d31638820210a2dc87a446ffb722825724a8905f441eb3cf92"
+      },
+      "title": "肩部＋手臂 · R2建议预填 · 24组",
+      "exerciseCount": 7,
+      "plannedSets": 24,
+      "packetSHA256": "4e546ee6a61ce7a33788383c275fcf7126da8ac150a5e1611db34da68a795200",
+      "apply": "PASS",
+      "repeatNewSchedules": 0,
+      "readback": "PASS"
+    }
+  ],
+  "unchangedCardioScheduleIDs": [
+    "772c5937-8448-503c-a762-3d2b8d3f904c",
+    "fa0496b2-eb40-5978-9b3d-cbb7dd647ae4"
+  ],
+  "allSetsIncompleteOnStart": true,
+  "actualRIRInitiallyUnknown": true,
+  "deviceWritten": true,
+  "localValidation": "outputs/test-results/20261017-upper-r2/validation.json",
+  "candidateApp": {
+    "version": "0.5.0",
+    "build": "20",
+    "signedBuild": "PASS"
+  },
+  "completedAt": "2026-10-18T09:54:34+08:00",
+  "deviceApp": {
+    "version": "0.5.0",
+    "build": "20",
+    "transport": "localNetwork",
+    "currentPackageOwner": "REQ-20261017-235901"
+  },
+  "normalLaunch": "PASS",
+  "finalVerification": "artifacts/training-sync/20261019-upper-r2/final-verification.json",
+  "allOriginalWorkoutRecordsPreserved": true,
+  "sourceMarkdownFrozenInPackets": true,
+  "nextAction": "按R2日程训练；周一完成后告知，读取App实际复盘胸部和三头，再确定周五三头调整。"
+}

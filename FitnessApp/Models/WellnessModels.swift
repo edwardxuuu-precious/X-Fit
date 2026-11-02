@@ -77,6 +77,12 @@ final class MealEntry {
     var preparationDifficulty: Int?
     var bloatingScore: Int?
     var feedbackNotes: String?
+    // Optional metadata preserves existing stores and owner-entered nutrition.
+    var recordedLocalDay: String?
+    var captureTimeZoneIdentifier: String?
+    var recordedTimeKnown: Bool?
+    var mealPhotosJSON: String?
+    var mealAssessmentsJSON: String?
 
     var isActiveMeal: Bool { isVoided != true }
     private func isFieldKnown(_ field: String) -> Bool {
@@ -481,20 +487,35 @@ final class HydrationEntry {
     }
 }
 
+struct JumpRopeActualInput {
+    var count: Int?
+    var totalSetCount: Int?
+    var activeDurationSeconds: Int?
+    var elapsedDurationSeconds: Int?
+    var date: Date
+    var recordedTimeKnown: Bool
+}
+
 @Model
 final class JumpRopeEntry {
     var id: UUID = UUID()
-    var count: Int = 0
+    var count: Int?
     // Legacy duration is deliberately not inferred as active or elapsed time.
     var durationSeconds: Int?
     var activeDurationSeconds: Int?
     var elapsedDurationSeconds: Int?
+    /// New records can identify their exact schedule; nil preserves legacy unknown ownership.
+    var scheduledWorkoutID: UUID?
+    var totalSetCount: Int?
+    var recordedTimeKnown: Bool?
+    var trainingLocalDay: String?
+    var trainingTimeZoneIdentifier: String?
     var date: Date = Date.now
     var createdAt: Date = Date.now
 
     init(
         id: UUID = UUID(),
-        count: Int,
+        count: Int?,
         durationSeconds: Int? = nil,
         activeDurationSeconds: Int? = nil,
         elapsedDurationSeconds: Int? = nil,
@@ -509,9 +530,45 @@ final class JumpRopeEntry {
         self.date = date
         self.createdAt = createdAt
     }
+
+    var displaySummary: String {
+        var parts = [count.map { "\($0) 个" } ?? "次数未知"]
+        if let totalSetCount { parts.append("\(totalSetCount) 组") }
+        if let activeDurationSeconds { parts.append("有效 \(activeDurationSeconds) 秒") }
+        if let elapsedDurationSeconds { parts.append("含休息 \(elapsedDurationSeconds) 秒") }
+        if let durationSeconds { parts.append("旧口径时长 \(durationSeconds) 秒") }
+        return parts.joined(separator: " · ")
+    }
+
+    static func totalKnownCount(_ entries: [JumpRopeEntry]) -> Int? {
+        guard entries.allSatisfy({ $0.count != nil }) else { return nil }
+        return entries.compactMap(\.count).reduce(0, +)
+    }
 }
 
 enum JumpRopeDurationValidation {
+    static func isValidMetadata(totalSetCount: Int?, localDay: String?, timeZoneIdentifier: String?,
+                                recordedTimeKnown: Bool?, date: Date? = nil) -> Bool {
+        guard totalSetCount.map({ (1...10_000).contains($0) }) ?? true else { return false }
+        switch (localDay, timeZoneIdentifier) {
+        case (nil, nil):
+            return recordedTimeKnown != false
+        case let (day?, identifier?):
+            guard let zone = TimeZone(identifier: identifier),
+                  TrainingLocalDate.date(day, timeZone: zone) != nil else { return false }
+            return date.map { TrainingLocalDate.key($0, timeZone: zone) == day } ?? true
+        default:
+            return false
+        }
+    }
+
+    static func isValidRecord(count: Int?, legacy: Int? = nil, active: Int?, elapsed: Int?) -> Bool {
+        (count != nil || legacy != nil || active != nil || elapsed != nil)
+            && (count.map { (1...100_000).contains($0) } ?? true)
+            && (legacy.map { (1...86_400).contains($0) } ?? true)
+            && isValid(active: active, elapsed: elapsed)
+    }
+
     static func isValid(active: Int?, elapsed: Int?) -> Bool {
         guard active.map({ (1...86_400).contains($0) }) ?? true,
               elapsed.map({ (1...86_400).contains($0) }) ?? true else { return false }
@@ -601,7 +658,7 @@ enum WellnessToolUndoAction: Equatable {
 
 struct WellnessToolSummary: Equatable {
     let waterMilliliters: Int
-    let jumpRopeCount: Int
+    let jumpRopeCount: Int?
     let sedentaryMinutes: Int
 }
 
@@ -624,19 +681,65 @@ enum WellnessToolError: LocalizedError, Equatable {
 @MainActor
 enum WellnessToolService {
     static func recordJumpRope(
-        count: Int, activeDurationSeconds: Int?, elapsedDurationSeconds: Int?,
-        at date: Date, in context: ModelContext
+        count: Int?, activeDurationSeconds: Int?, elapsedDurationSeconds: Int?,
+        at date: Date, scheduledWorkoutID: UUID? = nil, totalSetCount: Int? = nil,
+        recordedTimeKnown: Bool = true, in context: ModelContext
     ) throws -> WellnessToolResult {
-        guard (1...100_000).contains(count),
-              JumpRopeDurationValidation.isValid(active: activeDurationSeconds, elapsed: elapsedDurationSeconds) else {
-            throw WellnessToolError.invalidValue("有效跳绳时长不能超过含休息总时长，时长需为 1 到 86400 秒。")
+        guard JumpRopeDurationValidation.isValidRecord(count: count, active: activeDurationSeconds, elapsed: elapsedDurationSeconds),
+              totalSetCount.map({ (1...10_000).contains($0) }) ?? true else {
+            throw WellnessToolError.invalidValue("请至少记录次数或时长；次数为 1 到 100000，组数为 1 到 10000，时长为 1 到 86400 秒，有效时长不能超过总时长。")
+        }
+        let schedule: ScheduledWorkout?
+        if let scheduledWorkoutID {
+            guard let matched = try context.fetch(FetchDescriptor<ScheduledWorkout>()).first(where: {
+                $0.id == scheduledWorkoutID
+            }) else {
+                throw WellnessToolError.recordNotFound
+            }
+            guard try !ConfirmedDailyTrainingPlanService.isSuperseded(matched.id, in: context) else {
+                throw WellnessToolError.invalidValue("这项安排已由确认修订替代，请从训练菜单选择当前安排。")
+            }
+            guard TrainingScheduleDate.localDay(matched) == TrainingLocalDate.key(date) else {
+                throw WellnessToolError.invalidValue("跳绳记录日期需与所选日程同一天。")
+            }
+            guard matched.status == .planned || matched.status == .skipped else {
+                throw WellnessToolError.invalidValue("只有待完成或已跳过的跳绳日程可以补录。")
+            }
+            schedule = matched
+        } else {
+            schedule = nil
         }
         let entry = JumpRopeEntry(count: count, activeDurationSeconds: activeDurationSeconds,
                                   elapsedDurationSeconds: elapsedDurationSeconds, date: date)
+        entry.scheduledWorkoutID = schedule?.id
+        entry.totalSetCount = totalSetCount
+        entry.recordedTimeKnown = recordedTimeKnown
+        entry.trainingLocalDay = TrainingLocalDate.key(date)
+        entry.trainingTimeZoneIdentifier = TimeZone.current.identifier
+        let previousStatus = schedule?.status
+        let previousReason = schedule?.skipReason
+        let previousUpdate = schedule?.updatedAt
         context.insert(entry)
-        try context.save()
-        return WellnessToolResult(message: "已记录跳绳 \(count) 个", recordID: entry.id,
-                                  undoAction: .deleteJumpRope(entry.id))
+        schedule?.status = .completed
+        schedule?.skipReason = ""
+        schedule?.updatedAt = .now
+        do { try context.save() }
+        catch {
+            context.delete(entry)
+            if let schedule, let previousStatus {
+                schedule.status = previousStatus
+                schedule.skipReason = previousReason ?? ""
+                if let previousUpdate { schedule.updatedAt = previousUpdate }
+            }
+            throw error
+        }
+        return WellnessToolResult(
+            message: "已记录跳绳：\(entry.displaySummary)" + (schedule == nil ? "" : "，并完成日程"),
+            recordID: entry.id,
+            // A scheduled completion is one atomic action; the generic jump-rope
+            // undo cannot safely restore the schedule state, so it is not offered.
+            undoAction: schedule == nil ? .deleteJumpRope(entry.id) : nil
+        )
     }
 
     static func execute(_ command: WellnessToolCommand, in context: ModelContext) throws -> WellnessToolResult {
@@ -733,7 +836,7 @@ enum WellnessToolService {
                 sedentarySessions: try context.fetch(FetchDescriptor<SedentarySession>())
             )
             return WellnessToolResult(
-                message: "今天喝水 \(summary.waterMilliliters) ml，跳绳 \(summary.jumpRopeCount) 个，久坐 \(summary.sedentaryMinutes) 分钟。",
+                message: "今天喝水 \(summary.waterMilliliters) ml，跳绳 \(summary.jumpRopeCount.map { "\($0) 个" } ?? "次数未知")，久坐 \(summary.sedentaryMinutes) 分钟。",
                 recordID: nil,
                 undoAction: nil
             )
@@ -777,9 +880,11 @@ enum WellnessToolService {
             waterMilliliters: hydrationEntries
                 .filter { calendar.isDate($0.date, inSameDayAs: date) }
                 .reduce(0) { $0 + $1.milliliters },
-            jumpRopeCount: jumpRopeEntries
-                .filter { calendar.isDate($0.date, inSameDayAs: date) }
-                .reduce(0) { $0 + $1.count },
+            jumpRopeCount: JumpRopeEntry.totalKnownCount(jumpRopeEntries
+                .filter { entry in
+                    entry.trainingLocalDay.map { $0 == TrainingLocalDate.key(date, timeZone: calendar.timeZone) }
+                        ?? calendar.isDate(entry.date, inSameDayAs: date)
+                }),
             sedentaryMinutes: sedentarySeconds(
                 on: date,
                 sessions: sedentarySessions,

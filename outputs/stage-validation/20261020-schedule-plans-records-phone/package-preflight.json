@@ -1,0 +1,18 @@
+{
+  "requirement": "REQ-20261020-165614",
+  "status": "PASS",
+  "type": "local signed phone package only",
+  "source": "/Users/edward/Documents/Fitness App/artifacts/schedule-design/20261020-165614/phone-delivery/frozen-inputs.json",
+  "source_inputs": 153,
+  "candidate": "/tmp/xfit-schedule-phone-package-derived-20261020-1834/Build/Products/Release-iphoneos/FitnessApp.app",
+  "version": "0.5.0",
+  "build": "24",
+  "strict_signature": "PASS",
+  "app_and_share_extension_group": "group.com.edward.FitnessApp",
+  "phone_in_provisioning_profiles": true,
+  "cloud_sync_enabled": false,
+  "executable_sha256": "2d582f40542a1e80664d65f4be01d236439d0b28d59faaf3910cc23e4b9d214b",
+  "assets_sha256": "e597d6e2739dcdb3883637dbd130090f193a182aae1f3de823c902c696e83515",
+  "phone_installation": "NOT_RUN",
+  "phone_business_data_edits": 0
+}

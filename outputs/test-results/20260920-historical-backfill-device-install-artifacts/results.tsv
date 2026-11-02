@@ -1,0 +1,4 @@
+D00	PASS	真机在线与开发服务预检	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-install-artifacts/D00.log
+D01	FAIL	pre-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-install-artifacts/D01.log (exit=1)
+D02	FAIL	pre-install	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-historical-backfill-device-install-artifacts/D02.log (exit=1)
+D03	NOT_RUN	设备或活动数据预检失败，停止后续真机步骤	-

@@ -14,9 +14,7 @@ struct HistoricalWorkoutImportView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 18) {
-                Text("从 CSV 导入已有训练记录，先查看预览，再确认保存。")
-                    .font(.subheadline)
-                    .foregroundStyle(AppTheme.secondaryText)
+                SprintPageHeader(title: "导入训练", icon: "square.and.arrow.down", subtitle: "选择 CSV · 预览 · 确认保存")
 
                 Button {
                     showImporter = true
@@ -31,9 +29,7 @@ struct HistoricalWorkoutImportView: View {
 
                 if let preview {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("导入预检")
-                            .font(.headline.bold())
-                            .foregroundStyle(.white)
+                        SprintSectionHeading(title: "导入预览", icon: "doc.text.magnifyingglass")
                         HStack(spacing: 10) {
                             previewMetric("\(preview.sessions)", label: "训练")
                             previewMetric("\(preview.exercises)", label: "动作")
@@ -78,7 +74,7 @@ struct HistoricalWorkoutImportView: View {
                     .padding(.top, 12)
                 }
                 .font(.subheadline.bold())
-                .tint(AppTheme.accent)
+                .tint(AppTheme.ink)
                 .cardSurface()
 
                 NavigationLink(destination: HistoricalWorkoutEntryView()) {
@@ -89,7 +85,7 @@ struct HistoricalWorkoutImportView: View {
                         Image(systemName: "chevron.right")
                     }
                     .font(.subheadline.bold())
-                    .foregroundStyle(.white)
+                    .foregroundStyle(AppTheme.ink)
                     .frame(minHeight: 44)
                     .cardSurface(padding: 14, cornerRadius: 14)
                 }
@@ -99,7 +95,7 @@ struct HistoricalWorkoutImportView: View {
             .padding(.top, 12)
             .padding(.bottom, 30)
         }
-        .screenBackground()
+        .sprintPage()
         .navigationTitle("导入历史训练")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar(.visible, for: .navigationBar)
@@ -132,7 +128,7 @@ struct HistoricalWorkoutImportView: View {
         VStack(spacing: 3) {
             Text(value)
                 .font(.title3.weight(.black).monospacedDigit())
-                .foregroundStyle(.white)
+                .foregroundStyle(AppTheme.ink)
             Text(label)
                 .font(.caption2)
                 .foregroundStyle(AppTheme.secondaryText)

@@ -5,10 +5,22 @@ import UIKit
 @main
 struct FitnessAppApp: App {
     private let modelContainer: ModelContainer
+    private let viewDefaults: UserDefaults = {
+#if DEBUG
+        if CloudSyncRuntime.isUITesting {
+            guard let defaults = UserDefaults(suiteName: "com.edward.FitnessApp.UITestingPreferences") else {
+                fatalError("无法准备 UI 测试偏好设置")
+            }
+            return defaults
+        }
+#endif
+        return .standard
+    }()
 
     init() {
 #if DEBUG
-        if ProcessInfo.processInfo.arguments.contains("--ui-testing") {
+        if ProcessInfo.processInfo.arguments.contains("--ui-testing"),
+           !ProcessInfo.processInfo.arguments.contains("--ui-testing-animations") {
             UIView.setAnimationsEnabled(false)
         }
 #endif
@@ -25,6 +37,7 @@ struct FitnessAppApp: App {
             WorkoutSession.self,
             SessionExercise.self,
             SetLog.self,
+            TrainingCoachRecord.self,
             NutritionTarget.self,
             MealEntry.self,
             DailyBodyCheckIn.self,
@@ -32,6 +45,8 @@ struct FitnessAppApp: App {
             HydrationEntry.self,
             JumpRopeEntry.self,
             SedentarySession.self,
+            TrainingPreferenceRevision.self,
+            TrainingProgramRevision.self,
             FatLossProgram.self,
             ProgramTargetRevision.self,
             RecipeVersion.self,
@@ -86,6 +101,7 @@ struct FitnessAppApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
+                .defaultAppStorage(viewDefaults)
         }
         .modelContainer(modelContainer)
     }

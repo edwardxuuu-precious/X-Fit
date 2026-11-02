@@ -1,0 +1,59 @@
+{
+  "status": "APPLIED_READBACK_VERIFIED",
+  "requirement": "REQ-20261025-230536",
+  "source": "outputs/training-plan/2026-10-26-lower-chain-week-confirmed.md",
+  "sourceSHA256": "21eb9e7111dc5cb873c46b91bd7806084282de0544285e9abd288f14b73aeb02",
+  "days": [
+    {
+      "day": "2026-10-26",
+      "id": "7c908b1d-8208-594e-be7f-f06c31afff95",
+      "title": "下肢前链 · 13工作组",
+      "exercises": 4,
+      "plannedPositions": 13,
+      "transportSHA256": "99be86f8533b1928732d270219e53560cc6487e353a375e32af3ee57c125275e"
+    },
+    {
+      "day": "2026-10-27",
+      "id": "a2bd263d-1696-5125-9d56-f980a331ea3b",
+      "title": "跳绳① · 10轮60/45",
+      "exercises": 1,
+      "plannedPositions": 10,
+      "transportSHA256": "e8444530bc539f3ab16fdc97de90399dbb403e194257f0958b0c124a8a76162e"
+    },
+    {
+      "day": "2026-10-28",
+      "id": "fc2b3746-217f-528a-a71a-fba1a16c6710",
+      "title": "下肢后链 · 13工作组",
+      "exercises": 4,
+      "plannedPositions": 13,
+      "transportSHA256": "7013a851292003b7067e769afa26af7519efc4523b5bfa48273f56e92384811c"
+    },
+    {
+      "day": "2026-10-30",
+      "id": "61f10965-718f-58c7-b53f-01a2e00795da",
+      "title": "下肢综合＋高翻＋核心",
+      "exercises": 6,
+      "plannedPositions": 20,
+      "transportSHA256": "2f5b45a9d2650783ff99f2f9cae2b8afa9543365e1337e2c53be28e128c917c1"
+    },
+    {
+      "day": "2026-10-31",
+      "id": "42226988-8c77-5aec-93fa-799a88ef4bdb",
+      "title": "跳绳② · 12轮60/45",
+      "exercises": 1,
+      "plannedPositions": 12,
+      "transportSHA256": "b83b2f989dce8d4e3caa41dd1be8fa076efa114123cba6ed618c2b36472b18f9"
+    }
+  ],
+  "legWorkSets": 39,
+  "technicalSets": 4,
+  "coreSets": 3,
+  "jumpRopeRounds": 22,
+  "actualSessionsCreated": 0,
+  "actualSetRowsCreated": 0,
+  "phoneWrites": 5,
+  "appApplyCount": 5,
+  "repeatNewSchedules": 0,
+  "evidence": "artifacts/training-sync/20261025-lower-chain-week/final-verification.json",
+  "phoneSnapshot": "2026-10-26T07:45:58.828356+08:00"
+}

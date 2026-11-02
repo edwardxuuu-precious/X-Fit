@@ -1,0 +1,6 @@
+N01	PASS	Git diff 空白与冲突标记检查	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N01.log
+N02	PASS	Xcode 工程与 Scheme 可读	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N02.log
+N03	PASS	器械识别后端全量测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N03.log
+N03B	PASS	Mac 餐食交换安全测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N03B.log
+N04	PASS	Simulator App 构建	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N04.log
+N05	PASS	Simulator 全量单元测试	/Users/edward/Documents/Fitness App/outputs/test-results/20260920-meal-travel-nondevice/N05.log

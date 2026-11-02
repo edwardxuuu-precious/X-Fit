@@ -8,8 +8,7 @@ struct FatLossIntroductionView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 22) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("减脂，留住力量。")
-                    .font(AppTheme.pageTitle).foregroundStyle(.white)
+                SprintPageHeader(title: "减脂周期", icon: "figure.run")
                 Text("2026.09.06 — 12.06")
                     .font(.subheadline.monospacedDigit()).foregroundStyle(AppTheme.secondaryText)
             }
@@ -26,7 +25,7 @@ struct FatLossIntroductionView: View {
                 previewRow("figure.jumprope", title: "跳绳记录实际活动", detail: "实际跳跃 8–10 分钟与含休息总时长分开记，不为了追赶体重加量。")
                 previewRow("chart.xyaxis.line", title: "前两周建立基线", detail: "观察体重、腹胀和训练表现，每周记录反馈。目标和调整原因持续保留。")
             }.padding(.top, 12)
-            }.foregroundStyle(.white)
+            }.foregroundStyle(AppTheme.ink)
 
             VStack(alignment: .leading, spacing: 9) {
                 Label("营养目标待确认", systemImage: "heart.text.clipboard")
@@ -42,11 +41,10 @@ struct FatLossIntroductionView: View {
                 do { try create() } catch { errorMessage = error.localizedDescription }
                 isSaving = false
             } label: {
-                Label("创建减脂周期", systemImage: "plus.circle.fill")
-                    .font(.headline).foregroundStyle(.black)
-                    .frame(maxWidth: .infinity).padding(17)
-                    .background(AppTheme.accent, in: RoundedRectangle(cornerRadius: 16))
+                Label("创建周期", systemImage: "plus")
+                    .font(.headline).frame(maxWidth: .infinity, minHeight: 52)
             }
+            .buttonStyle(SprintPrimaryButtonStyle())
             .disabled(isSaving)
             .accessibilityIdentifier("创建减脂周期")
             FatLossNote(text: "创建后即可记录；餐单与训练日程分别预览并导入。")
@@ -56,9 +54,9 @@ struct FatLossIntroductionView: View {
 
     private func previewRow(_ icon: String, title: String, detail: String) -> some View {
         HStack(alignment: .top, spacing: 13) {
-            Image(systemName: icon).foregroundStyle(AppTheme.secondaryText).frame(width: 24)
+            SprintIcon(systemName: icon, size: 36)
             VStack(alignment: .leading, spacing: 5) {
-                Text(title).font(.headline).foregroundStyle(.white)
+                Text(title).font(.headline).foregroundStyle(AppTheme.ink)
                 Text(detail).font(.caption).foregroundStyle(AppTheme.secondaryText)
             }
         }

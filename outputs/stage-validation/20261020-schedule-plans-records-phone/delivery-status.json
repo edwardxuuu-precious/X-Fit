@@ -1,0 +1,21 @@
+{
+  "requirement": "REQ-20261020-165614",
+  "status": "BLOCKED_ENV",
+  "blocker": "phone passcodeRequired=true",
+  "phone_current_version": "0.5.0",
+  "phone_current_build": "23",
+  "candidate_version": "0.5.0",
+  "candidate_build": "24",
+  "signed_local_package_preflight": "PASS",
+  "official_device_gate": "D00 BLOCKED_ENV",
+  "device_backup": "NOT_RUN",
+  "device_installation": "NOT_RUN",
+  "installation_requests": 0,
+  "phone_business_data_edits": 0,
+  "simulator_data_uploaded_to_phone": false,
+  "recovery_action": "Owner unlocks the phone and keeps screen on; continue existing authorized overlay workflow, current-version check, prebackup and post-data readback",
+  "human_phone_acceptance": "pending",
+  "blocking_condition_resolved": true,
+  "superseded_by_successful_run": "20261020-schedule-plans-records-phone-r2",
+  "current_delivery_result": "outputs/stage-validation/20261020-schedule-plans-records-phone-r2/data-conservation.json"
+}

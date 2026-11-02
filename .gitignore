@@ -10,6 +10,7 @@ build/
 *.dSYM.zip
 *.dSYM
 artifacts/
+__pycache__/
 
 # Swift Package Manager
 .build/
@@ -17,3 +18,8 @@ artifacts/
 
 # macOS
 .DS_Store
+
+# Regenerable native test bundles and backend dependencies.
+# Existing tracked history is retained; summaries and fixtures stay visible.
+*.xcresult/
+EquipmentRecognitionBackend/node_modules/

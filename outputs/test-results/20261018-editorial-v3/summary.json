@@ -1,0 +1,49 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "889740E8-07E1-442F-9F8C-F6908B946D7A",
+        "deviceName" : "XFit-Editorial-V3",
+        "modelName" : "iPhone 17 Pro",
+        "osBuildNumber" : "23F77",
+        "osVersion" : "26.5",
+        "platform" : "iOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 0,
+      "passedTests" : 243,
+      "skippedTests" : 5,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "FitnessApp · Built with macOS 26.6.2",
+  "expectedFailures" : 0,
+  "failedTests" : 0,
+  "finishTime" : 1792256768.954,
+  "passedTests" : 243,
+  "result" : "Passed",
+  "runtimeWarnings" : [
+
+  ],
+  "skippedTests" : 5,
+  "startTime" : 1792256714.047,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+
+  ],
+  "title" : "Test - FitnessApp",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "57% of duration",
+      "text" : "3 longest test runs with outlier durations exceeding 0.34s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 248
+}
